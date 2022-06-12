@@ -11,7 +11,7 @@ class CollectionScreen extends Screen {
   final Widget Function(SQCollection collection,
       {required Function refreshScreen, Key? key}) collectionScreenBody;
 
-  final Widget Function(SQDoc object) docScreenBody;
+  final Widget Function(SQDoc doc) docScreenBody;
 
   CollectionScreen(String title, this.collection,
       {this.docScreenBody = DocScreenBody.new,
@@ -78,25 +78,9 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
       );
     }
 
-    final itemsDisplay = widget.collection.docs
-        .map((doc) => Container(
-            padding: EdgeInsets.all(8),
-            child: ElevatedButton(
-              child: Text(doc.id),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DocScreen(
-                            doc.id,
-                            doc,
-                            refreshCollectionScreen: widget.refreshScreen,
-                            docScreenBody:
-                                widget.collection.screen!.docScreenBody,
-                          )),
-                );
-              },
-            )))
+    var itemsDisplay = widget.collection.docs
+        .map((doc) => CollectionScreenBodyDocButton(
+            doc, widget.collection, widget.refreshScreen))
         .toList();
 
     return Center(
@@ -104,15 +88,37 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Object path: ${widget.collection.getPath()}'),
-          Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              ...itemsDisplay,
-              ElevatedButton(onPressed: goToAddItem, child: Text("Add item"))
-            ]),
-          ),
+          ...itemsDisplay,
+          ElevatedButton(onPressed: goToAddItem, child: Text("Add item")),
         ],
       ),
     );
+  }
+}
+
+class CollectionScreenBodyDocButton extends StatelessWidget {
+  final SQDoc doc;
+  final Function refreshScreen;
+  final SQCollection collection;
+  const CollectionScreenBodyDocButton(
+      this.doc, this.collection, this.refreshScreen,
+      {Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.all(8),
+        child: ElevatedButton(
+          child: Text(doc.identifier),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DocScreen(doc.id, doc,
+                      refreshCollectionScreen: refreshScreen)),
+            );
+          },
+        ));
   }
 }
