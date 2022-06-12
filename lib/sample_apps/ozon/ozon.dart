@@ -6,6 +6,7 @@ import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_display.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
+import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/firebase_options.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
@@ -18,16 +19,16 @@ void main() async {
   App ozonApp = App("Ozon");
   App.instance.currentUser = UserData(userId: "testuser123");
 
-  final catalogueCollection = SQCollection([
+  final catalogueCollection = SQCollection("catalogue", [
     SQDocField("Item Name", SQDocFieldType.string),
     SQDocField("Item Price", SQDocFieldType.int),
-  ], "catalogue");
+  ]);
 
-  Widget catalogueObjectDisplayBody(SQDoc object) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
+  Widget catalogueObjectDisplayBody(SQDoc doc) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text("this is the custom diplay of the ozon catalogue item"),
-      ElevatedButton(onPressed: null, child: Text("add to favourites")),
-      Text("custom display")
+      Text("custom display"),
+      FavouritesFeature.addToFavouritesButton(doc)
     ]
         // object.fields.map((field) => DataFieldDisplay(field)).toList()
         );
@@ -39,13 +40,15 @@ void main() async {
     dataObjectDisplayBody: catalogueObjectDisplayBody,
   );
 
+  FavouritesFeature.loadFavourites();
+
   final MainScreen homescreen = MainScreen(
     [
       Screen("Main"),
       Screen('Fresh'),
       catalogueScreen,
       Screen('Cart'),
-      Screen('Favourites')
+      FavouritesFeature.favouritesScreen
     ],
     initialScreenIndex: 2,
   );
