@@ -1,5 +1,5 @@
 import 'package:soar_quest/apps/app.dart';
-import 'package:soar_quest/data_objects/sq_doc.dart';
+import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 
 class SQCollection {

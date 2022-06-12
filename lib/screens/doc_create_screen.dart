@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/sq_collection.dart';
-import 'package:soar_quest/data_objects/sq_doc.dart';
+import 'package:soar_quest/data/sq_collection.dart';
+import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/screen.dart';
 
 class DocCreateScreen extends Screen {
