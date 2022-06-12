@@ -1,17 +1,11 @@
-// ignore_for_file: unused_local_variable, unused_import
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
-import 'package:soar_quest/app/app_display.dart';
+import 'package:soar_quest/components/doc_field_toggle_buttons.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/features/favourites/favourites.dart';
-import 'package:soar_quest/firebase_options.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/menu_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/users/user_data.dart';
 
@@ -51,24 +45,18 @@ class TodoDocBody extends DocScreenBody {
 }
 
 class _TodoDocBodyState extends State<TodoDocBody> {
+  void refresh() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text(
           "Your task ${widget.doc.getFieldValueByName("Task Name")} is due on ${widget.doc.getFieldValueByName("Reminder")}"),
       Text("Done: ${widget.doc.getFieldValueByName("Done")}"),
-      if (widget.doc.getFieldValueByName("Done") != "true")
-        ElevatedButton(
-            onPressed: () {
-              widget.doc.setDocFieldByName("Done", "true");
-            },
-            child: Text("Mark as done")),
-      if (widget.doc.getFieldValueByName("Done") == "true")
-        ElevatedButton(
-            onPressed: () {
-              widget.doc.setDocFieldByName("Done", "false");
-            },
-            child: Text("Mark as not done"))
+      DocFieldToggleButtons(
+          widget.doc.getFieldByName("Done"), widget.doc, refresh)
     ]);
   }
 }
