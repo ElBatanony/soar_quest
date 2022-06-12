@@ -8,7 +8,7 @@ class DocScreen extends Screen {
   final Widget Function(SQDoc object) docScreenBody;
 
   const DocScreen(String title, this.doc,
-      {this.docScreenBody = DefaultDocScreenBody.new,
+      {this.docScreenBody = DocScreenBody.new,
       required this.refreshCollectionScreen,
       Key? key})
       : super(title, key: key);
@@ -72,9 +72,9 @@ class DocFieldDisplay extends StatelessWidget {
   }
 }
 
-class DefaultDocScreenBody extends StatelessWidget {
+class DocScreenBody extends StatelessWidget {
   final SQDoc doc;
-  const DefaultDocScreenBody(this.doc, {Key? key}) : super(key: key);
+  const DocScreenBody(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
