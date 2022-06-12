@@ -18,10 +18,9 @@ class _DocScreenState extends State<DocScreen> {
   }
 
   void deleteDoc() {
-    db.doc(widget.object.dataPath).delete().then((value) {
-      widget.object.collection.loadCollection();
-      Navigator.pop(context);
-    });
+    widget.object.collection
+        .deleteDoc(widget.object)
+        .then((_) => Navigator.pop(context));
   }
 
   @override
