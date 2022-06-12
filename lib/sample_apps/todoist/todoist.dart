@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
+import 'package:soar_quest/components/bool_field_display.dart';
 import 'package:soar_quest/components/col_create_doc_button.dart';
 import 'package:soar_quest/components/doc_delete_button.dart';
 import 'package:soar_quest/components/doc_field_toggle_buttons.dart';
@@ -88,8 +89,17 @@ class _TodosCollectionBodyState extends State<TodosCollectionBody> {
             itemBuilder: (context, i) {
               SQDoc doc = widget.collection.docs[i];
               return ListTile(
-                title: Text(
-                  doc.identifier,
+                title: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BoolFieldDisplay(doc.getFieldByName("Done"), doc,
+                          Icon(Icons.check), Icon(Icons.cancel_outlined)),
+                    ),
+                    Text(
+                      doc.identifier,
+                    ),
+                  ],
                 ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
