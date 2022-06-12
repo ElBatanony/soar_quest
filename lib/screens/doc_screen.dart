@@ -6,7 +6,7 @@ class DocScreen extends Screen {
   final SQDoc doc;
   final Function refreshCollectionScreen;
 
-  const DocScreen(String title, this.doc,
+  DocScreen(String title, this.doc,
       {required this.refreshCollectionScreen, Key? key})
       : super(title, key: key);
 
@@ -37,7 +37,7 @@ class _DocScreenState extends State<DocScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.doc.identifier),
       ),
       body: Center(
         child: Column(

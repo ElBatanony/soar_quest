@@ -6,7 +6,7 @@ import 'package:soar_quest/screens/screen.dart';
 
 class DocCreateScreen extends Screen {
   final SQCollection collection;
-  const DocCreateScreen(String title, this.collection, {Key? key})
+  DocCreateScreen(String title, this.collection, {Key? key})
       : super(title, key: key);
 
   @override

@@ -38,7 +38,7 @@ void main() async {
 
   final MenuScreen cashbackBonusesScreen = MenuScreen("Bonuses", [
     cashbackEarnedScreen,
-    const Screen("How to get bonuses"),
+    Screen("How to get bonuses"),
     partnerCashbackScreen,
     Screen("Partner subscriptions"),
     Screen("Increased caschback at month")

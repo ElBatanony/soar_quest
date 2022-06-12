@@ -27,8 +27,7 @@ class ScreenButton extends StatelessWidget {
 class MenuScreen extends Screen {
   final List<Screen> screens;
 
-  const MenuScreen(String title, this.screens, {Key? key})
-      : super(title, key: key);
+  MenuScreen(String title, this.screens, {Key? key}) : super(title, key: key);
 
   @override
   State<Screen> createState() => _MenuScreenState();

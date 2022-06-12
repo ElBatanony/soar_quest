@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+// import 'package:soar_quest/app/app.dart';
 
 class Screen extends StatefulWidget {
   final String title;
-  const Screen(this.title, {Key? key}) : super(key: key);
+
+  Screen(this.title, {Key? key}) : super(key: key) {
+    // App.instance.setScreen(this);
+  }
 
   @override
   State<Screen> createState() => _ScreenState();

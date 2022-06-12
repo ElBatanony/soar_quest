@@ -86,8 +86,12 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Object path: ${widget.collection.getPath()}'),
+          Text(
+            'Object path: ${widget.collection.getPath()}',
+            textAlign: TextAlign.center,
+          ),
           ...itemsDisplay,
           ElevatedButton(onPressed: goToAddItem, child: Text("Add item")),
         ],
