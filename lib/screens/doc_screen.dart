@@ -19,7 +19,7 @@ class _DocScreenState extends State<DocScreen> {
 
   void deleteDoc() {
     db.doc(widget.object.dataPath).delete().then((value) {
-      widget.object.collection!.loadCollection();
+      widget.object.collection.loadCollection();
       Navigator.pop(context);
     });
   }
@@ -74,9 +74,9 @@ class DocDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: object.collection?.diplayScreen?.dataObjectDisplayBody == null
+      child: object.collection.diplayScreen?.dataObjectDisplayBody == null
           ? docDisplayBody(object)
-          : object.collection?.diplayScreen?.dataObjectDisplayBody!(object),
+          : object.collection.diplayScreen?.dataObjectDisplayBody!(object),
     );
   }
 }
