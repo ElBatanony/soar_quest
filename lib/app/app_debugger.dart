@@ -52,12 +52,15 @@ class _AppDebuggerBodyState extends State<AppDebuggerBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text("App name: ${App.instance.name}"),
-          Text(App.instance.currentScreen?.title ?? "no screen")
-        ],
+    return Container(
+      color: Colors.grey[100],
+      child: Center(
+        child: Column(
+          children: [
+            Text("App name: ${App.instance.name}"),
+            Text(App.instance.currentScreen?.title ?? "no screen")
+          ],
+        ),
       ),
     );
   }
