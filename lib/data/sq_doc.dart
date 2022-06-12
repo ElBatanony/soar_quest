@@ -24,10 +24,10 @@ class SQDoc {
   String dataPath;
   bool userData;
   String id;
-  SQCollection? collection;
+  late SQCollection collection;
 
   SQDoc(this.id, this.fields, this.dataPath,
-      {this.userData = false, this.collection}) {
+      {this.userData = false, required this.collection}) {
     if (userData)
       dataPath = App.instance.currentUser!.userDataPath() + dataPath;
   }
