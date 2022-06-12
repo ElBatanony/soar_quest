@@ -22,8 +22,8 @@ class SQCollection {
       print('${snap.docs.length} docs fetched for $id!');
 
       for (var doc in snap.docs) {
-        var newDoc = SQDoc.withData(doc.id, fields, doc.data());
-        newDoc.collection = this;
+        var newDoc = SQDoc(doc.id, fields, collection: this);
+        newDoc.setData(doc.data());
         docs.add(newDoc);
       }
     });

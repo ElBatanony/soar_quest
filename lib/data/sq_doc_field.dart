@@ -20,9 +20,8 @@ class SQDocField {
   static SQDocField unknownField() {
     return SQDocField("Unknown", SQDocFieldType.string);
   }
-}
 
-class BoolField extends SQDocField {
-  BoolField(String name, {bool? defaultValue})
-      : super(name, SQDocFieldType.bool, defualtValue: defaultValue);
+  SQDocField copy() {
+    return SQDocField(name, type, value: value, defualtValue: defualtValue);
+  }
 }

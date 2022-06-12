@@ -7,14 +7,16 @@ export 'sq_doc_field.dart';
 final db = FirebaseFirestore.instance;
 
 class SQDoc {
-  List<SQDocField> fields;
+  late List<SQDocField> fields;
   String id;
   late SQCollection collection;
 
-  SQDoc(this.id, this.fields, {required this.collection});
+  static List<SQDocField> copyFields(List<SQDocField> fields) {
+    return fields.map((field) => field.copy()).toList();
+  }
 
-  SQDoc.withData(this.id, this.fields, Map<String, dynamic> dataToSet) {
-    setData(dataToSet);
+  SQDoc(this.id, List<SQDocField> newFields, {required this.collection}) {
+    fields = SQDoc.copyFields(newFields);
   }
 
   setData(Map<String, dynamic> dataToSet) {
@@ -62,4 +64,6 @@ class SQDoc {
   String getPath() {
     return "${collection.getPath()}/$id";
   }
+
+  String get identifier => fields.first.value;
 }
