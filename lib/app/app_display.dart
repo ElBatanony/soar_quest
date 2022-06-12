@@ -19,6 +19,7 @@ class _AppDisplayState extends State<AppDisplay> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: widget.app.name,
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
         home: Row(children: [
           Expanded(

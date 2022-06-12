@@ -28,6 +28,7 @@ class _MainScreenState extends State<MainScreen> {
     return MaterialApp(
       title: App.instance.name,
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: (int index) {
