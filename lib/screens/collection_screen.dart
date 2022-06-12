@@ -28,7 +28,7 @@ class CollectionScreen extends Screen {
 class _CollectionScreenState extends State<CollectionScreen> {
   void loadData() async {
     await widget.collection.loadCollection();
-    setState(() {});
+    refreshScreen();
   }
 
   void refreshScreen() {
@@ -55,7 +55,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
   }
 }
 
-class CollectionScreenBody extends StatelessWidget {
+class CollectionScreenBody extends StatefulWidget {
   final SQCollection collection;
   final Function refreshScreen;
   const CollectionScreenBody(this.collection,
@@ -63,16 +63,22 @@ class CollectionScreenBody extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<CollectionScreenBody> createState() => _CollectionScreenBodyState();
+}
+
+class _CollectionScreenBodyState extends State<CollectionScreenBody> {
+  @override
   Widget build(BuildContext context) {
     void goToAddItem() {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => DocCreateScreen("Add item", collection)),
+            builder: (context) =>
+                DocCreateScreen("Add item", widget.collection)),
       );
     }
 
-    final itemsDisplay = collection.docs
+    final itemsDisplay = widget.collection.docs
         .map((doc) => Container(
             padding: EdgeInsets.all(8),
             child: ElevatedButton(
@@ -84,8 +90,9 @@ class CollectionScreenBody extends StatelessWidget {
                       builder: (context) => DocScreen(
                             doc.id,
                             doc,
-                            refreshCollectionScreen: refreshScreen,
-                            docScreenBody: collection.screen!.docScreenBody,
+                            refreshCollectionScreen: widget.refreshScreen,
+                            docScreenBody:
+                                widget.collection.screen!.docScreenBody,
                           )),
                 );
               },
@@ -96,7 +103,7 @@ class CollectionScreenBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Object path: ${collection.getPath()}'),
+          Text('Object path: ${widget.collection.getPath()}'),
           Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
