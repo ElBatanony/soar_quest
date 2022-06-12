@@ -16,9 +16,9 @@ class SQCollection {
   SQCollection(this.id, this.fields, {this.userData = false});
 
   loadCollection() async {
-    docs = [];
     print("fetching from ${getPath()}");
     await db.collection(getPath()).get().then((snap) {
+      docs = [];
       print('${snap.docs.length} docs fetched for $id!');
 
       for (var doc in snap.docs) {
