@@ -2,8 +2,8 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:soar_quest/apps/app.dart';
-import 'package:soar_quest/apps/app_display.dart';
+import 'package:soar_quest/app/app.dart';
+import 'package:soar_quest/app/app_display.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/firebase_options.dart';

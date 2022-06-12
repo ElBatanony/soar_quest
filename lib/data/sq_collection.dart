@@ -1,4 +1,4 @@
-import 'package:soar_quest/apps/app.dart';
+import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 

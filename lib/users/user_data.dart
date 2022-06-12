@@ -1,4 +1,4 @@
-import 'package:soar_quest/apps/app.dart';
+import 'package:soar_quest/app/app.dart';
 
 class UserData {
   String userId;

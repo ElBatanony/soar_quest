@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:soar_quest/apps/app.dart';
+import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 
 final db = FirebaseFirestore.instance;
