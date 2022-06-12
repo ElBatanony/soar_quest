@@ -47,7 +47,7 @@ void main() async {
   ozonApp.run();
 }
 
-class CatalogueDocBody extends DefaultDocScreenBody {
+class CatalogueDocBody extends DocScreenBody {
   const CatalogueDocBody(SQDoc doc, {Key? key}) : super(doc, key: key);
 
   @override
