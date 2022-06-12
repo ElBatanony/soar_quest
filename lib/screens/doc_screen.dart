@@ -5,12 +5,9 @@ import 'package:soar_quest/screens/screen.dart';
 class DocScreen extends Screen {
   final SQDoc doc;
   final Function refreshCollectionScreen;
-  final Widget Function(SQDoc object) docScreenBody;
 
   const DocScreen(String title, this.doc,
-      {this.docScreenBody = DocScreenBody.new,
-      required this.refreshCollectionScreen,
-      Key? key})
+      {required this.refreshCollectionScreen, Key? key})
       : super(title, key: key);
 
   @override
@@ -50,7 +47,7 @@ class _DocScreenState extends State<DocScreen> {
               '${widget.title} Screen',
             ),
             Text('Object path: ${widget.doc.getPath()}'),
-            widget.docScreenBody(widget.doc),
+            widget.doc.collection.screen!.docScreenBody(widget.doc),
             ElevatedButton(onPressed: deleteDoc, child: Text("Delete Item"))
           ],
         ),
