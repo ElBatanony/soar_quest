@@ -36,8 +36,8 @@ class SQCollection {
     return loadCollection();
   }
 
-  Future deleteDoc(SQDoc doc) async {
-    await db.doc(doc.getPath()).delete();
+  Future deleteDoc(String docId) async {
+    await db.collection(getPath()).doc(docId).delete();
     return loadCollection();
   }
 

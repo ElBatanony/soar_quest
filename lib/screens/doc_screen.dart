@@ -20,7 +20,7 @@ class _DocScreenState extends State<DocScreen> {
   }
 
   void deleteDoc() {
-    widget.object.collection.deleteDoc(widget.object).then((_) {
+    widget.object.collection.deleteDoc(widget.object.id).then((_) {
       widget.refreshCollectionScreen();
       Navigator.pop(context);
     });
