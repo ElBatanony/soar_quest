@@ -21,20 +21,12 @@ class SQDocField {
 
 class SQDoc {
   List<SQDocField> fields;
-  String dataPath;
-  bool userData;
   String id;
   late SQCollection collection;
 
-  SQDoc(this.id, this.fields, this.dataPath,
-      {this.userData = false, required this.collection}) {
-    if (userData)
-      dataPath = App.instance.currentUser!.userDataPath() + dataPath;
-  }
+  SQDoc(this.id, this.fields, {required this.collection});
 
-  SQDoc.withData(
-      this.id, this.fields, this.dataPath, Map<String, dynamic> dataToSet,
-      {this.userData = false}) {
+  SQDoc.withData(this.id, this.fields, Map<String, dynamic> dataToSet) {
     setData(dataToSet);
   }
 
@@ -48,9 +40,8 @@ class SQDoc {
   }
 
   loadData() async {
-    await db.doc(dataPath).get().then((doc) {
+    await db.doc(getPath()).get().then((doc) {
       print(doc.data());
-
       setData(doc.data()!);
     });
   }
@@ -65,5 +56,9 @@ class SQDoc {
 
   SQDocField getField(String fieldName) {
     return fields.singleWhere((field) => field.name == fieldName);
+  }
+
+  String getPath() {
+    return "${collection.getPath()}/$id";
   }
 }

@@ -3,32 +3,23 @@ import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 
 class SQCollection {
+  String id;
   List<SQDocField> fields;
-  String collectionPath;
   bool userData;
   List<SQDoc> docs = [];
   Function? updateUI;
   CollectionScreen? diplayScreen;
 
-  SQCollection(this.fields, this.collectionPath, {this.userData = false}) {
-    if (userData)
-      collectionPath = App.instance.getAppPath() +
-          "users/${App.instance.currentUser!.userId}/" +
-          collectionPath;
-    else
-      collectionPath = App.instance.getAppPath() + collectionPath;
-  }
+  SQCollection(this.id, this.fields, {this.userData = false});
 
   loadCollection() async {
     docs = [];
-    print("fetching from $collectionPath");
-    await db.collection(collectionPath).get().then((snap) {
+    print("fetching from ${getPath()}");
+    await db.collection(getPath()).get().then((snap) {
       print('${snap.docs.length} docs fetched!');
 
       for (var doc in snap.docs) {
-        var newDoc = SQDoc.withData(
-            doc.id, fields, '$collectionPath/${doc.id}', doc.data(),
-            userData: userData);
+        var newDoc = SQDoc.withData(doc.id, fields, doc.data());
         newDoc.collection = this;
         docs.add(newDoc);
       }
@@ -39,9 +30,15 @@ class SQCollection {
   }
 
   Future createDoc(SQDoc doc) async {
-    await db
-        .doc("${doc.collection.collectionPath}/${doc.id}")
-        .set(doc.collectFields());
+    await db.doc("${getPath()}/${doc.id}").set(doc.collectFields());
     return loadCollection();
+  }
+  String getPath() {
+    if (userData)
+      return App.instance.getAppPath() +
+          "users/${App.instance.currentUser!.userId}/" +
+          id;
+    else
+      return App.instance.getAppPath() + id;
   }
 }

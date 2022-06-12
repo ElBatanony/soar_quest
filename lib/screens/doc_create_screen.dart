@@ -37,9 +37,8 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
             Text(
               '${widget.title} Screen',
             ),
-            Text('Object path: ${widget.collection.collectionPath}'),
-            DocCreateDisplay(SQDoc("new-id", widget.collection.fields, "new-id",
-                userData: widget.collection.userData,
+            Text('Object path: ${widget.collection.getPath()}'),
+            DocCreateDisplay(SQDoc("new-id", widget.collection.fields,
                 collection: widget.collection))
           ],
         ),

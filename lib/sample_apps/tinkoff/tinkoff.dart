@@ -31,11 +31,11 @@ void main() async {
 
   final cashbackEarnedScreen = DocScreen("Cashback Earned", cashbackEarnedData);
 
-  final partnerCashbackCol = SQCollection([
+  final partnerCashbackCol = SQCollection("partner-cashbacks", [
     SQDocField("Partner", SQDocFieldType.string),
     SQDocField("Headline", SQDocFieldType.string),
     SQDocField("Subheader", SQDocFieldType.string)
-  ], "partner-cashbacks");
+  ]);
 
   final partnerCashbackScreen =
       CollectionScreen("Partner Cashbacks", partnerCashbackCol);

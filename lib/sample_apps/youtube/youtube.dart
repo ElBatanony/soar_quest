@@ -23,7 +23,7 @@ void main() async {
   ];
 
   SQCollection historyCollection =
-      SQCollection(videoFields, "history", userData: true);
+      SQCollection("history", videoFields, userData: true);
 
   final MenuScreen libraryScreen = MenuScreen("Library", [
     CollectionScreen("History", historyCollection),

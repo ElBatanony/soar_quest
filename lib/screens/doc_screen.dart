@@ -43,7 +43,7 @@ class _DocScreenState extends State<DocScreen> {
             Text(
               '${widget.title} Screen',
             ),
-            Text('Object path: ${widget.object.dataPath}'),
+            Text('Object path: ${widget.object.getPath()}'),
             DocDisplay(widget.object),
             ElevatedButton(onPressed: deleteDoc, child: Text("Delete Item"))
           ],

@@ -48,7 +48,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             Text(
               '${widget.title} Screen',
             ),
-            Text('Object path: ${widget.collection.collectionPath}'),
+            Text('Object path: ${widget.collection.getPath()}'),
             CollectionDisplay(widget.collection)
           ],
         ),
