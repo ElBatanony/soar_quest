@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/app/app.dart';
 
 import 'screen.dart';
-
-const appWidth = 500;
 
 class MainScreen extends Screen {
   final List<Screen> bottomNavScreens;
   final int initialScreenIndex;
 
-  const MainScreen(this.bottomNavScreens,
-      {this.initialScreenIndex = 0, Key? key})
+  MainScreen(this.bottomNavScreens, {this.initialScreenIndex = 0, Key? key})
       : super("App Main Screen", key: key);
 
   @override
@@ -27,34 +25,26 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width - appWidth,
-          child: Scaffold(
-            body: Text("App debug details here"),
-          ),
+    return MaterialApp(
+      title: App.instance.name,
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      home: Scaffold(
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          selectedIndex: currentPageIndex,
+          destinations: widget.bottomNavScreens
+              .map((screen) => NavigationDestination(
+                    icon: Icon(Icons.explore),
+                    label: screen.title,
+                  ))
+              .toList(),
         ),
-        Expanded(
-          child: Scaffold(
-            bottomNavigationBar: NavigationBar(
-              onDestinationSelected: (int index) {
-                setState(() {
-                  currentPageIndex = index;
-                });
-              },
-              selectedIndex: currentPageIndex,
-              destinations: widget.bottomNavScreens
-                  .map((screen) => NavigationDestination(
-                        icon: Icon(Icons.explore),
-                        label: screen.title,
-                      ))
-                  .toList(),
-            ),
-            body: widget.bottomNavScreens[currentPageIndex],
-          ),
-        ),
-      ],
+        body: widget.bottomNavScreens[currentPageIndex],
+      ),
     );
   }
 }

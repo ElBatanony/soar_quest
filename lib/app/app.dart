@@ -6,11 +6,19 @@ import 'package:soar_quest/firebase_options.dart';
 import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/users/user_data.dart';
 
+// import 'app_debugger.dart';
+
 class App {
   String name;
   Screen? homescreen;
 
   UserData? currentUser;
+  Screen? currentScreen;
+
+  void setScreen(Screen screen) {
+    currentScreen = screen;
+    // AppDebugger.refresh();
+  }
 
   static late App instance;
 

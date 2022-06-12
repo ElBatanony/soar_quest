@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/app/app_debugger.dart';
 
 import 'app.dart';
 
-class AppDisplay extends StatelessWidget {
+const appWidth = 500;
+
+class AppDisplay extends StatefulWidget {
   final App app;
 
   const AppDisplay(this.app, {Key? key}) : super(key: key);
 
   @override
+  State<AppDisplay> createState() => _AppDisplayState();
+}
+
+class _AppDisplayState extends State<AppDisplay> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: app.name,
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      home: app.homescreen,
-    );
+        title: widget.app.name,
+        theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+        home: Row(children: [
+          Expanded(
+            child: AppDebuggerDisplay(),
+          ),
+          SizedBox(
+            width: appWidth.toDouble(),
+            child: widget.app.homescreen!,
+          )
+        ]));
   }
 }
