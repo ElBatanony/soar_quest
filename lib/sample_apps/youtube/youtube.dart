@@ -8,7 +8,6 @@ import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/firebase_options.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/menu_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/users/user_data.dart';
@@ -16,34 +15,6 @@ import 'package:soar_quest/users/user_data.dart';
 void main() async {
   App youtubeApp = App("YouTube");
   App.instance.currentUser = UserData(userId: "testuser123");
-
-  final cashbackEarnedData = SQDoc(
-      'cashbackEarned',
-      [
-        SQDocField("cashbackEarned", SQDocFieldType.int),
-        SQDocField("creditedOn", SQDocFieldType.string)
-      ],
-      "cashbackEarned",
-      userData: true);
-
-  final cashbackEarnedScreen = DocScreen("Cashback Earned", cashbackEarnedData);
-
-  final partnerCashbackCol = SQCollection([
-    SQDocField("Partner", SQDocFieldType.string),
-    SQDocField("Headline", SQDocFieldType.string),
-    SQDocField("Subheader", SQDocFieldType.string)
-  ], "partner-cashbacks");
-
-  final partnerCashbackScreen =
-      CollectionScreen("Partner Cashbacks", partnerCashbackCol);
-
-  final MenuScreen cashbackBonusesScreen = MenuScreen("Bonuses", [
-    cashbackEarnedScreen,
-    const Screen("How to get bonuses"),
-    const Screen("Partner cashback"),
-    Screen("Partner subscriptions"),
-    Screen("Increased caschback at month")
-  ]);
 
   List<SQDocField> videoFields = [
     SQDocField("Title", SQDocFieldType.string),
