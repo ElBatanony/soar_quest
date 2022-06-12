@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/components/doc_field_field.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/screen.dart';
@@ -26,6 +27,8 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var docRef = db.collection(widget.collection.getPath()).doc();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -37,8 +40,8 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
             Text(
               '${widget.title} Screen',
             ),
-            Text('Object path: ${widget.collection.getPath()}'),
-            DocCreateDisplay(SQDoc("new-id", widget.collection.fields,
+            Text('Doc path: ${widget.collection.getPath()}'),
+            DocCreateScreenBody(SQDoc(docRef.id, widget.collection.fields,
                 collection: widget.collection))
           ],
         ),
@@ -47,75 +50,32 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
   }
 }
 
-class DocFieldCreateDisplay extends StatefulWidget {
-  final SQDocField field;
-  const DocFieldCreateDisplay(this.field, {Key? key}) : super(key: key);
+class DocCreateScreenBody extends StatelessWidget {
+  final SQDoc doc;
 
-  @override
-  State<DocFieldCreateDisplay> createState() => _DocFieldCreateDisplayState();
-}
-
-class _DocFieldCreateDisplayState extends State<DocFieldCreateDisplay> {
-  final fieldTextController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.field.type == SQDocFieldType.int) {
-      return TextField(
-        onChanged: (intText) {
-          widget.field.value = int.parse(intText);
-        },
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: widget.field.name,
-        ),
-      );
-    }
-
-    return TextField(
-      controller: fieldTextController,
-      onChanged: (text) {
-        widget.field.value = text;
-      },
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: widget.field.name,
-      ),
-    );
-  }
-}
-
-class DocCreateDisplay extends StatelessWidget {
-  final SQDoc object;
-
-  DocCreateDisplay(this.object, {Key? key}) : super(key: key);
-
-  final idTextController = TextEditingController();
+  const DocCreateScreenBody(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final objectFieldsFields =
-        object.fields.map((field) => DocFieldCreateDisplay(field)).toList();
+        doc.fields.map((field) => DocFieldField(field)).toList();
 
     void saveItem() async {
-      object.collection.createDoc(object).then((_) => Navigator.pop(context));
+      doc.collection.createDoc(doc).then((_) => Navigator.pop(context));
     }
 
     return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextField(
-          controller: idTextController,
-          onChanged: (newId) {
-            object.id = newId;
-          },
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: "Doc ID",
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 400),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text("Doc ID (generated)"), Text(doc.id)],
           ),
-        ),
-        ...objectFieldsFields,
-        ElevatedButton(onPressed: saveItem, child: Text("Save / Insert"))
-      ]),
+          ...objectFieldsFields,
+          ElevatedButton(onPressed: saveItem, child: Text("Save / Insert"))
+        ]),
+      ),
     );
   }
 }

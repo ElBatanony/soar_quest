@@ -1,21 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 
+import 'sq_doc_field.dart';
+export 'sq_doc_field.dart';
+
 final db = FirebaseFirestore.instance;
-
-enum SQDocFieldType { int, string }
-
-class SQDocField {
-  String name;
-  SQDocFieldType type;
-  dynamic value;
-
-  SQDocField(this.name, this.type, {this.value});
-
-  static SQDocField unknownField() {
-    return SQDocField("Unknown", SQDocFieldType.string);
-  }
-}
 
 class SQDoc {
   List<SQDocField> fields;
