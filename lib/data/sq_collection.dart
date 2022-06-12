@@ -37,4 +37,11 @@ class SQCollection {
       updateUI!();
     }
   }
+
+  Future createDoc(SQDoc doc) async {
+    await db
+        .doc("${doc.collection.collectionPath}/${doc.id}")
+        .set(doc.collectFields());
+    return loadCollection();
+  }
 }

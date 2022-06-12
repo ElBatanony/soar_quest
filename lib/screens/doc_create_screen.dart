@@ -99,13 +99,7 @@ class DocCreateDisplay extends StatelessWidget {
         object.fields.map((field) => DocFieldCreateDisplay(field)).toList();
 
     void saveItem() async {
-      db
-          .doc("${object.collection!.collectionPath}/${object.id}")
-          .set(object.collectFields())
-          .then((value) {
-        object.collection!.loadCollection();
-        Navigator.pop(context);
-      });
+      object.collection.createDoc(object).then((_) => Navigator.pop(context));
     }
 
     return Center(
