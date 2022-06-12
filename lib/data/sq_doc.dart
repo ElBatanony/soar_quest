@@ -62,4 +62,8 @@ class SQDoc {
     }
     return ret;
   }
+
+  SQDocField getField(String fieldName) {
+    return fields.singleWhere((field) => field.name == fieldName);
+  }
 }
