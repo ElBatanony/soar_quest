@@ -4,11 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/apps/app.dart';
 import 'package:soar_quest/apps/app_display.dart';
-import 'package:soar_quest/data_objects/data_collection.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_collection.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 import 'package:soar_quest/firebase_options.dart';
-import 'package:soar_quest/screens/collection_display_screen.dart';
-import 'package:soar_quest/screens/data_display_screen.dart';
+import 'package:soar_quest/screens/collection_screen.dart';
+import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/menu_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/users/user_data.dart';
@@ -17,26 +17,25 @@ void main() async {
   App tinkoffApp = App("Tinkoff");
   App.instance.currentUser = UserData(userId: "testuser123");
 
-  final cashbackEarnedData = DataObject(
+  final cashbackEarnedData = SQDoc(
       'cashbackEarned',
       [
-        DataField("cashbackEarned", DataFieldType.int),
-        DataField("creditedOn", DataFieldType.string)
+        SQDocField("cashbackEarned", SQDocFieldType.int),
+        SQDocField("creditedOn", SQDocFieldType.string)
       ],
       "cashbackEarned",
       userData: true);
 
-  final cashbackEarnedScreen =
-      DataDisplayScreen("Cashback Earned", cashbackEarnedData);
+  final cashbackEarnedScreen = DocScreen("Cashback Earned", cashbackEarnedData);
 
-  final partnerCashbackCol = DataCollection([
-    DataField("Partner", DataFieldType.string),
-    DataField("Headline", DataFieldType.string),
-    DataField("Subheader", DataFieldType.string)
+  final partnerCashbackCol = SQCollection([
+    SQDocField("Partner", SQDocFieldType.string),
+    SQDocField("Headline", SQDocFieldType.string),
+    SQDocField("Subheader", SQDocFieldType.string)
   ], "partner-cashbacks");
 
   final partnerCashbackScreen =
-      CollectionDisplayScreen("Partner Cashbacks", partnerCashbackCol);
+      CollectionScreen("Partner Cashbacks", partnerCashbackCol);
 
   final MenuScreen cashbackBonusesScreen = MenuScreen("Bonuses", [
     cashbackEarnedScreen,

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 import 'package:soar_quest/data_ui/data_object_display.dart';
 import 'package:soar_quest/screens/screen.dart';
 
-class DataDisplayScreen extends Screen {
-  final DataObject object;
-  const DataDisplayScreen(String title, this.object, {Key? key})
+class DocScreen extends Screen {
+  final SQDoc object;
+  const DocScreen(String title, this.object, {Key? key})
       : super(title, key: key);
 
   @override
-  State<DataDisplayScreen> createState() => _DataDisplayScreenState();
+  State<DocScreen> createState() => _DocScreenState();
 }
 
-class _DataDisplayScreenState extends State<DataDisplayScreen> {
+class _DocScreenState extends State<DocScreen> {
   void loadData() async {
     await widget.object.loadData();
     setState(() {});

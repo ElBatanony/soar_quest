@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/data_collection.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_collection.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 import 'package:soar_quest/data_ui/data_insert_display.dart';
 import 'package:soar_quest/screens/screen.dart';
 
 class CollectionInsertScreen extends Screen {
-  final DataCollection collection;
+  final SQCollection collection;
   const CollectionInsertScreen(String title, this.collection, {Key? key})
       : super(title, key: key);
 
@@ -39,7 +39,7 @@ class _CollectionInsertScreenState extends State<CollectionInsertScreen> {
               '${widget.title} Screen',
             ),
             Text('Object path: ${widget.collection.collectionPath}'),
-            DataObjectInsertDisplay(DataObject(
+            DataObjectInsertDisplay(SQDoc(
                 "new-id", widget.collection.fields, "new-id",
                 userData: widget.collection.userData,
                 collection: widget.collection))

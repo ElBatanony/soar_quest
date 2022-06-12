@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 
 class DataFieldInsertDisplay extends StatefulWidget {
-  final DataField field;
+  final SQDocField field;
   const DataFieldInsertDisplay(this.field, {Key? key}) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class _DataFieldInsertDisplayState extends State<DataFieldInsertDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.field.type == DataFieldType.int) {
+    if (widget.field.type == SQDocFieldType.int) {
       return TextField(
         onChanged: (intText) {
           widget.field.value = int.parse(intText);
@@ -40,7 +40,7 @@ class _DataFieldInsertDisplayState extends State<DataFieldInsertDisplay> {
 }
 
 class DataObjectInsertDisplay extends StatelessWidget {
-  final DataObject object;
+  final SQDoc object;
 
   DataObjectInsertDisplay(this.object, {Key? key}) : super(key: key);
 

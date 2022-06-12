@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 
 class DataFieldDisplay extends StatelessWidget {
-  final DataField field;
+  final SQDocField field;
   const DataFieldDisplay(this.field, {Key? key}) : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class DataFieldDisplay extends StatelessWidget {
 }
 
 class DataObjectDisplay extends StatelessWidget {
-  final DataObject object;
+  final SQDoc object;
 
   const DataObjectDisplay(this.object, {Key? key}) : super(key: key);
 
@@ -29,7 +29,7 @@ class DataObjectDisplay extends StatelessWidget {
   }
 }
 
-Widget dataObjectDisplayBody(DataObject object) {
+Widget dataObjectDisplayBody(SQDoc object) {
   return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: object.fields.map((field) => DataFieldDisplay(field)).toList());

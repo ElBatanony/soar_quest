@@ -1,38 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soar_quest/apps/app.dart';
-import 'package:soar_quest/data_objects/data_collection.dart';
+import 'package:soar_quest/data_objects/sq_collection.dart';
 
 final db = FirebaseFirestore.instance;
 
-enum DataFieldType { int, string }
+enum SQDocFieldType { int, string }
 
-class DataField {
+class SQDocField {
   String name;
-  DataFieldType type;
+  SQDocFieldType type;
   // ignore: prefer_typing_uninitialized_variables
   var value;
 
-  DataField(this.name, this.type, {this.value});
+  SQDocField(this.name, this.type, {this.value});
 
-  static DataField unknownField() {
-    return DataField("Unknown", DataFieldType.string);
+  static SQDocField unknownField() {
+    return SQDocField("Unknown", SQDocFieldType.string);
   }
 }
 
-class DataObject {
-  List<DataField> fields;
+class SQDoc {
+  List<SQDocField> fields;
   String dataPath;
   bool userData;
   String id;
-  DataCollection? collection;
+  SQCollection? collection;
 
-  DataObject(this.id, this.fields, this.dataPath,
+  SQDoc(this.id, this.fields, this.dataPath,
       {this.userData = false, this.collection}) {
     if (userData)
       dataPath = App.instance.currentUser!.userDataPath() + dataPath;
   }
 
-  DataObject.withData(
+  SQDoc.withData(
       this.id, this.fields, this.dataPath, Map<String, dynamic> dataToSet,
       {this.userData = false}) {
     setData(dataToSet);
@@ -42,7 +42,7 @@ class DataObject {
     dataToSet.forEach((key, value) {
       fields.firstWhere((element) => element.name == key, orElse: () {
         print("Data field not found");
-        return DataField.unknownField();
+        return SQDocField.unknownField();
       }).value = value;
     });
   }

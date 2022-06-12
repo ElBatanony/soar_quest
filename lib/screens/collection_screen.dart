@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/data_collection.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_collection.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 import 'package:soar_quest/data_ui/data_collection_display.dart';
 import 'package:soar_quest/screens/screen.dart';
 
-class CollectionDisplayScreen extends Screen {
-  final DataCollection collection;
-  final Widget Function(DataObject object)? dataObjectDisplayBody;
+class CollectionScreen extends Screen {
+  final SQCollection collection;
+  final Widget Function(SQDoc object)? dataObjectDisplayBody;
 
-  const CollectionDisplayScreen(String title, this.collection,
+  const CollectionScreen(String title, this.collection,
       {this.dataObjectDisplayBody, Key? key})
       : super(title, key: key);
 
   @override
-  State<CollectionDisplayScreen> createState() =>
-      _CollectionDisplayScreenState();
+  State<CollectionScreen> createState() => _CollectionScreenState();
 }
 
-class _CollectionDisplayScreenState extends State<CollectionDisplayScreen> {
+class _CollectionScreenState extends State<CollectionScreen> {
   void loadData() async {
     await widget.collection.loadCollection();
     setState(() {});

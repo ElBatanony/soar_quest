@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data_objects/data_collection.dart';
-import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/data_objects/sq_collection.dart';
+import 'package:soar_quest/data_objects/sq_doc.dart';
 import 'package:soar_quest/screens/collection_insert_screen.dart';
-import 'package:soar_quest/screens/data_display_screen.dart';
+import 'package:soar_quest/screens/doc_screen.dart';
 
 class CollectionDocDisplay extends StatelessWidget {
-  final DataObject docObject;
+  final SQDoc docObject;
   const CollectionDocDisplay(this.docObject, {Key? key}) : super(key: key);
 
   @override
@@ -18,8 +18,7 @@ class CollectionDocDisplay extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      DataDisplayScreen(docObject.id, docObject)),
+                  builder: (context) => DocScreen(docObject.id, docObject)),
             );
           },
         ));
@@ -27,7 +26,7 @@ class CollectionDocDisplay extends StatelessWidget {
 }
 
 class DataCollectionDisplay extends StatefulWidget {
-  final DataCollection collection;
+  final SQCollection collection;
 
   const DataCollectionDisplay(this.collection, {Key? key}) : super(key: key);
 
