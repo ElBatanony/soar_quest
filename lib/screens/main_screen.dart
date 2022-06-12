@@ -6,16 +6,24 @@ const appWidth = 500;
 
 class MainScreen extends Screen {
   final List<Screen> bottomNavScreens;
+  final int initialScreenIndex;
 
-  const MainScreen(this.bottomNavScreens, {Key? key})
+  const MainScreen(this.bottomNavScreens,
+      {this.initialScreenIndex = 0, Key? key})
       : super("App Main Screen", key: key);
 
   @override
-  State<Screen> createState() => _MenuScreenState();
+  State<Screen> createState() => _MainScreenState();
 }
 
-class _MenuScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> {
   int currentPageIndex = 0;
+
+  @override
+  void initState() {
+    currentPageIndex = widget.initialScreenIndex;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
