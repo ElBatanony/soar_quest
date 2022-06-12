@@ -37,6 +37,7 @@ class SQCollection {
   }
 
   Future deleteDoc(String docId) async {
+    docs.removeWhere((doc) => doc.id == docId);
     await db.collection(getPath()).doc(docId).delete();
     return loadCollection();
   }
