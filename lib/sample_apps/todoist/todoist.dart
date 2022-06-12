@@ -47,16 +47,28 @@ class TodoDocBody extends DocScreenBody {
   const TodoDocBody(SQDoc doc, {Key? key}) : super(doc, key: key);
 
   @override
+  State<TodoDocBody> createState() => _TodoDocBodyState();
+}
+
+class _TodoDocBodyState extends State<TodoDocBody> {
+  @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text(
-          "Your task ${doc.getFieldValueByName("Task Name")} is due on ${doc.getFieldValueByName("Reminder")}"),
-      if (doc.getFieldValueByName("Done") != "true")
+          "Your task ${widget.doc.getFieldValueByName("Task Name")} is due on ${widget.doc.getFieldValueByName("Reminder")}"),
+      Text("Done: ${widget.doc.getFieldValueByName("Done")}"),
+      if (widget.doc.getFieldValueByName("Done") != "true")
         ElevatedButton(
             onPressed: () {
-              doc.setDocFieldByName("Done", "true");
+              widget.doc.setDocFieldByName("Done", "true");
             },
-            child: Text("Mark as done"))
+            child: Text("Mark as done")),
+      if (widget.doc.getFieldValueByName("Done") == "true")
+        ElevatedButton(
+            onPressed: () {
+              widget.doc.setDocFieldByName("Done", "false");
+            },
+            child: Text("Mark as not done"))
     ]);
   }
 }

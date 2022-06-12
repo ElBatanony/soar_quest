@@ -51,11 +51,16 @@ class CatalogueDocBody extends DocScreenBody {
   const CatalogueDocBody(SQDoc doc, {Key? key}) : super(doc, key: key);
 
   @override
+  State<CatalogueDocBody> createState() => _CataglogueDocBodyState();
+}
+
+class _CataglogueDocBodyState extends State<CatalogueDocBody> {
+  @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text("this is the custom diplay of the ozon catalogue item"),
       Text("custom display"),
-      FavouritesFeature.addToFavouritesButton(doc)
+      FavouritesFeature.addToFavouritesButton(widget.doc)
     ]
         // object.fields.map((field) => DataFieldDisplay(field)).toList()
         );

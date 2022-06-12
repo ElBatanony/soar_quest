@@ -8,7 +8,9 @@ class DocScreen extends Screen {
 
   DocScreen(String title, this.doc,
       {required this.refreshCollectionScreen, Key? key})
-      : super(title, key: key);
+      : super(title, key: key) {
+    doc.screen = this;
+  }
 
   @override
   State<DocScreen> createState() => _DocScreenState();
@@ -27,8 +29,13 @@ class _DocScreenState extends State<DocScreen> {
     });
   }
 
+  void refresh() {
+    setState(() {});
+  }
+
   @override
   void initState() {
+    widget.doc.refreshUI = refresh;
     loadData();
     super.initState();
   }
@@ -72,16 +79,23 @@ class DocFieldDisplay extends StatelessWidget {
   }
 }
 
-class DocScreenBody extends StatelessWidget {
+class DocScreenBody extends StatefulWidget {
   final SQDoc doc;
   const DocScreenBody(this.doc, {Key? key}) : super(key: key);
 
+  @override
+  State<DocScreenBody> createState() => _DocScreenBodyState();
+}
+
+class _DocScreenBodyState extends State<DocScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: doc.fields.map((field) => DocFieldDisplay(field)).toList()),
+          children: widget.doc.fields
+              .map((field) => DocFieldDisplay(field))
+              .toList()),
     );
   }
 }
