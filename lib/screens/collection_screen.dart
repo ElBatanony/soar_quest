@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/components/col_create_doc_button.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/screens/doc_create_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
@@ -69,15 +69,6 @@ class CollectionScreenBody extends StatefulWidget {
 class _CollectionScreenBodyState extends State<CollectionScreenBody> {
   @override
   Widget build(BuildContext context) {
-    void goToAddItem() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                DocCreateScreen("Add item", widget.collection)),
-      );
-    }
-
     var itemsDisplay = widget.collection.docs
         .map((doc) => CollectionScreenBodyDocButton(
             doc, widget.collection, widget.refreshScreen))
@@ -93,7 +84,7 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
             textAlign: TextAlign.center,
           ),
           ...itemsDisplay,
-          ElevatedButton(onPressed: goToAddItem, child: Text("Add item")),
+          CollectionCreateDocButton(widget.collection),
         ],
       ),
     );
