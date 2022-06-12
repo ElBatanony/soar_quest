@@ -33,6 +33,10 @@ class SQDoc {
     });
   }
 
+  updateDoc() {
+    return db.doc(getPath()).update(collectFields());
+  }
+
   Map<String, dynamic> collectFields() {
     Map<String, dynamic> ret = {};
     for (var field in fields) {
@@ -41,8 +45,18 @@ class SQDoc {
     return ret;
   }
 
-  SQDocField getField(String fieldName) {
+  SQDocField getFieldByName(String fieldName) {
     return fields.singleWhere((field) => field.name == fieldName);
+  }
+
+  dynamic getFieldValueByName(String fieldName) {
+    return getFieldByName(fieldName).value;
+  }
+
+  Future setDocFieldByName(String fieldName, dynamic value) {
+    SQDocField field = getFieldByName(fieldName);
+    field.value = value;
+    return updateDoc();
   }
 
   String getPath() {
