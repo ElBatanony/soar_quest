@@ -8,9 +8,7 @@ class DocScreen extends Screen {
 
   DocScreen(String title, this.doc,
       {required this.refreshCollectionScreen, Key? key})
-      : super(title, key: key) {
-    doc.screen = this;
-  }
+      : super(title, key: key);
 
   @override
   State<DocScreen> createState() => _DocScreenState();
@@ -35,7 +33,6 @@ class _DocScreenState extends State<DocScreen> {
 
   @override
   void initState() {
-    widget.doc.refreshUI = refresh;
     loadData();
     super.initState();
   }
