@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data_objects/data_collection.dart';
+import 'package:soar_quest/data_objects/data_object.dart';
 import 'package:soar_quest/data_ui/data_collection_display.dart';
 import 'package:soar_quest/screens/screen.dart';
 
 class CollectionDisplayScreen extends Screen {
   final DataCollection collection;
-  const CollectionDisplayScreen(String title, this.collection, {Key? key})
+  final Widget Function(DataObject object)? dataObjectDisplayBody;
+
+  const CollectionDisplayScreen(String title, this.collection,
+      {this.dataObjectDisplayBody, Key? key})
       : super(title, key: key);
 
   @override
@@ -26,6 +30,7 @@ class _CollectionDisplayScreenState extends State<CollectionDisplayScreen> {
   @override
   void initState() {
     widget.collection.updateUI = refresh;
+    widget.collection.diplayScreen = widget;
     loadData();
     super.initState();
   }

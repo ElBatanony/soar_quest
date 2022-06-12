@@ -22,10 +22,15 @@ class DataObjectDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-              object.fields.map((field) => DataFieldDisplay(field)).toList()),
+      child: object.collection?.diplayScreen?.dataObjectDisplayBody == null
+          ? dataObjectDisplayBody(object)
+          : object.collection?.diplayScreen?.dataObjectDisplayBody!(object),
     );
   }
+}
+
+Widget dataObjectDisplayBody(DataObject object) {
+  return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: object.fields.map((field) => DataFieldDisplay(field)).toList());
 }

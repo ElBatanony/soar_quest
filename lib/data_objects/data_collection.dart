@@ -1,5 +1,6 @@
 import 'package:soar_quest/apps/app.dart';
 import 'package:soar_quest/data_objects/data_object.dart';
+import 'package:soar_quest/screens/collection_display_screen.dart';
 
 class DataCollection {
   List<DataField> fields;
@@ -7,6 +8,7 @@ class DataCollection {
   bool userData;
   List<DataObject> docs = [];
   Function? updateUI;
+  CollectionDisplayScreen? diplayScreen;
 
   DataCollection(this.fields, this.collectionPath, {this.userData = false}) {
     if (userData)
