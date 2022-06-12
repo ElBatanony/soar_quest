@@ -4,8 +4,10 @@ import 'package:soar_quest/data/sq_doc.dart';
 class DocDeleteButton extends StatelessWidget {
   final SQDoc doc;
   final bool popAfterDelete;
+  final bool isIcon;
 
-  const DocDeleteButton(this.doc, {this.popAfterDelete = true, Key? key})
+  const DocDeleteButton(this.doc,
+      {this.popAfterDelete = true, this.isIcon = false, Key? key})
       : super(key: key);
 
   void deleteDoc(BuildContext context) {
@@ -17,6 +19,10 @@ class DocDeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (isIcon)
+      return IconButton(
+          onPressed: () => deleteDoc(context), icon: Icon(Icons.delete));
+
     return ElevatedButton(
         onPressed: () => deleteDoc(context),
         child: Text("Delete ${doc.collection.singleDocName}"));

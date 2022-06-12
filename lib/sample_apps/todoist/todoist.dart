@@ -75,6 +75,8 @@ class TodosCollectionBody extends CollectionScreenBody {
 }
 
 class _TodosCollectionBodyState extends State<TodosCollectionBody> {
+  void refresh() => setState(() {});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,7 +91,14 @@ class _TodosCollectionBodyState extends State<TodosCollectionBody> {
                 title: Text(
                   doc.identifier,
                 ),
-                trailing: DocDeleteButton(doc, popAfterDelete: false),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    DocFieldToggleButtons(
+                        doc.getFieldByName("Done"), doc, refresh),
+                    DocDeleteButton(doc, popAfterDelete: false, isIcon: true),
+                  ],
+                ),
               );
             },
           ),
