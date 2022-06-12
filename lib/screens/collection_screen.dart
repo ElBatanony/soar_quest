@@ -14,8 +14,8 @@ class CollectionScreen extends Screen {
   final Widget Function(SQDoc object) docScreenBody;
 
   CollectionScreen(String title, this.collection,
-      {this.docScreenBody = DefaultDocScreenBody.new,
-      this.collectionScreenBody = DefaultCollectionScreenBody.new,
+      {this.docScreenBody = DocScreenBody.new,
+      this.collectionScreenBody = CollectionScreenBody.new,
       Key? key})
       : super(title, key: key) {
     collection.screen = this;
@@ -55,10 +55,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
   }
 }
 
-class DefaultCollectionScreenBody extends StatelessWidget {
+class CollectionScreenBody extends StatelessWidget {
   final SQCollection collection;
   final Function refreshScreen;
-  const DefaultCollectionScreenBody(this.collection,
+  const CollectionScreenBody(this.collection,
       {required this.refreshScreen, Key? key})
       : super(key: key);
 
