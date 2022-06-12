@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 
 final db = FirebaseFirestore.instance;
@@ -9,8 +8,7 @@ enum SQDocFieldType { int, string }
 class SQDocField {
   String name;
   SQDocFieldType type;
-  // ignore: prefer_typing_uninitialized_variables
-  var value;
+  dynamic value;
 
   SQDocField(this.name, this.type, {this.value});
 
