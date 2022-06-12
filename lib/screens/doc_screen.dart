@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/components/doc_delete_button.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/screen.dart';
 
@@ -18,13 +19,6 @@ class _DocScreenState extends State<DocScreen> {
   void loadData() async {
     await widget.doc.loadData();
     setState(() {});
-  }
-
-  void deleteDoc() {
-    widget.doc.collection.deleteDoc(widget.doc.id).then((_) {
-      widget.refreshCollectionScreen();
-      Navigator.pop(context);
-    });
   }
 
   void refresh() {
@@ -55,7 +49,7 @@ class _DocScreenState extends State<DocScreen> {
               textAlign: TextAlign.center,
             ),
             widget.doc.collection.screen!.docScreenBody(widget.doc),
-            ElevatedButton(onPressed: deleteDoc, child: Text("Delete Item"))
+            DocDeleteButton(widget.doc)
           ],
         ),
       ),
