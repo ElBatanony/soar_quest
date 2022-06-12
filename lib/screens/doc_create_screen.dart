@@ -66,7 +66,7 @@ class DocCreateScreenBody extends StatelessWidget {
 
     return Center(
       child: Container(
-        constraints: BoxConstraints(maxWidth: 400),
+        constraints: BoxConstraints(maxWidth: 350),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
