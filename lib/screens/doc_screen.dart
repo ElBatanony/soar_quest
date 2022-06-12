@@ -3,10 +3,14 @@ import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/screen.dart';
 
 class DocScreen extends Screen {
-  final SQDoc object;
+  final SQDoc doc;
   final Function refreshCollectionScreen;
-  const DocScreen(String title, this.object,
-      {required this.refreshCollectionScreen, Key? key})
+  final Widget Function(SQDoc object) docScreenBody;
+
+  const DocScreen(String title, this.doc,
+      {this.docScreenBody = DefaultDocScreenBody.new,
+      required this.refreshCollectionScreen,
+      Key? key})
       : super(title, key: key);
 
   @override
@@ -15,12 +19,12 @@ class DocScreen extends Screen {
 
 class _DocScreenState extends State<DocScreen> {
   void loadData() async {
-    await widget.object.loadData();
+    await widget.doc.loadData();
     setState(() {});
   }
 
   void deleteDoc() {
-    widget.object.collection.deleteDoc(widget.object.id).then((_) {
+    widget.doc.collection.deleteDoc(widget.doc.id).then((_) {
       widget.refreshCollectionScreen();
       Navigator.pop(context);
     });
@@ -45,8 +49,8 @@ class _DocScreenState extends State<DocScreen> {
             Text(
               '${widget.title} Screen',
             ),
-            Text('Object path: ${widget.object.getPath()}'),
-            DocDisplay(widget.object),
+            Text('Object path: ${widget.doc.getPath()}'),
+            widget.docScreenBody(widget.doc),
             ElevatedButton(onPressed: deleteDoc, child: Text("Delete Item"))
           ],
         ),
@@ -68,23 +72,16 @@ class DocFieldDisplay extends StatelessWidget {
   }
 }
 
-class DocDisplay extends StatelessWidget {
-  final SQDoc object;
-
-  const DocDisplay(this.object, {Key? key}) : super(key: key);
+class DefaultDocScreenBody extends StatelessWidget {
+  final SQDoc doc;
+  const DefaultDocScreenBody(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: object.collection.screen?.dataObjectDisplayBody == null
-          ? docDisplayBody(object)
-          : object.collection.screen?.dataObjectDisplayBody!(object),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: doc.fields.map((field) => DocFieldDisplay(field)).toList()),
     );
   }
-}
-
-Widget docDisplayBody(SQDoc object) {
-  return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: object.fields.map((field) => DocFieldDisplay(field)).toList());
 }

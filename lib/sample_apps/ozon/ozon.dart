@@ -24,20 +24,10 @@ void main() async {
     SQDocField("Item Price", SQDocFieldType.int),
   ]);
 
-  Widget catalogueObjectDisplayBody(SQDoc doc) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text("this is the custom diplay of the ozon catalogue item"),
-      Text("custom display"),
-      FavouritesFeature.addToFavouritesButton(doc)
-    ]
-        // object.fields.map((field) => DataFieldDisplay(field)).toList()
-        );
-  }
-
   final catalogueScreen = CollectionScreen(
     "Catalogue",
     catalogueCollection,
-    dataObjectDisplayBody: catalogueObjectDisplayBody,
+    docScreenBody: CatalogueDocBody.new,
   );
 
   FavouritesFeature.loadFavourites();
@@ -55,4 +45,19 @@ void main() async {
   ozonApp.homescreen = homescreen;
 
   ozonApp.run();
+}
+
+class CatalogueDocBody extends DefaultDocScreenBody {
+  const CatalogueDocBody(SQDoc doc, {Key? key}) : super(doc, key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text("this is the custom diplay of the ozon catalogue item"),
+      Text("custom display"),
+      FavouritesFeature.addToFavouritesButton(doc)
+    ]
+        // object.fields.map((field) => DataFieldDisplay(field)).toList()
+        );
+  }
 }
