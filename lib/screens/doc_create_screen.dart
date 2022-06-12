@@ -1,15 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/data_objects/sq_collection.dart';
 import 'package:soar_quest/data_objects/sq_doc.dart';
+import 'package:soar_quest/screens/screen.dart';
 
-class DataFieldInsertDisplay extends StatefulWidget {
-  final SQDocField field;
-  const DataFieldInsertDisplay(this.field, {Key? key}) : super(key: key);
+class DocCreateScreen extends Screen {
+  final SQCollection collection;
+  const DocCreateScreen(String title, this.collection, {Key? key})
+      : super(title, key: key);
 
   @override
-  State<DataFieldInsertDisplay> createState() => _DataFieldInsertDisplayState();
+  State<DocCreateScreen> createState() => _DocCreateScreenState();
 }
 
-class _DataFieldInsertDisplayState extends State<DataFieldInsertDisplay> {
+class _DocCreateScreenState extends State<DocCreateScreen> {
+  void loadData() async {
+    await widget.collection.loadCollection();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '${widget.title} Screen',
+            ),
+            Text('Object path: ${widget.collection.collectionPath}'),
+            DocCreateDisplay(SQDoc("new-id", widget.collection.fields, "new-id",
+                userData: widget.collection.userData,
+                collection: widget.collection))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DocFieldCreateDisplay extends StatefulWidget {
+  final SQDocField field;
+  const DocFieldCreateDisplay(this.field, {Key? key}) : super(key: key);
+
+  @override
+  State<DocFieldCreateDisplay> createState() => _DocFieldCreateDisplayState();
+}
+
+class _DocFieldCreateDisplayState extends State<DocFieldCreateDisplay> {
   final fieldTextController = TextEditingController();
 
   @override
@@ -39,17 +86,17 @@ class _DataFieldInsertDisplayState extends State<DataFieldInsertDisplay> {
   }
 }
 
-class DataObjectInsertDisplay extends StatelessWidget {
+class DocCreateDisplay extends StatelessWidget {
   final SQDoc object;
 
-  DataObjectInsertDisplay(this.object, {Key? key}) : super(key: key);
+  DocCreateDisplay(this.object, {Key? key}) : super(key: key);
 
   final idTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final objectFieldsFields =
-        object.fields.map((field) => DataFieldInsertDisplay(field)).toList();
+        object.fields.map((field) => DocFieldCreateDisplay(field)).toList();
 
     void saveItem() async {
       db

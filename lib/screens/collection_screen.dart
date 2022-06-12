@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data_objects/sq_collection.dart';
 import 'package:soar_quest/data_objects/sq_doc.dart';
-import 'package:soar_quest/screens/collection_insert_screen.dart';
+import 'package:soar_quest/screens/doc_create_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
@@ -105,7 +105,7 @@ class _CollectionDisplayState extends State<CollectionDisplay> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                CollectionInsertScreen("Add item", widget.collection)),
+                DocCreateScreen("Add item", widget.collection)),
       );
     }
 
