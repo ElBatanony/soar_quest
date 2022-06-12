@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data_objects/sq_doc.dart';
-import 'package:soar_quest/data_ui/data_object_display.dart';
 import 'package:soar_quest/screens/screen.dart';
 
 class DocScreen extends Screen {
@@ -45,11 +44,45 @@ class _DocScreenState extends State<DocScreen> {
               '${widget.title} Screen',
             ),
             Text('Object path: ${widget.object.dataPath}'),
-            DataObjectDisplay(widget.object),
+            DocDisplay(widget.object),
             ElevatedButton(onPressed: deleteDoc, child: Text("Delete Item"))
           ],
         ),
       ),
     );
   }
+}
+
+class DocFieldDisplay extends StatelessWidget {
+  final SQDocField field;
+  const DocFieldDisplay(this.field, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [Text('${field.name}: ${field.value} , ${field.type.name}')],
+    );
+  }
+}
+
+class DocDisplay extends StatelessWidget {
+  final SQDoc object;
+
+  const DocDisplay(this.object, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: object.collection?.diplayScreen?.dataObjectDisplayBody == null
+          ? docDisplayBody(object)
+          : object.collection?.diplayScreen?.dataObjectDisplayBody!(object),
+    );
+  }
+}
+
+Widget docDisplayBody(SQDoc object) {
+  return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: object.fields.map((field) => DocFieldDisplay(field)).toList());
 }
