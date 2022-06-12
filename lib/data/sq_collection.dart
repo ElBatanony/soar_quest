@@ -12,8 +12,10 @@ class SQCollection {
   List<SQDoc> docs = [];
   Function? refreshUI;
   CollectionScreen? screen;
+  String singleDocName;
 
-  SQCollection(this.id, this.fields, {this.userData = false});
+  SQCollection(this.id, this.fields,
+      {this.userData = false, this.singleDocName = "Doc"});
 
   loadCollection() async {
     print("fetching from ${getPath()}");
