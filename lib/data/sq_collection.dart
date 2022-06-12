@@ -10,8 +10,8 @@ class SQCollection {
   List<SQDocField> fields;
   bool userData;
   List<SQDoc> docs = [];
-  Function? updateUI;
-  CollectionScreen? diplayScreen;
+  Function? refreshUI;
+  CollectionScreen? screen;
 
   SQCollection(this.id, this.fields, {this.userData = false});
 
@@ -19,7 +19,7 @@ class SQCollection {
     docs = [];
     print("fetching from ${getPath()}");
     await db.collection(getPath()).get().then((snap) {
-      print('${snap.docs.length} docs fetched!');
+      print('${snap.docs.length} docs fetched for $id!');
 
       for (var doc in snap.docs) {
         var newDoc = SQDoc.withData(doc.id, fields, doc.data());
@@ -27,9 +27,8 @@ class SQCollection {
         docs.add(newDoc);
       }
     });
-    if (updateUI != null) {
-      updateUI!();
-    }
+
+    if (refreshUI != null) refreshUI!();
   }
 
   Future createDoc(SQDoc doc) async {

@@ -9,9 +9,11 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final Widget Function(SQDoc object)? dataObjectDisplayBody;
 
-  const CollectionScreen(String title, this.collection,
+  CollectionScreen(String title, this.collection,
       {this.dataObjectDisplayBody, Key? key})
-      : super(title, key: key);
+      : super(title, key: key) {
+    collection.screen = this;
+  }
 
   @override
   State<CollectionScreen> createState() => _CollectionScreenState();
@@ -23,78 +25,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
     setState(() {});
   }
 
-  void refresh() {
+  void refreshScreen() {
     setState(() {});
   }
 
   @override
   void initState() {
-    widget.collection.updateUI = refresh;
-    widget.collection.diplayScreen = widget;
+    widget.collection.refreshUI = refreshScreen;
     loadData();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '${widget.title} Screen',
-            ),
-            Text('Object path: ${widget.collection.getPath()}'),
-            CollectionDisplay(widget.collection)
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CollectionDocDisplay extends StatelessWidget {
-  final SQDoc docObject;
-  const CollectionDocDisplay(this.docObject, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(8),
-        child: ElevatedButton(
-          child: Text(docObject.id),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DocScreen(docObject.id, docObject)),
-            );
-          },
-        ));
-  }
-}
-
-class CollectionDisplay extends StatefulWidget {
-  final SQCollection collection;
-
-  const CollectionDisplay(this.collection, {Key? key}) : super(key: key);
-
-  @override
-  State<CollectionDisplay> createState() => _CollectionDisplayState();
-}
-
-class _CollectionDisplayState extends State<CollectionDisplay> {
-  void refresh() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    // widget.collection.updateUI = refresh;
     super.initState();
   }
 
@@ -109,14 +47,49 @@ class _CollectionDisplayState extends State<CollectionDisplay> {
       );
     }
 
-    final itemsDisplay =
-        widget.collection.docs.map((doc) => CollectionDocDisplay(doc)).toList();
+    final itemsDisplay = widget.collection.docs
+        .map((doc) => Container(
+            padding: EdgeInsets.all(8),
+            child: ElevatedButton(
+              child: Text(doc.id),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DocScreen(
+                            doc.id,
+                            doc,
+                            refreshCollectionScreen: refreshScreen,
+                          )),
+                );
+              },
+            )))
+        .toList();
 
-    return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        ...itemsDisplay,
-        ElevatedButton(onPressed: goToAddItem, child: Text("Add item"))
-      ]),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '${widget.title} Screen',
+            ),
+            Text('Object path: ${widget.collection.getPath()}'),
+            Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ...itemsDisplay,
+                    ElevatedButton(
+                        onPressed: goToAddItem, child: Text("Add item"))
+                  ]),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

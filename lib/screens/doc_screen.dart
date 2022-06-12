@@ -4,7 +4,9 @@ import 'package:soar_quest/screens/screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc object;
-  const DocScreen(String title, this.object, {Key? key})
+  final Function refreshCollectionScreen;
+  const DocScreen(String title, this.object,
+      {required this.refreshCollectionScreen, Key? key})
       : super(title, key: key);
 
   @override
@@ -18,9 +20,10 @@ class _DocScreenState extends State<DocScreen> {
   }
 
   void deleteDoc() {
-    widget.object.collection
-        .deleteDoc(widget.object)
-        .then((_) => Navigator.pop(context));
+    widget.object.collection.deleteDoc(widget.object).then((_) {
+      widget.refreshCollectionScreen();
+      Navigator.pop(context);
+    });
   }
 
   @override
@@ -73,9 +76,9 @@ class DocDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: object.collection.diplayScreen?.dataObjectDisplayBody == null
+      child: object.collection.screen?.dataObjectDisplayBody == null
           ? docDisplayBody(object)
-          : object.collection.diplayScreen?.dataObjectDisplayBody!(object),
+          : object.collection.screen?.dataObjectDisplayBody!(object),
     );
   }
 }
