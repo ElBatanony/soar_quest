@@ -2,6 +2,9 @@ import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 
+SQCollection userCollection =
+    SQCollection("users/${App.instance.currentUser!.userId}/data", []);
+
 class SQCollection {
   String id;
   List<SQDocField> fields;
@@ -33,6 +36,12 @@ class SQCollection {
     await db.doc("${getPath()}/${doc.id}").set(doc.collectFields());
     return loadCollection();
   }
+
+  Future deleteDoc(SQDoc doc) async {
+    await db.doc(doc.getPath()).delete();
+    return loadCollection();
+  }
+
   String getPath() {
     if (userData)
       return App.instance.getAppPath() +

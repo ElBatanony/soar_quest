@@ -17,17 +17,13 @@ void main() async {
   App tinkoffApp = App("Tinkoff");
   App.instance.currentUser = UserData(userId: "testuser123");
 
-  SQCollection miscCollection = SQCollection([], "misc", userData: true);
-
   final cashbackEarnedData = SQDoc(
       'cashbackEarned',
       [
         SQDocField("cashbackEarned", SQDocFieldType.int),
         SQDocField("creditedOn", SQDocFieldType.string)
       ],
-      "cashbackEarned",
-      collection: miscCollection,
-      userData: true);
+      collection: userCollection);
 
   final cashbackEarnedScreen = DocScreen("Cashback Earned", cashbackEarnedData);
 
