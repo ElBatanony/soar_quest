@@ -11,7 +11,7 @@ class CollectionScreen extends Screen {
   final Widget Function(SQCollection collection,
       {required Function refreshScreen, Key? key}) collectionScreenBody;
 
-  final Widget Function(SQDoc doc) docScreenBody;
+  final DocScreenBody Function(SQDoc doc) docScreenBody;
 
   CollectionScreen(String title, this.collection,
       {this.docScreenBody = DocScreenBody.new,
