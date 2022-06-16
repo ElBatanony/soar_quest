@@ -56,4 +56,8 @@ class SQCollection {
     else
       return App.instance.getAppPath() + id;
   }
+
+  String getNewDocId() {
+    return ref.doc().id;
+  }
 }
