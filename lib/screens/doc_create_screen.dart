@@ -27,7 +27,7 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var docRef = db.collection(widget.collection.getPath()).doc();
+    var docRef = widget.collection.getANewDocRef();
 
     return Scaffold(
       appBar: AppBar(
