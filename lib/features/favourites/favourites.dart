@@ -8,26 +8,38 @@ import 'package:soar_quest/screens/screen.dart';
 import 'toggle_in_favourites_button.dart';
 
 class FavouritesFeature extends Feature {
-  static SQCollection favouritesCollection = SQCollection(
-      "favourites",
-      [
-        SQDocField("itemName", SQDocFieldType.string),
-        SQDocField("docPath", SQDocFieldType.string),
-      ],
+  static final SQCollection _favouritesCollection = SQCollection(
+      "favourites", [SQDocField("identifier", SQDocFieldType.string)],
       userData: true);
 
   static Widget addToFavouritesButton(SQDoc doc) {
     return ToggleInFavouritesButton(doc);
   }
 
+  static addFavourite(SQDoc doc) {
+    var newFavDoc = SQDoc(
+        doc.id, [SQDocField("identifier", SQDocFieldType.string)],
+        collection: FavouritesFeature._favouritesCollection);
+    FavouritesFeature._favouritesCollection.createDoc(newFavDoc);
+  }
+
+  static removeFavourite(SQDoc favDoc) {
+    FavouritesFeature._favouritesCollection.deleteDoc(favDoc.id);
+  }
+
   static Screen favouritesScreen = CollectionScreen(
     "Favourites",
-    favouritesCollection,
+    _favouritesCollection,
     collectionScreenBody: FavouritesScreenBody.new,
   );
 
   static loadFavourites() {
-    favouritesCollection.loadCollection();
+    _favouritesCollection.loadCollection();
+  }
+
+  static bool isInFavourites(SQDoc doc) {
+    return _favouritesCollection.docs
+        .any((SQDoc someDoc) => someDoc.id == doc.id);
   }
 }
 
@@ -70,7 +82,7 @@ class _FavouritesScreenBodyState extends State<FavouritesScreenBody> {
         SQDoc doc = widget.collection.docs[i];
         return ListTile(
           title: Text(
-            doc.id,
+            doc.identifier,
           ),
           trailing: ElevatedButton(
               onPressed: () => removeFromFavourites(doc),
