@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
@@ -13,9 +14,12 @@ class SQCollection {
   Function? refreshUI;
   CollectionScreen? screen;
   String singleDocName;
+  late CollectionReference ref;
 
   SQCollection(this.id, this.fields,
-      {this.userData = false, this.singleDocName = "Doc"});
+      {this.userData = false, this.singleDocName = "Doc"}) {
+    ref = db.collection(getPath());
+  }
 
   loadCollection() async {
     print("fetching from ${getPath()}");
