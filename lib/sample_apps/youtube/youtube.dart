@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:soar_quest/app/app.dart';
-import 'package:soar_quest/data/sq_collection.dart';
+import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/menu_screen.dart';
@@ -18,8 +18,8 @@ void main() async {
     SQDocField("Views", SQDocFieldType.int)
   ];
 
-  SQCollection historyCollection =
-      SQCollection("history", videoFields, userData: true);
+  FirestoreCollection historyCollection =
+      FirestoreCollection(id: "history", fields: videoFields, userData: true);
 
   final MenuScreen libraryScreen = MenuScreen("Library", [
     CollectionScreen("History", historyCollection),

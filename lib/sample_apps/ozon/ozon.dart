@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_display.dart';
+import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
@@ -19,7 +20,7 @@ void main() async {
   App ozonApp = App("Ozon");
   App.instance.currentUser = UserData(userId: "testuser123");
 
-  final catalogueCollection = SQCollection("catalogue", [
+  final catalogueCollection = FirestoreCollection(id: "catalogue", fields: [
     SQDocField("Item Name", SQDocFieldType.string),
     SQDocField("Item Price", SQDocFieldType.int),
   ]);

@@ -4,6 +4,7 @@ import 'package:soar_quest/components/bool_field_display.dart';
 import 'package:soar_quest/components/col_create_doc_button.dart';
 import 'package:soar_quest/components/doc_delete_button.dart';
 import 'package:soar_quest/components/doc_field_toggle_buttons.dart';
+import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
@@ -20,9 +21,9 @@ void main() async {
 
   App.instance.currentUser = UserData(userId: "testuser123");
 
-  final todoCollection = SQCollection(
-      "Todos",
-      [
+  final todoCollection = FirestoreCollection(
+      id: "Todos",
+      fields: [
         SQDocField("Task Name", SQDocFieldType.string),
         SQDocField("Reminder", SQDocFieldType.string),
         SQDocField("Done", SQDocFieldType.bool, value: false),

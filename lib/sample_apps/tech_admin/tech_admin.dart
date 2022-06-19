@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/data.dart';
+import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/screens/auth/sign_in_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
@@ -15,9 +16,9 @@ void main() async {
 
   App.instance.currentUser = UserData(userId: "testuser123");
 
-  final logsCollection = SQCollection(
-      "Logs",
-      [
+  final logsCollection = FirestoreCollection(
+      id: "Logs",
+      fields: [
         SQDocField("Task Name", SQDocFieldType.string),
         SQDocField("Reminder", SQDocFieldType.string),
         SQDocField("Done", SQDocFieldType.bool, value: false),

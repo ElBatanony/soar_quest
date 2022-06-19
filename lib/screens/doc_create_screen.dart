@@ -27,7 +27,8 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var docRef = widget.collection.getANewDocRef();
+    // var docRef = widget.collection.getANewDocRef();
+    String newDocId = widget.collection.getANewDocId();
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +42,7 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
               '${widget.title} Screen',
             ),
             Text('Doc path: ${widget.collection.getPath()}'),
-            DocCreateScreenBody(SQDoc(docRef.id, widget.collection.fields,
+            DocCreateScreenBody(SQDoc(newDocId, widget.collection.fields,
                 collection: widget.collection))
           ],
         ),

@@ -16,8 +16,11 @@ class DocScreen extends Screen {
 }
 
 class _DocScreenState extends State<DocScreen> {
+  late SQDoc doc;
+
   void loadData() async {
-    await widget.doc.loadData();
+    // await widget.doc.loadData();
+    doc = await widget.doc.collection.loadDoc(widget.doc);
     setState(() {});
   }
 
@@ -35,7 +38,7 @@ class _DocScreenState extends State<DocScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.doc.identifier),
+        title: Text(doc.identifier),
       ),
       body: Center(
         child: Column(
@@ -45,11 +48,11 @@ class _DocScreenState extends State<DocScreen> {
               '${widget.title} Screen',
             ),
             Text(
-              'Object path: ${widget.doc.getPath()}',
+              'Object path: ${doc.getPath()}',
               textAlign: TextAlign.center,
             ),
-            widget.doc.collection.screen!.docScreenBody(widget.doc),
-            DocDeleteButton(widget.doc)
+            doc.collection.screen!.docScreenBody(doc),
+            DocDeleteButton(doc)
           ],
         ),
       ),

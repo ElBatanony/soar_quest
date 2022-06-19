@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/features/feature.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
@@ -8,8 +9,11 @@ import 'package:soar_quest/screens/screen.dart';
 import 'toggle_in_favourites_button.dart';
 
 class FavouritesFeature extends Feature {
-  static final SQCollection _favouritesCollection = SQCollection(
-      "favourites", [SQDocField("identifier", SQDocFieldType.string)],
+  static final SQCollection _favouritesCollection = FirestoreCollection(
+      id: "favourites",
+      fields: [
+        SQDocField("identifier", SQDocFieldType.string),
+      ],
       userData: true);
 
   static Widget addToFavouritesButton(SQDoc doc) {

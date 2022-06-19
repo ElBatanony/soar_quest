@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:soar_quest/app/app.dart';
-import 'package:soar_quest/data/sq_collection.dart';
+import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
@@ -27,11 +27,14 @@ void main() async {
     refreshCollectionScreen: () {},
   );
 
-  final partnerCashbackCol = SQCollection("partner-cashbacks", [
-    SQDocField("Partner", SQDocFieldType.string),
-    SQDocField("Headline", SQDocFieldType.string),
-    SQDocField("Subheader", SQDocFieldType.string)
-  ]);
+  final partnerCashbackCol = FirestoreCollection(
+    id: "partner-cashbacks",
+    fields: [
+      SQDocField("Partner", SQDocFieldType.string),
+      SQDocField("Headline", SQDocFieldType.string),
+      SQDocField("Subheader", SQDocFieldType.string)
+    ],
+  );
 
   final partnerCashbackScreen =
       CollectionScreen("Partner Cashbacks", partnerCashbackCol);
