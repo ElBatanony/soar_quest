@@ -17,6 +17,8 @@ class App {
   Screen? currentScreen;
   ThemeData? theme;
 
+  bool inDebug;
+
   void setScreen(Screen screen) {
     currentScreen = screen;
     // AppDebugger.refresh();
@@ -24,7 +26,7 @@ class App {
 
   static late App instance;
 
-  App(this.name, {this.theme}) {
+  App(this.name, {this.theme, this.inDebug = true}) {
     instance = this;
   }
 

@@ -22,14 +22,16 @@ class _AppDisplayState extends State<AppDisplay> {
         debugShowCheckedModeBanner: false,
         theme: widget.app.theme ??
             ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-        home: Row(children: [
-          Expanded(
-            child: AppDebuggerDisplay(),
-          ),
-          SizedBox(
-            width: appWidth.toDouble(),
-            child: widget.app.homescreen!,
-          )
-        ]));
+        home: widget.app.inDebug
+            ? Row(children: [
+                Expanded(
+                  child: AppDebuggerDisplay(),
+                ),
+                SizedBox(
+                  width: appWidth.toDouble(),
+                  child: widget.app.homescreen!,
+                )
+              ])
+            : widget.app.homescreen!);
   }
 }
