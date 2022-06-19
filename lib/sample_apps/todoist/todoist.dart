@@ -15,6 +15,9 @@ import 'package:soar_quest/users/user_data.dart';
 void main() async {
   App todoistApp = App("Todoist",
       theme: ThemeData(primarySwatch: Colors.red, useMaterial3: true));
+
+  await todoistApp.init();
+
   App.instance.currentUser = UserData(userId: "testuser123");
 
   final todoCollection = SQCollection(

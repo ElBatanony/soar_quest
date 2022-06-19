@@ -4,6 +4,7 @@ import 'package:soar_quest/app/app_display.dart';
 import 'package:soar_quest/firebase_options.dart';
 
 import 'package:soar_quest/screens/screen.dart';
+import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/users/user_data.dart';
 
 // import 'app_debugger.dart';
@@ -27,10 +28,14 @@ class App {
     instance = this;
   }
 
-  run() async {
+  init() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    AuthManager.init();
+  }
+
+  run() {
     runApp(AppDisplay(this));
   }
 
