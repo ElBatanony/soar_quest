@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 
 import 'sq_doc_field.dart';
 export 'sq_doc_field.dart';
-
-final db = FirebaseFirestore.instance;
 
 class SQDoc {
   late List<SQDocField> fields;
@@ -28,15 +25,8 @@ class SQDoc {
     });
   }
 
-  loadData() async {
-    await db.doc(getPath()).get().then((doc) {
-      print(doc.data());
-      setData(doc.data()!);
-    });
-  }
-
   updateDoc() {
-    return db.doc(getPath()).update(collectFields());
+    return collection.updateDoc(this);
   }
 
   Map<String, dynamic> collectFields() {
@@ -58,7 +48,7 @@ class SQDoc {
   Future setDocFieldByName(String fieldName, dynamic value) {
     SQDocField field = getFieldByName(fieldName);
     field.value = value;
-    return updateDoc();
+    return collection.updateDoc(this);
   }
 
   String getPath() {
