@@ -14,6 +14,7 @@ class App {
 
   UserData? currentUser;
   Screen? currentScreen;
+  ThemeData? theme;
 
   void setScreen(Screen screen) {
     currentScreen = screen;
@@ -22,7 +23,7 @@ class App {
 
   static late App instance;
 
-  App(this.name) {
+  App(this.name, {this.theme}) {
     instance = this;
   }
 

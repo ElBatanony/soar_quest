@@ -27,7 +27,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: App.instance.name,
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      theme: App.instance.theme ??
+          ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: NavigationBar(
