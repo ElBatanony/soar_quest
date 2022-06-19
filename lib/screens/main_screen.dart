@@ -31,20 +31,22 @@ class _MainScreenState extends State<MainScreen> {
           ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          selectedIndex: currentPageIndex,
-          destinations: widget.bottomNavScreens
-              .map((screen) => NavigationDestination(
-                    icon: Icon(Icons.explore),
-                    label: screen.title,
-                  ))
-              .toList(),
-        ),
+        bottomNavigationBar: widget.bottomNavScreens.length > 1
+            ? NavigationBar(
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    currentPageIndex = index;
+                  });
+                },
+                selectedIndex: currentPageIndex,
+                destinations: widget.bottomNavScreens
+                    .map((screen) => NavigationDestination(
+                          icon: Icon(Icons.explore),
+                          label: screen.title,
+                        ))
+                    .toList(),
+              )
+            : null,
         body: widget.bottomNavScreens[currentPageIndex],
       ),
     );
