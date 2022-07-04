@@ -26,7 +26,7 @@ class App {
 
   static late App instance;
 
-  App(this.name, {this.theme, this.inDebug = true}) {
+  App(this.name, {this.theme, this.inDebug = false}) {
     instance = this;
   }
 
