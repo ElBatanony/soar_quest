@@ -21,10 +21,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -60,5 +57,13 @@ class DefaultFirebaseOptions {
     authDomain: 'soar-quest-test.firebaseapp.com',
     storageBucket: 'soar-quest-test.appspot.com',
     measurementId: 'G-PGF7TJWZCL',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyBDzf4dybC0SNQoOxGqRX5jjDLDSa8rsj0',
+    appId: '1:864602908897:android:330f33d917cceacc582fa0',
+    messagingSenderId: '864602908897',
+    projectId: 'soar-quest-test',
+    storageBucket: 'soar-quest-test.appspot.com',
   );
 }
