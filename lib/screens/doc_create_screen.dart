@@ -34,17 +34,19 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '${widget.title} Screen',
-            ),
-            Text('Doc path: ${widget.collection.getPath()}'),
-            DocCreateScreenBody(SQDoc(newDocId, widget.collection.fields,
-                collection: widget.collection))
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${widget.title} Screen',
+              ),
+              Text('Doc path: ${widget.collection.getPath()}'),
+              DocCreateScreenBody(SQDoc(newDocId, widget.collection.fields,
+                  collection: widget.collection))
+            ],
+          ),
         ),
       ),
     );
