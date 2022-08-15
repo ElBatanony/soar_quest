@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'sq_timestamp.dart';
+export 'sq_timestamp.dart';
 
 enum SQDocFieldType { int, string, bool, timestamp }
 
@@ -6,7 +7,7 @@ Map<SQDocFieldType, dynamic> defaultTypeValue = {
   SQDocFieldType.int: 0,
   SQDocFieldType.string: "",
   SQDocFieldType.bool: false,
-  SQDocFieldType.timestamp: Timestamp(0, 0)
+  SQDocFieldType.timestamp: SQTimestamp(0, 0)
 };
 
 class SQDocField {
