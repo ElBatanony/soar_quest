@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:soar_quest/components/timestamp_doc_field.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 
 class DocFieldField extends StatefulWidget {
@@ -11,6 +13,10 @@ class DocFieldField extends StatefulWidget {
 
 class _DocFieldFieldState extends State<DocFieldField> {
   final fieldTextController = TextEditingController();
+
+  void refresh() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +50,31 @@ class _DocFieldFieldState extends State<DocFieldField> {
       );
     }
 
-    return TextField(
-      controller: fieldTextController,
-      onChanged: (text) {
-        widget.field.value = text;
-      },
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: widget.field.name,
-      ),
-    );
+    if (widget.field.type == SQDocFieldType.string) {
+      return TextField(
+        controller: fieldTextController,
+        onChanged: (text) {
+          widget.field.value = text;
+        },
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: widget.field.name,
+        ),
+      );
+    }
+
+    if (widget.field.type == SQDocFieldType.timestamp) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(widget.field.name),
+          Text((widget.field.value as Timestamp).toDate().toString()),
+          TimestampDocFieldPicker(
+              timestampField: widget.field, updateCallback: refresh),
+        ],
+      );
+    }
+
+    return Text("${widget.field.type.name} fields not implemented");
   }
 }
