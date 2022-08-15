@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data/sq_doc_field.dart';
 
@@ -34,7 +33,7 @@ class _TimestampDocFieldPickerState extends State<TimestampDocFieldPicker> {
 
   void _selectDate(DateTime? newSelectedDate) {
     if (newSelectedDate != null) {
-      widget.timestampField.value = Timestamp.fromDate(newSelectedDate);
+      widget.timestampField.value = SQTimestamp.fromDate(newSelectedDate);
       widget.updateCallback();
     }
   }
