@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/components/timestamp_doc_field.dart';
 import 'package:soar_quest/data/sq_doc.dart';
@@ -33,7 +32,6 @@ class _DocFieldFieldState extends State<DocFieldField> {
     }
 
     if (widget.field.type == SQDocFieldType.bool) {
-      print("${widget.field.type} ${widget.field.value.runtimeType}");
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -68,7 +66,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(widget.field.name),
-          Text((widget.field.value as Timestamp).toDate().toString()),
+          Text(widget.field.value.toString()),
           TimestampDocFieldPicker(
               timestampField: widget.field, updateCallback: refresh),
         ],
