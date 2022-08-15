@@ -19,10 +19,14 @@ class SQDoc {
 
   setData(Map<String, dynamic> dataToSet) {
     dataToSet.forEach((key, value) {
-      fields.firstWhere((element) => element.name == key, orElse: () {
+      SQDocField field =
+          fields.firstWhere((element) => element.name == key, orElse: () {
         print("Data field not found");
         return SQDocField.unknownField();
-      }).value = value;
+      });
+      field.value = value;
+      if (field.type == SQDocFieldType.timestamp)
+        field.value = SQTimestamp.fromTimestamp(value);
     });
     initialized = true;
   }
