@@ -19,8 +19,11 @@ class _DocScreenState extends State<DocScreen> {
   late SQDoc doc;
 
   void loadData() async {
-    // await widget.doc.loadData();
-    doc = await widget.doc.collection.loadDoc(widget.doc);
+    if (widget.doc.initialized == false)
+      doc = await widget.doc.collection.loadDoc(widget.doc);
+    else
+      doc = widget.doc;
+
     setState(() {});
   }
 

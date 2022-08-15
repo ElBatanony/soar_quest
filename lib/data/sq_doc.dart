@@ -7,6 +7,7 @@ class SQDoc {
   late List<SQDocField> fields;
   String id;
   late SQCollection collection;
+  bool initialized = false;
 
   static List<SQDocField> copyFields(List<SQDocField> fields) {
     return fields.map((field) => field.copy()).toList();
@@ -23,6 +24,7 @@ class SQDoc {
         return SQDocField.unknownField();
       }).value = value;
     });
+    initialized = true;
   }
 
   updateDoc() {
