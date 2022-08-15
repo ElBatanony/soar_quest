@@ -14,6 +14,8 @@ class DocCreateScreen extends Screen {
 }
 
 class _DocCreateScreenState extends State<DocCreateScreen> {
+  late SQDoc newDoc;
+
   void loadData() async {
     await widget.collection.loadCollection();
     setState(() {});
@@ -22,14 +24,14 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
   @override
   void initState() {
     loadData();
+    String newDocId = widget.collection.getANewDocId();
+    newDoc = SQDoc(newDocId, widget.collection.fields,
+        collection: widget.collection);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // var docRef = widget.collection.getANewDocRef();
-    String newDocId = widget.collection.getANewDocId();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -43,8 +45,11 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
                 '${widget.title} Screen',
               ),
               Text('Doc path: ${widget.collection.getPath()}'),
-              DocCreateScreenBody(SQDoc(newDocId, widget.collection.fields,
-                  collection: widget.collection))
+              DocCreateScreenBody(
+                newDoc,
+                objectFieldsFields:
+                    newDoc.fields.map((field) => DocFieldField(field)).toList(),
+              )
             ],
           ),
         ),
@@ -55,14 +60,14 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
 
 class DocCreateScreenBody extends StatelessWidget {
   final SQDoc doc;
+  final List<DocFieldField> objectFieldsFields;
 
-  const DocCreateScreenBody(this.doc, {Key? key}) : super(key: key);
+  const DocCreateScreenBody(this.doc,
+      {required this.objectFieldsFields, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final objectFieldsFields =
-        doc.fields.map((field) => DocFieldField(field)).toList();
-
     void saveItem() async {
       doc.collection.createDoc(doc).then((_) => Navigator.pop(context));
     }
