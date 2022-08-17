@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app_display.dart';
+import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/firebase_options.dart';
 
 import 'package:soar_quest/screens/screen.dart';
@@ -34,6 +35,7 @@ class App {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    AppSettings.init();
     AuthManager.init();
   }
 
