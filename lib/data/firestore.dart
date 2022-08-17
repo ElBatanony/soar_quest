@@ -84,7 +84,9 @@ class FirestoreCollection extends SQCollection {
 
   @override
   Future updateDoc(SQDoc doc) async {
-    await firestore.doc("${getPath()}/${doc.id}").update(doc.collectFields());
+    await firestore
+        .doc("${getPath()}/${doc.id}")
+        .set(doc.collectFields(), SetOptions(merge: true));
     return loadCollection();
   }
 
