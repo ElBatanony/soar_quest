@@ -13,6 +13,12 @@ class DocFieldField extends StatefulWidget {
 class _DocFieldFieldState extends State<DocFieldField> {
   final fieldTextController = TextEditingController();
 
+  @override
+  void initState() {
+    fieldTextController.text = widget.field.value.toString();
+    super.initState();
+  }
+
   void refresh() {
     setState(() {});
   }
