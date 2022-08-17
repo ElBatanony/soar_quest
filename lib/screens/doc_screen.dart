@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/components/doc_delete_button.dart';
+import 'package:soar_quest/components/doc_edit_button.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/screen.dart';
 
@@ -55,6 +56,7 @@ class _DocScreenState extends State<DocScreen> {
               textAlign: TextAlign.center,
             ),
             doc.collection.screen!.docScreenBody(doc),
+            DocEditButton(doc, refresh: refresh),
             DocDeleteButton(doc)
           ],
         ),
