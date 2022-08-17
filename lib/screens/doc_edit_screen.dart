@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/app/app_navigator.dart';
 import 'package:soar_quest/components/doc_field_field.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/screen.dart';
@@ -44,15 +45,21 @@ class _DocEditScreenState extends State<DocEditScreen> {
 class DocEditScreenBody extends StatelessWidget {
   final SQDoc doc;
   final List<DocFieldField> objectFieldsFields;
+  final Function? updateCallback;
 
   const DocEditScreenBody(this.doc,
-      {required this.objectFieldsFields, Key? key})
+      {required this.objectFieldsFields, this.updateCallback, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     void updateItem() async {
-      await doc.collection.updateDoc(doc).then((_) => Navigator.pop(context));
+      await doc.collection.updateDoc(doc).then((_) {
+        if (updateCallback != null)
+          updateCallback!();
+        else
+          exitScreen(context);
+      });
     }
 
     return Center(
