@@ -7,3 +7,7 @@ Future goToScreen(Screen screen, {required BuildContext context}) {
     MaterialPageRoute(builder: (context) => screen),
   );
 }
+
+void exitScreen(BuildContext context) {
+  return Navigator.pop(context);
+}
