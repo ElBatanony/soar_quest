@@ -62,17 +62,19 @@ class DocEditScreenBody extends StatelessWidget {
       });
     }
 
-    return Center(
-      child: Container(
-        constraints: BoxConstraints(maxWidth: 350),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Doc ID"), Text(doc.id)],
-          ),
-          ...objectFieldsFields,
-          ElevatedButton(onPressed: updateItem, child: Text("Save / Update"))
-        ]),
+    return SingleChildScrollView(
+      child: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 350),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [Text("Doc ID"), Text(doc.id)],
+            ),
+            ...objectFieldsFields,
+            ElevatedButton(onPressed: updateItem, child: Text("Save / Update"))
+          ]),
+        ),
       ),
     );
   }
