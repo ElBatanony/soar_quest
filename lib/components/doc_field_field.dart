@@ -16,6 +16,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
   @override
   void initState() {
     fieldTextController.text = widget.field.value.toString();
+    refresh();
     super.initState();
   }
 
@@ -63,6 +64,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: widget.field.name,
+          labelText: widget.field.name,
         ),
       );
     }
