@@ -28,8 +28,12 @@ class SQDoc {
         return SQDocField.unknownField();
       });
       field.value = value;
-      if (field.type == SQDocFieldType.timestamp)
-        field.value = SQTimestamp.fromTimestamp(value);
+      if (field.type == SQDocFieldType.timestamp) {
+        if (field.value["_seconds"] != null)
+          field.value = SQTimestamp(field.value["_seconds"], 0);
+        else
+          field.value = SQTimestamp.fromTimestamp(value);
+      }
     });
     initialized = true;
   }
