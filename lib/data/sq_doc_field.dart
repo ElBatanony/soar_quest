@@ -1,5 +1,5 @@
 import 'sq_timestamp.dart';
-export 'sq_timestamp.dart';
+export 'sq_timestamp.dart' show SQTimestamp;
 
 enum SQDocFieldType { int, string, bool, timestamp }
 
