@@ -8,10 +8,10 @@ class DocEditScreen extends Screen {
   DocEditScreen(String title, this.doc, {Key? key}) : super(title, key: key);
 
   @override
-  State<DocEditScreen> createState() => _DocCreateScreenState();
+  State<DocEditScreen> createState() => _DocEditScreenState();
 }
 
-class _DocCreateScreenState extends State<DocEditScreen> {
+class _DocEditScreenState extends State<DocEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
