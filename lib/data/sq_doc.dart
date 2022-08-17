@@ -17,11 +17,14 @@ class SQDoc {
     fields = SQDoc.copyFields(newFields);
   }
 
+  loadDoc() {
+    return collection.loadDoc(this);
+  }
+
   setData(Map<String, dynamic> dataToSet) {
     dataToSet.forEach((key, value) {
       SQDocField field =
           fields.firstWhere((element) => element.name == key, orElse: () {
-        print("Data field not found");
         return SQDocField.unknownField();
       });
       field.value = value;
