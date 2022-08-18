@@ -12,10 +12,10 @@ void main() async {
       SQDocField("date", SQDocFieldType.timestamp),
       SQDocField("payload", SQDocFieldType.bool),
     ]);
-    const collectionId = "sample-apps/Tech Admin/Logs";
+    const collectionPath = "sample-apps/Tech Admin/Logs";
 
     GetCollectionDocs cf = GetCollectionDocs(logsCollection);
-    List<SQDoc> yo = await cf.getDocs(collectionId);
-    print(yo[0].getFieldValueByName("logId"));
+    List<SQDoc> docs = await cf.getDocs(collectionPath: collectionPath);
+    print(docs[0].getFieldValueByName("logId"));
   });
 }

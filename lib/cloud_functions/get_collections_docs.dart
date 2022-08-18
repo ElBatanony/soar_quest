@@ -7,8 +7,10 @@ class GetCollectionDocs extends CloudFunction {
 
   GetCollectionDocs(this.collection) : super("getCollectionDocs");
 
-  Future<List<SQDoc>> getDocs(String collectionId) async {
-    dynamic json = await super.call(params: "collectionId=$collectionId");
+  Future<List<SQDoc>> getDocs({String? collectionPath}) async {
+    collectionPath ??= collection.getPath();
+
+    dynamic json = await super.call(params: "collectionId=$collectionPath");
 
     List<dynamic> docs = json["docs"];
     List<SQDoc> sqDocs = [];
