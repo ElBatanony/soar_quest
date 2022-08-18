@@ -19,6 +19,7 @@ class App {
   ThemeData? theme;
 
   bool inDebug;
+  bool emulatingCloudFunctions;
 
   void setScreen(Screen screen) {
     currentScreen = screen;
@@ -27,7 +28,12 @@ class App {
 
   static late App instance;
 
-  App(this.name, {this.theme, this.inDebug = false}) {
+  App(
+    this.name, {
+    this.theme,
+    this.inDebug = false,
+    this.emulatingCloudFunctions = false,
+  }) {
     instance = this;
   }
 
