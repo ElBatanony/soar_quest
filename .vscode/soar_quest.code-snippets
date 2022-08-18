@@ -29,7 +29,10 @@
 			"class _$1State extends State<$1> {",
 			"\t@override",
 			"\tWidget build(BuildContext context) {",
-			"\t\treturn Text(\"New Screen\");",
+			"\t\treturn Scaffold(",
+			"\t\t\tappBar: AppBar(title: Text(widget.title)),",
+			"\t\t\tbody: Center(child: Text('${widget.title} Screen'),),",
+			"\t\t);",
 			"\t}",
 			"}"
 		],
