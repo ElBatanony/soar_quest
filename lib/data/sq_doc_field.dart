@@ -37,5 +37,21 @@ class SQDocField {
 
   dynamic collectField() => value;
 }
+
+class SQDocListField extends SQDocField {
+  SQDocListField(String name, {List<SQDocField> value = const <SQDocField>[]})
+      : super(name, SQDocFieldType.list, value: value);
+
+  @override
+  List<SQDocField> get value => super.value as List<SQDocField>;
+
+  @override
+  SQDocField copy() {
+    return SQDocListField(name, value: [...value]);
+  }
+
+  @override
+  List<dynamic> collectField() {
+    return value.map((listItemField) => listItemField.collectField()).toList();
   }
 }
