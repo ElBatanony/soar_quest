@@ -1,13 +1,17 @@
+import 'package:soar_quest/data/sq_doc.dart';
+
 import 'sq_timestamp.dart';
 export 'sq_timestamp.dart' show SQTimestamp;
 
-enum SQDocFieldType { int, string, bool, timestamp }
+enum SQDocFieldType { int, string, bool, timestamp, list, nullType }
 
 Map<SQDocFieldType, dynamic> defaultTypeValue = {
   SQDocFieldType.int: 0,
   SQDocFieldType.string: "",
   SQDocFieldType.bool: false,
-  SQDocFieldType.timestamp: SQTimestamp(0, 0)
+  SQDocFieldType.timestamp: SQTimestamp(0, 0),
+  SQDocFieldType.list: <SQDocField>[],
+  SQDocFieldType.nullType: null
 };
 
 class SQDocField {
