@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/components/list_field.dart';
 import 'package:soar_quest/components/timestamp_doc_field.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 
@@ -92,6 +93,14 @@ class _DocFieldFieldState extends State<DocFieldField> {
               }),
         ],
       );
+    }
+
+    if (widget.field.type == SQDocFieldType.list) {
+      return ListField(widget.field as SQDocListField);
+    }
+
+    if (widget.field.type == SQDocFieldType.nullType) {
+      return Text("Greetings! This is null!");
     }
 
     return Text("${widget.field.type.name} fields not implemented");
