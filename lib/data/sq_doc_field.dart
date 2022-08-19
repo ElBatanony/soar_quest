@@ -18,11 +18,11 @@ class SQDocField {
   String name;
   SQDocFieldType type;
   dynamic value;
-  dynamic defualtValue;
 
-  SQDocField(this.name, this.type, {this.value, this.defualtValue}) {
-    defualtValue ??= defaultTypeValue[type];
-    value ??= defualtValue;
+  dynamic get defaultValue => defaultTypeValue[type];
+
+  SQDocField(this.name, this.type, {this.value}) {
+    value ??= defaultValue;
   }
 
   static SQDocField unknownField() {
