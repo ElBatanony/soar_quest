@@ -48,7 +48,7 @@ class SQDoc {
   Map<String, dynamic> collectFields() {
     Map<String, dynamic> ret = {};
     for (var field in fields) {
-      ret[field.name] = field.value;
+      ret[field.name] = field.collectField();
     }
     return ret;
   }
