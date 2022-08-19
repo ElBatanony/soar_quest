@@ -1,5 +1,15 @@
 import 'package:soar_quest/data.dart';
 
+extension FilterDocs on SQCollection {
+  List<SQDoc> filter(List<DocsFilter> filters) {
+    List<SQDoc> ret = docs;
+    for (var filter in filters) {
+      ret = filter.filter(ret);
+    }
+    return ret;
+  }
+}
+
 class DocsFilter {
   SQDocField field;
 
