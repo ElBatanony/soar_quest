@@ -23,7 +23,10 @@ class SQDoc {
   }
 
   setData(Map<String, dynamic> dataToSet) {
-    dataToSet.forEach((key, value) {
+    for (var entry in dataToSet.entries) {
+      var key = entry.key;
+      var value = entry.value;
+
       SQDocField field =
           fields.firstWhere((element) => element.name == key, orElse: () {
         return SQDocField.unknownField();
@@ -37,7 +40,7 @@ class SQDoc {
         else
           throw UnimplementedError("Timestamp variant not handled properly");
       }
-    });
+    }
     initialized = true;
   }
 
