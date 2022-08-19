@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 
 import 'sq_doc_field.dart';
@@ -29,10 +30,12 @@ class SQDoc {
       });
       field.value = value;
       if (field.type == SQDocFieldType.timestamp) {
-        if (field.value["_seconds"] != null)
+        if (field.value.runtimeType == Timestamp)
+          field.value = SQTimestamp.fromTimestamp(value);
+        else if (field.value["_seconds"] != null)
           field.value = SQTimestamp(field.value["_seconds"], 0);
         else
-          field.value = SQTimestamp.fromTimestamp(value);
+          throw UnimplementedError("Timestamp variant not handled properly");
       }
     });
     initialized = true;
