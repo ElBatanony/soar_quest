@@ -22,4 +22,7 @@ abstract class SQCollection {
 
   String getPath();
   String getANewDocId();
+
+  SQDocField getFieldByName(String fieldName) =>
+      fields.singleWhere((field) => field.name == fieldName);
 }
