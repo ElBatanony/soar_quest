@@ -14,15 +14,15 @@ Map<SQDocFieldType, dynamic> defaultTypeValue = {
   SQDocFieldType.nullType: null
 };
 
-class SQDocField {
+class SQDocField<T> {
   String name = "";
   SQDocFieldType type;
-  dynamic value;
+  late T value;
 
-  dynamic get defaultValue => defaultTypeValue[type];
+  T get defaultValue => defaultTypeValue[type];
 
-  SQDocField(this.name, this.type, {this.value}) {
-    value ??= defaultValue;
+  SQDocField(this.name, this.type, {T? value}) {
+    this.value = value ?? defaultValue;
   }
 
   SQDocField.nameless(this.type);
@@ -38,12 +38,9 @@ class SQDocField {
   dynamic collectField() => value;
 }
 
-class SQDocListField extends SQDocField {
+class SQDocListField extends SQDocField<List<SQDocField>> {
   SQDocListField(String name, {List<SQDocField> value = const <SQDocField>[]})
       : super(name, SQDocFieldType.list, value: value);
-
-  @override
-  List<SQDocField> get value => super.value as List<SQDocField>;
 
   @override
   SQDocField copy() {
