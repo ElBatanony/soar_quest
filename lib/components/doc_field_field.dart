@@ -4,7 +4,9 @@ import 'package:soar_quest/data/sq_doc.dart';
 
 class DocFieldField extends StatefulWidget {
   final SQDocField field;
-  const DocFieldField(this.field, {Key? key}) : super(key: key);
+  final Function? onChanged;
+
+  const DocFieldField(this.field, {this.onChanged, Key? key}) : super(key: key);
 
   @override
   State<DocFieldField> createState() => _DocFieldFieldState();
@@ -24,12 +26,17 @@ class _DocFieldFieldState extends State<DocFieldField> {
     setState(() {});
   }
 
+  void onChanged() {
+    if (widget.onChanged != null) widget.onChanged!(widget.field.value);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.field.type == SQDocFieldType.int) {
       return TextField(
         onChanged: (intText) {
           widget.field.value = int.parse(intText);
+          onChanged();
         },
         decoration: InputDecoration(
           border: OutlineInputBorder(),
@@ -49,6 +56,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
               setState(() {
                 widget.field.value = value;
               });
+              onChanged();
             },
           ),
         ],
@@ -60,6 +68,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
         controller: fieldTextController,
         onChanged: (text) {
           widget.field.value = text;
+          onChanged();
         },
         decoration: InputDecoration(
           border: OutlineInputBorder(),
@@ -76,7 +85,11 @@ class _DocFieldFieldState extends State<DocFieldField> {
           Text(widget.field.name),
           Text(widget.field.value.toString()),
           TimestampDocFieldPicker(
-              timestampField: widget.field, updateCallback: refresh),
+              timestampField: widget.field,
+              updateCallback: () {
+                refresh();
+                onChanged();
+              }),
         ],
       );
     }
