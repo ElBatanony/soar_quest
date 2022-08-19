@@ -15,7 +15,7 @@ Map<SQDocFieldType, dynamic> defaultTypeValue = {
 };
 
 class SQDocField {
-  String name;
+  String name = "";
   SQDocFieldType type;
   dynamic value;
 
@@ -24,6 +24,8 @@ class SQDocField {
   SQDocField(this.name, this.type, {this.value}) {
     value ??= defaultValue;
   }
+
+  SQDocField.nameless(this.type);
 
   static SQDocField unknownField() {
     return SQDocField("Unknown", SQDocFieldType.string);
