@@ -32,6 +32,10 @@ class SQDocField {
   }
 
   SQDocField copy() {
-    return SQDocField(name, type, value: value, defualtValue: defualtValue);
+    return SQDocField(name, type, value: value);
+  }
+
+  dynamic collectField() => value;
+}
   }
 }
