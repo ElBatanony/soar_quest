@@ -27,10 +27,14 @@ class SQDoc {
       var key = entry.key;
       var value = entry.value;
 
+      bool fieldNotFound = false;
       SQDocField field =
           fields.firstWhere((element) => element.name == key, orElse: () {
+        fieldNotFound = true;
         return SQDocField.unknownField();
       });
+
+      if (fieldNotFound) continue;
       field.value = value;
       if (field.type == SQDocFieldType.timestamp) {
         if (field.value.runtimeType == Timestamp)
