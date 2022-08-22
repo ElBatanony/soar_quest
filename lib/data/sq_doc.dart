@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:soar_quest/data/sq_collection.dart';
 
-import 'sq_doc_field.dart';
+import '../data.dart';
 export 'sq_doc_field.dart';
+export 'sq_doc_reference.dart';
 
 class SQDoc {
   late List<SQDocField> fields;
