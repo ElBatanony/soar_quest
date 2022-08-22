@@ -66,24 +66,3 @@ class SQTimestampField extends SQDocField<SQTimestamp> {
   SQTimestampField(String name, {SQTimestamp? value})
       : super(name, value: value ?? SQTimestamp(0, 0));
 }
-
-class SQDocReferenceField extends SQDocField<SQDocReference> {
-  SQDocReferenceField(String name, {required SQDocReference value})
-      : super(name, value: value);
-
-  @override
-  Type get type => SQDocReference;
-
-  @override
-  SQDocField copy() {
-    return SQDocReferenceField(name, value: value);
-  }
-
-  @override
-  Map<String, dynamic> collectField() {
-    return {
-      "docId": value.doc?.id ?? "",
-      "collectionPath": value.collection.getPath()
-    };
-  }
-}
