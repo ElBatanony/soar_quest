@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:soar_quest/data/sq_doc.dart';
 
-import 'sq_timestamp.dart';
+import '../app/app.dart';
+import '../data.dart';
+
 export 'sq_timestamp.dart' show SQTimestamp;
 
 const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
@@ -12,6 +13,7 @@ Map<Type, dynamic> defaultTypeValue = {
   bool: false,
   SQTimestamp: SQTimestamp(0, 0),
   List: <SQDocField>[],
+  SQDocReference: SQDocReference(collection: userCollection),
   Null: null,
 };
 
@@ -85,5 +87,37 @@ class SQDocListField extends SQDocField<List<SQDocField>> {
   @override
   List<dynamic> collectField() {
     return value.map((listItemField) => listItemField.collectField()).toList();
+  }
+}
+
+class SQDocReferenceField extends SQDocField<SQDocReference> {
+  SQDocReferenceField(String name, {required SQDocReference value})
+      : super(name, value: value);
+
+  @override
+  Type get type => SQDocReference;
+
+  @override
+  SQDocField copy() {
+    return SQDocReferenceField(name, value: value);
+  }
+
+  @override
+  Map<String, dynamic> collectField() {
+    return {
+      "docId": value.doc?.id ?? "",
+      "collectionPath": value.collection.getPath()
+    };
+  }
+
+  @override
+  void parse(dynamic newValue) {
+    String docId = newValue["docId"];
+    String collectionPath = newValue["collectionPath"];
+    SQCollection collection = App.instance.collections
+        .firstWhere((collection) => collection.getPath() == collectionPath);
+    SQDoc doc = SQDoc(docId, collection.fields, collection: collection);
+    doc.loadDoc();
+    value = SQDocReference(doc: doc, collection: collection);
   }
 }
