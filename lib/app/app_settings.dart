@@ -1,5 +1,4 @@
 import '../data.dart';
-import '../data/firestore.dart';
 
 class AppSettings {
   static SQDoc settingsDoc = SQDoc(

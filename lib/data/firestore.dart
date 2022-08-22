@@ -5,9 +5,6 @@ import 'package:soar_quest/data/sq_doc.dart';
 
 final firestore = FirebaseFirestore.instance;
 
-FirestoreCollection userCollection = FirestoreCollection(
-    id: "users/${App.instance.currentUser.userId}/data", fields: []);
-
 class FirestoreCollection extends SQCollection {
   late CollectionReference ref;
 
