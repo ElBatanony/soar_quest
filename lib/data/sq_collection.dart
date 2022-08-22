@@ -6,7 +6,6 @@ abstract class SQCollection {
   List<SQDocField> fields;
   bool userData;
   List<SQDoc> docs = [];
-  Function? refreshUI;
   CollectionScreen? screen;
   String singleDocName;
 

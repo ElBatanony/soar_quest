@@ -37,7 +37,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
   @override
   void initState() {
-    widget.collection.refreshUI = refreshScreen;
     loadData();
     super.initState();
   }

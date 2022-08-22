@@ -33,8 +33,6 @@ class FirestoreCollection extends SQCollection {
         docs.add(newDoc);
       }
     });
-
-    if (refreshUI != null) refreshUI!();
   }
 
   @override

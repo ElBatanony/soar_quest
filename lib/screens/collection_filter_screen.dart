@@ -30,7 +30,6 @@ class _CollectionFilterScreenState extends State<CollectionFilterScreen> {
 
   @override
   void initState() {
-    widget.collection.refreshUI = refreshScreen;
     loadData();
 
     super.initState();
