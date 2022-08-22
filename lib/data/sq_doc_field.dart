@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../app/app.dart';
 import '../data.dart';
 
 export 'sq_timestamp.dart' show SQTimestamp;
@@ -104,16 +102,5 @@ class SQDocReferenceField extends SQDocField<SQDocReference> {
       "docId": value.doc?.id ?? "",
       "collectionPath": value.collection.getPath()
     };
-  }
-
-  @override
-  void parse(dynamic newValue) {
-    String docId = newValue["docId"];
-    String collectionPath = newValue["collectionPath"];
-    SQCollection collection = App.instance.collections
-        .firstWhere((collection) => collection.getPath() == collectionPath);
-    SQDoc doc = SQDoc(docId, collection.fields, collection: collection);
-    doc.loadDoc();
-    value = SQDocReference(doc: doc, collection: collection);
   }
 }

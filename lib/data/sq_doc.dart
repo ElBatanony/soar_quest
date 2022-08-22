@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../data.dart';
 export 'sq_doc_field.dart';
 export 'sq_doc_reference.dart';
@@ -54,7 +52,7 @@ class SQDoc {
       }
 
       if (field.type == SQDocReference) {
-        field.parse(value);
+        field.value = SQDocReference.parse(value);
         continue;
       }
 
