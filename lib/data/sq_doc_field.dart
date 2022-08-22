@@ -46,6 +46,11 @@ class SQDocField<T> {
             "Dynamic SQDocField type of field not expexted");
     }
   }
+
+  @override
+  String toString() {
+    return "${name == "" ? "" : "$name:"} $value";
+  }
 }
 
 class SQStringField extends SQDocField<String> {
