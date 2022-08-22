@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/components/doc_field_field.dart';
 import 'package:soar_quest/data.dart';
-import 'package:soar_quest/data/docs_filter.dart';
 import 'collection_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
@@ -14,24 +13,14 @@ class CollectionFilterScreen extends CollectionScreen {
   State<CollectionFilterScreen> createState() => _CollectionFilterScreenState();
 }
 
-class _CollectionFilterScreenState extends State<CollectionFilterScreen> {
+class _CollectionFilterScreenState
+    extends CollectionScreenState<CollectionFilterScreen> {
   List<SQDoc> filteredDocs = [];
 
-  void loadData() async {
-    await widget.collection.loadCollection();
-    refreshScreen();
-    updateDocs();
-  }
-
-  void refreshScreen() {
-    setState(() {});
-  }
-
   @override
-  void initState() {
-    loadData();
-
-    super.initState();
+  Future loadData() async {
+    await super.loadData();
+    updateDocs();
   }
 
   void updateDocs() {
