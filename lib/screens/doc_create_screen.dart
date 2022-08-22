@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/app/app_navigator.dart';
 import 'package:soar_quest/components/doc_field_field.dart';
 import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
@@ -6,7 +7,10 @@ import 'package:soar_quest/screens/screen.dart';
 
 class DocCreateScreen extends Screen {
   final SQCollection collection;
-  DocCreateScreen(String title, this.collection, {Key? key})
+  final Function? createCallback;
+
+  DocCreateScreen(String title, this.collection,
+      {this.createCallback, Key? key})
       : super(title, key: key);
 
   @override
@@ -49,6 +53,7 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
                 newDoc,
                 objectFieldsFields:
                     newDoc.fields.map((field) => DocFieldField(field)).toList(),
+                createCallback: widget.createCallback,
               )
             ],
           ),
@@ -61,15 +66,19 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
 class DocCreateScreenBody extends StatelessWidget {
   final SQDoc doc;
   final List<DocFieldField> objectFieldsFields;
+  final Function? createCallback;
 
   const DocCreateScreenBody(this.doc,
-      {required this.objectFieldsFields, Key? key})
+      {required this.objectFieldsFields, this.createCallback, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     void saveItem() async {
-      doc.collection.createDoc(doc).then((_) => Navigator.pop(context));
+      doc.collection.createDoc(doc).then((value) {
+        if (createCallback != null) createCallback!();
+        exitScreen(context);
+      });
     }
 
     return Center(

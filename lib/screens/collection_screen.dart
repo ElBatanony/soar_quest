@@ -83,7 +83,10 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
             textAlign: TextAlign.center,
           ),
           ...itemsDisplay,
-          CollectionCreateDocButton(widget.collection),
+          CollectionCreateDocButton(
+            widget.collection,
+            createCallback: widget.refreshScreen,
+          ),
         ],
       ),
     );
