@@ -5,6 +5,9 @@ import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
+import '../app/app_navigator.dart';
+import '../components/sq_button.dart';
+
 class CollectionScreen extends Screen {
   final SQCollection collection;
 
@@ -69,7 +72,7 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
   @override
   Widget build(BuildContext context) {
     var itemsDisplay = widget.collection.docs
-        .map((doc) => CollectionScreenBodyDocButton(
+        .map((doc) => CollectionScreenDocButton(
             doc, widget.collection, widget.refreshScreen))
         .toList();
 
@@ -103,18 +106,9 @@ class CollectionScreenDocButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(8),
-        child: ElevatedButton(
-          child: Text(doc.identifier),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DocScreen(doc.id, doc,
-                      refreshCollectionScreen: refreshScreen)),
-            );
-          },
-        ));
+    return SQButton(doc.identifier,
+        onPressed: () => goToScreen(
+            DocScreen(doc.id, doc, refreshCollectionScreen: refreshScreen),
+            context: context));
   }
 }
