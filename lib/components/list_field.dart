@@ -66,25 +66,24 @@ class ListItemField extends StatefulWidget {
 class _ListItemFieldState extends State<ListItemField> {
   @override
   Widget build(BuildContext context) {
-    var typesWithoutList =
-        SQDocFieldType.values.where((type) => type != SQDocFieldType.list);
+    var typesWithoutList = sQDocFieldTypes.where((type) => type != List);
 
     return Column(
       children: [
         Row(
           children: [
-            DropdownButton<SQDocFieldType>(
+            DropdownButton<Type>(
                 value: widget.listItemField.type,
                 items: typesWithoutList
-                    .map((type) => DropdownMenuItem<SQDocFieldType>(
+                    .map((type) => DropdownMenuItem<Type>(
                           value: type,
-                          child: Text(type.name),
+                          child: Text(type.toString()),
                         ))
                     .toList(),
                 onChanged: ((value) {
                   setState(() {
                     if (value != null) {
-                      widget.listItemField.type = value;
+                      // widget.listItemField.type = value;
                       widget.listItemField.value =
                           widget.listItemField.defaultValue;
                     }
