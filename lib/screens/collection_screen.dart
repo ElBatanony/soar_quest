@@ -26,13 +26,14 @@ class CollectionScreen extends Screen {
   }
 
   @override
-  State<CollectionScreen> createState() => _CollectionScreenState();
+  State<CollectionScreen> createState() => CollectionScreenState();
 }
 
-class _CollectionScreenState extends State<CollectionScreen> {
-  void loadData() async {
+class CollectionScreenState<T extends CollectionScreen> extends State<T> {
+  Future loadData() async {
     await widget.collection.loadCollection();
     refreshScreen();
+    return;
   }
 
   void refreshScreen() {
