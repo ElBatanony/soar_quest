@@ -14,7 +14,7 @@ class App {
   String name;
   Screen? homescreen;
 
-  UserData? currentUser;
+  late UserData currentUser;
   Screen? currentScreen;
   ThemeData? theme;
 
@@ -35,6 +35,7 @@ class App {
     this.emulatingCloudFunctions = false,
   }) {
     instance = this;
+    currentUser = UserData(userId: "anon");
   }
 
   init() async {

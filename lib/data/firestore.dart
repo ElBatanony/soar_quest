@@ -6,7 +6,7 @@ import 'package:soar_quest/data/sq_doc.dart';
 final firestore = FirebaseFirestore.instance;
 
 FirestoreCollection userCollection = FirestoreCollection(
-    id: "users/${App.instance.currentUser!.userId}/data", fields: []);
+    id: "users/${App.instance.currentUser.userId}/data", fields: []);
 
 class FirestoreCollection extends SQCollection {
   late CollectionReference ref;
@@ -54,7 +54,7 @@ class FirestoreCollection extends SQCollection {
   String getPath() {
     if (userData)
       return App.instance.getAppPath() +
-          "users/${App.instance.currentUser!.userId}/" +
+          "users/${App.instance.currentUser.userId}/" +
           id;
     else
       return App.instance.getAppPath() + id;
