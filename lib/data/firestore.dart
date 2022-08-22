@@ -22,7 +22,7 @@ class FirestoreCollection extends SQCollection {
 
   @override
   Future loadCollection() async {
-    print("fetching from ${getPath()}");
+    print("Fetching collection from ${getPath()}");
     await firestore.collection(getPath()).get().then((snap) {
       docs = [];
       print('${snap.docs.length} docs fetched for $id!');
@@ -76,8 +76,7 @@ class FirestoreCollection extends SQCollection {
   Future<SQDoc> loadDoc(SQDoc doc) async {
     // SQDoc ret = SQDoc(id, newFields, collection: collection)
     await ref.doc(doc.id).get().then((docSnap) {
-      print(docSnap.data());
-      doc.setData(docSnap.data()! as Map<String, dynamic>);
+      doc.setData(docSnap.data() as Map<String, dynamic>);
     });
     return doc;
   }
