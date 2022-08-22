@@ -1,46 +1,72 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 
 import 'sq_timestamp.dart';
 export 'sq_timestamp.dart' show SQTimestamp;
 
-enum SQDocFieldType { int, string, bool, timestamp, list, nullType }
+const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
 
-Map<SQDocFieldType, dynamic> defaultTypeValue = {
-  SQDocFieldType.int: 0,
-  SQDocFieldType.string: "",
-  SQDocFieldType.bool: false,
-  SQDocFieldType.timestamp: SQTimestamp(0, 0),
-  SQDocFieldType.list: <SQDocField>[],
-  SQDocFieldType.nullType: null
+Map<Type, dynamic> defaultTypeValue = {
+  int: 0,
+  String: "",
+  bool: false,
+  SQTimestamp: SQTimestamp(0, 0),
+  List: <SQDocField>[],
+  Null: null,
 };
 
 class SQDocField<T> {
   String name = "";
-  SQDocFieldType type;
-  late T value;
+  T value;
+  Type get type => value.runtimeType;
 
   T get defaultValue => defaultTypeValue[type];
 
-  SQDocField(this.name, this.type, {T? value}) {
-    this.value = value ?? defaultValue;
-  }
-
-  SQDocField.nameless(this.type);
-
-  static SQDocField unknownField() {
-    return SQDocField("Unknown", SQDocFieldType.string);
-  }
+  SQDocField(this.name, {required this.value});
 
   SQDocField copy() {
-    return SQDocField(name, type, value: value);
+    return SQDocField(name, value: value);
   }
 
   dynamic collectField() => value;
+
+  static SQDocField fromDynamic(dynamicValue) {
+    switch (dynamicValue.runtimeType) {
+      case String:
+        return SQStringField("", value: dynamicValue);
+      case bool:
+        return SQBoolField("", value: dynamicValue);
+      case Timestamp:
+        return SQTimestampField("",
+            value: SQTimestamp.fromTimestamp(dynamicValue));
+      case List:
+        return SQDocListField("", value: dynamicValue);
+      default:
+        throw UnimplementedError(
+            "Dynamic SQDocField type of field not expexted");
+    }
+  }
+}
+
+class SQStringField extends SQDocField<String> {
+  SQStringField(String name, {String value = ""}) : super(name, value: value);
+}
+
+class SQBoolField extends SQDocField<bool> {
+  SQBoolField(String name, {bool value = false}) : super(name, value: value);
+}
+
+class SQTimestampField extends SQDocField<SQTimestamp> {
+  SQTimestampField(String name, {SQTimestamp? value})
+      : super(name, value: value ?? SQTimestamp(0, 0));
 }
 
 class SQDocListField extends SQDocField<List<SQDocField>> {
   SQDocListField(String name, {List<SQDocField> value = const <SQDocField>[]})
-      : super(name, SQDocFieldType.list, value: value);
+      : super(name, value: value);
+
+  @override
+  Type get type => List;
 
   @override
   SQDocField copy() {
