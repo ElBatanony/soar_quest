@@ -71,12 +71,7 @@ class DocFieldDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('${field.name}: ${field.value} , ${field.type.toString()}')
-      ],
-    );
+    return Text(field.toString());
   }
 }
 
