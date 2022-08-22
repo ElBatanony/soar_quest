@@ -37,12 +37,7 @@ class SQDoc {
       if (fieldNotFound) continue;
 
       if (field.type == SQTimestamp) {
-        if (value.runtimeType == Timestamp)
-          field.value = SQTimestamp.fromTimestamp(value);
-        else if (value["_seconds"] != null)
-          field.value = SQTimestamp(value["_seconds"], 0);
-        else
-          throw UnimplementedError("Timestamp variant not handled properly");
+        field.value = SQTimestamp.parse(value);
         continue;
       }
 
