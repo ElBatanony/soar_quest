@@ -13,8 +13,6 @@ import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/users/user_data.dart';
 
-import '../../data/docs_filter.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,7 +25,17 @@ void main() async {
 
   App.instance.currentUser = UserData(userId: "testuser123");
 
+  final coloursCollection = FirestoreCollection(
+      id: "Colours",
+      fields: [
+        SQStringField("name"),
+        SQStringField("hexValue"),
+      ],
+      singleDocName: "Colour");
+
   final logsColourField = SQStringField("colour");
+  final colorRefField = SQDocReferenceField("colorDoc",
+      value: SQDocReference(collection: coloursCollection));
 
   final logsCollection = FirestoreCollection(
       id: "Logs",
@@ -37,26 +45,21 @@ void main() async {
         SQTimestampField("date"),
         SQBoolField("payload"),
         // SQDocListField("tags"),
+        colorRefField,
         logsColourField,
         // SQDocListField("colours"),
       ],
       singleDocName: "Log");
 
-  final coloursCollection = FirestoreCollection(
-      id: "Colours",
-      fields: [
-        SQStringField("name"),
-        SQStringField("hexValue"),
-      ],
-      singleDocName: "Colour");
+  final otherLogRefField = SQDocReferenceField("otherLogDoc",
+      value: SQDocReference(collection: logsCollection));
+
+  logsCollection.fields.add(otherLogRefField);
 
   AppSettings.setSettings([
-    SQBoolField('fawryCodeRequest'),
-    SQBoolField('userIdUploaded'),
     SQBoolField('paymentError'),
     SQBoolField('newUser'),
     SQBoolField('payment'),
-    SQBoolField('manualMembership'),
     SQStringField('username'),
     SQBoolField('Log Manual Commands'),
   ]);
@@ -77,9 +80,9 @@ void main() async {
       //         children: [SignOutButton()],
       //       )),
       // ),
+      logsScreen,
       CollectionScreen("Colours", coloursCollection),
       // CollectionScreen("Logs", logsCollection),
-      logsScreen,
       CategorySelectScreen(
         "Colour Cat",
         collection: logsCollection,
