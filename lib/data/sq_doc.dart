@@ -58,6 +58,11 @@ class SQDoc {
         continue;
       }
 
+      if (field.type == SQDocReference) {
+        field.parse(value);
+        continue;
+      }
+
       field.value = value;
     }
     initialized = true;
