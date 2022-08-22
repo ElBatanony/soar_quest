@@ -45,6 +45,20 @@ class SQDoc {
           throw UnimplementedError("Timestamp variant not handled properly");
         continue;
       }
+
+      if (field.type == List) {
+        List<SQDocField> sqFields = [];
+        for (var dynField in (value as List)) {
+          // Type hey = dynField.runtimeType;
+          sqFields.add(SQDocField.fromDynamic(dynField));
+        }
+        print(value);
+        print("dynamic value: ${value.runtimeType}");
+        field.value = sqFields;
+        continue;
+      }
+
+      field.value = value;
     }
     initialized = true;
   }
