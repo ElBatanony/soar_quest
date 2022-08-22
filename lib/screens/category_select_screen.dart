@@ -19,41 +19,33 @@ class CategorySelectScreen extends CollectionScreen {
 
   @override
   State<CategorySelectScreen> createState() => _CategorySelectScreenState();
+}
+
+class _CategorySelectScreenState
+    extends CollectionScreenState<CategorySelectScreen> {
+  @override
+  Future loadData() async {
+    await widget.categoryCollection.loadCollection();
+    refreshScreen();
+  }
 
   List<Widget> docsDisplay(BuildContext context) {
-    return categoryCollection.docs.map((doc) {
+    return widget.categoryCollection.docs.map((doc) {
       return Container(
           padding: EdgeInsets.all(8),
           child: ElevatedButton(
             child: Text(doc.identifier),
             onPressed: () {
-              SQDocField categoryFieldCopy = categoryField.copy();
+              SQDocField categoryFieldCopy = widget.categoryField.copy();
               categoryFieldCopy.value = doc.identifier;
               DocsFilter filter = DocsFilter(categoryFieldCopy);
               goToScreen(
                   CollectionFilterScreen("Category of ",
-                      collection: collection, filters: [filter]),
+                      collection: widget.collection, filters: [filter]),
                   context: context);
             },
           ));
     }).toList();
-  }
-}
-
-class _CategorySelectScreenState extends State<CategorySelectScreen> {
-  void loadData() async {
-    await widget.categoryCollection.loadCollection();
-    refreshScreen();
-  }
-
-  void refreshScreen() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    loadData();
-    super.initState();
   }
 
   @override
@@ -66,7 +58,7 @@ class _CategorySelectScreenState extends State<CategorySelectScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: widget.docsDisplay(context),
+          children: docsDisplay(context),
         ),
       ),
     );
