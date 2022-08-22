@@ -3,12 +3,13 @@ import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/data/firestore.dart';
-import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
+import 'package:soar_quest/screens/category_select_screen.dart';
+// import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
-import 'package:soar_quest/screens/settings_screen.dart';
+// import 'package:soar_quest/screens/settings_screen.dart';
 import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/users/user_data.dart';
 
@@ -26,6 +27,8 @@ void main() async {
 
   App.instance.currentUser = UserData(userId: "testuser123");
 
+  final logsColourField = SQStringField("colour");
+
   final logsCollection = FirestoreCollection(
       id: "Logs",
       fields: [
@@ -33,11 +36,19 @@ void main() async {
         // SQDocField("message", SQDocFieldType.string),
         SQTimestampField("date"),
         SQBoolField("payload"),
-        SQDocListField("tags"),
+        // SQDocListField("tags"),
+        logsColourField,
+        // SQDocListField("colours"),
       ],
       singleDocName: "Log");
 
-  final logsScreen = CollectionScreen("Logs", logsCollection);
+  final coloursCollection = FirestoreCollection(
+      id: "Colours",
+      fields: [
+        SQStringField("name"),
+        SQStringField("hexValue"),
+      ],
+      singleDocName: "Colour");
 
   AppSettings.setSettings([
     SQBoolField('fawryCodeRequest'),
@@ -55,6 +66,8 @@ void main() async {
   DocsFilter payloadFilter =
       DocsFilter(logsCollection.getFieldByName("payload"));
 
+  final logsScreen = CollectionScreen("Logs", logsCollection);
+
   adminApp.homescreen = MainScreen(
     [
       // AuthScreenTesting("Auth Testing"),
@@ -64,17 +77,25 @@ void main() async {
       //         children: [SignOutButton()],
       //       )),
       // ),
+      CollectionScreen("Colours", coloursCollection),
+      // CollectionScreen("Logs", logsCollection),
       logsScreen,
+      CategorySelectScreen(
+        "Colour Cat",
+        collection: logsCollection,
+        categoryCollection: coloursCollection,
+        categoryField: logsColourField,
+      ),
       CollectionFilterScreen(
         "Search",
         collection: logsCollection,
         filters: [logIdSearchField, payloadFilter],
       ),
-      SettingsScreen(),
-      CloudFunctionDocsScreen(
-        "Fetched Logs",
-        collection: logsCollection,
-      ),
+      // SettingsScreen(),
+      // CloudFunctionDocsScreen(
+      //   "Fetched Logs",
+      //   collection: logsCollection,
+      // ),
       // Screen("Manage Users"),
       // PlaygroundScreen("Playground")
     ],
