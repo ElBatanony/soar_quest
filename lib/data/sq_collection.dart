@@ -1,6 +1,8 @@
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 
+import '../app/app.dart';
+
 abstract class SQCollection {
   String id;
   List<SQDocField> fields;
@@ -10,7 +12,9 @@ abstract class SQCollection {
   String singleDocName;
 
   SQCollection(this.id, this.fields,
-      {this.userData = false, this.singleDocName = "Doc"});
+      {this.userData = false, this.singleDocName = "Doc"}) {
+    App.instance.collections.add(this);
+  }
 
   Future loadCollection();
 
