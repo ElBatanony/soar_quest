@@ -5,19 +5,17 @@ import 'package:soar_quest/data/sq_collection.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';
 
-import 'screen.dart';
+import 'collection_screen.dart';
 
-class CategorySelectScreen extends Screen {
-  final SQCollection collection;
+class CategorySelectScreen extends CollectionScreen {
   final SQCollection categoryCollection;
   final SQDocField categoryField;
 
-  CategorySelectScreen(String title,
-      {required this.collection,
+  CategorySelectScreen(super.title,
+      {required super.collection,
       required this.categoryCollection,
       required this.categoryField,
-      Key? key})
-      : super(title, key: key);
+      super.key});
 
   @override
   State<CategorySelectScreen> createState() => _CategorySelectScreenState();

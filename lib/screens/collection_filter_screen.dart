@@ -7,9 +7,8 @@ import 'collection_screen.dart';
 class CollectionFilterScreen extends CollectionScreen {
   final List<DocsFilter> filters;
 
-  CollectionFilterScreen(String title,
-      {required SQCollection collection, required this.filters, Key? key})
-      : super(title, collection, key: key);
+  CollectionFilterScreen(super.title,
+      {required super.collection, required this.filters, super.key});
 
   @override
   State<CollectionFilterScreen> createState() => _CollectionFilterScreenState();

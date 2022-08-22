@@ -16,8 +16,9 @@ class CollectionScreen extends Screen {
 
   final DocScreenBody Function(SQDoc doc) docScreenBody;
 
-  CollectionScreen(String title, this.collection,
-      {this.docScreenBody = DocScreenBody.new,
+  CollectionScreen(String title,
+      {required this.collection,
+      this.docScreenBody = DocScreenBody.new,
       this.collectionScreenBody = CollectionScreenBody.new,
       Key? key})
       : super(title, key: key) {

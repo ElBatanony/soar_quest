@@ -32,7 +32,7 @@ class FavouritesFeature extends Feature {
 
   static Screen favouritesScreen = CollectionScreen(
     "Favourites",
-    _favouritesCollection,
+    collection: _favouritesCollection,
     collectionScreenBody: FavouritesScreenBody.new,
   );
 
