@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/components/col_create_doc_button.dart';
-import 'package:soar_quest/data/sq_collection.dart';
-import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/screens/doc_screen.dart';
-import 'package:soar_quest/screens/screen.dart';
 
 import '../app/app_navigator.dart';
-import '../components/sq_button.dart';
+import '../data.dart';
+
+import '../components/buttons/col_create_doc_button.dart';
+import '../components/buttons/sq_button.dart';
+
+import 'doc_screen.dart';
+import 'screen.dart';
 
 class CollectionScreen extends Screen {
   final SQCollection collection;

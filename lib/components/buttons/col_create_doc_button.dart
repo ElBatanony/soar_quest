@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app_navigator.dart';
-import 'package:soar_quest/data/sq_collection.dart';
-import 'package:soar_quest/screens/doc_create_screen.dart';
+
+import '../../app/app_navigator.dart';
+import '../../data.dart';
+
+import '../../screens/doc_create_screen.dart';
 
 class CollectionCreateDocButton extends StatelessWidget {
   final SQCollection collection;

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/components/doc_delete_button.dart';
-import 'package:soar_quest/components/doc_edit_button.dart';
-import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/screens/screen.dart';
+
+import '../data.dart';
+
+import '../components/buttons/doc_delete_button.dart';
+import '../components/buttons/doc_edit_button.dart';
+
+import 'screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;

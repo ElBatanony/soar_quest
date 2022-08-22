@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../app/app_navigator.dart';
-import '../../components/sq_button.dart';
 import '../../data.dart';
+
+import '../buttons/sq_button.dart';
 import '../../screens/select_doc_screen.dart';
 
 class DocReferenceFieldPicker extends StatefulWidget {

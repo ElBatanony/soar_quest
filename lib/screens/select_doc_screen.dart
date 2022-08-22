@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/components/sq_button.dart';
 
 import '../data.dart';
+
+import '../components/buttons/sq_button.dart';
+
 import 'collection_screen.dart';
 
 class SelectDocScreen extends CollectionScreen {
