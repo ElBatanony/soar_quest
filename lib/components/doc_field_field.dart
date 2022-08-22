@@ -3,6 +3,8 @@ import 'package:soar_quest/components/list_field.dart';
 import 'package:soar_quest/components/timestamp_doc_field.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 
+import 'doc_reference_picker.dart';
+
 class DocFieldField extends StatefulWidget {
   final SQDocField field;
   final Function? onChanged;
@@ -97,6 +99,16 @@ class _DocFieldFieldState extends State<DocFieldField> {
 
     if (widget.field.type == List) {
       return ListField(widget.field as SQDocListField);
+    }
+
+    if (widget.field.type == SQDocReference) {
+      return DocReferenceFieldPicker(
+        docReferenceField: widget.field as SQDocReferenceField,
+        updateCallback: () {
+          refresh();
+          onChanged();
+        },
+      );
     }
 
     if (widget.field.type == Null) {
