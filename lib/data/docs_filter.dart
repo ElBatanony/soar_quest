@@ -1,4 +1,4 @@
-import 'package:soar_quest/data.dart';
+import '../data.dart';
 
 extension FilterDocs on SQCollection {
   List<SQDoc> filter(List<DocsFilter> filters) {
