@@ -39,8 +39,7 @@ class _ListFieldState extends State<ListField> {
             IconButton(
               onPressed: () {
                 setState(() {
-                  widget.listField.value
-                      .add(SQDocField.nameless(SQDocFieldType.string));
+                  widget.listField.value.add(SQStringField(""));
                 });
               },
               icon: Icon(Icons.add),

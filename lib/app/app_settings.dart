@@ -3,7 +3,10 @@ import '../data/firestore.dart';
 
 class AppSettings {
   static SQDoc settingsDoc = SQDoc(
-      'settings', [SQDocField('testSetting', SQDocFieldType.bool)],
+      'settings',
+      [
+        SQBoolField('testSetting'),
+      ],
       collection: userCollection);
 
   static void setSettings(List<SQDocField> settings) {

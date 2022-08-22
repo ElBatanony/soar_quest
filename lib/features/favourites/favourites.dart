@@ -12,7 +12,7 @@ class FavouritesFeature extends Feature {
   static final SQCollection _favouritesCollection = FirestoreCollection(
       id: "favourites",
       fields: [
-        SQDocField("identifier", SQDocFieldType.string),
+        SQStringField("identifier"),
       ],
       userData: true);
 
@@ -21,8 +21,7 @@ class FavouritesFeature extends Feature {
   }
 
   static addFavourite(SQDoc doc) {
-    var newFavDoc = SQDoc(
-        doc.id, [SQDocField("identifier", SQDocFieldType.string)],
+    var newFavDoc = SQDoc(doc.id, [SQStringField("identifier")],
         collection: FavouritesFeature._favouritesCollection);
     FavouritesFeature._favouritesCollection.createDoc(newFavDoc);
   }

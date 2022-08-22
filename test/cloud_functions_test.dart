@@ -7,10 +7,10 @@ import 'package:soar_quest/data/unimplemented_collection.dart';
 void main() async {
   test("Getting Logs collection docs", () async {
     final logsCollection = UnimplementCollection("Logs", [
-      SQDocField("logId", SQDocFieldType.string),
-      SQDocField("message", SQDocFieldType.string),
-      SQDocField("date", SQDocFieldType.timestamp),
-      SQDocField("payload", SQDocFieldType.bool),
+      SQStringField("logId"),
+      SQStringField("message"),
+      SQTimestampField("date"),
+      SQBoolField("payload"),
     ]);
     const collectionPath = "sample-apps/Tech Admin/Logs";
 
