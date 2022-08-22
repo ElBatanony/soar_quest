@@ -18,7 +18,7 @@ class SQDocReference {
     SQCollection collection = App.instance.collections
         .firstWhere((collection) => collection.getPath() == collectionPath);
     SQDoc doc = SQDoc(docId, collection.fields, collection: collection);
-    doc.loadDoc();
+    if (docId != "") doc.loadDoc();
     return SQDocReference(doc: doc, collection: collection);
   }
 }
