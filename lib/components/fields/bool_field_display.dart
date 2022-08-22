@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data/sq_doc.dart';
+
+import '../../data.dart';
 
 class BoolFieldDisplay extends StatelessWidget {
   final SQDocField field;

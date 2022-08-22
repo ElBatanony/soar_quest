@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data/sq_doc.dart';
 
-import 'doc_field_field.dart';
+import '../../data.dart';
+import '../doc_field_field.dart';
 
 class ListField extends StatefulWidget {
   final SQDocListField listField;

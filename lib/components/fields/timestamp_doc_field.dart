@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data/sq_doc_field.dart';
+
+import '../../data.dart';
 
 class TimestampDocFieldPicker extends StatefulWidget {
   const TimestampDocFieldPicker(

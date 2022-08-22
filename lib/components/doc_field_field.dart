@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/components/list_field.dart';
-import 'package:soar_quest/components/timestamp_doc_field.dart';
 
 import '../data.dart';
-import 'doc_reference_picker.dart';
+
+import 'fields/timestamp_doc_field.dart';
+import 'fields/list_field.dart';
+import 'fields/doc_reference_picker.dart';
 
 class DocFieldField extends StatefulWidget {
   final SQDocField field;
