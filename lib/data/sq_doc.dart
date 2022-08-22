@@ -31,18 +31,19 @@ class SQDoc {
       SQDocField field =
           fields.firstWhere((element) => element.name == key, orElse: () {
         fieldNotFound = true;
-        return SQDocField.unknownField();
+        return fields.first;
       });
 
       if (fieldNotFound) continue;
-      field.value = value;
-      if (field.type == SQDocFieldType.timestamp) {
-        if (field.value.runtimeType == Timestamp)
+
+      if (field.type == SQTimestamp) {
+        if (value.runtimeType == Timestamp)
           field.value = SQTimestamp.fromTimestamp(value);
-        else if (field.value["_seconds"] != null)
-          field.value = SQTimestamp(field.value["_seconds"], 0);
+        else if (value["_seconds"] != null)
+          field.value = SQTimestamp(value["_seconds"], 0);
         else
           throw UnimplementedError("Timestamp variant not handled properly");
+        continue;
       }
     }
     initialized = true;
