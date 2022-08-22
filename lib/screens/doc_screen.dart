@@ -32,6 +32,10 @@ class _DocScreenState extends State<DocScreen> {
     setState(() {});
   }
 
+  void deleteCallback() {
+    widget.refreshCollectionScreen();
+  }
+
   @override
   void initState() {
     loadData();
@@ -57,7 +61,7 @@ class _DocScreenState extends State<DocScreen> {
             ),
             doc.collection.screen!.docScreenBody(doc),
             DocEditButton(doc, refresh: refresh),
-            DocDeleteButton(doc)
+            DocDeleteButton(doc, deleteCallback: deleteCallback)
           ],
         ),
       ),

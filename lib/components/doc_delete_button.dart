@@ -5,14 +5,18 @@ class DocDeleteButton extends StatelessWidget {
   final SQDoc doc;
   final bool popAfterDelete;
   final bool isIcon;
+  final Function? deleteCallback;
 
   const DocDeleteButton(this.doc,
-      {this.popAfterDelete = true, this.isIcon = false, Key? key})
+      {this.popAfterDelete = true,
+      this.isIcon = false,
+      this.deleteCallback,
+      Key? key})
       : super(key: key);
 
   void deleteDoc(BuildContext context) {
     doc.collection.deleteDoc(doc.id).then((_) {
-      doc.collection.refreshUI!();
+      if (deleteCallback != null) deleteCallback!();
       if (popAfterDelete) Navigator.pop(context);
     });
   }
