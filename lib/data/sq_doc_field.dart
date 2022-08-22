@@ -30,6 +30,10 @@ class SQDocField<T> {
 
   dynamic collectField() => value;
 
+  void parse(dynamic newValue) {
+    value = newValue;
+  }
+
   static SQDocField fromDynamic(dynamicValue) {
     switch (dynamicValue.runtimeType) {
       case String:
