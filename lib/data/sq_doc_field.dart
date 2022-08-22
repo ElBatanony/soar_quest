@@ -32,21 +32,17 @@ class SQDocField<T> {
 
   dynamic collectField() => value;
 
-  void parse(dynamic newValue) {
-    value = newValue;
-  }
-
-  static SQDocField fromDynamic(dynamicValue) {
+  static SQDocField fromDynamic(dynamicValue, {String name = ""}) {
     switch (dynamicValue.runtimeType) {
       case String:
-        return SQStringField("", value: dynamicValue);
+        return SQStringField(name, value: dynamicValue);
       case bool:
-        return SQBoolField("", value: dynamicValue);
+        return SQBoolField(name, value: dynamicValue);
       case Timestamp:
-        return SQTimestampField("",
+        return SQTimestampField(name,
             value: SQTimestamp.fromTimestamp(dynamicValue));
       case List:
-        return SQDocListField("", value: dynamicValue);
+        return SQDocListField(name, value: dynamicValue);
       default:
         throw UnimplementedError(
             "Dynamic SQDocField type of field not expexted");
