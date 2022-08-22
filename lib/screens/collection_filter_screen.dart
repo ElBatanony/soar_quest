@@ -43,8 +43,8 @@ class _CollectionFilterScreenState extends State<CollectionFilterScreen> {
   @override
   Widget build(BuildContext context) {
     var itemsDisplay = filteredDocs
-        .map((doc) => CollectionScreenBodyDocButton(
-            doc, widget.collection, refreshScreen))
+        .map((doc) =>
+            CollectionScreenDocButton(doc, widget.collection, refreshScreen))
         .toList();
 
     return Scaffold(

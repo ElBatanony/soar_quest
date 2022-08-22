@@ -40,8 +40,8 @@ class _CloudFunctionDocsScreenState extends State<CloudFunctionDocsScreen> {
           children: [
             Text('${widget.title} Screen'),
             ...fetchedDocs
-                .map((doc) => CollectionScreenBodyDocButton(
-                    doc, widget.collection, () {}))
+                .map((doc) =>
+                    CollectionScreenDocButton(doc, widget.collection, () {}))
                 .toList()
           ],
         ),

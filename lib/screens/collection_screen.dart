@@ -93,12 +93,11 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
   }
 }
 
-class CollectionScreenBodyDocButton extends StatelessWidget {
+class CollectionScreenDocButton extends StatelessWidget {
   final SQDoc doc;
   final Function refreshScreen;
   final SQCollection collection;
-  const CollectionScreenBodyDocButton(
-      this.doc, this.collection, this.refreshScreen,
+  const CollectionScreenDocButton(this.doc, this.collection, this.refreshScreen,
       {Key? key})
       : super(key: key);
 
