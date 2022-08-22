@@ -29,25 +29,25 @@ void main() async {
   final logsCollection = FirestoreCollection(
       id: "Logs",
       fields: [
-        SQDocField("logId", SQDocFieldType.string),
-        SQDocField("message", SQDocFieldType.string),
-        SQDocField("date", SQDocFieldType.timestamp),
-        SQDocField("payload", SQDocFieldType.bool),
-        // SQDocField("tags", SQDocFieldType.string),
+        SQStringField("logId"),
+        // SQDocField("message", SQDocFieldType.string),
+        SQTimestampField("date"),
+        SQBoolField("payload"),
+        SQDocListField("tags"),
       ],
       singleDocName: "Log");
 
   final logsScreen = CollectionScreen("Logs", logsCollection);
 
   AppSettings.setSettings([
-    SQDocField('fawryCodeRequest', SQDocFieldType.bool),
-    SQDocField('userIdUploaded', SQDocFieldType.bool),
-    SQDocField('paymentError', SQDocFieldType.bool),
-    SQDocField('newUser', SQDocFieldType.bool),
-    SQDocField('payment', SQDocFieldType.bool),
-    SQDocField('manualMembership', SQDocFieldType.bool),
-    SQDocField('username', SQDocFieldType.string),
-    SQDocField('Log Manual Commands', SQDocFieldType.bool),
+    SQBoolField('fawryCodeRequest'),
+    SQBoolField('userIdUploaded'),
+    SQBoolField('paymentError'),
+    SQBoolField('newUser'),
+    SQBoolField('payment'),
+    SQBoolField('manualMembership'),
+    SQStringField('username'),
+    SQBoolField('Log Manual Commands'),
   ]);
 
   DocsFilter logIdSearchField =
@@ -64,6 +64,7 @@ void main() async {
       //         children: [SignOutButton()],
       //       )),
       // ),
+      logsScreen,
       CollectionFilterScreen(
         "Search",
         collection: logsCollection,
@@ -74,7 +75,6 @@ void main() async {
         "Fetched Logs",
         collection: logsCollection,
       ),
-      logsScreen,
       // Screen("Manage Users"),
       // PlaygroundScreen("Playground")
     ],
