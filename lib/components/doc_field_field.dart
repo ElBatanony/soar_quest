@@ -33,7 +33,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.field.type == SQDocFieldType.int) {
+    if (widget.field.type == int) {
       return TextField(
         onChanged: (intText) {
           widget.field.value = int.parse(intText);
@@ -46,13 +46,13 @@ class _DocFieldFieldState extends State<DocFieldField> {
       );
     }
 
-    if (widget.field.type == SQDocFieldType.bool) {
+    if (widget.field.type == bool) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(widget.field.name),
           Switch(
-            value: widget.field.value ?? false,
+            value: widget.field.value,
             onChanged: (value) {
               setState(() {
                 widget.field.value = value;
@@ -64,7 +64,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
       );
     }
 
-    if (widget.field.type == SQDocFieldType.string) {
+    if (widget.field.type == String) {
       return TextField(
         controller: fieldTextController,
         onChanged: (text) {
@@ -79,7 +79,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
       );
     }
 
-    if (widget.field.type == SQDocFieldType.timestamp) {
+    if (widget.field.type == SQTimestamp) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -95,14 +95,14 @@ class _DocFieldFieldState extends State<DocFieldField> {
       );
     }
 
-    if (widget.field.type == SQDocFieldType.list) {
+    if (widget.field.type == List) {
       return ListField(widget.field as SQDocListField);
     }
 
-    if (widget.field.type == SQDocFieldType.nullType) {
+    if (widget.field.type == Null) {
       return Text("Greetings! This is null!");
     }
 
-    return Text("${widget.field.type.name} fields not implemented");
+    return Text("${widget.field.type} fields not implemented");
   }
 }
