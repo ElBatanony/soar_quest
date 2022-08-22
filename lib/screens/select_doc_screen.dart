@@ -11,28 +11,7 @@ class SelectDocScreen extends CollectionScreen {
   State<SelectDocScreen> createState() => _SelectDocScreenState();
 }
 
-class _SelectDocScreenState extends State<SelectDocScreen> {
-  void loadData() async {
-    await widget.collection.loadCollection();
-    refreshScreen();
-    updateDocs();
-  }
-
-  void refreshScreen() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    loadData();
-
-    super.initState();
-  }
-
-  void updateDocs() {
-    setState(() {});
-  }
-
+class _SelectDocScreenState extends CollectionScreenState<SelectDocScreen> {
   @override
   Widget build(BuildContext context) {
     var itemsDisplay = widget.collection.docs
