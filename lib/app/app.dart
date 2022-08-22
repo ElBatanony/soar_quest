@@ -9,6 +9,7 @@ import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/users/user_data.dart';
 
 // import 'app_debugger.dart';
+import '../data.dart';
 
 class App {
   String name;
@@ -17,6 +18,8 @@ class App {
   late UserData currentUser;
   Screen? currentScreen;
   ThemeData? theme;
+
+  List<SQCollection> collections = [];
 
   bool inDebug;
   bool emulatingCloudFunctions;
