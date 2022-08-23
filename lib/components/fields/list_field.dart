@@ -83,9 +83,7 @@ class _ListItemFieldState extends State<ListItemField> {
                 onChanged: ((value) {
                   setState(() {
                     if (value != null) {
-                      // widget.listItemField.type = value;
-                      widget.listItemField.value =
-                          widget.listItemField.defaultValue;
+                      widget.listItemField.value = null;
                     }
                   });
                 })),

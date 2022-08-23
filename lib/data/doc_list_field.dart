@@ -8,7 +8,10 @@ class SQDocListField extends SQDocField<List<SQDocField>> {
   Type get type => List;
 
   @override
-  SQDocField copy() {
+  List<SQDocField> get value => super.value ?? [];
+
+  @override
+  SQDocField<List<SQDocField>> copy() {
     return SQDocListField(name, value: [...value]);
   }
 

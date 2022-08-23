@@ -6,27 +6,15 @@ export 'doc_list_field.dart';
 
 const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
 
-Map<Type, dynamic> defaultTypeValue = {
-  int: 0,
-  String: "",
-  bool: false,
-  SQTimestamp: SQTimestamp(0, 0),
-  List: <SQDocField>[],
-  SQDocReference: SQDocReference(collection: userCollection),
-  Null: null,
-};
-
 class SQDocField<T> {
   String name = "";
-  T value;
-  Type get type => value.runtimeType;
+  T? value;
+  Type get type => T;
 
-  T get defaultValue => defaultTypeValue[type];
+  SQDocField(this.name, {this.value});
 
-  SQDocField(this.name, {required this.value});
-
-  SQDocField copy() {
-    return SQDocField(name, value: value);
+  SQDocField<T> copy() {
+    return SQDocField<T>(name, value: value);
   }
 
   dynamic collectField() => value;
