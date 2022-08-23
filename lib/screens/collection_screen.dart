@@ -45,6 +45,14 @@ class CollectionScreenState<T extends CollectionScreen> extends State<T> {
     super.initState();
   }
 
+  Widget docDisplay(SQDoc doc) {
+    return Text("Doc: ${doc.identifier}");
+  }
+
+  List<Widget> docsDisplay(BuildContext context) {
+    return widget.collection.docs.map((doc) => docDisplay(doc)).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
