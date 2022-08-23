@@ -8,10 +8,7 @@ import 'package:soar_quest/screens/category_select_screen.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/screen.dart';
-import 'package:soar_quest/screens/video_screen.dart';
 // import 'package:soar_quest/screens/settings_screen.dart';
-import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/users/user_data.dart';
 
 void main() async {
@@ -43,7 +40,6 @@ void main() async {
       id: "Logs",
       fields: [
         SQStringField("logId"),
-        // SQDocField("message", SQDocFieldType.string),
         SQTimestampField("date"),
         SQBoolField("payload"),
         logsVideoField,
@@ -76,18 +72,6 @@ void main() async {
 
   adminApp.homescreen = MainScreen(
     [
-      // AuthScreenTesting("Auth Testing"),
-      // SignInScreen(
-      //   signedRedirectScreen: ScaffoldedScreen("Yay! You are signed in",
-      //       screenBody: Column(
-      //         children: [SignOutButton()],
-      //       )),
-      // ),
-      VideoCollectionScreen(
-        "Video Library",
-        collection: logsCollection,
-        videoField: logsVideoField,
-      ),
       logsScreen,
       CollectionScreen("Colours", collection: coloursCollection),
       // CollectionScreen("Logs", logsCollection),
@@ -107,35 +91,9 @@ void main() async {
       //   "Fetched Logs",
       //   collection: logsCollection,
       // ),
-      // Screen("Manage Users"),
-      // PlaygroundScreen("Playground")
     ],
     initialScreenIndex: 0,
   );
 
   adminApp.run();
-}
-
-class AuthScreenTesting extends Screen {
-  AuthScreenTesting(String title, {Key? key}) : super(title, key: key);
-
-  @override
-  State<AuthScreenTesting> createState() => _AuthScreenTestingState();
-}
-
-class _AuthScreenTestingState extends State<AuthScreenTesting> {
-  @override
-  Widget build(BuildContext context) {
-    return Text("Text");
-  }
-}
-
-class SignOutButton extends StatelessWidget {
-  const SignOutButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: AuthManager.signOut, child: Text("Sign Out"));
-  }
 }
