@@ -20,16 +20,15 @@ class FirestoreCollection extends SQCollection {
   @override
   Future loadCollection() async {
     print("Fetching collection from ${getPath()}");
-    await firestore.collection(getPath()).get().then((snap) {
-      docs = [];
-      print('${snap.docs.length} docs fetched for $id!');
+    final snap = await firestore.collection(getPath()).get();
+    docs = [];
+    print('${snap.docs.length} docs fetched for $id!');
 
-      for (var doc in snap.docs) {
-        var newDoc = SQDoc(doc.id, fields, collection: this);
-        newDoc.setData(doc.data());
-        docs.add(newDoc);
-      }
-    });
+    for (var doc in snap.docs) {
+      var newDoc = SQDoc(doc.id, fields, collection: this);
+      newDoc.setData(doc.data());
+      docs.add(newDoc);
+    }
   }
 
   @override
