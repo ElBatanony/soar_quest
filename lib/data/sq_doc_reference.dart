@@ -1,45 +1,56 @@
-import '../app/app.dart';
 import '../data.dart';
 
 class SQDocReference {
-  SQDoc? doc;
-  SQCollection collection;
+  String docId;
+  String docIdentifier;
+  String collectionPath;
 
-  SQDocReference({required this.collection, this.doc});
+  SQDocReference({
+    required this.collectionPath,
+    required this.docId,
+    required this.docIdentifier,
+  });
 
   @override
-  String toString() {
-    return "${collection.id}/${doc?.identifier ?? "null"}";
-  }
+  String toString() => docIdentifier;
 
-  static SQDocReference parse(dynamic source) {
-    String docId = source["docId"];
-    String collectionPath = source["collectionPath"];
-    SQCollection collection = App.instance.collections
-        .firstWhere((collection) => collection.getPath() == collectionPath);
-    SQDoc doc = SQDoc(docId, collection.fields, collection: collection);
-    if (docId != "") doc.loadDoc();
-    return SQDocReference(doc: doc, collection: collection);
+  static SQDocReference? parse(dynamic source) {
+    String? docId = source["docId"];
+    String? collectionPath = source["collectionPath"];
+    String? docIdentifier = source["docIdentifier"];
+
+    if (docId == null || collectionPath == null || docIdentifier == null)
+      return null;
+
+    return SQDocReference(
+      docId: docId,
+      docIdentifier: docIdentifier,
+      collectionPath: collectionPath,
+    );
   }
 }
 
 class SQDocReferenceField extends SQDocField<SQDocReference> {
-  SQDocReferenceField(String name, {required SQDocReference value})
-      : super(name, value: value);
+  SQCollection collection;
+
+  SQDocReferenceField(super.name, {required this.collection, super.value});
 
   @override
   Type get type => SQDocReference;
 
   @override
-  SQDocField copy() {
-    return SQDocReferenceField(name, value: value);
+  SQDocField<SQDocReference> copy() {
+    return SQDocReferenceField(name, collection: collection, value: value);
   }
 
   @override
   Map<String, dynamic> collectField() {
+    if (value == null) return {};
+
     return {
-      "docId": value.doc?.id ?? "",
-      "collectionPath": value.collection.getPath()
+      "docId": value!.docId,
+      "docIdentifier": value!.docIdentifier,
+      "collectionPath": value!.collectionPath
     };
   }
 }

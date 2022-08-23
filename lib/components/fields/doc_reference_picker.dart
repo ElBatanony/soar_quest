@@ -26,18 +26,21 @@ class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(widget.docReferenceField.name),
-        Text(widget.docReferenceField.value.doc?.identifier ?? "not set"),
+        Text(widget.docReferenceField.value?.docIdentifier ?? "not-set"),
         SQButton(
           'Select Doc',
           onPressed: () async {
             SQDoc? retDoc = await goToScreen(
                 SelectDocScreen("Select ${widget.docReferenceField.name}",
-                    collection: widget.docReferenceField.value.collection),
+                    collection: widget.docReferenceField.collection),
                 context: context);
 
             if (retDoc != null) {
-              SQDocReference ref =
-                  SQDocReference(doc: retDoc, collection: retDoc.collection);
+              SQDocReference ref = SQDocReference(
+                docId: retDoc.id,
+                docIdentifier: retDoc.identifier,
+                collectionPath: retDoc.collection.getPath(),
+              );
               widget.docReferenceField.value = ref;
               widget.updateCallback();
             }
