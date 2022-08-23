@@ -66,3 +66,7 @@ class SQTimestampField extends SQDocField<SQTimestamp> {
   SQTimestampField(String name, {SQTimestamp? value})
       : super(name, value: value ?? SQTimestamp(0, 0));
 }
+
+class VideoLinkField extends SQDocField<String> {
+  VideoLinkField(String name, {String? url}) : super(name, value: url ?? "");
+}
