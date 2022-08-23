@@ -9,6 +9,7 @@ import 'package:soar_quest/screens/collection_filter_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
+import 'package:soar_quest/screens/video_screen.dart';
 // import 'package:soar_quest/screens/settings_screen.dart';
 import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/users/user_data.dart';
@@ -36,6 +37,7 @@ void main() async {
   final logsColourField = SQStringField("colour");
   final colorRefField = SQDocReferenceField("colorDoc",
       value: SQDocReference(collection: coloursCollection));
+  final logsVideoField = VideoLinkField("logVideo");
 
   final logsCollection = FirestoreCollection(
       id: "Logs",
@@ -44,6 +46,7 @@ void main() async {
         // SQDocField("message", SQDocFieldType.string),
         SQTimestampField("date"),
         SQBoolField("payload"),
+        logsVideoField,
         // SQDocListField("tags"),
         colorRefField,
         logsColourField,
@@ -80,6 +83,11 @@ void main() async {
       //         children: [SignOutButton()],
       //       )),
       // ),
+      VideoCollectionScreen(
+        "Video Library",
+        collection: logsCollection,
+        videoField: logsVideoField,
+      ),
       logsScreen,
       CollectionScreen("Colours", collection: coloursCollection),
       // CollectionScreen("Logs", logsCollection),
