@@ -16,10 +16,10 @@ class DocScreen extends Screen {
       : super(title, key: key);
 
   @override
-  State<DocScreen> createState() => _DocScreenState();
+  State<DocScreen> createState() => DocScreenState();
 }
 
-class _DocScreenState extends State<DocScreen> {
+class DocScreenState<T extends DocScreen> extends State<T> {
   late SQDoc doc;
 
   void loadData() async {
