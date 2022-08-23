@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app_navigator.dart';
-import 'package:soar_quest/data/docs_filter.dart';
-import 'package:soar_quest/data/sq_collection.dart';
-import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/screens/collection_filter_screen.dart';
 
+import '../data.dart';
+import '../app/app_navigator.dart';
+
+import '../../components/buttons/sq_button.dart';
+
+import 'collection_filter_screen.dart';
 import 'collection_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {
@@ -29,23 +30,27 @@ class _CategorySelectScreenState
     refreshScreen();
   }
 
+  @override
+  Widget docDisplay(SQDoc doc) {
+    return SQButton(
+      doc.identifier,
+      onPressed: () {
+        SQDocField categoryFieldCopy = widget.categoryField.copy();
+        categoryFieldCopy.value = doc.identifier;
+        DocsFilter filter = DocsFilter(categoryFieldCopy);
+        goToScreen(
+            CollectionFilterScreen("Category of ",
+                collection: widget.collection, filters: [filter]),
+            context: context);
+      },
+    );
+  }
+
+  @override
   List<Widget> docsDisplay(BuildContext context) {
-    return widget.categoryCollection.docs.map((doc) {
-      return Container(
-          padding: EdgeInsets.all(8),
-          child: ElevatedButton(
-            child: Text(doc.identifier),
-            onPressed: () {
-              SQDocField categoryFieldCopy = widget.categoryField.copy();
-              categoryFieldCopy.value = doc.identifier;
-              DocsFilter filter = DocsFilter(categoryFieldCopy);
-              goToScreen(
-                  CollectionFilterScreen("Category of ",
-                      collection: widget.collection, filters: [filter]),
-                  context: context);
-            },
-          ));
-    }).toList();
+    return widget.categoryCollection.docs
+        .map((doc) => docDisplay(doc))
+        .toList();
   }
 
   @override
