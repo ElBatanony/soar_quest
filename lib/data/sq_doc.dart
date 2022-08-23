@@ -16,8 +16,9 @@ class SQDoc {
     fields = SQDoc.copyFields(newFields);
   }
 
-  loadDoc() {
-    return collection.loadDoc(this);
+  Future loadDoc({bool forceFetch = false}) async {
+    if (initialized && forceFetch == false) return;
+    await collection.loadDoc(this);
   }
 
   setData(Map<String, dynamic> dataToSet) {

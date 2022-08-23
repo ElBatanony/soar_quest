@@ -18,7 +18,7 @@ abstract class SQCollection {
 
   Future loadCollection();
 
-  Future<SQDoc> loadDoc(SQDoc doc);
+  Future<void> loadDoc(SQDoc doc);
   Future updateDoc(SQDoc doc);
   Future createDoc(SQDoc doc);
   Future deleteDoc(String docId);

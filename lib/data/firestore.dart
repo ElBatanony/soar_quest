@@ -59,20 +59,10 @@ class FirestoreCollection extends SQCollection {
   @override
   String getANewDocId() => getANewDocRef().id;
 
-  // loadData() async {
-  // await db.doc(getPath()).get().then((doc) {
-  //   print(doc.data());
-  //   setData(doc.data()!);
-  // });
-  // }
-
   @override
-  Future<SQDoc> loadDoc(SQDoc doc) async {
-    // SQDoc ret = SQDoc(id, newFields, collection: collection)
-    await ref.doc(doc.id).get().then((docSnap) {
-      doc.setData(docSnap.data() as Map<String, dynamic>);
-    });
-    return doc;
+  Future loadDoc(SQDoc doc) async {
+    final docSnap = await ref.doc(doc.id).get();
+    doc.setData(docSnap.data() as Map<String, dynamic>);
   }
 
   @override
