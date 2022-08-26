@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_settings.dart';
@@ -12,14 +13,14 @@ import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/users/user_data.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   App adminApp = App("Tech Admin",
       theme: ThemeData(primarySwatch: Colors.amber, useMaterial3: true),
       inDebug: false,
       emulatingCloudFunctions: false);
 
   await adminApp.init();
+
+  FirebaseAuth.instance.signInAnonymously();
 
   App.instance.currentUser = UserData(userId: "testuser123");
 
@@ -28,12 +29,13 @@ void main() async {
       fields: [
         SQStringField("name"),
         SQStringField("hexValue"),
+        SQFileField("colorFile")
       ],
       singleDocName: "Colour");
 
   final logsColourField = SQStringField("colour");
-  final colorRefField = SQDocReferenceField("colorDoc",
-      value: SQDocReference(collection: coloursCollection));
+  final colorRefField =
+      SQDocReferenceField("colorDoc", collection: coloursCollection);
   final logsVideoField = VideoLinkField("logVideo");
 
   final logsCollection = FirestoreCollection(
@@ -50,8 +52,8 @@ void main() async {
       ],
       singleDocName: "Log");
 
-  final otherLogRefField = SQDocReferenceField("otherLogDoc",
-      value: SQDocReference(collection: logsCollection));
+  final otherLogRefField =
+      SQDocReferenceField("otherLogDoc", collection: logsCollection);
 
   logsCollection.fields.add(otherLogRefField);
 
@@ -72,8 +74,8 @@ void main() async {
 
   adminApp.homescreen = MainScreen(
     [
-      logsScreen,
       CollectionScreen("Colours", collection: coloursCollection),
+      logsScreen,
       // CollectionScreen("Logs", logsCollection),
       CategorySelectScreen(
         "Colour Cat",
