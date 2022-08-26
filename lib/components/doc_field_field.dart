@@ -32,6 +32,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
 
   void onChanged() {
     if (widget.onChanged != null) widget.onChanged!(widget.field.value);
+    refresh();
   }
 
   @override
@@ -89,11 +90,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
           Text(widget.field.name),
           Text(widget.field.value.toString()),
           TimestampDocFieldPicker(
-              timestampField: widget.field,
-              updateCallback: () {
-                refresh();
-                onChanged();
-              }),
+              timestampField: widget.field, updateCallback: onChanged),
         ],
       );
     }
@@ -104,12 +101,9 @@ class _DocFieldFieldState extends State<DocFieldField> {
 
     if (widget.field.type == SQDocReference) {
       return DocReferenceFieldPicker(
-        docReferenceField: widget.field as SQDocReferenceField,
-        updateCallback: () {
-          refresh();
-          onChanged();
-        },
-      );
+          docReferenceField: widget.field as SQDocReferenceField,
+          updateCallback: onChanged);
+    }
     }
 
     if (widget.field.type == Null) {
