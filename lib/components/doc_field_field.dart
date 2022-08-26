@@ -17,6 +17,15 @@ class DocFieldField extends StatefulWidget {
 
   @override
   State<DocFieldField> createState() => _DocFieldFieldState();
+
+  static List<DocFieldField> generateDocFieldsFields(SQDoc doc) {
+    return doc.fields
+        .map((field) => DocFieldField(
+              field,
+              doc: doc,
+            ))
+        .toList();
+  }
 }
 
 class _DocFieldFieldState extends State<DocFieldField> {

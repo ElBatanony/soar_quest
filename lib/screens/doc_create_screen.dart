@@ -52,7 +52,7 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
               DocCreateScreenBody(
                 newDoc,
                 objectFieldsFields:
-                    newDoc.fields.map((field) => DocFieldField(field)).toList(),
+                    DocFieldField.generateDocFieldsFields(newDoc),
                 createCallback: widget.createCallback,
               )
             ],

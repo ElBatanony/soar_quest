@@ -45,9 +45,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ? Text("Loading settings")
             : DocEditScreenBody(
                 settingsDoc!,
-                objectFieldsFields: settingsDoc!.fields
-                    .map((field) => DocFieldField(field))
-                    .toList(),
+                objectFieldsFields:
+                    DocFieldField.generateDocFieldsFields(settingsDoc!),
                 updateCallback: settingsUpdateCallback,
               ));
   }

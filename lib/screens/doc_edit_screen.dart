@@ -30,9 +30,8 @@ class _DocEditScreenState extends State<DocEditScreen> {
               Text('Doc path: ${widget.doc.collection.getPath()}'),
               DocEditScreenBody(
                 widget.doc,
-                objectFieldsFields: widget.doc.fields
-                    .map((field) => DocFieldField(field))
-                    .toList(),
+                objectFieldsFields:
+                    DocFieldField.generateDocFieldsFields(widget.doc),
               )
             ],
           ),
