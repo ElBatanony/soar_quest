@@ -8,7 +8,8 @@ import 'screen.dart';
 class CloudFunctionDocsScreen extends Screen {
   final SQCollection collection;
 
-  CloudFunctionDocsScreen(String title, {required this.collection, Key? key})
+  const CloudFunctionDocsScreen(String title,
+      {required this.collection, Key? key})
       : super(title, key: key);
 
   @override

@@ -9,7 +9,7 @@ class DocCreateScreen extends Screen {
   final SQCollection collection;
   final Function? createCallback;
 
-  DocCreateScreen(String title, this.collection,
+  const DocCreateScreen(String title, this.collection,
       {this.createCallback, Key? key})
       : super(title, key: key);
 

@@ -6,7 +6,7 @@ import 'doc_edit_screen.dart';
 import 'screen.dart';
 
 class SettingsScreen extends Screen {
-  SettingsScreen({String title = "Settings", Key? key})
+  const SettingsScreen({String title = "Settings", Key? key})
       : super(title, key: key);
 
   @override

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class Screen extends StatefulWidget {
   final String title;
 
-  // ignore: prefer_const_constructors_in_immutables
-  Screen(this.title, {super.key});
+  const Screen(this.title, {super.key});
 
   @override
   State<Screen> createState() => ScreenState();

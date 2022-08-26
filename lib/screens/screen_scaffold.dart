@@ -43,7 +43,7 @@ class ShowIfAuthState extends StatelessWidget {
 class ScaffoldedScreen extends Screen {
   final Widget screenBody;
 
-  ScaffoldedScreen(String title, {required this.screenBody, Key? key})
+  const ScaffoldedScreen(String title, {required this.screenBody, Key? key})
       : super(title, key: key);
 
   @override

@@ -11,7 +11,7 @@ class DocScreen extends Screen {
   final SQDoc doc;
   final Function refreshCollectionScreen;
 
-  DocScreen(super.title, this.doc,
+  const DocScreen(super.title, this.doc,
       {required this.refreshCollectionScreen, super.key});
 
   @override

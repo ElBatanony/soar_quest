@@ -6,7 +6,8 @@ import 'package:soar_quest/screens/screen.dart';
 
 class DocEditScreen extends Screen {
   final SQDoc doc;
-  DocEditScreen(String title, this.doc, {Key? key}) : super(title, key: key);
+  const DocEditScreen(String title, this.doc, {Key? key})
+      : super(title, key: key);
 
   @override
   State<DocEditScreen> createState() => _DocEditScreenState();

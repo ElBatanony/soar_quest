@@ -6,7 +6,7 @@ import 'package:soar_quest/users/auth_manager.dart';
 class SignInScreen extends Screen {
   final Screen signedRedirectScreen;
 
-  SignInScreen(
+  const SignInScreen(
       {String title = "Sign In", required this.signedRedirectScreen, Key? key})
       : super(title, key: key);
 

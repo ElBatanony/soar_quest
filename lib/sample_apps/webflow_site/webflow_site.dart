@@ -24,7 +24,7 @@ void main() async {
 }
 
 class WebflowTestScreen extends Screen {
-  WebflowTestScreen(String title, {Key? key}) : super(title, key: key);
+  const WebflowTestScreen(String title, {Key? key}) : super(title, key: key);
 
   @override
   State<WebflowTestScreen> createState() => _WebflowTestScreenState();

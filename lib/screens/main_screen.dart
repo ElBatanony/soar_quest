@@ -7,7 +7,8 @@ class MainScreen extends Screen {
   final List<Screen> bottomNavScreens;
   final int initialScreenIndex;
 
-  MainScreen(this.bottomNavScreens, {this.initialScreenIndex = 0, Key? key})
+  const MainScreen(this.bottomNavScreens,
+      {this.initialScreenIndex = 0, Key? key})
       : super("App Main Screen", key: key);
 
   @override
