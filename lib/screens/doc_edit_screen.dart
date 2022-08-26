@@ -28,11 +28,7 @@ class _DocEditScreenState extends State<DocEditScreen> {
                 '${widget.title} Screen',
               ),
               Text('Doc path: ${widget.doc.collection.getPath()}'),
-              DocEditScreenBody(
-                widget.doc,
-                objectFieldsFields:
-                    DocFieldField.generateDocFieldsFields(widget.doc),
-              )
+              DocEditScreenBody(widget.doc)
             ],
           ),
         ),
@@ -43,11 +39,9 @@ class _DocEditScreenState extends State<DocEditScreen> {
 
 class DocEditScreenBody extends StatelessWidget {
   final SQDoc doc;
-  final List<DocFieldField> objectFieldsFields;
   final Function? updateCallback;
 
-  const DocEditScreenBody(this.doc,
-      {required this.objectFieldsFields, this.updateCallback, Key? key})
+  const DocEditScreenBody(this.doc, {this.updateCallback, Key? key})
       : super(key: key);
 
   @override
@@ -70,7 +64,7 @@ class DocEditScreenBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text("Doc ID"), Text(doc.id)],
             ),
-            ...objectFieldsFields,
+            ...DocFieldField.generateDocFieldsFields(doc),
             ElevatedButton(onPressed: updateItem, child: Text("Save / Update"))
           ]),
         ),

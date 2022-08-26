@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data/sq_doc.dart';
 
-import '../components/doc_field_field.dart';
 import 'doc_edit_screen.dart';
 import 'screen.dart';
 
@@ -45,8 +44,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ? Text("Loading settings")
             : DocEditScreenBody(
                 settingsDoc!,
-                objectFieldsFields:
-                    DocFieldField.generateDocFieldsFields(settingsDoc!),
                 updateCallback: settingsUpdateCallback,
               ));
   }

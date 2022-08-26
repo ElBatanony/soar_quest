@@ -51,8 +51,6 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
               Text('Doc path: ${widget.collection.getPath()}'),
               DocCreateScreenBody(
                 newDoc,
-                objectFieldsFields:
-                    DocFieldField.generateDocFieldsFields(newDoc),
                 createCallback: widget.createCallback,
               )
             ],
@@ -65,11 +63,10 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
 
 class DocCreateScreenBody extends StatelessWidget {
   final SQDoc doc;
-  final List<DocFieldField> objectFieldsFields;
+  // final List<DocFieldField> objectFieldsFields;
   final Function? createCallback;
 
-  const DocCreateScreenBody(this.doc,
-      {required this.objectFieldsFields, this.createCallback, Key? key})
+  const DocCreateScreenBody(this.doc, {this.createCallback, Key? key})
       : super(key: key);
 
   @override
@@ -89,7 +86,7 @@ class DocCreateScreenBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [Text("Doc ID (generated)"), Text(doc.id)],
           ),
-          ...objectFieldsFields,
+          ...DocFieldField.generateDocFieldsFields(doc),
           ElevatedButton(onPressed: saveItem, child: Text("Save / Insert"))
         ]),
       ),
