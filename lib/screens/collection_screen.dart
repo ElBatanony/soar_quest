@@ -85,21 +85,23 @@ class _CollectionScreenBodyState extends State<CollectionScreenBody> {
             doc, widget.collection, widget.refreshScreen))
         .toList();
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Object path: ${widget.collection.getPath()}',
-            textAlign: TextAlign.center,
-          ),
-          ...itemsDisplay,
-          CollectionCreateDocButton(
-            widget.collection,
-            createCallback: widget.refreshScreen,
-          ),
-        ],
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Object path: ${widget.collection.getPath()}',
+              textAlign: TextAlign.center,
+            ),
+            ...itemsDisplay,
+            CollectionCreateDocButton(
+              widget.collection,
+              createCallback: widget.refreshScreen,
+            ),
+          ],
+        ),
       ),
     );
   }
