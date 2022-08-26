@@ -12,17 +12,7 @@ import 'screen.dart';
 class CollectionScreen extends Screen {
   final SQCollection collection;
 
-  final Widget Function(SQCollection collection,
-      {required Function refreshScreen, Key? key}) collectionScreenBody;
-
-  final DocScreenBody Function(SQDoc doc) docScreenBody;
-
-  CollectionScreen(String title,
-      {required this.collection,
-      this.docScreenBody = DocScreenBody.new,
-      this.collectionScreenBody = CollectionScreenBody.new,
-      Key? key})
-      : super(title, key: key) {
+  CollectionScreen(super.title, {required this.collection, super.key}) {
     collection.screen = this;
   }
 
@@ -46,7 +36,7 @@ class CollectionScreenState<T extends CollectionScreen> extends State<T> {
   }
 
   Widget docDisplay(SQDoc doc) {
-    return Text("Doc: ${doc.identifier}");
+    return CollectionScreenDocButton(doc, widget.collection, refreshScreen);
   }
 
   List<Widget> docsDisplay(BuildContext context) {
@@ -59,51 +49,25 @@ class CollectionScreenState<T extends CollectionScreen> extends State<T> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: widget.collectionScreenBody(
-          widget.collection,
-          refreshScreen: refreshScreen,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Object path: ${widget.collection.getPath()}',
+                  textAlign: TextAlign.center,
+                ),
+                ...docsDisplay(context),
+                CollectionCreateDocButton(
+                  widget.collection,
+                  createCallback: refreshScreen,
+                ),
+              ],
+            ),
+          ),
         ));
-  }
-}
-
-class CollectionScreenBody extends StatefulWidget {
-  final SQCollection collection;
-  final Function refreshScreen;
-  const CollectionScreenBody(this.collection,
-      {required this.refreshScreen, Key? key})
-      : super(key: key);
-
-  @override
-  State<CollectionScreenBody> createState() => _CollectionScreenBodyState();
-}
-
-class _CollectionScreenBodyState extends State<CollectionScreenBody> {
-  @override
-  Widget build(BuildContext context) {
-    var itemsDisplay = widget.collection.docs
-        .map((doc) => CollectionScreenDocButton(
-            doc, widget.collection, widget.refreshScreen))
-        .toList();
-
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Object path: ${widget.collection.getPath()}',
-              textAlign: TextAlign.center,
-            ),
-            ...itemsDisplay,
-            CollectionCreateDocButton(
-              widget.collection,
-              createCallback: widget.refreshScreen,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
 
