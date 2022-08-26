@@ -18,7 +18,7 @@ class DocScreen extends Screen {
   State<DocScreen> createState() => DocScreenState();
 }
 
-class DocScreenState<T extends DocScreen> extends State<T> {
+class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   void loadData() async {
     await widget.doc.loadDoc();
 
@@ -40,59 +40,25 @@ class DocScreenState<T extends DocScreen> extends State<T> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.doc.identifier),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+  Widget screenBody(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('Doc path: ${widget.doc.getPath()}', textAlign: TextAlign.center),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: widget.doc.fields
+                .map((field) => Text(field.toString()))
+                .toList()),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              '${widget.title} Screen',
-            ),
-            Text(
-              'Object path: ${widget.doc.getPath()}',
-              textAlign: TextAlign.center,
-            ),
-            DocScreenBody(widget.doc),
             DocEditButton(widget.doc, refresh: refresh),
             DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
           ],
         ),
-      ),
-    );
-  }
-}
-
-class DocFieldDisplay extends StatelessWidget {
-  final SQDocField field;
-  const DocFieldDisplay(this.field, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(field.toString());
-  }
-}
-
-class DocScreenBody extends StatefulWidget {
-  final SQDoc doc;
-  const DocScreenBody(this.doc, {Key? key}) : super(key: key);
-
-  @override
-  State<DocScreenBody> createState() => _DocScreenBodyState();
-}
-
-class _DocScreenBodyState extends State<DocScreenBody> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: widget.doc.fields
-              .map((field) => DocFieldDisplay(field))
-              .toList()),
+      ],
     );
   }
 }
