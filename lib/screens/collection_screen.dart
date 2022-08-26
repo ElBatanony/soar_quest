@@ -83,7 +83,8 @@ class CollectionScreenDocButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SQButton(doc.identifier,
         onPressed: () => goToScreen(
-            DocScreen(doc.id, doc, refreshCollectionScreen: refreshScreen),
+            DocScreen(doc.identifier, doc,
+                refreshCollectionScreen: refreshScreen),
             context: context));
   }
 }
