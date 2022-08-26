@@ -5,6 +5,7 @@ import '../data.dart';
 import 'fields/timestamp_doc_field.dart';
 import 'fields/list_field.dart';
 import 'fields/doc_reference_picker.dart';
+import 'fields/file_field_picker.dart';
 
 class DocFieldField extends StatefulWidget {
   final SQDocField field;
@@ -106,6 +107,15 @@ class _DocFieldFieldState extends State<DocFieldField> {
           docReferenceField: widget.field as SQDocReferenceField,
           updateCallback: onChanged);
     }
+
+    if (widget.field.type == SQFile) {
+      if (widget.doc == null) return Text("No doc to upload file to");
+
+      return FileFieldPicker(
+          fileField: widget.field as SQFileField,
+          doc: widget.doc!,
+          storage: FirebaseFileStorage(widget.field.value),
+          updateCallback: onChanged);
     }
 
     if (widget.field.type == Null) {
