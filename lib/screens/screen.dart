@@ -1,34 +1,25 @@
 import 'package:flutter/material.dart';
-// import 'package:soar_quest/app/app.dart';
 
 class Screen extends StatefulWidget {
   final String title;
 
-  Screen(this.title, {Key? key}) : super(key: key) {
-    // App.instance.setScreen(this);
+  // ignore: prefer_const_constructors_in_immutables
+  Screen(this.title, {super.key});
+
+  @override
+  State<Screen> createState() => ScreenState();
+}
+
+class ScreenState<T extends Screen> extends State<T> {
+  Widget screenBody(BuildContext context) {
+    return Center(child: Text('${widget.title} Screen'));
   }
 
   @override
-  State<Screen> createState() => _ScreenState();
-}
-
-class _ScreenState extends State<Screen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '${widget.title} Screen',
-            ),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
+      body: screenBody(context),
     );
   }
 }
