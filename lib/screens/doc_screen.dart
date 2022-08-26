@@ -56,7 +56,7 @@ class DocScreenState<T extends DocScreen> extends State<T> {
               'Object path: ${widget.doc.getPath()}',
               textAlign: TextAlign.center,
             ),
-            widget.doc.collection.screen!.docScreenBody(widget.doc),
+            DocScreenBody(widget.doc),
             DocEditButton(widget.doc, refresh: refresh),
             DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
           ],
