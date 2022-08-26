@@ -9,8 +9,10 @@ import 'fields/doc_reference_picker.dart';
 class DocFieldField extends StatefulWidget {
   final SQDocField field;
   final Function? onChanged;
+  final SQDoc? doc;
 
-  const DocFieldField(this.field, {this.onChanged, Key? key}) : super(key: key);
+  const DocFieldField(this.field, {this.onChanged, this.doc, Key? key})
+      : super(key: key);
 
   @override
   State<DocFieldField> createState() => _DocFieldFieldState();
