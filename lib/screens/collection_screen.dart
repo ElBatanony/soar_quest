@@ -20,7 +20,7 @@ class CollectionScreen extends Screen {
   State<CollectionScreen> createState() => CollectionScreenState();
 }
 
-class CollectionScreenState<T extends CollectionScreen> extends State<T> {
+class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   void refreshScreen() => setState(() {});
 
   Future loadData() async {
@@ -44,30 +44,26 @@ class CollectionScreenState<T extends CollectionScreen> extends State<T> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Object path: ${widget.collection.getPath()}',
-                  textAlign: TextAlign.center,
-                ),
-                ...docsDisplay(context),
-                CollectionCreateDocButton(
-                  widget.collection,
-                  createCallback: refreshScreen,
-                ),
-              ],
+  Widget screenBody(BuildContext context) {
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Collection path: ${widget.collection.getPath()}',
+              textAlign: TextAlign.center,
             ),
-          ),
-        ));
+            ...docsDisplay(context),
+            CollectionCreateDocButton(
+              widget.collection,
+              createCallback: refreshScreen,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
