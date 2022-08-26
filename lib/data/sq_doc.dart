@@ -54,6 +54,11 @@ class SQDoc {
         continue;
       }
 
+      if (field.type == SQFile) {
+        field.value = SQFile.parse(value);
+        continue;
+      }
+
       field.value = value;
     }
     initialized = true;
