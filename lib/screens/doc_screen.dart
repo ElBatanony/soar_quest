@@ -11,9 +11,8 @@ class DocScreen extends Screen {
   final SQDoc doc;
   final Function refreshCollectionScreen;
 
-  DocScreen(String title, this.doc,
-      {required this.refreshCollectionScreen, Key? key})
-      : super(title, key: key);
+  DocScreen(super.title, this.doc,
+      {required this.refreshCollectionScreen, super.key});
 
   @override
   State<DocScreen> createState() => DocScreenState();
