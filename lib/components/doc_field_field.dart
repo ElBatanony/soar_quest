@@ -55,8 +55,8 @@ class _DocFieldFieldState extends State<DocFieldField> {
       return TextField(
         onChanged: (intText) {
           widget.field.value = int.parse(intText);
-          onChanged();
         },
+        onEditingComplete: onChanged,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: widget.field.name,
@@ -87,8 +87,8 @@ class _DocFieldFieldState extends State<DocFieldField> {
         controller: fieldTextController,
         onChanged: (text) {
           widget.field.value = text;
-          onChanged();
         },
+        onEditingComplete: onChanged,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: widget.field.name,
