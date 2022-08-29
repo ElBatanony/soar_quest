@@ -1,4 +1,5 @@
-import 'package:soar_quest/app/app.dart';
+import '../app/app.dart';
+import '../data.dart';
 
 class UserData {
   String userId;
@@ -10,3 +11,11 @@ class UserData {
     return "${App.instance.getAppPath()}users/$userId/data/";
   }
 }
+
+List<SQDocField> userDocFields = [
+  SQStringField("Nickname"),
+  SQTimestampField("Birthdate")
+];
+
+late SQCollection userCollection;
+late SQDoc userDoc;
