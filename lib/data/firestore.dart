@@ -11,9 +11,8 @@ class FirestoreCollection extends SQCollection {
   FirestoreCollection(
       {required String id,
       required List<SQDocField> fields,
-      bool userData = false,
       String singleDocName = "Doc"})
-      : super(id, fields, userData: userData, singleDocName: singleDocName) {
+      : super(id, fields, singleDocName: singleDocName) {
     ref = firestore.collection(getPath());
   }
 
@@ -46,12 +45,7 @@ class FirestoreCollection extends SQCollection {
 
   @override
   String getPath() {
-    if (userData)
-      return App.instance.getAppPath() +
-          "users/${App.instance.currentUser.userId}/" +
-          id;
-    else
-      return App.instance.getAppPath() + id;
+    return App.instance.getAppPath() + id;
   }
 
   DocumentReference getANewDocRef() => ref.doc();
@@ -72,8 +66,39 @@ class FirestoreCollection extends SQCollection {
         .set(doc.collectFields(), SetOptions(merge: true));
     return loadCollection();
   }
+}
 
-  // updateDoc() {
-  //   return db.doc(getPath()).update(collectFields());
-  // }
+class FirestoreUserCollection extends SQUserCollection {
+  late FirestoreCollection firestoreCollection;
+
+  FirestoreUserCollection({
+    required super.id,
+    required super.userId,
+    required super.fields,
+    super.singleDocName,
+  }) {
+    firestoreCollection = FirestoreCollection(
+        id: id, fields: fields, singleDocName: singleDocName);
+  }
+
+  @override
+  Future createDoc(SQDoc doc) => firestoreCollection.createDoc(doc);
+
+  @override
+  Future deleteDoc(String docId) => firestoreCollection.deleteDoc(docId);
+
+  @override
+  String getANewDocId() => firestoreCollection.getANewDocId();
+
+  @override
+  String getPath() => App.instance.getAppPath() + "users/$userId/" + id;
+
+  @override
+  Future loadCollection() => firestoreCollection.loadCollection();
+
+  @override
+  Future<void> loadDoc(SQDoc doc) => firestoreCollection.loadDoc(doc);
+
+  @override
+  Future updateDoc(SQDoc doc) => firestoreCollection.updateDoc(doc);
 }
