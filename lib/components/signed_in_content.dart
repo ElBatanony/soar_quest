@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../app/app.dart';
+import '../data.dart';
 import '../screens/screen.dart';
 import 'buttons/sq_button.dart';
 
+typedef SignedInContentBuilder = Widget Function(
+    BuildContext context, SignedInUser user);
+
 class SignedInContent extends StatefulWidget {
-  final Widget child;
   final Screen? redirectScreen;
   final Function? refreshUp;
+  final SignedInContentBuilder builder;
 
   const SignedInContent({
-    required this.child,
+    required this.builder,
     this.redirectScreen,
     this.refreshUp,
     super.key,
@@ -48,6 +52,6 @@ class _SignedInContentState extends State<SignedInContent> {
                       redirectScreen: widget.redirectScreen))
             ],
           )
-        : widget.child;
+        : widget.builder(context, App.auth.user as SignedInUser);
   }
 }
