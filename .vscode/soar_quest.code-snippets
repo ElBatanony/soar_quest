@@ -37,5 +37,47 @@
 			"}"
 		],
 		"description": "Creates a template for a new screen"
-	}
+	},
+	"New Collection Screen": {
+		"scope": "dart",
+		"prefix": "collectionScreen",
+		"body": [
+			"class $1 extends CollectionScreen {",
+			"  $1(super.title, {required super.collection, super.key});",
+			"",
+			"  @override",
+			"  State<$1> createState() => _$1State();",
+			"}",
+			"",
+			"class _$1State extends CollectionScreenState<$1> {",
+			"",
+			"  @override",
+			"  Widget screenBody(BuildContext context) {",
+			"    // TODO: implement screenBody",
+			"    return super.screenBody(context);",
+			"  }",
+			"}"
+		],
+	},
+	"New Doc Screen": {
+		"scope": "dart",
+		"prefix": "docScreen",
+		"body": [
+			"class $1 extends DocScreen {",
+			"  const $1(super.title, super.doc,",
+			"      {required super.refreshCollectionScreen, super.key});",
+			"",
+			"  @override",
+			"  State<$1> createState() => _$1State();",
+			"}",
+			"",
+			"class _$1State extends DocScreenState<$1> {",
+			"  @override",
+			"  Widget screenBody(BuildContext context) {",
+			"    // TODO: implement screenBody",
+			"    return super.screenBody(context);",
+			"  }",
+			"}"
+		],
+	},
 }
