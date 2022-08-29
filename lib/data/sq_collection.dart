@@ -6,13 +6,11 @@ import '../app/app.dart';
 abstract class SQCollection {
   String id;
   List<SQDocField> fields;
-  bool userData;
   List<SQDoc> docs = [];
   CollectionScreen? screen;
   String singleDocName;
 
-  SQCollection(this.id, this.fields,
-      {this.userData = false, this.singleDocName = "Doc"}) {
+  SQCollection(this.id, this.fields, {this.singleDocName = "Doc"}) {
     App.instance.collections.add(this);
   }
 
@@ -28,4 +26,15 @@ abstract class SQCollection {
 
   SQDocField getFieldByName(String fieldName) =>
       fields.singleWhere((field) => field.name == fieldName);
+}
+
+abstract class SQUserCollection extends SQCollection {
+  final String userId;
+
+  SQUserCollection({
+    required String id,
+    required List<SQDocField> fields,
+    required this.userId,
+    String singleDocName = "User Doc",
+  }) : super(id, fields, singleDocName: singleDocName);
 }
