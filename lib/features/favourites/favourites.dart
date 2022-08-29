@@ -6,16 +6,17 @@ import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
+import '../../app/app.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
 
 class FavouritesFeature extends Feature {
-  static final SQCollection _favouritesCollection = FirestoreCollection(
+  static final SQUserCollection _favouritesCollection = FirestoreUserCollection(
       id: "favourites",
       fields: [
         SQStringField("identifier"),
       ],
-      userData: true);
+      userId: App.auth.user.userId);
 
   static Widget addToFavouritesButton(SQDoc doc) {
     return ToggleInFavouritesButton(doc);
