@@ -8,6 +8,6 @@ Future goToScreen(Screen screen, {required BuildContext context}) {
   );
 }
 
-void exitScreen(BuildContext context) {
-  return Navigator.pop(context);
+void exitScreen(BuildContext context, {dynamic value}) {
+  return Navigator.pop(context, value);
 }
