@@ -1,43 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/screens/screen.dart';
-import 'package:soar_quest/screens/screen_scaffold.dart';
-import 'package:soar_quest/users/auth_manager.dart';
+
+import '../../app/app.dart';
+import '../../app/app_navigator.dart';
+import '../../components/buttons/sq_button.dart';
+import '../../components/doc_field_field.dart';
+import '../../data/sq_doc_field.dart';
+import '../profile_screen.dart';
+import '../screen.dart';
 
 class SignInScreen extends Screen {
-  final Screen signedRedirectScreen;
+  late final Screen signedRedirectScreen; // TODO: remove or use redirect screen
 
-  const SignInScreen(
-      {String title = "Sign In", required this.signedRedirectScreen, Key? key})
-      : super(title, key: key);
+  SignInScreen({
+    String title = "Sign In",
+    Screen? signedRedirectScreen,
+    Key? key,
+  }) : super(title, key: key) {
+    this.signedRedirectScreen =
+        signedRedirectScreen ?? ProfileScreen("Profile");
+  }
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInScreenState extends ScreenState<SignInScreen> {
+  final emailField = SQStringField("Email", value: "test@email.com");
+  final passwordField = SQStringField("Password", value: "testtest");
+
   @override
   void initState() {
+    if (App.auth.user.isAnonymous == false) {
+      redirect();
+    }
     super.initState();
   }
 
+  redirect() {
+    exitScreen(context);
+  }
+
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<Map<String, dynamic>>(
-        stream: AuthManager.authChanges,
-        builder: (context, snapshot) {
-          return snapshot.data?["signedIn"] == true
-              ? widget.signedRedirectScreen
-              : ScreenScaffold(
-                  widget.title,
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Sign In Screen"),
-                      ElevatedButton(
-                          onPressed: AuthManager.signInAnonymously,
-                          child: Text("Sign In Anonymously"))
-                    ],
-                  ));
-        });
+  Widget screenBody(BuildContext context) {
+    return Column(
+      children: [
+        Text("hello. i am sign in"),
+        DocFieldField(emailField),
+        DocFieldField(passwordField),
+        SQButton("Sign In", onPressed: () async {
+          await App.auth.signInWithEmailAndPassword(
+              email: emailField.value, password: passwordField.value);
+          if (App.auth.user.isAnonymous) {
+            print("Did not sign in");
+          } else {
+            print("Signed in");
+            redirect();
+          }
+        })
+      ],
+    );
   }
 }
