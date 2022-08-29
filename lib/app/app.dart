@@ -6,16 +6,15 @@ import 'package:soar_quest/firebase_options.dart';
 
 import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/users/auth_manager.dart';
-import 'package:soar_quest/users/user_data.dart';
 
 // import 'app_debugger.dart';
 import '../data.dart';
+import '../users/auth_manager.dart';
 
 class App {
   String name;
   Screen? homescreen;
 
-  late UserData currentUser;
   Screen? currentScreen;
   ThemeData? theme;
 
@@ -23,6 +22,10 @@ class App {
 
   bool inDebug;
   bool emulatingCloudFunctions;
+
+  SQAuthManager authManager;
+
+  static SQAuthManager auth = instance.authManager;
 
   void setScreen(Screen screen) {
     currentScreen = screen;
@@ -36,9 +39,9 @@ class App {
     this.theme,
     this.inDebug = false,
     this.emulatingCloudFunctions = false,
+    required this.authManager,
   }) {
     instance = this;
-    currentUser = UserData(userId: "anon");
   }
 
   init() async {
@@ -46,8 +49,8 @@ class App {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await App.auth.init();
     AppSettings.init();
-    AuthManager.init();
   }
 
   run() {
