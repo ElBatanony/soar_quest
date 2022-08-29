@@ -36,7 +36,11 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   Widget docDisplay(SQDoc doc) {
-    return CollectionScreenDocButton(doc, widget.collection, refreshScreen);
+    return SQButton(doc.identifier,
+        onPressed: () => goToScreen(
+            DocScreen(doc.identifier, doc,
+                refreshCollectionScreen: refreshScreen),
+            context: context));
   }
 
   List<Widget> docsDisplay(BuildContext context) {
@@ -64,23 +68,5 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
         ),
       ),
     );
-  }
-}
-
-class CollectionScreenDocButton extends StatelessWidget {
-  final SQDoc doc;
-  final Function refreshScreen;
-  final SQCollection collection;
-  const CollectionScreenDocButton(this.doc, this.collection, this.refreshScreen,
-      {Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SQButton(doc.identifier,
-        onPressed: () => goToScreen(
-            DocScreen(doc.identifier, doc,
-                refreshCollectionScreen: refreshScreen),
-            context: context));
   }
 }
