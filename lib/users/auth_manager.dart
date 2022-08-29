@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../data.dart';
 import '../data/firestore.dart';
 import '../app/app_navigator.dart';
-import '../screens/screen.dart';
 import '../screens/auth/sign_in_screen.dart';
 
 abstract class SQAuthManager {
@@ -22,7 +21,7 @@ abstract class SQAuthManager {
 
   Stream<UserData?> authStateChanges();
 
-  goToSignIn(BuildContext context, {Screen? redirectScreen});
+  goToSignIn(BuildContext context, {bool forceSignIn = false});
 
   Future signInWithEmailAndPassword({
     required String email,
@@ -67,9 +66,8 @@ class FirebaseAuthManager extends SQAuthManager {
   }
 
   @override
-  goToSignIn(BuildContext context, {Screen? redirectScreen}) {
-    goToScreen(SignInScreen(signedRedirectScreen: redirectScreen),
-        context: context);
+  goToSignIn(BuildContext context, {bool forceSignIn = false}) {
+    return goToScreen(SignInScreen(forceSignIn: forceSignIn), context: context);
   }
 
   @override

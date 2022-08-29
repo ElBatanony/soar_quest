@@ -5,20 +5,16 @@ import '../../app/app_navigator.dart';
 import '../../components/buttons/sq_button.dart';
 import '../../components/doc_field_field.dart';
 import '../../data/sq_doc_field.dart';
-import '../profile_screen.dart';
 import '../screen.dart';
 
 class SignInScreen extends Screen {
-  late final Screen signedRedirectScreen; // TODO: remove or use redirect screen
+  final bool forceSignIn;
 
-  SignInScreen({
+  const SignInScreen({
     String title = "Sign In",
-    Screen? signedRedirectScreen,
+    this.forceSignIn = false,
     Key? key,
-  }) : super(title, key: key) {
-    this.signedRedirectScreen =
-        signedRedirectScreen ?? ProfileScreen("Profile");
-  }
+  }) : super(title, key: key);
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -30,7 +26,7 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
 
   @override
   void initState() {
-    if (App.auth.user.isAnonymous == false) {
+    if (widget.forceSignIn == false && App.auth.user.isAnonymous == false) {
       redirect();
     }
     super.initState();

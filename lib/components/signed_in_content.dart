@@ -47,9 +47,7 @@ class _SignedInContentState extends State<SignedInContent> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text("Sign in to view this content"),
-              SQButton("Sign In",
-                  onPressed: () => App.auth.goToSignIn(context,
-                      redirectScreen: widget.redirectScreen))
+              SQButton("Sign In", onPressed: () => App.auth.goToSignIn(context))
             ],
           )
         : widget.builder(context, App.auth.user as SignedInUser);
