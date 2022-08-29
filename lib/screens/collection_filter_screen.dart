@@ -29,12 +29,12 @@ class _CollectionFilterScreenState
   }
 
   @override
-  Widget build(BuildContext context) {
-    var itemsDisplay = filteredDocs
-        .map((doc) =>
-            CollectionScreenDocButton(doc, widget.collection, refreshScreen))
-        .toList();
+  List<Widget> docsDisplay(BuildContext context) {
+    return filteredDocs.map((doc) => docDisplay(doc)).toList();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("${widget.title} ${widget.collection.id}"),
@@ -61,7 +61,7 @@ class _CollectionFilterScreenState
                       'Showing docs: ${filteredDocs.length}',
                       textAlign: TextAlign.center,
                     ),
-                    ...itemsDisplay,
+                    ...docsDisplay(context),
                   ],
                 ),
               ),
