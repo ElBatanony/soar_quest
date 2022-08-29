@@ -40,8 +40,7 @@ class FirebaseAuthManager extends SQAuthManager {
   @override
   updateUserData() {
     final firebaseUser = _auth.currentUser!;
-    user = UserData(
-        userId: firebaseUser.uid, isAnonymous: firebaseUser.isAnonymous);
+    user = FirebaseSignedInUser(firebaseUser);
     return super.updateUserData();
   }
 
