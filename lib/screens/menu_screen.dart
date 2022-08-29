@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/screens/screen_scaffold.dart';
 
 import 'screen.dart';
 
@@ -34,14 +33,12 @@ class MenuScreen extends Screen {
   State<Screen> createState() => _MenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class _MenuScreenState extends ScreenState<MenuScreen> {
   @override
-  Widget build(BuildContext context) {
-    return ScreenScaffold(
-        "Menu Screen",
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                widget.screens.map((screen) => ScreenButton(screen)).toList()));
+  Widget screenBody(BuildContext context) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            widget.screens.map((screen) => ScreenButton(screen)).toList());
   }
 }
