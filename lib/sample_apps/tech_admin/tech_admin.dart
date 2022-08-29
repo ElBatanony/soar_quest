@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_settings.dart';
@@ -9,20 +8,20 @@ import 'package:soar_quest/screens/category_select_screen.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
+import 'package:soar_quest/screens/profile_screen.dart';
+import 'package:soar_quest/users/auth_manager.dart';
 // import 'package:soar_quest/screens/settings_screen.dart';
-import 'package:soar_quest/users/user_data.dart';
 
 void main() async {
-  App adminApp = App("Tech Admin",
-      theme: ThemeData(primarySwatch: Colors.amber, useMaterial3: true),
-      inDebug: false,
-      emulatingCloudFunctions: false);
+  App adminApp = App(
+    "Tech Admin",
+    theme: ThemeData(primarySwatch: Colors.amber, useMaterial3: true),
+    inDebug: false,
+    emulatingCloudFunctions: false,
+    authManager: FirebaseAuthManager(),
+  );
 
   await adminApp.init();
-
-  FirebaseAuth.instance.signInAnonymously();
-
-  App.instance.currentUser = UserData(userId: "testuser123");
 
   final coloursCollection = FirestoreCollection(
       id: "Colours",
@@ -74,6 +73,7 @@ void main() async {
 
   adminApp.homescreen = MainScreen(
     [
+      ProfileScreen("Profile"),
       CollectionScreen("Colours", collection: coloursCollection),
       logsScreen,
       // CollectionScreen("Logs", logsCollection),
