@@ -16,10 +16,13 @@ abstract class SQAuthManager {
 
   updateUserData() {
     String userId = user.userId;
-    userCollection = FirestoreCollection(id: "users/$userId/data", fields: []);
-    userDoc = SQDoc(
-        userId, [SQStringField("Nickname"), SQTimestampField("Birthdate")],
-        collection: userCollection);
+    List<SQDocField> userDocFields = [
+      SQStringField("Nickname"),
+      SQTimestampField("Birthdate")
+    ];
+    userCollection =
+        FirestoreCollection(id: "users/$userId/data", fields: userDocFields);
+    userDoc = SQDoc(userId, userDocFields, collection: userCollection);
   }
 
   Stream<UserData?> authStateChanges();
