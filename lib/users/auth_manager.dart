@@ -77,8 +77,9 @@ class FirebaseAuthManager extends SQAuthManager {
     List<String> methods = await _auth.fetchSignInMethodsForEmail(email);
 
     if (methods.isEmpty) {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      // await _auth.createUserWithEmailAndPassword(
+      //     email: email, password: password);
+      print("Should sign up");
     } else {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     }
