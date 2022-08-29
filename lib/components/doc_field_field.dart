@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../app/app_navigator.dart';
 import '../data.dart';
 
+import 'buttons/sq_button.dart';
 import 'fields/timestamp_doc_field.dart';
 import 'fields/list_field.dart';
 import 'fields/doc_reference_picker.dart';
@@ -133,4 +135,22 @@ class _DocFieldFieldState extends State<DocFieldField> {
 
     return Text("${widget.field.type} fields not implemented");
   }
+}
+
+Future showFieldDialog(
+    {required BuildContext context, required SQDocField field}) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("Update ${field.name}"),
+            content: DocFieldField(field),
+            actions: [
+              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton(
+                'Save',
+                onPressed: () => exitScreen(context, value: field.value),
+              ),
+            ]);
+      });
 }
