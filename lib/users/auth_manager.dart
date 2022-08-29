@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../data.dart';
 import '../data/firestore.dart';
-import 'user_data.dart';
 import '../app/app_navigator.dart';
 import '../screens/screen.dart';
 import '../screens/auth/sign_in_screen.dart';
@@ -16,10 +15,6 @@ abstract class SQAuthManager {
 
   updateUserData() {
     String userId = user.userId;
-    List<SQDocField> userDocFields = [
-      SQStringField("Nickname"),
-      SQTimestampField("Birthdate")
-    ];
     userCollection =
         FirestoreCollection(id: "users/$userId/data", fields: userDocFields);
     userDoc = SQDoc(userId, userDocFields, collection: userCollection);
