@@ -45,6 +45,9 @@ class SQDocField<T> {
 
 class SQStringField extends SQDocField<String> {
   SQStringField(String name, {String value = ""}) : super(name, value: value);
+
+  @override
+  String get value => super.value ?? "";
 }
 
 class SQBoolField extends SQDocField<bool> {
