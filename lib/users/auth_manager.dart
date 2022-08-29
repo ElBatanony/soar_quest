@@ -1,46 +1,102 @@
+import 'package:flutter/material.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthManager {
-  static final FirebaseAuth _auth = FirebaseAuth.instance;
+import '../data.dart';
+import '../data/firestore.dart';
+import 'user_data.dart';
+import '../app/app_navigator.dart';
+import '../screens/screen.dart';
+import '../screens/auth/sign_in_screen.dart';
 
-  static bool isSignedIn = _auth.currentUser != null;
+abstract class SQAuthManager {
+  Future init();
 
-  static init() {
-    //_logAuthChanges();
+  late UserData user;
+
+  updateUserData() {
+    String userId = user.userId;
+    userCollection = FirestoreCollection(id: "users/$userId/data", fields: []);
+    userDoc = SQDoc(
+        userId, [SQStringField("Nickname"), SQTimestampField("Birthdate")],
+        collection: userCollection);
   }
+
+  Stream<UserData?> authStateChanges();
+
+  goToSignIn(BuildContext context, {Screen? redirectScreen});
+
+  Future signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+
+  Future signOut();
+}
+
+class FirebaseAuthManager extends SQAuthManager {
+  static late final FirebaseAuth _auth;
 
   static Stream<Map<String, dynamic>> get authChanges =>
       _auth.authStateChanges().map((User? user) => {"signedIn": user != null});
 
-  static signInAnonymously() async {
-    try {
-      // final userCredential = await FirebaseAuth.instance.signInAnonymously();
-      await FirebaseAuth.instance.signInAnonymously();
-      print("Signed in with temporary account.");
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case "operation-not-allowed":
-          print("Anonymous auth hasn't been enabled for this project.");
-          break;
-        default:
-          print("Unknown error.");
+  @override
+  updateUserData() {
+    final firebaseUser = _auth.currentUser!;
+    user = UserData(
+        userId: firebaseUser.uid, isAnonymous: firebaseUser.isAnonymous);
+    return super.updateUserData();
+  }
+
+  @override
+  init() async {
+    _auth = FirebaseAuth.instance;
+    if (_auth.currentUser == null) await _auth.signInAnonymously();
+    updateUserData();
+
+    _auth.authStateChanges().listen((User? user) {
+      if (user != null) {
+        print(user.uid);
       }
-    }
-    return;
-  }
-
-  static signOut() {
-    return _auth.signOut();
-  }
-
-  // ignore: unused_element
-  static _logAuthChanges() {
-    authChanges.listen((event) {
-      print(event.toString());
-      if (event["signedIn"] == true)
-        print("User is logged in");
-      else
-        print("User is logged out");
     });
+  }
+
+  @override
+  Stream<UserData?> authStateChanges() {
+    return _auth.authStateChanges().map((user) => user == null
+        ? UserData(userId: "temp", isAnonymous: true)
+        : UserData(userId: user.uid, isAnonymous: user.isAnonymous));
+  }
+
+  @override
+  goToSignIn(BuildContext context, {Screen? redirectScreen}) {
+    goToScreen(SignInScreen(signedRedirectScreen: redirectScreen),
+        context: context);
+  }
+
+  @override
+  Future signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    List<String> methods = await _auth.fetchSignInMethodsForEmail(email);
+
+    if (methods.isEmpty) {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } else {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    }
+
+    updateUserData();
+  }
+
+  @override
+  signOut() async {
+    await _auth.signOut();
+    print("Signed out");
+    await _auth.signInAnonymously();
+    print("Signed in anonymously");
+    updateUserData();
   }
 }
