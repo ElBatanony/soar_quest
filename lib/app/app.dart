@@ -26,6 +26,8 @@ class App {
   SQAuthManager authManager;
 
   static SQAuthManager auth = instance.authManager;
+  static String get userId => auth.user.userId;
+
   AppSettings settings;
 
   void setScreen(Screen screen) {
