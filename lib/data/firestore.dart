@@ -25,7 +25,7 @@ class FirestoreCollection extends SQCollection {
     print('${snap.docs.length} docs fetched for $id!');
 
     for (var doc in snap.docs) {
-      var newDoc = SQDoc(doc.id, fields, collection: this);
+      var newDoc = SQDoc(doc.id, collection: this);
       newDoc.setData(doc.data());
       docs.add(newDoc);
     }
@@ -77,41 +77,18 @@ class FirestoreCollection extends SQCollection {
   }
 }
 
-class FirestoreUserCollection extends SQUserCollection {
-  late FirestoreCollection firestoreCollection;
+class FirestoreUserCollection extends FirestoreCollection
+    implements SQUserCollection {
+  @override
+  final String userId;
 
   FirestoreUserCollection({
     required super.id,
-    required super.userId,
+    required this.userId,
     required super.fields,
     super.singleDocName,
-  }) {
-    firestoreCollection = FirestoreCollection(
-        id: id, fields: fields, singleDocName: singleDocName);
-  }
-
-  @override
-  Future createDoc(SQDoc doc) => firestoreCollection.createDoc(doc);
-
-  @override
-  Future deleteDoc(String docId) => firestoreCollection.deleteDoc(docId);
-
-  @override
-  Future<bool> doesDocExist(String docId) =>
-      firestoreCollection.doesDocExist(docId);
-
-  @override
-  String getANewDocId() => firestoreCollection.getANewDocId();
+  });
 
   @override
   String getPath() => App.instance.getAppPath() + "users/$userId/" + id;
-
-  @override
-  Future loadCollection() => firestoreCollection.loadCollection();
-
-  @override
-  Future<void> loadDoc(SQDoc doc) => firestoreCollection.loadDoc(doc);
-
-  @override
-  Future updateDoc(SQDoc doc) => firestoreCollection.updateDoc(doc);
 }
