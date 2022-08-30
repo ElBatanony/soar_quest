@@ -1,23 +1,36 @@
+// ignore_for_file: unused_import, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/data/firestore.dart';
+import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/screens/category_select_screen.dart';
-// import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
+import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
+import 'package:soar_quest/screens/playground_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 import 'package:soar_quest/users/auth_manager.dart';
-// import 'package:soar_quest/screens/settings_screen.dart';
+import 'package:soar_quest/screens/settings_screen.dart';
 
 void main() async {
+  AppSettings settings = AppSettings(settingsFields: [
+    SQBoolField('paymentError'),
+    SQBoolField('newUser'),
+    SQBoolField('payment'),
+    SQStringField('username'),
+    SQBoolField('Log Manual Commands'),
+  ]);
+
   App adminApp = App(
     "Tech Admin",
     theme: ThemeData(primarySwatch: Colors.amber, useMaterial3: true),
     inDebug: false,
     emulatingCloudFunctions: false,
+    settings: settings,
     authManager: FirebaseAuthManager(),
   );
 
@@ -28,9 +41,12 @@ void main() async {
       fields: [
         SQStringField("name"),
         SQStringField("hexValue"),
-        SQFileField("colorFile")
+        SQFileField("colorFile"),
+        SQTimestampField("Upvotes", readOnly: true)
       ],
       singleDocName: "Colour");
+
+  FavouritesFeature.loadFavourites();
 
   final logsColourField = SQStringField("colour");
   final colorRefField =
@@ -56,14 +72,6 @@ void main() async {
 
   logsCollection.fields.add(otherLogRefField);
 
-  AppSettings.setSettings([
-    SQBoolField('paymentError'),
-    SQBoolField('newUser'),
-    SQBoolField('payment'),
-    SQStringField('username'),
-    SQBoolField('Log Manual Commands'),
-  ]);
-
   DocsFilter logIdSearchField =
       StringContainsFilter(logsCollection.getFieldByName("logId"));
   DocsFilter payloadFilter =
@@ -73,21 +81,26 @@ void main() async {
 
   adminApp.homescreen = MainScreen(
     [
-      ProfileScreen("Profile"),
+      UpvoteCollectionScreen(
+        "Col Upvote",
+        collection: coloursCollection,
+      ),
       CollectionScreen("Colours", collection: coloursCollection),
+      ProfileScreen("Profile"),
       logsScreen,
+      // FavouritesFeature.favouritesScreen
       // CollectionScreen("Logs", logsCollection),
-      CategorySelectScreen(
-        "Colour Cat",
-        collection: logsCollection,
-        categoryCollection: coloursCollection,
-        categoryField: logsColourField,
-      ),
-      CollectionFilterScreen(
-        "Search",
-        collection: logsCollection,
-        filters: [logIdSearchField, payloadFilter],
-      ),
+      // CategorySelectScreen(
+      //   "Colour Cat",
+      //   collection: logsCollection,
+      //   categoryCollection: coloursCollection,
+      //   categoryField: logsColourField,
+      // ),
+      // CollectionFilterScreen(
+      //   "Search",
+      //   collection: logsCollection,
+      //   filters: [logIdSearchField, payloadFilter],
+      // ),
       // SettingsScreen(),
       // CloudFunctionDocsScreen(
       //   "Fetched Logs",
