@@ -45,6 +45,12 @@ class FirestoreCollection extends SQCollection {
   }
 
   @override
+  Future<bool> doesDocExist(String docId) async {
+    final docSnap = await ref.doc(docId).get();
+    return docSnap.exists;
+  }
+
+  @override
   String getPath() {
     if (parentDoc != null) return "${parentDoc!.getPath()}/$id";
     return App.instance.getAppPath() + id;
@@ -89,6 +95,10 @@ class FirestoreUserCollection extends SQUserCollection {
 
   @override
   Future deleteDoc(String docId) => firestoreCollection.deleteDoc(docId);
+
+  @override
+  Future<bool> doesDocExist(String docId) =>
+      firestoreCollection.doesDocExist(docId);
 
   @override
   String getANewDocId() => firestoreCollection.getANewDocId();

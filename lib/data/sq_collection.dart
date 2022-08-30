@@ -27,6 +27,8 @@ abstract class SQCollection {
   Future createDoc(SQDoc doc);
   Future deleteDoc(String docId);
 
+  Future<bool> doesDocExist(String docId);
+
   String getPath();
   String getANewDocId();
 
