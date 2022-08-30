@@ -23,9 +23,9 @@ class FavouritesFeature extends Feature {
   }
 
   static addFavourite(SQDoc doc) {
-    var newFavDoc = SQDoc(
-        doc.id, [SQStringField("identifier", value: doc.identifier)],
-        collection: FavouritesFeature._favouritesCollection);
+    var newFavDoc =
+        SQDoc(doc.id, collection: FavouritesFeature._favouritesCollection);
+    newFavDoc.setData({"identifier": doc.identifier});
     FavouritesFeature._favouritesCollection.createDoc(newFavDoc);
   }
 
