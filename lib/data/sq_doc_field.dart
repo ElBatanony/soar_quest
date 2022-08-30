@@ -11,11 +11,13 @@ class SQDocField<T> {
   String name = "";
   T? value;
   Type get type => T;
+  final bool readOnly;
 
-  SQDocField(this.name, {this.value});
+  SQDocField(this.name, {this.value, this.readOnly = false});
 
+  // TODO: fix copying fields to avoid changin in subclasses
   SQDocField<T> copy() {
-    return SQDocField<T>(name, value: value);
+    return SQDocField<T>(name, value: value, readOnly: readOnly);
   }
 
   dynamic collectField() => value;
@@ -44,21 +46,24 @@ class SQDocField<T> {
 }
 
 class SQStringField extends SQDocField<String> {
-  SQStringField(String name, {String value = ""}) : super(name, value: value);
+  SQStringField(String name, {String value = "", super.readOnly})
+      : super(name, value: value);
 
   @override
   String get value => super.value ?? "";
 }
 
 class SQBoolField extends SQDocField<bool> {
-  SQBoolField(String name, {bool value = false}) : super(name, value: value);
+  SQBoolField(String name, {bool value = false, super.readOnly})
+      : super(name, value: value);
 }
 
 class SQTimestampField extends SQDocField<SQTimestamp> {
-  SQTimestampField(String name, {SQTimestamp? value})
+  SQTimestampField(String name, {SQTimestamp? value, super.readOnly})
       : super(name, value: value ?? SQTimestamp(0, 0));
 }
 
 class VideoLinkField extends SQDocField<String> {
-  VideoLinkField(String name, {String? url}) : super(name, value: url ?? "");
+  VideoLinkField(String name, {String? url, super.readOnly})
+      : super(name, value: url ?? "");
 }

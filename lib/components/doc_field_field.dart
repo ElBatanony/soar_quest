@@ -14,8 +14,7 @@ class DocFieldField extends StatefulWidget {
   final Function? onChanged;
   final SQDoc? doc;
 
-  const DocFieldField(this.field, {this.onChanged, this.doc, Key? key})
-      : super(key: key);
+  const DocFieldField(this.field, {this.onChanged, this.doc, super.key});
 
   @override
   State<DocFieldField> createState() => _DocFieldFieldState();
@@ -51,6 +50,10 @@ class _DocFieldFieldState extends State<DocFieldField> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.field.readOnly == true) {
+      return Text("${widget.field} (read only)");
+    }
+
     if (widget.field.type == int) {
       return TextField(
         onChanged: (intText) {
