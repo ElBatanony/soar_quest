@@ -1,23 +1,22 @@
+import 'app.dart';
 import '../data.dart';
+import '../data/firestore.dart';
 
 class AppSettings {
-  static SQDoc settingsDoc = SQDoc(
-      'settings',
-      [
-        SQBoolField('testSetting'),
-      ],
-      collection: userCollection);
+  late SQCollection _settingsCollection;
+  late SQDoc settingsDoc;
+  List<SQDocField> settingsFields;
 
-  static void setSettings(List<SQDocField> settings) {
-    settingsDoc = SQDoc('settings', settings, collection: userCollection);
-  }
+  AppSettings({this.settingsFields = const []});
 
-  static Future init() async {
+  Future init() async {
+    _settingsCollection = FirestoreUserCollection(
+        id: 'Settings', userId: App.auth.user.userId, fields: settingsFields);
+    settingsDoc = SQDoc('settings', collection: _settingsCollection);
     await settingsDoc.loadDoc();
-    return;
   }
 
-  static getSetting(String settingsName) {
+  getSetting(String settingsName) {
     return settingsDoc.getFieldValueByName(settingsName);
   }
 }

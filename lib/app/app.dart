@@ -26,6 +26,7 @@ class App {
   SQAuthManager authManager;
 
   static SQAuthManager auth = instance.authManager;
+  AppSettings settings;
 
   void setScreen(Screen screen) {
     currentScreen = screen;
@@ -39,6 +40,7 @@ class App {
     this.theme,
     this.inDebug = false,
     this.emulatingCloudFunctions = false,
+    required this.settings,
     required this.authManager,
   }) {
     instance = this;
@@ -49,8 +51,8 @@ class App {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    await App.auth.init();
-    AppSettings.init();
+    await auth.init();
+    await settings.init();
   }
 
   run() {

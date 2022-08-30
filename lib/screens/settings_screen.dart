@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app_settings.dart';
-import 'package:soar_quest/data/sq_doc.dart';
+
+import '../app/app.dart';
+import '../data/sq_doc.dart';
 
 import 'doc_edit_screen.dart';
 import 'screen.dart';
@@ -17,8 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   SQDoc? settingsDoc;
 
   loadSettings() async {
-    await AppSettings.init();
-    settingsDoc = AppSettings.settingsDoc;
+    settingsDoc = App.instance.settings.settingsDoc;
     setState(() {});
   }
 
