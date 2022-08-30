@@ -46,6 +46,8 @@ abstract class SQFileStorage {
     required Function onUpload,
   });
 
+  Future deleteFile({required SQDoc doc});
+
   Future getFileDownloadURL(SQDoc doc);
 }
 
@@ -90,5 +92,12 @@ class FirebaseFileStorage extends SQFileStorage {
     final ref = getRef(doc);
     final fileUrl = await ref.getDownloadURL();
     return fileUrl;
+  }
+
+  @override
+  Future deleteFile({required SQDoc doc}) async {
+    final ref = getRef(doc);
+    sqFile.getFileField(doc)?.sqFile.exists = false;
+    await ref.delete();
   }
 }

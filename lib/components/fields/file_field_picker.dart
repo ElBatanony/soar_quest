@@ -54,6 +54,12 @@ class _FileFieldPickerState extends State<FileFieldPicker> {
     }
   }
 
+  deleteFile() async {
+    await widget.storage.deleteFile(doc: widget.doc);
+    refreshFileExists();
+    widget.updateCallback();
+  }
+
   @override
   void initState() {
     refreshFileExists();
@@ -71,6 +77,8 @@ class _FileFieldPickerState extends State<FileFieldPicker> {
             : Text("File not set"),
         SQButton("${fileExists ? 'Edit' : 'Upload'} File",
             onPressed: selectAndUploadFile),
+        if (fileExists)
+          IconButton(onPressed: deleteFile, icon: Icon(Icons.delete))
       ],
     );
   }
