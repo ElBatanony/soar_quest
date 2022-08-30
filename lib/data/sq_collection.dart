@@ -9,8 +9,14 @@ abstract class SQCollection {
   List<SQDoc> docs = [];
   CollectionScreen? screen;
   String singleDocName;
+  SQDoc? parentDoc;
 
-  SQCollection(this.id, this.fields, {this.singleDocName = "Doc"}) {
+  SQCollection(
+    this.id,
+    this.fields, {
+    this.singleDocName = "Doc",
+    this.parentDoc,
+  }) {
     App.instance.collections.add(this);
   }
 

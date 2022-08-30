@@ -11,7 +11,8 @@ class FirestoreCollection extends SQCollection {
   FirestoreCollection(
       {required String id,
       required List<SQDocField> fields,
-      String singleDocName = "Doc"})
+      String singleDocName = "Doc",
+      super.parentDoc})
       : super(id, fields, singleDocName: singleDocName) {
     ref = firestore.collection(getPath());
   }
@@ -45,6 +46,7 @@ class FirestoreCollection extends SQCollection {
 
   @override
   String getPath() {
+    if (parentDoc != null) return "${parentDoc!.getPath()}/$id";
     return App.instance.getAppPath() + id;
   }
 
