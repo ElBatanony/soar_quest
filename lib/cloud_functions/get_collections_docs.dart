@@ -16,7 +16,7 @@ class GetCollectionDocs extends CloudFunction {
     List<SQDoc> sqDocs = [];
 
     for (var doc in docs) {
-      SQDoc sqdoc = SQDoc(doc["id"], collection.fields, collection: collection);
+      SQDoc sqdoc = SQDoc(doc["id"], collection: collection);
       sqdoc.setData(doc["data"]);
       sqDocs.add(sqdoc);
     }

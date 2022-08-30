@@ -16,7 +16,7 @@ abstract class SQAuthManager {
     String userId = user.userId;
     userCollection =
         FirestoreCollection(id: "users/$userId/data", fields: userDocFields);
-    userDoc = SQDoc(userId, userDocFields, collection: userCollection);
+    userDoc = SQDoc(userId, collection: userCollection);
   }
 
   Stream<UserData?> authStateChanges();

@@ -29,8 +29,7 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
   void initState() {
     loadData();
     String newDocId = widget.collection.getANewDocId();
-    newDoc = SQDoc(newDocId, widget.collection.fields,
-        collection: widget.collection);
+    newDoc = SQDoc(newDocId, collection: widget.collection);
     super.initState();
   }
 

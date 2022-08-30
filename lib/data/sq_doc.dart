@@ -5,15 +5,15 @@ export 'sq_doc_reference.dart';
 class SQDoc {
   late List<SQDocField> fields;
   String id;
-  late SQCollection collection;
+  SQCollection collection;
   bool initialized = false;
 
   static List<SQDocField> copyFields(List<SQDocField> fields) {
     return fields.map((field) => field.copy()).toList();
   }
 
-  SQDoc(this.id, List<SQDocField> newFields, {required this.collection}) {
-    fields = SQDoc.copyFields(newFields);
+  SQDoc(this.id, {required this.collection}) {
+    fields = SQDoc.copyFields(collection.fields);
   }
 
   Future loadDoc({bool forceFetch = false}) async {
