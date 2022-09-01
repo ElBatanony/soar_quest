@@ -56,7 +56,8 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               DocEditButton(widget.doc, refresh: refresh),
-              DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
+              if (widget.doc.collection.canDeleteDoc)
+                DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
             ],
           ),
       ],
