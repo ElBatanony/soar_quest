@@ -10,6 +10,6 @@ admin.initializeApp();
 //   response.send("Hello from Firebase!");
 // });
 
-const getCollectionDocs = require("./getCollectionDocs").getCollectionDocs
+exports.getCollectionDocs = require("./getCollectionDocs").getCollectionDocs;
 
-exports.getCollectionDocs = getCollectionDocs;
+exports.publicProfileTrigger = require('./publicProfile').publicProfileTrigger;
