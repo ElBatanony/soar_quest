@@ -16,7 +16,14 @@ class UserData {
 
 List<SQDocField> userDocFields = [
   SQStringField("City"),
-  SQTimestampField("Birthdate")
+  SQTimestampField("Birthdate"),
+  SQBoolField("Public Profile"),
+];
+
+List<SQDocField> publicProfileFields = [
+  SQStringField("Username"),
+  SQStringField("City"),
+  SQTimestampField("Birthdate"),
 ];
 
 late SQCollection userCollection;
