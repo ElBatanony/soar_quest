@@ -34,39 +34,33 @@ class _CollectionFilterScreenState
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("${widget.title} ${widget.collection.id}"),
-        ),
-        body: Column(
-          children: [
-            ...widget.filters
-                .map((filter) => DocFieldField(
-                      filter.field,
-                      onChanged: (value) => updateDocs(),
-                    ))
-                .toList(),
-            SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Total docs: ${widget.collection.docs.length}',
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'Showing docs: ${filteredDocs.length}',
-                      textAlign: TextAlign.center,
-                    ),
-                    ...docsDisplay(context),
-                  ],
-                ),
+  Widget screenBody(BuildContext context) {
+    return Column(children: [
+      ...widget.filters
+          .map((filter) => DocFieldField(
+                filter.field,
+                onChanged: (value) => updateDocs(),
+              ))
+          .toList(),
+      SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Total docs: ${widget.collection.docs.length}',
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
-        ));
+              Text(
+                'Showing docs: ${filteredDocs.length}',
+                textAlign: TextAlign.center,
+              ),
+              ...docsDisplay(context),
+            ],
+          ),
+        ),
+      )
+    ]);
   }
 }
