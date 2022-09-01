@@ -14,7 +14,12 @@ abstract class SQAuthManager {
 
   updateUserData() {
     String userId = user.userId;
-    userCollection = FirestoreCollection(id: "users", fields: userDocFields);
+    userCollection = FirestoreCollection(
+      id: "users",
+      fields: userDocFields,
+      singleDocName: "Profile Info",
+      canDeleteDoc: false,
+    );
     userDoc = SQDoc(userId, collection: userCollection);
   }
 
