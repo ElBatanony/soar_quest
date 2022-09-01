@@ -12,7 +12,8 @@ class FirestoreCollection extends SQCollection {
       {required String id,
       required List<SQDocField> fields,
       String singleDocName = "Doc",
-      super.parentDoc})
+      super.parentDoc,
+      super.readOnly})
       : super(id, fields, singleDocName: singleDocName) {
     ref = firestore.collection(getPath());
   }

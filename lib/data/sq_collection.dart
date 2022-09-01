@@ -10,12 +10,14 @@ abstract class SQCollection {
   CollectionScreen? screen;
   String singleDocName;
   SQDoc? parentDoc;
+  bool readOnly;
 
   SQCollection(
     this.id,
     this.fields, {
     this.singleDocName = "Doc",
     this.parentDoc,
+    this.readOnly = false,
   }) {
     App.instance.collections.add(this);
   }
