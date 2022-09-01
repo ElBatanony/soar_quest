@@ -11,6 +11,7 @@ abstract class SQCollection {
   String singleDocName;
   SQDoc? parentDoc;
   bool readOnly;
+  bool canDeleteDoc;
 
   SQCollection(
     this.id,
@@ -18,6 +19,7 @@ abstract class SQCollection {
     this.singleDocName = "Doc",
     this.parentDoc,
     this.readOnly = false,
+    this.canDeleteDoc = true,
   }) {
     App.instance.collections.add(this);
   }
