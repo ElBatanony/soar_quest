@@ -51,13 +51,14 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             children: widget.doc.fields
                 .map((field) => Text(field.toString()))
                 .toList()),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            DocEditButton(widget.doc, refresh: refresh),
-            DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
-          ],
-        ),
+        if (widget.doc.collection.readOnly == false)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              DocEditButton(widget.doc, refresh: refresh),
+              DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
+            ],
+          ),
       ],
     );
   }
