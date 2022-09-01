@@ -13,3 +13,5 @@ admin.initializeApp();
 exports.getCollectionDocs = require("./getCollectionDocs").getCollectionDocs;
 
 exports.publicProfileTrigger = require('./publicProfile').publicProfileTrigger;
+
+exports.upvotesTracker = require("./upvotesTracker").upvotesTracker;
