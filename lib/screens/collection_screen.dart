@@ -60,10 +60,11 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
               textAlign: TextAlign.center,
             ),
             ...docsDisplay(context),
-            CollectionCreateDocButton(
-              widget.collection,
-              createCallback: refreshScreen,
-            ),
+            if (widget.collection.readOnly == false)
+              CollectionCreateDocButton(
+                widget.collection,
+                createCallback: refreshScreen,
+              ),
           ],
         ),
       ),
