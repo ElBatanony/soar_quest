@@ -6,6 +6,7 @@ import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
+import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
 import 'package:soar_quest/screens/category_select_screen.dart';
 import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';
@@ -13,6 +14,7 @@ import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/playground_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
+import 'package:soar_quest/screens/public_profiles_screen.dart';
 import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/screens/settings_screen.dart';
 
@@ -86,26 +88,27 @@ void main() async {
         collection: coloursCollection,
       ),
       CollectionScreen("Colours", collection: coloursCollection),
+      PublicProfilesScreen(),
       ProfileScreen("Profile"),
       logsScreen,
-      // FavouritesFeature.favouritesScreen
-      // CollectionScreen("Logs", logsCollection),
-      // CategorySelectScreen(
-      //   "Colour Cat",
-      //   collection: logsCollection,
-      //   categoryCollection: coloursCollection,
-      //   categoryField: logsColourField,
-      // ),
-      // CollectionFilterScreen(
-      //   "Search",
-      //   collection: logsCollection,
-      //   filters: [logIdSearchField, payloadFilter],
-      // ),
-      // SettingsScreen(),
-      // CloudFunctionDocsScreen(
-      //   "Fetched Logs",
-      //   collection: logsCollection,
-      // ),
+      FavouritesFeature.favouritesScreen,
+      CollectionScreen("Logs", collection: logsCollection),
+      CategorySelectScreen(
+        "Colour Cat",
+        collection: logsCollection,
+        categoryCollection: coloursCollection,
+        categoryField: logsColourField,
+      ),
+      CollectionFilterScreen(
+        "Search",
+        collection: logsCollection,
+        filters: [logIdSearchField, payloadFilter],
+      ),
+      SettingsScreen(),
+      CloudFunctionDocsScreen(
+        "Fetched Logs",
+        collection: logsCollection,
+      ),
     ],
     initialScreenIndex: 0,
   );
