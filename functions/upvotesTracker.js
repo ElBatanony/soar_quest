@@ -16,6 +16,8 @@ module.exports.upvotesTracker = functions.firestore
     let postDocId = context.params.postDocId
     let postDocRef = db.doc(postCollectionPath + '/' + postDocId);
 
+    if (change.before.exists && change.after.exists) return null;
+
     let incrementValue = change.after.exists == false ? -1 : 1;
 
     let fieldValue = admin.firestore.FieldValue.increment(incrementValue);
