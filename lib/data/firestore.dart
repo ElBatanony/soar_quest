@@ -47,9 +47,8 @@ class FirestoreCollection extends SQCollection {
   }
 
   @override
-  Future<bool> doesDocExist(String docId) async {
-    final docSnap = await ref.doc(docId).get();
-    return docSnap.exists;
+  bool doesDocExist(String docId) {
+    return docs.any((doc) => doc.id == docId);
   }
 
   @override

@@ -14,7 +14,7 @@ class UnimplementCollection extends SQCollection {
   }
 
   @override
-  Future<bool> doesDocExist(String docId) {
+  bool doesDocExist(String docId) {
     throw UnimplementedError();
   }
 
