@@ -26,14 +26,9 @@ class SQDoc {
       var key = entry.key;
       var value = entry.value;
 
-      bool fieldNotFound = false;
-      SQDocField field =
-          fields.firstWhere((element) => element.name == key, orElse: () {
-        fieldNotFound = true;
-        return fields.first;
-      });
+      if (fields.any((field) => field.name == key) == false) continue;
 
-      if (fieldNotFound) continue;
+      SQDocField field = fields.firstWhere((field) => field.name == key);
 
       if (field.type == SQTimestamp) {
         field.value = SQTimestamp.parse(value);
