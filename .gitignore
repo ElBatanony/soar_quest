@@ -45,3 +45,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+lib/screens/playground_screen.dart
+
+lib/playground/
+.VSCodeCounter/
