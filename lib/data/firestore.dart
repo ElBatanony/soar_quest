@@ -43,7 +43,7 @@ class FirestoreCollection extends SQCollection {
   @override
   Future deleteDoc(String docId) async {
     docs.removeWhere((doc) => doc.id == docId);
-    await firestore.collection(getPath()).doc(docId).delete();
+    await ref.doc(docId).delete();
     return loadCollection();
   }
 
