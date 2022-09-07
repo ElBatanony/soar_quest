@@ -43,9 +43,6 @@ abstract class SQAuthManager {
 class FirebaseAuthManager extends SQAuthManager {
   static late final FirebaseAuth _auth;
 
-  static Stream<Map<String, dynamic>> get authChanges =>
-      _auth.authStateChanges().map((User? user) => {"signedIn": user != null});
-
   @override
   updateUserData() {
     final firebaseUser = _auth.currentUser!;
