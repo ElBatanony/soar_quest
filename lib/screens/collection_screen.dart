@@ -21,6 +21,7 @@ class CollectionScreen extends Screen {
 }
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
+  @override
   void refreshScreen() => setState(() {});
 
   Future loadData() async {

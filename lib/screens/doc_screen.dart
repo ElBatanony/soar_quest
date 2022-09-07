@@ -21,11 +21,11 @@ class DocScreen extends Screen {
 class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   void loadData() async {
     await widget.doc.loadDoc();
-
     setState(() {});
   }
 
-  void refresh() {
+  @override
+  void refreshScreen() {
     setState(() {});
   }
 

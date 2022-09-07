@@ -10,6 +10,8 @@ class Screen extends StatefulWidget {
 }
 
 class ScreenState<T extends Screen> extends State<T> {
+  void refreshScreen() => setState(() {});
+
   Widget screenBody(BuildContext context) {
     return Center(child: Text('${widget.title} Screen'));
   }
