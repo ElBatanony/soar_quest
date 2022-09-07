@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../app/app.dart';
+import '../app/app_navigator.dart';
 import '../data.dart';
 import '../screens/screen.dart';
 import 'buttons/sq_button.dart';
@@ -57,7 +58,9 @@ class _SignedInContentState extends State<SignedInContent> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text("Sign in to view this content"),
-              SQButton("Sign In", onPressed: () => App.auth.goToSignIn(context))
+              SQButton("Sign In",
+                  onPressed: () =>
+                      goToScreen(App.auth.signInScreen(), context: context))
             ],
           )
         : widget.builder(context, App.auth.user as SignedInUser);
