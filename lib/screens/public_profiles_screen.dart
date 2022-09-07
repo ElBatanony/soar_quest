@@ -1,10 +1,11 @@
+import '../app/app.dart';
 import '../data.dart';
 import '../data/firestore.dart';
 import 'collection_filter_screen.dart';
 
 final SQCollection publicProfilesCollection = FirestoreCollection(
   id: 'publicProfiles',
-  fields: publicProfileFields,
+  fields: App.instance.publicProfileFields,
   readOnly: true,
 );
 
