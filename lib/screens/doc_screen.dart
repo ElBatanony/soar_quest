@@ -41,26 +41,29 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text('Doc path: ${widget.doc.getPath()}', textAlign: TextAlign.center),
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: widget.doc.fields
-                .map((field) => Text(field.toString()))
-                .toList()),
-        if (widget.doc.collection.readOnly == false)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              DocEditButton(widget.doc, refresh: refresh),
-              if (widget.doc.collection.canDeleteDoc)
-                DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
-            ],
-          ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('Doc path: ${widget.doc.getPath()}',
+              textAlign: TextAlign.center),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: widget.doc.fields
+                  .map((field) => Text(field.toString()))
+                  .toList()),
+          if (widget.doc.collection.readOnly == false)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                DocEditButton(widget.doc, refresh: refreshScreen),
+                if (widget.doc.collection.canDeleteDoc)
+                  DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
+              ],
+            ),
+        ],
+      ),
     );
   }
 }
