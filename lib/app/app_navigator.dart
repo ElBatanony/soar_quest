@@ -8,6 +8,13 @@ Future goToScreen(Screen screen, {required BuildContext context}) {
   );
 }
 
+Future replaceScreen(Screen screen, {required BuildContext context}) {
+  return Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
+  );
+}
+
 void exitScreen(BuildContext context, {dynamic value}) {
   return Navigator.pop(context, value);
 }
