@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import '../app/app.dart';
 import '../data.dart';
+import 'firestore.dart';
 
 abstract class UserData {
   String userId;
@@ -47,7 +48,17 @@ class FirebaseSignedInUser extends SignedInUser {
       : super(
           userId: firebaseUser.uid,
           isAnonymous: firebaseUser.isAnonymous,
-        );
+          docFields: App.instance.userDocFields,
+        ) {
+    userCollection = FirestoreCollection(
+      id: "users",
+      fields: App.instance.userDocFields,
+      singleDocName: "Profile Info",
+      canDeleteDoc: false,
+    );
+    userDoc = SQDoc(userId, collection: userCollection);
+    userDoc.loadDoc();
+  }
 
   refreshUser() {
     firebaseUser = firebase_auth.FirebaseAuth.instance.currentUser!;
