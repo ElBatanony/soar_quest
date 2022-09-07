@@ -33,6 +33,11 @@ abstract class SQAuthManager {
   });
 
   Future signOut();
+
+  Future signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
 }
 
 class FirebaseAuthManager extends SQAuthManager {
@@ -88,7 +93,14 @@ class FirebaseAuthManager extends SQAuthManager {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     }
 
-    updateUserData();
+  @override
+  Future signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    await updateUserData();
   }
 
   @override
