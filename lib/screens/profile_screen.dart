@@ -3,6 +3,7 @@ import 'package:soar_quest/components/buttons/sq_button.dart';
 
 import '../app/app.dart';
 import '../app/app_navigator.dart';
+import '../components/buttons/doc_edit_button.dart';
 import '../components/doc_field_field.dart';
 import '../components/signed_in_content.dart';
 import '../data.dart';
@@ -84,7 +85,13 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                             onPressed: () => updatePassword(user)),
                       ],
                     ),
-                    super.screenBody(context),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: App.auth.user.userDoc.fields
+                            .map((field) => Text(field.toString()))
+                            .toList()),
+                    DocEditButton(App.auth.user.userDoc,
+                        refresh: refreshScreen),
                     SQButton("Sign out", onPressed: signOut),
                   ],
                 );
