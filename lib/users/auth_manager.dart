@@ -16,7 +16,7 @@ abstract class SQAuthManager {
 
   Stream<UserData?> authStateChanges();
 
-  goToSignIn(BuildContext context, {bool forceSignIn = false});
+  Screen signInScreen({bool forceSignIn = false});
 
   Future signInWithEmailAndPassword({
     required String email,
@@ -62,8 +62,9 @@ class FirebaseAuthManager extends SQAuthManager {
   }
 
   @override
-  goToSignIn(BuildContext context, {bool forceSignIn = false}) {
-    return goToScreen(SignInScreen(forceSignIn: forceSignIn), context: context);
+  Screen signInScreen({bool forceSignIn = false}) {
+    return SignInScreen(forceSignIn: forceSignIn);
+  }
   }
 
   @override
