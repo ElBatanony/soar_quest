@@ -28,7 +28,7 @@ class App {
   static SQAuthManager auth = instance.authManager;
   static String get userId => auth.user.userId;
 
-  AppSettings settings;
+  late AppSettings settings;
 
   void setScreen(Screen screen) {
     currentScreen = screen;
@@ -42,9 +42,10 @@ class App {
     this.theme,
     this.inDebug = false,
     this.emulatingCloudFunctions = false,
-    required this.settings,
+    AppSettings? settings,
     required this.authManager,
   }) {
+    this.settings = settings ?? AppSettings(settingsFields: []);
     instance = this;
   }
 
