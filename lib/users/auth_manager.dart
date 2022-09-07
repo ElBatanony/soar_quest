@@ -37,7 +37,6 @@ class FirebaseAuthManager extends SQAuthManager {
   updateUserData() {
     final firebaseUser = _auth.currentUser!;
     user = FirebaseSignedInUser(firebaseUser);
-    return super.updateUserData();
   }
 
   @override
@@ -55,9 +54,10 @@ class FirebaseAuthManager extends SQAuthManager {
 
   @override
   Stream<UserData?> authStateChanges() {
-    return _auth.authStateChanges().map((user) => user == null
-        ? UserData(userId: "temp", isAnonymous: true)
-        : UserData(userId: user.uid, isAnonymous: user.isAnonymous));
+    return _auth.authStateChanges().map((user) {
+      if (user == null) return null;
+      return FirebaseSignedInUser(user);
+    });
   }
 
   @override
