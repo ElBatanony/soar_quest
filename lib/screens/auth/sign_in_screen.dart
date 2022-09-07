@@ -27,32 +27,32 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
   @override
   void initState() {
     if (widget.forceSignIn == false && App.auth.user.isAnonymous == false) {
-      redirect();
+      exitScreen(context);
     }
     super.initState();
   }
 
-  redirect() {
-    exitScreen(context);
+  signIn() {
+    App.auth
+        .signInWithEmailAndPassword(
+            email: emailField.value, password: passwordField.value)
+        .then((_) {
+      if (App.auth.user.isAnonymous) {
+        print("Did not sign in");
+      } else {
+        print("Signed in");
+        exitScreen(context);
+      }
+    });
   }
 
   @override
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        Text("hello. i am sign in"),
         DocFieldField(emailField),
         DocFieldField(passwordField),
-        SQButton("Sign In", onPressed: () async {
-          await App.auth.signInWithEmailAndPassword(
-              email: emailField.value, password: passwordField.value);
-          if (App.auth.user.isAnonymous) {
-            print("Did not sign in");
-          } else {
-            print("Signed in");
-            redirect();
-          }
-        })
+        SQButton("Sign In", onPressed: signIn),
       ],
     );
   }
