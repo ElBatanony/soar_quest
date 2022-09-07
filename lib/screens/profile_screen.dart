@@ -5,31 +5,27 @@ import '../app/app.dart';
 import '../components/doc_field_field.dart';
 import '../components/signed_in_content.dart';
 import '../data.dart';
-import 'doc_screen.dart';
+import 'screen.dart';
 
-class ProfileScreen extends DocScreen {
-  ProfileScreen(String title, {super.key})
-      : super(
-          title,
-          userDoc,
-          refreshCollectionScreen: () {},
-        );
+class ProfileScreen extends Screen {
+  const ProfileScreen(super.title, {super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends DocScreenState<ProfileScreen> {
+class _ProfileScreenState extends ScreenState<ProfileScreen> {
   signOut() async {
     await App.auth.signOut();
-    refresh();
+    refreshScreen();
+  }
   }
 
   updateUserField(SQDocField field, Function updateFunction) async {
     dynamic newValue = await showFieldDialog(context: context, field: field);
     if (newValue != null) {
       await updateFunction(newValue);
-      refresh();
+      refreshScreen();
     }
   }
 
@@ -88,7 +84,7 @@ class _ProfileScreenState extends DocScreenState<ProfileScreen> {
                   ],
                 );
               },
-              refreshUp: refresh),
+              refreshUp: refreshScreen),
         ],
       ),
     );
