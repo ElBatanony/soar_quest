@@ -30,6 +30,9 @@ class App {
 
   late AppSettings settings;
 
+  List<SQDocField> userDocFields;
+  List<SQDocField> publicProfileFields;
+
   void setScreen(Screen screen) {
     currentScreen = screen;
     // AppDebugger.refresh();
@@ -44,6 +47,8 @@ class App {
     this.emulatingCloudFunctions = false,
     AppSettings? settings,
     required this.authManager,
+    required this.userDocFields,
+    this.publicProfileFields = const [],
   }) {
     this.settings = settings ?? AppSettings(settingsFields: []);
     instance = this;
