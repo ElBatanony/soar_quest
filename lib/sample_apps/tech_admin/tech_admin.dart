@@ -19,6 +19,18 @@ import 'package:soar_quest/users/auth_manager.dart';
 import 'package:soar_quest/screens/settings_screen.dart';
 
 void main() async {
+  List<SQDocField> userDocFields = [
+    SQStringField("City"),
+    SQTimestampField("Birthdate"),
+    SQBoolField("Public Profile"),
+  ];
+
+  List<SQDocField> publicProfileFields = [
+    SQStringField("Username"),
+    SQStringField("City"),
+    SQTimestampField("Birthdate"),
+  ];
+
   AppSettings settings = AppSettings(settingsFields: [
     SQBoolField('paymentError'),
     SQBoolField('newUser'),
@@ -34,6 +46,8 @@ void main() async {
     emulatingCloudFunctions: false,
     settings: settings,
     authManager: FirebaseAuthManager(),
+    userDocFields: userDocFields,
+    publicProfileFields: publicProfileFields,
   );
 
   await adminApp.init();
