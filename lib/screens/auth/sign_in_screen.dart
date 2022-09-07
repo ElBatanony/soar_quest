@@ -53,6 +53,11 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
         DocFieldField(emailField),
         DocFieldField(passwordField),
         SQButton("Sign In", onPressed: signIn),
+        SQButton(
+          "Sign Up",
+          onPressed: () =>
+              replaceScreen(App.auth.signUpScreen(), context: context),
+        )
       ],
     );
   }
