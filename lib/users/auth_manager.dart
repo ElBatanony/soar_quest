@@ -12,16 +12,7 @@ abstract class SQAuthManager {
 
   late UserData user;
 
-  updateUserData() {
-    String userId = user.userId;
-    userCollection = FirestoreCollection(
-      id: "users",
-      fields: userDocFields,
-      singleDocName: "Profile Info",
-      canDeleteDoc: false,
-    );
-    userDoc = SQDoc(userId, collection: userCollection);
-  }
+  updateUserData();
 
   Stream<UserData?> authStateChanges();
 
