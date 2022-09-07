@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../app/app.dart';
@@ -27,9 +29,11 @@ class SignedInContent extends StatefulWidget {
 class _SignedInContentState extends State<SignedInContent> {
   bool isHidden = true;
 
+  late StreamSubscription listener;
+
   @override
   void initState() {
-    App.auth.authStateChanges().listen((userData) {
+    listener = App.auth.authStateChanges().listen((userData) {
       if (userData != null) {
         setState(() {
           isHidden = userData.isAnonymous;
@@ -38,6 +42,12 @@ class _SignedInContentState extends State<SignedInContent> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    listener.cancel();
+    super.dispose();
   }
 
   @override
