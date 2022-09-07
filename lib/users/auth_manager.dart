@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../data.dart';
-import '../data/firestore.dart';
-import '../app/app_navigator.dart';
 import '../screens/auth/sign_in_screen.dart';
+import '../screens/auth/sign_up_screen.dart';
+import '../screens/screen.dart';
 
 abstract class SQAuthManager {
   Future init();
@@ -17,6 +15,7 @@ abstract class SQAuthManager {
   Stream<UserData?> authStateChanges();
 
   Screen signInScreen({bool forceSignIn = false});
+  Screen signUpScreen();
 
   Future signInWithEmailAndPassword({
     required String email,
@@ -65,6 +64,10 @@ class FirebaseAuthManager extends SQAuthManager {
   Screen signInScreen({bool forceSignIn = false}) {
     return SignInScreen(forceSignIn: forceSignIn);
   }
+
+  @override
+  Screen signUpScreen() {
+    return SQSignUpScreen();
   }
 
   @override
