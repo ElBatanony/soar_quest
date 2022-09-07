@@ -3,34 +3,32 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '../app/app.dart';
 import '../data.dart';
 
-class UserData {
+abstract class UserData {
   String userId;
   bool isAnonymous;
 
-  UserData({required this.userId, required this.isAnonymous});
+  late SQDoc userDoc;
+  late SQCollection userCollection;
+
+  List<SQDocField> docFields;
+  List<SQDocField> publicFields;
+
+  UserData(
+      {required this.userId,
+      required this.isAnonymous,
+      required this.docFields,
+      this.publicFields = const []});
 
   userDataPath() {
     return "${App.instance.getAppPath()}users/$userId/data/";
   }
 }
 
-List<SQDocField> userDocFields = [
-  SQStringField("City"),
-  SQTimestampField("Birthdate"),
-  SQBoolField("Public Profile"),
-];
-
-List<SQDocField> publicProfileFields = [
-  SQStringField("Username"),
-  SQStringField("City"),
-  SQTimestampField("Birthdate"),
-];
-
-late SQCollection userCollection;
-late SQDoc userDoc;
-
 abstract class SignedInUser extends UserData {
-  SignedInUser({required super.userId, required super.isAnonymous});
+  SignedInUser(
+      {required super.userId,
+      required super.isAnonymous,
+      required super.docFields});
 
   String? get email;
   String? get displayName;
