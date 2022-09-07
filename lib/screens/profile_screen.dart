@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 
 import '../app/app.dart';
+import '../app/app_navigator.dart';
 import '../components/doc_field_field.dart';
 import '../components/signed_in_content.dart';
 import '../data.dart';
@@ -19,6 +20,10 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     await App.auth.signOut();
     refreshScreen();
   }
+
+  Future goToSignIn() {
+    return goToScreen(App.auth.signInScreen(forceSignIn: true),
+        context: context);
   }
 
   updateUserField(SQDocField field, Function updateFunction) async {
@@ -41,7 +46,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
           SQStringField("Email", value: user.email ?? ""), user.updateEmail);
     } catch (e) {
       print(e.toString());
-      await App.auth.goToSignIn(context, forceSignIn: true);
+      await goToSignIn();
     }
   }
 
@@ -50,7 +55,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
       await updateUserField(SQStringField("Password"), user.updatePassword);
     } catch (e) {
       print(e.toString());
-      await App.auth.goToSignIn(context, forceSignIn: true);
+      await goToSignIn();
     }
   }
 
