@@ -17,18 +17,16 @@ class DocScreen extends Screen {
 }
 
 class DocScreenState<T extends DocScreen> extends ScreenState<T> {
-  void loadData() async {
-    await widget.doc.loadDoc();
-    setState(() {});
-  }
+  late SQDoc doc;
 
-  @override
-  void refreshScreen() {
-    setState(() {});
+  void loadData() async {
+    await doc.loadDoc();
+    refreshScreen();
   }
 
   @override
   void initState() {
+    doc = widget.doc;
     loadData();
     super.initState();
   }
@@ -40,20 +38,18 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Doc path: ${widget.doc.getPath()}',
-              textAlign: TextAlign.center),
+          Text('Doc path: ${doc.getPath()}', textAlign: TextAlign.center),
           Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: widget.doc.fields
-                  .map((field) => Text(field.toString()))
-                  .toList()),
-          if (widget.doc.collection.readOnly == false)
+              children:
+                  doc.fields.map((field) => Text(field.toString())).toList()),
+          if (doc.collection.readOnly == false)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                DocEditButton(widget.doc, refresh: refreshScreen),
-                if (widget.doc.collection.canDeleteDoc)
-                  DocDeleteButton(widget.doc, deleteCallback: refreshScreen)
+                DocEditButton(doc, refresh: refreshScreen),
+                if (doc.collection.canDeleteDoc)
+                  DocDeleteButton(doc, deleteCallback: refreshScreen)
               ],
             ),
         ],
