@@ -10,6 +10,7 @@ import 'fields/doc_reference_picker.dart';
 import 'fields/file_field_picker.dart';
 
 class DocFieldField extends StatefulWidget {
+  // TODO: inherit from FormField
   final SQDocField field;
   final Function? onChanged;
   final SQDoc? doc;
@@ -18,6 +19,8 @@ class DocFieldField extends StatefulWidget {
 
   @override
   State<DocFieldField> createState() => _DocFieldFieldState();
+
+  // TODO: required fields (validate not null)
 
   static List<DocFieldField> generateDocFieldsFields(SQDoc doc) {
     return doc.fields
@@ -86,6 +89,7 @@ class _DocFieldFieldState extends State<DocFieldField> {
     }
 
     if (widget.field.type == String) {
+      // TODO: consider multiline string fields
       return TextField(
         controller: fieldTextController,
         onChanged: (text) {
