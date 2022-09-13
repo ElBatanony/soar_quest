@@ -9,10 +9,8 @@ import 'screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
-  final Function refreshCollectionScreen;
 
-  const DocScreen(super.title, this.doc,
-      {required this.refreshCollectionScreen, super.key});
+  DocScreen(this.doc, {super.key}) : super(doc.identifier);
 
   @override
   State<DocScreen> createState() => DocScreenState();
