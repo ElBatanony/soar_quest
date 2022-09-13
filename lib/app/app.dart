@@ -23,7 +23,7 @@ class App {
   bool inDebug;
   bool emulatingCloudFunctions;
 
-  SQAuthManager authManager;
+  late SQAuthManager authManager;
 
   static SQAuthManager auth = instance.authManager;
   static String get userId => auth.user.userId;
@@ -46,11 +46,12 @@ class App {
     this.inDebug = false,
     this.emulatingCloudFunctions = false,
     AppSettings? settings,
-    required this.authManager,
+    SQAuthManager? authManager,
     required this.userDocFields,
     this.publicProfileFields = const [],
   }) {
     this.settings = settings ?? AppSettings(settingsFields: []);
+    this.authManager = authManager ?? FirebaseAuthManager();
     instance = this;
   }
 
