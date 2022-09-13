@@ -33,3 +33,19 @@ class StringContainsFilter extends DocsFilter {
         .toList();
   }
 }
+
+class DocRefFilter extends DocsFilter {
+  SQDocReferenceField docRefField;
+
+  DocRefFilter({required this.docRefField}) : super(docRefField);
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    return docs.where((doc) {
+      SQDocReference docRef = doc.getFieldValueByName(field.name);
+      SQDocReference fieldValue = field.value;
+      return docRef.docId == fieldValue.docId &&
+          docRef.collectionPath == fieldValue.collectionPath;
+    }).toList();
+  }
+}
