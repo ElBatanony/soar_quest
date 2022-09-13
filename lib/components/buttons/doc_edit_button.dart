@@ -5,12 +5,13 @@ import '../../data.dart';
 
 import '../../screens/doc_edit_screen.dart';
 
+import 'sq_button.dart';
+
 class DocEditButton extends StatelessWidget {
   final SQDoc doc;
   final Function refresh;
 
-  const DocEditButton(this.doc, {required this.refresh, Key? key})
-      : super(key: key);
+  const DocEditButton(this.doc, {required this.refresh, super.key});
 
   void goToEditScreen(BuildContext context) async {
     await goToScreen(DocEditScreen("Edit ${doc.collection.singleDocName}", doc),
@@ -20,9 +21,9 @@ class DocEditButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SQButton(
+      "Edit ${doc.collection.singleDocName}",
       onPressed: () => goToEditScreen(context),
-      child: Text("Edit ${doc.collection.singleDocName}"),
     );
   }
 }
