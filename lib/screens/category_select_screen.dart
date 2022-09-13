@@ -10,7 +10,7 @@ import 'collection_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {
   final SQCollection categoryCollection;
-  final SQDocField categoryField;
+  final SQDocReferenceField categoryField;
 
   CategorySelectScreen(super.title,
       {required super.collection,
@@ -36,12 +36,19 @@ class _CategorySelectScreenState
     return SQButton(
       doc.identifier,
       onPressed: () {
-        SQDocField categoryFieldCopy = widget.categoryField.copy();
-        categoryFieldCopy.value = doc.identifier;
-        DocsFilter filter = DocsFilter(categoryFieldCopy);
+        SQDocReferenceField categoryFieldCopy =
+            widget.categoryField.copy() as SQDocReferenceField;
+        categoryFieldCopy.value = SQDocReference(
+          collectionPath: widget.categoryCollection.getPath(),
+          docId: doc.id,
+          docIdentifier: doc.identifier,
+        );
+        DocsFilter filter = DocRefFilter(docRefField: categoryFieldCopy);
         goToScreen(
-            CollectionFilterScreen("Category of ",
-                collection: widget.collection, filters: [filter]),
+            CollectionFilterScreen("Category of",
+                collection: widget.collection,
+                filters: [filter],
+                docScreen: widget.docScreen),
             context: context);
       },
     );
