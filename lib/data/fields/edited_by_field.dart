@@ -9,5 +9,5 @@ class SQEditedByField extends SQDocField<String> {
   SQDocField<String> copy() => SQEditedByField(name);
 
   @override
-  collectField() => App.userId;
+  collectField() => value = App.userId;
 }
