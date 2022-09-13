@@ -8,19 +8,22 @@ class MainScreen extends Screen {
   final int initialScreenIndex;
 
   const MainScreen(this.bottomNavScreens,
-      {this.initialScreenIndex = 0, Key? key})
-      : super("App Main Screen", key: key);
+      {this.initialScreenIndex = 0, super.key})
+      : super("App Main Screen");
 
   @override
   State<Screen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ScreenState<MainScreen> {
   int currentPageIndex = 0;
+
+  List<Screen> screens = [];
 
   @override
   void initState() {
     currentPageIndex = widget.initialScreenIndex;
+    screens = widget.bottomNavScreens;
     super.initState();
   }
 
@@ -32,15 +35,14 @@ class _MainScreenState extends State<MainScreen> {
           ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: widget.bottomNavScreens.length > 1
+        bottomNavigationBar: screens.length > 1
             ? NavigationBar(
                 onDestinationSelected: (int index) {
-                  setState(() {
-                    currentPageIndex = index;
-                  });
+                  currentPageIndex = index;
+                  refreshScreen();
                 },
                 selectedIndex: currentPageIndex,
-                destinations: widget.bottomNavScreens
+                destinations: screens
                     .map((screen) => NavigationDestination(
                           icon: Icon(Icons.explore),
                           label: screen.title,
@@ -48,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                     .toList(),
               )
             : null,
-        body: widget.bottomNavScreens[currentPageIndex],
+        body: IndexedStack(index: currentPageIndex, children: screens),
       ),
     );
   }
