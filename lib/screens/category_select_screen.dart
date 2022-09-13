@@ -9,12 +9,10 @@ import 'collection_filter_screen.dart';
 import 'collection_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {
-  final SQCollection categoryCollection;
   final SQDocReferenceField categoryField;
 
   CategorySelectScreen(super.title,
       {required super.collection,
-      required this.categoryCollection,
       required this.categoryField,
       super.docScreen,
       super.key});
@@ -27,7 +25,7 @@ class _CategorySelectScreenState
     extends CollectionScreenState<CategorySelectScreen> {
   @override
   Future loadData() async {
-    await widget.categoryCollection.loadCollection();
+    await widget.categoryField.collection.loadCollection();
     refreshScreen();
   }
 
@@ -39,10 +37,12 @@ class _CategorySelectScreenState
         SQDocReferenceField categoryFieldCopy =
             widget.categoryField.copy() as SQDocReferenceField;
         categoryFieldCopy.value = SQDocReference(
-          collectionPath: widget.categoryCollection.getPath(),
+          collectionPath: widget.categoryField.collection.getPath(),
           docId: doc.id,
           docIdentifier: doc.identifier,
         );
+        print(categoryFieldCopy.name);
+        print(categoryFieldCopy.value);
         DocsFilter filter = DocRefFilter(docRefField: categoryFieldCopy);
         goToScreen(
             CollectionFilterScreen("Category of",
@@ -56,7 +56,7 @@ class _CategorySelectScreenState
 
   @override
   List<Widget> docsDisplay(BuildContext context) {
-    return widget.categoryCollection.docs
+    return widget.categoryField.collection.docs
         .map((doc) => docDisplay(doc))
         .toList();
   }
