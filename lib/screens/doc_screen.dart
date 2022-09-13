@@ -27,10 +27,6 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     setState(() {});
   }
 
-  void deleteCallback() {
-    widget.refreshCollectionScreen();
-  }
-
   @override
   void initState() {
     loadData();
@@ -57,7 +53,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
               children: [
                 DocEditButton(widget.doc, refresh: refreshScreen),
                 if (widget.doc.collection.canDeleteDoc)
-                  DocDeleteButton(widget.doc, deleteCallback: deleteCallback)
+                  DocDeleteButton(widget.doc, deleteCallback: refreshScreen)
               ],
             ),
         ],
