@@ -9,10 +9,16 @@ import '../components/buttons/sq_button.dart';
 import 'doc_screen.dart';
 import 'screen.dart';
 
+DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
+
 class CollectionScreen extends Screen {
   final SQCollection collection;
+  final DocScreen Function(SQDoc doc) docScreen;
 
-  CollectionScreen(super.title, {required this.collection, super.key}) {
+  CollectionScreen(super.title,
+      {required this.collection,
+      this.docScreen = defaultDocScreen,
+      super.key}) {
     collection.screen = this;
   }
 
@@ -36,12 +42,18 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     super.initState();
   }
 
+  Future goToDocScreen(DocScreen docScreen) async {
+    await goToScreen(docScreen, context: context);
+    refreshScreen();
+  }
+
+  DocScreen docScreen(SQDoc doc) => widget.docScreen(doc);
+
   Widget docDisplay(SQDoc doc) {
-    return SQButton(doc.identifier,
-        onPressed: () => goToScreen(
-            DocScreen(doc.identifier, doc,
-                refreshCollectionScreen: refreshScreen),
-            context: context));
+    return SQButton(
+      doc.identifier,
+      onPressed: () => goToDocScreen(docScreen(doc)),
+    );
   }
 
   List<Widget> docsDisplay(BuildContext context) {

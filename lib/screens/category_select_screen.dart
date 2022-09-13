@@ -16,6 +16,7 @@ class CategorySelectScreen extends CollectionScreen {
       {required super.collection,
       required this.categoryCollection,
       required this.categoryField,
+      super.docScreen,
       super.key});
 
   @override
