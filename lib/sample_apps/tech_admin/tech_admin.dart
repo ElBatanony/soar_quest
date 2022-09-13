@@ -45,7 +45,6 @@ void main() async {
     inDebug: false,
     emulatingCloudFunctions: false,
     settings: settings,
-    authManager: FirebaseAuthManager(),
     userDocFields: userDocFields,
     publicProfileFields: publicProfileFields,
   );
@@ -64,7 +63,6 @@ void main() async {
 
   FavouritesFeature.loadFavourites();
 
-  final logsColourField = SQStringField("colour");
   final colorRefField =
       SQDocReferenceField("colorDoc", collection: coloursCollection);
   final logsVideoField = VideoLinkField("logVideo");
@@ -78,7 +76,6 @@ void main() async {
         logsVideoField,
         // SQDocListField("tags"),
         colorRefField,
-        logsColourField,
         // SQDocListField("colours"),
       ],
       singleDocName: "Log");
@@ -97,32 +94,31 @@ void main() async {
 
   adminApp.homescreen = MainScreen(
     [
-      UpvoteCollectionScreen(
-        "Col Upvote",
-        collection: coloursCollection,
-      ),
+      // UpvoteCollectionScreen(
+      //   "Col Upvote",
+      //   collection: coloursCollection,
+      // ),
       CollectionScreen("Colours", collection: coloursCollection),
-      PublicProfilesScreen(),
-      ProfileScreen("Profile"),
+      // PublicProfilesScreen(),
+
       logsScreen,
-      FavouritesFeature.favouritesScreen,
-      CollectionScreen("Logs", collection: logsCollection),
+      // FavouritesFeature.favouritesScreen,
       CategorySelectScreen(
         "Colour Cat",
         collection: logsCollection,
-        categoryCollection: coloursCollection,
-        categoryField: logsColourField,
+        categoryField: colorRefField,
       ),
       CollectionFilterScreen(
         "Search",
         collection: logsCollection,
         filters: [logIdSearchField, payloadFilter],
       ),
-      SettingsScreen(),
-      CloudFunctionDocsScreen(
-        "Fetched Logs",
-        collection: logsCollection,
-      ),
+      ProfileScreen("Profile"),
+      // SettingsScreen(),
+      // CloudFunctionDocsScreen(
+      //   "Fetched Logs",
+      //   collection: logsCollection,
+      // ),
     ],
     initialScreenIndex: 0,
   );
