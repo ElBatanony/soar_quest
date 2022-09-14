@@ -27,25 +27,26 @@ class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
       children: [
         Text(widget.docReferenceField.name),
         Text(widget.docReferenceField.value?.docIdentifier ?? "not-set"),
-        SQButton(
-          'Select Doc',
-          onPressed: () async {
-            SQDoc? retDoc = await goToScreen(
-                SelectDocScreen("Select ${widget.docReferenceField.name}",
-                    collection: widget.docReferenceField.collection),
-                context: context);
+        if (widget.docReferenceField.readOnly == false)
+          SQButton(
+            'Select ${widget.docReferenceField.collection.singleDocName}',
+            onPressed: () async {
+              SQDoc? retDoc = await goToScreen(
+                  SelectDocScreen("Select ${widget.docReferenceField.name}",
+                      collection: widget.docReferenceField.collection),
+                  context: context);
 
-            if (retDoc != null) {
-              SQDocReference ref = SQDocReference(
-                docId: retDoc.id,
-                docIdentifier: retDoc.identifier,
-                collectionPath: retDoc.collection.getPath(),
-              );
-              widget.docReferenceField.value = ref;
-              widget.updateCallback();
-            }
-          },
-        ),
+              if (retDoc != null) {
+                SQDocReference ref = SQDocReference(
+                  docId: retDoc.id,
+                  docIdentifier: retDoc.identifier,
+                  collectionPath: retDoc.collection.getPath(),
+                );
+                widget.docReferenceField.value = ref;
+                widget.updateCallback();
+              }
+            },
+          ),
       ],
     );
   }
