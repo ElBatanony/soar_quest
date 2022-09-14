@@ -8,18 +8,15 @@ import 'screen.dart';
 
 class DocCreateScreen extends Screen {
   final SQCollection collection;
-  final Function? createCallback;
   final List<SQDocField> initialFields;
   final List<String> hiddenFields;
 
-  const DocCreateScreen(
-    super.title,
+  DocCreateScreen(
     this.collection, {
-    this.createCallback,
     this.initialFields = const [],
     this.hiddenFields = const [],
     super.key,
-  });
+  }) : super("Create ${collection.singleDocName}");
 
   @override
   State<DocCreateScreen> createState() => _DocCreateScreenState();
@@ -40,10 +37,7 @@ class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
   }
 
   void createDoc() async {
-    widget.collection.createDoc(newDoc).then((value) {
-      if (widget.createCallback != null) widget.createCallback!();
-      exitScreen(context);
-    });
+    await widget.collection.createDoc(newDoc).then((_) => exitScreen(context));
   }
 
   @override
