@@ -8,9 +8,14 @@ import 'package:soar_quest/screens/screen.dart';
 class DocCreateScreen extends Screen {
   final SQCollection collection;
   final Function? createCallback;
+  final List<SQDocField> initialFields;
+  final List<String> hiddenFields;
 
   const DocCreateScreen(String title, this.collection,
-      {this.createCallback, Key? key})
+      {this.createCallback,
+      this.initialFields = const [],
+      this.hiddenFields = const [],
+      Key? key})
       : super(title, key: key);
 
   @override
@@ -30,6 +35,11 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
     loadData();
     String newDocId = widget.collection.getANewDocId();
     newDoc = SQDoc(newDocId, collection: widget.collection);
+
+    for (var field in widget.initialFields) {
+      newDoc.getFieldByName(field.name).value = field.value;
+    }
+
     super.initState();
   }
 
@@ -51,6 +61,7 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
               DocCreateScreenBody(
                 newDoc,
                 createCallback: widget.createCallback,
+                hiddenFields: widget.hiddenFields,
               )
             ],
           ),
@@ -64,9 +75,10 @@ class DocCreateScreenBody extends StatelessWidget {
   final SQDoc doc;
   // final List<DocFieldField> objectFieldsFields;
   final Function? createCallback;
+  final List<String> hiddenFields;
 
-  const DocCreateScreenBody(this.doc, {this.createCallback, Key? key})
-      : super(key: key);
+  const DocCreateScreenBody(this.doc,
+      {this.createCallback, required this.hiddenFields, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +97,8 @@ class DocCreateScreenBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [Text("Doc ID (generated)"), Text(doc.id)],
           ),
-          ...DocFieldField.generateDocFieldsFields(doc),
+          ...DocFieldField.generateDocFieldsFields(doc,
+              hiddenFields: hiddenFields),
           ElevatedButton(onPressed: saveItem, child: Text("Save / Insert"))
         ]),
       ),
