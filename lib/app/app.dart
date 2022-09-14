@@ -5,11 +5,11 @@ import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/firebase_options.dart';
 
 import 'package:soar_quest/screens/screen.dart';
-import 'package:soar_quest/users/auth_manager.dart';
+import 'package:soar_quest/app/auth_manager.dart';
 
 // import 'app_debugger.dart';
 import '../data.dart';
-import '../users/auth_manager.dart';
+import 'auth_manager.dart';
 
 class App {
   String name;

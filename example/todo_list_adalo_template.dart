@@ -8,7 +8,7 @@ import 'package:soar_quest/data.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
-import 'package:soar_quest/users/auth_manager.dart';
+import 'package:soar_quest/app/auth_manager.dart';
 
 void main() async {
   List<SQDocField> userDocFields = [SQStringField("Full Name")];
