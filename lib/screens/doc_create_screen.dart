@@ -22,7 +22,7 @@ class DocCreateScreen extends Screen {
   State<DocCreateScreen> createState() => _DocCreateScreenState();
 }
 
-class _DocCreateScreenState extends State<DocCreateScreen> {
+class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
   late SQDoc newDoc;
 
   void loadData() async {
@@ -43,64 +43,43 @@ class _DocCreateScreenState extends State<DocCreateScreen> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${widget.title} Screen',
-              ),
-              Text('Doc path: ${widget.collection.getPath()}'),
-              DocCreateScreenBody(
-                newDoc,
-                createCallback: widget.createCallback,
-                hiddenFields: widget.hiddenFields,
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+  void saveItem() async {
+    newDoc.collection.createDoc(newDoc).then((value) {
+      if (widget.createCallback != null) widget.createCallback!();
+      exitScreen(context);
+    });
   }
-}
-
-class DocCreateScreenBody extends StatelessWidget {
-  final SQDoc doc;
-  // final List<DocFieldField> objectFieldsFields;
-  final Function? createCallback;
-  final List<String> hiddenFields;
-
-  const DocCreateScreenBody(this.doc,
-      {this.createCallback, required this.hiddenFields, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    void saveItem() async {
-      doc.collection.createDoc(doc).then((value) {
-        if (createCallback != null) createCallback!();
-        exitScreen(context);
-      });
-    }
-
-    return Center(
-      child: Container(
-        constraints: BoxConstraints(maxWidth: 350),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Doc ID (generated)"), Text(doc.id)],
-          ),
-          ...DocFieldField.generateDocFieldsFields(doc,
-              hiddenFields: hiddenFields),
-          ElevatedButton(onPressed: saveItem, child: Text("Save / Insert"))
-        ]),
+  Widget screenBody(BuildContext context) {
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '${widget.title} Screen',
+            ),
+            Text('Doc path: ${widget.collection.getPath()}'),
+            Center(
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text("Doc ID (generated)"), Text(newDoc.id)],
+                      ),
+                      ...DocFieldField.generateDocFieldsFields(newDoc,
+                          hiddenFields: widget.hiddenFields),
+                      ElevatedButton(
+                          onPressed: saveItem, child: Text("Save / Insert"))
+                    ]),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
