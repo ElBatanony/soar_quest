@@ -1,15 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app_display.dart';
-import 'package:soar_quest/app/app_settings.dart';
-import 'package:soar_quest/firebase_options.dart';
 
-import 'package:soar_quest/screens/screen.dart';
-import 'package:soar_quest/app/auth_manager.dart';
+import 'firebase_options.dart';
 
-// import 'app_debugger.dart';
-import 'data.dart';
+import 'app/app_display.dart';
+import 'app/app_settings.dart';
 import 'app/auth_manager.dart';
+
+import 'data.dart';
+import 'screens/screen.dart';
+
+export 'app/app_navigator.dart';
+export 'app/app_settings.dart';
+export 'app/auth_manager.dart';
 
 class App {
   String name;

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
-import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
