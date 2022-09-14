@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../components/buttons/sq_button.dart';
 import '../../components/signed_in_content.dart';
-import '../../data/firestore.dart';
 import '../feature.dart';
 import '../../data.dart';
 

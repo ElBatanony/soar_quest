@@ -1,6 +1,5 @@
 import 'app.dart';
 import '../data.dart';
-import '../data/firestore.dart';
 
 class AppSettings {
   late SQCollection _settingsCollection;

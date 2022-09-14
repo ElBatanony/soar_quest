@@ -8,7 +8,6 @@ import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/data/fields/edited_by_field.dart';
 import 'package:soar_quest/data/fields/updated_date_field.dart';
-import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/screens/category_select_screen.dart';
 import 'package:soar_quest/screens/collection_filter_screen.dart';

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app.dart';
 import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data.dart';
-import 'package:soar_quest/data/firestore.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
 import 'package:soar_quest/screens/category_select_screen.dart';

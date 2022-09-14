@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import '../app/app.dart';
 import '../data.dart';
-import 'firestore.dart';
 
 abstract class UserData {
   String userId;
