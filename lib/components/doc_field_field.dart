@@ -22,8 +22,12 @@ class DocFieldField extends StatefulWidget {
 
   // TODO: required fields (validate not null)
 
-  static List<DocFieldField> generateDocFieldsFields(SQDoc doc) {
+  static List<DocFieldField> generateDocFieldsFields(
+    SQDoc doc, {
+    List<String> hiddenFields = const [],
+  }) {
     return doc.fields
+        .where((field) => hiddenFields.contains(field.name) == false)
         .map((field) => DocFieldField(
               field,
               doc: doc,
