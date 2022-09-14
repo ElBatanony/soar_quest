@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../app/app_navigator.dart';
 import '../data.dart';
 
-import '../components/buttons/col_create_doc_button.dart';
 import '../components/buttons/sq_button.dart';
 
+import 'doc_create_screen.dart';
 import 'doc_screen.dart';
 import 'screen.dart';
 
@@ -71,9 +71,13 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
             ),
             ...docsDisplay(context),
             if (widget.collection.readOnly == false)
-              CollectionCreateDocButton(
-                widget.collection,
-                createCallback: refreshScreen,
+              SQButton(
+                "Create ${widget.collection.singleDocName}",
+                onPressed: () async {
+                  await goToScreen(DocCreateScreen(widget.collection),
+                      context: context);
+                  loadData();
+                },
               ),
           ],
         ),
