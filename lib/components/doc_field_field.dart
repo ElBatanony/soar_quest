@@ -93,7 +93,6 @@ class _DocFieldFieldState extends State<DocFieldField> {
     }
 
     if (widget.field.type == String) {
-      // TODO: consider multiline string fields
       return TextField(
         controller: fieldTextController,
         onChanged: (text) {
