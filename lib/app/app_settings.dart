@@ -1,4 +1,4 @@
-import 'app.dart';
+import '../app.dart';
 import '../data.dart';
 
 class AppSettings {

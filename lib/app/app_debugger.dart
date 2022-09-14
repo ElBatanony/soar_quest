@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
+import '../app.dart';
 
 class AppDebugger {
   static Function? refreshDebuggerDisplay;

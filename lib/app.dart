@@ -8,8 +8,8 @@ import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/app/auth_manager.dart';
 
 // import 'app_debugger.dart';
-import '../data.dart';
-import 'auth_manager.dart';
+import 'data.dart';
+import 'app/auth_manager.dart';
 
 class App {
   String name;

@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app.dart';
+import 'package:soar_quest/app.dart';
 import 'package:soar_quest/app/app_settings.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';

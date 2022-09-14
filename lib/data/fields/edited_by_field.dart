@@ -1,4 +1,4 @@
-import '../../app/app.dart';
+import '../../app.dart';
 import '../sq_doc_field.dart';
 
 class SQEditedByField extends SQDocField<String> {

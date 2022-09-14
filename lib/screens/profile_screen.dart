@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 
-import '../app/app.dart';
+import '../app.dart';
 import '../app/app_navigator.dart';
 import '../components/buttons/doc_edit_button.dart';
 import '../components/doc_field_field.dart';

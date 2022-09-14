@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:soar_quest/app/app.dart';
+import 'package:soar_quest/app.dart';
 
 abstract class CloudFunction {
   final String name;

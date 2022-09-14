@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app/app_debugger.dart';
 
-import 'app.dart';
+import '../app.dart';
 
 const appWidth = 500;
 

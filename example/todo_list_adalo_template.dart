@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:soar_quest/app/app.dart';
+import 'package:soar_quest/app.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/components/doc_field_field.dart';
 import 'package:soar_quest/components/signed_in_content.dart';

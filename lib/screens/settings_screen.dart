@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../app/app.dart';
+import '../app.dart';
 import '../data/sq_doc.dart';
 
 import 'doc_edit_screen.dart';

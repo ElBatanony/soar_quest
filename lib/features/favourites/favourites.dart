@@ -6,7 +6,7 @@ import 'package:soar_quest/data/sq_doc.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
-import '../../app/app.dart';
+import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
 
