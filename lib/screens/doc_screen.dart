@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../data.dart';
 
@@ -31,6 +32,19 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     super.initState();
   }
 
+  Widget fieldDisplay(SQDocField field) {
+    return GestureDetector(
+      onLongPress: () {
+        String fieldValue = field.value.toString();
+        Clipboard.setData(ClipboardData(text: fieldValue));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 500),
+            content: Text('Copied field: $fieldValue')));
+      },
+      child: Text(field.toString()),
+    );
+  }
+
   @override
   Widget screenBody(BuildContext context) {
     return SingleChildScrollView(
@@ -41,8 +55,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
           Text('Doc path: ${doc.getPath()}', textAlign: TextAlign.center),
           Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:
-                  doc.fields.map((field) => Text(field.toString())).toList()),
+              children: doc.fields.map(fieldDisplay).toList()),
           if (doc.collection.readOnly == false)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
