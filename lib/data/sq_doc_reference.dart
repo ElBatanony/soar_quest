@@ -11,10 +11,16 @@ class SQDocReference {
     required this.docIdentifier,
   });
 
+  SQDocReference.fromDoc(SQDoc doc)
+      : this(
+            collectionPath: doc.collection.getPath(),
+            docId: doc.id,
+            docIdentifier: doc.identifier);
+
   @override
   String toString() => docIdentifier;
 
-  static SQDocReference? parse(dynamic source) {
+  static SQDocReference? parse(Map<String, dynamic> source) {
     String? docId = source["docId"];
     String? collectionPath = source["collectionPath"];
     String? docIdentifier = source["docIdentifier"];
