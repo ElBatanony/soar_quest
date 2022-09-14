@@ -20,7 +20,10 @@ class ScreenState<T extends Screen> extends State<T> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: screenBody(context),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: screenBody(context),
+      ),
     );
   }
 }
