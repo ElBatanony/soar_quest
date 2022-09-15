@@ -1,5 +1,6 @@
 import '../../data.dart';
 import '../types/sq_doc_reference.dart';
+import '../types/sq_time_of_day.dart';
 export '../sq_doc_field.dart';
 export '../fields/sq_doc_reference_field.dart';
 
@@ -38,6 +39,11 @@ class SQDoc {
 
       if (field.type == SQTimestamp) {
         field.value = SQTimestamp.parse(value);
+        continue;
+      }
+
+      if (field.type == SQTimeOfDay) {
+        field.value = SQTimeOfDay.parse(value);
         continue;
       }
 
