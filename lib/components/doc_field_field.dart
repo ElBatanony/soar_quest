@@ -6,7 +6,7 @@ import '../data.dart';
 import '../data/types/sq_doc_reference.dart';
 import 'buttons/sq_button.dart';
 import 'fields/timestamp_doc_field.dart';
-import 'fields/list_field.dart';
+import 'fields/list_field_field.dart';
 import 'fields/doc_reference_picker.dart';
 import 'fields/file_field_picker.dart';
 
@@ -115,13 +115,14 @@ class _DocFieldFieldState extends State<DocFieldField> {
           Text(widget.field.name),
           Text(widget.field.value.toString()),
           TimestampDocFieldPicker(
-              timestampField: widget.field, updateCallback: onChanged),
+              timestampField: widget.field as SQTimestampField,
+              updateCallback: onChanged),
         ],
       );
     }
 
     if (widget.field.type == List) {
-      return ListField(widget.field as SQDocListField);
+      return ListFieldField(widget.field as SQDocListField);
     }
 
     if (widget.field.type == SQDocReference) {
