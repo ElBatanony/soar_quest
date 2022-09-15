@@ -37,6 +37,8 @@ class SQDoc {
 
       SQDocField field = fields.firstWhere((field) => field.name == key);
 
+      // TODO: make parse implementable in everything
+
       if (field.type == SQTimestamp) {
         field.value = SQTimestamp.parse(value);
         continue;

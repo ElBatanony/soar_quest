@@ -1,3 +1,5 @@
+// TODO: export each directory individually
+
 export 'data/db/sq_collection.dart';
 export 'data/db/sq_doc.dart';
 export 'data/sq_doc_field.dart';

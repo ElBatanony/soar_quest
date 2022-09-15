@@ -124,6 +124,7 @@ class _DocFormFieldState extends State<DocFormField> {
       );
     }
 
+    // TODO: use variable field and use "is" to check type
     if (widget.field.type == SQTimeOfDay) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
