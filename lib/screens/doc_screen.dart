@@ -11,7 +11,8 @@ import 'screen.dart';
 class DocScreen extends Screen {
   final SQDoc doc;
 
-  DocScreen(this.doc, {super.key}) : super(doc.identifier);
+  DocScreen(this.doc, {super.prebody, super.postbody, super.key})
+      : super(doc.identifier);
 
   @override
   State<DocScreen> createState() => DocScreenState();

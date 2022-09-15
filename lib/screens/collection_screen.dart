@@ -15,9 +15,12 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreen Function(SQDoc doc) docScreen;
 
+  // TODO: make title optional and use collection ID as default
   CollectionScreen(super.title,
       {required this.collection,
       this.docScreen = defaultDocScreen,
+      super.prebody,
+      super.postbody,
       super.key}) {
     collection.screen = this;
   }
@@ -65,10 +68,6 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Collection path: ${widget.collection.getPath()}',
-              textAlign: TextAlign.center,
-            ),
             ...docsDisplay(context),
             if (widget.collection.readOnly == false)
               SQButton(

@@ -9,7 +9,7 @@ import '../data.dart';
 import 'screen.dart';
 
 class ProfileScreen extends Screen {
-  const ProfileScreen(super.title, {super.key});
+  const ProfileScreen(super.title, {super.prebody, super.postbody, super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
