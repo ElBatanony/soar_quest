@@ -7,7 +7,7 @@ export 'sq_file_field.dart';
 
 const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
 
-class SQDocField<T> {
+abstract class SQDocField<T> {
   String name = "";
   T? value;
   Type get type => T;
@@ -15,10 +15,7 @@ class SQDocField<T> {
 
   SQDocField(this.name, {this.value, this.readOnly = false});
 
-  // TODO: fix copying fields to avoid changin in subclasses
-  SQDocField<T> copy() {
-    return SQDocField<T>(name, value: value, readOnly: readOnly);
-  }
+  SQDocField copy();
 
   dynamic collectField() => value;
 
@@ -50,20 +47,42 @@ class SQStringField extends SQDocField<String> {
       : super(name, value: value);
 
   @override
+  SQStringField copy() => SQStringField(name, value: value, readOnly: readOnly);
+
+  @override
   String get value => super.value ?? "";
 }
 
 class SQBoolField extends SQDocField<bool> {
-  SQBoolField(String name, {bool value = false, super.readOnly})
-      : super(name, value: value);
+  SQBoolField(super.name, {super.value, super.readOnly});
+
+  @override
+  SQBoolField copy() => SQBoolField(name, value: value, readOnly: readOnly);
+
+  @override
+  bool get value => super.value ?? false;
+}
+
+class SQIntField extends SQDocField<int> {
+  SQIntField(super.name, {super.value, super.readOnly});
+
+  @override
+  SQIntField copy() => SQIntField(name, value: value, readOnly: readOnly);
 }
 
 class SQTimestampField extends SQDocField<SQTimestamp> {
   SQTimestampField(String name, {SQTimestamp? value, super.readOnly})
       : super(name, value: value ?? SQTimestamp(0, 0));
+
+  @override
+  SQTimestampField copy() =>
+      SQTimestampField(name, value: value, readOnly: readOnly);
 }
 
 class VideoLinkField extends SQDocField<String> {
   VideoLinkField(String name, {String? url, super.readOnly})
       : super(name, value: url ?? "");
+
+  @override
+  VideoLinkField copy() => VideoLinkField(name, url: value, readOnly: readOnly);
 }

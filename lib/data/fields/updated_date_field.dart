@@ -5,7 +5,7 @@ class UpdatedDateField extends SQDocField<SQTimestamp> {
       : super(name, value: value, readOnly: true);
 
   @override
-  SQDocField<SQTimestamp> copy() => UpdatedDateField(name, value: value);
+  UpdatedDateField copy() => UpdatedDateField(name, value: value);
 
   @override
   collectField() => value = SQTimestamp.fromDate(DateTime.now());

@@ -26,7 +26,7 @@ void main() async {
       id: "Menu",
       fields: [
         SQStringField("Item Name"),
-        SQDocField<int>("Item Price"),
+        SQIntField("Item Price"),
       ],
       singleDocName: "Menu Item");
 

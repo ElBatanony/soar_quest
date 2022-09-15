@@ -34,8 +34,7 @@ class _CategorySelectScreenState
     return SQButton(
       doc.identifier,
       onPressed: () {
-        SQDocReferenceField categoryFieldCopy =
-            widget.categoryField.copy() as SQDocReferenceField;
+        SQDocReferenceField categoryFieldCopy = widget.categoryField.copy();
         categoryFieldCopy.value = SQDocReference(
           collectionPath: widget.categoryField.collection.getPath(),
           docId: doc.id,

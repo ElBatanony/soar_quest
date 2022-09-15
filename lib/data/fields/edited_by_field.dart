@@ -6,7 +6,7 @@ class SQEditedByField extends SQDocField<String> {
       : super(name, value: userId, readOnly: true);
 
   @override
-  SQDocField<String> copy() => SQEditedByField(name);
+  SQEditedByField copy() => SQEditedByField(name);
 
   @override
   collectField() => value = App.userId;

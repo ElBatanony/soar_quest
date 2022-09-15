@@ -11,9 +11,8 @@ class SQDocListField extends SQDocField<List<SQDocField>> {
   List<SQDocField> get value => super.value ?? [];
 
   @override
-  SQDocField<List<SQDocField>> copy() {
-    return SQDocListField(name, value: value.map((e) => e.copy()).toList());
-  }
+  SQDocListField copy() =>
+      SQDocListField(name, value: value.map((e) => e.copy()).toList());
 
   @override
   List<dynamic> collectField() {

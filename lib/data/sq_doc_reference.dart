@@ -46,7 +46,7 @@ class SQDocReferenceField extends SQDocField<SQDocReference> {
   Type get type => SQDocReference;
 
   @override
-  SQDocField<SQDocReference> copy() {
+  SQDocReferenceField copy() {
     return SQDocReferenceField(name,
         collection: collection, value: value, readOnly: readOnly);
   }
