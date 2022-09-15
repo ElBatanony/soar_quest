@@ -1,3 +1,4 @@
+import '../../app.dart';
 import '../../data.dart';
 
 class SQDocReference {
@@ -33,5 +34,11 @@ class SQDocReference {
       docIdentifier: docIdentifier,
       collectionPath: collectionPath,
     );
+  }
+
+  SQDoc getDoc() {
+    return SQDoc(docId,
+        collection: App.instance.collections
+            .firstWhere((e) => e.getPath() == collectionPath));
   }
 }
