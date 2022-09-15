@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
+export 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
 
 class SQTimestamp extends Timestamp {
   SQTimestamp(super.seconds, super.nanoseconds);

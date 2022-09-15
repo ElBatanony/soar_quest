@@ -35,38 +35,7 @@ class SQDoc {
 
       SQDocField field = fields.firstWhere((field) => field.name == key);
 
-      // TODO: make parse implementable in everything
-
-      if (field.type == SQTimestamp) {
-        field.value = SQTimestamp.parse(value);
-        continue;
-      }
-
-      if (field.type == SQTimeOfDay) {
-        field.value = SQTimeOfDay.parse(value);
-        continue;
-      }
-
-      if (field.type == List) {
-        List<SQDocField> sqFields = [];
-        for (var dynField in (value as List)) {
-          sqFields.add(SQDocField.fromDynamic(dynField));
-        }
-        field.value = sqFields;
-        continue;
-      }
-
-      if (field.type == SQDocReference) {
-        field.value = SQDocReference.parse(value);
-        continue;
-      }
-
-      if (field.type == SQFile) {
-        field.value = SQFile.parse(value);
-        continue;
-      }
-
-      field.value = value;
+      field.value = field.parse(value);
     }
     initialized = true;
   }

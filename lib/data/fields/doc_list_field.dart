@@ -15,6 +15,15 @@ class SQDocListField extends SQDocField<List<SQDocField>> {
   List<SQDocField> get value => super.value ?? [];
 
   @override
+  List<SQDocField> parse(source) {
+    List<SQDocField> sqFields = [];
+    for (var dynField in (source as List)) {
+      sqFields.add(SQDocField.fromDynamic(dynField));
+    }
+    return value = sqFields;
+  }
+
+  @override
   SQDocListField copy() => SQDocListField(name,
       value: value.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
 

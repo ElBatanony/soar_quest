@@ -13,6 +13,11 @@ class SQFileField extends SQDocField<SQFile> {
   Type get type => SQFile;
 
   @override
+  SQFile? parse(source) {
+    return SQFile.parse(source);
+  }
+
+  @override
   SQFile get value => super.value ?? SQFile(fieldName: name, exists: false);
 
   SQFile get sqFile => value;

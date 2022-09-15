@@ -8,6 +8,11 @@ class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
       : super(name, value: value ?? SQTimeOfDay.fromTimeOfDay(TimeOfDay.now()));
 
   @override
+  SQTimeOfDay parse(source) {
+    return SQTimeOfDay.parse(source);
+  }
+
+  @override
   SQTimeOfDayField copy() =>
       SQTimeOfDayField(name, value: value, readOnly: readOnly);
 

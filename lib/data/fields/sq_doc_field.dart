@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../fields.dart';
 import '../types.dart';
 
@@ -14,6 +12,8 @@ abstract class SQDocField<T> {
   SQDocField copy();
 
   dynamic collectField() => value;
+
+  T? parse(dynamic source);
 
   static SQDocField fromDynamic(dynamicValue, {String name = ""}) {
     switch (dynamicValue.runtimeType) {
@@ -43,6 +43,12 @@ class SQStringField extends SQDocField<String> {
       : super(name, value: value);
 
   @override
+  String? parse(source) {
+    if (source is String) return source;
+    return null;
+  }
+
+  @override
   SQStringField copy() => SQStringField(name, value: value, readOnly: readOnly);
 
   @override
@@ -51,6 +57,12 @@ class SQStringField extends SQDocField<String> {
 
 class SQBoolField extends SQDocField<bool> {
   SQBoolField(super.name, {super.value, super.readOnly});
+
+  @override
+  bool? parse(source) {
+    if (source is bool) return source;
+    return null;
+  }
 
   @override
   SQBoolField copy() => SQBoolField(name, value: value, readOnly: readOnly);
@@ -63,6 +75,12 @@ class SQIntField extends SQDocField<int> {
   SQIntField(super.name, {super.value, super.readOnly});
 
   @override
+  int? parse(source) {
+    if (source is int) value = source;
+    return null;
+  }
+
+  @override
   SQIntField copy() => SQIntField(name, value: value, readOnly: readOnly);
 }
 
@@ -71,5 +89,13 @@ class VideoLinkField extends SQDocField<String> {
       : super(name, value: url ?? "");
 
   @override
+  String? parse(source) {
+    if (source is String) return source;
+    return null;
+  }
+
+  @override
   VideoLinkField copy() => VideoLinkField(name, url: value, readOnly: readOnly);
 }
+
+// TODO: move fields to different files

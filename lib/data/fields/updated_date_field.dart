@@ -6,6 +6,11 @@ class UpdatedDateField extends SQDocField<SQTimestamp> {
       : super(name, value: value, readOnly: true);
 
   @override
+  SQTimestamp parse(source) {
+    return SQTimestamp.parse(source);
+  }
+
+  @override
   UpdatedDateField copy() => UpdatedDateField(name, value: value);
 
   @override

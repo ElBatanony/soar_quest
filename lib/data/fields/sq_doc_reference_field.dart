@@ -17,6 +17,11 @@ class SQDocReferenceField extends SQDocField<SQDocReference> {
   }
 
   @override
+  SQDocReference? parse(source) {
+    return SQDocReference.parse(source);
+  }
+
+  @override
   Map<String, dynamic> collectField() {
     if (value == null) return {};
 
