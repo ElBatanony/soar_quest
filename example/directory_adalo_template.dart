@@ -52,22 +52,27 @@ void main() async {
     UpdatedDateField("Last Updated"),
   ]);
 
+  FavouritesFeature favouriteDates =
+      FavouritesFeature(collection: datesCollection);
+
   adaloDirectoryApp.homescreen = MainScreen([
     CollectionScreen(
       collection: datesCollection,
-      docScreen: (doc) => DateDocScreen(doc),
+      docScreen: (doc) =>
+          DocScreen(doc, postbody: favouriteDates.addToFavouritesButton(doc)),
     ),
     CategorySelectScreen(
       collection: datesCollection,
       categoryField: dateCategoryRefField,
-      docScreen: (doc) => DateDocScreen(doc),
+      docScreen: (doc) =>
+          DocScreen(doc, postbody: favouriteDates.addToFavouritesButton(doc)),
     ),
     CollectionScreen(
         title: "My Dates",
         collection: ByUserCollection.fromCollection(
             collection: datesCollection, byUserField: sqEditedByField)),
     // CollectionScreen("Categories", collection: categoriesCollection),
-    FavouritesFeature.favouritesScreen,
+    favouriteDates.favouritesScreen,
     ProfileScreen("Profile"),
   ]);
 
@@ -99,24 +104,5 @@ class ByUserCollection extends FirestoreCollection implements SQCollection {
         .map((doc) => SQDoc(doc.id, collection: this)
           ..setData(doc.data() as Map<String, dynamic>))
         .toList();
-  }
-}
-
-class DateDocScreen extends DocScreen {
-  DateDocScreen(super.doc, {super.key});
-
-  @override
-  State<DateDocScreen> createState() => _DateDocScreenState();
-}
-
-class _DateDocScreenState extends DocScreenState<DateDocScreen> {
-  @override
-  Widget screenBody(BuildContext context) {
-    return Column(
-      children: [
-        super.screenBody(context),
-        FavouritesFeature.addToFavouritesButton(widget.doc)
-      ],
-    );
   }
 }
