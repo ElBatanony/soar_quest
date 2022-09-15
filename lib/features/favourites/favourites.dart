@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data/firestore.dart';
-import 'package:soar_quest/features/feature.dart';
-import 'package:soar_quest/data/sq_collection.dart';
-import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/screen.dart';
 
+import '../../data.dart';
+import '../feature.dart';
+import '../../screens/collection_screen.dart';
+import '../../screens/screen.dart';
 import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
