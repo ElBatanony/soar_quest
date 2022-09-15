@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../data.dart';
+import '../../data/types/sq_doc_reference.dart';
 import '../feature.dart';
 import '../../screens/collection_screen.dart';
+import '../../screens/doc_screen.dart';
 import '../../screens/screen.dart';
 import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
@@ -64,9 +66,12 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
   @override
   Widget docDisplay(SQDoc doc) {
-    // TODO: add option to go to original doc screen (not fav doc screen)
+    SQDocReference originalDocRef = doc.getFieldValueByName("ref");
+
     return ListTile(
-      title: Text(doc.identifier),
+      title: SQButton(doc.identifier,
+          onPressed: () =>
+              goToScreen(DocScreen(originalDocRef.getDoc()), context: context)),
       trailing: SQButton(
         'Remove',
         onPressed: () => removeFromFavourites(doc),
