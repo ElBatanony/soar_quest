@@ -8,7 +8,6 @@ abstract class UserData {
   bool isAnonymous;
 
   late SQDoc userDoc;
-  late SQCollection userCollection;
 
   List<SQDocField> docFields;
   List<SQDocField> publicFields;
@@ -49,13 +48,7 @@ class FirebaseSignedInUser extends SignedInUser {
           isAnonymous: firebaseUser.isAnonymous,
           docFields: App.instance.userDocFields,
         ) {
-    userCollection = FirestoreCollection(
-      id: "users",
-      fields: App.instance.userDocFields,
-      singleDocName: "Profile Info",
-      canDeleteDoc: false,
-    );
-    userDoc = SQDoc(userId, collection: userCollection);
+    userDoc = SQDoc(userId, collection: App.usersCollection);
     userDoc.loadDoc();
   }
 

@@ -36,6 +36,8 @@ class App {
   List<SQDocField> userDocFields;
   List<SQDocField> publicProfileFields;
 
+  static late SQCollection usersCollection;
+
   void setScreen(Screen screen) {
     currentScreen = screen;
     // AppDebugger.refresh();
@@ -62,6 +64,12 @@ class App {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
+    );
+    usersCollection = FirestoreCollection(
+      id: "users",
+      fields: App.instance.userDocFields,
+      singleDocName: "Profile Info",
+      canDeleteDoc: false,
     );
     await auth.init();
     await settings.init();
