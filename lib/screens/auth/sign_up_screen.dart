@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../components/buttons/sq_button.dart';
-import '../../components/doc_field_field.dart';
+import '../../components/doc_form_field.dart';
 import '../../data/sq_doc_field.dart';
 import '../screen.dart';
 
@@ -39,8 +39,8 @@ class _SQSignUpScreenState extends ScreenState<SQSignUpScreen> {
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        DocFieldField(emailField),
-        DocFieldField(passwordField),
+        DocFormField(emailField),
+        DocFormField(passwordField),
         SQButton("Sign Up", onPressed: () async {
           await App.auth.signUpWithEmailAndPassword(
               email: emailField.value, password: passwordField.value);

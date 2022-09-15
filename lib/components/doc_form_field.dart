@@ -10,26 +10,26 @@ import 'fields/list_field_field.dart';
 import 'fields/doc_reference_picker.dart';
 import 'fields/file_field_picker.dart';
 
-class DocFieldField extends StatefulWidget {
+class DocFormField extends StatefulWidget {
   // TODO: inherit from FormField
   final SQDocField field;
   final Function? onChanged;
   final SQDoc? doc;
 
-  const DocFieldField(this.field, {this.onChanged, this.doc, super.key});
+  const DocFormField(this.field, {this.onChanged, this.doc, super.key});
 
   @override
-  State<DocFieldField> createState() => _DocFieldFieldState();
+  State<DocFormField> createState() => _DocFormFieldState();
 
   // TODO: required fields (validate not null)
 
-  static List<DocFieldField> generateDocFieldsFields(
+  static List<DocFormField> generateDocFieldsFields(
     SQDoc doc, {
     List<String> hiddenFields = const [],
   }) {
     return doc.fields
         .where((field) => hiddenFields.contains(field.name) == false)
-        .map((field) => DocFieldField(
+        .map((field) => DocFormField(
               field,
               doc: doc,
             ))
@@ -37,7 +37,7 @@ class DocFieldField extends StatefulWidget {
   }
 }
 
-class _DocFieldFieldState extends State<DocFieldField> {
+class _DocFormFieldState extends State<DocFormField> {
   final fieldTextController = TextEditingController();
 
   @override
@@ -156,7 +156,7 @@ Future showFieldDialog(
       builder: (BuildContext context) {
         return AlertDialog(
             title: Text("Update ${field.name}"),
-            content: DocFieldField(field),
+            content: DocFormField(field),
             actions: [
               SQButton('Cancel', onPressed: () => exitScreen(context)),
               SQButton(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
-import 'package:soar_quest/components/doc_field_field.dart';
+import 'package:soar_quest/components/doc_form_field.dart';
 import 'package:soar_quest/components/wrappers/signed_in_content.dart';
 import 'package:soar_quest/data.dart';
 import 'package:soar_quest/screens/collection_screen.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data.dart';
-import '../doc_field_field.dart';
+import '../doc_form_field.dart';
 
 class ListFieldField extends StatefulWidget {
   final SQDocListField listField;
@@ -91,7 +91,7 @@ class _ListItemFieldState extends State<ListItemField> {
                     }
                   });
                 })),
-            Expanded(child: DocFieldField(widget.listItemField)),
+            Expanded(child: DocFormField(widget.listItemField)),
             IconButton(
               onPressed: () {
                 widget.deleteItem();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/components/doc_field_field.dart';
+import 'package:soar_quest/components/doc_form_field.dart';
 import 'package:soar_quest/data.dart';
 import 'collection_screen.dart';
 
@@ -42,7 +42,7 @@ class _CollectionFilterScreenState
   Widget screenBody(BuildContext context) {
     return Column(children: [
       ...widget.filters
-          .map((filter) => DocFieldField(
+          .map((filter) => DocFormField(
                 filter.field,
                 onChanged: (value) => updateDocs(),
               ))

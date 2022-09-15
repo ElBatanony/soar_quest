@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app.dart';
 import '../data.dart';
-import '../components/doc_field_field.dart';
+import '../components/doc_form_field.dart';
 import 'screen.dart';
 
 class DocEditScreen extends Screen {
@@ -66,7 +66,7 @@ class DocEditScreenBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text("Doc ID"), Text(doc.id)],
             ),
-            ...DocFieldField.generateDocFieldsFields(doc),
+            ...DocFormField.generateDocFieldsFields(doc),
             ElevatedButton(onPressed: updateItem, child: Text("Save / Update"))
           ]),
         ),

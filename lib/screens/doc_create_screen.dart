@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../app.dart';
 import '../../data.dart';
 import '../components/buttons/sq_button.dart';
-import '../components/doc_field_field.dart';
+import '../components/doc_form_field.dart';
 import '../data/fields/sq_user_ref_field.dart';
 import 'screen.dart';
 
@@ -51,7 +51,7 @@ class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
       child: Center(
         child: Column(
           children: [
-            ...DocFieldField.generateDocFieldsFields(newDoc,
+            ...DocFormField.generateDocFieldsFields(newDoc,
                 hiddenFields: widget.hiddenFields),
             SQButton("Create", onPressed: createDoc)
           ],

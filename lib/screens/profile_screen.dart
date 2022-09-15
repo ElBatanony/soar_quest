@@ -3,7 +3,7 @@ import 'package:soar_quest/components/buttons/sq_button.dart';
 
 import '../app.dart';
 import '../components/buttons/doc_edit_button.dart';
-import '../components/doc_field_field.dart';
+import '../components/doc_form_field.dart';
 import '../components/wrappers/signed_in_content.dart';
 import '../data.dart';
 import 'screen.dart';
