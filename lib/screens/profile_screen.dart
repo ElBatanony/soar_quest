@@ -101,3 +101,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     );
   }
 }
+
+Screen settingsScreen() {
+  return DocEditScreen(App.instance.settings.settingsDoc);
+}
