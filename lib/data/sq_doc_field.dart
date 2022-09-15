@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data.dart';
 
 export 'sq_timestamp.dart' show SQTimestamp;
-export 'doc_list_field.dart';
+export 'fields/doc_list_field.dart';
 export 'sq_file_field.dart';
 
 const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
