@@ -42,11 +42,10 @@ void main() async {
 
   adaloAppointmentsApp.homescreen = MainScreen([
     CollectionScreen(
-      "Learn",
+      title: "Learn",
       collection: requests,
     ),
     CollectionScreen(
-      "Classes",
       collection: classes,
       docScreen: (doc) => DocScreen(
         doc,

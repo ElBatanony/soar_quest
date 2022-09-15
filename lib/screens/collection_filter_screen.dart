@@ -6,8 +6,8 @@ import 'collection_screen.dart';
 class CollectionFilterScreen extends CollectionScreen {
   final List<DocsFilter> filters;
 
-  CollectionFilterScreen(
-    super.title, {
+  CollectionFilterScreen({
+    super.title,
     required super.collection,
     required this.filters,
     super.docScreen,

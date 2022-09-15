@@ -20,7 +20,8 @@ void main() async {
   await adaloTodoApp.init();
 
   adaloTodoApp.homescreen = MainScreen([
-    TodoListScreen("To Do List", tasksCollection: TasksCollection(id: "Tasks")),
+    TodoListScreen(
+        title: "To Do List", tasksCollection: TasksCollection(id: "Tasks")),
     ProfileScreen("Profile"),
   ]);
 
@@ -59,7 +60,7 @@ class TasksCollection extends FirestoreUserCollection {
 class TodoListScreen extends CollectionScreen {
   final TasksCollection tasksCollection;
 
-  TodoListScreen(super.title, {required this.tasksCollection, super.key})
+  TodoListScreen({super.title, required this.tasksCollection, super.key})
       : super(collection: tasksCollection);
 
   @override

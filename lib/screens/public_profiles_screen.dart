@@ -9,9 +9,12 @@ final SQCollection publicProfilesCollection = FirestoreCollection(
 );
 
 class PublicProfilesScreen extends CollectionFilterScreen {
-  PublicProfilesScreen({String title = "Public Profiles", super.key})
-      : super(title, collection: publicProfilesCollection, filters: [
-          StringContainsFilter(
-              publicProfilesCollection.getFieldByName("Username"))
-        ]);
+  PublicProfilesScreen({super.key})
+      : super(
+            title: "Public Profiles",
+            collection: publicProfilesCollection,
+            filters: [
+              StringContainsFilter(
+                  publicProfilesCollection.getFieldByName("Username"))
+            ]);
 }

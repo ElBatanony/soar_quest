@@ -10,7 +10,7 @@ import '../../components/buttons/sq_button.dart';
 
 class FavouritesFeature extends Feature {
   static final SQUserCollection _favouritesCollection = FirestoreUserCollection(
-      id: "favourites",
+      id: "Favourites",
       fields: [
         SQStringField("identifier"),
       ],
@@ -32,7 +32,7 @@ class FavouritesFeature extends Feature {
   }
 
   static Screen favouritesScreen =
-      FavouritesScreen("Favourites", collection: _favouritesCollection);
+      FavouritesScreen(collection: _favouritesCollection);
 
   static loadFavourites() {
     _favouritesCollection.loadCollection();
@@ -56,7 +56,7 @@ class FavouritesScreenButton extends StatelessWidget {
 }
 
 class FavouritesScreen extends CollectionScreen {
-  FavouritesScreen(super.title, {required super.collection, super.key});
+  FavouritesScreen({super.title, required super.collection, super.key});
 
   @override
   State<FavouritesScreen> createState() => _FavouritesScreenState();

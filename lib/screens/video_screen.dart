@@ -8,8 +8,8 @@ import 'collection_screen.dart';
 class VideoCollectionScreen extends CollectionScreen {
   final VideoLinkField videoField;
 
-  VideoCollectionScreen(
-    super.title, {
+  VideoCollectionScreen({
+    super.title,
     required super.collection,
     required this.videoField,
     super.key,

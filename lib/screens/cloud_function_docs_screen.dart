@@ -5,7 +5,7 @@ import '../data.dart';
 import 'collection_screen.dart';
 
 class CloudFunctionDocsScreen extends CollectionScreen {
-  CloudFunctionDocsScreen(super.title, {required super.collection, super.key});
+  CloudFunctionDocsScreen({super.title, required super.collection, super.key});
 
   @override
   State<CloudFunctionDocsScreen> createState() =>

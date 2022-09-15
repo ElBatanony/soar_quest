@@ -12,8 +12,9 @@ import 'collection_screen.dart';
 class CategorySelectScreen extends CollectionScreen {
   final SQDocReferenceField categoryField;
 
-  CategorySelectScreen(super.title,
-      {required super.collection,
+  CategorySelectScreen(
+      {super.title,
+      required super.collection,
       required this.categoryField,
       super.docScreen,
       super.key});
@@ -45,7 +46,8 @@ class _CategorySelectScreenState
         print(categoryFieldCopy.value);
         DocsFilter filter = DocRefFilter(docRefField: categoryFieldCopy);
         goToScreen(
-            CollectionFilterScreen("Category of",
+            CollectionFilterScreen(
+                title: "Category of",
                 collection: widget.collection,
                 filters: [filter],
                 docScreen: widget.docScreen),

@@ -7,7 +7,7 @@ import '../components/buttons/sq_button.dart';
 import 'collection_screen.dart';
 
 class SelectDocScreen extends CollectionScreen {
-  SelectDocScreen(super.title, {required super.collection, super.key});
+  SelectDocScreen({super.title, required super.collection, super.key});
 
   @override
   State<SelectDocScreen> createState() => _SelectDocScreenState();

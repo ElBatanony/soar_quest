@@ -44,11 +44,10 @@ void main() async {
 
   shicoffeeApp.homescreen = MainScreen([
     MenuScreen(
-      "Menu",
       collection: menu,
       ordersCollection: orders,
     ),
-    OrdersCollection("Orders", collection: orders),
+    OrdersCollection(collection: orders),
     ProfileScreen("Profile"),
   ]);
 
@@ -58,8 +57,11 @@ void main() async {
 class MenuScreen extends CollectionScreen {
   final SQCollection ordersCollection;
 
-  MenuScreen(super.title,
-      {required super.collection, required this.ordersCollection, super.key});
+  MenuScreen(
+      {super.title,
+      required super.collection,
+      required this.ordersCollection,
+      super.key});
 
   @override
   State<MenuScreen> createState() => _MenuScreenState();
@@ -95,7 +97,7 @@ class _MenuScreenState extends CollectionScreenState<MenuScreen> {
 }
 
 class OrdersCollection extends CollectionScreen {
-  OrdersCollection(super.title, {required super.collection, super.key});
+  OrdersCollection({super.title, required super.collection, super.key});
 
   @override
   State<OrdersCollection> createState() => _OrdersCollectionState();

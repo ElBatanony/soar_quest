@@ -88,7 +88,7 @@ void main() async {
   DocsFilter payloadFilter =
       DocsFilter(logsCollection.getFieldByName("payload"));
 
-  final logsScreen = CollectionScreen("Logs", collection: logsCollection);
+  final logsScreen = CollectionScreen(collection: logsCollection);
 
   adminApp.homescreen = MainScreen(
     [
@@ -96,18 +96,18 @@ void main() async {
       //   "Col Upvote",
       //   collection: coloursCollection,
       // ),
-      CollectionScreen("Colours", collection: coloursCollection),
+      CollectionScreen(collection: coloursCollection),
       // PublicProfilesScreen(),
 
       logsScreen,
       // FavouritesFeature.favouritesScreen,
       CategorySelectScreen(
-        "Colour Cat",
+        title: "Colour Cat",
         collection: logsCollection,
         categoryField: colorRefField,
       ),
       CollectionFilterScreen(
-        "Search",
+        title: "Search",
         collection: logsCollection,
         filters: [logIdSearchField, payloadFilter],
       ),

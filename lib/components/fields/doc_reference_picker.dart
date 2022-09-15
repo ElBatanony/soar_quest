@@ -33,7 +33,8 @@ class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
             'Select ${widget.docReferenceField.collection.singleDocName}',
             onPressed: () async {
               SQDoc? retDoc = await goToScreen(
-                  SelectDocScreen("Select ${widget.docReferenceField.name}",
+                  SelectDocScreen(
+                      title: "Select ${widget.docReferenceField.name}",
                       collection: widget.docReferenceField.collection),
                   context: context);
 

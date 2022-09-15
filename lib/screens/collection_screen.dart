@@ -15,13 +15,14 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreen Function(SQDoc doc) docScreen;
 
-  // TODO: make title optional and use collection ID as default
-  CollectionScreen(super.title,
-      {required this.collection,
+  CollectionScreen(
+      {String? title,
+      required this.collection,
       this.docScreen = defaultDocScreen,
       super.prebody,
       super.postbody,
-      super.key}) {
+      super.key})
+      : super(title ?? collection.id) {
     collection.screen = this;
   }
 

@@ -54,17 +54,16 @@ void main() async {
 
   adaloDirectoryApp.homescreen = MainScreen([
     CollectionScreen(
-      "Dates",
       collection: datesCollection,
       docScreen: (doc) => DateDocScreen(doc),
     ),
     CategorySelectScreen(
-      "Categories",
       collection: datesCollection,
       categoryField: dateCategoryRefField,
       docScreen: (doc) => DateDocScreen(doc),
     ),
-    CollectionScreen("My Dates",
+    CollectionScreen(
+        title: "My Dates",
         collection: ByUserCollection.fromCollection(
             collection: datesCollection, byUserField: sqEditedByField)),
     // CollectionScreen("Categories", collection: categoriesCollection),
