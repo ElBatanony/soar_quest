@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data.dart';
-
-// TODO: add hours picker option
+import '../buttons/sq_button.dart';
 
 class TimestampDocFieldPicker extends StatefulWidget {
   const TimestampDocFieldPicker(
@@ -43,7 +42,8 @@ class _TimestampDocFieldPickerState extends State<TimestampDocFieldPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SQButton(
+      'Select Date',
       onPressed: () async {
         DateTime? ret = await Navigator.of(context).push(_datePickerRoute(
           context,
@@ -52,7 +52,6 @@ class _TimestampDocFieldPickerState extends State<TimestampDocFieldPicker> {
           _selectDate(ret);
         }
       },
-      child: const Text('Select Date'),
     );
   }
 }
