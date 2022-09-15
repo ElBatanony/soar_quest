@@ -1,7 +1,6 @@
 import '../db.dart';
 import '../types.dart';
-export '../sq_doc_field.dart';
-export '../fields/sq_doc_reference_field.dart';
+export '../fields.dart';
 
 class SQDoc {
   late List<SQDocField> fields;

@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:soar_quest/cloud_functions/get_collections_docs.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/fields.dart';
 
 void main() async {
   test("Getting Logs collection docs", () async {

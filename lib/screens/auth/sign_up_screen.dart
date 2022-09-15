@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../components/buttons/sq_button.dart';
 import '../../components/doc_form_field.dart';
-import '../../data/sq_doc_field.dart';
+import '../../data/fields.dart';
 import '../screen.dart';
 
 class SQSignUpScreen extends Screen {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/fields.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
