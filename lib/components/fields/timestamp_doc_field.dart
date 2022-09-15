@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../data.dart';
 
+// TODO: add hours picker option
+
 class TimestampDocFieldPicker extends StatefulWidget {
   const TimestampDocFieldPicker(
       {Key? key, required this.timestampField, required this.updateCallback})
