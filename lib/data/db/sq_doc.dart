@@ -10,7 +10,12 @@ class SQDoc {
   bool initialized = false;
 
   static List<SQDocField> copyFields(List<SQDocField> fields) {
-    return fields.map((field) => field.copy()).toList();
+    return fields.map((field) {
+      SQDocField fieldCopy = field.copy();
+      assert(field.runtimeType == fieldCopy.runtimeType,
+          "SQDocField not copied properly");
+      return fieldCopy;
+    }).toList();
   }
 
   SQDoc(this.id, {required this.collection}) {
