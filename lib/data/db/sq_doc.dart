@@ -90,5 +90,5 @@ class SQDoc {
     return "${collection.getPath()}/$id";
   }
 
-  String get identifier => fields.first.value;
+  String get identifier => fields.first.value.toString();
 }
