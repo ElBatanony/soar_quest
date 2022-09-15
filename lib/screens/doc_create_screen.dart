@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../app.dart';
 import '../../data.dart';
-import '../app/app_navigator.dart';
 import '../components/buttons/sq_button.dart';
 import '../components/doc_field_field.dart';
+import '../data/fields/sq_user_ref_field.dart';
 import 'screen.dart';
 
 class DocCreateScreen extends Screen {
@@ -35,7 +36,7 @@ class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
 
     for (var field in newDoc.fields)
       if (field.runtimeType == SQEditedByField)
-        field.value = SQDocReference.fromDoc(App.auth.user.userDoc);
+        field.value = SQUserRefField.currentUserRef;
 
     super.initState();
   }
