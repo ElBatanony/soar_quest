@@ -39,6 +39,8 @@ abstract class SQCollection {
 
   SQDocField getFieldByName(String fieldName) =>
       fields.singleWhere((field) => field.name == fieldName);
+
+  int get docsCount => docs.length;
 }
 
 abstract class SQUserCollection extends SQCollection {
