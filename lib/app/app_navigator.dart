@@ -16,5 +16,5 @@ Future replaceScreen(Screen screen, {required BuildContext context}) {
 }
 
 void exitScreen(BuildContext context, {dynamic value}) {
-  return Navigator.pop(context, value);
+  if (Navigator.canPop(context)) return Navigator.pop(context, value);
 }
