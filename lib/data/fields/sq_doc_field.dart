@@ -1,25 +1,4 @@
 import '../fields.dart';
-import '../types.dart';
-
-abstract class SQDocField<T> {
-  String name = "";
-  T? value;
-  Type get type => T;
-  final bool readOnly;
-
-  SQDocField(this.name, {this.value, this.readOnly = false});
-
-  SQDocField copy();
-
-  dynamic collectField() => value;
-
-  T? parse(dynamic source);
-
-  @override
-  String toString() {
-    return "${name == "" ? "" : "$name:"} $value";
-  }
-}
 
 class SQStringField extends SQDocField<String> {
   SQStringField(String name, {String value = "", super.readOnly})
