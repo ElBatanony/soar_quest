@@ -5,6 +5,7 @@ import '../app.dart';
 import '../components/doc_form_field.dart';
 import '../components/wrappers/signed_in_content.dart';
 import '../data.dart';
+import '../data/fields.dart';
 import 'doc_edit_screen.dart';
 import 'screen.dart';
 

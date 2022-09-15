@@ -1,4 +1,5 @@
-import '../sq_doc_field.dart';
+import '../db.dart';
+import '../types.dart';
 
 class UpdatedDateField extends SQDocField<SQTimestamp> {
   UpdatedDateField(String name, {SQTimestamp? value})

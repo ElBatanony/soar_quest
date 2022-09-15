@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../app/app_navigator.dart';
 
 import '../data/db.dart';
+import '../data/fields.dart';
 import '../data/types.dart';
-import '../data/fields/sq_time_of_day_field.dart';
 import 'buttons/sq_button.dart';
 import 'fields/timestamp_doc_field.dart';
 import 'fields/list_field_field.dart';

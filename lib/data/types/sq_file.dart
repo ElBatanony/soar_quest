@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../db.dart';
+import '../fields.dart';
 
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 

@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/buttons/sq_button.dart';
 import '../../data/db.dart';
+import '../../data/fields.dart';
 import '../../data/types.dart';
 
 class FileFieldPicker extends StatefulWidget {

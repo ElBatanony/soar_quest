@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data.dart';
+import '../../data/fields.dart';
+import '../../data/types.dart';
 import '../buttons/sq_button.dart';
 
 class TimestampDocFieldPicker extends StatefulWidget {

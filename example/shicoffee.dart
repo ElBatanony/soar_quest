@@ -4,7 +4,7 @@ import 'package:soar_quest/app.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/components/wrappers/special_access_content.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/fields/sq_user_ref_field.dart';
+import 'package:soar_quest/data/fields.dart';
 import 'package:soar_quest/data/types/sq_doc_reference.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_create_screen.dart';

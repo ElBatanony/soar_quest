@@ -1,4 +1,4 @@
-import '../../data.dart';
+import '../fields.dart';
 
 class SQDocListField extends SQDocField<List<SQDocField>> {
   List<Type> allowedTypes;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data.dart';
+import '../../data/fields.dart';
 import '../doc_form_field.dart';
 
 class ListFieldField extends StatefulWidget {

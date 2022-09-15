@@ -1,6 +1,7 @@
 import 'package:soar_quest/app.dart';
-import 'package:soar_quest/data.dart';
-import 'package:soar_quest/data/types/sq_doc_reference.dart';
+
+import '../fields.dart';
+import '../types.dart';
 
 class SQUserRefField extends SQDocReferenceField {
   SQUserRefField(super.name, {super.value, super.readOnly})

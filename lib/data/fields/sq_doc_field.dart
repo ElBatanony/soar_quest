@@ -1,12 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../data.dart';
 
-export 'types/sq_timestamp.dart' show SQTimestamp;
-export 'fields/doc_list_field.dart';
-export 'fields/sq_file_field.dart';
-export 'fields/updated_date_field.dart';
-export 'fields/sq_doc_reference_field.dart';
-export 'fields/sq_timestamp_field.dart';
+import '../fields.dart';
+import '../types.dart';
 
 // TODO: move to data/fields
 
