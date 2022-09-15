@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../fields.dart';
 import '../types.dart';
 
-// TODO: move to data/fields
-
 abstract class SQDocField<T> {
   String name = "";
   T? value;
