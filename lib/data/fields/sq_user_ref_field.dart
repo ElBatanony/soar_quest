@@ -11,3 +11,15 @@ class SQUserRefField extends SQDocReferenceField {
       SQUserRefField(name, value: value, readOnly: readOnly);
 }
 
+class SQEditedByField extends SQUserRefField {
+  SQEditedByField(super.name, {super.value}) : super(readOnly: true);
+
+  @override
+  SQEditedByField copy() => SQEditedByField(name, value: value);
+
+  @override
+  collectField() {
+    value ??= SQDocReference.fromDoc(App.auth.user.userDoc);
+    return super.collectField();
+  }
+}
