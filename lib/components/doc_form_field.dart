@@ -59,33 +59,35 @@ class _DocFormFieldState extends State<DocFormField> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.field.readOnly == true) {
-      return Text("${widget.field} (read only)");
+    final SQDocField field = widget.field;
+
+    if (field.readOnly == true) {
+      return Text("$field (read only)");
     }
 
-    if (widget.field.type == int) {
+    if (field is SQIntField) {
       return TextField(
         onChanged: (intText) {
-          widget.field.value = int.parse(intText);
+          field.value = int.parse(intText);
         },
         onEditingComplete: onChanged,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          hintText: widget.field.name,
+          hintText: field.name,
         ),
       );
     }
 
-    if (widget.field.type == bool) {
+    if (field is SQBoolField) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(widget.field.name),
+          Text(field.name),
           Switch(
-            value: widget.field.value,
+            value: field.value,
             onChanged: (value) {
               setState(() {
-                widget.field.value = value;
+                field.value = value;
               });
               onChanged();
             },
@@ -94,73 +96,69 @@ class _DocFormFieldState extends State<DocFormField> {
       );
     }
 
-    if (widget.field.type == String) {
+    if (field is SQStringField) {
       return TextField(
         controller: fieldTextController,
         onChanged: (text) {
-          widget.field.value = text;
+          field.value = text;
         },
         onEditingComplete: onChanged,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          hintText: widget.field.name,
-          labelText: widget.field.name,
+          hintText: field.name,
+          labelText: field.name,
         ),
       );
     }
 
-    if (widget.field.type == SQTimestamp) {
+    if (field is SQTimestampField) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(widget.field.name),
-          Text(widget.field.value.toString()),
+          Text(field.name),
+          Text(field.value.toString()),
           TimestampDocFieldPicker(
-              timestampField: widget.field as SQTimestampField,
-              updateCallback: onChanged),
+              timestampField: field, updateCallback: onChanged),
         ],
       );
     }
 
-    // TODO: use variable field and use "is" to check type
-    if (widget.field.type == SQTimeOfDay) {
+    if (field is SQTimeOfDayField) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(widget.field.name),
-          Text(widget.field.value.toString()),
+          Text(field.name),
+          Text(field.value.toString()),
           TimeOfDayFieldPicker(
-              timeOfDayField: widget.field as SQTimeOfDayField,
-              updateCallback: onChanged),
+              timeOfDayField: field, updateCallback: onChanged),
         ],
       );
     }
 
-    if (widget.field.type == List) {
-      return ListFieldField(widget.field as SQDocListField);
+    if (field is SQDocListField) {
+      return ListFieldField(field);
     }
 
-    if (widget.field.type == SQDocReference) {
+    if (field is SQDocReferenceField) {
       return DocReferenceFieldPicker(
-          docReferenceField: widget.field as SQDocReferenceField,
-          updateCallback: onChanged);
+          docReferenceField: field, updateCallback: onChanged);
     }
 
-    if (widget.field.type == SQFile) {
+    if (field is SQFileField) {
       if (widget.doc == null) return Text("No doc to upload file to");
 
       return FileFieldPicker(
-          fileField: widget.field as SQFileField,
+          fileField: field,
           doc: widget.doc!,
-          storage: FirebaseFileStorage(widget.field.value),
+          storage: FirebaseFileStorage(field.value),
           updateCallback: onChanged);
     }
 
-    if (widget.field.type == Null) {
+    if (field.type == Null) {
       return Text("Greetings! This is null!");
     }
 
-    return Text("${widget.field.type} fields not implemented");
+    return Text("${field.type} fields not implemented");
   }
 }
 
