@@ -72,17 +72,17 @@ class SQDoc {
     return ret;
   }
 
-  SQDocField getFieldByName(String fieldName) {
+  SQDocField? getFieldByName(String fieldName) {
     return fields.singleWhere((field) => field.name == fieldName);
   }
 
   dynamic getFieldValueByName(String fieldName) {
-    return getFieldByName(fieldName).value;
+    return getFieldByName(fieldName)?.value;
   }
 
   Future setDocFieldByName(String fieldName, dynamic value) {
-    SQDocField field = getFieldByName(fieldName);
-    field.value = value;
+    SQDocField? field = getFieldByName(fieldName);
+    field?.value = value;
     return collection.updateDoc(this);
   }
 

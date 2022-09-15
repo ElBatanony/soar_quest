@@ -31,7 +31,7 @@ class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
     newDoc = SQDoc(newDocId, collection: widget.collection);
 
     for (var field in widget.initialFields)
-      newDoc.getFieldByName(field.name).value = field.value;
+      newDoc.getFieldByName(field.name)?.value = field.value;
 
     super.initState();
   }
