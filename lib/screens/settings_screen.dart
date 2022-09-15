@@ -8,19 +8,18 @@ import 'screen.dart';
 
 // TODO: extend from docEditScreen
 class SettingsScreen extends Screen {
-  const SettingsScreen({String title = "Settings", Key? key})
-      : super(title, key: key);
+  const SettingsScreen({String title = "Settings", super.key}) : super(title);
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ScreenState<SettingsScreen> {
   SQDoc? settingsDoc;
 
   loadSettings() async {
     settingsDoc = App.instance.settings.settingsDoc;
-    setState(() {});
+    refreshScreen();
   }
 
   settingsUpdateCallback() {
@@ -36,16 +35,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: settingsDoc == null
-            ? Text("Loading settings")
-            : DocEditScreenBody(
-                settingsDoc!,
-                updateCallback: settingsUpdateCallback,
-              ));
+  Widget screenBody(BuildContext context) {
+    return settingsDoc == null
+        ? Text("Loading settings")
+        : DocEditScreenBody(
+            settingsDoc!,
+            updateCallback: settingsUpdateCallback,
+          );
   }
 }
