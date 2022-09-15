@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/app_navigator.dart';
 import '../../data.dart';
 
+import '../../data/types/sq_doc_reference.dart';
 import '../buttons/sq_button.dart';
 import '../../screens/select_doc_screen.dart';
 
