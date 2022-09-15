@@ -2,73 +2,49 @@ import 'package:flutter/material.dart';
 
 import '../app.dart';
 import '../data.dart';
+import '../components/buttons/sq_button.dart';
 import '../components/doc_form_field.dart';
 import 'screen.dart';
 
 class DocEditScreen extends Screen {
   final SQDoc doc;
-  const DocEditScreen(String title, this.doc, {Key? key})
-      : super(title, key: key);
+  DocEditScreen(this.doc, {super.key})
+      : super("Edit ${doc.collection.singleDocName}");
 
   @override
   State<DocEditScreen> createState() => _DocEditScreenState();
 }
 
-class _DocEditScreenState extends State<DocEditScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${widget.title} Screen',
-              ),
-              Text('Doc path: ${widget.doc.collection.getPath()}'),
-              DocEditScreenBody(widget.doc)
-            ],
-          ),
-        ),
-      ),
-    );
+class _DocEditScreenState extends ScreenState<DocEditScreen> {
+  void updateItem() async {
+    await widget.doc.collection.updateDoc(widget.doc).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("${widget.doc.collection.singleDocName} updated"),
+      ));
+      exitScreen(context);
+    });
   }
-}
-
-class DocEditScreenBody extends StatelessWidget {
-  final SQDoc doc;
-  final Function? updateCallback;
-
-  const DocEditScreenBody(this.doc, {this.updateCallback, Key? key})
-      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    void updateItem() async {
-      await doc.collection.updateDoc(doc).then((_) {
-        if (updateCallback != null)
-          updateCallback!();
-        else
-          exitScreen(context);
-      });
-    }
-
+  Widget screenBody(BuildContext context) {
     return SingleChildScrollView(
       child: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 350),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("Doc ID"), Text(doc.id)],
-            ),
-            ...DocFormField.generateDocFieldsFields(doc),
-            ElevatedButton(onPressed: updateItem, child: Text("Save / Update"))
-          ]),
+        child: Column(
+          children: [
+            Container(
+              constraints: BoxConstraints(maxWidth: 350),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text("Doc ID"), Text(widget.doc.id)],
+                  ),
+                  ...DocFormField.generateDocFieldsFields(widget.doc),
+                  SQButton("Save", onPressed: updateItem)
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -7,6 +7,7 @@ import '../../screens/doc_edit_screen.dart';
 
 import 'sq_button.dart';
 
+// TODO: delete button
 class DocEditButton extends StatelessWidget {
   final SQDoc doc;
   final Function refresh;
@@ -14,8 +15,7 @@ class DocEditButton extends StatelessWidget {
   const DocEditButton(this.doc, {required this.refresh, super.key});
 
   void goToEditScreen(BuildContext context) async {
-    await goToScreen(DocEditScreen("Edit ${doc.collection.singleDocName}", doc),
-        context: context);
+    await goToScreen(DocEditScreen(doc), context: context);
     refresh();
   }
 
