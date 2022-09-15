@@ -4,11 +4,11 @@ import 'package:soar_quest/screens/collection_screen.dart';
 import '../../app.dart';
 
 abstract class SQCollection {
-  String id;
+  final String id;
   List<SQDocField> fields;
   List<SQDoc> docs = [];
   CollectionScreen? screen;
-  String singleDocName;
+  late String singleDocName;
   SQDoc? parentDoc;
   bool readOnly;
   bool canDeleteDoc;
@@ -16,11 +16,12 @@ abstract class SQCollection {
   SQCollection(
     this.id,
     this.fields, {
-    this.singleDocName = "Doc",
+    String? singleDocName,
     this.parentDoc,
     this.readOnly = false,
     this.canDeleteDoc = true,
   }) {
+    this.singleDocName = singleDocName ?? id;
     App.instance.collections.add(this);
   }
 

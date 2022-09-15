@@ -11,11 +11,11 @@ class FirestoreCollection extends SQCollection {
   FirestoreCollection({
     required String id,
     required List<SQDocField> fields,
-    String singleDocName = "Doc",
+    super.singleDocName,
     super.parentDoc,
     super.readOnly,
     super.canDeleteDoc,
-  }) : super(id, fields, singleDocName: singleDocName) {
+  }) : super(id, fields) {
     ref = firestore.collection(getPath());
   }
 
