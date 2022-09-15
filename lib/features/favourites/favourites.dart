@@ -9,36 +9,41 @@ import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
 
 class FavouritesFeature extends Feature {
-  static final SQUserCollection _favouritesCollection = FirestoreUserCollection(
-      id: "Favourites",
-      fields: [
-        SQStringField("identifier"),
-      ],
-      userId: App.auth.user.userId);
+  SQCollection collection;
+  late final SQUserCollection _favouritesCollection;
 
-  static Widget addToFavouritesButton(SQDoc doc) {
-    return ToggleInFavouritesButton(doc);
+  FavouritesFeature({required this.collection}) {
+    _favouritesCollection = FirestoreUserCollection(
+        id: "Favourite ${collection.id}",
+        fields: [
+          SQDocReferenceField("ref", collection: collection),
+        ],
+        userId: App.auth.user.userId);
   }
 
-  static addFavourite(SQDoc doc) {
-    var newFavDoc =
-        SQDoc(doc.id, collection: FavouritesFeature._favouritesCollection);
-    newFavDoc.setData({"identifier": doc.identifier});
-    FavouritesFeature._favouritesCollection.createDoc(newFavDoc);
+  Widget addToFavouritesButton(SQDoc doc) {
+    return ToggleInFavouritesButton(doc, favouritesFeature: this);
   }
 
-  static removeFavourite(SQDoc favDoc) {
-    FavouritesFeature._favouritesCollection.deleteDoc(favDoc.id);
+  addFavourite(SQDoc doc) {
+    var newFavDoc = SQDoc(doc.id, collection: _favouritesCollection);
+    newFavDoc.setDocFieldByName("ref", doc.ref);
+    // newFavDoc.setData({"ref": });
+    _favouritesCollection.createDoc(newFavDoc);
   }
 
-  static Screen favouritesScreen =
+  removeFavourite(SQDoc favDoc) {
+    _favouritesCollection.deleteDoc(favDoc.id);
+  }
+
+  Screen get favouritesScreen =>
       FavouritesScreen(collection: _favouritesCollection);
 
-  static loadFavourites() {
+  loadFavourites() {
     _favouritesCollection.loadCollection();
   }
 
-  static bool isInFavourites(SQDoc doc) {
+  bool isInFavourites(SQDoc doc) {
     return _favouritesCollection.docs
         .any((SQDoc someDoc) => someDoc.id == doc.id);
   }

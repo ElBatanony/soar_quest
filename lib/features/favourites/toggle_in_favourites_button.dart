@@ -4,8 +4,10 @@ import '../../data.dart';
 import 'favourites.dart';
 
 class ToggleInFavouritesButton extends StatefulWidget {
+  final FavouritesFeature favouritesFeature;
   final SQDoc doc;
-  const ToggleInFavouritesButton(this.doc, {Key? key}) : super(key: key);
+  const ToggleInFavouritesButton(this.doc,
+      {required this.favouritesFeature, super.key});
 
   @override
   State<ToggleInFavouritesButton> createState() =>
@@ -17,8 +19,8 @@ class _ToggleInFavouritesButtonState extends State<ToggleInFavouritesButton> {
 
   @override
   void initState() {
-    FavouritesFeature.loadFavourites();
-    inFavourites = FavouritesFeature.isInFavourites(widget.doc);
+    widget.favouritesFeature.loadFavourites();
+    inFavourites = widget.favouritesFeature.isInFavourites(widget.doc);
     super.initState();
   }
 
@@ -28,12 +30,12 @@ class _ToggleInFavouritesButtonState extends State<ToggleInFavouritesButton> {
         onPressed: () async {
           print("Toggling ${widget.doc.id} in favs");
           if (inFavourites) {
-            FavouritesFeature.removeFavourite(widget.doc);
+            widget.favouritesFeature.removeFavourite(widget.doc);
           } else {
-            FavouritesFeature.addFavourite(widget.doc);
+            widget.favouritesFeature.addFavourite(widget.doc);
           }
           inFavourites = !inFavourites;
-          FavouritesFeature.loadFavourites();
+          widget.favouritesFeature.loadFavourites();
           setState(() {});
         },
         child: inFavourites
