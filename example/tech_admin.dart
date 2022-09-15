@@ -14,7 +14,6 @@ import 'package:soar_quest/screens/playground_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 import 'package:soar_quest/screens/public_profiles_screen.dart';
 import 'package:soar_quest/app/auth_manager.dart';
-import 'package:soar_quest/screens/settings_screen.dart';
 
 void main() async {
   List<SQDocField> userDocFields = [
