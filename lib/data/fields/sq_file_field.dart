@@ -1,4 +1,5 @@
 import '../../data.dart';
+import '../types.dart';
 
 class SQFileField extends SQDocField<SQFile> {
   SQFileField(super.name, {super.value});

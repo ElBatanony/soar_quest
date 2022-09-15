@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data.dart';
+import '../../data/db.dart';
 
 class BoolFieldDisplay extends StatelessWidget {
   final SQDocField field;

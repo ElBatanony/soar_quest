@@ -8,6 +8,8 @@ export 'fields/updated_date_field.dart';
 export 'fields/sq_doc_reference_field.dart';
 export 'fields/sq_timestamp_field.dart';
 
+// TODO: move to data/fields
+
 abstract class SQDocField<T> {
   String name = "";
   T? value;

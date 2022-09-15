@@ -1,4 +1,4 @@
-import '../data.dart';
+import 'db.dart';
 import 'types/sq_doc_reference.dart';
 
 extension FilterDocs on SQCollection {

@@ -1,4 +1,4 @@
-import 'package:soar_quest/data.dart';
+import 'package:soar_quest/data/db.dart';
 
 import 'cloud_function.dart';
 

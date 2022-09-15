@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../app/app_navigator.dart';
-import '../data.dart';
 
 import '../components/buttons/sq_button.dart';
 
+import '../data/db.dart';
 import 'doc_create_screen.dart';
 import 'doc_screen.dart';
 import 'screen.dart';

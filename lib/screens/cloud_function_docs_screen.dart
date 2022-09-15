@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../cloud_functions/get_collections_docs.dart';
-import '../data.dart';
+import '../data/db.dart';
 import 'collection_screen.dart';
 
 class CloudFunctionDocsScreen extends CollectionScreen {

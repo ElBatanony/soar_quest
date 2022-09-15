@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:soar_quest/app.dart';
-import 'package:soar_quest/data.dart';
+import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/fields/sq_time_of_day_field.dart';
 import 'package:soar_quest/data/fields/sq_user_ref_field.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';

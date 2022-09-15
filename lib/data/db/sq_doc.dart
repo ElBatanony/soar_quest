@@ -1,6 +1,5 @@
-import '../../data.dart';
-import '../types/sq_doc_reference.dart';
-import '../types/sq_time_of_day.dart';
+import '../db.dart';
+import '../types.dart';
 export '../sq_doc_field.dart';
 export '../fields/sq_doc_reference_field.dart';
 

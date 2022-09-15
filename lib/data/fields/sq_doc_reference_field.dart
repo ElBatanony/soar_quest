@@ -1,5 +1,5 @@
-import '../../data.dart';
-import '../types/sq_doc_reference.dart';
+import '../db.dart';
+import '../types.dart';
 
 class SQDocReferenceField extends SQDocField<SQDocReference> {
   SQCollection collection;

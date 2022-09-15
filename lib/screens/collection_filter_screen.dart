@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/components/doc_form_field.dart';
 import 'package:soar_quest/data.dart';
+import '../data/db.dart';
 import 'collection_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {

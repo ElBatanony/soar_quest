@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../data.dart';
-
 import '../components/buttons/sq_button.dart';
 
+import '../data/db.dart';
 import 'collection_screen.dart';
 
 class SelectDocScreen extends CollectionScreen {

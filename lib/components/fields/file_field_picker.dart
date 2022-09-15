@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../data.dart';
 import '../../components/buttons/sq_button.dart';
+import '../../data/db.dart';
+import '../../data/types.dart';
 
 class FileFieldPicker extends StatefulWidget {
   final SQFileField fileField;

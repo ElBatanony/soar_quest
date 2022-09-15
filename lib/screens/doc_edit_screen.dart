@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../app.dart';
-import '../data.dart';
 import '../components/buttons/sq_button.dart';
 import '../components/doc_form_field.dart';
+import '../data/db.dart';
 import 'screen.dart';
 
 class DocEditScreen extends Screen {

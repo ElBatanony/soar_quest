@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data.dart';
+import '../../data/db.dart';
 import '../../data/types/sq_doc_reference.dart';
 import '../feature.dart';
 import '../../screens/collection_screen.dart';
