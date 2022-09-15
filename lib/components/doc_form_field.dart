@@ -4,11 +4,14 @@ import '../app/app_navigator.dart';
 import '../data.dart';
 
 import '../data/types/sq_doc_reference.dart';
+import '../data/fields/sq_time_of_day_field.dart';
+import '../data/types/sq_time_of_day.dart';
 import 'buttons/sq_button.dart';
 import 'fields/timestamp_doc_field.dart';
 import 'fields/list_field_field.dart';
 import 'fields/doc_reference_picker.dart';
 import 'fields/file_field_picker.dart';
+import 'fields/time_of_day_field_picker.dart';
 
 class DocFormField extends StatefulWidget {
   // TODO: inherit from FormField
@@ -116,6 +119,19 @@ class _DocFormFieldState extends State<DocFormField> {
           Text(widget.field.value.toString()),
           TimestampDocFieldPicker(
               timestampField: widget.field as SQTimestampField,
+              updateCallback: onChanged),
+        ],
+      );
+    }
+
+    if (widget.field.type == SQTimeOfDay) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(widget.field.name),
+          Text(widget.field.value.toString()),
+          TimeOfDayFieldPicker(
+              timeOfDayField: widget.field as SQTimeOfDayField,
               updateCallback: onChanged),
         ],
       );
