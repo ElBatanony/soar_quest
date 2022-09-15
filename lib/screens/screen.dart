@@ -22,7 +22,9 @@ class ScreenState<T extends Screen> extends State<T> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(title: Text(widget.title), actions: [
+        IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
+      ]),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
