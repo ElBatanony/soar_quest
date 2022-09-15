@@ -4,7 +4,6 @@ import '../data.dart';
 export 'types/sq_timestamp.dart' show SQTimestamp;
 export 'fields/doc_list_field.dart';
 export 'fields/sq_file_field.dart';
-export 'fields/edited_by_field.dart';
 export 'fields/updated_date_field.dart';
 export 'fields/sq_doc_reference_field.dart';
 export 'fields/sq_timestamp_field.dart';
@@ -30,8 +29,8 @@ abstract class SQDocField<T> {
       case Timestamp:
         return SQTimestampField(name,
             value: SQTimestamp.fromTimestamp(dynamicValue));
-      case List:
-        return SQDocListField(name, value: dynamicValue);
+      // case List: TODO: bring back from dyamic SQDocListField, needs list of types
+      //   return SQDocListField(name, value: dynamicValue);
       default:
         throw UnimplementedError(
             "Dynamic SQDocField type of field not expexted");
