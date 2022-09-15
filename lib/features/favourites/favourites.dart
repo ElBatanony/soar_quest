@@ -44,6 +44,17 @@ class FavouritesFeature extends Feature {
   }
 }
 
+class FavouritesScreenButton extends StatelessWidget {
+  const FavouritesScreenButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SQButton("Go to Favourites",
+        onPressed: () =>
+            goToScreen(FavouritesFeature.favouritesScreen, context: context));
+  }
+}
+
 class FavouritesScreen extends CollectionScreen {
   FavouritesScreen(super.title, {required super.collection, super.key});
 
