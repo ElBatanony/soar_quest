@@ -96,4 +96,6 @@ class SQDoc {
   }
 
   String get identifier => fields.first.value.toString();
+
+  SQDocReference get ref => SQDocReference.fromDoc(this);
 }
