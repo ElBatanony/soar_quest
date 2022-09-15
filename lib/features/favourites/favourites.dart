@@ -70,6 +70,7 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
   @override
   Widget docDisplay(SQDoc doc) {
+    // TODO: add option to go to original doc screen (not fav doc screen)
     return ListTile(
       title: Text(doc.identifier),
       trailing: SQButton(
@@ -80,19 +81,10 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: widget.collection.docs.isEmpty
-                ? [Center(child: Text("Your favourites list is empty"))]
-                : docsDisplay(context),
-          ),
-        ));
+  Widget screenBody(BuildContext context) {
+    return Column(
+        children: widget.collection.docs.isEmpty
+            ? [Center(child: Text("Your favourites list is empty"))]
+            : docsDisplay(context));
   }
 }
