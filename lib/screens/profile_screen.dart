@@ -6,6 +6,7 @@ import '../components/buttons/doc_edit_button.dart';
 import '../components/doc_form_field.dart';
 import '../components/wrappers/signed_in_content.dart';
 import '../data.dart';
+import 'doc_edit_screen.dart';
 import 'screen.dart';
 
 class ProfileScreen extends Screen {
@@ -91,6 +92,9 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                             .toList()),
                     DocEditButton(App.auth.user.userDoc,
                         refresh: refreshScreen),
+                    SQButton("Settings",
+                        onPressed: () =>
+                            goToScreen(settingsScreen(), context: context)),
                     SQButton("Sign out", onPressed: signOut),
                   ],
                 );
