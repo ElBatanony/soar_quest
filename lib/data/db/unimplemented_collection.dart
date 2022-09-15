@@ -1,4 +1,4 @@
-import '../data.dart';
+import '../../data.dart';
 
 class UnimplementCollection extends SQCollection {
   UnimplementCollection(super.id, super.fields);
