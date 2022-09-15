@@ -15,23 +15,6 @@ abstract class SQDocField<T> {
 
   T? parse(dynamic source);
 
-  static SQDocField fromDynamic(dynamicValue, {String name = ""}) {
-    switch (dynamicValue.runtimeType) {
-      case String:
-        return SQStringField(name, value: dynamicValue);
-      case bool:
-        return SQBoolField(name, value: dynamicValue);
-      case Timestamp:
-        return SQTimestampField(name,
-            value: SQTimestamp.fromTimestamp(dynamicValue));
-      // case List: TODO: bring back from dyamic SQDocListField, needs list of types
-      //   return SQDocListField(name, value: dynamicValue);
-      default:
-        throw UnimplementedError(
-            "Dynamic SQDocField type of field not expexted");
-    }
-  }
-
   @override
   String toString() {
     return "${name == "" ? "" : "$name:"} $value";

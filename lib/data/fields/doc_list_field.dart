@@ -14,11 +14,28 @@ class SQDocListField extends SQDocField<List<SQDocField>> {
   @override
   List<SQDocField> get value => super.value ?? [];
 
+  SQDocField fromDynamic(dynamicValue, {String name = ""}) {
+    switch (dynamicValue.runtimeType) {
+      case String:
+        return SQStringField(name, value: dynamicValue);
+      case bool:
+        return SQBoolField(name, value: dynamicValue);
+      // case Timestamp:
+      //   return SQTimestampField(name,
+      //       value: SQTimestamp.fromTimestamp(dynamicValue));
+      // case List: TODO: bring back from dyamic SQDocListField, needs list of types
+      //   return SQDocListField(name, value: dynamicValue);
+      default:
+        throw UnimplementedError(
+            "Dynamic SQDocField type of field not expexted");
+    }
+  }
+
   @override
   List<SQDocField> parse(source) {
     List<SQDocField> sqFields = [];
     for (var dynField in (source as List)) {
-      sqFields.add(SQDocField.fromDynamic(dynField));
+      sqFields.add(fromDynamic(dynField));
     }
     return value = sqFields;
   }
