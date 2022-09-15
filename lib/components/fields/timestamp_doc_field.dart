@@ -7,7 +7,7 @@ class TimestampDocFieldPicker extends StatefulWidget {
       {Key? key, required this.timestampField, required this.updateCallback})
       : super(key: key);
 
-  final SQDocField timestampField;
+  final SQTimestampField timestampField;
   final Function updateCallback;
 
   @override
