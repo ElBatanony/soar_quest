@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../app.dart';
+import '../components/buttons/sq_button.dart';
 import '../data.dart';
 
 import '../components/buttons/doc_delete_button.dart';
-import '../components/buttons/doc_edit_button.dart';
 
+import 'doc_edit_screen.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {
@@ -61,7 +63,13 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                DocEditButton(doc, refresh: refreshScreen),
+                SQButton(
+                  "Edit ${doc.collection.singleDocName}",
+                  onPressed: () async {
+                    await goToScreen(DocEditScreen(doc), context: context);
+                    refreshScreen();
+                  },
+                ),
                 if (doc.collection.canDeleteDoc)
                   DocDeleteButton(doc, deleteCallback: refreshScreen)
               ],

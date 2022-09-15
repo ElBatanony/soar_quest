@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 
 import '../app.dart';
-import '../components/buttons/doc_edit_button.dart';
 import '../components/doc_form_field.dart';
 import '../components/wrappers/signed_in_content.dart';
 import '../data.dart';
@@ -90,8 +89,14 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                         children: App.auth.user.userDoc.fields
                             .map((field) => Text(field.toString()))
                             .toList()),
-                    DocEditButton(App.auth.user.userDoc,
-                        refresh: refreshScreen),
+                    SQButton(
+                      "Edit Profile Info",
+                      onPressed: () async {
+                        await goToScreen(DocEditScreen(App.auth.user.userDoc),
+                            context: context);
+                        refreshScreen();
+                      },
+                    ),
                     SQButton("Settings",
                         onPressed: () =>
                             goToScreen(settingsScreen(), context: context)),
