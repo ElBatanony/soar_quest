@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../../data.dart';
 import '../doc_field_field.dart';
 
-class ListField extends StatefulWidget {
+class ListFieldField extends StatefulWidget {
   final SQDocListField listField;
 
-  const ListField(this.listField, {Key? key}) : super(key: key);
+  const ListFieldField(this.listField, {Key? key}) : super(key: key);
 
   @override
-  State<ListField> createState() => _ListFieldState();
+  State<ListFieldField> createState() => _ListFieldFieldState();
 }
 
-class _ListFieldState extends State<ListField> {
+class _ListFieldFieldState extends State<ListFieldField> {
   void deleteListItem(int index) {
     setState(() {
       widget.listField.value.removeAt(index);
@@ -25,7 +25,8 @@ class _ListFieldState extends State<ListField> {
     var listItemsWidgets = [];
 
     for (int i = 0; i < listItems.length; i++) {
-      listItemsWidgets.add(ListItemField(listItems[i], deleteItem: () {
+      listItemsWidgets.add(ListItemField(listItems[i],
+          listField: widget.listField, deleteItem: () {
         deleteListItem(i);
       }));
     }
@@ -53,10 +54,12 @@ class _ListFieldState extends State<ListField> {
 }
 
 class ListItemField extends StatefulWidget {
+  final SQDocListField listField;
   final SQDocField listItemField;
   final Function deleteItem;
 
-  const ListItemField(this.listItemField, {required this.deleteItem, Key? key})
+  const ListItemField(this.listItemField,
+      {required this.deleteItem, required this.listField, Key? key})
       : super(key: key);
 
   @override
@@ -66,7 +69,8 @@ class ListItemField extends StatefulWidget {
 class _ListItemFieldState extends State<ListItemField> {
   @override
   Widget build(BuildContext context) {
-    var typesWithoutList = sQDocFieldTypes.where((type) => type != List);
+    var typesWithoutList =
+        widget.listField.allowedTypes.where((type) => type != List);
 
     return Column(
       children: [
