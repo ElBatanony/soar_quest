@@ -9,8 +9,6 @@ export 'fields/updated_date_field.dart';
 export 'fields/sq_doc_reference_field.dart';
 export 'fields/sq_timestamp_field.dart';
 
-const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
-
 abstract class SQDocField<T> {
   String name = "";
   T? value;
