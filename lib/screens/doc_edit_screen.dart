@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app_navigator.dart';
-import 'package:soar_quest/components/doc_field_field.dart';
-import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/screens/screen.dart';
+
+import '../app.dart';
+import '../data.dart';
+import '../components/doc_field_field.dart';
+import 'screen.dart';
 
 class DocEditScreen extends Screen {
   final SQDoc doc;

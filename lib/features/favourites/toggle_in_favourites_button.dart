@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/data/sq_doc.dart';
-import 'package:soar_quest/features/favourites/favourites.dart';
+
+import '../../data.dart';
+import 'favourites.dart';
 
 class ToggleInFavouritesButton extends StatefulWidget {
   final SQDoc doc;

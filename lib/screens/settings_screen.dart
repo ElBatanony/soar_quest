@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../app.dart';
-import '../data/sq_doc.dart';
+import '../data.dart';
 
 import 'doc_edit_screen.dart';
 import 'screen.dart';
 
+// TODO: extend from docEditScreen
 class SettingsScreen extends Screen {
   const SettingsScreen({String title = "Settings", Key? key})
       : super(title, key: key);

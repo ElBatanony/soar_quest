@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:soar_quest/cloud_functions/get_collections_docs.dart';
-import 'package:soar_quest/data/sq_doc.dart';
+import 'package:soar_quest/data.dart';
 import 'package:soar_quest/data/unimplemented_collection.dart';
 
 void main() async {
