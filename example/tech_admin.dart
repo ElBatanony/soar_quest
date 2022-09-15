@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data.dart';
-import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
 import 'package:soar_quest/screens/category_select_screen.dart';
 import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
@@ -58,8 +57,6 @@ void main() async {
       ],
       singleDocName: "Colour");
 
-  FavouritesFeature.loadFavourites();
-
   final colorRefField =
       SQDocReferenceField("colorDoc", collection: coloursCollection);
   final logsVideoField = VideoLinkField("logVideo");
@@ -99,7 +96,6 @@ void main() async {
       // PublicProfilesScreen(),
 
       logsScreen,
-      // FavouritesFeature.favouritesScreen,
       CategorySelectScreen(
         title: "Colour Cat",
         collection: logsCollection,
