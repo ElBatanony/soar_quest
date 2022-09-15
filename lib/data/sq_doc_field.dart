@@ -4,6 +4,9 @@ import '../data.dart';
 export 'types/sq_timestamp.dart' show SQTimestamp;
 export 'fields/doc_list_field.dart';
 export 'fields/sq_file_field.dart';
+export 'fields/edited_by_field.dart';
+export 'fields/updated_date_field.dart';
+export 'fields/sq_doc_reference_field.dart';
 
 const List<Type> sQDocFieldTypes = [int, String, bool, SQTimestamp, List, Null];
 
@@ -70,6 +73,7 @@ class SQIntField extends SQDocField<int> {
   SQIntField copy() => SQIntField(name, value: value, readOnly: readOnly);
 }
 
+// TODO: move timestamp field to separate folder
 class SQTimestampField extends SQDocField<SQTimestamp> {
   SQTimestampField(String name, {SQTimestamp? value, super.readOnly})
       : super(name, value: value ?? SQTimestamp(0, 0));
