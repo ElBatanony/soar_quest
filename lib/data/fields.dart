@@ -14,7 +14,7 @@ abstract class SQDocField<T> {
   String name = "";
   T? value;
   Type get type => T;
-  final bool readOnly;
+  bool readOnly;
 
   SQDocField(this.name, {this.value, this.readOnly = false});
 
