@@ -15,6 +15,7 @@ class FirestoreCollection extends SQCollection {
     super.parentDoc,
     super.readOnly,
     super.canDeleteDoc,
+    super.docScreen,
   }) : super(id, fields) {
     ref = firestore.collection(getPath());
   }

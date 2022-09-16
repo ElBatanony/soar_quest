@@ -11,18 +11,21 @@ import 'screen.dart';
 
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
 
+typedef DocScreenBuilder = DocScreen Function(SQDoc doc);
+
 class CollectionScreen extends Screen {
   final SQCollection collection;
-  final DocScreen Function(SQDoc doc) docScreen;
+  final DocScreenBuilder docScreen;
 
   CollectionScreen(
       {String? title,
       required this.collection,
-      this.docScreen = defaultDocScreen,
+      DocScreenBuilder? docScreen,
       super.prebody,
       super.postbody,
       super.key})
-      : super(title ?? collection.id);
+      : docScreen = docScreen ?? collection.docScreen,
+        super(title ?? collection.id);
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();

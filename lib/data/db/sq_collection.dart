@@ -1,5 +1,6 @@
 import '../../app.dart';
 import 'sq_doc.dart';
+import '../../screens/collection_screen.dart';
 
 abstract class SQCollection {
   final String id;
@@ -9,7 +10,7 @@ abstract class SQCollection {
   SQDoc? parentDoc;
   bool readOnly;
   bool canDeleteDoc;
-  // TODO: add param for default docScreen, instead of setting for each CollectionScreen
+  DocScreenBuilder docScreen;
 
   SQCollection(
     this.id,
@@ -18,6 +19,7 @@ abstract class SQCollection {
     this.parentDoc,
     this.readOnly = false,
     this.canDeleteDoc = true,
+    this.docScreen = defaultDocScreen,
   }) {
     this.singleDocName = singleDocName ?? id;
     App.instance.collections.add(this);
