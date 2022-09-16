@@ -10,12 +10,14 @@ class DocCreateScreen extends Screen {
   final SQCollection collection;
   final List<SQDocField> initialFields;
   final List<String> hiddenFields;
+  final String submitButtonText;
 
   DocCreateScreen(
     this.collection, {
     String? title,
     this.initialFields = const [],
     this.hiddenFields = const [],
+    this.submitButtonText = "Create",
     super.key,
   }) : super(title ?? "Create ${collection.singleDocName}");
 
@@ -56,7 +58,7 @@ class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
           children: [
             ...DocFormField.generateDocFieldsFields(newDoc,
                 hiddenFields: widget.hiddenFields),
-            SQButton("Create", onPressed: createDoc)
+            SQButton(widget.submitButtonText, onPressed: createDoc)
           ],
         ),
       ),
