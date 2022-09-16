@@ -62,7 +62,10 @@ class _DocFormFieldState extends State<DocFormField> {
     final SQDocField field = widget.field;
 
     if (field.readOnly == true) {
-      return Text("$field (read only)");
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text("$field"),
+      );
     }
 
     if (field is SQIntField) {
