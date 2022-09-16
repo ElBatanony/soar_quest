@@ -30,8 +30,11 @@ class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
     String newDocId = widget.collection.getANewDocId();
     newDoc = SQDoc(newDocId, collection: widget.collection);
 
-    for (var field in widget.initialFields)
-      newDoc.getFieldByName(field.name)?.value = field.value;
+    for (var field in widget.initialFields) {
+      SQDocField? newDocField = newDoc.getFieldByName(field.name);
+      newDocField?.value = field.value;
+      newDocField?.readOnly = field.readOnly;
+    }
 
     for (var field in newDoc.fields)
       if (field.runtimeType == SQEditedByField)
