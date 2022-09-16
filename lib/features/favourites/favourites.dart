@@ -4,8 +4,6 @@ import '../../data/db.dart';
 import '../../data/types/sq_doc_reference.dart';
 import '../feature.dart';
 import '../../screens/collection_screen.dart';
-import '../../screens/doc_screen.dart';
-import '../../screens/screen.dart';
 import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
@@ -62,9 +60,6 @@ class FavouritesFeature extends Feature {
     favouritesCollection.deleteDoc(favDoc.id);
   }
 
-  Screen get favouritesScreen =>
-      FavouritesScreen(collection: _favouritesCollection);
-
   loadFavourites() {
     favouritesCollection.loadCollection();
   }
@@ -76,7 +71,12 @@ class FavouritesFeature extends Feature {
 }
 
 class FavouritesScreen extends CollectionScreen {
-  FavouritesScreen({super.title, required super.collection, super.key});
+  FavouritesScreen(
+      {required FavouritesFeature favouritesFeature,
+      super.docScreen,
+      super.postbody,
+      super.key})
+      : super(collection: favouritesFeature.favouritesCollection);
 
   @override
   State<FavouritesScreen> createState() => _FavouritesScreenState();
@@ -94,8 +94,8 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
     return ListTile(
       title: SQButton(doc.identifier,
-          onPressed: () =>
-              goToScreen(DocScreen(originalDocRef.getDoc()), context: context)),
+          onPressed: () => goToScreen(widget.docScreen(originalDocRef.getDoc()),
+              context: context)),
       trailing: SQButton(
         'Remove',
         onPressed: () => removeFromFavourites(doc),

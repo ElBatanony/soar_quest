@@ -71,7 +71,7 @@ void main() async {
         collection: ByUserCollection.fromCollection(
             collection: datesCollection, byUserField: sqEditedByField)),
     // CollectionScreen("Categories", collection: categoriesCollection),
-    favouriteDates.favouritesScreen,
+    FavouritesScreen(favouritesFeature: favouriteDates),
     ProfileScreen("Profile"),
   ]);
 
