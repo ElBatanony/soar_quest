@@ -10,12 +10,36 @@ import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
 
+class FavDoc extends SQDoc {
+  SQDocReference favedDocRef;
+
+  FavDoc(super.id, {required this.favedDocRef, required super.collection});
+
+  FavDoc.fromDoc(SQDoc doc)
+      : this(doc.id,
+            favedDocRef: doc.getFieldValueByName('ref'),
+            collection: doc.collection);
+}
+
+class FavouritesCollection extends FirestoreUserCollection {
+  List<FavDoc> favDocs = [];
+
+  FavouritesCollection(
+      {required super.id, required super.userId, required super.fields});
+
+  @override
+  Future loadCollection() async {
+    await super.loadCollection();
+    favDocs = docs.map((doc) => FavDoc.fromDoc(doc)).toList();
+  }
+}
+
 class FavouritesFeature extends Feature {
   SQCollection collection;
-  late final SQUserCollection _favouritesCollection;
+  late final FavouritesCollection favouritesCollection;
 
   FavouritesFeature({required this.collection}) {
-    _favouritesCollection = FirestoreUserCollection(
+    favouritesCollection = FavouritesCollection(
         id: "Favourite ${collection.id}",
         fields: [
           SQDocReferenceField("ref", collection: collection),
@@ -28,25 +52,25 @@ class FavouritesFeature extends Feature {
   }
 
   addFavourite(SQDoc doc) {
-    var newFavDoc = SQDoc(doc.id, collection: _favouritesCollection);
+    var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
     newFavDoc.setDocFieldByName("ref", doc.ref);
     // newFavDoc.setData({"ref": });
-    _favouritesCollection.createDoc(newFavDoc);
+    favouritesCollection.createDoc(newFavDoc);
   }
 
   removeFavourite(SQDoc favDoc) {
-    _favouritesCollection.deleteDoc(favDoc.id);
+    favouritesCollection.deleteDoc(favDoc.id);
   }
 
   Screen get favouritesScreen =>
       FavouritesScreen(collection: _favouritesCollection);
 
   loadFavourites() {
-    _favouritesCollection.loadCollection();
+    favouritesCollection.loadCollection();
   }
 
   bool isInFavourites(SQDoc doc) {
-    return _favouritesCollection.docs
+    return favouritesCollection.docs
         .any((SQDoc someDoc) => someDoc.id == doc.id);
   }
 }
