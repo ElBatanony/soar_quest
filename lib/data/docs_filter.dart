@@ -12,14 +12,15 @@ extension FilterDocs on SQCollection {
 }
 
 abstract class DocsFilter {
-  SQDocField field;
-
-  DocsFilter(this.field);
-
   List<SQDoc> filter(List<SQDoc> docs);
 }
 
-class DocValueFilter extends DocsFilter {
+abstract class DocsFieldFilter extends DocsFilter {
+  SQDocField field;
+  DocsFieldFilter(this.field);
+}
+
+class DocValueFilter extends DocsFieldFilter {
   DocValueFilter(super.field);
 
   @override
@@ -30,7 +31,7 @@ class DocValueFilter extends DocsFilter {
   }
 }
 
-class StringContainsFilter extends DocsFilter {
+class StringContainsFilter extends DocsFieldFilter {
   StringContainsFilter(super.field);
 
   @override
@@ -42,7 +43,7 @@ class StringContainsFilter extends DocsFilter {
   }
 }
 
-class DocRefFilter extends DocsFilter {
+class DocRefFilter extends DocsFieldFilter {
   SQDocReferenceField docRefField;
 
   DocRefFilter({required this.docRefField}) : super(docRefField);

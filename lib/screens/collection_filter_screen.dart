@@ -43,10 +43,12 @@ class _CollectionFilterScreenState
   Widget screenBody(BuildContext context) {
     return Column(children: [
       ...widget.filters
-          .map((filter) => DocFormField(
-                filter.field,
-                onChanged: (value) => updateDocs(),
-              ))
+          .map((filter) => (filter is DocsFieldFilter)
+              ? DocFormField(
+                  filter.field,
+                  onChanged: (value) => updateDocs(),
+                )
+              : Container())
           .toList(),
       SingleChildScrollView(
         child: Center(
