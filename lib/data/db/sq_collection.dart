@@ -1,17 +1,15 @@
-import 'package:soar_quest/data/db/sq_doc.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-
 import '../../app.dart';
+import 'sq_doc.dart';
 
 abstract class SQCollection {
   final String id;
   List<SQDocField> fields;
   List<SQDoc> docs = [];
-  CollectionScreen? screen;
   late String singleDocName;
   SQDoc? parentDoc;
   bool readOnly;
   bool canDeleteDoc;
+  // TODO: add param for default docScreen, instead of setting for each CollectionScreen
 
   SQCollection(
     this.id,

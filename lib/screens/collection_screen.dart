@@ -22,9 +22,7 @@ class CollectionScreen extends Screen {
       super.prebody,
       super.postbody,
       super.key})
-      : super(title ?? collection.id) {
-    collection.screen = this;
-  }
+      : super(title ?? collection.id);
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();
