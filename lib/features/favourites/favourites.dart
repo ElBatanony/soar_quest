@@ -43,6 +43,7 @@ class FavouritesFeature extends Feature {
           SQDocReferenceField("ref", collection: collection),
         ],
         userId: App.auth.user.userId);
+    favouritesCollection.loadCollection();
   }
 
   Widget addToFavouritesButton(SQDoc doc) {
