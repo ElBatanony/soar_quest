@@ -57,14 +57,14 @@ void main() async {
   adaloDirectoryApp.homescreen = MainScreen([
     CollectionScreen(
       collection: datesCollection,
-      docScreen: (doc) =>
-          DocScreen(doc, postbody: favouriteDates.addToFavouritesButton(doc)),
+      docScreen: (doc) => DocScreen(doc,
+          postbody: (_) => favouriteDates.addToFavouritesButton(doc)),
     ),
     CategorySelectScreen(
       collection: datesCollection,
       categoryField: dateCategoryRefField,
-      docScreen: (doc) =>
-          DocScreen(doc, postbody: favouriteDates.addToFavouritesButton(doc)),
+      docScreen: (doc) => DocScreen(doc,
+          postbody: (_) => favouriteDates.addToFavouritesButton(doc)),
     ),
     CollectionScreen(
         title: "My Dates",
