@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../app.dart';
+import '../components/buttons/sq_button.dart';
+
 class Screen extends StatefulWidget {
   final String title;
   final Widget? prebody;
   final Widget? postbody;
 
   const Screen(this.title, {this.prebody, this.postbody, super.key});
+
+  SQButton button(BuildContext context) {
+    return SQButton('Go to $title',
+        onPressed: () => goToScreen(this, context: context));
+  }
 
   @override
   State<Screen> createState() => ScreenState();
