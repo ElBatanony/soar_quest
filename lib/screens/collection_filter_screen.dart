@@ -12,6 +12,8 @@ class CollectionFilterScreen extends CollectionScreen {
     required super.collection,
     required this.filters,
     super.docScreen,
+    super.prebody,
+    super.postbody,
     super.key,
   });
 
