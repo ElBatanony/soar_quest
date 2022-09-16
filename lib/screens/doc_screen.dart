@@ -12,9 +12,16 @@ import 'screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
+  final bool canEdit, canDelete;
 
-  DocScreen(this.doc, {super.prebody, super.postbody, super.key})
-      : super(doc.identifier);
+  DocScreen(
+    this.doc, {
+    super.prebody,
+    super.postbody,
+    this.canEdit = true,
+    this.canDelete = true,
+    super.key,
+  }) : super(doc.identifier);
 
   @override
   State<DocScreen> createState() => DocScreenState();
@@ -63,14 +70,15 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SQButton(
-                  "Edit ${doc.collection.singleDocName}",
-                  onPressed: () async {
-                    await goToScreen(DocEditScreen(doc), context: context);
-                    refreshScreen();
-                  },
-                ),
-                if (doc.collection.canDeleteDoc)
+                if (widget.canEdit)
+                  SQButton(
+                    "Edit ${doc.collection.singleDocName}",
+                    onPressed: () async {
+                      await goToScreen(DocEditScreen(doc), context: context);
+                      refreshScreen();
+                    },
+                  ),
+                if (doc.collection.canDeleteDoc && widget.canDelete)
                   DocDeleteButton(doc, deleteCallback: refreshScreen)
               ],
             ),
