@@ -13,10 +13,11 @@ class DocCreateScreen extends Screen {
 
   DocCreateScreen(
     this.collection, {
+    String? title,
     this.initialFields = const [],
     this.hiddenFields = const [],
     super.key,
-  }) : super("Create ${collection.singleDocName}");
+  }) : super(title ?? "Create ${collection.singleDocName}");
 
   @override
   State<DocCreateScreen> createState() => _DocCreateScreenState();
