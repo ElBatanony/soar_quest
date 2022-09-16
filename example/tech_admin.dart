@@ -83,7 +83,7 @@ void main() async {
   DocsFilter logIdSearchField =
       StringContainsFilter(logsCollection.getFieldByName("logId"));
   DocsFilter payloadFilter =
-      DocsFilter(logsCollection.getFieldByName("payload"));
+      DocValueFilter(logsCollection.getFieldByName("payload"));
 
   final logsScreen = CollectionScreen(collection: logsCollection);
 

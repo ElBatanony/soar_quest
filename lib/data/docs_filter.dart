@@ -11,11 +11,18 @@ extension FilterDocs on SQCollection {
   }
 }
 
-class DocsFilter {
+abstract class DocsFilter {
   SQDocField field;
 
   DocsFilter(this.field);
 
+  List<SQDoc> filter(List<SQDoc> docs);
+}
+
+class DocValueFilter extends DocsFilter {
+  DocValueFilter(super.field);
+
+  @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs
         .where((doc) => doc.getFieldValueByName(field.name) == field.value)
