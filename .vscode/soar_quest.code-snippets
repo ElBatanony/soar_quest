@@ -64,8 +64,7 @@
 		"prefix": "docScreen",
 		"body": [
 			"class $1 extends DocScreen {",
-			"  const $1(super.title, super.doc,",
-			"      {required super.refreshCollectionScreen, super.key});",
+			"  $1(super.doc,{super.key});",
 			"",
 			"  @override",
 			"  State<$1> createState() => _$1State();",
