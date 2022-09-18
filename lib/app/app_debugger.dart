@@ -22,8 +22,7 @@ class _AppDebuggerDisplayState extends State<AppDebuggerDisplay> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: App.instance.theme ??
-            ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+        theme: App.instance.theme,
         home: Scaffold(
           appBar: AppBar(
             title: Text("App Debugger"),
