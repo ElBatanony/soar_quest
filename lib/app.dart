@@ -19,7 +19,7 @@ class App {
   Screen? homescreen;
 
   Screen? currentScreen;
-  ThemeData? theme;
+  ThemeData theme;
 
   List<SQCollection> collections = [];
 
@@ -47,7 +47,7 @@ class App {
 
   App(
     this.name, {
-    this.theme,
+    required this.theme,
     this.inDebug = false,
     this.emulatingCloudFunctions = false,
     AppSettings? settings,
