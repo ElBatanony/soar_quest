@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app.dart';
 
 import 'screen.dart';
 
@@ -29,29 +28,23 @@ class _MainScreenState extends ScreenState<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: App.instance.name,
-      theme: App.instance.theme ??
-          ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        bottomNavigationBar: screens.length > 1
-            ? NavigationBar(
-                onDestinationSelected: (int index) {
-                  currentPageIndex = index;
-                  refreshScreen();
-                },
-                selectedIndex: currentPageIndex,
-                destinations: screens
-                    .map((screen) => NavigationDestination(
-                          icon: Icon(Icons.explore),
-                          label: screen.title,
-                        ))
-                    .toList(),
-              )
-            : null,
-        body: IndexedStack(index: currentPageIndex, children: screens),
-      ),
+    return Scaffold(
+      bottomNavigationBar: screens.length > 1
+          ? NavigationBar(
+              onDestinationSelected: (int index) {
+                currentPageIndex = index;
+                refreshScreen();
+              },
+              selectedIndex: currentPageIndex,
+              destinations: screens
+                  .map((screen) => NavigationDestination(
+                        icon: Icon(Icons.explore),
+                        label: screen.title,
+                      ))
+                  .toList(),
+            )
+          : null,
+      body: IndexedStack(index: currentPageIndex, children: screens),
     );
   }
 }
