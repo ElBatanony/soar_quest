@@ -23,6 +23,12 @@ class DocCreateScreen extends Screen {
 
   @override
   State<DocCreateScreen> createState() => _DocCreateScreenState();
+
+  @override
+  SQButton button(BuildContext context, {String? label}) {
+    return super.button(context,
+        label: label ?? "Create a ${collection.singleDocName}");
+  }
 }
 
 class _DocCreateScreenState extends ScreenState<DocCreateScreen> {
