@@ -16,6 +16,7 @@ typedef DocScreenBuilder = DocScreen Function(SQDoc doc);
 class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
+  final bool canCreate;
 
   CollectionScreen(
       {String? title,
@@ -23,6 +24,7 @@ class CollectionScreen extends Screen {
       DocScreenBuilder? docScreen,
       super.prebody,
       super.postbody,
+      this.canCreate = false,
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);
@@ -71,7 +73,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ...docsDisplay(context),
-            if (widget.collection.readOnly == false)
+            if (widget.collection.readOnly == false && widget.canCreate)
               SQButton(
                 "Create ${widget.collection.singleDocName}",
                 onPressed: () async {
