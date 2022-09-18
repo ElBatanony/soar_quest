@@ -92,34 +92,7 @@ void main() async {
     );
   }
 
-  DocScreen classScreen(SQDoc doc) {
-    return DocScreen(
-      doc,
-      canEdit: false,
-      canDelete: false,
-      postbody: (context) => SQButton('Request Class',
-          onPressed: () => goToScreen(
-              DocCreateScreen(
-                title: "Book Class",
-                submitButtonText: "Submit Request",
-                requests,
-                initialFields: [
-                  requests.getFieldByName("Requested Class").copy()
-                    ..value = SQDocReference.fromDoc(doc)
-                    ..readOnly = true
-                ],
-                hiddenFields: [
-                  "Status",
-                  "Attendee",
-                  "Video Meeting Link",
-                  "Reschedule Comment"
-                ],
-              ),
-              context: context)),
-    );
-  }
-
-  classes.docScreen = classScreen;
+  classes.docScreen = (doc) => ClassesDocScreen(doc, requests: requests);
 
   adaloAppointmentsApp.homescreen = MainScreen([
     CollectionFilterScreen(
@@ -138,24 +111,70 @@ void main() async {
               .button(context),
     ),
     LearnScreen(collection: requests),
-    CollectionScreen(collection: classTypes, docScreen: classTypeDocScreen),
-    // CollectionScreen("Class Types", collection: classTypes),
-    FavouritesScreen(
-      favouritesFeature: favouriteClassTypes,
-      docScreen: classTypeDocScreen,
-      postbody: (context) => CollectionFilterScreen(
-          title: "Matching Classes",
-          collection: classes,
-          filters: [
-            FavouriteClassTypesFilter(
-              favouritesFeature: favouriteClassTypes,
-            )
-          ]).button(context),
+    // CollectionScreen(collection: classTypes, docScreen: classTypeDocScreen),
+    ProfileScreen(
+      "Profile",
+      postbody: (context) => FavouritesScreen(
+        // TODO: make inline in profile
+        favouritesFeature: favouriteClassTypes,
+        docScreen: classTypeDocScreen,
+        isInline: true,
+        prebody: (context) => Row(
+          children: [Text("Interested In")],
+        ),
+        postbody: (context) => CollectionFilterScreen(
+            title: "Matching Classes",
+            collection: classes,
+            filters: [
+              FavouriteClassTypesFilter(
+                favouritesFeature: favouriteClassTypes,
+              )
+            ]).button(context),
+      ),
     ),
-    ProfileScreen("Profile"),
   ]);
 
   adaloAppointmentsApp.run();
+}
+
+class ClassesDocScreen extends DocScreen {
+  final SQCollection requests;
+
+  ClassesDocScreen(super.doc, {required this.requests, super.key})
+      : super(canEdit: false, canDelete: false);
+
+  @override
+  State<ClassesDocScreen> createState() => _BookClassScreenState();
+}
+
+class _BookClassScreenState extends DocScreenState<ClassesDocScreen> {
+  @override
+  Widget screenBody(BuildContext context) {
+    return Column(children: [
+      super.screenBody(context),
+      SQButton(
+        'Request Class',
+        onPressed: () => goToScreen(
+            DocCreateScreen(
+              title: "Book Class",
+              submitButtonText: "Submit Request",
+              widget.requests,
+              initialFields: [
+                widget.requests.getFieldByName("Requested Class").copy()
+                  ..value = SQDocReference.fromDoc(doc)
+                  ..readOnly = true
+              ],
+              hiddenFields: [
+                "Status",
+                "Attendee",
+                "Video Meeting Link",
+                "Reschedule Comment"
+              ],
+            ),
+            context: context),
+      ),
+    ]);
+  }
 }
 
 class LearnScreen extends CollectionScreen {
