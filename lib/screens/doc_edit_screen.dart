@@ -8,8 +8,12 @@ import 'screen.dart';
 
 class DocEditScreen extends Screen {
   final SQDoc doc;
-  DocEditScreen(this.doc, {super.key})
-      : super("Edit ${doc.collection.singleDocName}");
+  DocEditScreen(
+    this.doc, {
+    super.prebody,
+    super.postbody,
+    super.key,
+  }) : super("Edit ${doc.collection.singleDocName}");
 
   @override
   State<DocEditScreen> createState() => _DocEditScreenState();
