@@ -10,7 +10,12 @@ import 'doc_edit_screen.dart';
 import 'screen.dart';
 
 class ProfileScreen extends Screen {
-  const ProfileScreen(super.title, {super.prebody, super.postbody, super.key});
+  const ProfileScreen(
+    super.title, {
+    super.prebody,
+    super.postbody,
+    super.key,
+  }) : super(icon: Icons.account_circle);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();

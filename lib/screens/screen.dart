@@ -9,10 +9,17 @@ class Screen extends StatefulWidget {
   final String title;
   final Widget Function(BuildContext)? prebody;
   final Widget Function(BuildContext)? postbody;
+  final IconData? icon;
   final bool isInline;
 
-  const Screen(this.title,
-      {this.prebody, this.postbody, this.isInline = false, super.key});
+  const Screen(
+    this.title, {
+    this.prebody,
+    this.postbody,
+    this.isInline = false,
+    this.icon,
+    super.key,
+  });
 
   SQButton button(BuildContext context) {
     return SQButton('Go to $title',

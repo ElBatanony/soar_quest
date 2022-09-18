@@ -20,6 +20,7 @@ class DocScreen extends Screen {
     super.postbody,
     this.canEdit = true,
     this.canDelete = true,
+    super.icon,
     super.key,
   }) : super(doc.identifier);
 

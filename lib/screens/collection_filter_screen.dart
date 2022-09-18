@@ -14,6 +14,7 @@ class CollectionFilterScreen extends CollectionScreen {
     super.docScreen,
     super.prebody,
     super.postbody,
+    super.icon,
     super.key,
   });
 

@@ -38,7 +38,7 @@ class _MainScreenState extends ScreenState<MainScreen> {
               selectedIndex: currentPageIndex,
               destinations: screens
                   .map((screen) => NavigationDestination(
-                        icon: Icon(Icons.explore),
+                        icon: Icon(screen.icon ?? Icons.explore),
                         label: screen.title,
                       ))
                   .toList(),
