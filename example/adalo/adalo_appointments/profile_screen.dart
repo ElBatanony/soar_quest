@@ -8,7 +8,7 @@ import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
-import 'config.dart';
+import 'config_adalo_appointments.dart';
 import 'favourite_class_types_filter.dart';
 
 Screen profileScreen() {

@@ -29,6 +29,7 @@ SQCollection classes = FirestoreCollection(
     SQUserRefField("Teacher"),
     SQIntField("Teacher's Years of Experience"),
   ],
+  singleDocName: "Class",
   docScreen: (doc) => BookClassScreen(doc, requests: requests),
 );
 
