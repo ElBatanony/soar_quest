@@ -16,6 +16,7 @@ Screen classesCollectionScreen() {
   return CollectionFilterScreen(
     title: "Classes",
     collection: classes,
+    icon: Icons.bookmark,
     filters: [
       FavouriteClassTypesFilter(
         favouritesFeature: favouriteClassTypes,
