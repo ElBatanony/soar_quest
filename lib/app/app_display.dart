@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/app/app_debugger.dart';
 
 import '../app.dart';
 
@@ -20,18 +19,7 @@ class _AppDisplayState extends State<AppDisplay> {
     return MaterialApp(
         title: widget.app.name,
         debugShowCheckedModeBanner: false,
-        theme: widget.app.theme ??
-            ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-        home: widget.app.inDebug
-            ? Row(children: [
-                Expanded(
-                  child: AppDebuggerDisplay(),
-                ),
-                SizedBox(
-                  width: appWidth.toDouble(),
-                  child: widget.app.homescreen!,
-                )
-              ])
-            : widget.app.homescreen!);
+        theme: widget.app.theme,
+        home: widget.app.homescreen);
   }
 }
