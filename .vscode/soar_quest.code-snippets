@@ -53,7 +53,7 @@
 			"",
 			"  @override",
 			"  Widget screenBody(BuildContext context) {",
-			"    // TODO: implement screenBody",
+			"    // TODO: implement screenBody for $1",
 			"    return super.screenBody(context);",
 			"  }",
 			"}"
@@ -73,7 +73,7 @@
 			"class _$1State extends DocScreenState<$1> {",
 			"  @override",
 			"  Widget screenBody(BuildContext context) {",
-			"    // TODO: implement screenBody",
+			"    // TODO: implement screenBody for $1",
 			"    return super.screenBody(context);",
 			"  }",
 			"}"
