@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../app.dart';
 import '../components/buttons/sq_button.dart';
 
+// TODO: create a barrel file for screens
+
 class Screen extends StatefulWidget {
   final String title;
   final Widget Function(BuildContext)? prebody;
