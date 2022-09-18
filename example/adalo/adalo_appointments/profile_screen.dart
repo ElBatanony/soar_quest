@@ -8,12 +8,10 @@ import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
+import 'config.dart';
 import 'favourite_class_types_filter.dart';
 
-Screen profileScreen({
-  required SQCollection classes,
-  required FavouritesFeature favouriteClassTypes,
-}) {
+Screen profileScreen() {
   DocScreen classTypeDocScreen(SQDoc doc) {
     return DocScreen(
       doc,

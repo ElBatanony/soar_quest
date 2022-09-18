@@ -5,8 +5,10 @@ import 'package:soar_quest/data/types.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
 
+import 'config.dart';
+
 class LearnScreen extends CollectionScreen {
-  LearnScreen({required super.collection, super.key}) : super(title: "Learn");
+  LearnScreen({super.key}) : super(title: "Learn", collection: requests);
 
   @override
   State<LearnScreen> createState() => _LearnScreenState();
