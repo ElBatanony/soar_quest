@@ -43,7 +43,7 @@
 		"prefix": "collectionScreen",
 		"body": [
 			"class $1 extends CollectionScreen {",
-			"  $1(super.title, {required super.collection, super.key});",
+			"  $1({super.title, required super.collection, super.key});",
 			"",
 			"  @override",
 			"  State<$1> createState() => _$1State();",
