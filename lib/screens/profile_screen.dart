@@ -76,29 +76,32 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
               builder: (BuildContext context, SignedInUser user) {
                 return Column(
                   children: [
-                    Text("Important stuff for non-anonymous users"),
                     Text("Username: ${user.displayName}"),
                     Text("Email: ${user.email ?? "No-email"}"),
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        SQButton('Update username',
-                            onPressed: () => updateUsername(user)),
-                        SQButton('Update email',
-                            onPressed: () => updateEmail(user)),
-                        SQButton('Update password',
-                            onPressed: () => updatePassword(user)),
-                      ],
-                    ),
                     Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: App.auth.user.userDoc.fields
-                            .map((field) => Text(field.toString()))
-                            .toList()),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: App.auth.user.userDoc.fields
+                          .map((field) => Text(field.toString()))
+                          .toList(),
+                    ),
                     SQButton(
                       "Edit Profile Info",
                       onPressed: () async {
-                        await goToScreen(DocEditScreen(App.auth.user.userDoc),
+                        await goToScreen(
+                            DocEditScreen(
+                              App.auth.user.userDoc,
+                              prebody: (_) => Wrap(
+                                alignment: WrapAlignment.center,
+                                children: [
+                                  SQButton('Update username',
+                                      onPressed: () => updateUsername(user)),
+                                  SQButton('Update email',
+                                      onPressed: () => updateEmail(user)),
+                                  SQButton('Update password',
+                                      onPressed: () => updatePassword(user)),
+                                ],
+                              ),
+                            ),
                             context: context);
                         refreshScreen();
                       },
