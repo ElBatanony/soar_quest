@@ -84,32 +84,36 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                           .map((field) => Text(field.toString()))
                           .toList(),
                     ),
-                    SQButton(
-                      "Edit Profile Info",
-                      onPressed: () async {
-                        await goToScreen(
-                            DocEditScreen(
-                              App.auth.user.userDoc,
-                              prebody: (_) => Wrap(
-                                alignment: WrapAlignment.center,
-                                children: [
-                                  SQButton('Update username',
-                                      onPressed: () => updateUsername(user)),
-                                  SQButton('Update email',
-                                      onPressed: () => updateEmail(user)),
-                                  SQButton('Update password',
-                                      onPressed: () => updatePassword(user)),
-                                ],
-                              ),
-                            ),
-                            context: context);
-                        refreshScreen();
-                      },
+                    Wrap(
+                      children: [
+                        SQButton(
+                          "Edit Profile Info",
+                          onPressed: () async {
+                            await goToScreen(
+                                DocEditScreen(
+                                  App.auth.user.userDoc,
+                                  prebody: (_) => Wrap(
+                                    alignment: WrapAlignment.center,
+                                    children: [
+                                      SQButton('Update username',
+                                          onPressed: () =>
+                                              updateUsername(user)),
+                                      SQButton('Update email',
+                                          onPressed: () => updateEmail(user)),
+                                      SQButton('Update password',
+                                          onPressed: () =>
+                                              updatePassword(user)),
+                                    ],
+                                  ),
+                                ),
+                                context: context);
+                            refreshScreen();
+                          },
+                        ),
+                        settingsScreen().button(context, label: "Settings"),
+                        SQButton("Sign out", onPressed: signOut),
+                      ],
                     ),
-                    SQButton("Settings",
-                        onPressed: () =>
-                            goToScreen(settingsScreen(), context: context)),
-                    SQButton("Sign out", onPressed: signOut),
                   ],
                 );
               },
