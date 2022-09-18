@@ -75,7 +75,9 @@ class FavouritesScreen extends CollectionScreen {
   FavouritesScreen(
       {required FavouritesFeature favouritesFeature,
       super.docScreen,
+      super.prebody,
       super.postbody,
+      super.isInline,
       super.key})
       : super(collection: favouritesFeature.favouritesCollection);
 

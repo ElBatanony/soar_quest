@@ -25,6 +25,7 @@ class CollectionScreen extends Screen {
       super.prebody,
       super.postbody,
       this.canCreate = false,
+      super.isInline,
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);

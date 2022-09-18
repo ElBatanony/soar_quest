@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../app.dart';
 import '../components/buttons/sq_button.dart';
 
-// TODO: add inline screen option
 class Screen extends StatefulWidget {
   final String title;
   final Widget Function(BuildContext)? prebody;
   final Widget Function(BuildContext)? postbody;
+  final bool isInline;
 
-  const Screen(this.title, {this.prebody, this.postbody, super.key});
+  const Screen(this.title,
+      {this.prebody, this.postbody, this.isInline = false, super.key});
 
   SQButton button(BuildContext context) {
     return SQButton('Go to $title',
@@ -29,13 +30,9 @@ class ScreenState<T extends Screen> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text(widget.title), actions: [
-        IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
-      ]),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+    final Widget body = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
         child: Column(
           children: [
             if (widget.prebody != null) widget.prebody!(context),
@@ -44,6 +41,16 @@ class ScreenState<T extends Screen> extends State<T> {
           ],
         ),
       ),
+    );
+
+    if (widget.isInline) return body;
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(title: Text(widget.title), actions: [
+        IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
+      ]),
+      body: body,
     );
   }
 }
