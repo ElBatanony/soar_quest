@@ -40,7 +40,7 @@ class _TeachScreenState extends CollectionScreenState<TeachScreen> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                DocEditScreen(doc).button(context, label: "Edit Class"),
+                docEditScreen(doc).button(context, label: "Edit Class"),
                 StudentsRequestsScreen(doc)
                     .button(context, label: "$numberOfRequests Students")
               ],

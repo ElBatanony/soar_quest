@@ -96,7 +96,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                           "Edit Profile Info",
                           onPressed: () async {
                             await goToScreen(
-                                DocEditScreen(
+                                docEditScreen(
                                   App.auth.user.userDoc,
                                 ),
                                 context: context);

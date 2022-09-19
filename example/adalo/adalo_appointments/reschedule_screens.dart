@@ -22,7 +22,7 @@ class _RescheduledRequestStudentScreenState
 
   void changeDate() async {
     bool changedDate = await goToScreen(
-        DocEditScreen(
+        docEditScreen(
           doc,
           shownFields: ["Requested Class Date", "Time"],
         ),

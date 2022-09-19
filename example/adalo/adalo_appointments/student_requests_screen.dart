@@ -103,7 +103,7 @@ class _NewRequestTeacherScreenState
     extends DocScreenState<NewRequestTeacherScreen> {
   void rescheduleRequest() async {
     bool rescheduledRequest = await goToScreen(
-        DocEditScreen(
+        docEditScreen(
           doc,
           shownFields: ["Reschedule Comment", "Requested Class Date", "Time"],
         ),
@@ -117,7 +117,7 @@ class _NewRequestTeacherScreenState
 
   void bookRequest() async {
     bool bookedRequest = await goToScreen(
-        DocEditScreen(
+        docEditScreen(
           doc,
           shownFields: ["Video Meeting Link"],
         ),
