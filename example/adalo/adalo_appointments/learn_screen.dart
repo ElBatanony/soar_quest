@@ -6,6 +6,7 @@ import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_screen.dart';
 
 import 'config_adalo_appointments.dart';
+import 'reschedule_screens.dart';
 
 class LearnScreen extends CollectionScreen {
   LearnScreen({super.key})
@@ -63,10 +64,21 @@ class _LearnDocWidgetState extends State<LearnDocWidget> {
 
   @override
   Widget build(BuildContext context) {
-    SQDocReference classRef = widget.doc.getFieldValueByName("Requested Class");
-    print(classRef.docId);
+    String status = widget.doc.getFieldValueByName("Status");
     return GestureDetector(
-      onTap: () => goToScreen(DocScreen(widget.doc), context: context),
+      onTap: () {
+        if (status == "Rescheduled")
+          goToScreen(RescheduledRequestStudentScreen(widget.doc),
+              context: context);
+        else
+          goToScreen(
+              DocScreen(
+                widget.doc,
+                canDelete: true,
+                canEdit: false,
+              ),
+              context: context);
+      },
       child: Card(
         color: Colors.lightGreen[100],
         child: Padding(
@@ -77,7 +89,7 @@ class _LearnDocWidgetState extends State<LearnDocWidget> {
                 widget.doc.identifier,
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Text("Status: ${widget.doc.getFieldValueByName("Status")}"),
+              Text("Status: $status"),
               if (requestClassDoc?.initialized == true)
                 Text("Teacher: ${teacherDocRef!.docIdentifier}"),
               Text(

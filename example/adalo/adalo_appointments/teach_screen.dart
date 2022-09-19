@@ -6,7 +6,8 @@ import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/doc_create_screen.dart';
 import 'package:soar_quest/screens/doc_edit_screen.dart';
 
-import 'config.dart';
+import 'config_adalo_appointments.dart';
+import 'student_requests_screen.dart';
 
 class TeachScreen extends CollectionScreen {
   TeachScreen({super.key})
@@ -23,18 +24,10 @@ class TeachScreen extends CollectionScreen {
 class _TeachScreenState extends CollectionScreenState<TeachScreen> {
   @override
   Widget docDisplay(SQDoc doc) {
-    final List<SQDoc> classRequests = requests.filter([
-      DocRefFilter(
-          docRefField: (requests.getFieldByName("Requested Class")
-              as SQDocReferenceField)
-            ..value = SQDocReference.fromDoc(doc))
-    ]);
+    final List<SQDoc> classRequests = requests
+        .filter([DocRefFilter("Requested Class", SQDocReference.fromDoc(doc))]);
 
-    // print(classRequests);
-    print("Class: " + doc.identifier);
-    for (var classRequest in classRequests) {
-      print(classRequest.identifier);
-    }
+    int numberOfRequests = classRequests.length;
 
     return Card(
       child: Padding(
@@ -44,8 +37,14 @@ class _TeachScreenState extends CollectionScreenState<TeachScreen> {
             Text(doc.identifier),
             Text((doc.getFieldValueByName("Class Type") as SQDocReference)
                 .docIdentifier),
-            DocEditScreen(doc).button(context, label: "Edit Class"),
-            Text(classRequests.length.toString() + " Students"),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DocEditScreen(doc).button(context, label: "Edit Class"),
+                StudentsRequestsScreen(doc)
+                    .button(context, label: "$numberOfRequests Students")
+              ],
+            ),
           ],
         ),
       ),
