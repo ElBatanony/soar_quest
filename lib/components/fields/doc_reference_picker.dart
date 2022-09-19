@@ -30,7 +30,7 @@ class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
         Text(widget.docReferenceField.value?.docIdentifier ?? "not-set"),
         if (widget.docReferenceField.readOnly == false)
           SQButton(
-            'Select ${widget.docReferenceField.collection.singleDocName}',
+            'Select',
             onPressed: () async {
               SQDoc? retDoc = await goToScreen(
                   SelectDocScreen(
