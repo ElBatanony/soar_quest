@@ -7,11 +7,14 @@ import '../data/db.dart';
 import 'screen.dart';
 
 class DocEditScreen extends Screen {
+  final List<String> shownFields;
+
   final SQDoc doc;
   DocEditScreen(
     this.doc, {
     super.prebody,
     super.postbody,
+    this.shownFields = const [],
     super.key,
   }) : super("Edit ${doc.collection.singleDocName}");
 
@@ -43,7 +46,8 @@ class _DocEditScreenState extends ScreenState<DocEditScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [Text("Doc ID"), Text(widget.doc.id)],
                   ),
-                  ...DocFormField.generateDocFieldsFields(widget.doc),
+                  ...DocFormField.generateDocFieldsFields(widget.doc,
+                      shownFields: widget.shownFields),
                   SQButton("Save", onPressed: updateItem)
                 ],
               ),
