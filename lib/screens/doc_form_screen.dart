@@ -6,6 +6,9 @@ import '../components/doc_form_field.dart';
 import '../data/db.dart';
 import 'screen.dart';
 
+export 'doc_edit_screen.dart';
+export 'doc_create_screen.dart';
+
 class DocFormScreen extends Screen {
   late final SQCollection collection;
   final List<String> hiddenFields;
