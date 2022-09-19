@@ -71,7 +71,7 @@ void main() async {
             collection: datesCollection, byUserField: sqEditedByField)),
     // CollectionScreen("Categories", collection: categoriesCollection),
     FavouritesScreen(favouritesFeature: favouriteDates),
-    ProfileScreen("Profile"),
+    ProfileScreen(),
   ]);
 
   adaloDirectoryApp.run();

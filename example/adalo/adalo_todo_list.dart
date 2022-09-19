@@ -23,7 +23,7 @@ void main() async {
   adaloTodoApp.homescreen = MainScreen([
     TodoListScreen(
         title: "To Do List", tasksCollection: TasksCollection(id: "Tasks")),
-    ProfileScreen("Profile"),
+    ProfileScreen(),
   ]);
 
   adaloTodoApp.run();

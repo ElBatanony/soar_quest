@@ -25,7 +25,6 @@ Screen profileScreen() {
   }
 
   return ProfileScreen(
-    "Profile",
     postbody: (context) => FavouritesScreen(
       favouritesFeature: favouriteClassTypes,
       docScreen: classTypeDocScreen,

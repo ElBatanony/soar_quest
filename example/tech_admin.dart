@@ -102,7 +102,7 @@ void main() async {
         collection: logsCollection,
         filters: [logIdSearchField],
       ),
-      ProfileScreen("Profile"),
+      ProfileScreen(),
       // SettingsScreen(),
       // CloudFunctionDocsScreen(
       //   "Fetched Logs",

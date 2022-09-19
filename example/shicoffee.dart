@@ -46,7 +46,7 @@ void main() async {
       ordersCollection: orders,
     ),
     OrdersCollection(collection: orders),
-    ProfileScreen("Profile"),
+    ProfileScreen(),
   ]);
 
   shicoffeeApp.run();
