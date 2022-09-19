@@ -86,25 +86,18 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                     ),
                     Wrap(
                       children: [
+                        SQButton('Update username',
+                            onPressed: () => updateUsername(user)),
+                        SQButton('Update email',
+                            onPressed: () => updateEmail(user)),
+                        SQButton('Update password',
+                            onPressed: () => updatePassword(user)),
                         SQButton(
                           "Edit Profile Info",
                           onPressed: () async {
                             await goToScreen(
                                 DocEditScreen(
                                   App.auth.user.userDoc,
-                                  prebody: (_) => Wrap(
-                                    alignment: WrapAlignment.center,
-                                    children: [
-                                      SQButton('Update username',
-                                          onPressed: () =>
-                                              updateUsername(user)),
-                                      SQButton('Update email',
-                                          onPressed: () => updateEmail(user)),
-                                      SQButton('Update password',
-                                          onPressed: () =>
-                                              updatePassword(user)),
-                                    ],
-                                  ),
                                 ),
                                 context: context);
                             refreshScreen();
@@ -125,5 +118,5 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
 }
 
 Screen settingsScreen() {
-  return DocEditScreen(App.instance.settings.settingsDoc);
+  return docEditScreen(App.instance.settings.settingsDoc);
 }
