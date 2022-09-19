@@ -5,6 +5,7 @@ import '../app/app_navigator.dart';
 import '../components/buttons/sq_button.dart';
 
 import '../data/db.dart';
+import '../data/docs_filter.dart';
 import '../screens.dart';
 
 export 'collection_screens/category_select_screen.dart';
@@ -19,6 +20,7 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
   final bool canCreate;
+  final List<DocsFilter> filters;
 
   CollectionScreen(
       {String? title,
@@ -29,6 +31,7 @@ class CollectionScreen extends Screen {
       this.canCreate = false,
       super.isInline,
       super.icon,
+      this.filters = const [],
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);
@@ -65,7 +68,10 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   List<Widget> docsDisplay(BuildContext context) {
-    return widget.collection.docs.map((doc) => docDisplay(doc)).toList();
+    return widget.collection
+        .filter(widget.filters)
+        .map((doc) => docDisplay(doc))
+        .toList();
   }
 
   @override
