@@ -44,6 +44,7 @@ class ScreenState<T extends Screen> extends State<T> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            if (widget.isInline) Text(widget.title),
             if (widget.prebody != null) widget.prebody!(context),
             screenBody(context),
             if (widget.postbody != null) widget.postbody!(context),
