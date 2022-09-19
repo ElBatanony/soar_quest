@@ -12,7 +12,7 @@ class DocFormScreen extends Screen {
   final String submitButtonText;
   final List<String> shownFields;
   final SQDoc doc;
-  final Future Function(SQDoc) submitFunction;
+  final Future Function(SQDoc, BuildContext) submitFunction;
 
   DocFormScreen(
     this.doc, {
@@ -47,7 +47,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   }
 
   Future submitForm() async {
-    await widget.submitFunction(widget.doc).then(
+    await widget.submitFunction(widget.doc, context).then(
           (_) => exitScreen(context, value: true),
         );
   }

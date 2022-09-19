@@ -1,8 +1,7 @@
 import '../data/db.dart';
 import 'doc_form_screen.dart';
 
-Future createDoc(SQDoc doc) async {
-  return doc.collection.createDoc(doc);
+Future createDoc(SQDoc doc, BuildContext context) async {
 }
 
 DocFormScreen docCreateScreen(
