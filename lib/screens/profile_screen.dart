@@ -84,6 +84,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                           .toList(),
                     ),
                     Wrap(
+                      alignment: WrapAlignment.center,
                       children: [
                         SQButton('Update username',
                             onPressed: () => updateUsername(user)),
