@@ -6,6 +6,8 @@ import 'learn_screen.dart';
 import 'profile_screen.dart';
 import 'teach_screen.dart';
 
+// TODO: clean up and compress Adalo Appointments app
+
 void main() async {
   await adaloAppointmentsApp.init();
 
