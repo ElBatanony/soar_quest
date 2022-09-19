@@ -82,8 +82,6 @@ void main() async {
 
   DocsFilter logIdSearchField =
       StringContainsFilter(logsCollection.getFieldByName("logId"));
-  DocsFilter payloadFilter =
-      DocValueFilter(logsCollection.getFieldByName("payload"));
 
   final logsScreen = CollectionScreen(collection: logsCollection);
 
@@ -105,7 +103,7 @@ void main() async {
       CollectionFilterScreen(
         title: "Search",
         collection: logsCollection,
-        filters: [logIdSearchField, payloadFilter],
+        filters: [logIdSearchField],
       ),
       ProfileScreen("Profile"),
       // SettingsScreen(),

@@ -19,10 +19,7 @@ Screen profileScreen() {
         children: [
           favouriteClassTypes.addToFavouritesButton(doc),
           CollectionFilterScreen(collection: classes, filters: [
-            DocRefFilter(
-                docRefField: SQDocReferenceField("Class Type",
-                    collection: doc.collection,
-                    value: SQDocReference.fromDoc(doc)))
+            DocRefFilter("Class Type", SQDocReference.fromDoc(doc))
           ]).button(context)
         ],
       ),

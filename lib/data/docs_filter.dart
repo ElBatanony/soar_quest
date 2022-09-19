@@ -20,13 +20,15 @@ abstract class DocsFieldFilter extends DocsFilter {
   DocsFieldFilter(this.field);
 }
 
-class DocValueFilter extends DocsFieldFilter {
-  DocValueFilter(super.field);
+class DocValueFilter extends DocsFilter {
+  String fieldName;
+  dynamic fieldValue;
+  DocValueFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs
-        .where((doc) => doc.getFieldValueByName(field.name) == field.value)
+        .where((doc) => doc.getFieldValueByName(fieldName) == fieldValue)
         .toList();
   }
 }
@@ -40,6 +42,23 @@ class StringContainsFilter extends DocsFieldFilter {
         .where((doc) => (doc.getFieldValueByName(field.name) as String)
             .contains(field.value))
         .toList();
+  }
+}
+
+class DocRefFilter extends DocsFilter {
+  String fieldName;
+  dynamic fieldValue;
+
+  DocRefFilter(this.fieldName, this.fieldValue);
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    return docs.where((doc) {
+      if (doc.getFieldValueByName(fieldName) == null) return false;
+      SQDocReference docRef = doc.getFieldValueByName(fieldName);
+      return docRef.docId == fieldValue.docId &&
+          docRef.collectionPath == fieldValue.collectionPath;
+    }).toList();
   }
 }
 
