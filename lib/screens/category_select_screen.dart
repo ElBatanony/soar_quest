@@ -45,7 +45,7 @@ class _CategorySelectScreenState
         );
         print(categoryFieldCopy.name);
         print(categoryFieldCopy.value);
-        DocsFilter filter = DocRefFilter(docRefField: categoryFieldCopy);
+        DocsFilter filter = DocRefFieldFilter(docRefField: categoryFieldCopy);
         goToScreen(
             CollectionFilterScreen(
                 title: "Category of",

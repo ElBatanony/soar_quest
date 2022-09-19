@@ -43,10 +43,10 @@ class StringContainsFilter extends DocsFieldFilter {
   }
 }
 
-class DocRefFilter extends DocsFieldFilter {
+class DocRefFieldFilter extends DocsFieldFilter {
   SQDocReferenceField docRefField;
 
-  DocRefFilter({required this.docRefField}) : super(docRefField);
+  DocRefFieldFilter({required this.docRefField}) : super(docRefField);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
