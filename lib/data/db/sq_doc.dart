@@ -40,7 +40,7 @@ class SQDoc {
     initialized = true;
   }
 
-  updateDoc() {
+  Future updateDoc() {
     return collection.updateDoc(this);
   }
 
