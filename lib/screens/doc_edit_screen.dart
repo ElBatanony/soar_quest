@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../app.dart';
 import '../components/buttons/sq_button.dart';
-import '../components/doc_form_field.dart';
 import '../data/db.dart';
+import 'doc_form_screen.dart';
 import 'screen.dart';
 
 class DocEditScreen extends Screen {
@@ -46,7 +46,7 @@ class _DocEditScreenState extends ScreenState<DocEditScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [Text("Doc ID"), Text(widget.doc.id)],
                   ),
-                  ...DocFormField.generateDocFieldsFields(widget.doc,
+                  ...generateDocFieldsFields(widget.doc,
                       shownFields: widget.shownFields),
                   SQButton("Save", onPressed: updateItem)
                 ],
