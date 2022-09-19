@@ -59,8 +59,11 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        ...generateDocFieldsFields(widget.doc,
-            hiddenFields: widget.hiddenFields),
+        ...generateDocFieldsFields(
+          widget.doc,
+          shownFields: widget.shownFields,
+          hiddenFields: widget.hiddenFields,
+        ),
         SQButton(widget.submitButtonText, onPressed: submitForm)
       ],
     );
