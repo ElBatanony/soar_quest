@@ -16,7 +16,7 @@ DocFormScreen docEditScreen(
   String? title,
   List<String>? shownFields,
   List<String> hiddenFields = const [],
-  String submitButtonText = "Create",
+  String submitButtonText = "Edit",
 }) {
   return DocFormScreen(
     doc,
