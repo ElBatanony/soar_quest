@@ -8,7 +8,7 @@ import 'app/app_display.dart';
 import 'app/app_settings.dart';
 import 'app/auth_manager.dart';
 
-import 'screens/screen.dart';
+import 'screens.dart';
 
 export 'app/app_navigator.dart';
 export 'app/app_settings.dart';

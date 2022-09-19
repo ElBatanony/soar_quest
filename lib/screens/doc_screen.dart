@@ -7,7 +7,7 @@ import '../components/buttons/sq_button.dart';
 import '../components/buttons/doc_delete_button.dart';
 
 import '../data/db.dart';
-import 'screen.dart';
+import '../screens.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;

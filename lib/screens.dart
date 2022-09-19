@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../app.dart';
-import '../components/buttons/sq_button.dart';
+import 'app.dart';
+import 'components/buttons/sq_button.dart';
 
-export 'collection_screen.dart';
-export 'doc_screen.dart';
-export 'form_screen.dart';
+export 'screens/collection_screen.dart';
+export 'screens/doc_screen.dart';
+export 'screens/form_screen.dart';
 
 class Screen extends StatefulWidget {
   final String title;

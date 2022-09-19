@@ -4,7 +4,7 @@ import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types/sq_doc_reference.dart';
-import 'package:soar_quest/screens/screen.dart';
+import 'package:soar_quest/screens.dart';
 
 import 'config_adalo_appointments.dart';
 

@@ -4,7 +4,7 @@ import '../../app.dart';
 import '../../components/buttons/sq_button.dart';
 import '../../components/doc_form_field.dart';
 import '../../data/fields.dart';
-import '../screen.dart';
+import '../../screens.dart';
 
 class SQSignUpScreen extends Screen {
   final bool forceSignIn;

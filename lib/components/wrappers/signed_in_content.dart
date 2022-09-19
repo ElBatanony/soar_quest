@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../data/user_data.dart';
-import '../../screens/screen.dart';
+import '../../screens.dart';
 import '../buttons/sq_button.dart';
 
 typedef SignedInContentBuilder = Widget Function(

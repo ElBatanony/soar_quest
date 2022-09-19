@@ -4,7 +4,7 @@ import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
-import 'package:soar_quest/screens/screen.dart';
+import 'package:soar_quest/screens.dart';
 
 import 'config_adalo_appointments.dart';
 import 'favourite_class_types_filter.dart';

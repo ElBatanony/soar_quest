@@ -5,7 +5,7 @@ import '../app/app_navigator.dart';
 import '../components/buttons/sq_button.dart';
 
 import '../data/db.dart';
-import 'screen.dart';
+import '../screens.dart';
 
 export 'collection_screens/category_select_screen.dart';
 export 'collection_screens/collection_filter_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screen.dart';
+import '../screens.dart';
 
 class MainScreen extends Screen {
   final List<Screen> bottomNavScreens;

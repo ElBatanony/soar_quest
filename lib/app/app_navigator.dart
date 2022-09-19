@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/screens/screen.dart';
+import 'package:soar_quest/screens.dart';
 
 Future goToScreen(Screen screen, {required BuildContext context}) {
   return Navigator.push(

@@ -4,7 +4,7 @@ import '../app.dart';
 import '../components/buttons/sq_button.dart';
 import '../components/doc_form_field.dart';
 import '../data/db.dart';
-import 'screen.dart';
+import '../screens.dart';
 
 export 'form_screens/doc_edit_screen.dart';
 export 'form_screens/doc_create_screen.dart';
