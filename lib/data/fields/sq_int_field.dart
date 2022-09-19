@@ -1,5 +1,7 @@
 import '../fields.dart';
 
+// TODO: create SQDoubleField
+
 class SQIntField extends SQDocField<int> {
   SQIntField(super.name, {super.value, super.readOnly});
 
