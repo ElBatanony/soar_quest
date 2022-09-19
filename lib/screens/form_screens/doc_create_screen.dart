@@ -32,6 +32,10 @@ DocFormScreen docCreateScreen(
     newDocField?.readOnly = field.readOnly;
   }
 
+  for (var field in newDoc.fields)
+    if (field.runtimeType == SQCreatedByField)
+      field.value = SQUserRefField.currentUserRef;
+
   return DocFormScreen(
     newDoc,
     submitFunction: createDoc,

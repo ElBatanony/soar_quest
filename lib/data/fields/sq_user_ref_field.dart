@@ -27,3 +27,10 @@ class SQEditedByField extends SQUserRefField {
     return super.collectField();
   }
 }
+
+class SQCreatedByField extends SQUserRefField {
+  SQCreatedByField(super.name, {super.value}) : super(readOnly: true);
+
+  @override
+  SQCreatedByField copy() => SQCreatedByField(name, value: value);
+}
