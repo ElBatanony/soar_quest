@@ -3,8 +3,6 @@ import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
-import 'package:soar_quest/screens/collection_filter_screen.dart';
-import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 

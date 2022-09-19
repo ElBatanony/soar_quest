@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/doc_create_screen.dart';
-import 'package:soar_quest/screens/doc_edit_screen.dart';
+import 'package:soar_quest/screens/screen.dart';
 
 import 'config_adalo_appointments.dart';
 import 'student_requests_screen.dart';

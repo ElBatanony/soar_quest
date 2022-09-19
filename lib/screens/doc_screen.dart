@@ -7,7 +7,6 @@ import '../components/buttons/sq_button.dart';
 import '../components/buttons/doc_delete_button.dart';
 
 import '../data/db.dart';
-import 'doc_edit_screen.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {

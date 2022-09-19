@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../data/db.dart';
-import 'doc_form_screen.dart';
+import '../../data/db.dart';
+import '../form_screen.dart';
 
 Future createDoc(SQDoc doc, BuildContext context) async {
   return doc.collection.createDoc(doc).then((_) {
+    // TODO: make showSnackbar to utils
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("${doc.collection.singleDocName} created"),
     ));

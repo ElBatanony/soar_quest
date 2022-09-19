@@ -3,10 +3,6 @@ import 'package:soar_quest/app/app_navigator.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/types.dart';
-import 'package:soar_quest/screens/collection_filter_screen.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/doc_create_screen.dart';
-import 'package:soar_quest/screens/doc_screen.dart';
 import 'package:soar_quest/screens/screen.dart';
 
 import 'config_adalo_appointments.dart';

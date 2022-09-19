@@ -5,14 +5,11 @@ import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
-import 'package:soar_quest/screens/category_select_screen.dart';
-import 'package:soar_quest/screens/cloud_function_docs_screen.dart';
-import 'package:soar_quest/screens/collection_filter_screen.dart';
+import 'package:soar_quest/screens/cloud_function_screens/cloud_function_docs_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/playground_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
-import 'package:soar_quest/screens/public_profiles_screen.dart';
+import 'package:soar_quest/screens/collection_screens/public_profiles_screen.dart';
 import 'package:soar_quest/app/auth_manager.dart';
 
 void main() async {

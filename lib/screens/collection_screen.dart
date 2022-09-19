@@ -5,9 +5,11 @@ import '../app/app_navigator.dart';
 import '../components/buttons/sq_button.dart';
 
 import '../data/db.dart';
-import 'doc_create_screen.dart';
-import 'doc_screen.dart';
 import 'screen.dart';
+
+export 'collection_screens/category_select_screen.dart';
+export 'collection_screens/collection_filter_screen.dart';
+export 'collection_screens/select_doc_screen.dart';
 
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
 

@@ -5,8 +5,7 @@ import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/components/wrappers/special_access_content.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/types.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/doc_create_screen.dart';
+import 'package:soar_quest/screens/screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 

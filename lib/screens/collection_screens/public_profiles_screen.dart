@@ -1,6 +1,6 @@
-import '../app.dart';
-import '../data/db.dart';
-import '../data/docs_filter.dart';
+import '../../app.dart';
+import '../../data/db.dart';
+import '../../data/docs_filter.dart';
 import 'collection_filter_screen.dart';
 
 final SQCollection publicProfilesCollection = FirestoreCollection(

@@ -6,7 +6,6 @@ import '../components/doc_form_field.dart';
 import '../components/wrappers/signed_in_content.dart';
 import '../data/fields.dart';
 import '../data/user_data.dart';
-import 'doc_edit_screen.dart';
 import 'screen.dart';
 
 class ProfileScreen extends Screen {
