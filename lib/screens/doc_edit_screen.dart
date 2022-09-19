@@ -25,7 +25,7 @@ class _DocEditScreenState extends ScreenState<DocEditScreen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("${widget.doc.collection.singleDocName} updated"),
       ));
-      exitScreen(context);
+      exitScreen(context, value: true);
     });
   }
 
