@@ -75,7 +75,7 @@ class _MenuScreenState extends CollectionScreenState<MenuScreen> {
         return;
       }
       await goToScreen(
-        DocCreateScreen(
+        docCreateScreen(
           widget.ordersCollection,
           hiddenFields: ["Customer"],
           initialFields: [

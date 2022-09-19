@@ -79,7 +79,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
               SQButton(
                 "Create ${widget.collection.singleDocName}",
                 onPressed: () async {
-                  await goToScreen(DocCreateScreen(widget.collection),
+                  await goToScreen(docCreateScreen(widget.collection),
                       context: context);
                   loadData();
                 },

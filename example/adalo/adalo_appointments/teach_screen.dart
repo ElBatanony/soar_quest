@@ -55,7 +55,7 @@ class _TeachScreenState extends CollectionScreenState<TeachScreen> {
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        DocCreateScreen(classes).button(context),
+        docCreateScreen(classes).button(context),
         super.screenBody(context),
       ],
     );

@@ -49,7 +49,7 @@ class _BookClassScreenState extends DocScreenState<BookClassScreen> {
       SQButton(
         'Request Class',
         onPressed: () => goToScreen(
-            DocCreateScreen(
+            docCreateScreen(
               title: "Book Class",
               submitButtonText: "Submit Request",
               widget.requests,
