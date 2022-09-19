@@ -14,7 +14,7 @@ Future updateItem(SQDoc doc, BuildContext context) async {
 DocFormScreen docEditScreen(
   SQDoc doc, {
   String? title,
-  List<String> shownFields = const [],
+  List<String>? shownFields,
   List<String> hiddenFields = const [],
   String submitButtonText = "Create",
 }) {

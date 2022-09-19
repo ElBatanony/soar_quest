@@ -13,7 +13,7 @@ class DocFormScreen extends Screen {
   late final SQCollection collection;
   final List<String> hiddenFields;
   final String submitButtonText;
-  final List<String> shownFields;
+  final List<String>? shownFields;
   final SQDoc doc;
   final Future Function(SQDoc, BuildContext) submitFunction;
 
