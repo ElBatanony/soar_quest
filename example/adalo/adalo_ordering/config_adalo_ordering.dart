@@ -25,7 +25,7 @@ SQCollection menuItems = FirestoreCollection(
     fields: [
       SQStringField("Name"),
       SQDocRefField("Food Truck", collection: foodTrucks),
-      SQIntField("Price"),
+      SQDoubleField("Price"),
       SQBoolField("Food?", value: true),
       SQBoolField("Drink?"),
     ],
@@ -42,8 +42,8 @@ SQCollection orders = FirestoreCollection(
 
       SQStringField("Notes"),
       SQStringField("Status"),
-      SQIntField("Tip Amount"),
-      SQIntField("Total Paid"),
+      SQDoubleField("Tip Amount"),
+      SQDoubleField("Total Paid"),
     ],
     singleDocName: "Order");
 
@@ -53,6 +53,6 @@ SQCollection orderItems = FirestoreCollection(
       SQStringField("Name"),
       SQDocRefField("Menu Item", collection: menuItems),
       SQDocRefField("Order", collection: orders),
-      SQIntField("Price"),
+      SQDoubleField("Price"),
     ],
     singleDocName: "Order Item");
