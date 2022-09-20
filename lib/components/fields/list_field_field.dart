@@ -4,7 +4,7 @@ import '../../data/fields.dart';
 import '../doc_form_field.dart';
 
 class ListFieldField extends StatefulWidget {
-  final SQDocListField listField;
+  final SQFieldListField listField;
 
   const ListFieldField(this.listField, {Key? key}) : super(key: key);
 
@@ -54,7 +54,7 @@ class _ListFieldFieldState extends State<ListFieldField> {
 }
 
 class ListItemField extends StatefulWidget {
-  final SQDocListField listField;
+  final SQFieldListField listField;
   final SQDocField listItemField;
   final Function deleteItem;
 

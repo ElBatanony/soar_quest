@@ -123,7 +123,7 @@ class _DocFormFieldState extends State<DocFormField> {
       );
     }
 
-    if (field is SQDocListField) {
+    if (field is SQFieldListField) {
       return ListFieldField(field);
     }
 

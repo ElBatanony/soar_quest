@@ -1,9 +1,9 @@
 import '../fields.dart';
 
-class SQDocListField extends SQDocField<List<SQDocField>> {
+class SQFieldListField extends SQDocField<List<SQDocField>> {
   List<Type> allowedTypes;
 
-  SQDocListField(String name,
+  SQFieldListField(String name,
       {List<SQDocField> value = const <SQDocField>[],
       required this.allowedTypes})
       : super(name, value: value);
@@ -41,7 +41,7 @@ class SQDocListField extends SQDocField<List<SQDocField>> {
   }
 
   @override
-  SQDocListField copy() => SQDocListField(name,
+  SQFieldListField copy() => SQFieldListField(name,
       value: value.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
 
   @override

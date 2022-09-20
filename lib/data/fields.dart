@@ -1,4 +1,4 @@
-export 'fields/doc_list_field.dart';
+export 'fields/sq_field_list_field.dart';
 export 'fields/sq_doc_reference_field.dart';
 export 'fields/sq_file_field.dart';
 export 'fields/sq_time_of_day_field.dart';
