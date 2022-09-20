@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../app/app_navigator.dart';
 
 import '../data/db.dart';
-import '../data/types.dart';
 import 'buttons/sq_button.dart';
-import 'fields/timestamp_doc_field.dart';
-import 'fields/list_field_field.dart';
-import 'fields/doc_reference_picker.dart';
-import 'fields/file_field_picker.dart';
-import 'fields/time_of_day_field_picker.dart';
+
+export 'fields/bool_form_field.dart';
+export 'fields/int_form_field.dart';
+export 'fields/list_field_field.dart';
+export 'fields/string_form_field.dart';
+export 'fields/timestamp_form_field.dart';
+export 'fields/time_of_day_form_field.dart';
+export 'fields/doc_ref_form_field.dart';
+export 'fields/file_form_field.dart';
 
 class DocFormField extends StatefulWidget {
   // TODO: inherit from FormField
@@ -20,133 +23,29 @@ class DocFormField extends StatefulWidget {
   const DocFormField(this.field, {this.onChanged, this.doc, super.key});
 
   @override
-  State<DocFormField> createState() => _DocFormFieldState();
+  State<DocFormField> createState() => DocFormFieldState();
 }
 
-class _DocFormFieldState extends State<DocFormField> {
-  final fieldTextController = TextEditingController();
-
-  @override
-  void initState() {
-    fieldTextController.text = widget.field.value.toString();
-    refresh();
-    super.initState();
-  }
-
-  void refresh() {
-    setState(() {});
-  }
-
+class DocFormFieldState<T extends DocFormField> extends State<T> {
   void onChanged() {
     if (widget.onChanged != null) widget.onChanged!(widget.field.value);
-    refresh();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final SQDocField field = widget.field;
-
-    if (field.readOnly == true) {
+    if (widget.field.readOnly == true) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text("$field"),
+        child: Text("${widget.field}"),
       );
     }
 
-    if (field is SQIntField) {
-      return TextField(
-        onChanged: (intText) {
-          field.value = int.parse(intText);
-        },
-        onEditingComplete: onChanged,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: field.name,
-        ),
-      );
-    }
-
-    if (field is SQBoolField) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(field.name),
-          Switch(
-            value: field.value,
-            onChanged: (value) {
-              setState(() {
-                field.value = value;
-              });
-              onChanged();
-            },
-          ),
-        ],
-      );
-    }
-
-    if (field is SQStringField) {
-      return TextField(
-        controller: fieldTextController,
-        onChanged: (text) {
-          field.value = text;
-        },
-        onEditingComplete: onChanged,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: field.name,
-          labelText: field.name,
-        ),
-      );
-    }
-
-    if (field is SQTimestampField) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(field.name),
-          Text(field.value.toString()),
-          TimestampDocFieldPicker(
-              timestampField: field, updateCallback: onChanged),
-        ],
-      );
-    }
-
-    if (field is SQTimeOfDayField) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(field.name),
-          Text(field.value.toString()),
-          TimeOfDayFieldPicker(
-              timeOfDayField: field, updateCallback: onChanged),
-        ],
-      );
-    }
-
-    if (field is SQFieldListField) {
-      return ListFieldField(field);
-    }
-
-    if (field is SQDocRefField) {
-      return DocReferenceFieldPicker(
-          docReferenceField: field, updateCallback: onChanged);
-    }
-
-    if (field is SQFileField) {
-      if (widget.doc == null) return Text("No doc to upload file to");
-
-      return FileFieldPicker(
-          fileField: field,
-          doc: widget.doc!,
-          storage: FirebaseFileStorage(field.value),
-          updateCallback: onChanged);
-    }
-
-    if (field.type == Null) {
+    if (widget.field.type == Null) {
       return Text("Greetings! This is null!");
     }
 
-    return Text("${field.type} fields not implemented");
+    return widget.field.formField(onChanged: onChanged, doc: widget.doc);
   }
 }
 
