@@ -7,6 +7,23 @@ import '../../data/types/sq_doc_reference.dart';
 import '../buttons/sq_button.dart';
 import '../../screens/collection_screen.dart';
 
+class SQDocRefFormField extends DocFormField {
+  const SQDocRefFormField(super.field,
+      {required super.onChanged, super.doc, super.key});
+
+  @override
+  State<SQDocRefFormField> createState() => _SQDocRefFormFieldState();
+}
+
+class _SQDocRefFormFieldState extends DocFormFieldState<SQDocRefFormField> {
+  @override
+  Widget build(BuildContext context) {
+    return DocReferenceFieldPicker(
+        docReferenceField: widget.field as SQDocRefField,
+        updateCallback: onChanged);
+  }
+}
+
 class DocReferenceFieldPicker extends StatefulWidget {
   final SQDocRefField docReferenceField;
   final Function updateCallback;

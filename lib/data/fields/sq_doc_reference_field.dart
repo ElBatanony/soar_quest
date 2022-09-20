@@ -31,4 +31,9 @@ class SQDocRefField extends SQDocField<SQDocRef> {
       "collectionPath": value!.collectionPath
     };
   }
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQDocRefFormField(this, onChanged: onChanged);
+  }
 }
