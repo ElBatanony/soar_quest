@@ -1,4 +1,5 @@
 import '../fields.dart';
+import '../../components/doc_form_field.dart';
 
 class SQBoolField extends SQDocField<bool> {
   SQBoolField(super.name, {super.value, super.readOnly});
@@ -14,4 +15,9 @@ class SQBoolField extends SQDocField<bool> {
 
   @override
   bool get value => super.value ?? false;
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQBoolFormField(this, onChanged: onChanged);
+  }
 }
