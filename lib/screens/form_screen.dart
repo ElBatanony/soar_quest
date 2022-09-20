@@ -59,7 +59,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        ...generateDocFieldsFields(
+        ..._generateDocFormFields(
           widget.doc,
           shownFields: widget.shownFields,
           hiddenFields: widget.hiddenFields,
@@ -71,7 +71,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   }
 }
 
-List<DocFormField> generateDocFieldsFields(
+List<DocFormField> _generateDocFormFields(
   SQDoc doc, {
   List<String> hiddenFields = const [],
   List<String>? shownFields,
