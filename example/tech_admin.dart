@@ -56,7 +56,7 @@ void main() async {
       singleDocName: "Colour");
 
   final colorRefField =
-      SQDocReferenceField("colorDoc", collection: coloursCollection);
+      SQDocRefField("colorDoc", collection: coloursCollection);
   final logsVideoField = VideoLinkField("logVideo");
 
   final logsCollection = FirestoreCollection(
@@ -73,7 +73,7 @@ void main() async {
       singleDocName: "Log");
 
   final otherLogRefField =
-      SQDocReferenceField("otherLogDoc", collection: logsCollection);
+      SQDocRefField("otherLogDoc", collection: logsCollection);
 
   logsCollection.fields.add(otherLogRefField);
 

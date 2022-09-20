@@ -25,7 +25,7 @@ SQCollection classes = FirestoreCollection(
   id: "Classes",
   fields: [
     SQStringField("Name"),
-    SQDocReferenceField("Class Type", collection: classTypes),
+    SQDocRefField("Class Type", collection: classTypes),
     SQUserRefField("Teacher"),
     SQIntField("Teacher's Years of Experience"),
   ],
@@ -34,7 +34,7 @@ SQCollection classes = FirestoreCollection(
 );
 
 SQCollection requests = FirestoreCollection(id: "Requests", fields: [
-  SQDocReferenceField("Requested Class", collection: classes),
+  SQDocRefField("Requested Class", collection: classes),
   SQTimestampField("Requested Class Date"),
   SQTimeOfDayField("Time"),
   SQStringField("Status", value: "Pending", readOnly: true),

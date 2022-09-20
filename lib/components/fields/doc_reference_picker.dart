@@ -8,7 +8,7 @@ import '../buttons/sq_button.dart';
 import '../../screens/collection_screen.dart';
 
 class DocReferenceFieldPicker extends StatefulWidget {
-  final SQDocReferenceField docReferenceField;
+  final SQDocRefField docReferenceField;
   final Function updateCallback;
 
   const DocReferenceFieldPicker(

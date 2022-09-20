@@ -34,7 +34,7 @@ void main() async {
       id: "Orders",
       fields: [
         SQStringField("Order Note"),
-        SQDocReferenceField("Item", collection: menu, readOnly: true),
+        SQDocRefField("Item", collection: menu, readOnly: true),
         SQTimestampField("Time"),
         SQUserRefField("Customer", readOnly: true),
       ],
@@ -78,7 +78,7 @@ class _MenuScreenState extends CollectionScreenState<MenuScreen> {
           widget.ordersCollection,
           hiddenFields: ["Customer"],
           initialFields: [
-            SQDocReferenceField(
+            SQDocRefField(
               "Item",
               collection: doc.collection,
               value: SQDocRef.fromDoc(doc),

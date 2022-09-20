@@ -1,18 +1,18 @@
 import '../db.dart';
 import '../types.dart';
 
-class SQDocReferenceField extends SQDocField<SQDocRef> {
+class SQDocRefField extends SQDocField<SQDocRef> {
   SQCollection collection;
 
-  SQDocReferenceField(super.name,
+  SQDocRefField(super.name,
       {required this.collection, super.value, super.readOnly});
 
   @override
   Type get type => SQDocRef;
 
   @override
-  SQDocReferenceField copy() {
-    return SQDocReferenceField(name,
+  SQDocRefField copy() {
+    return SQDocRefField(name,
         collection: collection, value: value, readOnly: readOnly);
   }
 

@@ -40,7 +40,7 @@ class FavouritesFeature extends Feature {
     favouritesCollection = FavouritesCollection(
         id: "Favourite ${collection.id}",
         fields: [
-          SQDocReferenceField("ref", collection: collection),
+          SQDocRefField("ref", collection: collection),
         ],
         userId: App.auth.user.userId);
     favouritesCollection.loadCollection();

@@ -63,7 +63,7 @@ class DocRefFilter extends DocsFilter {
 }
 
 class DocRefFieldFilter extends DocsFieldFilter {
-  SQDocReferenceField docRefField;
+  SQDocRefField docRefField;
 
   DocRefFieldFilter({required this.docRefField}) : super(docRefField);
 

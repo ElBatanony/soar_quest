@@ -127,7 +127,7 @@ class _DocFormFieldState extends State<DocFormField> {
       return ListFieldField(field);
     }
 
-    if (field is SQDocReferenceField) {
+    if (field is SQDocRefField) {
       return DocReferenceFieldPicker(
           docReferenceField: field, updateCallback: onChanged);
     }

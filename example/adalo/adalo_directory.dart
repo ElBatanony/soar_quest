@@ -35,8 +35,8 @@ void main() async {
       ],
       singleDocName: "Category");
 
-  SQDocReferenceField dateCategoryRefField =
-      SQDocReferenceField("Category", collection: categoriesCollection);
+  SQDocRefField dateCategoryRefField =
+      SQDocRefField("Category", collection: categoriesCollection);
   SQEditedByField sqEditedByField = SQEditedByField("Created By");
 
   SQCollection datesCollection = FirestoreCollection(id: "Dates", fields: [
