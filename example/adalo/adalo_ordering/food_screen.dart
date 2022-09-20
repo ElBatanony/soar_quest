@@ -8,17 +8,18 @@ import 'package:soar_quest/screens.dart';
 
 import 'config_adalo_ordering.dart';
 
-class FoodScreen extends CollectionScreen {
+class FoodScreen extends CollectionFilterScreen {
   FoodScreen({super.key})
-      : super(title: "Food", collection: foodTrucks, canCreate: isAdmin);
+      : super(
+            title: "Food",
+            collection: foodTrucks,
+            filters: [StringContainsFilter(foodTrucks.getFieldByName("Name"))]);
 
   @override
   State<FoodScreen> createState() => _FoodScreenState();
 }
 
-class _FoodScreenState extends CollectionScreenState<FoodScreen> {
-  // TODO : add a search for name filter
-
+class _FoodScreenState extends CollectionFilterScreenState<FoodScreen> {
   @override
   Widget docDisplay(SQDoc doc) {
     return CollectionScreen(
