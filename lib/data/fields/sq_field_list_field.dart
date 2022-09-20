@@ -48,4 +48,9 @@ class SQFieldListField extends SQDocField<List<SQDocField>> {
   List<dynamic> collectField() {
     return value.map((listItemField) => listItemField.collectField()).toList();
   }
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQFieldListFormField(this, onChanged: onChanged);
+  }
 }

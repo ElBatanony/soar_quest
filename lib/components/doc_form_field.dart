@@ -7,7 +7,7 @@ import 'buttons/sq_button.dart';
 
 export 'fields/bool_form_field.dart';
 export 'fields/int_form_field.dart';
-export 'fields/list_field_field.dart';
+export 'fields/field_list_form_field.dart';
 export 'fields/string_form_field.dart';
 export 'fields/timestamp_form_field.dart';
 export 'fields/time_of_day_form_field.dart';

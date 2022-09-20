@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../data/fields.dart';
-import '../doc_form_field.dart';
 
-class ListFieldField extends StatefulWidget {
+class SQFieldListFormField extends DocFormField {
   final SQFieldListField listField;
 
-  const ListFieldField(this.listField, {Key? key}) : super(key: key);
+  const SQFieldListFormField(this.listField,
+      {super.doc, required super.onChanged, super.key})
+      : super(listField);
 
   @override
-  State<ListFieldField> createState() => _ListFieldFieldState();
+  State<SQFieldListFormField> createState() => _SQFieldListFormFieldState();
 }
 
-class _ListFieldFieldState extends State<ListFieldField> {
+class _SQFieldListFormFieldState
+    extends DocFormFieldState<SQFieldListFormField> {
   void deleteListItem(int index) {
     setState(() {
       widget.listField.value.removeAt(index);
