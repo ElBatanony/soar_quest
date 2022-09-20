@@ -25,6 +25,7 @@ class _SQStringFormFieldState extends DocFormFieldState<SQStringFormField> {
       controller: fieldTextController,
       onChanged: (text) {
         widget.field.value = text;
+        onChanged();
       },
       onEditingComplete: onChanged,
       decoration: InputDecoration(
