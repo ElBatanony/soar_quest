@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../components/snackbar.dart';
 import '../../data/db.dart';
 import '../form_screen.dart';
 
 Future updateItem(SQDoc doc, BuildContext context) async {
   return doc.collection.updateDoc(doc).then((_) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("${doc.collection.singleDocName} updated"),
-    ));
+    showSnackBar("${doc.collection.singleDocName} updated", context: context);
   });
 }
 
