@@ -1,3 +1,6 @@
+import 'db.dart';
+import '../components/doc_form_field.dart';
+
 export 'fields/sq_field_list_field.dart';
 export 'fields/sq_doc_reference_field.dart';
 export 'fields/sq_file_field.dart';
@@ -9,6 +12,8 @@ export 'fields/sq_string_field.dart';
 export 'fields/sq_bool_field.dart';
 export 'fields/sq_int_field.dart';
 export 'fields/sq_video_link_field.dart';
+
+export '../data/db/sq_doc.dart';
 
 abstract class SQDocField<T> {
   String name = "";
@@ -23,6 +28,8 @@ abstract class SQDocField<T> {
   dynamic collectField() => value;
 
   T? parse(dynamic source);
+
+  DocFormField formField({Function? onChanged, SQDoc? doc});
 
   @override
   String toString() {
