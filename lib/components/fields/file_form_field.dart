@@ -3,9 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../components/buttons/sq_button.dart';
 import '../../data/db.dart';
 import '../../data/types.dart';
+import '../../components/buttons/sq_button.dart';
+
+class SQFileFormField extends DocFormField {
+  const SQFileFormField(super.field,
+      {required super.onChanged, required super.doc, super.key});
+
+  @override
+  State<SQFileFormField> createState() => _SQFileFormFieldState();
+}
+
+class _SQFileFormFieldState extends DocFormFieldState<SQFileFormField> {
+  @override
+  Widget build(BuildContext context) {
+    if (widget.doc == null) return Text("No doc to upload file to");
+
+    return FileFieldPicker(
+        fileField: widget.field as SQFileField,
+        doc: widget.doc!,
+        storage: FirebaseFileStorage(widget.field.value),
+        updateCallback: onChanged);
+  }
+}
 
 class FileFieldPicker extends StatefulWidget {
   final SQFileField fileField;

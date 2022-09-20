@@ -26,4 +26,9 @@ class SQFileField extends SQDocField<SQFile> {
   collectField() {
     return {"exists": value.exists, "fieldName": name};
   }
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQFileFormField(this, onChanged: onChanged, doc: doc);
+  }
 }
