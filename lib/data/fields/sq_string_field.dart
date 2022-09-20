@@ -15,4 +15,9 @@ class SQStringField extends SQDocField<String> {
 
   @override
   String get value => super.value ?? "";
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQStringFormField(this, onChanged: onChanged);
+  }
 }
