@@ -5,12 +5,10 @@ import '../../data/docs_filter.dart';
 import '../collection_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
-  final List<DocsFilter> filters;
-
   CollectionFilterScreen({
     super.title,
     required super.collection,
-    required this.filters,
+    required super.filters,
     super.docScreen,
     super.prebody,
     super.postbody,
