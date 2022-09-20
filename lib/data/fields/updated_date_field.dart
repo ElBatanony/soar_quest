@@ -1,5 +1,6 @@
 import '../db.dart';
 import '../types.dart';
+import '../../components/doc_form_field.dart';
 
 class UpdatedDateField extends SQDocField<SQTimestamp> {
   UpdatedDateField(String name, {SQTimestamp? value})
@@ -15,4 +16,9 @@ class UpdatedDateField extends SQDocField<SQTimestamp> {
 
   @override
   collectField() => value = SQTimestamp.fromDate(DateTime.now());
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    throw UnimplementedError();
+  }
 }
