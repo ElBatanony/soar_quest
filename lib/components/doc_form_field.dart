@@ -5,14 +5,14 @@ import '../app/app_navigator.dart';
 import '../data/db.dart';
 import 'buttons/sq_button.dart';
 
-export 'fields/bool_form_field.dart';
-export 'fields/int_form_field.dart';
-export 'fields/field_list_form_field.dart';
-export 'fields/string_form_field.dart';
-export 'fields/timestamp_form_field.dart';
-export 'fields/time_of_day_form_field.dart';
-export 'fields/doc_ref_form_field.dart';
-export 'fields/file_form_field.dart';
+export 'form_fields/bool_form_field.dart';
+export 'form_fields/int_form_field.dart';
+export 'form_fields/field_list_form_field.dart';
+export 'form_fields/string_form_field.dart';
+export 'form_fields/timestamp_form_field.dart';
+export 'form_fields/time_of_day_form_field.dart';
+export 'form_fields/doc_ref_form_field.dart';
+export 'form_fields/file_form_field.dart';
 
 class DocFormField extends StatefulWidget {
   // TODO: inherit from FormField

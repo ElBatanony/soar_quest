@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/db.dart';
 import '../../data/types.dart';
-import '../../components/buttons/sq_button.dart';
+import '../buttons/sq_button.dart';
 
 class SQFileFormField extends DocFormField {
   const SQFileFormField(super.field,
