@@ -24,4 +24,9 @@ class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
       "minute": value?.minute,
     };
   }
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQTimeOfDayFormField(this, onChanged: onChanged);
+  }
 }
