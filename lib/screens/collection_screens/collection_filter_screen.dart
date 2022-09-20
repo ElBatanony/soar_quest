@@ -17,11 +17,11 @@ class CollectionFilterScreen extends CollectionScreen {
   });
 
   @override
-  State<CollectionFilterScreen> createState() => _CollectionFilterScreenState();
+  State<CollectionFilterScreen> createState() => CollectionFilterScreenState();
 }
 
-class _CollectionFilterScreenState
-    extends CollectionScreenState<CollectionFilterScreen> {
+class CollectionFilterScreenState<T extends CollectionFilterScreen>
+    extends CollectionScreenState<T> {
   List<SQDoc> filteredDocs = [];
 
   @override
