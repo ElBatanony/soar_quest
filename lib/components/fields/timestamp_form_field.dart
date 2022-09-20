@@ -1,8 +1,33 @@
 import 'package:flutter/material.dart';
 
-import '../../data/fields.dart';
+import '../../data/db.dart';
 import '../../data/types.dart';
 import '../buttons/sq_button.dart';
+
+class SQTimestampFormField extends DocFormField {
+  const SQTimestampFormField(super.field,
+      {required super.onChanged, super.doc, super.key});
+
+  @override
+  State<SQTimestampFormField> createState() => _SQTimestampFormFieldState();
+}
+
+class _SQTimestampFormFieldState
+    extends DocFormFieldState<SQTimestampFormField> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(widget.field.name),
+        Text(widget.field.value.toString()),
+        TimestampDocFieldPicker(
+            timestampField: widget.field as SQTimestampField,
+            updateCallback: onChanged),
+      ],
+    );
+  }
+}
 
 class TimestampDocFieldPicker extends StatefulWidget {
   const TimestampDocFieldPicker(
