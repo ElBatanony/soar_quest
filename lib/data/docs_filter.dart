@@ -40,7 +40,8 @@ class StringContainsFilter extends DocsFieldFilter {
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs
         .where((doc) => (doc.getFieldValueByName(field.name) as String)
-            .contains(field.value))
+            .toLowerCase()
+            .contains(field.value.toLowerCase()))
         .toList();
   }
 }
