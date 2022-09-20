@@ -81,10 +81,10 @@ class _MenuScreenState extends CollectionScreenState<MenuScreen> {
             SQDocReferenceField(
               "Item",
               collection: doc.collection,
-              value: SQDocReference.fromDoc(doc),
+              value: SQDocRef.fromDoc(doc),
             ),
             SQUserRefField("Customer",
-                value: SQDocReference.fromDoc(App.auth.user.userDoc)),
+                value: SQDocRef.fromDoc(App.auth.user.userDoc)),
           ],
         ),
         context: context,

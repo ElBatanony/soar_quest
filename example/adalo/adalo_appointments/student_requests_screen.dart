@@ -50,8 +50,7 @@ class _NewRequestsScreenState extends CollectionScreenState<NewRequestsScreen> {
   List<Widget> docsDisplay(BuildContext context) {
     return widget.collection
         .filter([
-          DocRefFilter(
-              "Requested Class", SQDocReference.fromDoc(widget.classDoc)),
+          DocRefFilter("Requested Class", SQDocRef.fromDoc(widget.classDoc)),
           DocValueFilter("Status", "Pending")
         ])
         .map((doc) => docDisplay(doc))
@@ -79,8 +78,7 @@ class _BookedRequestsScreenState
   List<Widget> docsDisplay(BuildContext context) {
     return widget.collection
         .filter([
-          DocRefFilter(
-              "Requested Class", SQDocReference.fromDoc(widget.classDoc)),
+          DocRefFilter("Requested Class", SQDocRef.fromDoc(widget.classDoc)),
           DocValueFilter("Status", "Booked")
         ])
         .map((doc) => docDisplay(doc))
@@ -171,8 +169,7 @@ class _RescheduledRequestsScreenState
   List<Widget> docsDisplay(BuildContext context) {
     return widget.collection
         .filter([
-          DocRefFilter(
-              "Requested Class", SQDocReference.fromDoc(widget.classDoc)),
+          DocRefFilter("Requested Class", SQDocRef.fromDoc(widget.classDoc)),
           DocValueFilter("Status", "Rescheduled")
         ])
         .map((doc) => docDisplay(doc))

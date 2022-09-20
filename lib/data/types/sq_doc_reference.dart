@@ -1,18 +1,18 @@
 import '../../app.dart';
 import '../db.dart';
 
-class SQDocReference {
+class SQDocRef {
   String docId;
   String docIdentifier;
   String collectionPath;
 
-  SQDocReference({
+  SQDocRef({
     required this.collectionPath,
     required this.docId,
     required this.docIdentifier,
   });
 
-  SQDocReference.fromDoc(SQDoc doc)
+  SQDocRef.fromDoc(SQDoc doc)
       : this(
             collectionPath: doc.collection.getPath(),
             docId: doc.id,
@@ -21,7 +21,7 @@ class SQDocReference {
   @override
   String toString() => docIdentifier;
 
-  static SQDocReference? parse(Map<String, dynamic> source) {
+  static SQDocRef? parse(Map<String, dynamic> source) {
     String? docId = source["docId"];
     String? collectionPath = source["collectionPath"];
     String? docIdentifier = source["docIdentifier"];
@@ -29,7 +29,7 @@ class SQDocReference {
     if (docId == null || collectionPath == null || docIdentifier == null)
       return null;
 
-    return SQDocReference(
+    return SQDocRef(
       docId: docId,
       docIdentifier: docIdentifier,
       collectionPath: collectionPath,

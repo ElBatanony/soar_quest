@@ -9,7 +9,7 @@ import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
 
 class FavDoc extends SQDoc {
-  SQDocReference favedDocRef;
+  SQDocRef favedDocRef;
 
   FavDoc(super.id, {required this.favedDocRef, required super.collection});
 
@@ -93,7 +93,7 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
   @override
   Widget docDisplay(SQDoc doc) {
-    SQDocReference originalDocRef = doc.getFieldValueByName("ref");
+    SQDocRef originalDocRef = doc.getFieldValueByName("ref");
 
     return ListTile(
       title: SQButton(doc.identifier,

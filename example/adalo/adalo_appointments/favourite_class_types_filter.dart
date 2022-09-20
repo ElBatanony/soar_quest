@@ -12,7 +12,7 @@ class FavouriteClassTypesFilter extends DocsFilter {
   List<SQDoc> filter(List<SQDoc> docs) {
     final classes = docs;
     return classes.where((aclass) {
-      SQDocReference classType = aclass.getFieldValueByName("Class Type");
+      SQDocRef classType = aclass.getFieldValueByName("Class Type");
       // print(classType);
       // print(favouritesFeature.favouritesCollection.favDocs);
       bool isClassInFavedType = favouritesFeature.favouritesCollection.favDocs

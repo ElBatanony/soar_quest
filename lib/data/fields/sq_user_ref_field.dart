@@ -7,8 +7,7 @@ class SQUserRefField extends SQDocReferenceField {
   SQUserRefField(super.name, {super.value, super.readOnly})
       : super(collection: App.usersCollection);
 
-  static SQDocReference get currentUserRef =>
-      SQDocReference.fromDoc(App.auth.user.userDoc);
+  static SQDocRef get currentUserRef => SQDocRef.fromDoc(App.auth.user.userDoc);
 
   @override
   SQUserRefField copy() =>

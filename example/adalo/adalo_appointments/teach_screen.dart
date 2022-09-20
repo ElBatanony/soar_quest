@@ -23,7 +23,7 @@ class _TeachScreenState extends CollectionScreenState<TeachScreen> {
   @override
   Widget docDisplay(SQDoc doc) {
     final List<SQDoc> classRequests = requests
-        .filter([DocRefFilter("Requested Class", SQDocReference.fromDoc(doc))]);
+        .filter([DocRefFilter("Requested Class", SQDocRef.fromDoc(doc))]);
 
     int numberOfRequests = classRequests.length;
 
@@ -33,7 +33,7 @@ class _TeachScreenState extends CollectionScreenState<TeachScreen> {
         child: Column(
           children: [
             Text(doc.identifier),
-            Text((doc.getFieldValueByName("Class Type") as SQDocReference)
+            Text((doc.getFieldValueByName("Class Type") as SQDocRef)
                 .docIdentifier),
             Row(
               mainAxisSize: MainAxisSize.min,

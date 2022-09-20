@@ -39,7 +39,7 @@ class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
                   context: context);
 
               if (retDoc != null) {
-                SQDocReference ref = SQDocReference(
+                SQDocRef ref = SQDocRef(
                   docId: retDoc.id,
                   docIdentifier: retDoc.identifier,
                   collectionPath: retDoc.collection.getPath(),

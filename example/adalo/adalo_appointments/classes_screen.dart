@@ -51,7 +51,7 @@ class _BookClassScreenState extends DocScreenState<BookClassScreen> {
               widget.requests,
               initialFields: [
                 widget.requests.getFieldByName("Requested Class").copy()
-                  ..value = SQDocReference.fromDoc(doc)
+                  ..value = SQDocRef.fromDoc(doc)
                   ..readOnly = true
               ],
               hiddenFields: [

@@ -44,11 +44,11 @@ class LearnDocWidget extends StatefulWidget {
 
 class _LearnDocWidgetState extends State<LearnDocWidget> {
   SQDoc? requestClassDoc;
-  SQDocReference? teacherDocRef;
+  SQDocRef? teacherDocRef;
 
   void loadData() async {
     requestClassDoc =
-        (widget.doc.getFieldValueByName("Requested Class") as SQDocReference)
+        (widget.doc.getFieldValueByName("Requested Class") as SQDocRef)
             .getDoc();
     await requestClassDoc!.loadDoc();
     teacherDocRef = requestClassDoc!.getFieldValueByName("Teacher");
