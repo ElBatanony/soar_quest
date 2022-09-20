@@ -42,14 +42,13 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
 
   @override
   Widget screenBody(BuildContext context) {
+    List<DocsFieldFilter> fieldFilters =
+        widget.filters.whereType<DocsFieldFilter>().toList();
+
     return Column(children: [
-      ...widget.filters
-          .map((filter) => (filter is DocsFieldFilter)
-              ? DocFormField(
-                  filter.field,
-                  onChanged: (value) => updateDocs(),
-                )
-              : Container())
+      ...fieldFilters
+          .map((fieldFilter) =>
+              fieldFilter.field.formField(onChanged: (_) => updateDocs()))
           .toList(),
       SingleChildScrollView(
         child: Center(
