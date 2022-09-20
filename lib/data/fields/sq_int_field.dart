@@ -13,4 +13,9 @@ class SQIntField extends SQDocField<int> {
 
   @override
   SQIntField copy() => SQIntField(name, value: value, readOnly: readOnly);
+
+  @override
+  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+    return SQIntFormField(this, onChanged: onChanged);
+  }
 }
