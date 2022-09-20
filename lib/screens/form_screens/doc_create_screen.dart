@@ -17,7 +17,7 @@ DocFormScreen docCreateScreen(
   String? title,
   List<SQDocField> initialFields = const [],
   // TODO : maybe use Map<fieldName, fieldValue>. but what about readOnly. another list?
-  List<String> shownFields = const [],
+  List<String>? shownFields,
   List<String> hiddenFields = const [],
   String submitButtonText = "Create",
 }) {
