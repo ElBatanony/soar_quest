@@ -1,5 +1,4 @@
 import '../fields.dart';
-import '../../components/doc_form_field.dart';
 
 class SQBoolField extends SQDocField<bool> {
   SQBoolField(super.name, {super.value, super.readOnly});

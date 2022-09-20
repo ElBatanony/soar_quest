@@ -1,5 +1,4 @@
 import 'db.dart';
-import '../components/doc_form_field.dart';
 
 export 'fields/sq_field_list_field.dart';
 export 'fields/sq_doc_reference_field.dart';
@@ -14,6 +13,7 @@ export 'fields/sq_int_field.dart';
 export 'fields/sq_video_link_field.dart';
 
 export '../data/db/sq_doc.dart';
+export '../components/doc_form_field.dart';
 
 abstract class SQDocField<T> {
   String name = "";
