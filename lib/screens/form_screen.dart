@@ -63,6 +63,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
           widget.doc,
           shownFields: widget.shownFields,
           hiddenFields: widget.hiddenFields,
+          onChanged: refreshScreen,
         ),
         SQButton(widget.submitButtonText, onPressed: submitForm)
       ],
@@ -74,6 +75,7 @@ List<DocFormField> generateDocFieldsFields(
   SQDoc doc, {
   List<String> hiddenFields = const [],
   List<String>? shownFields,
+  Function? onChanged,
 }) {
   // TODO: required fields (validate not null)
   List<SQDocField> fields = doc.fields;
@@ -88,9 +90,6 @@ List<DocFormField> generateDocFieldsFields(
       .toList();
 
   return fields
-      .map((field) => DocFormField(
-            field,
-            doc: doc,
-          ))
+      .map((field) => field.formField(onChanged: onChanged, doc: doc))
       .toList();
 }
