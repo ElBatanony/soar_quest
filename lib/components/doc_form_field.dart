@@ -13,6 +13,7 @@ export 'form_fields/timestamp_form_field.dart';
 export 'form_fields/time_of_day_form_field.dart';
 export 'form_fields/doc_ref_form_field.dart';
 export 'form_fields/file_form_field.dart';
+export 'form_fields/double_form_field.dart';
 
 class DocFormField extends StatefulWidget {
   // TODO: inherit from FormField
