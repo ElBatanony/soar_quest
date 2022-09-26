@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../../app/app_navigator.dart';
 import '../../data/fields.dart';
+import '../buttons/sq_button.dart';
+
+Future showFieldOptions(SQFieldListField fieldListfield,
+    {required BuildContext context}) {
+  return showDialog<SQDocField>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("Select new field type"),
+            content: Wrap(
+              children: [
+                ...fieldListfield.allowedTypes
+                    .map((field) => SQButton(field.type.toString(),
+                        onPressed: () =>
+                            exitScreen(context, value: field.copy())))
+                    .toList(),
+              ],
+            ),
+            actions: [
+              SQButton('Cancel', onPressed: () => exitScreen(context)),
+            ]);
+      });
+}
 
 class SQFieldListFormField extends DocFormField {
   final SQFieldListField listField;
@@ -17,13 +41,23 @@ class _SQFieldListFormFieldState
     extends DocFormFieldState<SQFieldListFormField> {
   void deleteListItem(int index) {
     setState(() {
-      widget.listField.value.removeAt(index);
+      widget.listField.fields.removeAt(index);
     });
+  }
+
+  void addField() async {
+    SQDocField? newValue =
+        await showFieldOptions(widget.listField, context: context);
+    if (newValue != null) {
+      setState(() {
+        widget.listField.fields.add(newValue);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var listItems = widget.listField.value;
+    var listItems = widget.listField.fields;
     var listItemsWidgets = [];
 
     for (int i = 0; i < listItems.length; i++) {
@@ -39,14 +73,7 @@ class _SQFieldListFormFieldState
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("${widget.listField.name} (List of ${listItems.length})"),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  widget.listField.value.add(SQStringField(""));
-                });
-              },
-              icon: Icon(Icons.add),
-            ),
+            IconButton(onPressed: addField, icon: Icon(Icons.add)),
           ],
         ),
         ...listItemsWidgets,
@@ -71,35 +98,13 @@ class ListItemField extends StatefulWidget {
 class _ListItemFieldState extends State<ListItemField> {
   @override
   Widget build(BuildContext context) {
-    var typesWithoutList =
-        widget.listField.allowedTypes.where((type) => type != List);
-
     return Column(
       children: [
         Row(
           children: [
-            DropdownButton<Type>(
-                value: widget.listItemField.type,
-                items: typesWithoutList
-                    .map((type) => DropdownMenuItem<Type>(
-                          value: type,
-                          child: Text(type.toString()),
-                        ))
-                    .toList(),
-                onChanged: ((value) {
-                  setState(() {
-                    if (value != null) {
-                      widget.listItemField.value = null;
-                    }
-                  });
-                })),
-            Expanded(child: DocFormField(widget.listItemField)),
+            Expanded(child: widget.listItemField.formField()),
             IconButton(
-              onPressed: () {
-                widget.deleteItem();
-              },
-              icon: Icon(Icons.delete),
-            ),
+                onPressed: () => widget.deleteItem(), icon: Icon(Icons.delete)),
           ],
         ),
       ],
