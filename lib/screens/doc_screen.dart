@@ -51,7 +51,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             duration: Duration(milliseconds: 500),
             content: Text('Copied field: $fieldValue')));
       },
-      child: Text(field.toString()),
+      child: field.readOnlyField(doc: doc),
     );
   }
 
