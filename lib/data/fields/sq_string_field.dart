@@ -22,4 +22,7 @@ class SQStringField extends SQDocField<String> {
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
     return SQStringFormField(this, onChanged: onChanged);
   }
+
+  @override
+  bool get isNull => value.isEmpty;
 }
