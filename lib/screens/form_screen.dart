@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/components/snackbar.dart';
 
 import '../app.dart';
 import '../components/buttons/sq_button.dart';
@@ -49,6 +50,13 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   }
 
   Future submitForm() async {
+    for (SQDocField field in widget.doc.fields) {
+      if (field.required && field.isNull) {
+        showSnackBar("${field.name} is required!", context: context);
+        return;
+      }
+    }
+
     await widget.submitFunction(widget.doc, context).then(
           (_) => exitScreen(context, value: true),
         );
@@ -76,7 +84,6 @@ List<DocFormField> _generateDocFormFields(
   List<String>? shownFields,
   Function? onChanged,
 }) {
-  // TODO: required fields (validate not null)
   List<SQDocField> fields = doc.fields;
 
   if (shownFields != null)
