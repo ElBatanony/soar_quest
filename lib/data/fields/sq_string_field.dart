@@ -1,7 +1,8 @@
 import '../fields.dart';
 
 class SQStringField extends SQDocField<String> {
-  SQStringField(String name, {String value = "", super.readOnly})
+  SQStringField(String name,
+      {String value = "", super.readOnly, super.required})
       : super(name, value: value);
 
   @override
@@ -11,7 +12,8 @@ class SQStringField extends SQDocField<String> {
   }
 
   @override
-  SQStringField copy() => SQStringField(name, value: value, readOnly: readOnly);
+  SQStringField copy() =>
+      SQStringField(name, value: value, readOnly: readOnly, required: required);
 
   @override
   String get value => super.value ?? "";
