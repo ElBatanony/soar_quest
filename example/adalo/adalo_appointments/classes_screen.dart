@@ -50,7 +50,7 @@ class _BookClassScreenState extends DocScreenState<BookClassScreen> {
               submitButtonText: "Submit Request",
               widget.requests,
               initialFields: [
-                widget.requests.getFieldByName("Requested Class").copy()
+                widget.requests.getFieldByName("Requested Class")!.copy()
                   ..value = SQDocRef.fromDoc(doc)
                   ..readOnly = true
               ],

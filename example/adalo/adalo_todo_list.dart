@@ -70,7 +70,7 @@ class TodoListScreen extends CollectionScreen {
 class _TodoListScreenState extends CollectionScreenState<TodoListScreen> {
   addTask() async {
     dynamic newTaskName = await showFieldDialog(
-        context: context, field: widget.collection.getFieldByName("Name"));
+        context: context, field: widget.collection.getFieldByName("Name")!);
     if (newTaskName != null) {
       await widget.tasksCollection.addTask(newTaskName);
       refreshScreen();
