@@ -15,10 +15,21 @@ class InverseRefFormField extends DocFormField {
 }
 
 class _InverseRefFieldState extends DocFormFieldState<InverseRefFormField> {
+  List<SQDocRef> inverses = [];
+
+  void loadInverses() async {
+    inverses = await widget.inverseRefField.inverseRefs(widget.doc!);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadInverses();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<SQDocRef> inverses = widget.inverseRefField.inverseRefs(widget.doc!);
-
     return Wrap(
       children: [
         Text(widget.field.name),

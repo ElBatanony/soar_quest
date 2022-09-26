@@ -11,7 +11,9 @@ class SQInverseRefField extends SQListField {
 
   SQCollection get collection => App.getCollectionById(collectionId);
 
-  List<SQDocRef> inverseRefs(SQDoc doc) {
+  Future<List<SQDocRef>> inverseRefs(SQDoc doc) async {
+    if (!collection.initialized) await collection.loadCollection();
+
     return collection
         .filter([DocRefFilter(refFieldName, doc.ref)])
         .map((doc) => doc.ref)
