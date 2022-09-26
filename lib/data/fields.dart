@@ -25,7 +25,12 @@ abstract class SQDocField<T> {
   bool readOnly;
   bool required;
 
-  SQDocField(this.name, {this.value, this.readOnly = false});
+  SQDocField(
+    this.name, {
+    this.value,
+    this.readOnly = false,
+    this.required = false,
+  });
 
   SQDocField copy();
 
@@ -43,4 +48,6 @@ abstract class SQDocField<T> {
   String toString() {
     return "${name == "" ? "" : "$name:"} $value";
   }
+
+  bool get isNull => value == null;
 }
