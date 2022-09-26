@@ -1,6 +1,8 @@
 import 'db.dart';
 import 'types/sq_doc_reference.dart';
 
+// TODO: rename to CollectionFilter
+
 extension FilterDocs on SQCollection {
   List<SQDoc> filter(List<DocsFilter> filters) {
     List<SQDoc> ret = docs;
