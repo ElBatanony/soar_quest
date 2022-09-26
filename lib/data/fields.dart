@@ -32,6 +32,10 @@ abstract class SQDocField<T> {
 
   DocFormField formField({Function? onChanged, SQDoc? doc});
 
+  DocFormField readOnlyField({SQDoc? doc}) {
+    return ReadOnlyFormField(this, doc: doc);
+  }
+
   @override
   String toString() {
     return "${name == "" ? "" : "$name:"} $value";
