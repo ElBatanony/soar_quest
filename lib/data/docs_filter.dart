@@ -1,10 +1,8 @@
 import 'db.dart';
 import 'types/sq_doc_reference.dart';
 
-// TODO: rename to CollectionFilter
-
 extension FilterDocs on SQCollection {
-  List<SQDoc> filter(List<DocsFilter> filters) {
+  List<SQDoc> filter(List<CollectionFilter> filters) {
     List<SQDoc> ret = docs;
     for (var filter in filters) {
       ret = filter.filter(ret);
@@ -13,19 +11,19 @@ extension FilterDocs on SQCollection {
   }
 }
 
-abstract class DocsFilter {
+abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);
 }
 
-abstract class DocsFieldFilter extends DocsFilter {
+abstract class CollectionFieldFilter extends CollectionFilter {
   SQDocField field;
-  DocsFieldFilter(this.field);
+  CollectionFieldFilter(this.field);
 }
 
-class DocValueFilter extends DocsFilter {
+class ValueFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
-  DocValueFilter(this.fieldName, this.fieldValue);
+  ValueFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
@@ -35,7 +33,7 @@ class DocValueFilter extends DocsFilter {
   }
 }
 
-class StringContainsFilter extends DocsFieldFilter {
+class StringContainsFilter extends CollectionFieldFilter {
   StringContainsFilter(super.field);
 
   @override
@@ -48,7 +46,7 @@ class StringContainsFilter extends DocsFieldFilter {
   }
 }
 
-class DocRefFilter extends DocsFilter {
+class DocRefFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
 
@@ -65,7 +63,7 @@ class DocRefFilter extends DocsFilter {
   }
 }
 
-class DocRefFieldFilter extends DocsFieldFilter {
+class DocRefFieldFilter extends CollectionFieldFilter {
   SQDocRefField docRefField;
 
   DocRefFieldFilter({required this.docRefField}) : super(docRefField);

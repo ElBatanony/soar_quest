@@ -20,7 +20,7 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
   final bool canCreate;
-  final List<DocsFilter> filters;
+  final List<CollectionFilter> filters;
 
   CollectionScreen(
       {String? title,

@@ -43,8 +43,8 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
 
   @override
   Widget screenBody(BuildContext context) {
-    List<DocsFieldFilter> fieldFilters =
-        widget.filters.whereType<DocsFieldFilter>().toList();
+    List<CollectionFieldFilter> fieldFilters =
+        widget.filters.whereType<CollectionFieldFilter>().toList();
 
     return Column(children: [
       ...fieldFilters

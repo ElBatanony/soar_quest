@@ -3,7 +3,7 @@ import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types/sq_doc_reference.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 
-class FavouriteClassTypesFilter extends DocsFilter {
+class FavouriteClassTypesFilter extends CollectionFilter {
   FavouritesFeature favouritesFeature;
 
   FavouriteClassTypesFilter({required this.favouritesFeature});
