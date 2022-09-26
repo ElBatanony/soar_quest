@@ -13,6 +13,7 @@ export 'fields/sq_int_field.dart';
 export 'fields/sq_video_link_field.dart';
 export 'fields/sq_double_field.dart';
 export 'fields/sq_list_field.dart';
+export 'fields/sq_inverse_ref_field.dart';
 
 export '../data/db/sq_doc.dart';
 export '../components/doc_form_field.dart';
