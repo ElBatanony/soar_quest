@@ -5,6 +5,7 @@ import '../app/app_navigator.dart';
 import '../data/db.dart';
 import 'buttons/sq_button.dart';
 
+export 'form_fields/read_only_form_field.dart';
 export 'form_fields/bool_form_field.dart';
 export 'form_fields/int_form_field.dart';
 export 'form_fields/field_list_form_field.dart';
