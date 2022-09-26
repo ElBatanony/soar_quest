@@ -14,6 +14,8 @@ void main() async {
 
   await adaloOrderingApp.init();
 
+  configCollections();
+
   adaloOrderingApp.homescreen = MainScreen([
     if (isAdmin) CollectionScreen(collection: foodTrucks, canCreate: isAdmin),
     FoodScreen(),

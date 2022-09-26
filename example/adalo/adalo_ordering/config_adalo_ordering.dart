@@ -7,58 +7,62 @@ List<SQDocField> userDocFields = [
   SQFileField("Profile Picture"),
 ];
 
-SQCollection foodTrucks = FirestoreCollection(
-  id: "Food Trucks",
-  fields: [
-    SQStringField("Name"),
-    SQStringField("Hours"),
-    SQInverseRefField("Menu Items",
-        refFieldName: "Food Truck", collectionId: menuItems.id),
-    SQFieldListField("List Test", allowedTypes: [
-      SQStringField(""),
-      SQTimestampField(""),
-      SQFileField(""),
-      SQDocRefField("", collectionId: menuItems.id),
-      SQDocRefField("", collectionId: "Orders"),
-    ])
-  ],
-  readOnly: !isAdmin,
-  singleDocName: "Food Truck",
-);
+late SQCollection foodTrucks, menuItems, orders, orderItems;
 
-SQCollection menuItems = FirestoreCollection(
-    id: "Menu Items",
+void configCollections() {
+  foodTrucks = FirestoreCollection(
+    id: "Food Trucks",
     fields: [
-      SQStringField("Name"),
-      SQDocRefField("Food Truck", collectionId: foodTrucks.id),
-      SQDoubleField("Price"),
-      SQBoolField("Food?", value: true),
-      SQBoolField("Drink?"),
+      SQStringField("Name", required: true),
+      SQStringField("Hours"),
+      SQInverseRefField("Menu Items",
+          refFieldName: "Food Truck", collectionId: "Menu Items"),
+      SQFieldListField("List Test", allowedTypes: [
+        SQStringField(""),
+        SQTimestampField(""),
+        SQFileField(""),
+        SQDocRefField("", collectionId: "Menu Items"),
+        SQDocRefField("", collectionId: "Orders"),
+      ])
     ],
-    singleDocName: "Menu Item");
+    readOnly: !isAdmin,
+    singleDocName: "Food Truck",
+  );
 
-SQCollection orders = FirestoreCollection(
-    id: "Orders",
-    fields: [
-      SQCreatedByField("User"),
-      SQDocRefField("Food Truck", collectionId: foodTrucks.id),
-      SQTimeOfDayField("Pick up time"),
-      // SQRefListField("Order Items", collection: orderItems),
-      // TODO : add order items
+  menuItems = FirestoreCollection(
+      id: "Menu Items",
+      fields: [
+        SQStringField("Name"),
+        SQDocRefField("Food Truck", collectionId: foodTrucks.id),
+        SQDoubleField("Price"),
+        SQBoolField("Food?", value: true),
+        SQBoolField("Drink?"),
+      ],
+      singleDocName: "Menu Item");
 
-      SQStringField("Notes"),
-      SQStringField("Status"),
-      SQDoubleField("Tip Amount"),
-      SQDoubleField("Total Paid"),
-    ],
-    singleDocName: "Order");
+  orders = FirestoreCollection(
+      id: "Orders",
+      fields: [
+        SQCreatedByField("User"),
+        SQDocRefField("Food Truck", collectionId: foodTrucks.id),
+        SQTimeOfDayField("Pick up time"),
+        // SQRefListField("Order Items", collection: orderItems),
+        // TODO : add order items
 
-SQCollection orderItems = FirestoreCollection(
-    id: "Order Items",
-    fields: [
-      SQStringField("Name"),
-      SQDocRefField("Menu Item", collectionId: menuItems.id),
-      SQDocRefField("Order", collection: orders),
-      SQDoubleField("Price"),
-    ],
-    singleDocName: "Order Item");
+        SQStringField("Notes"),
+        SQStringField("Status"),
+        SQDoubleField("Tip Amount"),
+        SQDoubleField("Total Paid"),
+      ],
+      singleDocName: "Order");
+
+  orderItems = FirestoreCollection(
+      id: "Order Items",
+      fields: [
+        SQStringField("Name"),
+        SQDocRefField("Menu Item", collectionId: menuItems.id),
+        SQDocRefField("Order", collection: orders),
+        SQDoubleField("Price"),
+      ],
+      singleDocName: "Order Item");
+}
