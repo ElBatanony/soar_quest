@@ -14,7 +14,6 @@ DocFormScreen docCreateScreen(
   SQCollection collection, {
   String? title,
   List<SQDocField> initialFields = const [],
-  // TODO : maybe use Map<fieldName, fieldValue>. but what about readOnly. another list?
   List<String>? shownFields,
   List<String> hiddenFields = const [],
   String submitButtonText = "Create",
@@ -24,10 +23,10 @@ DocFormScreen docCreateScreen(
   String newDocId = collection.getANewDocId();
   SQDoc newDoc = SQDoc(newDocId, collection: collection);
 
-  for (var field in initialFields) {
-    SQDocField? newDocField = newDoc.getFieldByName(field.name);
-    newDocField?.value = field.value;
-    newDocField?.readOnly = field.readOnly;
+  for (var initialField in initialFields) {
+    int index =
+        newDoc.fields.indexWhere((field) => field.name == initialField.name);
+    newDoc.fields[index] = initialField.copy();
   }
 
   for (var field in newDoc.fields)
