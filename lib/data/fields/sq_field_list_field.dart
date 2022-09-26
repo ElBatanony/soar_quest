@@ -1,18 +1,17 @@
 import '../fields.dart';
 
-class SQFieldListField extends SQDocField<List<SQDocField>> {
-  List<Type> allowedTypes;
+class SQFieldListField extends SQListField<SQDocField> {
+  List<SQDocField> allowedTypes;
 
-  SQFieldListField(String name,
-      {List<SQDocField> value = const <SQDocField>[],
+  SQFieldListField(super.name,
+      {List<SQDocField> list = const <SQDocField>[],
       required this.allowedTypes})
-      : super(name, value: value);
+      : super(list: list);
 
   @override
   Type get type => List;
 
-  @override
-  List<SQDocField> get value => super.value ?? [];
+  List<SQDocField> get fields => list;
 
   SQDocField fromDynamic(dynamicValue, {String name = ""}) {
     switch (dynamicValue.runtimeType) {
@@ -42,11 +41,11 @@ class SQFieldListField extends SQDocField<List<SQDocField>> {
 
   @override
   SQFieldListField copy() => SQFieldListField(name,
-      value: value.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
+      list: fields.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
 
   @override
   List<dynamic> collectField() {
-    return value.map((listItemField) => listItemField.collectField()).toList();
+    return fields.map((listItemField) => listItemField.collectField()).toList();
   }
 
   @override
