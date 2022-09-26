@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
 import 'package:soar_quest/screens/cloud_function_screens/cloud_function_docs_screen.dart';
 import 'package:soar_quest/screens/collection_screen.dart';

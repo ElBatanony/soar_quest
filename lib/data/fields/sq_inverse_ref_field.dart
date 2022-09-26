@@ -1,5 +1,3 @@
-import 'package:soar_quest/data/docs_filter.dart';
-
 import '../../app.dart';
 import '../db.dart';
 import '../types.dart';

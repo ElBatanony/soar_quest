@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types.dart';
 import 'package:soar_quest/screens.dart';
 

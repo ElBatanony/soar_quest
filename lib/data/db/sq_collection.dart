@@ -1,6 +1,7 @@
 import '../../app.dart';
 import 'sq_doc.dart';
 import '../../screens/collection_screen.dart';
+export 'collection_filter.dart';
 
 abstract class SQCollection {
   final String id;

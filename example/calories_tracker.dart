@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/docs_filter.dart';
 import 'package:soar_quest/data/types/sq_timestamp.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
