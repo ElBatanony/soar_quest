@@ -2,25 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
-import 'package:soar_quest/data/types/sq_timestamp.dart';
 import 'package:soar_quest/screens/collection_screen.dart';
 import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
-
-// TODO: create a compareTo filter
-class DateBeforeFilter extends CollectionFieldFilter {
-  DateBeforeFilter(super.field);
-
-  @override
-  List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where((doc) =>
-            (doc.getFieldValueByName(field.name) as SQTimestamp)
-                .compareTo(field.value as SQTimestamp) <
-            0)
-        .toList();
-  }
-}
 
 void main() async {
   List<SQDocField> userDocFields = [
@@ -48,7 +32,10 @@ void main() async {
   caloriesTrackersApp.homescreen = MainScreen([
     MealCollectionScreen(
       collection: meals,
-      filters: [DateBeforeFilter(SQTimestampField("Timestamp"))],
+      filters: [
+        CompareFuncFilter(SQTimestampField("Timestamp"),
+            compareFunc: (p) => p < 0)
+      ],
     ),
     ProfileScreen(),
   ]);

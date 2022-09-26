@@ -80,3 +80,20 @@ class DocRefFieldFilter extends CollectionFieldFilter {
     }).toList();
   }
 }
+
+class CompareFuncFilter extends CollectionFieldFilter {
+  bool Function(int) compareFunc;
+
+  CompareFuncFilter(super.field, {required this.compareFunc});
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    return docs
+        .where(
+          (doc) => compareFunc(
+            doc.getFieldValueByName(field.name).compareTo(field.value),
+          ),
+        )
+        .toList();
+  }
+}
