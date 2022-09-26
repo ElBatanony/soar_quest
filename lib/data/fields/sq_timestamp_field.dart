@@ -16,6 +16,6 @@ class SQTimestampField extends SQDocField<SQTimestamp> {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return SQTimeOfDayFormField(this, onChanged: onChanged);
+    return SQTimestampFormField(this, onChanged: onChanged);
   }
 }
