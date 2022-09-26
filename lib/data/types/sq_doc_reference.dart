@@ -38,7 +38,7 @@ class SQDocRef {
 
   SQDoc getDoc() {
     return SQDoc(docId,
-        collection: App.instance.collections
-            .firstWhere((e) => e.getPath() == collectionPath));
+        collection:
+            App.collections.firstWhere((e) => e.getPath() == collectionPath));
   }
 }

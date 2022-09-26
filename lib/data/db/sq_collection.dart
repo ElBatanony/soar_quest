@@ -22,7 +22,7 @@ abstract class SQCollection {
     this.docScreen = defaultDocScreen,
   }) {
     this.singleDocName = singleDocName ?? id;
-    App.instance.collections.add(this);
+    App.collections.add(this);
   }
 
   Future loadCollection();

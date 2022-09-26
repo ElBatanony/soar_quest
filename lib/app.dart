@@ -21,7 +21,7 @@ class App {
   Screen? currentScreen;
   ThemeData theme;
 
-  List<SQCollection> collections = [];
+  static List<SQCollection> collections = [];
 
   bool inDebug;
   bool emulatingCloudFunctions;
@@ -81,5 +81,9 @@ class App {
 
   getAppPath() {
     return "sample-apps/$name/";
+  }
+
+  static getCollectionById(String collectionId) {
+    return collections.firstWhere((col) => col.id == collectionId);
   }
 }

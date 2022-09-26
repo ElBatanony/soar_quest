@@ -9,8 +9,7 @@ class SQInverseRefField extends SQListField {
   String refFieldName;
   SQDoc? doc;
 
-  SQCollection get collection =>
-      App.instance.collections.firstWhere((col) => col.id == collectionId);
+  SQCollection get collection => App.getCollectionById(collectionId);
 
   List<SQDocRef> inverseRefs(SQDoc doc) {
     return collection
