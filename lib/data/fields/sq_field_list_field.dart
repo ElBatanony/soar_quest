@@ -13,30 +13,23 @@ class SQFieldListField extends SQListField<SQDocField> {
 
   List<SQDocField> get fields => list;
 
-  SQDocField fromDynamic(dynamicValue, {String name = ""}) {
-    switch (dynamicValue.runtimeType) {
-      case String:
-        return SQStringField(name, value: dynamicValue);
-      case bool:
-        return SQBoolField(name, value: dynamicValue);
-      // case Timestamp:
-      //   return SQTimestampField(name,
-      //       value: SQTimestamp.fromTimestamp(dynamicValue));
-      // case List: TODO: bring back from dyamic SQDocListField, needs list of types
-      //   return SQDocListField(name, value: dynamicValue);
-      default:
-        throw UnimplementedError(
-            "Dynamic SQDocField type of field not expexted");
-    }
-  }
-
   @override
   List<SQDocField> parse(source) {
-    List<SQDocField> sqFields = [];
-    for (var dynField in (source as List)) {
-      sqFields.add(fromDynamic(dynField));
+    List<dynamic> dynamicList = source as List;
+    List<SQDocField> fields = [];
+    for (var dynamicFieldValue in dynamicList) {
+      for (SQDocField allowedType in allowedTypes) {
+        var parsed = allowedType.parse(dynamicFieldValue);
+
+        if (parsed != null && parsed.runtimeType == allowedType.type) {
+          SQDocField newField = allowedType.copy();
+          newField.value = parsed;
+          fields.add(newField);
+          break;
+        }
+      }
     }
-    return value = sqFields;
+    return fields;
   }
 
   @override
