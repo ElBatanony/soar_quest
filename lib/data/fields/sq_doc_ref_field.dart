@@ -1,11 +1,23 @@
+import '../../app.dart';
 import '../db.dart';
 import '../types.dart';
 
 class SQDocRefField extends SQDocField<SQDocRef> {
-  SQCollection collection;
+  SQCollection? _collection;
+  late String collectionId;
+
+  SQCollection get collection =>
+      _collection ?? App.getCollectionById(collectionId);
 
   SQDocRefField(super.name,
-      {required this.collection, super.value, super.readOnly});
+      {SQCollection? collection,
+      String? collectionId,
+      super.value,
+      super.readOnly})
+      : assert(collectionId != null || collection != null) {
+    _collection = collection;
+    this.collectionId = collectionId ?? collection!.id;
+  }
 
   @override
   Type get type => SQDocRef;
