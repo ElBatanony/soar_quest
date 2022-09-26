@@ -6,7 +6,7 @@ class SQTimestampField extends SQDocField<SQTimestamp> {
       : super(name, value: value ?? SQTimestamp.fromDate(DateTime.now()));
 
   @override
-  SQTimestamp parse(source) {
+  SQTimestamp? parse(source) {
     return SQTimestamp.parse(source);
   }
 
