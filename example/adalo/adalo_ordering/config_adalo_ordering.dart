@@ -12,9 +12,7 @@ SQCollection foodTrucks = FirestoreCollection(
   fields: [
     SQStringField("Name"),
     SQStringField("Hours"),
-    // SQListField<String>("string list"),
-    SQFieldListField("idk at this point", allowedTypes: [String, int]),
-    // TODO: add menu items as list ref field
+    SQInverseRefField("Menu Items", refFieldName: "Food Truck"),
   ],
   readOnly: !isAdmin,
   singleDocName: "Food Truck",
