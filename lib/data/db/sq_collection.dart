@@ -37,8 +37,10 @@ abstract class SQCollection {
   String getPath();
   String getANewDocId();
 
-  SQDocField getFieldByName(String fieldName) =>
-      fields.singleWhere((field) => field.name == fieldName);
+  SQDocField? getFieldByName(String fieldName) {
+    if (!fields.any((field) => field.name == fieldName)) return null;
+    return fields.singleWhere((field) => field.name == fieldName);
+  }
 
   int get docsCount => docs.length;
 }
