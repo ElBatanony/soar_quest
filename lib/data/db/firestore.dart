@@ -29,6 +29,7 @@ class FirestoreCollection extends SQCollection {
         .map((doc) => SQDoc(doc.id, collection: this)
           ..setData(doc.data() as Map<String, dynamic>))
         .toList();
+    super.loadCollection();
   }
 
   @override

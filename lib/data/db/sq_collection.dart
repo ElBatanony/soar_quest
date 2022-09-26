@@ -11,6 +11,7 @@ abstract class SQCollection {
   bool readOnly;
   bool canDeleteDoc;
   DocScreenBuilder docScreen;
+  bool initialized = false;
 
   SQCollection(
     this.id,
@@ -25,7 +26,9 @@ abstract class SQCollection {
     App.collections.add(this);
   }
 
-  Future loadCollection();
+  Future loadCollection() async {
+    initialized = true;
+  }
 
   Future<void> loadDoc(SQDoc doc);
   Future updateDoc(SQDoc doc);
