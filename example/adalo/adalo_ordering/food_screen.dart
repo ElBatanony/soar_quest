@@ -10,10 +10,9 @@ import 'config_adalo_ordering.dart';
 
 class FoodScreen extends CollectionFilterScreen {
   FoodScreen({super.key})
-      : super(
-            title: "Food",
-            collection: foodTrucks,
-            filters: [StringContainsFilter(foodTrucks.getFieldByName("Name"))]);
+      : super(title: "Food", collection: foodTrucks, filters: [
+          StringContainsFilter(foodTrucks.getFieldByName("Name")!),
+        ]);
 
   @override
   State<FoodScreen> createState() => _FoodScreenState();
@@ -36,7 +35,7 @@ class _FoodScreenState extends CollectionFilterScreenState<FoodScreen> {
 
 DocFormScreen startOrderScreen(SQDoc foodTruckDoc) {
   return docCreateScreen(orders, initialFields: [
-    orders.getFieldByName("Food Truck").copy()
+    orders.getFieldByName("Food Truck")!.copy()
       ..value = SQDocRef.fromDoc(foodTruckDoc)
       ..readOnly = true,
   ], shownFields: [
