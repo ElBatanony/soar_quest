@@ -65,7 +65,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
                 'Showing docs: ${filteredDocs.length}',
                 textAlign: TextAlign.center,
               ),
-              ...docsDisplay(context),
+              super.screenBody(context),
             ],
           ),
         ),
