@@ -12,7 +12,15 @@ SQCollection foodTrucks = FirestoreCollection(
   fields: [
     SQStringField("Name"),
     SQStringField("Hours"),
-    SQInverseRefField("Menu Items", refFieldName: "Food Truck"),
+    SQInverseRefField("Menu Items",
+        refFieldName: "Food Truck", collectionId: menuItems.id),
+    SQFieldListField("List Test", allowedTypes: [
+      SQStringField(""),
+      SQTimestampField(""),
+      SQFileField(""),
+      SQDocRefField("", collectionId: menuItems.id),
+      SQDocRefField("", collectionId: "Orders"),
+    ])
   ],
   readOnly: !isAdmin,
   singleDocName: "Food Truck",
@@ -22,7 +30,7 @@ SQCollection menuItems = FirestoreCollection(
     id: "Menu Items",
     fields: [
       SQStringField("Name"),
-      SQDocRefField("Food Truck", collection: foodTrucks),
+      SQDocRefField("Food Truck", collectionId: foodTrucks.id),
       SQDoubleField("Price"),
       SQBoolField("Food?", value: true),
       SQBoolField("Drink?"),
@@ -33,7 +41,7 @@ SQCollection orders = FirestoreCollection(
     id: "Orders",
     fields: [
       SQCreatedByField("User"),
-      SQDocRefField("Food Truck", collection: foodTrucks),
+      SQDocRefField("Food Truck", collectionId: foodTrucks.id),
       SQTimeOfDayField("Pick up time"),
       // SQRefListField("Order Items", collection: orderItems),
       // TODO : add order items
@@ -49,7 +57,7 @@ SQCollection orderItems = FirestoreCollection(
     id: "Order Items",
     fields: [
       SQStringField("Name"),
-      SQDocRefField("Menu Item", collection: menuItems),
+      SQDocRefField("Menu Item", collectionId: menuItems.id),
       SQDocRefField("Order", collection: orders),
       SQDoubleField("Price"),
     ],
