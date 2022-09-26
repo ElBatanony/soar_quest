@@ -13,6 +13,7 @@ class CollectionFilterScreen extends CollectionScreen {
     super.prebody,
     super.postbody,
     super.icon,
+    super.canCreate,
     super.key,
   });
 
