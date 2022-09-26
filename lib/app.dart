@@ -83,7 +83,7 @@ class App {
     return "sample-apps/$name/";
   }
 
-  static getCollectionById(String collectionId) {
-    return collections.firstWhere((col) => col.id == collectionId);
+  static SQCollection getCollectionById(String collectionId) {
+    return App.collections.firstWhere((col) => col.id == collectionId);
   }
 }
