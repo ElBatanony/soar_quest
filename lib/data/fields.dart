@@ -23,6 +23,7 @@ abstract class SQDocField<T> {
   T? value;
   Type get type => T;
   bool readOnly;
+  bool required;
 
   SQDocField(this.name, {this.value, this.readOnly = false});
 
