@@ -6,8 +6,6 @@ import 'package:soar_quest/data/db/sq_doc.dart';
 final firestore = FirebaseFirestore.instance;
 
 class FirestoreCollection extends SQCollection {
-  late CollectionReference ref;
-
   FirestoreCollection({
     required String id,
     required List<SQDocField> fields,
@@ -16,9 +14,9 @@ class FirestoreCollection extends SQCollection {
     super.readOnly,
     super.canDeleteDoc,
     super.docScreen,
-  }) : super(id, fields) {
-    ref = firestore.collection(getPath());
-  }
+  }) : super(id, fields);
+
+  CollectionReference get ref => firestore.collection(getPath());
 
   @override
   Future loadCollection() async {

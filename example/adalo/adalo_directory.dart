@@ -83,7 +83,6 @@ class ByUserCollection extends FirestoreCollection implements SQCollection {
   ByUserCollection(
       {required super.id, required this.byUserField, required super.fields}) {
     docs = [];
-    ref = firestore.collection(getPath());
   }
 
   ByUserCollection.fromCollection({
