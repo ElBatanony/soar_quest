@@ -77,7 +77,7 @@ void main() async {
 
   logsCollection.fields.add(otherLogRefField);
 
-  DocsFilter logIdSearchField =
+  CollectionFilter logIdSearchField =
       StringContainsFilter(logsCollection.getFieldByName("logId")!);
 
   final logsScreen = CollectionScreen(collection: logsCollection);

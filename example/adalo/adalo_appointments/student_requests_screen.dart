@@ -51,7 +51,7 @@ class _NewRequestsScreenState extends CollectionScreenState<NewRequestsScreen> {
     return widget.collection
         .filter([
           DocRefFilter("Requested Class", SQDocRef.fromDoc(widget.classDoc)),
-          DocValueFilter("Status", "Pending")
+          ValueFilter("Status", "Pending")
         ])
         .map((doc) => docDisplay(doc))
         .toList();
@@ -79,7 +79,7 @@ class _BookedRequestsScreenState
     return widget.collection
         .filter([
           DocRefFilter("Requested Class", SQDocRef.fromDoc(widget.classDoc)),
-          DocValueFilter("Status", "Booked")
+          ValueFilter("Status", "Booked")
         ])
         .map((doc) => docDisplay(doc))
         .toList();
@@ -170,7 +170,7 @@ class _RescheduledRequestsScreenState
     return widget.collection
         .filter([
           DocRefFilter("Requested Class", SQDocRef.fromDoc(widget.classDoc)),
-          DocValueFilter("Status", "Rescheduled")
+          ValueFilter("Status", "Rescheduled")
         ])
         .map((doc) => docDisplay(doc))
         .toList();

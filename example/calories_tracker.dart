@@ -9,7 +9,7 @@ import 'package:soar_quest/screens/main_screen.dart';
 import 'package:soar_quest/screens/profile_screen.dart';
 
 // TODO: create a compareTo filter
-class DateBeforeFilter extends DocsFieldFilter {
+class DateBeforeFilter extends CollectionFieldFilter {
   DateBeforeFilter(super.field);
 
   @override
