@@ -7,7 +7,36 @@ List<SQDocField> userDocFields = [
   SQFileField("Profile Picture"),
 ];
 
-late SQCollection foodTrucks, menuItems, orders, orderItems;
+late MenuItemsCollection menuItems;
+
+class MenuItemDoc extends SQDoc {
+  String get name => getFieldValueByName("Name");
+  double get price => getFieldValueByName("Price");
+  SQDocRef get foodTruck => getFieldValueByName("Food Truck");
+  bool get isFood => getFieldValueByName("Food?");
+  bool get isDrink => getFieldValueByName("Drink?");
+
+  MenuItemDoc(super.id, {required super.collection});
+}
+
+class MenuItemsCollection extends FirestoreCollection<MenuItemDoc> {
+  MenuItemsCollection({required super.id})
+      : super(
+          fields: [
+            SQStringField("Name"),
+            SQDocRefField("Food Truck", collectionId: foodTrucks.id),
+            SQDoubleField("Price"),
+            SQBoolField("Food?", value: true),
+            SQBoolField("Drink?")
+          ],
+          singleDocName: "Menu Item",
+        );
+
+  @override
+  MenuItemDoc constructDoc(String id) {
+    return MenuItemDoc(id, collection: this);
+  }
+}
 
 void configCollections() {
   foodTrucks = FirestoreCollection(
@@ -29,16 +58,7 @@ void configCollections() {
     singleDocName: "Food Truck",
   );
 
-  menuItems = FirestoreCollection(
-      id: "Menu Items",
-      fields: [
-        SQStringField("Name"),
-        SQDocRefField("Food Truck", collectionId: foodTrucks.id),
-        SQDoubleField("Price"),
-        SQBoolField("Food?", value: true),
-        SQBoolField("Drink?"),
-      ],
-      singleDocName: "Menu Item");
+  menuItems = MenuItemsCollection(id: "Menu Items");
 
   orders = FirestoreCollection(
       id: "Orders",
