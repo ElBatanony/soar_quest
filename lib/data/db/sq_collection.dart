@@ -27,6 +27,10 @@ abstract class SQCollection<DocType extends SQDoc> {
     App.collections.add(this);
   }
 
+  DocType constructDoc(String id) {
+    return SQDoc(id, collection: this) as DocType;
+  }
+
   Future loadCollection() async {
     initialized = true;
   }
