@@ -58,7 +58,7 @@ class ScreenState<T extends Screen> extends State<T> {
     if (widget.isInline) return body;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(title: Text(widget.title), actions: [
         IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
       ]),
