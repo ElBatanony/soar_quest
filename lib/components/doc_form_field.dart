@@ -31,7 +31,7 @@ class DocFormField extends StatefulWidget {
 
 class DocFormFieldState<T extends DocFormField> extends State<T> {
   void onChanged() {
-    if (widget.onChanged != null) widget.onChanged!(widget.field.value);
+    if (widget.onChanged != null) widget.onChanged!();
     setState(() {});
   }
 
