@@ -66,7 +66,7 @@ class App {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     usersCollection = FirestoreCollection(
-      id: "users",
+      id: "Users",
       fields: App.instance.userDocFields,
       singleDocName: "Profile Info",
       canDeleteDoc: false,
