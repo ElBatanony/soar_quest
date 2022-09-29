@@ -60,10 +60,9 @@ class SQDoc {
     return getFieldByName(fieldName)?.value;
   }
 
-  Future setDocFieldByName(String fieldName, dynamic value) {
+  void setDocFieldByName(String fieldName, dynamic value) {
     SQDocField? field = getFieldByName(fieldName);
     field?.value = value;
-    return collection.updateDoc(this);
   }
 
   String getPath() {
