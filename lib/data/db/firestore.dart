@@ -5,7 +5,7 @@ import 'package:soar_quest/data/db/sq_doc.dart';
 
 final firestore = FirebaseFirestore.instance;
 
-class FirestoreCollection extends SQCollection {
+class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   FirestoreCollection({
     required String id,
     required List<SQDocField> fields,
@@ -31,7 +31,7 @@ class FirestoreCollection extends SQCollection {
   }
 
   @override
-  Future createDoc(SQDoc doc) async {
+  Future createDoc(DocType doc) async {
     docs.add(doc);
     await firestore.doc("${getPath()}/${doc.id}").set(doc.collectFields());
     return loadCollection();
@@ -61,14 +61,14 @@ class FirestoreCollection extends SQCollection {
   String getANewDocId() => getANewDocRef().id;
 
   @override
-  Future loadDoc(SQDoc doc) async {
+  Future loadDoc(DocType doc) async {
     final docSnap = await ref.doc(doc.id).get();
     doc.setData(
         (docSnap.data() ?? <String, dynamic>{}) as Map<String, dynamic>);
   }
 
   @override
-  Future updateDoc(SQDoc doc) async {
+  Future updateDoc(DocType doc) async {
     await firestore
         .doc("${getPath()}/${doc.id}")
         .set(doc.collectFields(), SetOptions(merge: true));
@@ -76,8 +76,8 @@ class FirestoreCollection extends SQCollection {
   }
 }
 
-class FirestoreUserCollection extends FirestoreCollection
-    implements SQUserCollection {
+class FirestoreUserCollection<DocType extends SQDoc>
+    extends FirestoreCollection<DocType> implements SQUserCollection<DocType> {
   @override
   final String userId;
 

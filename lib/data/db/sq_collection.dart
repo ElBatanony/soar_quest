@@ -71,7 +71,8 @@ abstract class SQCollection<DocType extends SQDoc> {
   }
 }
 
-abstract class SQUserCollection extends SQCollection {
+abstract class SQUserCollection<DocType extends SQDoc>
+    extends SQCollection<DocType> {
   final String userId;
 
   SQUserCollection({
