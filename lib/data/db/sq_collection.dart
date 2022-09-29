@@ -51,6 +51,24 @@ abstract class SQCollection<DocType extends SQDoc> {
   }
 
   int get docsCount => docs.length;
+
+  DocType newDoc({List<SQDocField> initialFields = const []}) {
+    DocType newDoc = constructDoc(getANewDocId());
+
+    for (var initialField in initialFields) {
+      int index =
+          newDoc.fields.indexWhere((field) => field.name == initialField.name);
+      newDoc.fields[index] = initialField.copy();
+    }
+
+    for (var field in newDoc.fields)
+      if (field.runtimeType == SQCreatedByField)
+        field.value = SQUserRefField.currentUserRef;
+
+    docs.add(newDoc);
+
+    return newDoc;
+  }
 }
 
 abstract class SQUserCollection extends SQCollection {

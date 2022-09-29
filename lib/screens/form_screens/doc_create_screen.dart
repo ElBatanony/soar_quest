@@ -20,18 +20,7 @@ DocFormScreen docCreateScreen(
 }) {
   title ??= "Create ${collection.singleDocName}";
 
-  String newDocId = collection.getANewDocId();
-  SQDoc newDoc = SQDoc(newDocId, collection: collection);
-
-  for (var initialField in initialFields) {
-    int index =
-        newDoc.fields.indexWhere((field) => field.name == initialField.name);
-    newDoc.fields[index] = initialField.copy();
-  }
-
-  for (var field in newDoc.fields)
-    if (field.runtimeType == SQCreatedByField)
-      field.value = SQUserRefField.currentUserRef;
+  SQDoc newDoc = collection.newDoc(initialFields: initialFields);
 
   return DocFormScreen(
     newDoc,
@@ -41,10 +30,4 @@ DocFormScreen docCreateScreen(
     hiddenFields: hiddenFields,
     submitButtonText: submitButtonText,
   );
-
-  // @override
-  // SQButton button(BuildContext context, {String? label}) {
-  //   return super.button(context,
-  //       label: label ?? "Create a ${collection.singleDocName}");
-  // }
 }
