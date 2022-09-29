@@ -1,6 +1,7 @@
 import '../../app.dart';
 import 'sq_doc.dart';
 import '../../screens/collection_screen.dart';
+import 'collection_filter.dart';
 export 'collection_filter.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {
@@ -68,6 +69,14 @@ abstract class SQCollection<DocType extends SQDoc> {
     docs.add(newDoc);
 
     return newDoc;
+  }
+
+  List<DocType> filter(List<CollectionFilter<DocType>> filters) {
+    List<DocType> ret = docs;
+    for (var filter in filters) {
+      ret = filter.filter(ret);
+    }
+    return ret;
   }
 }
 
