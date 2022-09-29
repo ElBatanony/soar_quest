@@ -3,10 +3,10 @@ import 'sq_doc.dart';
 import '../../screens/collection_screen.dart';
 export 'collection_filter.dart';
 
-abstract class SQCollection {
+abstract class SQCollection<DocType extends SQDoc> {
   final String id;
   List<SQDocField> fields;
-  List<SQDoc> docs = [];
+  List<DocType> docs = [];
   late String singleDocName;
   SQDoc? parentDoc;
   bool readOnly;
@@ -31,9 +31,9 @@ abstract class SQCollection {
     initialized = true;
   }
 
-  Future<void> loadDoc(SQDoc doc);
-  Future updateDoc(SQDoc doc);
-  Future createDoc(SQDoc doc);
+  Future<void> loadDoc(DocType doc);
+  Future updateDoc(DocType doc);
+  Future createDoc(DocType doc);
   Future deleteDoc(String docId);
 
   bool doesDocExist(String docId);
