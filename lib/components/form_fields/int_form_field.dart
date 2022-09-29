@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
-
-import '../doc_form_field.dart';
+import 'package:soar_quest/data/db/sq_doc.dart';
 
 class SQIntFormField extends DocFormField {
-  const SQIntFormField(super.field,
-      {required super.onChanged, super.doc, super.key});
+  const SQIntFormField(SQIntField field,
+      {required super.onChanged, super.doc, super.key})
+      : super(field);
 
   @override
   State<SQIntFormField> createState() => _SQIntFormFieldState();
 }
 
 class _SQIntFormFieldState extends DocFormFieldState<SQIntFormField> {
+  final fieldTextController = TextEditingController();
+
+  @override
+  void initState() {
+    fieldTextController.text = (widget.field.value ?? "").toString();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (intText) {
-        widget.field.value = int.parse(intText);
+      controller: fieldTextController,
+      onChanged: (text) {
+        widget.field.value = int.tryParse(text);
       },
       onEditingComplete: onChanged,
       decoration: InputDecoration(
