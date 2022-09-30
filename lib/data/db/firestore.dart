@@ -78,6 +78,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 }
 
+// TODO: use parent doc instead of creating a new type
 class FirestoreUserCollection<DocType extends SQDoc>
     extends FirestoreCollection<DocType> implements SQUserCollection<DocType> {
   @override
@@ -90,6 +91,7 @@ class FirestoreUserCollection<DocType extends SQDoc>
     super.singleDocName,
   });
 
+  // TODO: fix this to use usersCollection
   @override
   String getPath() => App.instance.getAppPath() + "users/$userId/" + id;
 }

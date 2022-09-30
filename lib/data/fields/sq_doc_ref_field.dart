@@ -6,6 +6,8 @@ class SQDocRefField extends SQDocField<SQDocRef> {
   SQCollection? _collection;
   late String collectionId;
 
+  // TODO: use collection path. does not work for subcollections
+  // both have same IDs but differnet parent docs
   SQCollection get collection =>
       _collection ?? App.getCollectionById(collectionId);
 
@@ -15,6 +17,7 @@ class SQDocRefField extends SQDocField<SQDocRef> {
       super.value,
       super.readOnly})
       : assert(collectionId != null || collection != null) {
+    // TODO: remove the collection param
     _collection = collection;
     this.collectionId = collectionId ?? collection!.id;
   }

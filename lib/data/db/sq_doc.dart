@@ -40,6 +40,7 @@ class SQDoc {
     initialized = true;
   }
 
+  // TODO: rename to save?
   Future updateDoc() {
     return collection.updateDoc(this);
   }
