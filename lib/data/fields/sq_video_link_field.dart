@@ -1,6 +1,6 @@
 import '../fields.dart';
 
-class VideoLinkField extends SQDocField<String> {
+class VideoLinkField extends SQStringField {
   VideoLinkField(String name, {String? url, super.readOnly})
       : super(name, value: url ?? "");
 
