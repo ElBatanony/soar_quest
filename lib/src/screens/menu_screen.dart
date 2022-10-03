@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens.dart';
+import '../../screens.dart';
 
 class ScreenButton extends StatelessWidget {
   final Screen targetScreen;
