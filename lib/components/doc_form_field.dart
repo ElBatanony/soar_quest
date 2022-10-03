@@ -4,7 +4,6 @@ import '../data/db.dart';
 
 export 'form_fields/read_only_form_field.dart';
 export 'form_fields/field_list_form_field.dart';
-export 'form_fields/timestamp_form_field.dart';
 export 'form_fields/dialog_field.dart';
 
 // TODO: move form fields into doc fields files
