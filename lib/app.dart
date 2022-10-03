@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'data/db.dart';
 import 'firebase_options.dart';
 
-import 'app/app_display.dart';
 import 'app/app_settings.dart';
 import 'app/auth_manager.dart';
 
@@ -77,7 +76,11 @@ class App {
   }
 
   run() {
-    runApp(AppDisplay(this));
+    runApp(MaterialApp(
+        title: name,
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        home: homescreen));
   }
 
   getAppPath() {
