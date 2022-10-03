@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../app.dart';
-import '../components/buttons/sq_button.dart';
 import 'db.dart';
 
 export 'fields/sq_field_list_field.dart';
@@ -19,6 +17,7 @@ export 'fields/sq_double_field.dart';
 export 'fields/sq_list_field.dart';
 export 'fields/sq_inverse_ref_field.dart';
 export 'fields/sq_read_only_field.dart';
+export 'fields/show_field_dialog.dart';
 
 export '../data/db/sq_doc.dart';
 
@@ -91,22 +90,4 @@ abstract class DocFormFieldState<DocField extends SQDocField>
   Widget build(BuildContext context) {
     return fieldBuilder(context);
   }
-}
-
-Future showFieldDialog(
-    {required SQDocField field, required BuildContext context}) {
-  return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            title: Text("Set ${field.name}"),
-            content: field.formField(),
-            actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
-              SQButton(
-                'Save',
-                onPressed: () => exitScreen(context, value: field.value),
-              ),
-            ]);
-      });
 }
