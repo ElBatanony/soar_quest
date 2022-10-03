@@ -1,23 +1,22 @@
 import '../db.dart';
 import '../types/sq_doc_reference.dart';
 
-abstract class CollectionFilter<DocType extends SQDoc> {
-  List<DocType> filter(List<DocType> docs);
+abstract class CollectionFilter {
+  List<SQDoc> filter(List<SQDoc> docs);
 }
 
-abstract class CollectionFieldFilter<DocType extends SQDoc>
-    extends CollectionFilter<DocType> {
+abstract class CollectionFieldFilter extends CollectionFilter {
   SQDocField field;
   CollectionFieldFilter(this.field);
 }
 
-class ValueFilter<DocType extends SQDoc> extends CollectionFilter<DocType> {
+class ValueFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
   ValueFilter(this.fieldName, this.fieldValue);
 
   @override
-  List<DocType> filter(List<DocType> docs) {
+  List<SQDoc> filter(List<SQDoc> docs) {
     return docs
         .where((doc) => doc.getFieldValueByName(fieldName) == fieldValue)
         .toList();
@@ -37,14 +36,14 @@ class StringContainsFilter extends CollectionFieldFilter {
   }
 }
 
-class DocRefFilter<DocType extends SQDoc> extends CollectionFilter<DocType> {
+class DocRefFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
 
   DocRefFilter(this.fieldName, this.fieldValue);
 
   @override
-  List<DocType> filter(List<DocType> docs) {
+  List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
       if (doc.getFieldValueByName(fieldName) == null) return false;
       SQDocRef docRef = doc.getFieldValueByName(fieldName);
