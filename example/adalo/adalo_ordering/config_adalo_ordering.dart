@@ -27,7 +27,7 @@ class MenuItemsCollection extends FirestoreCollection<MenuItemDoc> {
       : super(
           fields: [
             SQStringField("Name"),
-            SQDocRefField("Food Truck", collectionId: foodTrucks.id),
+            SQDocRefField("Food Truck", collection: foodTrucks),
             SQDoubleField("Price"),
             SQBoolField("Food?", value: true),
             SQBoolField("Drink?")
@@ -48,7 +48,7 @@ void configCollections() {
       SQStringField("Name", required: true),
       SQStringField("Hours"),
       SQInverseRefField("Menu Items",
-          refFieldName: "Food Truck", collectionId: "Menu Items"),
+          refFieldName: "Food Truck", collection: menuItems),
     ],
     readOnly: !isAdmin,
     singleDocName: "Food Truck",
@@ -60,12 +60,11 @@ void configCollections() {
       id: "Orders",
       fields: [
         SQCreatedByField("User"),
-        SQDocRefField("Food Truck",
-            collectionId: foodTrucks.id, readOnly: true),
+        SQDocRefField("Food Truck", collection: foodTrucks, readOnly: true),
         SQTimeOfDayField("Pick up time"),
-        SQFieldListField("Order Items", allowedTypes: [
-          SQDocRefField("", collectionId: "Order Items"),
-        ]),
+        // SQFieldListField("Order Items", allowedTypes: [
+        //   SQDocRefField("", collectionId: "Order Items"),
+        // ]),
         SQStringField("Notes"),
         SQStringField("Status", readOnly: true),
         SQDoubleField("Tip Amount"),

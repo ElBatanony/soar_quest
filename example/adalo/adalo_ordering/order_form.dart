@@ -50,7 +50,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
         parentDoc: widget.doc,
         fields: [
           SQStringField("Name"),
-          SQDocRefField("Menu Item", collectionId: menuItems.id),
+          SQDocRefField("Menu Item", collection: menuItems),
           SQDocRefField("Order", collection: orders),
           SQDoubleField("Price"),
         ],
