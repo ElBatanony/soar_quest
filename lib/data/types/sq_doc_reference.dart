@@ -1,5 +1,5 @@
 import '../../app.dart';
-import '../db.dart';
+import '../../db.dart';
 
 class SQDocRef {
   String docId;

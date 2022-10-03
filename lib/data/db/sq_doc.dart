@@ -1,4 +1,4 @@
-import '../db.dart';
+import '../../db.dart';
 import '../types.dart';
 export '../fields.dart';
 

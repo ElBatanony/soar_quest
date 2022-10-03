@@ -3,7 +3,7 @@ import 'package:soar_quest/components/snackbar.dart';
 
 import '../../app.dart';
 import '../../components/buttons/sq_button.dart';
-import '../../data/db.dart';
+import '../../db.dart';
 import '../../screens.dart';
 
 export 'form_screens/doc_edit_screen.dart';

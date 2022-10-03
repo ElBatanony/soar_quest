@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/snackbar.dart';
-import '../../../data/db.dart';
+import '../../../db.dart';
 import '../form_screen.dart';
 
 Future createDoc(SQDoc doc, BuildContext context) async {

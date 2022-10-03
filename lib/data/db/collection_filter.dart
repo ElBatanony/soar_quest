@@ -1,4 +1,4 @@
-import '../db.dart';
+import '../../db.dart';
 import '../types/sq_doc_reference.dart';
 
 abstract class CollectionFilter {

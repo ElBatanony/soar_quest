@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/buttons/sq_button.dart';
-import '../db.dart';
+import '../../db.dart';
 import '../fields.dart';
 import '../types.dart';
 

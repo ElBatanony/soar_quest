@@ -4,7 +4,7 @@ import '../../../app/app_navigator.dart';
 
 import '../../../../components/buttons/sq_button.dart';
 
-import '../../../data/db.dart';
+import '../../../db.dart';
 import '../../../data/types/sq_doc_reference.dart';
 import '../collection_screen.dart';
 

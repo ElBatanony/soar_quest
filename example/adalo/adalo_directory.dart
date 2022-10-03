@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/app/app_navigator.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
-import 'package:soar_quest/data/db.dart';
+import 'package:soar_quest/db.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 import 'package:soar_quest/screens.dart';
 import 'package:soar_quest/app/auth_manager.dart';

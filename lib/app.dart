@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'data/db.dart';
+import 'db.dart';
 import 'firebase_options.dart';
 
 import 'app/app_settings.dart';

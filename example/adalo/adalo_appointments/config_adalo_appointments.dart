@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
-import 'package:soar_quest/data/db.dart';
+import 'package:soar_quest/db.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 
 import 'classes_screen.dart';

@@ -1,5 +1,5 @@
 import '../app.dart';
-import '../data/db.dart';
+import '../db.dart';
 
 class AppSettings {
   late SQCollection _settingsCollection;
