@@ -24,7 +24,7 @@ class Screen extends StatefulWidget {
   });
 
   SQButton button(BuildContext context, {String? label}) {
-    return SQButton(label ?? 'Go to $title',
+    return SQButton(label ?? title,
         onPressed: () => goToScreen(this, context: context));
   }
 
