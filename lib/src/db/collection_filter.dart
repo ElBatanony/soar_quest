@@ -1,5 +1,5 @@
-import '../../db.dart';
-import '../types/sq_doc_reference.dart';
+import '../../data/types.dart';
+import 'sq_doc.dart';
 
 abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);
