@@ -61,10 +61,20 @@ class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
     var listItemsWidgets = [];
 
     for (int i = 0; i < listItems.length; i++) {
-      listItemsWidgets.add(
-          ListItemField(listItems[i], listField: listField, deleteItem: () {
-        deleteListItem(i);
-      }));
+      listItemsWidgets.add(Column(
+        children: [
+          Row(
+            children: [
+              Expanded(child: listItems[i].formField()),
+              IconButton(
+                  onPressed: () {
+                    deleteListItem(i);
+                  },
+                  icon: Icon(Icons.delete)),
+            ],
+          ),
+        ],
+      ));
     }
 
     return Column(
@@ -77,36 +87,6 @@ class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
           ],
         ),
         ...listItemsWidgets,
-      ],
-    );
-  }
-}
-
-class ListItemField extends StatefulWidget {
-  final SQFieldListField listField;
-  final SQDocField listItemField;
-  final Function deleteItem;
-
-  const ListItemField(this.listItemField,
-      {required this.deleteItem, required this.listField, Key? key})
-      : super(key: key);
-
-  @override
-  State<ListItemField> createState() => _ListItemFieldState();
-}
-
-class _ListItemFieldState extends State<ListItemField> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(child: widget.listItemField.formField()),
-            IconButton(
-                onPressed: () => widget.deleteItem(), icon: Icon(Icons.delete)),
-          ],
-        ),
       ],
     );
   }
