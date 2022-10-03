@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/buttons/sq_button.dart';
 import '../fields.dart';
 import '../types.dart';
 
@@ -27,6 +28,45 @@ class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return SQTimeOfDayFormField(this, onChanged: onChanged);
+    return _SQTimeOfDayFormField(this, onChanged: onChanged);
+  }
+}
+
+class _SQTimeOfDayFormField extends DocFormField<SQTimeOfDayField> {
+  const _SQTimeOfDayFormField(super.field, {required super.onChanged});
+
+  @override
+  createState() => _SQTimeOfDayFormFieldState();
+}
+
+class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
+  void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
+    if (newSelectedTimeOfDay != null) {
+      field.value = SQTimeOfDay.fromTimeOfDay(newSelectedTimeOfDay);
+      onChanged();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(field.name),
+        Text(field.value.toString()),
+        SQButton(
+          'Select Time',
+          onPressed: () async {
+            TimeOfDay? newTimeOfDay = await showTimePicker(
+              context: context,
+              initialTime: field.value?.toTimeOfDay() ?? TimeOfDay.now(),
+            );
+            if (newTimeOfDay != null) {
+              _selectTimeOfDay(newTimeOfDay);
+            }
+          },
+        )
+      ],
+    );
   }
 }
