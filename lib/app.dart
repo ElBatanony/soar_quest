@@ -83,6 +83,7 @@ class App {
     return "sample-apps/$name/";
   }
 
+  // TODO: replace by getCollectionByPath
   static SQCollection getCollectionById(String collectionId) {
     return App.collections.firstWhere((col) => col.id == collectionId);
   }
