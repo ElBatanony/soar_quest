@@ -18,6 +18,7 @@ export 'fields/sq_video_link_field.dart';
 export 'fields/sq_double_field.dart';
 export 'fields/sq_list_field.dart';
 export 'fields/sq_inverse_ref_field.dart';
+export 'fields/sq_read_only_field.dart';
 
 export '../data/db/sq_doc.dart';
 
@@ -44,7 +45,7 @@ abstract class SQDocField<T> {
   DocFormField formField({Function? onChanged, SQDoc? doc});
 
   DocFormField readOnlyField({SQDoc? doc}) {
-    return _ReadOnlyFormField(this, doc: doc);
+    return SQReadOnlyFormField(this, doc: doc);
   }
 
   @override
@@ -89,23 +90,6 @@ abstract class DocFormFieldState<DocField extends SQDocField>
   @override
   Widget build(BuildContext context) {
     return fieldBuilder(context);
-  }
-}
-
-class _ReadOnlyFormField extends DocFormField {
-  const _ReadOnlyFormField(super.field, {super.doc});
-
-  @override
-  createState() => _ReadOnlyFormFieldState();
-}
-
-class _ReadOnlyFormFieldState extends DocFormFieldState {
-  @override
-  Widget fieldBuilder(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: [Text(field.name), Text(": "), Text(field.value.toString())],
-    );
   }
 }
 
