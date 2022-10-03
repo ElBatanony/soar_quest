@@ -13,34 +13,6 @@ class SQTimestampFormField extends DocFormField<SQTimestampField> {
 }
 
 class _SQTimestampFormFieldState extends DocFormFieldState<SQTimestampField> {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(field.name),
-        Text(field.value.toString()),
-        TimestampDocFieldPicker(
-            timestampField: field, updateCallback: onChanged),
-      ],
-    );
-  }
-}
-
-class TimestampDocFieldPicker extends StatefulWidget {
-  const TimestampDocFieldPicker(
-      {Key? key, required this.timestampField, required this.updateCallback})
-      : super(key: key);
-
-  final SQTimestampField timestampField;
-  final Function updateCallback;
-
-  @override
-  State<TimestampDocFieldPicker> createState() =>
-      _TimestampDocFieldPickerState();
-}
-
-class _TimestampDocFieldPickerState extends State<TimestampDocFieldPicker> {
   static Route<DateTime> _datePickerRoute(
     BuildContext context,
   ) {
@@ -59,23 +31,30 @@ class _TimestampDocFieldPickerState extends State<TimestampDocFieldPicker> {
 
   void _selectDate(DateTime? newSelectedDate) {
     if (newSelectedDate != null) {
-      widget.timestampField.value = SQTimestamp.fromDate(newSelectedDate);
-      widget.updateCallback();
+      field.value = SQTimestamp.fromDate(newSelectedDate);
+      onChanged();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SQButton(
-      'Select Date',
-      onPressed: () async {
-        DateTime? ret = await Navigator.of(context).push(_datePickerRoute(
-          context,
-        ));
-        if (ret != null) {
-          _selectDate(ret);
-        }
-      },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(field.name),
+        Text(field.value.toString()),
+        SQButton(
+          'Select Date',
+          onPressed: () async {
+            DateTime? ret = await Navigator.of(context).push(_datePickerRoute(
+              context,
+            ));
+            if (ret != null) {
+              _selectDate(ret);
+            }
+          },
+        )
+      ],
     );
   }
 }
