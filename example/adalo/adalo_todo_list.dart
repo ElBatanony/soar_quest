@@ -19,13 +19,11 @@ void main() async {
 
   await adaloTodoApp.init();
 
-  adaloTodoApp.homescreen = MainScreen([
+  adaloTodoApp.run(MainScreen([
     TodoListScreen(
         title: "To Do List", tasksCollection: TasksCollection(id: "Tasks")),
     ProfileScreen(),
-  ]);
-
-  adaloTodoApp.run();
+  ]));
 }
 
 class TasksCollection extends FirestoreUserCollection {

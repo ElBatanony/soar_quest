@@ -16,13 +16,11 @@ void main() async {
 
   configCollections();
 
-  adaloOrderingApp.homescreen = MainScreen([
+  adaloOrderingApp.run(MainScreen([
     FoodScreen(),
     if (isAdmin) CollectionScreen(collection: foodTrucks, canCreate: true),
     if (isAdmin) CollectionScreen(collection: menuItems, canCreate: true),
     CollectionScreen(collection: orders),
     ProfileScreen(),
-  ]);
-
-  adaloOrderingApp.run();
+  ]));
 }

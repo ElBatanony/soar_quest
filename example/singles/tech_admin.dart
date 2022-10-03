@@ -81,7 +81,7 @@ void main() async {
 
   final logsScreen = CollectionScreen(collection: logsCollection);
 
-  adminApp.homescreen = MainScreen(
+  adminApp.run(MainScreen(
     [
       // UpvoteCollectionScreen(
       //   "Col Upvote",
@@ -109,7 +109,5 @@ void main() async {
       // ),
     ],
     initialScreenIndex: 0,
-  );
-
-  adminApp.run();
+  ));
 }

@@ -9,13 +9,11 @@ import 'teach_screen.dart';
 void main() async {
   await adaloAppointmentsApp.init();
 
-  adaloAppointmentsApp.homescreen = MainScreen([
+  adaloAppointmentsApp.run(MainScreen([
     classesCollectionScreen(),
     LearnScreen(),
     TeachScreen(),
     profileScreen()
     // CollectionScreen(collection: classTypes, docScreen: classTypeDocScreen),
-  ]);
-
-  adaloAppointmentsApp.run();
+  ]));
 }

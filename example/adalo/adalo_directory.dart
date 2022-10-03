@@ -53,7 +53,7 @@ void main() async {
   FavouritesFeature favouriteDates =
       FavouritesFeature(collection: datesCollection);
 
-  adaloDirectoryApp.homescreen = MainScreen([
+  adaloDirectoryApp.run(MainScreen([
     CollectionScreen(
       collection: datesCollection,
       docScreen: (doc) => DocScreen(doc,
@@ -72,9 +72,7 @@ void main() async {
     // CollectionScreen("Categories", collection: categoriesCollection),
     FavouritesScreen(favouritesFeature: favouriteDates),
     ProfileScreen(),
-  ]);
-
-  adaloDirectoryApp.run();
+  ]));
 }
 
 class ByUserCollection extends FirestoreCollection implements SQCollection {

@@ -29,7 +29,7 @@ void main() async {
     SQCreatedByField("User"),
   ]);
 
-  caloriesTrackersApp.homescreen = MainScreen([
+  caloriesTrackersApp.run(MainScreen([
     MealCollectionScreen(
       collection: meals,
       filters: [
@@ -38,9 +38,7 @@ void main() async {
       ],
     ),
     ProfileScreen(),
-  ]);
-
-  caloriesTrackersApp.run();
+  ]));
 }
 
 class MealCollectionScreen extends CollectionFilterScreen {

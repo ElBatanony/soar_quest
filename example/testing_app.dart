@@ -41,11 +41,9 @@ void main() async {
       ],
       singleDocName: "Test Doc");
 
-  testingApp.homescreen = MainScreen([
+  testingApp.run(MainScreen([
     CollectionScreen(collection: testCollection, canCreate: true),
     CollectionScreen(collection: simpleCollection, canCreate: true),
     ProfileScreen(),
-  ]);
-
-  testingApp.run();
+  ]));
 }

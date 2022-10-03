@@ -40,16 +40,14 @@ void main() async {
       ],
       singleDocName: "Order");
 
-  shicoffeeApp.homescreen = MainScreen([
+  shicoffeeApp.run(MainScreen([
     MenuScreen(
       collection: menu,
       ordersCollection: orders,
     ),
     OrdersCollection(collection: orders),
     ProfileScreen(),
-  ]);
-
-  shicoffeeApp.run();
+  ]));
 }
 
 class MenuScreen extends CollectionScreen {
