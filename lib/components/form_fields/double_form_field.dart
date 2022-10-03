@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data/db/sq_doc.dart';
 
-// TODO: make SQDoubleFormField inherit from SQStringFormField
 class SQDoubleFormField extends DocFormField<SQDoubleField> {
   const SQDoubleFormField(super.field, {super.onChanged, super.key});
 
