@@ -9,8 +9,8 @@ class AppSettings {
   AppSettings({this.settingsFields = const []});
 
   Future init() async {
-    _settingsCollection = FirestoreUserCollection(
-        id: 'Settings', userId: App.auth.user.userId, fields: settingsFields);
+    _settingsCollection = FirestoreCollection(
+        id: 'Settings', parentDoc: App.userDoc, fields: settingsFields);
     settingsDoc = SQDoc('settings', collection: _settingsCollection);
     await settingsDoc.loadDoc();
   }

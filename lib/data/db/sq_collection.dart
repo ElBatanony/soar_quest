@@ -79,15 +79,3 @@ abstract class SQCollection<DocType extends SQDoc> {
     return ret;
   }
 }
-
-abstract class SQUserCollection<DocType extends SQDoc>
-    extends SQCollection<DocType> {
-  final String userId;
-
-  SQUserCollection({
-    required String id,
-    required List<SQDocField> fields,
-    required this.userId,
-    String singleDocName = "User Doc",
-  }) : super(id, fields, singleDocName: singleDocName);
-}

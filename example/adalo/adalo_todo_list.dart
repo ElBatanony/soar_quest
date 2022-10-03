@@ -26,11 +26,11 @@ void main() async {
   ]));
 }
 
-class TasksCollection extends FirestoreUserCollection {
+class TasksCollection extends FirestoreCollection {
   TasksCollection({required super.id})
       : super(
             fields: [SQStringField("Name"), SQBoolField("Status")],
-            userId: App.userId,
+            parentDoc: App.userDoc,
             singleDocName: "Task");
 
   List<SQDoc> get todoTasks => docs.where((doc) => !isComplete(doc)).toList();

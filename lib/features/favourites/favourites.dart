@@ -17,11 +17,11 @@ class FavDoc extends SQDoc {
       : this(doc.id, favedDocRef: doc.value('ref'), collection: doc.collection);
 }
 
-class FavouritesCollection extends FirestoreUserCollection {
+class FavouritesCollection extends FirestoreCollection {
   List<FavDoc> favDocs = [];
 
-  FavouritesCollection(
-      {required super.id, required super.userId, required super.fields});
+  FavouritesCollection({required super.id, required super.fields})
+      : super(parentDoc: App.userDoc);
 
   @override
   Future loadCollection() async {
@@ -36,11 +36,11 @@ class FavouritesFeature extends Feature {
 
   FavouritesFeature({required this.collection}) {
     favouritesCollection = FavouritesCollection(
-        id: "Favourite ${collection.id}",
-        fields: [
-          SQDocRefField("ref", collection: collection),
-        ],
-        userId: App.auth.user.userId);
+      id: "Favourite ${collection.id}",
+      fields: [
+        SQDocRefField("ref", collection: collection),
+      ],
+    );
     favouritesCollection.loadCollection();
   }
 
