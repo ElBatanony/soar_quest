@@ -44,7 +44,7 @@ abstract class DocFormFieldState<DocField extends SQDocField>
   }
 
   Widget fieldBuilder(BuildContext context) {
-    if (field.readOnly == true) return ReadOnlyFormField(field, doc: doc);
+    if (field.readOnly == true) return field.readOnlyField(doc: doc);
     return field.formField(onChanged: onChanged, doc: doc);
   }
 
