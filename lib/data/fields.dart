@@ -20,7 +20,6 @@ export 'fields/sq_list_field.dart';
 export 'fields/sq_inverse_ref_field.dart';
 
 export '../data/db/sq_doc.dart';
-export '../components/doc_form_field.dart';
 
 abstract class SQDocField<T> {
   String name = "";
@@ -54,6 +53,43 @@ abstract class SQDocField<T> {
   }
 
   bool get isNull => value == null;
+}
+
+abstract class DocFormField<DocField extends SQDocField>
+    extends FormField<DocFormField<DocField>> {
+  final DocField field;
+  final Function? onChanged;
+  final SQDoc? doc;
+
+  const DocFormField(this.field, {this.onChanged, this.doc, super.key})
+      : super(builder: emptyBuilder);
+
+  static Widget emptyBuilder(FormFieldState s) => Container();
+
+  @override
+  DocFormFieldState<DocField> createState();
+}
+
+abstract class DocFormFieldState<DocField extends SQDocField>
+    extends FormFieldState<DocFormField<DocField>> {
+  DocFormField<DocField> get formField => (widget as DocFormField<DocField>);
+  DocField get field => formField.field;
+  SQDoc? get doc => formField.doc;
+
+  void onChanged() {
+    if (formField.onChanged != null) formField.onChanged!();
+    setState(() {});
+  }
+
+  Widget fieldBuilder(BuildContext context) {
+    if (field.readOnly == true) return field.readOnlyField(doc: doc);
+    return field.formField(onChanged: onChanged, doc: doc);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return fieldBuilder(context);
+  }
 }
 
 class _ReadOnlyFormField extends DocFormField {
