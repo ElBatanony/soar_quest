@@ -106,7 +106,7 @@ class _NewRequestTeacherScreenState
 
     if (rescheduledRequest) {
       doc.setDocFieldByName("Status", "Rescheduled");
-      await doc.updateDoc().then((_) => exitScreen(context));
+      await doc.saveDoc().then((_) => exitScreen(context));
     }
   }
 
@@ -120,7 +120,7 @@ class _NewRequestTeacherScreenState
 
     if (bookedRequest) {
       doc.setDocFieldByName("Status", "Booked");
-      await doc.updateDoc().then((_) => exitScreen(context));
+      await doc.saveDoc().then((_) => exitScreen(context));
     }
   }
 

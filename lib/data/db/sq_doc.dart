@@ -40,9 +40,8 @@ class SQDoc {
     initialized = true;
   }
 
-  // TODO: rename to save?
-  Future updateDoc() {
-    return collection.updateDoc(this);
+  Future saveDoc() {
+    return collection.saveDoc(this);
   }
 
   Map<String, dynamic> collectFields() {

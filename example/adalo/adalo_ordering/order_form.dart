@@ -138,7 +138,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
 
   void placeOrder() async {
     for (SQDoc orderItemDoc in orderItems.docs) {
-      await orderItemDoc.updateDoc();
+      await orderItemDoc.saveDoc();
     }
 
     orderDoc.setDocFieldByName("Order Items", orderItemsRefFields);

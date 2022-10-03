@@ -39,7 +39,7 @@ class UnimplementCollection extends SQCollection {
   }
 
   @override
-  Future updateDoc(SQDoc doc) {
+  Future saveDoc(SQDoc doc) {
     throw UnimplementedError();
   }
 }

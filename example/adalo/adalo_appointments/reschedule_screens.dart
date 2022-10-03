@@ -16,7 +16,7 @@ class _RescheduledRequestStudentScreenState
     extends DocScreenState<RescheduledRequestStudentScreen> {
   void acceptDate() async {
     doc.setDocFieldByName("Status", "Booked");
-    await doc.updateDoc().then((_) => exitScreen(context));
+    await doc.saveDoc().then((_) => exitScreen(context));
   }
 
   void changeDate() async {
@@ -29,7 +29,7 @@ class _RescheduledRequestStudentScreenState
 
     if (changedDate) {
       doc.setDocFieldByName("Status", "Pending");
-      await doc.updateDoc().then((_) => exitScreen(context));
+      await doc.saveDoc().then((_) => exitScreen(context));
     }
   }
 
