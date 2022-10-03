@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../app.dart';
+import '../components/buttons/sq_button.dart';
 import 'db.dart';
 
 export 'fields/sq_field_list_field.dart';
@@ -69,4 +71,22 @@ class _ReadOnlyFormFieldState extends DocFormFieldState {
       children: [Text(field.name), Text(": "), Text(field.value.toString())],
     );
   }
+}
+
+Future showFieldDialog(
+    {required SQDocField field, required BuildContext context}) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("Set ${field.name}"),
+            content: field.formField(),
+            actions: [
+              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton(
+                'Save',
+                onPressed: () => exitScreen(context, value: field.value),
+              ),
+            ]);
+      });
 }
