@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../fields.dart';
 
 class SQDoubleField extends SQDocField<double> {
@@ -15,6 +17,39 @@ class SQDoubleField extends SQDocField<double> {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return SQDoubleFormField(this, onChanged: onChanged);
+    return _SQDoubleFormField(this, onChanged: onChanged);
+  }
+}
+
+class _SQDoubleFormField extends DocFormField<SQDoubleField> {
+  const _SQDoubleFormField(super.field, {super.onChanged});
+
+  @override
+  createState() => _SQDoubleFormFieldState();
+}
+
+class _SQDoubleFormFieldState extends DocFormFieldState<SQDoubleField> {
+  final fieldTextController = TextEditingController();
+
+  @override
+  void initState() {
+    fieldTextController.text = (field.value ?? "").toString();
+    super.initState();
+  }
+
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    return TextField(
+      controller: fieldTextController,
+      onChanged: (text) {
+        field.value = double.tryParse(text);
+        onChanged();
+      },
+      onEditingComplete: onChanged,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: field.name,
+      ),
+    );
   }
 }

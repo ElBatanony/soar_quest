@@ -9,7 +9,6 @@ export 'form_fields/string_form_field.dart';
 export 'form_fields/timestamp_form_field.dart';
 export 'form_fields/time_of_day_form_field.dart';
 export 'form_fields/file_form_field.dart';
-export 'form_fields/double_form_field.dart';
 export 'form_fields/inverse_ref_form_field.dart';
 export 'form_fields/dialog_field.dart';
 
