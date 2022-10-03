@@ -17,8 +17,9 @@ void main() async {
   configCollections();
 
   adaloOrderingApp.homescreen = MainScreen([
-    if (isAdmin) CollectionScreen(collection: foodTrucks, canCreate: isAdmin),
     FoodScreen(),
+    if (isAdmin) CollectionScreen(collection: foodTrucks, canCreate: true),
+    if (isAdmin) CollectionScreen(collection: menuItems, canCreate: true),
     CollectionScreen(collection: orders),
     ProfileScreen(),
   ]);

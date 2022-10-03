@@ -1,4 +1,5 @@
 import 'package:soar_quest/data/db.dart';
+import 'package:soar_quest/data/types.dart';
 
 const isAdmin = true;
 
@@ -6,6 +7,8 @@ List<SQDocField> userDocFields = [
   SQStringField("Full Name"),
   SQFileField("Profile Picture"),
 ];
+
+late SQCollection foodTrucks, orders;
 
 late MenuItemsCollection menuItems;
 
@@ -46,13 +49,6 @@ void configCollections() {
       SQStringField("Hours"),
       SQInverseRefField("Menu Items",
           refFieldName: "Food Truck", collectionId: "Menu Items"),
-      SQFieldListField("List Test", allowedTypes: [
-        SQStringField(""),
-        SQTimestampField(""),
-        SQFileField(""),
-        SQDocRefField("", collectionId: "Menu Items"),
-        SQDocRefField("", collectionId: "Orders"),
-      ])
     ],
     readOnly: !isAdmin,
     singleDocName: "Food Truck",
@@ -64,25 +60,16 @@ void configCollections() {
       id: "Orders",
       fields: [
         SQCreatedByField("User"),
-        SQDocRefField("Food Truck", collectionId: foodTrucks.id),
+        SQDocRefField("Food Truck",
+            collectionId: foodTrucks.id, readOnly: true),
         SQTimeOfDayField("Pick up time"),
-        // SQRefListField("Order Items", collection: orderItems),
-        // TODO : add order items
-
+        SQFieldListField("Order Items", allowedTypes: [
+          SQDocRefField("", collectionId: "Order Items"),
+        ]),
         SQStringField("Notes"),
-        SQStringField("Status"),
+        SQStringField("Status", readOnly: true),
         SQDoubleField("Tip Amount"),
-        SQDoubleField("Total Paid"),
+        SQDoubleField("Total Paid", readOnly: true),
       ],
       singleDocName: "Order");
-
-  orderItems = FirestoreCollection(
-      id: "Order Items",
-      fields: [
-        SQStringField("Name"),
-        SQDocRefField("Menu Item", collectionId: menuItems.id),
-        SQDocRefField("Order", collection: orders),
-        SQDoubleField("Price"),
-      ],
-      singleDocName: "Order Item");
 }
