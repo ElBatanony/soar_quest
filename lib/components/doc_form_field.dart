@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../data/db.dart';
 
 export 'form_fields/read_only_form_field.dart';
-export 'form_fields/bool_form_field.dart';
 export 'form_fields/int_form_field.dart';
 export 'form_fields/field_list_form_field.dart';
 export 'form_fields/string_form_field.dart';

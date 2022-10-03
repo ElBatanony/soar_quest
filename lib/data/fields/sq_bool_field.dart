@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../fields.dart';
 
 class SQBoolField extends SQDocField<bool> {
@@ -17,6 +19,32 @@ class SQBoolField extends SQDocField<bool> {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return SQBoolFormField(this, onChanged: onChanged);
+    return _SQBoolFormField(this, onChanged: onChanged);
+  }
+}
+
+class _SQBoolFormField extends DocFormField<SQBoolField> {
+  const _SQBoolFormField(super.field, {super.onChanged});
+
+  @override
+  createState() => _SQBoolFormFieldState();
+}
+
+class _SQBoolFormFieldState extends DocFormFieldState<SQBoolField> {
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(field.name),
+        Switch(
+          value: field.value,
+          onChanged: (value) {
+            field.value = value;
+            onChanged();
+          },
+        ),
+      ],
+    );
   }
 }
