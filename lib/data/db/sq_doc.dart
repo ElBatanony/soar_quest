@@ -53,16 +53,16 @@ class SQDoc {
     return ret;
   }
 
-  SQDocField? getFieldByName(String fieldName) {
+  SQDocField? getField(String fieldName) {
     return fields.singleWhere((field) => field.name == fieldName);
   }
 
   dynamic value(String fieldName) {
-    return getFieldByName(fieldName)?.value;
+    return getField(fieldName)?.value;
   }
 
   void setDocFieldByName(String fieldName, dynamic value) {
-    SQDocField? field = getFieldByName(fieldName);
+    SQDocField? field = getField(fieldName);
     field?.value = value;
   }
 

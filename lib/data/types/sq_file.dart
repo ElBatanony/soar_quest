@@ -26,7 +26,7 @@ class SQFile {
   }
 
   SQFileField? getFileField(SQDoc doc) {
-    return doc.getFieldByName(fieldName) as SQFileField;
+    return doc.getField(fieldName) as SQFileField;
   }
 
   @override

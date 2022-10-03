@@ -39,7 +39,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
   @override
   void initState() {
     orderDoc = widget.doc;
-    foodTruckRef = orderDoc.getFieldByName("Food Truck")! as SQDocRefField;
+    foodTruckRef = orderDoc.getField("Food Truck")! as SQDocRefField;
     foodTruckMenuItems =
         menuItems.filter([DocRefFilter("Food Truck", foodTruckRef.value)]);
     orderItemsRefFields = (orderDoc.value("Order Items") as List<SQDocField>)
@@ -180,7 +180,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
           content: Column(
             children: [
               foodTruckRef.formField(),
-              orderDoc.getFieldByName("Pick up time")!.formField()
+              orderDoc.getField("Pick up time")!.formField()
             ],
           ),
         ),
@@ -207,12 +207,12 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
                   }),
                 ),
               ),
-              orderDoc.getFieldByName("Notes")!.formField(),
+              orderDoc.getField("Notes")!.formField(),
               Text("Cost"),
               Text("Total Before Tax & Tip: US\$$totalBeforeTaxAndTip"),
               Text("Tax Amount: US\$$taxAmount"),
               orderDoc
-                  .getFieldByName("Tip Amount")!
+                  .getField("Tip Amount")!
                   .formField(onChanged: refreshScreen),
               Text("Total with Tip and Tax: US\$$totalWithTaxAndTip"),
               // orderDoc.getFieldByName("Total Paid")!.formField(),
