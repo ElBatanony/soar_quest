@@ -52,20 +52,5 @@ class DocFormFieldState<T extends DocFormField> extends State<T> {
   }
 }
 
-Future showFieldDialog(
-    {required BuildContext context, required SQDocField field}) {
-  return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            title: Text("Update ${field.name}"),
-            content: DocFormField(field),
-            actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
-              SQButton(
-                'Save',
-                onPressed: () => exitScreen(context, value: field.value),
-              ),
-            ]);
-      });
+  }
 }
