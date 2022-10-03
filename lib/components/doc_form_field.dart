@@ -4,7 +4,6 @@ import '../data/db.dart';
 
 export 'form_fields/read_only_form_field.dart';
 export 'form_fields/field_list_form_field.dart';
-export 'form_fields/string_form_field.dart';
 export 'form_fields/timestamp_form_field.dart';
 export 'form_fields/time_of_day_form_field.dart';
 export 'form_fields/file_form_field.dart';
