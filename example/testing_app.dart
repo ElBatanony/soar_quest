@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/screens.dart';
-import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/profile_screen.dart';
 
 void main() async {
   List<SQDocField> userDocFields = [
@@ -28,12 +26,12 @@ void main() async {
   SQCollection testCollection = FirestoreCollection(
       id: "Test Collection",
       fields: [
+        SQStringField("String"),
         SQBoolField("Bool"),
         SQDocRefField("Doc Ref", collection: simpleCollection),
         SQDoubleField("Double"),
         SQFileField("File"),
         SQIntField("Int"),
-        SQStringField("String"),
         SQTimeOfDayField("Time of Day"),
         SQTimestampField("Timestamp"),
         SQStringField("Readonly String",
@@ -41,9 +39,36 @@ void main() async {
       ],
       singleDocName: "Test Doc");
 
+  SQCollection testUserCollection = FirestoreCollection(
+      id: "Test User Collection",
+      parentDoc: App.userDoc,
+      fields: [
+        SQStringField("Name"),
+      ]);
+
   testingApp.run(MainScreen([
-    CollectionScreen(collection: testCollection, canCreate: true),
+    CollectionScreen(
+      collection: testCollection,
+      canCreate: true,
+      docScreen: (doc) => DocScreen(
+        doc,
+        postbody: (context) => CollectionScreen(
+                canCreate: true,
+                collection: FirestoreCollection(
+                    id: "Child Collection",
+                    fields: [
+                      SQStringField("Name"),
+                      SQDocRefField("Parent Doc",
+                          collection: testCollection,
+                          value: doc.ref,
+                          readOnly: true),
+                    ],
+                    parentDoc: doc))
+            .button(context),
+      ),
+    ),
     CollectionScreen(collection: simpleCollection, canCreate: true),
+    CollectionScreen(collection: testUserCollection, canCreate: true),
     ProfileScreen(),
   ]));
 }
