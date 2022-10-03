@@ -17,40 +17,19 @@ class SQDocRefFormField extends DocFormField<SQDocRefField> {
 class _SQDocRefFormFieldState extends DocFormFieldState<SQDocRefField> {
   @override
   Widget fieldBuilder(BuildContext context) {
-    return DocReferenceFieldPicker(
-        docReferenceField: field, updateCallback: onChanged);
-  }
-}
-
-class DocReferenceFieldPicker extends StatefulWidget {
-  final SQDocRefField docReferenceField;
-  final Function updateCallback;
-
-  const DocReferenceFieldPicker(
-      {Key? key, required this.docReferenceField, required this.updateCallback})
-      : super(key: key);
-
-  @override
-  State<DocReferenceFieldPicker> createState() =>
-      _DocReferenceFieldPickerState();
-}
-
-class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
-  @override
-  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.docReferenceField.name),
-        Text(widget.docReferenceField.value?.docIdentifier ?? "not-set"),
-        if (widget.docReferenceField.readOnly == false)
+        Text(field.name),
+        Text(field.value?.docIdentifier ?? "not-set"),
+        if (field.readOnly == false)
           SQButton(
             'Select',
             onPressed: () async {
               SQDoc? retDoc = await goToScreen(
                   SelectDocScreen(
-                      title: "Select ${widget.docReferenceField.name}",
-                      collection: widget.docReferenceField.collection),
+                      title: "Select ${field.name}",
+                      collection: field.collection),
                   context: context);
 
               if (retDoc != null) {
@@ -59,8 +38,8 @@ class _DocReferenceFieldPickerState extends State<DocReferenceFieldPicker> {
                   docIdentifier: retDoc.identifier,
                   collectionPath: retDoc.collection.getPath(),
                 );
-                widget.docReferenceField.value = ref;
-                widget.updateCallback();
+                field.value = ref;
+                onChanged();
               }
             },
           ),
