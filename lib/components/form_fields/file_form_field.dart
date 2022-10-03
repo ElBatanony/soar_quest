@@ -8,47 +8,19 @@ import '../../data/types.dart';
 import '../buttons/sq_button.dart';
 
 class SQFileFormField extends DocFormField<SQFileField> {
-  const SQFileFormField(super.field, {super.onChanged, super.doc, super.key});
+  const SQFileFormField(super.field,
+      {super.onChanged, required super.doc, super.key});
 
   @override
   createState() => _SQFileFormFieldState();
 }
 
 class _SQFileFormFieldState extends DocFormFieldState<SQFileField> {
-  @override
-  Widget build(BuildContext context) {
-    if (doc == null) return Text("No doc to upload file to");
-
-    return FileFieldPicker(
-        fileField: field,
-        doc: doc!,
-        storage: FirebaseFileStorage(field.value),
-        updateCallback: onChanged);
-  }
-}
-
-class FileFieldPicker extends StatefulWidget {
-  final SQFileField fileField;
-  final Function updateCallback;
-  final SQDoc doc;
-  final SQFileStorage storage;
-
-  const FileFieldPicker(
-      {required this.fileField,
-      required this.updateCallback,
-      required this.doc,
-      required this.storage,
-      super.key});
-
-  @override
-  State<FileFieldPicker> createState() => _FileFieldPickerState();
-}
-
-class _FileFieldPickerState extends State<FileFieldPicker> {
   bool fileExists = false;
+  late SQFileStorage storage = FirebaseFileStorage(field.value);
 
   downloadFileFromUrl() async {
-    final fileUrl = await widget.storage.getFileDownloadURL(widget.doc);
+    final fileUrl = await storage.getFileDownloadURL(doc!);
     final url = Uri.parse(fileUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $fileUrl';
@@ -57,7 +29,7 @@ class _FileFieldPickerState extends State<FileFieldPicker> {
 
   refreshFileExists() {
     setState(() {
-      fileExists = widget.fileField.value.exists;
+      fileExists = field.value.exists;
     });
   }
 
@@ -65,20 +37,20 @@ class _FileFieldPickerState extends State<FileFieldPicker> {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      await widget.storage.uploadFile(
-          doc: widget.doc,
+      await storage.uploadFile(
+          doc: doc!,
           file: pickedFile,
           onUpload: () {
             refreshFileExists();
-            widget.updateCallback();
+            onChanged();
           });
     }
   }
 
   deleteFile() async {
-    await widget.storage.deleteFile(doc: widget.doc);
+    await storage.deleteFile(doc: doc!);
     refreshFileExists();
-    widget.updateCallback();
+    onChanged();
   }
 
   @override
@@ -89,10 +61,12 @@ class _FileFieldPickerState extends State<FileFieldPicker> {
 
   @override
   Widget build(BuildContext context) {
+    if (doc == null) return Text("No doc to upload file to");
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.fileField.name),
+        Text(field.name),
         fileExists
             ? SQButton("Download", onPressed: downloadFileFromUrl)
             : Text("File not set"),
