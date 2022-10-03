@@ -28,6 +28,7 @@ class App {
 
   static SQAuthManager auth = instance.authManager;
   static String get userId => auth.user.userId;
+  static SQDoc get userDoc => auth.user.userDoc;
 
   late AppSettings settings;
 
