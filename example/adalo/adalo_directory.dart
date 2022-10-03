@@ -7,11 +7,7 @@ import 'package:soar_quest/app/app_navigator.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
-import 'package:soar_quest/screens/collection_screens/collection_filter_screen.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/doc_screen.dart';
-import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/profile_screen.dart';
+import 'package:soar_quest/screens.dart';
 import 'package:soar_quest/app/auth_manager.dart';
 
 void main() async {

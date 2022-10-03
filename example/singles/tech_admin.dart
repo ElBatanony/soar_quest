@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
-import 'package:soar_quest/screens/cloud_function_screens/cloud_function_docs_screen.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/profile_screen.dart';
-import 'package:soar_quest/screens/collection_screens/public_profiles_screen.dart';
+import 'package:soar_quest/screens.dart';
 import 'package:soar_quest/app/auth_manager.dart';
 
 void main() async {

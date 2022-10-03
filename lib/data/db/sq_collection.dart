@@ -1,6 +1,6 @@
 import '../../app.dart';
 import 'sq_doc.dart';
-import '../../screens/collection_screen.dart';
+import '../../screens.dart';
 import 'collection_filter.dart';
 export 'collection_filter.dart';
 

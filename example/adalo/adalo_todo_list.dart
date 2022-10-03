@@ -5,9 +5,7 @@ import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/components/wrappers/signed_in_content.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/user_data.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/main_screen.dart';
-import 'package:soar_quest/screens/profile_screen.dart';
+import 'package:soar_quest/screens.dart' hide createDoc;
 
 void main() async {
   List<SQDocField> userDocFields = [SQStringField("Full Name")];

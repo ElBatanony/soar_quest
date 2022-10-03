@@ -5,7 +5,7 @@ import '../../app/app_navigator.dart';
 import '../../data/db.dart';
 import '../../data/types/sq_doc_reference.dart';
 import '../buttons/sq_button.dart';
-import '../../screens/collection_screen.dart';
+import '../../screens.dart';
 
 class SQDocRefFormField extends DocFormField<SQDocRefField> {
   const SQDocRefFormField(super.field, {super.onChanged, super.doc, super.key});

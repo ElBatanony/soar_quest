@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/data/db.dart';
 import 'package:soar_quest/data/types.dart';
-import 'package:soar_quest/screens/collection_screen.dart';
-import 'package:soar_quest/screens/doc_screen.dart';
+import 'package:soar_quest/screens.dart';
 
 import 'config_adalo_appointments.dart';
 import 'reschedule_screens.dart';

@@ -1,4 +1,4 @@
-import 'package:soar_quest/screens/main_screen.dart';
+import 'package:soar_quest/screens.dart';
 
 import 'classes_screen.dart';
 import 'config_adalo_appointments.dart';

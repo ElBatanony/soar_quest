@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/db.dart';
 import '../../data/types/sq_doc_reference.dart';
 import '../feature.dart';
-import '../../screens/collection_screen.dart';
+import '../../screens.dart';
 import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../components/buttons/sq_button.dart';
