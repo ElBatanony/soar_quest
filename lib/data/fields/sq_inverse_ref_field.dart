@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../db.dart';
 import '../types.dart';
 
@@ -31,11 +33,46 @@ class SQInverseRefField extends SQListField {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return InverseRefFormField(this, doc: doc);
+    return _InverseRefFormField(this, doc: doc);
   }
 
   @override
   DocFormField readOnlyField({SQDoc? doc}) {
-    return InverseRefFormField(this, doc: doc);
+    return _InverseRefFormField(this, doc: doc);
+  }
+}
+
+class _InverseRefFormField extends DocFormField {
+  final SQInverseRefField inverseRefField;
+
+  const _InverseRefFormField(this.inverseRefField, {required super.doc})
+      : super(inverseRefField);
+
+  @override
+  createState() => _InverseRefFieldState();
+}
+
+class _InverseRefFieldState extends DocFormFieldState {
+  List<SQDocRef> inverses = [];
+
+  SQInverseRefField get inverseRefField =>
+      (widget as _InverseRefFormField).inverseRefField;
+
+  void loadInverses() async {
+    inverses = await inverseRefField.inverseRefs(doc!);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadInverses();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: [Text(field.name), Text(": "), Text(inverses.toString())],
+    );
   }
 }
