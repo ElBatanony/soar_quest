@@ -1,13 +1,10 @@
-import '../../app.dart';
 import '../db.dart';
 import '../types.dart';
 
 class SQInverseRefField extends SQListField {
-  late String collectionId;
+  SQCollection collection;
   String refFieldName;
   SQDoc? doc;
-
-  SQCollection get collection => App.getCollectionById(collectionId);
 
   Future<List<SQDocRef>> inverseRefs(SQDoc doc) async {
     if (!collection.initialized) await collection.loadCollection();
@@ -19,15 +16,17 @@ class SQInverseRefField extends SQListField {
   }
 
   SQInverseRefField(super.name,
-      {required this.refFieldName, this.doc, String? collectionId})
-      : super(readOnly: true) {
-    this.collectionId = collectionId ?? name;
-  }
+      {required this.refFieldName, this.doc, required this.collection})
+      : super(readOnly: true);
 
   @override
   SQInverseRefField copy() {
-    return SQInverseRefField(name,
-        refFieldName: refFieldName, doc: doc, collectionId: collectionId);
+    return SQInverseRefField(
+      name,
+      refFieldName: refFieldName,
+      doc: doc,
+      collection: collection,
+    );
   }
 
   @override
