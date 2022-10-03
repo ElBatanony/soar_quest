@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data/db/sq_doc.dart';
 
-class SQIntFormField extends DocFormField {
-  const SQIntFormField(SQIntField field,
-      {required super.onChanged, super.doc, super.key})
-      : super(field);
+class SQIntFormField extends DocFormField<SQIntField> {
+  const SQIntFormField(super.field,
+      {required super.onChanged, super.doc, super.key});
 
   @override
-  State<SQIntFormField> createState() => _SQIntFormFieldState();
+  createState() => _SQIntFormFieldState();
 }
 
-class _SQIntFormFieldState extends DocFormFieldState<SQIntFormField> {
+class _SQIntFormFieldState extends DocFormFieldState<SQIntField> {
   final fieldTextController = TextEditingController();
 
   @override
   void initState() {
-    fieldTextController.text = (widget.field.value ?? "").toString();
+    fieldTextController.text = (field.value ?? "").toString();
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return TextField(
       controller: fieldTextController,
       onChanged: (text) {
-        widget.field.value = int.tryParse(text);
+        field.value = int.tryParse(text);
       },
       onEditingComplete: onChanged,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        hintText: widget.field.name,
+        hintText: field.name,
       ),
     );
   }

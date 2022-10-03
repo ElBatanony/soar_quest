@@ -26,7 +26,7 @@ Future showFieldOptions(SQFieldListField fieldListfield,
       });
 }
 
-class SQFieldListFormField extends DocFormField {
+class SQFieldListFormField extends DocFormField<SQFieldListField> {
   final SQFieldListField listField;
 
   const SQFieldListFormField(this.listField,
@@ -34,35 +34,35 @@ class SQFieldListFormField extends DocFormField {
       : super(listField);
 
   @override
-  State<SQFieldListFormField> createState() => _SQFieldListFormFieldState();
+  createState() => _SQFieldListFormFieldState();
 }
 
-class _SQFieldListFormFieldState
-    extends DocFormFieldState<SQFieldListFormField> {
+class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
+  SQFieldListField get listField => field;
+
   void deleteListItem(int index) {
     setState(() {
-      widget.listField.fields.removeAt(index);
+      listField.fields.removeAt(index);
     });
   }
 
   void addField() async {
-    SQDocField? newValue =
-        await showFieldOptions(widget.listField, context: context);
+    SQDocField? newValue = await showFieldOptions(listField, context: context);
     if (newValue != null) {
       setState(() {
-        widget.listField.fields.add(newValue);
+        listField.fields.add(newValue);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var listItems = widget.listField.fields;
+    var listItems = listField.fields;
     var listItemsWidgets = [];
 
     for (int i = 0; i < listItems.length; i++) {
-      listItemsWidgets.add(ListItemField(listItems[i],
-          listField: widget.listField, deleteItem: () {
+      listItemsWidgets.add(
+          ListItemField(listItems[i], listField: listField, deleteItem: () {
         deleteListItem(i);
       }));
     }
@@ -72,7 +72,7 @@ class _SQFieldListFormFieldState
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("${widget.listField.name} (List of ${listItems.length})"),
+            Text("${listField.name} (List of ${listItems.length})"),
             IconButton(onPressed: addField, icon: Icon(Icons.add)),
           ],
         ),

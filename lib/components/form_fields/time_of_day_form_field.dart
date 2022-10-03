@@ -5,26 +5,23 @@ import '../buttons/sq_button.dart';
 import '../../data/fields/sq_time_of_day_field.dart';
 import '../../data/types/sq_time_of_day.dart';
 
-class SQTimeOfDayFormField extends DocFormField {
+class SQTimeOfDayFormField extends DocFormField<SQTimeOfDayField> {
   const SQTimeOfDayFormField(super.field,
-      {required super.onChanged, super.doc, super.key});
+      {super.onChanged, super.doc, super.key});
 
   @override
-  State<SQTimeOfDayFormField> createState() => _SQTimeOfDayFormFieldState();
+  createState() => _SQTimeOfDayFormFieldState();
 }
 
-class _SQTimeOfDayFormFieldState
-    extends DocFormFieldState<SQTimeOfDayFormField> {
+class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.field.name),
-        Text(widget.field.value.toString()),
-        TimeOfDayFieldPicker(
-            timeOfDayField: widget.field as SQTimeOfDayField,
-            updateCallback: onChanged),
+        Text(field.name),
+        Text(field.value.toString()),
+        TimeOfDayFieldPicker(timeOfDayField: field, updateCallback: onChanged),
       ],
     );
   }

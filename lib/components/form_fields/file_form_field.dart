@@ -7,23 +7,22 @@ import '../../data/db.dart';
 import '../../data/types.dart';
 import '../buttons/sq_button.dart';
 
-class SQFileFormField extends DocFormField {
-  const SQFileFormField(super.field,
-      {required super.onChanged, required super.doc, super.key});
+class SQFileFormField extends DocFormField<SQFileField> {
+  const SQFileFormField(super.field, {super.onChanged, super.doc, super.key});
 
   @override
-  State<SQFileFormField> createState() => _SQFileFormFieldState();
+  createState() => _SQFileFormFieldState();
 }
 
-class _SQFileFormFieldState extends DocFormFieldState<SQFileFormField> {
+class _SQFileFormFieldState extends DocFormFieldState<SQFileField> {
   @override
   Widget build(BuildContext context) {
-    if (widget.doc == null) return Text("No doc to upload file to");
+    if (doc == null) return Text("No doc to upload file to");
 
     return FileFieldPicker(
-        fileField: widget.field as SQFileField,
-        doc: widget.doc!,
-        storage: FirebaseFileStorage(widget.field.value),
+        fileField: field,
+        doc: doc!,
+        storage: FirebaseFileStorage(field.value),
         updateCallback: onChanged);
   }
 }

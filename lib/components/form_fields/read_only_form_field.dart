@@ -6,19 +6,15 @@ class ReadOnlyFormField extends DocFormField {
   const ReadOnlyFormField(super.field, {super.onChanged, super.doc, super.key});
 
   @override
-  State<ReadOnlyFormField> createState() => _ReadOnlyFormFieldState();
+  createState() => _ReadOnlyFormFieldState();
 }
 
-class _ReadOnlyFormFieldState extends DocFormFieldState<ReadOnlyFormField> {
+class _ReadOnlyFormFieldState extends DocFormFieldState {
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return Wrap(
       alignment: WrapAlignment.center,
-      children: [
-        Text(widget.field.name),
-        Text(": "),
-        Text(widget.field.value.toString())
-      ],
+      children: [Text(field.name), Text(": "), Text(field.value.toString())],
     );
   }
 }

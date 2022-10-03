@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/data/db/sq_doc.dart';
 
-class SQDoubleFormField extends DocFormField {
-  const SQDoubleFormField(SQDoubleField field, {super.onChanged, super.key})
-      : super(field);
+// TODO: make SQDoubleFormField inherit from SQStringFormField
+class SQDoubleFormField extends DocFormField<SQDoubleField> {
+  const SQDoubleFormField(super.field, {super.onChanged, super.key});
 
   @override
-  State<SQDoubleFormField> createState() => _SQDoubleFormFieldState();
+  createState() => _SQDoubleFormFieldState();
 }
 
-class _SQDoubleFormFieldState extends DocFormFieldState<SQDoubleFormField> {
+class _SQDoubleFormFieldState extends DocFormFieldState<SQDoubleField> {
   final fieldTextController = TextEditingController();
 
   @override
   void initState() {
-    fieldTextController.text = (widget.field.value ?? "").toString();
+    fieldTextController.text = (field.value ?? "").toString();
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return TextField(
       controller: fieldTextController,
       onChanged: (text) {
-        widget.field.value = double.tryParse(text);
+        field.value = double.tryParse(text);
         onChanged();
       },
       onEditingComplete: onChanged,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        hintText: widget.field.name,
+        hintText: field.name,
       ),
     );
   }

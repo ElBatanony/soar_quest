@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/data/db/sq_doc.dart';
 
-import '../doc_form_field.dart';
-
-class SQBoolFormField extends DocFormField {
+class SQBoolFormField extends DocFormField<SQBoolField> {
   const SQBoolFormField(super.field, {super.onChanged, super.doc, super.key});
 
   @override
-  State<SQBoolFormField> createState() => _SQBoolFormFieldState();
+  createState() => _SQBoolFormFieldState();
 }
 
-class _SQBoolFormFieldState extends DocFormFieldState<SQBoolFormField> {
+class _SQBoolFormFieldState extends DocFormFieldState<SQBoolField> {
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.field.name),
+        Text(field.name),
         Switch(
-          value: widget.field.value,
+          value: field.value,
           onChanged: (value) {
-            setState(() {
-              widget.field.value = value;
-            });
+            field.value = value;
             onChanged();
           },
         ),

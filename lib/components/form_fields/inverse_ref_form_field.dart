@@ -11,14 +11,17 @@ class InverseRefFormField extends DocFormField {
       : super(inverseRefField);
 
   @override
-  State<InverseRefFormField> createState() => _InverseRefFieldState();
+  createState() => _InverseRefFieldState();
 }
 
-class _InverseRefFieldState extends DocFormFieldState<InverseRefFormField> {
+class _InverseRefFieldState extends DocFormFieldState {
   List<SQDocRef> inverses = [];
 
+  SQInverseRefField get inverseRefField =>
+      (widget as InverseRefFormField).inverseRefField;
+
   void loadInverses() async {
-    inverses = await widget.inverseRefField.inverseRefs(widget.doc!);
+    inverses = await inverseRefField.inverseRefs(doc!);
     setState(() {});
   }
 
@@ -31,11 +34,7 @@ class _InverseRefFieldState extends DocFormFieldState<InverseRefFormField> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      children: [
-        Text(widget.field.name),
-        Text(": "),
-        Text(inverses.toString())
-      ],
+      children: [Text(field.name), Text(": "), Text(inverses.toString())],
     );
   }
 }

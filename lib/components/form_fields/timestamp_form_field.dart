@@ -4,26 +4,24 @@ import '../../data/db.dart';
 import '../../data/types.dart';
 import '../buttons/sq_button.dart';
 
-class SQTimestampFormField extends DocFormField {
+class SQTimestampFormField extends DocFormField<SQTimestampField> {
   const SQTimestampFormField(super.field,
-      {required super.onChanged, super.doc, super.key});
+      {super.onChanged, super.doc, super.key});
 
   @override
-  State<SQTimestampFormField> createState() => _SQTimestampFormFieldState();
+  createState() => _SQTimestampFormFieldState();
 }
 
-class _SQTimestampFormFieldState
-    extends DocFormFieldState<SQTimestampFormField> {
+class _SQTimestampFormFieldState extends DocFormFieldState<SQTimestampField> {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.field.name),
-        Text(widget.field.value.toString()),
+        Text(field.name),
+        Text(field.value.toString()),
         TimestampDocFieldPicker(
-            timestampField: widget.field as SQTimestampField,
-            updateCallback: onChanged),
+            timestampField: field, updateCallback: onChanged),
       ],
     );
   }
