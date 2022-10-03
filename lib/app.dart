@@ -16,6 +16,7 @@ export 'app/auth_manager.dart';
 
 class App {
   String name;
+  // TODO: replace homescreen with param when running
   Screen? homescreen;
 
   Screen? currentScreen;
