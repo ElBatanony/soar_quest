@@ -14,6 +14,13 @@ class SQTimeOfDayFormField extends DocFormField<SQTimeOfDayField> {
 }
 
 class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
+  void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
+    if (newSelectedTimeOfDay != null) {
+      field.value = SQTimeOfDay.fromTimeOfDay(newSelectedTimeOfDay);
+      onChanged();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,46 +28,19 @@ class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
       children: [
         Text(field.name),
         Text(field.value.toString()),
-        TimeOfDayFieldPicker(timeOfDayField: field, updateCallback: onChanged),
+        SQButton(
+          'Select Time',
+          onPressed: () async {
+            TimeOfDay? newTimeOfDay = await showTimePicker(
+              context: context,
+              initialTime: field.value?.toTimeOfDay() ?? TimeOfDay.now(),
+            );
+            if (newTimeOfDay != null) {
+              _selectTimeOfDay(newTimeOfDay);
+            }
+          },
+        )
       ],
-    );
-  }
-}
-
-class TimeOfDayFieldPicker extends StatefulWidget {
-  const TimeOfDayFieldPicker(
-      {required this.timeOfDayField, required this.updateCallback, super.key});
-
-  final SQTimeOfDayField timeOfDayField;
-  final Function updateCallback;
-
-  @override
-  State<TimeOfDayFieldPicker> createState() => _TimeOfDayFieldPickerState();
-}
-
-class _TimeOfDayFieldPickerState extends State<TimeOfDayFieldPicker> {
-  void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
-    if (newSelectedTimeOfDay != null) {
-      widget.timeOfDayField.value =
-          SQTimeOfDay.fromTimeOfDay(newSelectedTimeOfDay);
-      widget.updateCallback();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SQButton(
-      'Select Time',
-      onPressed: () async {
-        TimeOfDay? newTimeOfDay = await showTimePicker(
-          context: context,
-          initialTime:
-              widget.timeOfDayField.value?.toTimeOfDay() ?? TimeOfDay.now(),
-        );
-        if (newTimeOfDay != null) {
-          _selectTimeOfDay(newTimeOfDay);
-        }
-      },
     );
   }
 }
