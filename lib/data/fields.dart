@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'db.dart';
 
 export 'fields/sq_field_list_field.dart';
@@ -41,7 +43,7 @@ abstract class SQDocField<T> {
   DocFormField formField({Function? onChanged, SQDoc? doc});
 
   DocFormField readOnlyField({SQDoc? doc}) {
-    return ReadOnlyFormField(this, doc: doc);
+    return _ReadOnlyFormField(this, doc: doc);
   }
 
   @override
@@ -50,4 +52,21 @@ abstract class SQDocField<T> {
   }
 
   bool get isNull => value == null;
+}
+
+class _ReadOnlyFormField extends DocFormField {
+  const _ReadOnlyFormField(super.field, {super.doc});
+
+  @override
+  createState() => _ReadOnlyFormFieldState();
+}
+
+class _ReadOnlyFormFieldState extends DocFormFieldState {
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      children: [Text(field.name), Text(": "), Text(field.value.toString())],
+    );
+  }
 }
