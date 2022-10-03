@@ -42,10 +42,9 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
     foodTruckRef = orderDoc.getFieldByName("Food Truck")! as SQDocRefField;
     foodTruckMenuItems =
         menuItems.filter([DocRefFilter("Food Truck", foodTruckRef.value)]);
-    orderItemsRefFields =
-        (orderDoc.getFieldValueByName("Order Items") as List<SQDocField>)
-            .whereType<SQDocRefField>()
-            .toList();
+    orderItemsRefFields = (orderDoc.value("Order Items") as List<SQDocField>)
+        .whereType<SQDocRefField>()
+        .toList();
     orderItems = FirestoreCollection(
         id: "Order Items",
         parentDoc: widget.doc,
@@ -75,7 +74,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
     totalBeforeTaxAndTip = 0;
 
     for (var orderItem in thisOrderItems) {
-      totalBeforeTaxAndTip += orderItem.getFieldValueByName("Price") ?? 0;
+      totalBeforeTaxAndTip += orderItem.value("Price") ?? 0;
     }
 
     totalBeforeTaxAndTip =
@@ -85,7 +84,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
 
     taxAmount = double.parse(taxAmount.toStringAsPrecision(3));
 
-    double tipAmount = (orderDoc.getFieldValueByName("Tip Amount") ?? 0);
+    double tipAmount = (orderDoc.value("Tip Amount") ?? 0);
 
     totalWithTaxAndTip = totalBeforeTaxAndTip + taxAmount + tipAmount;
 
@@ -131,7 +130,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
         .where((orderItemRef) =>
             (orderItems.docs
                     .firstWhere((doc) => doc.id == orderItemRef.value!.docId)
-                    .getFieldValueByName("Menu Item") as SQDocRef)
+                    .value("Menu Item") as SQDocRef)
                 .docId ==
             menuItem.id)
         .length;
@@ -199,8 +198,7 @@ class OrderFormScreenState extends DocFormScreenState<OrderFormScreen> {
                     SQDoc orderItem = thisOrderItems[index];
                     return ListTile(
                       title: Text(orderItem.identifier),
-                      subtitle:
-                          Text("US\$${orderItem.getFieldValueByName("Price")}"),
+                      subtitle: Text("US\$${orderItem.value("Price")}"),
                       dense: true,
                       trailing: IconButton(
                           onPressed: () => deleteOrderItem(orderItem),

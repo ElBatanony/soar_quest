@@ -48,10 +48,9 @@ class _LearnDocWidgetState extends State<LearnDocWidget> {
 
   void loadData() async {
     requestClassDoc =
-        (widget.doc.getFieldValueByName("Requested Class") as SQDocRef)
-            .getDoc();
+        (widget.doc.value("Requested Class") as SQDocRef).getDoc();
     await requestClassDoc!.loadDoc();
-    teacherDocRef = requestClassDoc!.getFieldValueByName("Teacher");
+    teacherDocRef = requestClassDoc!.value("Teacher");
     setState(() {});
   }
 
@@ -64,7 +63,7 @@ class _LearnDocWidgetState extends State<LearnDocWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String status = widget.doc.getFieldValueByName("Status");
+    String status = widget.doc.value("Status");
     return GestureDetector(
       onTap: () {
         if (status == "Rescheduled")
@@ -93,7 +92,7 @@ class _LearnDocWidgetState extends State<LearnDocWidget> {
               if (requestClassDoc?.initialized == true)
                 Text("Teacher: ${teacherDocRef!.docIdentifier}"),
               Text(
-                  "Requested Date: ${widget.doc.getFieldValueByName("Requested Class Date")}"),
+                  "Requested Date: ${widget.doc.value("Requested Class Date")}"),
             ],
           ),
         ),

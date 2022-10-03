@@ -13,11 +13,11 @@ late SQCollection foodTrucks, orders;
 late MenuItemsCollection menuItems;
 
 class MenuItemDoc extends SQDoc {
-  String get name => getFieldValueByName("Name");
-  double get price => getFieldValueByName("Price");
-  SQDocRef get foodTruck => getFieldValueByName("Food Truck");
-  bool get isFood => getFieldValueByName("Food?");
-  bool get isDrink => getFieldValueByName("Drink?");
+  String get name => value("Name");
+  double get price => value("Price");
+  SQDocRef get foodTruck => value("Food Truck");
+  bool get isFood => value("Food?");
+  bool get isDrink => value("Drink?");
 
   MenuItemDoc(super.id, {required super.collection});
 }

@@ -57,7 +57,7 @@ class SQDoc {
     return fields.singleWhere((field) => field.name == fieldName);
   }
 
-  dynamic getFieldValueByName(String fieldName) {
+  dynamic value(String fieldName) {
     return getFieldByName(fieldName)?.value;
   }
 

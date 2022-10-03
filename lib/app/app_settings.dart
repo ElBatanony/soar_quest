@@ -16,6 +16,6 @@ class AppSettings {
   }
 
   getSetting(String settingsName) {
-    return settingsDoc.getFieldValueByName(settingsName);
+    return settingsDoc.value(settingsName);
   }
 }

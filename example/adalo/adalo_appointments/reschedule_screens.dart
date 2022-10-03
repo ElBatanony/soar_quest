@@ -37,11 +37,9 @@ class _RescheduledRequestStudentScreenState
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        Text(
-            "Reschedule Comment: ${doc.getFieldValueByName("Reschedule Comment")}"),
-        Text(
-            "New requested date: ${doc.getFieldValueByName("Requested Class Date")}"),
-        Text("Time: ${doc.getFieldValueByName("Time")}"),
+        Text("Reschedule Comment: ${doc.value("Reschedule Comment")}"),
+        Text("New requested date: ${doc.value("Requested Class Date")}"),
+        Text("Time: ${doc.value("Time")}"),
         Row(
           children: [
             SQButton("Accept", onPressed: acceptDate),

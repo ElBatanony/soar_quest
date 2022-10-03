@@ -15,6 +15,6 @@ void main() async {
 
     GetCollectionDocs cf = GetCollectionDocs(logsCollection);
     List<SQDoc> docs = await cf.getDocs(collectionPath: collectionPath);
-    print(docs[0].getFieldValueByName("logId"));
+    print(docs[0].value("logId"));
   });
 }

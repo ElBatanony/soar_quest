@@ -126,7 +126,7 @@ class _NewRequestTeacherScreenState
 
   @override
   Widget screenBody(BuildContext context) {
-    String status = widget.doc.getFieldValueByName("Status");
+    String status = widget.doc.value("Status");
     return Column(
       children: [
         super.screenBody(context),

@@ -45,7 +45,7 @@ class TasksCollection extends FirestoreUserCollection {
   }
 
   bool isComplete(SQDoc taskDoc) {
-    return taskDoc.getFieldValueByName("Status");
+    return taskDoc.value("Status");
   }
 
   Future addTask(String taskName) {

@@ -17,9 +17,7 @@ class ValueFilter extends CollectionFilter {
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where((doc) => doc.getFieldValueByName(fieldName) == fieldValue)
-        .toList();
+    return docs.where((doc) => doc.value(fieldName) == fieldValue).toList();
   }
 }
 
@@ -29,7 +27,7 @@ class StringContainsFilter extends CollectionFieldFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs
-        .where((doc) => (doc.getFieldValueByName(field.name) as String)
+        .where((doc) => (doc.value(field.name) as String)
             .toLowerCase()
             .contains(field.value.toLowerCase()))
         .toList();
@@ -45,8 +43,8 @@ class DocRefFilter extends CollectionFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
-      if (doc.getFieldValueByName(fieldName) == null) return false;
-      SQDocRef docRef = doc.getFieldValueByName(fieldName);
+      if (doc.value(fieldName) == null) return false;
+      SQDocRef docRef = doc.value(fieldName);
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
@@ -61,9 +59,9 @@ class DocRefFieldFilter extends CollectionFieldFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
-      if (doc.getFieldValueByName(field.name) == null) return false;
+      if (doc.value(field.name) == null) return false;
 
-      SQDocRef docRef = doc.getFieldValueByName(field.name);
+      SQDocRef docRef = doc.value(field.name);
       SQDocRef fieldValue = field.value;
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
@@ -81,7 +79,7 @@ class CompareFuncFilter extends CollectionFieldFilter {
     return docs
         .where(
           (doc) => compareFunc(
-            doc.getFieldValueByName(field.name).compareTo(field.value),
+            doc.value(field.name).compareTo(field.value),
           ),
         )
         .toList();

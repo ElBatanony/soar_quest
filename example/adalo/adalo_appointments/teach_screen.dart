@@ -25,7 +25,7 @@ class _TeachScreenState extends CollectionScreenState<TeachScreen> {
         .filter([DocRefFilter("Requested Class", SQDocRef.fromDoc(doc))]);
 
     int numberOfRequests = classRequests.length;
-    SQDocRef? classTypeRef = doc.getFieldValueByName("Class Type");
+    SQDocRef? classTypeRef = doc.value("Class Type");
 
     return Card(
       child: Padding(

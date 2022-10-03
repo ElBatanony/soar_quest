@@ -107,7 +107,7 @@ class _OrdersCollectionState extends CollectionScreenState<OrdersCollection> {
     return SpecialAccessContent(
         child: super.screenBody(context),
         checker: (userData) {
-          return userData.userDoc.getFieldValueByName("Admin") == true;
+          return userData.userDoc.value("Admin") == true;
         });
   }
 }

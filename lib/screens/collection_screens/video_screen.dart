@@ -59,8 +59,7 @@ class _VideoDocDisplayState extends State<VideoDocDisplay> {
   void initState() {
     super.initState();
 
-    String videoFieldValue =
-        widget.doc.getFieldValueByName(widget.videoField.name);
+    String videoFieldValue = widget.doc.value(widget.videoField.name);
 
     String? videoId = YoutubePlayer.convertUrlToId(videoFieldValue);
 

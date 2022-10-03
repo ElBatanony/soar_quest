@@ -14,9 +14,7 @@ class FavDoc extends SQDoc {
   FavDoc(super.id, {required this.favedDocRef, required super.collection});
 
   FavDoc.fromDoc(SQDoc doc)
-      : this(doc.id,
-            favedDocRef: doc.getFieldValueByName('ref'),
-            collection: doc.collection);
+      : this(doc.id, favedDocRef: doc.value('ref'), collection: doc.collection);
 }
 
 class FavouritesCollection extends FirestoreUserCollection {
@@ -93,7 +91,7 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
   @override
   Widget docDisplay(SQDoc doc) {
-    SQDocRef originalDocRef = doc.getFieldValueByName("ref");
+    SQDocRef originalDocRef = doc.value("ref");
 
     return ListTile(
       title: SQButton(doc.identifier,

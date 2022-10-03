@@ -64,9 +64,9 @@ class _MealCollectionScreenState
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(doc.getFieldValueByName("Name")),
-            Text(doc.getFieldValueByName("Calories").toString()),
-            Text(doc.getFieldValueByName("Price").toString())
+            Text(doc.value("Name")),
+            Text(doc.value("Calories").toString()),
+            Text(doc.value("Price").toString())
           ],
         ),
       ),
