@@ -1,5 +1,3 @@
-export 'sq_doc_field.dart';
-
 export '../fields/sq_field_list_field.dart';
 export '../fields/sq_doc_ref_field.dart';
 export '../fields/sq_file_field.dart';
