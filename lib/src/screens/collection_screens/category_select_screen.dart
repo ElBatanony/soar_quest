@@ -6,6 +6,7 @@ import '../../ui/sq_button.dart';
 
 import '../collection_screen.dart';
 import '../screen_navigation.dart';
+import 'collection_filter_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {
   final SQDocRefField categoryField;

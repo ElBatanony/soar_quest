@@ -6,9 +6,6 @@ import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';
 
-export 'form_screens/doc_edit_screen.dart';
-export 'form_screens/doc_create_screen.dart';
-
 class DocFormScreen extends Screen {
   late final SQCollection collection;
   final List<String> hiddenFields;
