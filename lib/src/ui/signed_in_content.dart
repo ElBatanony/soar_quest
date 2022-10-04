@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
 import '../../data/user_data.dart';
+import '../app/app.dart';
+import '../screens/app_navigator.dart';
 import '../screens/screen.dart';
 import 'sq_button.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
 import '../../data/user_data.dart';
+import '../app/app.dart';
 
 class SpecialAccessContent extends StatefulWidget {
   final Widget child;

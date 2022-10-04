@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../db.dart';
+import '../db/sq_doc.dart';
 
 class DocDeleteButton extends StatelessWidget {
   final SQDoc doc;
