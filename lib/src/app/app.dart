@@ -7,7 +7,7 @@ import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
 import '../screens/screen.dart';
 import 'app_settings.dart';
-import 'auth_manager.dart';
+import '../auth/auth_manager.dart';
 
 class App {
   String name;

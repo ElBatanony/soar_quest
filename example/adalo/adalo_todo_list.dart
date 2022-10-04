@@ -11,7 +11,6 @@ void main() async {
 
   App adaloTodoApp = App("To Do List",
       theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
-      authManager: FirebaseAuthManager(),
       userDocFields: userDocFields);
 
   await adaloTodoApp.init();

@@ -14,7 +14,6 @@ void main() async {
 
   App caloriesTrackersApp = App("To Do List",
       theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
-      authManager: FirebaseAuthManager(),
       userDocFields: userDocFields);
 
   await caloriesTrackersApp.init();
