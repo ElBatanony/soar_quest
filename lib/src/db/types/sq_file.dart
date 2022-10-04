@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../db/sq_doc.dart';
-import '../fields/sq_file_field.dart';
+import '../sq_doc.dart';
+import '../../fields/sq_file_field.dart';
 
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 

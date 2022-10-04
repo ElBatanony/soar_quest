@@ -4,10 +4,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../db/sq_doc.dart';
-import '../types/sq_file.dart';
+import '../db/types/sq_file.dart';
 import '../ui/sq_button.dart';
 
-export '../types/sq_file.dart';
+export '../db/types/sq_file.dart';
 
 class SQFileField extends SQDocField<SQFile> {
   SQFileField(super.name, {super.value});
