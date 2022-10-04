@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../data/user_data.dart';
+import 'user_data.dart';
 import '../screens/screen.dart';
 import 'auth_manager.dart';
 import 'sign_in_screen.dart';

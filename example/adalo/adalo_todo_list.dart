@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/ui.dart';
 import 'package:soar_quest/db.dart';
-import 'package:soar_quest/data/user_data.dart';
 import 'package:soar_quest/screens.dart' hide createDoc;
 
 void main() async {

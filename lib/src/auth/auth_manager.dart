@@ -1,4 +1,4 @@
-import '../../data/user_data.dart';
+import 'user_data.dart';
 import '../screens/screen.dart';
 
 abstract class SQAuthManager {

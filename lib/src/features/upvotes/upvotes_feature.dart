@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../ui/sq_button.dart';
 import '../../ui/signed_in_content.dart';
 import '../../../db.dart';
-import '../../../data/user_data.dart';
 import '../feature.dart';
 
 class UpvotesFeature extends Feature {

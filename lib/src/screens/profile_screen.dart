@@ -6,7 +6,6 @@ import '../fields/show_field_dialog.dart';
 import '../fields/sq_string_field.dart';
 import '../ui/signed_in_content.dart';
 import '../ui/sq_button.dart';
-import '../../data/user_data.dart';
 import 'screen.dart';
 import 'form_screens/doc_edit_screen.dart';
 
