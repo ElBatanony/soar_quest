@@ -2,6 +2,9 @@ import '../../../app.dart';
 import '../../../db.dart';
 import 'collection_filter_screen.dart';
 
+// TODO: public profile cloud function removed
+// Update public profiles when setting user doc
+
 final SQCollection publicProfilesCollection = FirestoreCollection(
   id: 'publicProfiles',
   fields: App.instance.publicProfileFields,
