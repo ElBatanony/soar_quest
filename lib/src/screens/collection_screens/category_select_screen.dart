@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../app.dart';
-
 import '../../db/sq_collection.dart';
 import '../../db/fields/sq_doc_ref_field.dart';
 import '../../ui/sq_button.dart';
 
 import '../collection_screen.dart';
+import '../screen_navigation.dart';
 
 class CategorySelectScreen extends CollectionScreen {
   final SQDocRefField categoryField;

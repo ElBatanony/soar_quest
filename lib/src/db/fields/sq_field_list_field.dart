@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../app.dart';
+import '../../screens/screen.dart';
 import '../sq_doc.dart';
 import '../../ui/sq_button.dart';
 import 'sq_list_field.dart';
