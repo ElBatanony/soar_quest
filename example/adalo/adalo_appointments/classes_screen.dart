@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/components/buttons/sq_button.dart';
 import 'package:soar_quest/db.dart';
-import 'package:soar_quest/data/types.dart';
 import 'package:soar_quest/screens.dart';
 
 import 'config_adalo_appointments.dart';

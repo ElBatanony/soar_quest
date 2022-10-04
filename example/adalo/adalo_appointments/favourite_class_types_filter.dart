@@ -1,5 +1,4 @@
 import 'package:soar_quest/db.dart';
-import 'package:soar_quest/data/types/sq_doc_reference.dart';
 import 'package:soar_quest/features/favourites/favourites.dart';
 
 class FavouriteClassTypesFilter extends CollectionFilter {

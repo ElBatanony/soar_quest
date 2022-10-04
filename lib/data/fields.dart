@@ -19,6 +19,11 @@ export 'fields/sq_inverse_ref_field.dart';
 export 'fields/sq_read_only_field.dart';
 export 'fields/show_field_dialog.dart';
 
+export 'types/sq_doc_reference.dart';
+export 'types/sq_file.dart';
+export 'types/sq_time_of_day.dart';
+export 'types/sq_timestamp.dart';
+
 export '../src/db/sq_doc.dart';
 
 abstract class SQDocField<T> {

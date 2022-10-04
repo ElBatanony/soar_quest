@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../components/buttons/sq_button.dart';
 import '../../db.dart';
-import '../types.dart';
 
 class SQTimestampField extends SQDocField<SQTimestamp> {
   SQTimestampField(String name, {SQTimestamp? value, super.readOnly})

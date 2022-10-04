@@ -5,7 +5,6 @@ import '../../../app.dart';
 import '../../../../components/buttons/sq_button.dart';
 
 import '../../../db.dart';
-import '../../../data/types/sq_doc_reference.dart';
 import '../collection_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {

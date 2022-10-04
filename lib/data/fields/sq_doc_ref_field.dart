@@ -4,10 +4,7 @@ import '../../app.dart';
 
 import '../../components/buttons/sq_button.dart';
 import '../../db.dart';
-import '../../data/types/sq_doc_reference.dart';
 import '../../screens.dart';
-
-import '../types.dart';
 
 class SQDocRefField extends SQDocField<SQDocRef> {
   SQCollection collection;

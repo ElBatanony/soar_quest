@@ -1,5 +1,4 @@
 import 'package:soar_quest/db.dart';
-import 'package:soar_quest/data/types.dart';
 
 const isAdmin = true;
 

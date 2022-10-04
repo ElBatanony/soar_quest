@@ -1,4 +1,3 @@
-import '../../data/types.dart';
 import 'sq_collection.dart';
 import 'sq_doc.dart';
 export '../../data/fields.dart';

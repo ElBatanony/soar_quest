@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../db.dart';
-import '../types.dart';
 
 class SQInverseRefField extends SQListField {
   SQCollection collection;
