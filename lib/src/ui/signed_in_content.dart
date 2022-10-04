@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../data/user_data.dart';
-import '../../screens.dart';
+import '../screens/screen.dart';
 import 'sq_button.dart';
 
 typedef SignedInContentBuilder = Widget Function(
     BuildContext context, SignedInUser user);
 
 class SignedInContent extends StatefulWidget {
-  final Screen? redirectScreen;
+  final Screen? redirectScreen; // TODO: remove redirectScreen for now
   final Function? refreshUp;
   final SignedInContentBuilder builder;
 

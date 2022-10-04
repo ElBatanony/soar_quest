@@ -5,7 +5,8 @@ import '../../app.dart';
 import '../ui/signed_in_content.dart';
 import '../../data/fields.dart';
 import '../../data/user_data.dart';
-import '../../screens.dart';
+import 'screen.dart';
+import 'form_screens/doc_edit_screen.dart';
 
 class ProfileScreen extends Screen {
   const ProfileScreen({

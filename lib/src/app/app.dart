@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import '../../firebase_options.dart';
-import '../../screens.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
+import '../screens/screen.dart';
 import 'app_settings.dart';
 import 'auth_manager.dart';
 

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../ui/sq_button.dart';
 import '../../db.dart';
-import '../../screens.dart';
 import '../ui/snackbar.dart';
+import 'screen.dart';
 
 export 'form_screens/doc_edit_screen.dart';
 export 'form_screens/doc_create_screen.dart';
