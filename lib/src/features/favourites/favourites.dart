@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../db.dart';
+import '../../../db.dart';
 import '../feature.dart';
-import '../../screens.dart';
-import '../../app.dart';
+import '../../../screens.dart';
+import '../../../app.dart';
 import 'toggle_in_favourites_button.dart';
-import '../../src/ui/sq_button.dart';
+import '../../ui/sq_button.dart';
 
 class FavDoc extends SQDoc {
   SQDocRef favedDocRef;

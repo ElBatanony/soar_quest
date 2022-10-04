@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../db.dart';
+import '../../../db.dart';
 import 'favourites.dart';
 
 class ToggleInFavouritesButton extends StatefulWidget {
