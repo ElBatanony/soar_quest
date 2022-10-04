@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../app.dart';
-import '../../ui/sq_button.dart';
-import '../../../data/fields.dart';
-import '../screen.dart';
+import '../app/app.dart';
+import '../app/app_navigator.dart';
+import '../ui/sq_button.dart';
+import '../../data/fields.dart';
+import '../screens/screen.dart';
 
 class SignInScreen extends Screen {
   final bool forceSignIn;
