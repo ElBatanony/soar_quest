@@ -9,7 +9,6 @@ import '../ui/doc_delete_button.dart';
 
 import 'form_screens/doc_edit_screen.dart';
 import 'screen.dart';
-import 'screen_navigation.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;

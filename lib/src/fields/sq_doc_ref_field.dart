@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
-
 import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
 import '../types/sq_doc_ref.dart';

@@ -7,7 +7,6 @@ import '../fields/sq_user_ref_field.dart';
 import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';
-import 'screen_navigation.dart';
 
 export 'form_screens/doc_edit_screen.dart';
 export 'form_screens/doc_create_screen.dart';

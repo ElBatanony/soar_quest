@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'screen_navigation.dart';
 import '../ui/sq_button.dart';
 
+export 'screen_navigation.dart';
+
 class Screen extends StatefulWidget {
   final String title;
   final Widget Function(BuildContext)? prebody;
