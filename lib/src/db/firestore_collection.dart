@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../app.dart';
+import '../app/app.dart';
 import 'sq_collection.dart';
 
 final firestore = FirebaseFirestore.instance;
