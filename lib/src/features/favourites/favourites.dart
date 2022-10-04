@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../db.dart';
+import '../../db/firestore_collection.dart';
+import '../../db/sq_collection.dart';
+import '../../db/sq_doc.dart';
+import '../../fields/sq_doc_ref_field.dart';
+import '../../types/sq_doc_reference.dart';
 import '../feature.dart';
 import '../../../screens.dart';
 import '../../../app.dart';
