@@ -9,7 +9,6 @@ export 'src/screens/form_screen.dart';
 export 'src/screens/menu_screen.dart';
 export 'src/screens/profile_screen.dart';
 export 'src/screens/main_screen.dart';
-export 'src/screens/cloud_function_screens/cloud_function_docs_screen.dart';
 export 'src/screens/auth/sign_in_screen.dart';
 export 'src/screens/auth/sign_up_screen.dart';
 
