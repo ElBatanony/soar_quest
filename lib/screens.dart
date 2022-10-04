@@ -1,4 +1,4 @@
-export 'src/screens//screen.dart';
+export 'src/screens/screen.dart';
 export 'src/screens/collection_screen.dart';
 export 'src/screens/doc_screen.dart';
 export 'src/screens/form_screen.dart';
