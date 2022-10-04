@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../auth/firebase_auth_manager.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
-import '../db/sq_doc.dart';
 import 'firebase_app.dart';
 import '../screens/screen.dart';
 import 'app_settings.dart';

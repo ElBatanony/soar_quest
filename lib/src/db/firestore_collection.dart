@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../app.dart';
 import 'sq_collection.dart';
-import 'sq_doc.dart';
 
 final firestore = FirebaseFirestore.instance;
 

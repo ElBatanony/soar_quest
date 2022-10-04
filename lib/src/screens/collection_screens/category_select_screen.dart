@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../app.dart';
 
 import '../../db/sq_collection.dart';
-import '../../db/sq_doc.dart';
 import '../../fields/sq_doc_ref_field.dart';
 import '../../ui/sq_button.dart';
 

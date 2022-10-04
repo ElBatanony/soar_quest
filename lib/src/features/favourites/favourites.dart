@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../db/firestore_collection.dart';
 import '../../db/sq_collection.dart';
-import '../../db/sq_doc.dart';
 import '../../fields/sq_doc_ref_field.dart';
 import '../feature.dart';
 import '../../../screens.dart';
