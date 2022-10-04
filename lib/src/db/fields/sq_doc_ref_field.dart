@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../sq_collection.dart';
-import '../types/sq_doc_ref.dart';
+import 'types/sq_doc_ref.dart';
 import '../../ui/sq_button.dart';
 import '../../../screens.dart';
 
-export '../types/sq_doc_ref.dart';
+export 'types/sq_doc_ref.dart';
 
 class SQDocRefField extends SQDocField<SQDocRef> {
   SQCollection collection;

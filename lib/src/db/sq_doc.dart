@@ -1,4 +1,4 @@
-import 'types/sq_doc_ref.dart';
+import 'fields/types/sq_doc_ref.dart';
 import 'sq_collection.dart';
 
 export 'sq_doc_field.dart';
