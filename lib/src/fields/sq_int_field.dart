@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../db/sq_doc.dart';
-import '../db/sq_doc_field.dart';
 
 class SQIntField extends SQDocField<int> {
   SQIntField(super.name, {super.value, super.readOnly});

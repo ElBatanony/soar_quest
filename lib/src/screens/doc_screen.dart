@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../db/sq_doc.dart';
-import '../db/sq_doc_field.dart';
 import '../ui/sq_button.dart';
 
 import '../ui/doc_delete_button.dart';

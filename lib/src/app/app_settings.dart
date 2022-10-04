@@ -1,7 +1,6 @@
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
-import '../db/sq_doc_field.dart';
 import 'app.dart';
 
 class AppSettings {

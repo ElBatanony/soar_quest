@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../db/sq_collection.dart';
 import '../../db/sq_doc.dart';
-import '../../db/sq_doc_field.dart';
 import '../../ui/snackbar.dart';
 import '../form_screen.dart';
 

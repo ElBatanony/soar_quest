@@ -5,7 +5,6 @@ import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
 import 'firebase_app.dart';
-import '../db/sq_doc_field.dart';
 import '../screens/screen.dart';
 import 'app_settings.dart';
 import '../auth/auth_manager.dart';
