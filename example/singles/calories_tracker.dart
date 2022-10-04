@@ -4,6 +4,8 @@ import 'package:soar_quest/app.dart';
 import 'package:soar_quest/db.dart';
 import 'package:soar_quest/screens.dart';
 
+import '../firebase_options.dart';
+
 void main() async {
   List<SQDocField> userDocFields = [
     SQStringField("Full Name"),
@@ -14,6 +16,7 @@ void main() async {
 
   App caloriesTrackersApp = App("To Do List",
       theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       userDocFields: userDocFields);
 
   await caloriesTrackersApp.init();

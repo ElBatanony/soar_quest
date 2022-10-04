@@ -4,6 +4,8 @@ import 'package:soar_quest/app.dart';
 import 'package:soar_quest/db.dart';
 import 'package:soar_quest/screens.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   List<SQDocField> userDocFields = [
     SQStringField("Name"),
@@ -11,6 +13,7 @@ void main() async {
 
   App testingApp = App("Testing App",
       theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       userDocFields: userDocFields);
 
   await testingApp.init();

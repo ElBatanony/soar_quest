@@ -3,6 +3,7 @@ import 'package:soar_quest/app.dart';
 import 'package:soar_quest/db.dart';
 import 'package:soar_quest/features.dart';
 
+import '../../firebase_options.dart';
 import 'classes_screen.dart';
 
 List<SQDocField> userDocFields = [
@@ -16,6 +17,7 @@ AppSettings settings = AppSettings(
 App adaloAppointmentsApp = App("First Class",
     theme: ThemeData(primarySwatch: Colors.green, useMaterial3: true),
     settings: settings,
+    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
     userDocFields: userDocFields);
 
 SQCollection classTypes =

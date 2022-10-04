@@ -6,6 +6,8 @@ import 'package:soar_quest/db.dart';
 import 'package:soar_quest/features.dart';
 import 'package:soar_quest/screens.dart';
 
+import '../firebase_options.dart';
+
 void main() async {
   List<SQDocField> userDocFields = [
     SQStringField("City"),
@@ -35,6 +37,7 @@ void main() async {
     settings: settings,
     userDocFields: userDocFields,
     publicProfileFields: publicProfileFields,
+    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   );
 
   await adminApp.init();

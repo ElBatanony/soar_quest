@@ -5,11 +5,14 @@ import 'package:soar_quest/ui.dart';
 import 'package:soar_quest/db.dart';
 import 'package:soar_quest/screens.dart' hide createDoc;
 
+import '../firebase_options.dart';
+
 void main() async {
   List<SQDocField> userDocFields = [SQStringField("Full Name")];
 
   App adaloTodoApp = App("To Do List",
       theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       userDocFields: userDocFields);
 
   await adaloTodoApp.init();

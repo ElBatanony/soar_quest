@@ -8,6 +8,8 @@ import 'package:soar_quest/db.dart';
 import 'package:soar_quest/features.dart';
 import 'package:soar_quest/screens.dart';
 
+import '../firebase_options.dart';
+
 void main() async {
   List<SQDocField> userDocFields = [
     SQStringField("Full Name"),
@@ -17,6 +19,7 @@ void main() async {
   App adaloDirectoryApp = App("Date Night",
       theme:
           ThemeData(primaryColor: Colors.deepPurpleAccent, useMaterial3: true),
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       userDocFields: userDocFields);
 
   await adaloDirectoryApp.init();
