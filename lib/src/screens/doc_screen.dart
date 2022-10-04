@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../app.dart';
-import '../ui/buttons/sq_button.dart';
+import '../ui/sq_button.dart';
 
-import '../ui/buttons/doc_delete_button.dart';
+import '../ui/doc_delete_button.dart';
 
 import '../../db.dart';
 import '../../screens.dart';

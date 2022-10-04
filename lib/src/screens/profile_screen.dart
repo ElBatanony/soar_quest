@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/src/ui/buttons/sq_button.dart';
+import 'package:soar_quest/src/ui/sq_button.dart';
 
 import '../../app.dart';
-import '../ui/wrappers/signed_in_content.dart';
+import '../ui/signed_in_content.dart';
 import '../../data/fields.dart';
 import '../../data/user_data.dart';
 import '../../screens.dart';

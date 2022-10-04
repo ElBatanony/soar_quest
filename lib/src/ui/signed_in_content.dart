@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../../app.dart';
-import '../../../data/user_data.dart';
-import '../../../screens.dart';
-import '../buttons/sq_button.dart';
+import '../../app.dart';
+import '../../data/user_data.dart';
+import '../../screens.dart';
+import 'sq_button.dart';
 
 typedef SignedInContentBuilder = Widget Function(
     BuildContext context, SignedInUser user);
