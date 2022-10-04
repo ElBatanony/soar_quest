@@ -1,4 +1,4 @@
-import '../fields.dart';
+import '../../data/fields.dart';
 
 class VideoLinkField extends SQStringField {
   VideoLinkField(String name, {String? url, super.readOnly})

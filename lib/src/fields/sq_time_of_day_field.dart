@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../components/buttons/sq_button.dart';
-import '../fields.dart';
+import '../../data/fields.dart';
 
 class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
   SQTimeOfDayField(String name, {SQTimeOfDay? value, super.readOnly})

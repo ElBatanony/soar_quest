@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/buttons/sq_button.dart';
 import '../../db.dart';
-import '../fields.dart';
+import '../../data/fields.dart';
 
 class SQFileField extends SQDocField<SQFile> {
   SQFileField(super.name, {super.value});

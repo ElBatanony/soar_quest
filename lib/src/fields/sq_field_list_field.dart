@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../components/buttons/sq_button.dart';
-import '../fields.dart';
+import '../../data/fields.dart';
 
 class SQFieldListField extends SQListField<SQDocField> {
   List<SQDocField> allowedTypes;
