@@ -4,6 +4,8 @@ import '../db/sq_doc.dart';
 import '../types/sq_timestamp.dart';
 import '../ui/sq_button.dart';
 
+export '../types/sq_timestamp.dart';
+
 class SQTimestampField extends SQDocField<SQTimestamp> {
   SQTimestampField(String name, {SQTimestamp? value, super.readOnly})
       : super(name, value: value ?? SQTimestamp.fromDate(DateTime.now()));
