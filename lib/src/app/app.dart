@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-import '../../firebase_options.dart';
 import '../auth/firebase_auth_manager.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
+import 'firebase_app.dart';
 import '../fields/sq_doc_field.dart';
 import '../screens/screen.dart';
 import 'app_settings.dart';
@@ -59,9 +58,7 @@ class App {
 
   init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    await initializeFirebaseApp();
     usersCollection = FirestoreCollection(
       id: "Users",
       fields: App.instance.userDocFields,
