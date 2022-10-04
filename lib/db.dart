@@ -1,4 +1,20 @@
 export 'src/db/firestore_collection.dart';
 export 'src/db/sq_collection.dart';
 export 'src/db/unimplemented_collection.dart';
-export 'src/db/fields.dart';
+
+export 'src/db/fields/sq_field_list_field.dart';
+export 'src/db/fields/sq_doc_ref_field.dart';
+export 'src/db/fields/sq_file_field.dart';
+export 'src/db/fields/sq_time_of_day_field.dart';
+export 'src/db/fields/sq_timestamp_field.dart';
+export 'src/db/fields/sq_user_ref_field.dart';
+export 'src/db/fields/sq_updated_date_field.dart';
+export 'src/db/fields/sq_string_field.dart';
+export 'src/db/fields/sq_bool_field.dart';
+export 'src/db/fields/sq_int_field.dart';
+export 'src/db/fields/sq_video_link_field.dart';
+export 'src/db/fields/sq_double_field.dart';
+export 'src/db/fields/sq_list_field.dart';
+export 'src/db/fields/sq_inverse_ref_field.dart';
+export 'src/db/fields/sq_read_only_field.dart';
+export 'src/db/fields/show_field_dialog.dart';
