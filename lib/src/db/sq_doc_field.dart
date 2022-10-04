@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../db/sq_doc.dart';
-import 'sq_read_only_field.dart';
+import 'sq_doc.dart';
+import '../fields/sq_read_only_field.dart';
 
 abstract class SQDocField<T> {
   String name = "";

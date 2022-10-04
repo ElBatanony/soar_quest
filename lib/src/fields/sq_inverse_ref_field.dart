@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../db/sq_collection.dart';
 import '../db/sq_doc.dart';
 import '../types/sq_doc_ref.dart';
-import 'sq_doc_field.dart';
+import '../db/sq_doc_field.dart';
 import 'sq_list_field.dart';
 
 class SQInverseRefField extends SQListField {

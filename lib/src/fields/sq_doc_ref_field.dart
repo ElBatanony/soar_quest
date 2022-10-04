@@ -5,7 +5,7 @@ import '../db/sq_doc.dart';
 import '../types/sq_doc_ref.dart';
 import '../ui/sq_button.dart';
 import '../../screens.dart';
-import 'sq_doc_field.dart';
+import '../db/sq_doc_field.dart';
 
 export '../types/sq_doc_ref.dart';
 

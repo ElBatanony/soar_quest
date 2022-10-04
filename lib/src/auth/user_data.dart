@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import '../app/app.dart';
 import '../db/sq_doc.dart';
-import '../fields/sq_doc_field.dart';
+import '../db/sq_doc_field.dart';
 
 abstract class UserData {
   String userId;

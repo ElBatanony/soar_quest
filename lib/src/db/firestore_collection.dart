@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../app.dart';
-import '../fields/sq_doc_field.dart';
+import 'sq_doc_field.dart';
 import 'sq_collection.dart';
 import 'sq_doc.dart';
 
