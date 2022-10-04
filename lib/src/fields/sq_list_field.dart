@@ -1,4 +1,5 @@
-import '../../db.dart';
+import '../db/sq_doc.dart';
+import 'sq_doc_field.dart';
 
 class SQListField<T> extends SQDocField<List<T>> {
   SQListField(

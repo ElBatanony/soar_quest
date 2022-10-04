@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../db.dart';
+import '../../db/sq_doc.dart';
+import '../../fields/sq_video_link_field.dart';
 import '../collection_screen.dart';
 
 class VideoCollectionScreen extends CollectionScreen {

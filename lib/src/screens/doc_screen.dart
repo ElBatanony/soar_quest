@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../app.dart';
+import '../db/sq_doc.dart';
+import '../fields/sq_doc_field.dart';
 import '../ui/sq_button.dart';
 
 import '../ui/doc_delete_button.dart';
 
-import '../../db.dart';
 import 'form_screens/doc_edit_screen.dart';
 import 'screen.dart';
+import 'screen_navigation.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
