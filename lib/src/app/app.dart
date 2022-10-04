@@ -76,6 +76,7 @@ class App {
     return _collections.firstWhere((col) => col.getPath() == collectionPath);
   }
 
-    return App.collections.firstWhere((col) => col.getPath() == collectionPath);
+  static void registerCollection(SQCollection collection) {
+    _collections.add(collection);
   }
 }

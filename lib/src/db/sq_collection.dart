@@ -27,7 +27,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.docScreen = defaultDocScreen,
   }) {
     this.singleDocName = singleDocName ?? id;
-    App.collections.add(this);
+    App.registerCollection(this);
   }
 
   DocType constructDoc(String id) {
