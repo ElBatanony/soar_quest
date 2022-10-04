@@ -34,7 +34,10 @@ class App {
 
   static late SQCollection usersCollection;
 
+  FirebaseOptions firebaseOptions;
+
   void setScreen(Screen screen) {
+    // TODO: remove setScreen
     currentScreen = screen;
     // AppDebugger.refresh();
   }
@@ -50,6 +53,7 @@ class App {
     SQAuthManager? authManager,
     required this.userDocFields,
     this.publicProfileFields = const [],
+    required this.firebaseOptions,
   }) {
     this.settings = settings ?? AppSettings(settingsFields: []);
     this.authManager = authManager ?? FirebaseAuthManager();
@@ -58,7 +62,7 @@ class App {
 
   init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await initializeFirebaseApp();
+    await initializeFirebaseApp(firebaseOptions);
     usersCollection = FirestoreCollection(
       id: "Users",
       fields: App.instance.userDocFields,

@@ -1,9 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+export 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 
-import '../../firebase_options.dart';
-
-Future<FirebaseApp> initializeFirebaseApp() {
-  return Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) {
+  return Firebase.initializeApp(options: options);
 }
