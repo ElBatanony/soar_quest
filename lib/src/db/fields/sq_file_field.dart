@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../db/sq_doc.dart';
-import '../db/types/sq_file.dart';
-import '../ui/sq_button.dart';
+import '../sq_doc.dart';
+import '../types/sq_file.dart';
+import '../../ui/sq_button.dart';
 
-export '../db/types/sq_file.dart';
+export '../types/sq_file.dart';
 
 class SQFileField extends SQDocField<SQFile> {
   SQFileField(super.name, {super.value});

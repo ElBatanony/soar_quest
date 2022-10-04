@@ -1,4 +1,4 @@
-import 'package:soar_quest/src/fields/sq_string_field.dart';
+import 'package:soar_quest/src/db/fields/sq_string_field.dart';
 
 class VideoLinkField extends SQStringField {
   VideoLinkField(String name, {String? url, super.readOnly})

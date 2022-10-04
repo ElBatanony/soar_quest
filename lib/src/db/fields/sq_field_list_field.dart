@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
-import '../db/sq_doc.dart';
-import '../ui/sq_button.dart';
+import '../../../app.dart';
+import '../sq_doc.dart';
+import '../../ui/sq_button.dart';
 import 'sq_list_field.dart';
 
 class SQFieldListField extends SQListField<SQDocField> {

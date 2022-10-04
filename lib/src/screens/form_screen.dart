@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../db/sq_collection.dart';
-import '../fields/sq_user_ref_field.dart';
+import '../db/fields/sq_user_ref_field.dart';
 import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';

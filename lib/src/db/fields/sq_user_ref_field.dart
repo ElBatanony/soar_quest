@@ -1,4 +1,4 @@
-import '../app/app.dart';
+import '../../app/app.dart';
 import 'sq_doc_ref_field.dart';
 
 class SQUserRefField extends SQDocRefField {

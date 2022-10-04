@@ -1,5 +1,5 @@
 import '../../app.dart';
-import '../fields/sq_user_ref_field.dart';
+import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
 import '../../screens.dart';
 import 'collection_filter.dart';
