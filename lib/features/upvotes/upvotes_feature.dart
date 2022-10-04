@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../components/buttons/sq_button.dart';
-import '../../components/wrappers/signed_in_content.dart';
+import '../../src/components/buttons/sq_button.dart';
+import '../../src/components/wrappers/signed_in_content.dart';
 import '../../db.dart';
 import '../../data/user_data.dart';
 import '../feature.dart';

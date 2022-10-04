@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
-import 'package:soar_quest/components/buttons/doc_delete_button.dart';
-import 'package:soar_quest/components/buttons/sq_button.dart';
+import 'package:soar_quest/ui.dart';
 import 'package:soar_quest/screens.dart';
 
 class RescheduledRequestStudentScreen extends DocScreen {

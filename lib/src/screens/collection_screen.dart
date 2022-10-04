@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 
-import '../../components/buttons/sq_button.dart';
+import '../components/buttons/sq_button.dart';
 
 import '../../db.dart';
 import '../../screens.dart';
