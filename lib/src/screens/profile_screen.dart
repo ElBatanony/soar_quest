@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/src/ui/sq_button.dart';
 
 import '../../app.dart';
+import '../fields/sq_doc_field.dart';
+import '../fields/show_field_dialog.dart';
+import '../fields/sq_string_field.dart';
 import '../ui/signed_in_content.dart';
-import '../../data/fields.dart';
+import '../ui/sq_button.dart';
 import '../../data/user_data.dart';
 import 'screen.dart';
 import 'form_screens/doc_edit_screen.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data/fields.dart';
+import 'sq_doc_field.dart';
+import '../db/sq_doc.dart';
 
 class SQStringField extends SQDocField<String> {
   SQStringField(String name,

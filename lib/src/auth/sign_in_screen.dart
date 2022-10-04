@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../app/app.dart';
 import '../app/app_navigator.dart';
+import '../fields/sq_string_field.dart';
 import '../ui/sq_button.dart';
-import '../../data/fields.dart';
 import '../screens/screen.dart';
 
 class SignInScreen extends Screen {

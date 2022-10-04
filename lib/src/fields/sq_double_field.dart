@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../data/fields.dart';
+import 'sq_doc_field.dart';
+import '../db/sq_doc.dart';
 
 class SQDoubleField extends SQDocField<double> {
   SQDoubleField(super.name, {super.value, super.readOnly});

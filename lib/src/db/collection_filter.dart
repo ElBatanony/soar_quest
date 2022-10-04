@@ -1,4 +1,7 @@
 import 'sq_doc.dart';
+import '../fields/sq_doc_ref_field.dart';
+import '../fields/sq_doc_field.dart';
+import '../types/sq_doc_reference.dart';
 
 abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);
