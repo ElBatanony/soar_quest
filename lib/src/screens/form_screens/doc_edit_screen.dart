@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../components/snackbar.dart';
+import '../../ui/snackbar.dart';
 import '../../../db.dart';
 import '../form_screen.dart';
 

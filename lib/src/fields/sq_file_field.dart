@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../components/buttons/sq_button.dart';
+import '../ui/buttons/sq_button.dart';
 import '../../db.dart';
 import '../../data/fields.dart';
 

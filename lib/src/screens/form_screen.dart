@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
-import '../components/buttons/sq_button.dart';
+import '../ui/buttons/sq_button.dart';
 import '../../db.dart';
 import '../../screens.dart';
-import '../components/snackbar.dart';
+import '../ui/snackbar.dart';
 
 export 'form_screens/doc_edit_screen.dart';
 export 'form_screens/doc_create_screen.dart';

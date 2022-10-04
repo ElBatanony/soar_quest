@@ -5,7 +5,7 @@ import '../feature.dart';
 import '../../screens.dart';
 import '../../app.dart';
 import 'toggle_in_favourites_button.dart';
-import '../../src/components/buttons/sq_button.dart';
+import '../../src/ui/buttons/sq_button.dart';
 
 class FavDoc extends SQDoc {
   SQDocRef favedDocRef;
