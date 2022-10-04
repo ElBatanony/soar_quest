@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'db.dart';
 import 'firebase_options.dart';
 
-import 'app/app_settings.dart';
-import 'app/auth_manager.dart';
+import 'src/app/app_settings.dart';
+import 'src/app/auth_manager.dart';
 
 import 'screens.dart';
 
-export 'app/app_navigator.dart';
-export 'app/app_settings.dart';
-export 'app/auth_manager.dart';
+export 'src/app/app_navigator.dart';
+export 'src/app/app_settings.dart';
+export 'src/app/auth_manager.dart';
 
 class App {
   String name;

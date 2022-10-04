@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../app/app_navigator.dart';
+import '../../app.dart';
 
 import '../../components/buttons/sq_button.dart';
 import '../../db.dart';

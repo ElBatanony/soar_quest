@@ -5,7 +5,6 @@ import 'package:soar_quest/app.dart';
 import 'package:soar_quest/db.dart';
 import 'package:soar_quest/features/upvotes/upvotes_feature.dart';
 import 'package:soar_quest/screens.dart';
-import 'package:soar_quest/app/auth_manager.dart';
 
 void main() async {
   List<SQDocField> userDocFields = [

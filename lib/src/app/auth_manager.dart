@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../data/user_data.dart';
-import '../screens.dart';
+import '../../data/user_data.dart';
+import '../../screens.dart';
 
 abstract class SQAuthManager {
   Future init();
