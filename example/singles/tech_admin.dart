@@ -32,8 +32,6 @@ void main() async {
   App adminApp = App(
     "Tech Admin",
     theme: ThemeData(primarySwatch: Colors.amber, useMaterial3: true),
-    inDebug: false,
-    emulatingCloudFunctions: false,
     settings: settings,
     userDocFields: userDocFields,
     publicProfileFields: publicProfileFields,

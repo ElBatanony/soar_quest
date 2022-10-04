@@ -12,14 +12,9 @@ import '../auth/auth_manager.dart';
 
 class App {
   String name;
-
-  Screen? currentScreen;
   ThemeData theme;
 
-  static List<SQCollection> collections = [];
-
-  bool inDebug;
-  bool emulatingCloudFunctions;
+  static final List<SQCollection> _collections = [];
 
   late SQAuthManager authManager;
 
@@ -36,19 +31,11 @@ class App {
 
   FirebaseOptions firebaseOptions;
 
-  void setScreen(Screen screen) {
-    // TODO: remove setScreen
-    currentScreen = screen;
-    // AppDebugger.refresh();
-  }
-
   static late App instance;
 
   App(
     this.name, {
     required this.theme,
-    this.inDebug = false,
-    this.emulatingCloudFunctions = false,
     AppSettings? settings,
     SQAuthManager? authManager,
     required this.userDocFields,
@@ -86,6 +73,9 @@ class App {
   }
 
   static SQCollection collectionByPath(String collectionPath) {
+    return _collections.firstWhere((col) => col.getPath() == collectionPath);
+  }
+
     return App.collections.firstWhere((col) => col.getPath() == collectionPath);
   }
 }
