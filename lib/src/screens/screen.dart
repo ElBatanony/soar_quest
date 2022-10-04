@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_navigator.dart';
+import 'screen_navigation.dart';
 import '../ui/sq_button.dart';
 
 class Screen extends StatefulWidget {

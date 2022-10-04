@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/user_data.dart';
 import '../app/app.dart';
-import '../screens/app_navigator.dart';
+import '../screens/screen_navigation.dart';
 import '../screens/screen.dart';
 import 'sq_button.dart';
 
