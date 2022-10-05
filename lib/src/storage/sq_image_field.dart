@@ -53,7 +53,7 @@ class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(Icons.camera_alt, size: 30),
-            if (downloadUrl != null) Image.network(downloadUrl!),
+            if (field.downloadUrl != null) Image.network(field.downloadUrl!),
             TextButton.icon(
                 onPressed: deleteFile,
                 icon: Icon(Icons.clear),
@@ -75,8 +75,6 @@ class _SQImageReadOnlyFieldState extends SQFileFormFieldState<SQImageField> {
   Widget fieldBuilder(BuildContext context) {
     if (field.fileExists == false) return Text("No Image");
 
-    if (downloadUrl == null) return Text("Loading Image");
-
-    return Image.network(downloadUrl!);
+    return Image.network(field.downloadUrl!);
   }
 }
