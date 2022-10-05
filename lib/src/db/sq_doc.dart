@@ -4,14 +4,14 @@ import 'sq_collection.dart';
 export 'sq_doc_field.dart';
 
 class SQDoc {
-  late List<SQDocField> fields;
+  late List<SQField> fields;
   String id;
   SQCollection collection;
   bool initialized = false;
 
-  static List<SQDocField> copyFields(List<SQDocField> fields) {
+  static List<SQField> copyFields(List<SQField> fields) {
     return fields.map((field) {
-      SQDocField fieldCopy = field.copy();
+      SQField fieldCopy = field.copy();
       assert(field.runtimeType == fieldCopy.runtimeType,
           "SQDocField not copied properly");
       return fieldCopy;
@@ -34,7 +34,7 @@ class SQDoc {
 
       if (fields.any((field) => field.name == key) == false) continue;
 
-      SQDocField field = fields.firstWhere((field) => field.name == key);
+      SQField field = fields.firstWhere((field) => field.name == key);
 
       field.value = field.parse(value);
     }
@@ -53,7 +53,7 @@ class SQDoc {
     return ret;
   }
 
-  SQDocField? getField(String fieldName) {
+  SQField? getField(String fieldName) {
     return fields.singleWhere((field) => field.name == fieldName);
   }
 
@@ -62,7 +62,7 @@ class SQDoc {
   }
 
   void setDocFieldByName(String fieldName, dynamic value) {
-    SQDocField? field = getField(fieldName);
+    SQField? field = getField(fieldName);
     field?.value = value;
   }
 

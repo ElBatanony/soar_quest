@@ -1,6 +1,6 @@
 import '../sq_doc.dart';
 
-class SQListField<T> extends SQDocField<List<T>> {
+class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
     List<T> list = const [],

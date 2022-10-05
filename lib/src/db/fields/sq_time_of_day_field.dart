@@ -6,7 +6,7 @@ import '../../ui/sq_button.dart';
 
 export 'types/sq_time_of_day.dart';
 
-class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
+class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   SQTimeOfDayField(String name, {SQTimeOfDay? value, super.readOnly})
       : super(name, value: value ?? SQTimeOfDay.fromTimeOfDay(TimeOfDay.now()));
 

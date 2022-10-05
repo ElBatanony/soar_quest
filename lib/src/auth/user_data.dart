@@ -9,8 +9,8 @@ abstract class UserData {
 
   late SQDoc userDoc;
 
-  List<SQDocField> docFields;
-  List<SQDocField> publicFields;
+  List<SQField> docFields;
+  List<SQField> publicFields;
 
   UserData(
       {required this.userId,

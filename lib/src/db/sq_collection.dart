@@ -8,7 +8,7 @@ export 'collection_filter.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
-  List<SQDocField> fields;
+  List<SQField> fields;
   List<DocType> docs = [];
   late String singleDocName;
   SQDoc? parentDoc;
@@ -19,6 +19,7 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   static final List<SQCollection> _collections = [];
 
+  // TODO: make id and fields named params
   SQCollection(
     this.id,
     this.fields, {
@@ -51,14 +52,14 @@ abstract class SQCollection<DocType extends SQDoc> {
   String getPath();
   String getANewDocId();
 
-  SQDocField? getFieldByName(String fieldName) {
+  SQField? getFieldByName(String fieldName) {
     if (!fields.any((field) => field.name == fieldName)) return null;
     return fields.singleWhere((field) => field.name == fieldName);
   }
 
   int get docsCount => docs.length;
 
-  DocType newDoc({List<SQDocField> initialFields = const []}) {
+  DocType newDoc({List<SQField> initialFields = const []}) {
     DocType newDoc = constructDoc(getANewDocId());
 
     for (var initialField in initialFields) {

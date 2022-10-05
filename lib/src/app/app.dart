@@ -21,8 +21,8 @@ class App {
 
   late AppSettings settings;
 
-  late List<SQDocField> userDocFields;
-  List<SQDocField> publicProfileFields;
+  late List<SQField> userDocFields;
+  List<SQField> publicProfileFields;
 
   static late SQCollection usersCollection;
 
@@ -35,7 +35,7 @@ class App {
     ThemeData? theme,
     AppSettings? settings,
     SQAuthManager? authManager,
-    List<SQDocField>? userDocFields,
+    List<SQField>? userDocFields,
     this.publicProfileFields = const [],
     required this.firebaseOptions,
   }) {

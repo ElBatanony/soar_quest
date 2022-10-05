@@ -47,7 +47,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   }
 
   Future submitForm() async {
-    for (SQDocField field in widget.doc.fields) {
+    for (SQField field in widget.doc.fields) {
       if (field.required && field.isNull) {
         showSnackBar("${field.name} is required!", context: context);
         return;
@@ -81,7 +81,7 @@ List<DocFormField> _generateDocFormFields(
   List<String>? shownFields,
   Function? onChanged,
 }) {
-  List<SQDocField> fields = doc.fields;
+  List<SQField> fields = doc.fields;
 
   if (shownFields != null)
     fields = fields

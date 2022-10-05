@@ -32,7 +32,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
         context: context);
   }
 
-  updateUserField(SQDocField field, Function updateFunction) async {
+  updateUserField(SQField field, Function updateFunction) async {
     dynamic newValue = await showFieldDialog(context: context, field: field);
     if (newValue != null) {
       await updateFunction(newValue);

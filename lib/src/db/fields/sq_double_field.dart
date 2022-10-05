@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../sq_doc.dart';
 
-class SQDoubleField extends SQDocField<double> {
+class SQDoubleField extends SQField<double> {
   SQDoubleField(super.name, {super.value, super.readOnly});
 
   @override

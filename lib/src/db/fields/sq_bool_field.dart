@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../sq_doc.dart';
 
-class SQBoolField extends SQDocField<bool> {
+class SQBoolField extends SQField<bool> {
   SQBoolField(super.name, {super.value, super.readOnly});
 
   @override

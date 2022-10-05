@@ -6,7 +6,7 @@ abstract class CollectionFilter {
 }
 
 abstract class CollectionFieldFilter extends CollectionFilter {
-  SQDocField field;
+  SQField field;
   CollectionFieldFilter(this.field);
 }
 

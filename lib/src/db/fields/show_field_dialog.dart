@@ -5,7 +5,7 @@ import '../../ui/sq_button.dart';
 import '../sq_doc_field.dart';
 
 Future showFieldDialog(
-    {required SQDocField field, required BuildContext context}) {
+    {required SQField field, required BuildContext context}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {

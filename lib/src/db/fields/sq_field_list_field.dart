@@ -5,29 +5,28 @@ import '../sq_doc.dart';
 import '../../ui/sq_button.dart';
 import 'sq_list_field.dart';
 
-class SQFieldListField extends SQListField<SQDocField> {
-  List<SQDocField> allowedTypes;
+class SQFieldListField extends SQListField<SQField> {
+  List<SQField> allowedTypes;
 
   SQFieldListField(super.name,
-      {List<SQDocField> list = const <SQDocField>[],
-      required this.allowedTypes})
+      {List<SQField> list = const <SQField>[], required this.allowedTypes})
       : super(list: list);
 
   @override
   Type get type => List;
 
-  List<SQDocField> get fields => list;
+  List<SQField> get fields => list;
 
   @override
-  List<SQDocField> parse(source) {
+  List<SQField> parse(source) {
     List<dynamic> dynamicList = source as List;
-    List<SQDocField> fields = [];
+    List<SQField> fields = [];
     for (var dynamicFieldValue in dynamicList) {
-      for (SQDocField allowedType in allowedTypes) {
+      for (SQField allowedType in allowedTypes) {
         var parsed = allowedType.parse(dynamicFieldValue);
 
         if (parsed != null && parsed.runtimeType == allowedType.type) {
-          SQDocField newField = allowedType.copy();
+          SQField newField = allowedType.copy();
           newField.value = parsed;
           fields.add(newField);
           break;
@@ -54,7 +53,7 @@ class SQFieldListField extends SQListField<SQDocField> {
 
 Future showFieldOptions(SQFieldListField fieldListfield,
     {required BuildContext context}) {
-  return showDialog<SQDocField>(
+  return showDialog<SQField>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -94,7 +93,7 @@ class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
   }
 
   void addField() async {
-    SQDocField? newValue = await showFieldOptions(listField, context: context);
+    SQField? newValue = await showFieldOptions(listField, context: context);
     if (newValue != null) {
       setState(() {
         listField.fields.add(newValue);

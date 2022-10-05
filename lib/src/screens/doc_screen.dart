@@ -42,7 +42,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     super.initState();
   }
 
-  Widget fieldDisplay(SQDocField field) {
+  Widget fieldDisplay(SQField field) {
     return GestureDetector(
       onLongPress: () {
         String fieldValue = field.value.toString();

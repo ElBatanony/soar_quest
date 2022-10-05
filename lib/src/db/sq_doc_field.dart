@@ -3,22 +3,21 @@ import 'package:flutter/material.dart';
 import 'sq_doc.dart';
 import 'fields/sq_read_only_field.dart';
 
-// TODO: rename to SQField
-abstract class SQDocField<T> {
+abstract class SQField<T> {
   String name = "";
   T? value;
   Type get type => T;
   bool readOnly;
   bool required;
 
-  SQDocField(
+  SQField(
     this.name, {
     this.value,
     this.readOnly = false,
     this.required = false,
   });
 
-  SQDocField copy();
+  SQField copy();
 
   dynamic collectField() => value;
 
@@ -39,7 +38,7 @@ abstract class SQDocField<T> {
 }
 
 // TODO: rename to SQFormField
-abstract class DocFormField<DocField extends SQDocField>
+abstract class DocFormField<DocField extends SQField>
     extends FormField<DocFormField<DocField>> {
   final DocField field;
   final Function? onChanged;
@@ -54,7 +53,7 @@ abstract class DocFormField<DocField extends SQDocField>
   DocFormFieldState<DocField> createState();
 }
 
-abstract class DocFormFieldState<DocField extends SQDocField>
+abstract class DocFormFieldState<DocField extends SQField>
     extends FormFieldState<DocFormField<DocField>> {
   DocFormField<DocField> get formField => (widget as DocFormField<DocField>);
   DocField get field => formField.field;

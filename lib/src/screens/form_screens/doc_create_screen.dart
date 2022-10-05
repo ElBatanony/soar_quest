@@ -10,7 +10,7 @@ Future createDoc(SQDoc doc, BuildContext context) async {
 DocFormScreen docCreateScreen(
   SQCollection collection, {
   String? title,
-  List<SQDocField> initialFields = const [],
+  List<SQField> initialFields = const [],
   List<String>? shownFields,
   List<String> hiddenFields = const [],
   String submitButtonText = "Create",

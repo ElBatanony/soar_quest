@@ -7,7 +7,7 @@ import '../../../screens.dart';
 
 export 'types/sq_ref.dart';
 
-class SQRefField extends SQDocField<SQRef> {
+class SQRefField extends SQField<SQRef> {
   SQCollection collection;
 
   SQRefField(super.name,

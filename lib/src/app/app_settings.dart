@@ -7,7 +7,7 @@ import 'app.dart';
 class AppSettings {
   late SQCollection _settingsCollection;
   late SQDoc settingsDoc;
-  List<SQDocField> settingsFields;
+  List<SQField> settingsFields;
 
   AppSettings({this.settingsFields = const []});
 
