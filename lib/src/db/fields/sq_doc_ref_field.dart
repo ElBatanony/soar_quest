@@ -24,6 +24,7 @@ class SQDocRefField extends SQDocField<SQDocRef> {
 
   @override
   SQDocRef? parse(source) {
+    if (source is! Map<String, dynamic>) return null;
     return SQDocRef.parse(source);
   }
 
