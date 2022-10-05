@@ -47,17 +47,28 @@ class _SQStringFormFieldState extends DocFormFieldState<SQStringField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: fieldTextController,
-      onChanged: (text) {
-        field.value = text;
-        onChanged();
-      },
-      onEditingComplete: onChanged,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: field.name,
-        labelText: field.name,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            field.name,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          SizedBox(height: 4),
+          TextField(
+            controller: fieldTextController,
+            onChanged: (text) {
+              field.value = text;
+              onChanged();
+            },
+            onEditingComplete: onChanged,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ],
       ),
     );
   }
