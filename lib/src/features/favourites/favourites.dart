@@ -94,7 +94,7 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
     SQRef originalDocRef = doc.value("ref");
 
     return ListTile(
-      title: SQButton(doc.identifier,
+      title: SQButton(doc.label,
           onPressed: () => goToScreen(widget.docScreen(originalDocRef.getDoc()),
               context: context)),
       trailing: SQButton(

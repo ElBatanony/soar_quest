@@ -88,7 +88,7 @@ class _VideoDocDisplayState extends State<VideoDocDisplay> {
       child: Center(
         child: Column(
           children: [
-            Text(widget.doc.identifier),
+            Text(widget.doc.label),
             _controller != null
                 ? YoutubePlayer(
                     controller: _controller!,

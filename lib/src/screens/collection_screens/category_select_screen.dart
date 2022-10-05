@@ -33,13 +33,13 @@ class _CategorySelectScreenState
   @override
   Widget docDisplay(SQDoc doc) {
     return SQButton(
-      doc.identifier,
+      doc.label,
       onPressed: () {
         SQRefField categoryFieldCopy = widget.categoryField.copy();
         categoryFieldCopy.value = SQRef(
           collectionPath: widget.categoryField.collection.getPath(),
           docId: doc.id,
-          docIdentifier: doc.identifier,
+          label: doc.label,
         );
         print(categoryFieldCopy.name);
         print(categoryFieldCopy.value);

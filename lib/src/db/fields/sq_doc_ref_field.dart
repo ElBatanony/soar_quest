@@ -34,7 +34,7 @@ class SQRefField extends SQField<SQRef> {
 
     return {
       "docId": value!.docId,
-      "docIdentifier": value!.docIdentifier,
+      "label": value!.label,
       "collectionPath": value!.collectionPath
     };
   }
@@ -59,7 +59,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.name),
-        Text(field.value?.docIdentifier ?? "not-set"),
+        Text(field.value?.label ?? "not-set"),
         if (field.readOnly == false)
           SQButton(
             'Select',
@@ -73,7 +73,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
               if (retDoc != null) {
                 SQRef ref = SQRef(
                   docId: retDoc.id,
-                  docIdentifier: retDoc.identifier,
+                  label: retDoc.label,
                   collectionPath: retDoc.collection.getPath(),
                 );
                 field.value = ref;

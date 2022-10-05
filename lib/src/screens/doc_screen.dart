@@ -21,7 +21,7 @@ class DocScreen extends Screen {
     this.canDelete = true,
     super.icon,
     super.key,
-  }) : super(doc.identifier);
+  }) : super(doc.label);
 
   @override
   State<DocScreen> createState() => DocScreenState();

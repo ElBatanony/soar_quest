@@ -2,23 +2,23 @@ import '../../sq_collection.dart';
 
 class SQRef {
   String docId;
-  String docIdentifier;
+  String label;
   String collectionPath;
 
   SQRef({
     required this.collectionPath,
     required this.docId,
-    required this.docIdentifier,
+    required this.label,
   });
 
   SQRef.fromDoc(SQDoc doc)
       : this(
             collectionPath: doc.collection.getPath(),
             docId: doc.id,
-            docIdentifier: doc.identifier);
+            label: doc.label);
 
   @override
-  String toString() => docIdentifier;
+  String toString() => label;
 
   static SQRef? parse(Map<String, dynamic> source) {
     String? docId = source["docId"];
@@ -30,7 +30,7 @@ class SQRef {
 
     return SQRef(
       docId: docId,
-      docIdentifier: docIdentifier,
+      label: docIdentifier,
       collectionPath: collectionPath,
     );
   }

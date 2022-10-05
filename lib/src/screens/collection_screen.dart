@@ -55,7 +55,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   Widget docDisplay(SQDoc doc) {
     return ListTile(
-      title: Text(doc.identifier),
+      title: Text(doc.label),
       onTap: () => goToDocScreen(docScreen(doc)),
     );
   }

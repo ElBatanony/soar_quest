@@ -70,10 +70,10 @@ class SQDoc {
     return "${collection.getPath()}/$id";
   }
 
-  String get identifier => fields.first.value.toString();
+  String get label => fields.first.value.toString();
 
   SQRef get ref => SQRef.fromDoc(this);
 
   @override
-  String toString() => identifier;
+  String toString() => label;
 }
