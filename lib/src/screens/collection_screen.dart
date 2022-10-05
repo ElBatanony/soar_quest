@@ -60,6 +60,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     if (widget.docDisplay != null) return widget.docDisplay!(doc, this);
     return ListTile(
       title: Text(doc.label),
+      subtitle: Text(doc.fields[1].value.toString()),
       onTap: () => goToDocScreen(docScreen(doc)),
     );
   }
