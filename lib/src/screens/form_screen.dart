@@ -65,6 +65,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   @override
   Widget screenBody(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ..._generateDocFormFields(
           widget.doc,
