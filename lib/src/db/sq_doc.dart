@@ -54,7 +54,9 @@ class SQDoc {
   }
 
   SQField? getField(String fieldName) {
-    return fields.singleWhere((field) => field.name == fieldName);
+    if (fields.any((field) => field.name == fieldName))
+      return fields.singleWhere((field) => field.name == fieldName);
+    return null;
   }
 
   dynamic value(String fieldName) {
