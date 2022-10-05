@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/app.dart';
 import 'package:soar_quest/db.dart';
 import 'package:soar_quest/screens.dart';
+import 'package:soar_quest/storage.dart';
 
 import 'firebase_options.dart';
 
@@ -26,6 +27,8 @@ void main() async {
     ],
   );
 
+  SQFileStorage firebaseFileStorage = FirebaseFileStorage();
+
   SQCollection testCollection = FirestoreCollection(
       id: "Test Collection",
       fields: [
@@ -33,7 +36,7 @@ void main() async {
         SQBoolField("Bool"),
         SQRefField("Doc Ref", collection: simpleCollection),
         SQDoubleField("Double"),
-        SQFileField("File"),
+        SQFileField("File", storage: firebaseFileStorage),
         SQIntField("Int"),
         SQTimeOfDayField("Time of Day"),
         SQTimestampField("Timestamp"),

@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../firebase_file_storage.dart';
 import '../sq_doc.dart';
 import '../sq_file_storage.dart';
 import '../../ui/sq_button.dart';
 import 'sq_bool_field.dart';
 
 class SQFileField extends SQBoolField {
-  SQFileField(super.name, {super.value});
+  SQFileStorage storage;
+
+  SQFileField(super.name, {super.value, required this.storage});
 
   @override
   SQFileField copy() {
-    return SQFileField(name, value: value);
+    return SQFileField(name, value: value, storage: storage);
   }
 
   @override
@@ -35,10 +36,9 @@ class SQFileFormField<FileField extends SQFileField>
 class SQFileFormFieldState<FileField extends SQFileField>
     extends DocFormFieldState<FileField> {
   bool fileExists = false;
-  late SQFileStorage storage = FirebaseFileStorage();
 
   downloadFileFromUrl() async {
-    final fileUrl = await storage.getFileDownloadURL(doc!, field);
+    final fileUrl = await field.storage.getFileDownloadURL(doc!, field);
     final url = Uri.parse(fileUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $fileUrl';
@@ -55,7 +55,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      await storage.uploadFile(
+      await field.storage.uploadFile(
           doc: doc!,
           file: pickedFile,
           field: field,
@@ -67,7 +67,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
   }
 
   deleteFile() async {
-    await storage.deleteFile(doc: doc!, field: field);
+    await field.storage.deleteFile(doc: doc!, field: field);
     refreshFileExists();
     onChanged();
   }
