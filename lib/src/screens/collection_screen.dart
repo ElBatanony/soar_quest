@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/src/screens/form_screens/doc_create_screen.dart';
-
-import '../ui/sq_button.dart';
 
 import '../../db.dart';
 import 'doc_screen.dart';
 import 'screen.dart';
+import 'form_screens/doc_create_screen.dart';
 
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
 
@@ -56,9 +54,9 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   DocScreen docScreen(SQDoc doc) => widget.docScreen(doc);
 
   Widget docDisplay(SQDoc doc) {
-    return SQButton(
-      doc.identifier,
-      onPressed: () => goToDocScreen(docScreen(doc)),
+    return ListTile(
+      title: Text(doc.identifier),
+      onTap: () => goToDocScreen(docScreen(doc)),
     );
   }
 
@@ -86,12 +84,17 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: docsDisplay(context),
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Flexible(
+          fit: FlexFit.loose,
+          child: ListView(
+            shrinkWrap: true,
+            children: docsDisplay(context),
+          ),
+        ),
+      ],
     );
   }
 }
