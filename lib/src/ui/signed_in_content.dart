@@ -13,13 +13,11 @@ typedef SignedInContentBuilder = Widget Function(
     BuildContext context, SignedInUser user);
 
 class SignedInContent extends StatefulWidget {
-  final Screen? redirectScreen; // TODO: remove redirectScreen for now
   final Function? refreshUp;
   final SignedInContentBuilder builder;
 
   const SignedInContent({
     required this.builder,
-    this.redirectScreen,
     this.refreshUp,
     super.key,
   });
