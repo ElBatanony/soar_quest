@@ -80,7 +80,10 @@ class SQDoc {
   @override
   String toString() => label;
 
-  bool get hasImage => fields.any((field) => field is SQImageField);
+  bool get hasImage =>
+      fields.any((field) => field is SQImageField && field.value != null);
 
-  SQImageField get imageLabel => fields.whereType<SQImageField>().first;
+  SQImageField get imageLabel =>
+      fields.firstWhere((field) => field is SQImageField && field.value != null)
+          as SQImageField;
 }
