@@ -1,5 +1,6 @@
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
+import '../storage/sq_image_field.dart';
 
 export 'sq_doc_field.dart';
 
@@ -78,4 +79,8 @@ class SQDoc {
 
   @override
   String toString() => label;
+
+  bool get hasImage => fields.any((field) => field is SQImageField);
+
+  SQImageField get imageLabel => fields.whereType<SQImageField>().first;
 }
