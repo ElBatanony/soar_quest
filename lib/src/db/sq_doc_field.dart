@@ -64,8 +64,8 @@ abstract class SQFormFieldState<Field extends SQField>
   }
 
   Widget fieldLabel() {
-    // TODO: add * if required
-    return Text(field.name, style: Theme.of(context).textTheme.headline6);
+    return Text(field.name + (field.isRequired ? " *" : ""),
+        style: Theme.of(context).textTheme.headline6);
   }
 
   Widget fieldBuilder(BuildContext context) {
