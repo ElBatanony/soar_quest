@@ -23,14 +23,13 @@ class SQRef {
   static SQRef? parse(Map<String, dynamic> source) {
     String? docId = source["docId"];
     String? collectionPath = source["collectionPath"];
-    String? docIdentifier = source["docIdentifier"];
+    String? label = source["label"];
 
-    if (docId == null || collectionPath == null || docIdentifier == null)
-      return null;
+    if (docId == null || collectionPath == null || label == null) return null;
 
     return SQRef(
       docId: docId,
-      label: docIdentifier,
+      label: label,
       collectionPath: collectionPath,
     );
   }
