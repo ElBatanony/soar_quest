@@ -69,6 +69,21 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
         .toList();
   }
 
+  Future createNewDoc() async {
+    await goToScreen(docCreateScreen(widget.collection), context: context);
+    loadData();
+  }
+
+  @override
+  FloatingActionButton? floatingActionButton() {
+    if (widget.canCreate)
+      return FloatingActionButton(
+          shape: CircleBorder(),
+          onPressed: createNewDoc,
+          child: Icon(Icons.add));
+    return null;
+  }
+
   @override
   Widget screenBody(BuildContext context) {
     return SingleChildScrollView(
@@ -76,18 +91,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ...docsDisplay(context),
-            if (widget.collection.readOnly == false && widget.canCreate)
-              SQButton(
-                "Create ${widget.collection.singleDocName}",
-                onPressed: () async {
-                  await goToScreen(docCreateScreen(widget.collection),
-                      context: context);
-                  loadData();
-                },
-              ),
-          ],
+          children: docsDisplay(context),
         ),
       ),
     );
