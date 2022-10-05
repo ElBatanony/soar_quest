@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/snackbar.dart';
 import '../../../db.dart';
 import '../form_screen.dart';
 
 Future updateItem(SQDoc doc, BuildContext context) async {
-  return doc.collection.saveDoc(doc).then((_) {
-    showSnackBar("${doc.collection.singleDocName} updated", context: context);
-  });
+  return doc.collection.saveDoc(doc);
 }
 
 DocFormScreen docEditScreen(
