@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../../ui/sq_button.dart';
 import '../../ui/signed_in_content.dart';
 import '../../../db.dart';
-import '../feature.dart';
 
-class UpvotesFeature extends Feature {
+class UpvotesFeature {
   static StatefulWidget upvoteButton(SQDoc doc) {
     return _UpvoteButton(doc: doc);
   }
