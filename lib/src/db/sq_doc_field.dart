@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'sq_doc.dart';
 import 'fields/sq_read_only_field.dart';
 
+// TODO: rename to SQField
 abstract class SQDocField<T> {
   String name = "";
   T? value;
@@ -37,6 +38,7 @@ abstract class SQDocField<T> {
   bool get isNull => value == null;
 }
 
+// TODO: rename to SQFormField
 abstract class DocFormField<DocField extends SQDocField>
     extends FormField<DocFormField<DocField>> {
   final DocField field;
@@ -63,6 +65,11 @@ abstract class DocFormFieldState<DocField extends SQDocField>
     setState(() {});
   }
 
+  Widget fieldLabel() {
+    // TODO: add * if required
+    return Text(field.name, style: Theme.of(context).textTheme.headline6);
+  }
+
   Widget fieldBuilder(BuildContext context) {
     if (field.readOnly == true) return field.readOnlyField(doc: doc);
     return field.formField(onChanged: onChanged, doc: doc);
@@ -70,6 +77,16 @@ abstract class DocFormFieldState<DocField extends SQDocField>
 
   @override
   Widget build(BuildContext context) {
-    return fieldBuilder(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          fieldLabel(),
+          SizedBox(height: 4),
+          fieldBuilder(context),
+        ],
+      ),
+    );
   }
 }
