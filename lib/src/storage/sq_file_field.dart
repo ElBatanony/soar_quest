@@ -4,16 +4,19 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../db/sq_doc.dart';
+import 'firebase_file_storage.dart';
 import 'sq_file_storage.dart';
 import '../ui/sq_button.dart';
 import '../db/fields/sq_bool_field.dart';
 
 class SQFileField extends SQBoolField {
-  SQFileStorage storage;
+  late SQFileStorage storage;
 
   bool get fileExists => value;
 
-  SQFileField(super.name, {super.value, required this.storage});
+  SQFileField(super.name, {super.value, SQFileStorage? storage}) {
+    this.storage = storage ?? FirebaseFileStorage();
+  }
 
   @override
   SQFileField copy() {

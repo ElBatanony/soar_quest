@@ -4,7 +4,7 @@ import '../db/sq_doc.dart';
 import 'sq_file_field.dart';
 
 class SQImageField extends SQFileField {
-  SQImageField(super.name, {super.value, required super.storage});
+  SQImageField(super.name, {super.value, super.storage});
 
   @override
   SQImageField copy() {

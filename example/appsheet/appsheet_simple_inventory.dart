@@ -14,13 +14,10 @@ void main() async {
 
   await simpleInventoryApp.init();
 
-  SQFileStorage firebaseFileStorage = FirebaseFileStorage();
-
   SQCollection items = FirestoreCollection(id: "Items", fields: [
     SQStringField("Name"),
     SQStringField("Description"),
-    SQImageField("Image", storage: firebaseFileStorage),
-    SQFileField("Test File", storage: firebaseFileStorage),
+    SQImageField("Image"),
     // TODO: add inventory change log
     // TODO: add Total Stock Available
   ]);
