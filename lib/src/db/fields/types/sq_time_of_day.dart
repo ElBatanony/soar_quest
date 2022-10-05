@@ -12,8 +12,10 @@ class SQTimeOfDay extends TimeOfDay {
     return "${pad(hour)}:${pad(minute)}";
   }
 
+  // TODO: move this field to the formfield only
   TimeOfDay toTimeOfDay() => TimeOfDay(hour: hour, minute: minute);
 
+  // TODO: make parse nullable
   static SQTimeOfDay parse(Map<String, dynamic> source) {
     if (source["hour"] != null && source["minute"] != null)
       return SQTimeOfDay(hour: source["hour"], minute: source["minute"]);
