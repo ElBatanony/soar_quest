@@ -61,19 +61,16 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: [
-          ..._generateDocFormFields(
-            widget.doc,
-            shownFields: widget.shownFields,
-            hiddenFields: widget.hiddenFields,
-            onChanged: refreshScreen,
-          ),
-          SQButton(widget.submitButtonText, onPressed: submitForm)
-        ],
-      ),
+    return Column(
+      children: [
+        ..._generateDocFormFields(
+          widget.doc,
+          shownFields: widget.shownFields,
+          hiddenFields: widget.hiddenFields,
+          onChanged: refreshScreen,
+        ),
+        SQButton(widget.submitButtonText, onPressed: submitForm)
+      ],
     );
   }
 }

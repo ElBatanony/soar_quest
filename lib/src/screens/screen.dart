@@ -42,7 +42,7 @@ class ScreenState<T extends Screen> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final Widget body = Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
         child: (widget.prebody != null ||
                 widget.postbody != null ||
