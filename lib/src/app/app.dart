@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../auth/firebase_auth_manager.dart';
+import '../db/fields/sq_string_field.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import 'firebase_app.dart';
@@ -22,7 +23,7 @@ class App {
 
   late AppSettings settings;
 
-  List<SQDocField> userDocFields;
+  late List<SQDocField> userDocFields;
   List<SQDocField> publicProfileFields;
 
   static late SQCollection usersCollection;
@@ -36,10 +37,11 @@ class App {
     required this.theme,
     AppSettings? settings,
     SQAuthManager? authManager,
-    required this.userDocFields,
+    List<SQDocField>? userDocFields,
     this.publicProfileFields = const [],
     required this.firebaseOptions,
   }) {
+    this.userDocFields = userDocFields ?? [SQStringField("Full Name")];
     this.settings = settings ?? AppSettings(settingsFields: []);
     this.authManager = authManager ?? FirebaseAuthManager();
     instance = this;
