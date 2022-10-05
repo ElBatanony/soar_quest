@@ -9,17 +9,11 @@ void main() async {
   App simpleInventoryApp = App("Simple Inventory",
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
-  // TODO: add DateTime field
-
   await simpleInventoryApp.init();
-
-  AppSettings.setSettings([
-    SQBoolField("isOn"),
-    SQBoolField("hamada"),
-  ]);
 
   items = FirestoreCollection(id: "Items", fields: [
     SQStringField("Name", isRequired: true),
+    SQStringField("Description"),
     SQVirtualField<int>(
         field: SQIntField("Total Stock Available"),
         valueBuilder: (doc) {
@@ -28,7 +22,6 @@ void main() async {
             sum += (doc.value("Amount") as int);
           return sum;
         }),
-    SQStringField("Description"),
     SQImageField("Image"),
   ]);
 
@@ -57,6 +50,5 @@ void main() async {
         trailing: Text(doc.value("Amount").toString()),
       ),
     ),
-    AppSettings.settingsScreen(),
   ]));
 }
