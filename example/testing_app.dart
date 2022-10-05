@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:soar_quest/app.dart';
-import 'package:soar_quest/db.dart';
-import 'package:soar_quest/screens.dart';
-import 'package:soar_quest/storage.dart';
+import 'package:soar_quest/soar_quest.dart';
 
 import 'firebase_options.dart';
 
