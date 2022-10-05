@@ -97,7 +97,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     if (doc == null) return Text("No doc to upload file to");
 
     return Row(
