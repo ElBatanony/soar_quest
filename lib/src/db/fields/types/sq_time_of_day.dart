@@ -12,11 +12,10 @@ class SQTimeOfDay extends TimeOfDay {
     return "${pad(hour)}:${pad(minute)}";
   }
 
-  // TODO: make parse nullable
-  static SQTimeOfDay parse(Map<String, dynamic> source) {
+  static SQTimeOfDay? parse(Map<String, dynamic> source) {
     if (source["hour"] != null && source["minute"] != null)
       return SQTimeOfDay(hour: source["hour"], minute: source["minute"]);
 
-    throw UnimplementedError("TimeOfDay variant not handled properly");
+    return null;
   }
 }
