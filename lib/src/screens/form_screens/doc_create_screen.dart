@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../db/sq_collection.dart';
-import '../../ui/snackbar.dart';
 import '../form_screen.dart';
 
 Future createDoc(SQDoc doc, BuildContext context) async {
-  return doc.collection.createDoc(doc).then((_) {
-    showSnackBar("${doc.collection.singleDocName} created", context: context);
-  });
+  return doc.collection.createDoc(doc);
 }
 
 DocFormScreen docCreateScreen(
