@@ -13,7 +13,7 @@ class SQDoc {
     return fields.map((field) {
       SQField fieldCopy = field.copy();
       assert(field.runtimeType == fieldCopy.runtimeType,
-          "SQDocField not copied properly");
+          "SQDocField not copied properly (${field.runtimeType} vs. ${fieldCopy.runtimeType})");
       return fieldCopy;
     }).toList();
   }
