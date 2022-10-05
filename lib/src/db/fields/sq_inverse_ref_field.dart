@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/screens.dart';
 
 import '../sq_collection.dart';
-import 'types/sq_ref.dart';
 import 'sq_list_field.dart';
 
 class SQInverseRefField extends SQListField {
@@ -9,13 +9,10 @@ class SQInverseRefField extends SQListField {
   String refFieldName;
   SQDoc? doc;
 
-  Future<List<SQRef>> inverseRefs(SQDoc doc) async {
+  Future<List<SQDoc>> inverseRefs(SQDoc doc) async {
     if (!collection.initialized) await collection.loadCollection();
 
-    return collection
-        .filterBy([DocRefFilter(refFieldName, doc.ref)])
-        .map((doc) => doc.ref)
-        .toList();
+    return collection.filterBy([DocRefFilter(refFieldName, doc.ref)]).toList();
   }
 
   SQInverseRefField(super.name,
@@ -54,7 +51,7 @@ class _InverseRefFormField extends SQFormField {
 }
 
 class _InverseRefFieldState extends SQFormFieldState {
-  List<SQRef> inverses = [];
+  List<SQDoc> inverses = [];
 
   SQInverseRefField get inverseRefField =>
       (widget as _InverseRefFormField).inverseRefField;
@@ -72,6 +69,16 @@ class _InverseRefFieldState extends SQFormFieldState {
 
   @override
   Widget fieldBuilder(BuildContext context) {
-    return Text(inverses.toString());
+    SQInverseRefField reverseField = (field as SQInverseRefField);
+
+    return Column(
+      children: [
+        Text(inverses.toString()),
+        CollectionFilterScreen(
+          collection: reverseField.collection,
+          filters: [DocRefFilter(reverseField.refFieldName, doc!.ref)],
+        ).button(context, label: "View All"),
+      ],
+    );
   }
 }
