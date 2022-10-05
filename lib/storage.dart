@@ -1,2 +1,2 @@
-export 'src/db/sq_file_storage.dart';
-export 'src/db/firebase_file_storage.dart';
+export 'src/storage/sq_file_storage.dart';
+export 'src/storage/firebase_file_storage.dart';

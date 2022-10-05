@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../sq_doc.dart';
-import '../sq_file_storage.dart';
+import '../../storage/sq_file_storage.dart';
 import '../../ui/sq_button.dart';
 import 'sq_bool_field.dart';
 
