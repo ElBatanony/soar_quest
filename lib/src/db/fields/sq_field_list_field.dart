@@ -46,7 +46,7 @@ class SQFieldListField extends SQListField<SQField> {
   }
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQFieldListFormField(this, onChanged: onChanged);
   }
 }
@@ -73,7 +73,7 @@ Future showFieldOptions(SQFieldListField fieldListfield,
       });
 }
 
-class _SQFieldListFormField extends DocFormField<SQFieldListField> {
+class _SQFieldListFormField extends SQFormField<SQFieldListField> {
   final SQFieldListField listField;
 
   const _SQFieldListFormField(this.listField, {required super.onChanged})
@@ -83,7 +83,7 @@ class _SQFieldListFormField extends DocFormField<SQFieldListField> {
   createState() => _SQFieldListFormFieldState();
 }
 
-class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
+class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
   SQFieldListField get listField => field;
 
   void deleteListItem(int index) {

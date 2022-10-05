@@ -33,17 +33,17 @@ class SQInverseRefField extends SQListField {
   }
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _InverseRefFormField(this, doc: doc);
   }
 
   @override
-  DocFormField readOnlyField({SQDoc? doc}) {
+  readOnlyField({SQDoc? doc}) {
     return _InverseRefFormField(this, doc: doc);
   }
 }
 
-class _InverseRefFormField extends DocFormField {
+class _InverseRefFormField extends SQFormField {
   final SQInverseRefField inverseRefField;
 
   const _InverseRefFormField(this.inverseRefField, {required super.doc})
@@ -53,7 +53,7 @@ class _InverseRefFormField extends DocFormField {
   createState() => _InverseRefFieldState();
 }
 
-class _InverseRefFieldState extends DocFormFieldState {
+class _InverseRefFieldState extends SQFormFieldState {
   List<SQRef> inverses = [];
 
   SQInverseRefField get inverseRefField =>

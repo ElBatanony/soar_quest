@@ -17,7 +17,7 @@ class UpdatedDateField extends SQField<SQTimestamp> {
   collectField() => value = SQTimestamp.fromDate(DateTime.now());
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     throw UnimplementedError();
   }
 }

@@ -29,19 +29,19 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQTimeOfDayFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQTimeOfDayFormField extends DocFormField<SQTimeOfDayField> {
+class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
   const _SQTimeOfDayFormField(super.field, {required super.onChanged});
 
   @override
   createState() => _SQTimeOfDayFormFieldState();
 }
 
-class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
+class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
   void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
     if (newSelectedTimeOfDay != null) {
       field.value = SQTimeOfDay.fromTimeOfDay(newSelectedTimeOfDay);

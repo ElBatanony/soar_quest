@@ -75,7 +75,7 @@ class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
   }
 }
 
-List<DocFormField> _generateDocFormFields(
+List<SQFormField> _generateDocFormFields(
   SQDoc doc, {
   List<String> hiddenFields = const [],
   List<String>? shownFields,

@@ -15,19 +15,19 @@ class SQIntField extends SQField<int> {
   SQIntField copy() => SQIntField(name, value: value, readOnly: readOnly);
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQIntFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQIntFormField extends DocFormField<SQIntField> {
+class _SQIntFormField extends SQFormField<SQIntField> {
   const _SQIntFormField(super.field, {required super.onChanged});
 
   @override
   createState() => _SQIntFormFieldState();
 }
 
-class _SQIntFormFieldState extends DocFormFieldState<SQIntField> {
+class _SQIntFormFieldState extends SQFormFieldState<SQIntField> {
   final fieldTextController = TextEditingController();
 
   @override

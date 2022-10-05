@@ -15,7 +15,7 @@ class SQListField<T> extends SQField<List<T>> {
   SQListField<T> copy() => SQListField<T>(name, list: copyList(list));
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     throw UnimplementedError();
   }
 

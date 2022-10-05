@@ -18,19 +18,19 @@ class SQBoolField extends SQField<bool> {
   bool get value => super.value ?? false;
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQBoolFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQBoolFormField extends DocFormField<SQBoolField> {
+class _SQBoolFormField extends SQFormField<SQBoolField> {
   const _SQBoolFormField(super.field, {super.onChanged});
 
   @override
   createState() => _SQBoolFormFieldState();
 }
 
-class _SQBoolFormFieldState extends DocFormFieldState<SQBoolField> {
+class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
   @override
   Widget fieldBuilder(BuildContext context) {
     return Row(

@@ -32,7 +32,7 @@ class SQFileField extends SQStringField {
 }
 
 class SQFileFormField<FileField extends SQFileField>
-    extends DocFormField<FileField> {
+    extends SQFormField<FileField> {
   const SQFileFormField(super.field,
       {super.key, super.onChanged, required super.doc});
 
@@ -41,7 +41,7 @@ class SQFileFormField<FileField extends SQFileField>
 }
 
 class SQFileFormFieldState<FileField extends SQFileField>
-    extends DocFormFieldState<FileField> {
+    extends SQFormFieldState<FileField> {
   openFileUrl() async {
     if (field.downloadUrl == null)
       throw "Download URL for ${field.name} is null";

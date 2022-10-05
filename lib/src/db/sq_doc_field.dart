@@ -23,9 +23,9 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  DocFormField formField({Function? onChanged, SQDoc? doc});
+  SQFormField formField({Function? onChanged, SQDoc? doc});
 
-  DocFormField readOnlyField({SQDoc? doc}) {
+  SQFormField readOnlyField({SQDoc? doc}) {
     return SQReadOnlyFormField(this, doc: doc);
   }
 
@@ -37,26 +37,25 @@ abstract class SQField<T> {
   bool get isNull => value == null;
 }
 
-// TODO: rename to SQFormField
-abstract class DocFormField<DocField extends SQField>
-    extends FormField<DocFormField<DocField>> {
-  final DocField field;
+abstract class SQFormField<Field extends SQField>
+    extends FormField<SQFormField<Field>> {
+  final Field field;
   final Function? onChanged;
   final SQDoc? doc;
 
-  const DocFormField(this.field, {this.onChanged, this.doc, super.key})
+  const SQFormField(this.field, {this.onChanged, this.doc, super.key})
       : super(builder: emptyBuilder);
 
   static Widget emptyBuilder(FormFieldState s) => Container();
 
   @override
-  DocFormFieldState<DocField> createState();
+  SQFormFieldState<Field> createState();
 }
 
-abstract class DocFormFieldState<DocField extends SQField>
-    extends FormFieldState<DocFormField<DocField>> {
-  DocFormField<DocField> get formField => (widget as DocFormField<DocField>);
-  DocField get field => formField.field;
+abstract class SQFormFieldState<Field extends SQField>
+    extends FormFieldState<SQFormField<Field>> {
+  SQFormField<Field> get formField => (widget as SQFormField<Field>);
+  Field get field => formField.field;
   SQDoc? get doc => formField.doc;
 
   void onChanged() {
