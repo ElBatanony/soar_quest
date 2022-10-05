@@ -46,8 +46,6 @@ void configCollections() {
     fields: [
       SQStringField("Name", required: true),
       SQStringField("Hours"),
-      SQInverseRefField("Menu Items",
-          refFieldName: "Food Truck", collection: menuItems),
     ],
     readOnly: !isAdmin,
     singleDocName: "Food Truck",
@@ -55,15 +53,16 @@ void configCollections() {
 
   menuItems = MenuItemsCollection(id: "Menu Items");
 
+  foodTrucks.fields.add(SQInverseRefField("Menu Items",
+      refFieldName: "Food Truck", collection: menuItems));
+
   orders = FirestoreCollection(
       id: "Orders",
       fields: [
         SQCreatedByField("User"),
         SQDocRefField("Food Truck", collection: foodTrucks, readOnly: true),
         SQTimeOfDayField("Pick up time"),
-        // SQFieldListField("Order Items", allowedTypes: [
-        //   SQDocRefField("", collectionId: "Order Items"),
-        // ]),
+        SQFieldListField("Order Items", allowedTypes: []),
         SQStringField("Notes"),
         SQStringField("Status", readOnly: true),
         SQDoubleField("Tip Amount"),
