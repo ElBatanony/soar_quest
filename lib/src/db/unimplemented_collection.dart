@@ -1,7 +1,7 @@
 import 'sq_collection.dart';
 
 class UnimplementCollection extends SQCollection {
-  UnimplementCollection(super.id, super.fields);
+  UnimplementCollection({required super.id, required super.fields});
 
   @override
   Future createDoc(SQDoc doc) {

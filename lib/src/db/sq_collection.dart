@@ -19,10 +19,9 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   static final List<SQCollection> _collections = [];
 
-  // TODO: make id and fields named params
-  SQCollection(
-    this.id,
-    this.fields, {
+  SQCollection({
+    required this.id,
+    required this.fields,
     String? singleDocName,
     this.parentDoc,
     this.readOnly = false,

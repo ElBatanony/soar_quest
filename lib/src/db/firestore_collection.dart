@@ -7,14 +7,14 @@ final firestore = FirebaseFirestore.instance;
 
 class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   FirestoreCollection({
-    required String id,
-    required List<SQField> fields,
+    required super.id,
+    required super.fields,
     super.singleDocName,
     super.parentDoc,
     super.readOnly,
     super.canDeleteDoc,
     super.docScreen,
-  }) : super(id, fields);
+  });
 
   CollectionReference get ref => firestore.collection(getPath());
 
