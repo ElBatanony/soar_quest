@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../sq_doc.dart';
+import '../../sq_file_storage.dart';
 import '../sq_file_field.dart';
 
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
@@ -34,22 +35,6 @@ class SQFile {
   String toString() {
     return exists ? "file" : "file not set";
   }
-}
-
-abstract class SQFileStorage {
-  SQFile sqFile;
-
-  SQFileStorage(this.sqFile);
-
-  Future uploadFile({
-    required SQDoc doc,
-    required XFile file,
-    required Function onUpload,
-  });
-
-  Future deleteFile({required SQDoc doc});
-
-  Future getFileDownloadURL(SQDoc doc);
 }
 
 class FirebaseFileStorage extends SQFileStorage {
