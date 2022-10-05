@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../firebase_file_storage.dart';
 import '../sq_doc.dart';
 import '../sq_file_storage.dart';
 import 'types/sq_file.dart';
