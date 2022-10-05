@@ -44,14 +44,18 @@ class ScreenState<T extends Screen> extends State<T> {
     final Widget body = Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (widget.isInline) Text(widget.title),
-            if (widget.prebody != null) widget.prebody!(context),
-            screenBody(context),
-            if (widget.postbody != null) widget.postbody!(context),
-          ],
-        ),
+        child: (widget.prebody != null ||
+                widget.postbody != null ||
+                widget.isInline)
+            ? Column(
+                children: [
+                  if (widget.isInline) Text(widget.title),
+                  if (widget.prebody != null) widget.prebody!(context),
+                  screenBody(context),
+                  if (widget.postbody != null) widget.postbody!(context),
+                ],
+              )
+            : screenBody(context),
       ),
     );
 
