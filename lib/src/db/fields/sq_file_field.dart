@@ -6,12 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../firebase_file_storage.dart';
 import '../sq_doc.dart';
 import '../sq_file_storage.dart';
-import 'types/sq_file.dart';
 import '../../ui/sq_button.dart';
+import 'sq_bool_field.dart';
 
-export 'types/sq_file.dart';
-
-class SQFileField extends SQDocField<SQFile> {
+class SQFileField extends SQBoolField {
   SQFileField(super.name, {super.value});
 
   @override
@@ -20,23 +18,7 @@ class SQFileField extends SQDocField<SQFile> {
   }
 
   @override
-  Type get type => SQFile;
-
-  @override
-  SQFile? parse(source) {
-    return SQFile.parse(source);
-  }
-
-  @override
-  SQFile get value => super.value ?? SQFile(exists: false);
-
-  @override
-  collectField() {
-    return {"exists": value.exists, "fieldName": name};
-  }
-
-  @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return SQFileFormField(this, onChanged: onChanged, doc: doc);
   }
 }
@@ -65,7 +47,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
 
   refreshFileExists() {
     setState(() {
-      fileExists = field.value.exists;
+      fileExists = field.value;
     });
   }
 

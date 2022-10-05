@@ -33,7 +33,7 @@ class FirebaseFileStorage extends SQFileStorage {
         .listen((taskSnapshot) {
       switch (taskSnapshot.state) {
         case TaskState.success:
-          field.value.exists = true;
+          field.value = true;
           print("File uploaded!!");
           onUpload();
           break;
@@ -53,7 +53,7 @@ class FirebaseFileStorage extends SQFileStorage {
   @override
   Future deleteFile({required SQDoc doc, required SQFileField field}) async {
     final ref = getRef(doc, field);
-    field.value.exists = false;
+    field.value = false;
     await ref.delete();
   }
 }
