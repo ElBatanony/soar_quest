@@ -13,7 +13,7 @@ class SQInverseRefField extends SQListField {
     if (!collection.initialized) await collection.loadCollection();
 
     return collection
-        .filter([DocRefFilter(refFieldName, doc.ref)])
+        .filterBy([DocRefFilter(refFieldName, doc.ref)])
         .map((doc) => doc.ref)
         .toList();
   }

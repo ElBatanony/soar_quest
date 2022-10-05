@@ -31,7 +31,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
   }
 
   void updateDocs() {
-    filteredDocs = widget.collection.filter(widget.filters);
+    filteredDocs = widget.collection.filterBy(widget.filters);
     setState(() {});
   }
 

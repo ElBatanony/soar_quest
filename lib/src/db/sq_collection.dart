@@ -74,7 +74,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     return newDoc;
   }
 
-  List<DocType> filter(List<CollectionFilter> filters) {
+  List<DocType> filterBy(List<CollectionFilter> filters) {
     List<DocType> ret = docs;
     for (var filter in filters) {
       ret = filter.filter(ret) as List<DocType>;

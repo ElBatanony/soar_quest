@@ -64,7 +64,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   List<Widget> docsDisplay(BuildContext context) {
     return widget.collection
-        .filter(widget.filters)
+        .filterBy(widget.filters)
         .map((doc) => docDisplay(doc))
         .toList();
   }
