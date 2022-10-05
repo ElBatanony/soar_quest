@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
-import '../auth/firebase_auth_manager.dart';
-import '../db/fields/sq_string_field.dart';
-import '../db/firestore_collection.dart';
-import '../db/sq_collection.dart';
-import '../screens/screen.dart';
-import '../auth/auth_manager.dart';
+import 'auth/firebase_auth_manager.dart';
+import 'db/fields/sq_string_field.dart';
+import 'db/firestore_collection.dart';
+import 'db/sq_collection.dart';
+import 'screens/screen.dart';
+import 'auth/auth_manager.dart';
 
 class App {
   String name;

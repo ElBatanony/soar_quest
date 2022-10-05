@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../auth/user_data.dart';
-import '../app/app.dart';
+import '../app.dart';
 import '../screens/screen.dart';
 import 'sq_button.dart';
 

@@ -1,5 +1,5 @@
 import '../../../db.dart';
-import '../../app/app.dart';
+import '../../app.dart';
 import 'collection_filter_screen.dart';
 
 // TODO: public profile cloud function removed

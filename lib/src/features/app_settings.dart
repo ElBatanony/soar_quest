@@ -2,7 +2,7 @@ import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import '../screens/form_screens/doc_edit_screen.dart';
 import '../screens/screen.dart';
-import '../app/app.dart';
+import '../app.dart';
 
 class AppSettings {
   static late SQCollection _settingsCollection;
