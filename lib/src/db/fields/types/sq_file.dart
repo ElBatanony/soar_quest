@@ -1,6 +1,3 @@
-import '../../sq_doc.dart';
-import '../sq_file_field.dart';
-
 class SQFile {
   String fieldName;
   bool exists;
@@ -17,10 +14,6 @@ class SQFile {
     if (fieldName == null) return null;
 
     return SQFile(fieldName: fieldName, exists: exists);
-  }
-
-  SQFileField? getFileField(SQDoc doc) {
-    return doc.getField(fieldName) as SQFileField;
   }
 
   @override

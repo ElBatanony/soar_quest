@@ -76,6 +76,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
       await storage.uploadFile(
           doc: doc!,
           file: pickedFile,
+          field: field,
           onUpload: () {
             refreshFileExists();
             onChanged();
@@ -84,7 +85,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
   }
 
   deleteFile() async {
-    await storage.deleteFile(doc: doc!);
+    await storage.deleteFile(doc: doc!, field: field);
     refreshFileExists();
     onChanged();
   }

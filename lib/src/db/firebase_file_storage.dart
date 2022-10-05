@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:soar_quest/db.dart';
 
 import 'sq_file_storage.dart';
-import 'sq_doc.dart';
 
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
@@ -20,6 +20,7 @@ class FirebaseFileStorage extends SQFileStorage {
     required SQDoc doc,
     required XFile file,
     required Function onUpload,
+    required SQFileField field,
   }) async {
     final metadata = SettableMetadata(
       contentType: 'image/jpeg',
@@ -34,7 +35,7 @@ class FirebaseFileStorage extends SQFileStorage {
         .listen((taskSnapshot) {
       switch (taskSnapshot.state) {
         case TaskState.success:
-          sqFile.getFileField(doc)?.value.exists = true;
+          field.value.exists = true;
           print("File uploaded!!");
           onUpload();
           break;
@@ -52,9 +53,9 @@ class FirebaseFileStorage extends SQFileStorage {
   }
 
   @override
-  Future deleteFile({required SQDoc doc}) async {
+  Future deleteFile({required SQDoc doc, required SQFileField field}) async {
     final ref = getRef(doc);
-    sqFile.getFileField(doc)?.value.exists = false;
+    field.value.exists = false;
     await ref.delete();
   }
 }

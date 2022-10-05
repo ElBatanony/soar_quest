@@ -1,6 +1,6 @@
 import 'package:image_picker/image_picker.dart';
 
-import 'fields/types/sq_file.dart';
+import 'fields/sq_file_field.dart';
 import 'sq_doc.dart';
 
 abstract class SQFileStorage {
@@ -12,9 +12,10 @@ abstract class SQFileStorage {
     required SQDoc doc,
     required XFile file,
     required Function onUpload,
+    required SQFileField field,
   });
 
-  Future deleteFile({required SQDoc doc});
+  Future deleteFile({required SQDoc doc, required SQFileField field});
 
   Future getFileDownloadURL(SQDoc doc);
 }
