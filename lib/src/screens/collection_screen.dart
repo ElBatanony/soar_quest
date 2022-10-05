@@ -76,6 +76,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   FloatingActionButton? floatingActionButton() {
     if (widget.canCreate)
       return FloatingActionButton(
+          heroTag: null,
           shape: CircleBorder(),
           onPressed: createNewDoc,
           child: Icon(Icons.add));
