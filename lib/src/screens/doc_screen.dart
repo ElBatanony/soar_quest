@@ -57,33 +57,31 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text('Doc path: ${doc.getPath()}', textAlign: TextAlign.center),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: doc.fields.map(fieldDisplay).toList()),
-          if (doc.collection.readOnly == false)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                if (widget.canEdit)
-                  SQButton(
-                    "Edit ${doc.collection.singleDocName}",
-                    onPressed: () async {
-                      await goToScreen(docEditScreen(doc), context: context);
-                      refreshScreen();
-                    },
-                  ),
-                if (doc.collection.canDeleteDoc && widget.canDelete)
-                  DocDeleteButton(doc, deleteCallback: refreshScreen)
-              ],
-            ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('Doc path: ${doc.getPath()}', textAlign: TextAlign.center),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: doc.fields.map(fieldDisplay).toList()),
+        if (doc.collection.readOnly == false)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              if (widget.canEdit)
+                SQButton(
+                  "Edit ${doc.collection.singleDocName}",
+                  onPressed: () async {
+                    await goToScreen(docEditScreen(doc), context: context);
+                    refreshScreen();
+                  },
+                ),
+              if (doc.collection.canDeleteDoc && widget.canDelete)
+                DocDeleteButton(doc, deleteCallback: refreshScreen)
+            ],
+          ),
+      ],
     );
   }
 }
