@@ -79,4 +79,21 @@
 			"}"
 		],
 	},
+	"New SQ App": {
+		"scope": "dart",
+		"prefix": "sqapp",
+		"body": [
+			"App $1 =",
+			"    App(\"$1\", firebaseOptions: DefaultFirebaseOptions.currentPlatform);",
+			"",
+			"await $1.init();",
+			"",
+			"SQCollection sampleCollection = FirestoreCollection(",
+			"    id: \"Sample Collection\", fields: [SQStringField(\"Name\")]);",
+			"",
+			"$1.run(MainScreen([",
+			"  CollectionScreen(collection: sampleCollection),",
+			"]));"
+		],
+	}
 }
