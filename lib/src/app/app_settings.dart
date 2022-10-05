@@ -4,27 +4,23 @@ import '../screens/form_screens/doc_edit_screen.dart';
 import '../screens/screen.dart';
 import 'app.dart';
 
-// TODO: make AppSettings a feature, not integral part of app
-
 class AppSettings {
-  late SQCollection _settingsCollection;
-  late SQDoc settingsDoc;
-  List<SQField> settingsFields;
+  static late SQCollection _settingsCollection;
+  static late SQDoc settingsDoc;
+  static List<SQField> settingsFields = [];
 
-  AppSettings({this.settingsFields = const []});
-
-  Future init() async {
+  static setSettings(List<SQField> settings) {
+    settingsFields = settings;
     _settingsCollection = FirestoreCollection(
         id: 'Settings', parentDoc: App.userDoc, fields: settingsFields);
-    settingsDoc = SQDoc('settings', collection: _settingsCollection);
-    await settingsDoc.loadDoc();
+    settingsDoc = SQDoc('default', collection: _settingsCollection);
   }
 
   getSetting(String settingsName) {
     return settingsDoc.value(settingsName);
   }
-}
 
-Screen settingsScreen() {
-  return docEditScreen(App.instance.settings.settingsDoc, title: "Settings");
+  static Screen settingsScreen() {
+    return docEditScreen(settingsDoc, title: "Settings");
+  }
 }

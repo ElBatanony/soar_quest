@@ -6,7 +6,6 @@ import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import 'firebase_app.dart';
 import '../screens/screen.dart';
-import 'app_settings.dart';
 import '../auth/auth_manager.dart';
 
 class App {
@@ -18,8 +17,6 @@ class App {
   static SQAuthManager auth = instance.authManager;
   static String get userId => auth.user.userId;
   static SQDoc get userDoc => auth.user.userDoc;
-
-  late AppSettings settings;
 
   late List<SQField> userDocFields;
   List<SQField> publicProfileFields;
@@ -33,7 +30,6 @@ class App {
   App(
     this.name, {
     ThemeData? theme,
-    AppSettings? settings,
     SQAuthManager? authManager,
     List<SQField>? userDocFields,
     this.publicProfileFields = const [],
@@ -42,7 +38,6 @@ class App {
     this.theme =
         theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
     this.userDocFields = userDocFields ?? [SQStringField("Full Name")];
-    this.settings = settings ?? AppSettings(settingsFields: []);
     this.authManager = authManager ?? FirebaseAuthManager();
     instance = this;
   }
@@ -57,7 +52,6 @@ class App {
       canDeleteDoc: false,
     );
     await auth.init();
-    await settings.init();
   }
 
   run(Screen homescreen) {
