@@ -53,7 +53,7 @@ class SQFileFormField<FileField extends SQFileField>
 class SQFileFormFieldState<FileField extends SQFileField>
     extends DocFormFieldState<FileField> {
   bool fileExists = false;
-  late SQFileStorage storage = FirebaseFileStorage(field.value);
+  late SQFileStorage storage = FirebaseFileStorage();
 
   downloadFileFromUrl() async {
     final fileUrl = await storage.getFileDownloadURL(doc!, field);

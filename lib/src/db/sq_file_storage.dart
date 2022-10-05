@@ -4,10 +4,6 @@ import 'fields/sq_file_field.dart';
 import 'sq_doc.dart';
 
 abstract class SQFileStorage {
-  SQFile sqFile;
-
-  SQFileStorage(this.sqFile);
-
   Future uploadFile({
     required SQDoc doc,
     required XFile file,
