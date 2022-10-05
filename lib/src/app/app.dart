@@ -11,7 +11,7 @@ import '../auth/auth_manager.dart';
 
 class App {
   String name;
-  ThemeData theme;
+  late ThemeData theme;
 
   static final List<SQCollection> _collections = [];
 
@@ -34,13 +34,15 @@ class App {
 
   App(
     this.name, {
-    required this.theme,
+    ThemeData? theme,
     AppSettings? settings,
     SQAuthManager? authManager,
     List<SQDocField>? userDocFields,
     this.publicProfileFields = const [],
     required this.firebaseOptions,
   }) {
+    this.theme =
+        theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
     this.userDocFields = userDocFields ?? [SQStringField("Full Name")];
     this.settings = settings ?? AppSettings(settingsFields: []);
     this.authManager = authManager ?? FirebaseAuthManager();
