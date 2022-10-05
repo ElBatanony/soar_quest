@@ -8,17 +8,20 @@ import 'form_screens/doc_create_screen.dart';
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
 
 typedef DocScreenBuilder = DocScreen Function(SQDoc doc);
+typedef DocDisplayBuilder = Widget Function(SQDoc doc, CollectionScreenState s);
 
 class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
   final bool canCreate;
   final List<CollectionFilter> filters;
+  final DocDisplayBuilder? docDisplay;
 
   CollectionScreen(
       {String? title,
       required this.collection,
       DocScreenBuilder? docScreen,
+      this.docDisplay,
       super.prebody,
       super.postbody,
       this.canCreate = false,
@@ -54,6 +57,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   DocScreen docScreen(SQDoc doc) => widget.docScreen(doc);
 
   Widget docDisplay(SQDoc doc) {
+    if (widget.docDisplay != null) return widget.docDisplay!(doc, this);
     return ListTile(
       title: Text(doc.label),
       onTap: () => goToDocScreen(docScreen(doc)),
