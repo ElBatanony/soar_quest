@@ -1,23 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:soar_quest/soar_quest.dart';
+import '../sq_doc.dart';
 
-typedef FieldBuilder = Widget Function(SQDoc doc);
+class SQVirtualField<T> extends SQField<T> {
+  SQField<T> field;
+  T Function(SQDoc doc) valueBuilder;
 
-class SQVirtualField extends SQField<String> {
-  FieldBuilder fieldBuilder;
-
-  SQVirtualField(super.name, {required this.fieldBuilder, super.value})
-      : super(readOnly: true);
+  SQVirtualField({required this.field, required this.valueBuilder})
+      : super(field.name, readOnly: true);
 
   @override
-  String? parse(source) {
-    if (source is String) return source;
-    return null;
-  }
+  T? parse(source) => null;
 
   @override
-  SQVirtualField copy() =>
-      SQVirtualField(name, fieldBuilder: fieldBuilder, value: value);
+  SQVirtualField<T> copy() =>
+      SQVirtualField<T>(field: field, valueBuilder: valueBuilder);
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {
@@ -26,20 +21,7 @@ class SQVirtualField extends SQField<String> {
 
   @override
   readOnlyField({SQDoc? doc}) {
-    return _SQVirtualFieldFormField(this, doc: doc);
-  }
-}
-
-class _SQVirtualFieldFormField extends SQFormField<SQVirtualField> {
-  const _SQVirtualFieldFormField(super.field, {required super.doc});
-
-  @override
-  createState() => _SQVirtualFieldState();
-}
-
-class _SQVirtualFieldState extends SQFormFieldState<SQVirtualField> {
-  @override
-  Widget fieldBuilder(BuildContext context) {
-    return field.fieldBuilder(doc!);
+    field.value = valueBuilder(doc!);
+    return field.readOnlyField();
   }
 }
