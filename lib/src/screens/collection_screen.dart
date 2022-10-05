@@ -61,6 +61,8 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     return ListTile(
       title: Text(doc.label),
       subtitle: Text(doc.fields[1].value.toString()),
+      leading:
+          doc.hasImage ? Image.network(doc.imageLabel.value!, width: 35) : null,
       onTap: () => goToDocScreen(docScreen(doc)),
     );
   }
