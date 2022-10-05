@@ -18,6 +18,7 @@ DocFormScreen docCreateScreen(
   title ??= "Create ${collection.singleDocName}";
 
   SQDoc newDoc = collection.newDoc(initialFields: initialFields);
+  newDoc.initialized = true;
 
   return DocFormScreen(
     newDoc,
