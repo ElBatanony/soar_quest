@@ -4,6 +4,7 @@ import '../../app.dart';
 import '../db/sq_doc_field.dart';
 import '../db/fields/show_field_dialog.dart';
 import '../db/fields/sq_string_field.dart';
+import '../features/app_settings.dart';
 import '../ui/signed_in_content.dart';
 import '../ui/sq_button.dart';
 import 'screen.dart';
