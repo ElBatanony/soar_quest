@@ -18,6 +18,6 @@ class PublicProfilesScreen extends CollectionFilterScreen {
             collection: publicProfilesCollection,
             filters: [
               StringContainsFilter(
-                  publicProfilesCollection.getFieldByName("Username")!)
+                  publicProfilesCollection.getField("Username")!)
             ]);
 }
