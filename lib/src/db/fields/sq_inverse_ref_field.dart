@@ -71,9 +71,7 @@ class _InverseRefFieldState extends SQFormFieldState {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      children: [Text(field.name), Text(": "), Text(inverses.toString())],
-    );
+  Widget fieldBuilder(BuildContext context) {
+    return Text(inverses.toString());
   }
 }
