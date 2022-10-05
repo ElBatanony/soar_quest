@@ -8,13 +8,13 @@ abstract class SQField<T> {
   T? value;
   Type get type => T;
   bool readOnly;
-  bool required;
+  bool isRequired;
 
   SQField(
     this.name, {
     this.value,
     this.readOnly = false,
-    this.required = false,
+    this.isRequired = false,
   });
 
   SQField copy();
