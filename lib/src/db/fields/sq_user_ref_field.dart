@@ -1,5 +1,5 @@
 import '../../app.dart';
-import 'sq_doc_ref_field.dart';
+import 'sq_ref_field.dart';
 
 class SQUserRefField extends SQRefField {
   SQUserRefField(super.name, {super.value, super.readOnly})

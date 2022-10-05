@@ -3,7 +3,7 @@ export 'src/db/sq_collection.dart';
 export 'src/db/unimplemented_collection.dart';
 
 export 'src/db/fields/sq_field_list_field.dart';
-export 'src/db/fields/sq_doc_ref_field.dart';
+export 'src/db/fields/sq_ref_field.dart';
 export 'src/db/fields/sq_time_of_day_field.dart';
 export 'src/db/fields/sq_timestamp_field.dart';
 export 'src/db/fields/sq_user_ref_field.dart';
