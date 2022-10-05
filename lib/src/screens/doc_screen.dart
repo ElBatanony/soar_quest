@@ -58,13 +58,9 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   @override
   Widget screenBody(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Doc path: ${doc.getPath()}', textAlign: TextAlign.center),
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: doc.fields.map(fieldDisplay).toList()),
+        ...doc.fields.map(fieldDisplay).toList(),
         if (doc.collection.readOnly == false)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
