@@ -64,6 +64,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
           file: pickedFile,
           field: field,
           onUpload: () {
+            getDownloadUrl();
             onChanged();
           });
     }
