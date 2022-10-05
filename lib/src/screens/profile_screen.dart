@@ -118,6 +118,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
   }
 }
 
+// TODO: move to settings feature
 Screen settingsScreen() {
   return docEditScreen(App.instance.settings.settingsDoc);
 }

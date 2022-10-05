@@ -2,6 +2,8 @@ import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import 'app.dart';
 
+// TODO: make AppSettings a feature, not integral part of app
+
 class AppSettings {
   late SQCollection _settingsCollection;
   late SQDoc settingsDoc;
