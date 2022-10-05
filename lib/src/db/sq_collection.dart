@@ -84,7 +84,9 @@ abstract class SQCollection<DocType extends SQDoc> {
     return ret;
   }
 
-  static SQCollection? byPath(String collectionPath) {
-    return _collections.firstWhere((col) => col.getPath() == collectionPath);
+  static SQCollection? byPath(String path) {
+    if (_collections.any((collection) => collection.getPath() == path))
+      return _collections.firstWhere((col) => col.getPath() == path);
+    return null;
   }
 }
