@@ -86,13 +86,11 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: docsDisplay(context),
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: docsDisplay(context),
       ),
     );
   }
