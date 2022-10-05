@@ -17,5 +17,5 @@ abstract class SQFileStorage {
 
   Future deleteFile({required SQDoc doc, required SQFileField field});
 
-  Future getFileDownloadURL(SQDoc doc);
+  Future getFileDownloadURL(SQDoc doc, SQFileField field);
 }

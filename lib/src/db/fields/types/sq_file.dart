@@ -1,19 +1,14 @@
 class SQFile {
-  String fieldName;
   bool exists;
 
-  SQFile({
-    required this.fieldName,
-    this.exists = false,
-  });
+  SQFile({this.exists = false});
 
   static SQFile? parse(dynamic source) {
-    bool exists = source["exists"] ?? false;
-    String? fieldName = source["fieldName"];
+    dynamic exists = source["exists"];
 
-    if (fieldName == null) return null;
+    if (exists == null || exists is! bool) return null;
 
-    return SQFile(fieldName: fieldName, exists: exists);
+    return SQFile(exists: exists);
   }
 
   @override

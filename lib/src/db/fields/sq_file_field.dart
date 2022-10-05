@@ -28,7 +28,7 @@ class SQFileField extends SQDocField<SQFile> {
   }
 
   @override
-  SQFile get value => super.value ?? SQFile(fieldName: name, exists: false);
+  SQFile get value => super.value ?? SQFile(exists: false);
 
   @override
   collectField() {
@@ -56,7 +56,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
   late SQFileStorage storage = FirebaseFileStorage(field.value);
 
   downloadFileFromUrl() async {
-    final fileUrl = await storage.getFileDownloadURL(doc!);
+    final fileUrl = await storage.getFileDownloadURL(doc!, field);
     final url = Uri.parse(fileUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $fileUrl';

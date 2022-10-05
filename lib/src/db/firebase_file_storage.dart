@@ -11,8 +11,8 @@ FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 class FirebaseFileStorage extends SQFileStorage {
   FirebaseFileStorage(super.file);
 
-  Reference getRef(SQDoc doc) {
-    return firebaseStorage.ref().child("${doc.getPath()}/${sqFile.fieldName}");
+  Reference getRef(SQDoc doc, SQFileField field) {
+    return firebaseStorage.ref().child("${doc.getPath()}/${field.name}");
   }
 
   @override
@@ -27,7 +27,7 @@ class FirebaseFileStorage extends SQFileStorage {
       customMetadata: {'picked-file-path': file.path},
     );
 
-    final ref = getRef(doc);
+    final ref = getRef(doc, field);
 
     ref
         .putFile(File(file.path), metadata)
@@ -46,15 +46,15 @@ class FirebaseFileStorage extends SQFileStorage {
   }
 
   @override
-  Future getFileDownloadURL(SQDoc doc) async {
-    final ref = getRef(doc);
+  Future getFileDownloadURL(SQDoc doc, SQFileField field) async {
+    final ref = getRef(doc, field);
     final fileUrl = await ref.getDownloadURL();
     return fileUrl;
   }
 
   @override
   Future deleteFile({required SQDoc doc, required SQFileField field}) async {
-    final ref = getRef(doc);
+    final ref = getRef(doc, field);
     field.value.exists = false;
     await ref.delete();
   }
