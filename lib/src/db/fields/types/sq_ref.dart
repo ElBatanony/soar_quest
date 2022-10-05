@@ -1,5 +1,4 @@
-import '../../../app/app.dart';
-import '../../sq_doc.dart';
+import '../../sq_collection.dart';
 
 class SQRef {
   String docId;
@@ -37,6 +36,6 @@ class SQRef {
   }
 
   SQDoc getDoc() {
-    return SQDoc(docId, collection: App.collectionByPath(collectionPath));
+    return SQDoc(docId, collection: SQCollection.byPath(collectionPath)!);
   }
 }

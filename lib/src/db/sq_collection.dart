@@ -1,4 +1,3 @@
-import '../app/app.dart';
 import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
@@ -18,6 +17,8 @@ abstract class SQCollection<DocType extends SQDoc> {
   DocScreenBuilder docScreen;
   bool initialized = false;
 
+  static final List<SQCollection> _collections = [];
+
   SQCollection(
     this.id,
     this.fields, {
@@ -28,7 +29,8 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.docScreen = defaultDocScreen,
   }) {
     this.singleDocName = singleDocName ?? id;
-    App.registerCollection(this);
+
+    if (byPath(getPath()) == null) _collections.add(this);
   }
 
   DocType constructDoc(String id) {
@@ -80,5 +82,9 @@ abstract class SQCollection<DocType extends SQDoc> {
       ret = filter.filter(ret) as List<DocType>;
     }
     return ret;
+  }
+
+  static SQCollection? byPath(String collectionPath) {
+    return _collections.firstWhere((col) => col.getPath() == collectionPath);
   }
 }

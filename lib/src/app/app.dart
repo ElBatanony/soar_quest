@@ -13,8 +13,6 @@ class App {
   String name;
   late ThemeData theme;
 
-  static final List<SQCollection> _collections = [];
-
   late SQAuthManager authManager;
 
   static SQAuthManager auth = instance.authManager;
@@ -72,13 +70,5 @@ class App {
 
   getAppPath() {
     return "sample-apps/$name/";
-  }
-
-  static SQCollection collectionByPath(String collectionPath) {
-    return _collections.firstWhere((col) => col.getPath() == collectionPath);
-  }
-
-  static void registerCollection(SQCollection collection) {
-    _collections.add(collection);
   }
 }
