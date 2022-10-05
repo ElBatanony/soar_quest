@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import '../sq_doc.dart';
 
 class SQStringField extends SQDocField<String> {
-  SQStringField(String name,
-      {String value = "", super.readOnly, super.required})
-      : super(name, value: value);
+  SQStringField(super.name, {super.value, super.readOnly, super.required});
 
   @override
   String? parse(source) {
@@ -18,15 +16,9 @@ class SQStringField extends SQDocField<String> {
       value: value, readOnly: readOnly, required: this.required);
 
   @override
-  String get value => super.value ?? "";
-
-  @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
     return _SQStringFormField(this, onChanged: onChanged);
   }
-
-  @override
-  bool get isNull => value.isEmpty;
 }
 
 class _SQStringFormField extends DocFormField<SQStringField> {
@@ -41,7 +33,7 @@ class _SQStringFormFieldState extends DocFormFieldState<SQStringField> {
 
   @override
   void initState() {
-    fieldTextController.text = field.value.toString();
+    fieldTextController.text = field.value ?? "";
     super.initState();
   }
 

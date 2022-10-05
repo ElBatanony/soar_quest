@@ -42,7 +42,8 @@ class _SQSignUpScreenState extends ScreenState<SQSignUpScreen> {
         passwordField.formField(),
         SQButton("Sign Up", onPressed: () async {
           await App.auth.signUpWithEmailAndPassword(
-              email: emailField.value, password: passwordField.value);
+              email: emailField.value ?? "",
+              password: passwordField.value ?? "");
           if (App.auth.user.isAnonymous) {
             print("Did not sign in");
           } else {

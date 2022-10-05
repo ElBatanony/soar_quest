@@ -33,7 +33,7 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
   signIn() {
     App.auth
         .signInWithEmailAndPassword(
-            email: emailField.value, password: passwordField.value)
+            email: emailField.value ?? "", password: passwordField.value ?? "")
         .then((_) {
       if (App.auth.user.isAnonymous) {
         print("Did not sign in");
