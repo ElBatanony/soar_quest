@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+
+import '../db/sq_doc.dart';
+import 'sq_file_field.dart';
+
+class SQImageField extends SQFileField {
+  SQImageField(super.name, {super.value, required super.storage});
+
+  @override
+  SQImageField copy() {
+    return SQImageField(name, value: value, storage: storage);
+  }
+
+  @override
+  formField({Function? onChanged, SQDoc? doc}) {
+    return _SQImageFormField(this, onChanged: onChanged, doc: doc);
+  }
+
+  @override
+  readOnlyField({SQDoc? doc}) {
+    return _SQImageReadOnlyFormField(this, doc: doc);
+  }
+}
+
+class _SQImageFormField extends SQFileFormField<SQImageField> {
+  const _SQImageFormField(super.field, {super.onChanged, required super.doc});
+
+  @override
+  createState() => _SQImageFormFieldState();
+}
+
+class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    if (field.fileExists == false)
+      return GestureDetector(
+        onTap: selectAndUploadFile,
+        child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(3)),
+            height: 70,
+            width: double.infinity,
+            child: Icon(Icons.camera_alt, size: 40)),
+      );
+
+    return Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(3)),
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(Icons.camera_alt, size: 30),
+            if (downloadUrl != null) Image.network(downloadUrl!),
+            TextButton.icon(
+                onPressed: deleteFile,
+                icon: Icon(Icons.clear),
+                label: Text("Clear"))
+          ],
+        ));
+  }
+}
+
+class _SQImageReadOnlyFormField extends SQFileFormField<SQImageField> {
+  const _SQImageReadOnlyFormField(super.field, {required super.doc});
+
+  @override
+  createState() => _SQImageReadOnlyFieldState();
+}
+
+class _SQImageReadOnlyFieldState extends SQFileFormFieldState<SQImageField> {
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    if (field.fileExists == false) return Text("No Image");
+
+    if (downloadUrl == null) return Text("Loading Image");
+
+    return Image.network(downloadUrl!);
+  }
+}
