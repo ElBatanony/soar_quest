@@ -11,6 +11,8 @@ import '../db/fields/sq_bool_field.dart';
 class SQFileField extends SQBoolField {
   SQFileStorage storage;
 
+  bool get fileExists => value;
+
   SQFileField(super.name, {super.value, required this.storage});
 
   @override
@@ -35,20 +37,19 @@ class SQFileFormField<FileField extends SQFileField>
 
 class SQFileFormFieldState<FileField extends SQFileField>
     extends DocFormFieldState<FileField> {
-  bool fileExists = false;
+  String? downloadUrl;
 
-  downloadFileFromUrl() async {
-    final fileUrl = await field.storage.getFileDownloadURL(doc!, field);
-    final url = Uri.parse(fileUrl);
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      throw 'Could not launch $fileUrl';
-    }
+  getDownloadUrl() async {
+    downloadUrl = await field.storage.getFileDownloadURL(doc!, field);
+    setState(() {});
   }
 
-  refreshFileExists() {
-    setState(() {
-      fileExists = field.value;
-    });
+  openFileUrl() async {
+    if (downloadUrl == null) throw "Download URL for ${field.name} is null";
+    if (!await launchUrl(Uri.parse(downloadUrl!),
+        mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $downloadUrl';
+    }
   }
 
   selectAndUploadFile() async {
@@ -60,7 +61,6 @@ class SQFileFormFieldState<FileField extends SQFileField>
           file: pickedFile,
           field: field,
           onUpload: () {
-            refreshFileExists();
             onChanged();
           });
     }
@@ -68,30 +68,29 @@ class SQFileFormFieldState<FileField extends SQFileField>
 
   deleteFile() async {
     await field.storage.deleteFile(doc: doc!, field: field);
-    refreshFileExists();
     onChanged();
   }
 
   @override
   void initState() {
-    refreshFileExists();
+    if (field.fileExists) getDownloadUrl();
     super.initState();
   }
 
   @override
   Widget fieldBuilder(BuildContext context) {
-    if (doc == null) return Text("No doc to upload file to");
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.name),
-        fileExists
-            ? SQButton("Download", onPressed: downloadFileFromUrl)
+        field.fileExists
+            ? (downloadUrl != null
+                ? SQButton("Download", onPressed: openFileUrl)
+                : Text("Loading file"))
             : Text("File not set"),
-        SQButton("${fileExists ? 'Edit' : 'Upload'} File",
+        SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
             onPressed: selectAndUploadFile),
-        if (fileExists)
+        if (field.fileExists)
           IconButton(onPressed: deleteFile, icon: Icon(Icons.delete))
       ],
     );
