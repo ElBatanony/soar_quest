@@ -49,6 +49,9 @@ class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
     }
   }
 
+  TimeOfDay toTimeOfDay(SQTimeOfDay sqTimeOfDay) =>
+      TimeOfDay(hour: sqTimeOfDay.hour, minute: sqTimeOfDay.minute);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -61,7 +64,9 @@ class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
           onPressed: () async {
             TimeOfDay? newTimeOfDay = await showTimePicker(
               context: context,
-              initialTime: field.value?.toTimeOfDay() ?? TimeOfDay.now(),
+              initialTime: field.value != null
+                  ? toTimeOfDay(field.value!)
+                  : TimeOfDay.now(),
             );
             if (newTimeOfDay != null) {
               _selectTimeOfDay(newTimeOfDay);
