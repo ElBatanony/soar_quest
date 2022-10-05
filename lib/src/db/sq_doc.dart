@@ -72,7 +72,7 @@ class SQDoc {
 
   String get identifier => fields.first.value.toString();
 
-  SQDocRef get ref => SQDocRef.fromDoc(this);
+  SQRef get ref => SQRef.fromDoc(this);
 
   @override
   String toString() => identifier;

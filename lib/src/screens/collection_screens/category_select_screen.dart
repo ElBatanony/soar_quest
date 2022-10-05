@@ -9,7 +9,7 @@ import '../screen_navigation.dart';
 import 'collection_filter_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {
-  final SQDocRefField categoryField;
+  final SQRefField categoryField;
 
   CategorySelectScreen(
       {super.title,
@@ -35,8 +35,8 @@ class _CategorySelectScreenState
     return SQButton(
       doc.identifier,
       onPressed: () {
-        SQDocRefField categoryFieldCopy = widget.categoryField.copy();
-        categoryFieldCopy.value = SQDocRef(
+        SQRefField categoryFieldCopy = widget.categoryField.copy();
+        categoryFieldCopy.value = SQRef(
           collectionPath: widget.categoryField.collection.getPath(),
           docId: doc.id,
           docIdentifier: doc.identifier,

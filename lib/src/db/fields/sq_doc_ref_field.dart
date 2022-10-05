@@ -7,25 +7,25 @@ import '../../../screens.dart';
 
 export 'types/sq_doc_ref.dart';
 
-class SQDocRefField extends SQDocField<SQDocRef> {
+class SQRefField extends SQDocField<SQRef> {
   SQCollection collection;
 
-  SQDocRefField(super.name,
+  SQRefField(super.name,
       {required this.collection, super.value, super.readOnly});
 
   @override
-  Type get type => SQDocRef;
+  Type get type => SQRef;
 
   @override
-  SQDocRefField copy() {
-    return SQDocRefField(name,
+  SQRefField copy() {
+    return SQRefField(name,
         collection: collection, value: value, readOnly: readOnly);
   }
 
   @override
-  SQDocRef? parse(source) {
+  SQRef? parse(source) {
     if (source is! Map<String, dynamic>) return null;
-    return SQDocRef.parse(source);
+    return SQRef.parse(source);
   }
 
   @override
@@ -41,18 +41,18 @@ class SQDocRefField extends SQDocField<SQDocRef> {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return _SQDocRefFormField(this, onChanged: onChanged);
+    return _SQRefFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQDocRefFormField extends DocFormField<SQDocRefField> {
-  const _SQDocRefFormField(super.field, {super.onChanged});
+class _SQRefFormField extends DocFormField<SQRefField> {
+  const _SQRefFormField(super.field, {super.onChanged});
 
   @override
-  createState() => _SQDocRefFormFieldState();
+  createState() => _SQRefFormFieldState();
 }
 
-class _SQDocRefFormFieldState extends DocFormFieldState<SQDocRefField> {
+class _SQRefFormFieldState extends DocFormFieldState<SQRefField> {
   @override
   Widget fieldBuilder(BuildContext context) {
     return Row(
@@ -71,7 +71,7 @@ class _SQDocRefFormFieldState extends DocFormFieldState<SQDocRefField> {
                   context: context);
 
               if (retDoc != null) {
-                SQDocRef ref = SQDocRef(
+                SQRef ref = SQRef(
                   docId: retDoc.id,
                   docIdentifier: retDoc.identifier,
                   collectionPath: retDoc.collection.getPath(),

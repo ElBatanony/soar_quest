@@ -9,7 +9,7 @@ class SQInverseRefField extends SQListField {
   String refFieldName;
   SQDoc? doc;
 
-  Future<List<SQDocRef>> inverseRefs(SQDoc doc) async {
+  Future<List<SQRef>> inverseRefs(SQDoc doc) async {
     if (!collection.initialized) await collection.loadCollection();
 
     return collection
@@ -54,7 +54,7 @@ class _InverseRefFormField extends DocFormField {
 }
 
 class _InverseRefFieldState extends DocFormFieldState {
-  List<SQDocRef> inverses = [];
+  List<SQRef> inverses = [];
 
   SQInverseRefField get inverseRefField =>
       (widget as _InverseRefFormField).inverseRefField;

@@ -44,7 +44,7 @@ class DocRefFilter extends CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
       if (doc.value(fieldName) == null) return false;
-      SQDocRef docRef = doc.value(fieldName);
+      SQRef docRef = doc.value(fieldName);
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
@@ -52,7 +52,7 @@ class DocRefFilter extends CollectionFilter {
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {
-  SQDocRefField docRefField;
+  SQRefField docRefField;
 
   DocRefFieldFilter({required this.docRefField}) : super(docRefField);
 
@@ -61,8 +61,8 @@ class DocRefFieldFilter extends CollectionFieldFilter {
     return docs.where((doc) {
       if (doc.value(field.name) == null) return false;
 
-      SQDocRef docRef = doc.value(field.name);
-      SQDocRef fieldValue = field.value;
+      SQRef docRef = doc.value(field.name);
+      SQRef fieldValue = field.value;
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();

@@ -31,7 +31,7 @@ void main() async {
       fields: [
         SQStringField("String"),
         SQBoolField("Bool"),
-        SQDocRefField("Doc Ref", collection: simpleCollection),
+        SQRefField("Doc Ref", collection: simpleCollection),
         SQDoubleField("Double"),
         SQFileField("File"),
         SQIntField("Int"),
@@ -61,7 +61,7 @@ void main() async {
                     id: "Child Collection",
                     fields: [
                       SQStringField("Name"),
-                      SQDocRefField("Parent Doc",
+                      SQRefField("Parent Doc",
                           collection: testCollection,
                           value: doc.ref,
                           readOnly: true),
