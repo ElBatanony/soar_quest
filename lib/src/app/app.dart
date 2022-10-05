@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+
 import '../auth/firebase_auth_manager.dart';
 import '../db/fields/sq_string_field.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
-import 'firebase_app.dart';
 import '../screens/screen.dart';
 import '../auth/auth_manager.dart';
 
@@ -65,4 +66,8 @@ class App {
   getAppPath() {
     return "sample-apps/$name/";
   }
+}
+
+Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) {
+  return Firebase.initializeApp(options: options);
 }
