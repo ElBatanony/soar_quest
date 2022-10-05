@@ -39,18 +39,21 @@ class SQFileField extends SQDocField<SQFile> {
 
   @override
   DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    return _SQFileFormField(this, onChanged: onChanged, doc: doc);
+    return SQFileFormField(this, onChanged: onChanged, doc: doc);
   }
 }
 
-class _SQFileFormField extends DocFormField<SQFileField> {
-  const _SQFileFormField(super.field, {super.onChanged, required super.doc});
+class SQFileFormField<FileField extends SQFileField>
+    extends DocFormField<FileField> {
+  const SQFileFormField(super.field,
+      {super.key, super.onChanged, required super.doc});
 
   @override
-  createState() => _SQFileFormFieldState();
+  createState() => SQFileFormFieldState<FileField>();
 }
 
-class _SQFileFormFieldState extends DocFormFieldState<SQFileField> {
+class SQFileFormFieldState<FileField extends SQFileField>
+    extends DocFormFieldState<FileField> {
   bool fileExists = false;
   late SQFileStorage storage = FirebaseFileStorage(field.value);
 
