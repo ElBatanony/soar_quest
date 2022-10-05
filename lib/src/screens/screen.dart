@@ -37,6 +37,8 @@ class ScreenState<T extends Screen> extends State<T> {
     return Center(child: Text('${widget.title} Screen'));
   }
 
+  FloatingActionButton? floatingActionButton() => null;
+
   @override
   Widget build(BuildContext context) {
     final Widget body = Padding(
@@ -61,6 +63,7 @@ class ScreenState<T extends Screen> extends State<T> {
         IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
       ]),
       body: body,
+      floatingActionButton: floatingActionButton(),
     );
   }
 }
