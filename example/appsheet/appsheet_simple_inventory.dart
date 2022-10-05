@@ -3,6 +3,8 @@ import 'package:soar_quest/soar_quest.dart';
 
 import '../firebase_options.dart';
 
+late SQCollection items, inventory;
+
 void main() async {
   App simpleInventoryApp = App("Simple Inventory",
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
@@ -16,19 +18,26 @@ void main() async {
     SQBoolField("hamada"),
   ]);
 
-  SQCollection items = FirestoreCollection(id: "Items", fields: [
+  items = FirestoreCollection(id: "Items", fields: [
     SQStringField("Name", isRequired: true),
+    SQVirtualField("Total Stock Available", fieldBuilder: (doc) {
+      int sum = 0;
+      for (final doc in inventory.filterBy([DocRefFilter("Item", doc.ref)]))
+        sum += (doc.value("Amount") as int);
+      return Text(sum.toString());
+    }),
     SQStringField("Description"),
     SQImageField("Image"),
-    // TODO: add inventory change log
-    // TODO: add Total Stock Available
   ]);
 
-  SQCollection inventory = FirestoreCollection(id: "Inventory", fields: [
+  inventory = FirestoreCollection(id: "Inventory", fields: [
     SQRefField("Item", collection: items),
     SQTimestampField("DateTime"),
-    SQIntField("Amount")
+    SQIntField("Amount", isRequired: true),
   ]);
+
+  items.fields.add(SQInverseRefField("Inventory Change Log",
+      refFieldName: "Item", collection: inventory));
 
   simpleInventoryApp.run(MainScreen([
     CollectionScreen(
@@ -36,7 +45,16 @@ void main() async {
       icon: Icons.factory,
       canCreate: true,
     ),
-    CollectionScreen(collection: inventory),
+    CollectionScreen(
+      collection: inventory,
+      icon: Icons.storage,
+      canCreate: true,
+      docDisplay: (doc, s) => ListTile(
+        title: Text(doc.label),
+        onTap: () => s.goToDocScreen(s.docScreen(doc)),
+        trailing: Text(doc.value("Amount").toString()),
+      ),
+    ),
     AppSettings.settingsScreen(),
   ]));
 }
