@@ -33,8 +33,6 @@ abstract class SQField<T> {
   String toString() {
     return "${name == "" ? "" : "$name:"} $value";
   }
-
-  bool get isNull => value == null;
 }
 
 abstract class SQFormField<Field extends SQField>
