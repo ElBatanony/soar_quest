@@ -54,9 +54,11 @@ class SQDoc {
     return ret;
   }
 
-  SQField? getField(String fieldName) {
-    if (fields.any((field) => field.name == fieldName))
-      return fields.singleWhere((field) => field.name == fieldName);
+  SQField<T>? getField<T>(String fieldName) {
+    if (fields.any((field) => field.name == fieldName && field is SQField<T>))
+      return fields
+          .whereType<SQField<T>>()
+          .singleWhere((field) => field.name == fieldName);
     return null;
   }
 
