@@ -22,6 +22,7 @@ dependencies:
   image_picker: ^0.8.5+3
   path_provider: ^2.0.11
   url_launcher: ^6.1.5
+  collection: ^1.16.0
 
 dev_dependencies:
   flutter_test:
