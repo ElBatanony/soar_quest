@@ -53,6 +53,8 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
 
   @override
   String getPath() {
+    // TODO: make getter
+    // TODO: path does not change since parentDoc does not change, create it once in constructor
     if (parentDoc != null) return "${parentDoc!.getPath()}/$id";
     return App.instance.getAppPath() + id;
   }

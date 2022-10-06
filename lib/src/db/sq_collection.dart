@@ -51,6 +51,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   String getPath();
   String getANewDocId();
 
+  // TODO: make generic
   SQField? getField(String fieldName) {
     if (!fields.any((field) => field.name == fieldName)) return null;
     return fields.singleWhere((field) => field.name == fieldName);

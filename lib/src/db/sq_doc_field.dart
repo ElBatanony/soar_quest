@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'sq_doc.dart';
 import 'fields/sq_read_only_field.dart';
 
+//TODO: rename file to sq_field
 abstract class SQField<T> {
   String name = "";
   T? value;
-  Type get type => T;
+  Type get type => T; // TODO: remove type
   bool readOnly;
   bool isRequired;
 
@@ -19,12 +20,15 @@ abstract class SQField<T> {
 
   SQField copy();
 
+  // TODO: renamce collectField or make it generic
   dynamic collectField() => value;
 
   T? parse(dynamic source);
 
   SQFormField formField({Function? onChanged, SQDoc? doc});
 
+  // TODO: rename to read only widget or displayWidget
+  // TODO: does not need to be an SQFormField
   SQFormField readOnlyField({SQDoc? doc}) {
     return SQReadOnlyFormField(this, doc: doc);
   }

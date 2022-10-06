@@ -28,6 +28,7 @@ class SQRefField extends SQField<SQRef> {
     return SQRef.parse(source);
   }
 
+  // TODO: make value string
   @override
   Map<String, dynamic> collectField() {
     if (value == null) return {};

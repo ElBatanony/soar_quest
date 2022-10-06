@@ -19,6 +19,9 @@ class SQIntField extends SQField<int> {
   formField({Function? onChanged, SQDoc? doc}) {
     return _SQIntFormField(this, onChanged: onChanged);
   }
+
+  // TODO: add sum method to count total in collection
+  // to use in Total Stock in Simple Inventory
 }
 
 class _SQIntFormField extends SQFormField<SQIntField> {
