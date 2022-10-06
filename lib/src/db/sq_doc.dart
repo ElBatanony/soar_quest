@@ -60,7 +60,7 @@ class SQDoc {
     return null;
   }
 
-  dynamic value(String fieldName) {
+  T? value<T>(String fieldName) {
     return getField(fieldName)?.value;
   }
 
