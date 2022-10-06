@@ -58,9 +58,9 @@ class SQDoc {
     return ret;
   }
 
-  SQField<T>? getField<T>(String fieldName) {
+  T? getField<T extends SQField>(String fieldName) {
     return fields
-        .whereType<SQField<T>>()
+        .whereType<T>()
         .singleWhereOrNull((field) => field.name == fieldName);
   }
 
