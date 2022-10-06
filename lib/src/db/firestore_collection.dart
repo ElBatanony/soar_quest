@@ -57,10 +57,8 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     return App.instance.getAppPath() + id;
   }
 
-  DocumentReference getANewDocRef() => ref.doc();
-
   @override
-  String getANewDocId() => getANewDocRef().id;
+  String getANewDocId() => ref.doc().id;
 
   @override
   Future loadDoc(DocType doc) async {
