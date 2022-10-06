@@ -16,12 +16,9 @@ void main() async {
     SQStringField("Description"),
     SQVirtualField<int>(
         field: SQIntField("Total Stock Available"),
-        valueBuilder: (doc) {
-          int sum = 0;
-          for (final doc in inventory.filterBy([DocRefFilter("Item", doc.ref)]))
-            sum += doc.value<int>("Amount") ?? 0;
-          return sum;
-        }),
+        valueBuilder: (doc) => inventory
+            .getField<SQIntField>("Amount")!
+            .sumDocs(inventory.filterBy([DocRefFilter("Item", doc.ref)]))),
     SQImageField("Image"),
   ]);
 
