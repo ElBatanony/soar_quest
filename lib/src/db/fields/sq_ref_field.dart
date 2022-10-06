@@ -72,7 +72,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
                 SQRef ref = SQRef(
                   docId: retDoc.id,
                   label: retDoc.label,
-                  collectionPath: retDoc.collection.getPath(),
+                  collectionPath: retDoc.collection.path,
                 );
                 field.value = ref;
                 onChanged();

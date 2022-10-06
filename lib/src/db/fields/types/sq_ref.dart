@@ -13,7 +13,7 @@ class SQRef {
 
   SQRef.fromDoc(SQDoc doc)
       : this(
-            collectionPath: doc.collection.getPath(),
+            collectionPath: doc.collection.path,
             docId: doc.id,
             label: doc.label);
 

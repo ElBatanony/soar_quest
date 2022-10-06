@@ -67,7 +67,7 @@ class SQDoc {
   }
 
   String getPath() {
-    return "${collection.getPath()}/$id";
+    return "${collection.path}/$id";
   }
 
   String get label => fields.first.value.toString();

@@ -24,11 +24,6 @@ class UnimplementCollection extends SQCollection {
   }
 
   @override
-  String getPath() {
-    throw UnimplementedError();
-  }
-
-  @override
   Future loadCollection() {
     throw UnimplementedError();
   }

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../app.dart';
 import 'sq_collection.dart';
 
 final firestore = FirebaseFirestore.instance;
@@ -16,7 +15,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     super.docScreen,
   });
 
-  CollectionReference get ref => firestore.collection(getPath());
+  CollectionReference get ref => firestore.collection(path);
 
   @override
   Future loadCollection() async {
@@ -35,7 +34,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   @override
   Future createDoc(DocType doc) async {
     docs.add(doc);
-    await firestore.doc("${getPath()}/${doc.id}").set(doc.collectFields());
+    await firestore.doc(doc.getPath()).set(doc.collectFields());
     return loadCollection();
   }
 
@@ -52,14 +51,6 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  String getPath() {
-    // TODO: make getter
-    // TODO: path does not change since parentDoc does not change, create it once in constructor
-    if (parentDoc != null) return "${parentDoc!.getPath()}/$id";
-    return App.instance.getAppPath() + id;
-  }
-
-  @override
   String getANewDocId() => ref.doc().id;
 
   @override
@@ -72,7 +63,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   @override
   Future saveDoc(DocType doc) async {
     await firestore
-        .doc("${getPath()}/${doc.id}")
+        .doc(doc.getPath())
         .set(doc.collectFields(), SetOptions(merge: true));
     return loadCollection();
   }

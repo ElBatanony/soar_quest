@@ -1,3 +1,4 @@
+import '../app.dart';
 import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
@@ -16,6 +17,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   bool canDeleteDoc;
   DocScreenBuilder docScreen;
   bool initialized = false;
+  late String path;
 
   static final List<SQCollection> _collections = [];
 
@@ -30,7 +32,12 @@ abstract class SQCollection<DocType extends SQDoc> {
   }) {
     this.singleDocName = singleDocName ?? id;
 
-    if (byPath(getPath()) == null) _collections.add(this);
+    if (parentDoc != null)
+      path = "${parentDoc!.getPath()}/$id";
+    else
+      path = App.instance.getAppPath() + id;
+
+    if (byPath(path) == null) _collections.add(this);
   }
 
   DocType constructDoc(String id) {
@@ -48,7 +55,6 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   bool doesDocExist(String docId);
 
-  String getPath();
   String getANewDocId();
 
   // TODO: make generic
@@ -86,8 +92,8 @@ abstract class SQCollection<DocType extends SQDoc> {
   }
 
   static SQCollection? byPath(String path) {
-    if (_collections.any((collection) => collection.getPath() == path))
-      return _collections.firstWhere((col) => col.getPath() == path);
+    if (_collections.any((collection) => collection.path == path))
+      return _collections.firstWhere((col) => col.path == path);
     return null;
   }
 }
