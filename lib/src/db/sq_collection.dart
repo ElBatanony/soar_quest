@@ -59,9 +59,10 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   String getANewDocId();
 
-  // TODO: make generic
-  SQField? getField(String fieldName) {
-    return fields.singleWhereOrNull((field) => field.name == fieldName);
+  SQField<T>? getField<T>(String fieldName) {
+    return fields
+        .whereType<SQField<T>>()
+        .singleWhereOrNull((field) => field.name == fieldName);
   }
 
   int get docsCount => docs.length;
