@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'sq_doc.dart';
 import 'fields/sq_read_only_field.dart';
 
-//TODO: rename file to sq_field
 abstract class SQField<T> {
   String name = "";
   T? value;

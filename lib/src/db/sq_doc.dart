@@ -2,7 +2,7 @@ import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 import '../storage/sq_image_field.dart';
 
-export 'sq_doc_field.dart';
+export 'sq_field.dart';
 
 class SQDoc {
   late List<SQField> fields;

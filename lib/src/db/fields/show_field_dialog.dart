@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../screens/screen.dart';
 import '../../ui/sq_button.dart';
-import '../sq_doc_field.dart';
+import '../sq_field.dart';
 
 Future showFieldDialog(
     {required SQField field, required BuildContext context}) {

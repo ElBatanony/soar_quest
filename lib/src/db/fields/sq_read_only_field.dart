@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sq_doc_field.dart';
+import '../sq_field.dart';
 
 class SQReadOnlyFormField extends SQFormField {
   const SQReadOnlyFormField(super.field, {super.doc, super.key});
