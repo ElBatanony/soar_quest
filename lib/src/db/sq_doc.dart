@@ -9,6 +9,7 @@ class SQDoc {
   String id;
   SQCollection collection;
   bool initialized = false;
+  late String path;
 
   static List<SQField> copyFields(List<SQField> fields) {
     return fields.map((field) {
@@ -20,6 +21,7 @@ class SQDoc {
   }
 
   SQDoc(this.id, {required this.collection}) {
+    path = "${collection.path}/$id";
     fields = SQDoc.copyFields(collection.fields);
   }
 
@@ -64,10 +66,6 @@ class SQDoc {
 
   T? value<T>(String fieldName) {
     return getField(fieldName)?.value;
-  }
-
-  String getPath() {
-    return "${collection.path}/$id";
   }
 
   String get label => fields.first.value.toString();

@@ -33,7 +33,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.singleDocName = singleDocName ?? id;
 
     if (parentDoc != null)
-      path = "${parentDoc!.getPath()}/$id";
+      path = "${parentDoc!.path}/$id";
     else
       path = App.instance.getAppPath() + id;
 

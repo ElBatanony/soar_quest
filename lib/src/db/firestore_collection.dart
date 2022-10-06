@@ -34,7 +34,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   @override
   Future createDoc(DocType doc) async {
     docs.add(doc);
-    await firestore.doc(doc.getPath()).set(doc.collectFields());
+    await firestore.doc(doc.path).set(doc.collectFields());
     return loadCollection();
   }
 
@@ -63,7 +63,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   @override
   Future saveDoc(DocType doc) async {
     await firestore
-        .doc(doc.getPath())
+        .doc(doc.path)
         .set(doc.collectFields(), SetOptions(merge: true));
     return loadCollection();
   }

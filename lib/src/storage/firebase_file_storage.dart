@@ -11,7 +11,7 @@ FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 class FirebaseFileStorage extends SQFileStorage {
   Reference getRef(SQDoc doc, SQFileField field) {
-    return firebaseStorage.ref().child("${doc.getPath()}/${field.name}");
+    return firebaseStorage.ref().child("${doc.path}/${field.name}");
   }
 
   @override
