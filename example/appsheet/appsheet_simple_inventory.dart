@@ -19,7 +19,7 @@ void main() async {
         valueBuilder: (doc) {
           int sum = 0;
           for (final doc in inventory.filterBy([DocRefFilter("Item", doc.ref)]))
-            sum += (doc.value("Amount") as int);
+            sum += doc.value<int>("Amount") ?? 0;
           return sum;
         }),
     SQImageField("Image"),
