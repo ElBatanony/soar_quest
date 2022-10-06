@@ -24,7 +24,7 @@ class App {
 
   static late SQCollection usersCollection;
 
-  FirebaseOptions firebaseOptions;
+  FirebaseOptions? firebaseOptions;
 
   static late App instance;
 
@@ -34,7 +34,7 @@ class App {
     SQAuthManager? authManager,
     List<SQField>? userDocFields,
     this.publicProfileFields = const [],
-    required this.firebaseOptions,
+    this.firebaseOptions,
   }) {
     this.theme =
         theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
@@ -45,14 +45,16 @@ class App {
 
   init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await initializeFirebaseApp(firebaseOptions);
-    usersCollection = FirestoreCollection(
-      id: "Users",
-      fields: App.instance.userDocFields,
-      singleDocName: "Profile Info",
-      canDeleteDoc: false,
-    );
-    await auth.init();
+    if (firebaseOptions != null) {
+      await initializeFirebaseApp(firebaseOptions!);
+      usersCollection = FirestoreCollection(
+        id: "Users",
+        fields: App.instance.userDocFields,
+        singleDocName: "Profile Info",
+        canDeleteDoc: false,
+      );
+      await auth.init();
+    }
   }
 
   run(Screen homescreen) {
