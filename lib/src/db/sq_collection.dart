@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 import '../app.dart';
 import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
@@ -59,8 +61,7 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   // TODO: make generic
   SQField? getField(String fieldName) {
-    if (!fields.any((field) => field.name == fieldName)) return null;
-    return fields.singleWhere((field) => field.name == fieldName);
+    return fields.singleWhereOrNull((field) => field.name == fieldName);
   }
 
   int get docsCount => docs.length;
@@ -92,8 +93,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   }
 
   static SQCollection? byPath(String path) {
-    if (_collections.any((collection) => collection.path == path))
-      return _collections.firstWhere((col) => col.path == path);
-    return null;
+    return _collections
+        .singleWhereOrNull((collection) => collection.path == path);
   }
 }
