@@ -26,7 +26,7 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  Map<String, dynamic> collectField() {
+  Map<String, dynamic> serialize() {
     if (value == null) return {};
 
     return {

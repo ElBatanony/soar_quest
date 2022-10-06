@@ -20,7 +20,7 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
       SQTimeOfDayField(name, value: value, readOnly: readOnly);
 
   @override
-  collectField() {
+  serialize() {
     if (value == null) return null;
     return {
       "hour": value?.hour,

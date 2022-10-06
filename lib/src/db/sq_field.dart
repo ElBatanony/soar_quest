@@ -18,8 +18,7 @@ abstract class SQField<T> {
 
   SQField copy();
 
-  // TODO: renamce collectField or make it generic
-  dynamic collectField() => value;
+  dynamic serialize() => value;
 
   T? parse(dynamic source);
 

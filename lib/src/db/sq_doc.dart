@@ -50,10 +50,10 @@ class SQDoc {
     return collection.saveDoc(this);
   }
 
-  Map<String, dynamic> collectFields() {
+  Map<String, dynamic> serializeFields() {
     Map<String, dynamic> ret = {};
     for (var field in fields) {
-      ret[field.name] = field.collectField();
+      ret[field.name] = field.serialize();
     }
     return ret;
   }

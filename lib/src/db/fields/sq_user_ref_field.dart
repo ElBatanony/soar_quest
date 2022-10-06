@@ -19,9 +19,9 @@ class SQEditedByField extends SQUserRefField {
   SQEditedByField copy() => SQEditedByField(name, value: value);
 
   @override
-  collectField() {
+  serialize() {
     value ??= SQUserRefField.currentUserRef;
-    return super.collectField();
+    return super.serialize();
   }
 }
 

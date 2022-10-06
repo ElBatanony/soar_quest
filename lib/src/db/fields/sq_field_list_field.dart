@@ -39,8 +39,8 @@ class SQFieldListField extends SQListField<SQField> {
       list: fields.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
 
   @override
-  List<dynamic> collectField() {
-    return fields.map((listItemField) => listItemField.collectField()).toList();
+  List<dynamic> serialize() {
+    return fields.map((listItemField) => listItemField.serialize()).toList();
   }
 
   @override

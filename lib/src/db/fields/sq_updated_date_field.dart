@@ -14,7 +14,7 @@ class UpdatedDateField extends SQField<SQTimestamp> {
   UpdatedDateField copy() => UpdatedDateField(name, value: value);
 
   @override
-  collectField() => value = SQTimestamp.fromDate(DateTime.now());
+  serialize() => value = SQTimestamp.fromDate(DateTime.now());
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {
