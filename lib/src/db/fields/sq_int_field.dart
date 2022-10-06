@@ -20,8 +20,9 @@ class SQIntField extends SQField<int> {
     return _SQIntFormField(this, onChanged: onChanged);
   }
 
-  // TODO: add sum method to count total in collection
-  // to use in Total Stock in Simple Inventory
+  int sumDocs(List<SQDoc> docs) {
+    return docs.fold(0, (sum, doc) => sum + (doc.value<int>(name) ?? 0));
+  }
 }
 
 class _SQIntFormField extends SQFormField<SQIntField> {
