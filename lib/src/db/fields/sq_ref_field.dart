@@ -14,9 +14,6 @@ class SQRefField extends SQField<SQRef> {
       {required this.collection, super.value, super.readOnly});
 
   @override
-  Type get type => SQRef;
-
-  @override
   SQRefField copy() {
     return SQRefField(name,
         collection: collection, value: value, readOnly: readOnly);

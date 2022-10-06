@@ -6,7 +6,6 @@ import 'fields/sq_read_only_field.dart';
 abstract class SQField<T> {
   String name = "";
   T? value;
-  Type get type => T; // TODO: remove type
   bool readOnly;
   bool isRequired;
 

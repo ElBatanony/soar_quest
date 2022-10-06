@@ -12,9 +12,6 @@ class SQFieldListField extends SQListField<SQField> {
       {List<SQField> list = const <SQField>[], required this.allowedTypes})
       : super(list: list);
 
-  @override
-  Type get type => List;
-
   List<SQField> get fields => list;
 
   @override
@@ -25,7 +22,8 @@ class SQFieldListField extends SQListField<SQField> {
       for (SQField allowedType in allowedTypes) {
         var parsed = allowedType.parse(dynamicFieldValue);
 
-        if (parsed != null && parsed.runtimeType == allowedType.type) {
+        if (parsed != null &&
+            parsed.runtimeType == allowedType.value.runtimeType) {
           SQField newField = allowedType.copy();
           newField.value = parsed;
           fields.add(newField);
@@ -61,7 +59,7 @@ Future showFieldOptions(SQFieldListField fieldListfield,
             content: Wrap(
               children: [
                 ...fieldListfield.allowedTypes
-                    .map((field) => SQButton(field.type.toString(),
+                    .map((field) => SQButton(field.value.runtimeType.toString(),
                         onPressed: () =>
                             exitScreen(context, value: field.copy())))
                     .toList(),
