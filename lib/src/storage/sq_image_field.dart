@@ -15,11 +15,6 @@ class SQImageField extends SQFileField {
   formField({Function? onChanged, SQDoc? doc}) {
     return _SQImageFormField(this, onChanged: onChanged, doc: doc);
   }
-
-  @override
-  readOnlyField({SQDoc? doc}) {
-    return _SQImageReadOnlyFormField(this, doc: doc);
-  }
 }
 
 class _SQImageFormField extends SQFileFormField<SQImageField> {
@@ -30,6 +25,12 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
 }
 
 class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
+  @override
+  Widget readOnlyBuilder(BuildContext context) {
+    if (field.fileExists == false) return Text("No Image");
+    return Image.network(field.downloadUrl!);
+  }
+
   @override
   Widget fieldBuilder(BuildContext context) {
     if (field.fileExists == false)
@@ -60,21 +61,5 @@ class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
                 label: Text("Clear"))
           ],
         ));
-  }
-}
-
-class _SQImageReadOnlyFormField extends SQFileFormField<SQImageField> {
-  const _SQImageReadOnlyFormField(super.field, {required super.doc});
-
-  @override
-  createState() => _SQImageReadOnlyFieldState();
-}
-
-class _SQImageReadOnlyFieldState extends SQFileFormFieldState<SQImageField> {
-  @override
-  Widget fieldBuilder(BuildContext context) {
-    if (field.fileExists == false) return Text("No Image");
-
-    return Image.network(field.downloadUrl!);
   }
 }

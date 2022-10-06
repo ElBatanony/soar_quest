@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'sq_doc.dart';
-import 'fields/sq_read_only_field.dart';
 
 abstract class SQField<T> {
   String name = "";
@@ -23,12 +22,6 @@ abstract class SQField<T> {
   T? parse(dynamic source);
 
   SQFormField formField({Function? onChanged, SQDoc? doc});
-
-  // TODO: rename to read only widget or displayWidget
-  // TODO: does not need to be an SQFormField
-  SQFormField readOnlyField({SQDoc? doc}) {
-    return SQReadOnlyFormField(this, doc: doc);
-  }
 
   @override
   String toString() {
@@ -67,8 +60,11 @@ abstract class SQFormFieldState<Field extends SQField>
         style: Theme.of(context).textTheme.headline6);
   }
 
+  Widget readOnlyBuilder(BuildContext context) {
+    return Text(field.value.toString());
+  }
+
   Widget fieldBuilder(BuildContext context) {
-    if (field.readOnly == true) return field.readOnlyField(doc: doc);
     return field.formField(onChanged: onChanged, doc: doc);
   }
 
@@ -81,7 +77,7 @@ abstract class SQFormFieldState<Field extends SQField>
         children: [
           fieldLabel(),
           SizedBox(height: 4),
-          fieldBuilder(context),
+          (field.readOnly) ? readOnlyBuilder(context) : fieldBuilder(context),
         ],
       ),
     );

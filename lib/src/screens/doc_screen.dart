@@ -43,6 +43,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   }
 
   Widget fieldDisplay(SQField field) {
+    field.readOnly = true;
     return GestureDetector(
       onLongPress: () {
         String fieldValue = field.value.toString();
@@ -51,7 +52,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             duration: Duration(milliseconds: 500),
             content: Text('Copied field: $fieldValue')));
       },
-      child: field.readOnlyField(doc: doc),
+      child: field.formField(doc: doc),
     );
   }
 
@@ -60,7 +61,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...doc.fields.map(fieldDisplay).toList(),
+        ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
         if (doc.collection.readOnly == false)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

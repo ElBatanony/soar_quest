@@ -33,11 +33,6 @@ class SQInverseRefField extends SQListField {
   formField({Function? onChanged, SQDoc? doc}) {
     return _InverseRefFormField(this, doc: doc);
   }
-
-  @override
-  readOnlyField({SQDoc? doc}) {
-    return _InverseRefFormField(this, doc: doc);
-  }
 }
 
 class _InverseRefFormField extends SQFormField {
@@ -68,7 +63,7 @@ class _InverseRefFieldState extends SQFormFieldState {
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget readOnlyBuilder(BuildContext context) {
     SQInverseRefField reverseField = (field as SQInverseRefField);
 
     return Column(

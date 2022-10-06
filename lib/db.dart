@@ -15,6 +15,5 @@ export 'src/db/fields/sq_video_link_field.dart';
 export 'src/db/fields/sq_double_field.dart';
 export 'src/db/fields/sq_list_field.dart';
 export 'src/db/fields/sq_inverse_ref_field.dart';
-export 'src/db/fields/sq_read_only_field.dart';
 export 'src/db/fields/show_field_dialog.dart';
 export 'src/db/fields/sq_virtual_field.dart';

@@ -97,8 +97,6 @@ List<SQFormField> _generateDocFormFields(
       .toList();
 
   return fields
-      .map((field) => field.readOnly
-          ? field.readOnlyField(doc: doc)
-          : field.formField(onChanged: onChanged, doc: doc))
+      .map((field) => field.formField(onChanged: onChanged, doc: doc))
       .toList();
 }
