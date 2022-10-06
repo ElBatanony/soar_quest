@@ -64,11 +64,6 @@ class SQDoc {
     return getField(fieldName)?.value;
   }
 
-  void setDocFieldByName(String fieldName, dynamic value) {
-    SQField? field = getField(fieldName);
-    field?.value = value;
-  }
-
   String getPath() {
     return "${collection.getPath()}/$id";
   }

@@ -50,8 +50,7 @@ class FavouritesFeature {
 
   addFavourite(SQDoc doc) {
     var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
-    newFavDoc.setDocFieldByName("ref", doc.ref);
-    // newFavDoc.setData({"ref": });
+    newFavDoc.getField<SQRef>("ref")!.value = doc.ref;
     favouritesCollection.createDoc(newFavDoc);
   }
 
