@@ -105,7 +105,9 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                             refreshScreen();
                           },
                         ),
-                        AppSettings.settingsScreen(),
+                        if (AppSettings.settingsDoc != null)
+                          AppSettings.settingsScreen()
+                              .button(context, label: "Settings"),
                         SQButton("Sign out", onPressed: signOut),
                       ],
                     ),
