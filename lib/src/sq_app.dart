@@ -9,12 +9,13 @@ import 'db/sq_collection.dart';
 import 'screens/screen.dart';
 import 'auth/auth_manager.dart';
 
-class App {
+class SQApp {
   String name;
   late ThemeData theme;
 
   late SQAuthManager authManager;
 
+  // TODO: move auth and userId getters to auth
   static SQAuthManager auth = instance.authManager;
   static String get userId => auth.user.userId;
   static SQDoc get userDoc => auth.user.userDoc;
@@ -26,13 +27,13 @@ class App {
 
   FirebaseOptions? firebaseOptions;
 
-  static late App instance;
+  static late SQApp instance;
 
-  App(
+  SQApp(
     this.name, {
     ThemeData? theme,
     SQAuthManager? authManager,
-    List<SQField>? userDocFields,
+    List<SQField>? userDocFields, // TODO: manage userDocFields in Auth
     this.publicProfileFields = const [],
     this.firebaseOptions,
   }) {
@@ -47,9 +48,10 @@ class App {
     WidgetsFlutterBinding.ensureInitialized();
     if (firebaseOptions != null) {
       await initializeFirebaseApp(firebaseOptions!);
+      // TODO: manage usersCollection in Auth
       usersCollection = FirestoreCollection(
         id: "Users",
-        fields: App.instance.userDocFields,
+        fields: SQApp.instance.userDocFields,
         singleDocName: "Profile Info",
         canDeleteDoc: false,
       );
@@ -65,6 +67,7 @@ class App {
         home: homescreen));
   }
 
+  // TODO: make getter
   getAppPath() {
     return "sample-apps/$name/";
   }

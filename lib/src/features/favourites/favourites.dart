@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
+import '../../sq_app.dart';
 import '../../db/firestore_collection.dart';
 import '../../db/sq_collection.dart';
 import '../../db/fields/sq_ref_field.dart';
@@ -21,7 +21,7 @@ class FavouritesCollection extends FirestoreCollection {
   List<FavDoc> favDocs = [];
 
   FavouritesCollection({required super.id, required super.fields})
-      : super(parentDoc: App.userDoc);
+      : super(parentDoc: SQApp.userDoc);
 
   @override
   Future loadCollection() async {

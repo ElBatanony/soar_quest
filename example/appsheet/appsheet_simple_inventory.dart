@@ -6,7 +6,7 @@ import '../firebase_options.dart';
 late SQCollection items, inventory;
 
 void main() async {
-  App simpleInventoryApp = App("Simple Inventory",
+  SQApp simpleInventoryApp = SQApp("Simple Inventory",
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
   await simpleInventoryApp.init();

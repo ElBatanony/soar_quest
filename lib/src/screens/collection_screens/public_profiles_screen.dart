@@ -1,5 +1,5 @@
 import '../../../db.dart';
-import '../../app.dart';
+import '../../sq_app.dart';
 import 'collection_filter_screen.dart';
 
 // TODO: public profile cloud function removed
@@ -7,7 +7,7 @@ import 'collection_filter_screen.dart';
 
 final SQCollection publicProfilesCollection = FirestoreCollection(
   id: 'publicProfiles',
-  fields: App.instance.publicProfileFields,
+  fields: SQApp.instance.publicProfileFields,
   readOnly: true,
 );
 

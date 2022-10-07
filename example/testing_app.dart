@@ -9,7 +9,7 @@ void main() async {
     SQStringField("Name"),
   ];
 
-  App testingApp = App("Testing App",
+  SQApp testingApp = SQApp("Testing App",
       theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       userDocFields: userDocFields);
@@ -44,7 +44,7 @@ void main() async {
 
   SQCollection testUserCollection = FirestoreCollection(
       id: "Test User Collection",
-      parentDoc: App.userDoc,
+      parentDoc: SQApp.userDoc,
       fields: [
         SQStringField("Name"),
       ]);

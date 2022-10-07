@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../auth/user_data.dart';
-import '../app.dart';
+import '../sq_app.dart';
 
 class SpecialAccessContent extends StatefulWidget {
   final Widget child;
@@ -17,7 +17,7 @@ class SpecialAccessContent extends StatefulWidget {
 class _SpecialAccessContentState extends State<SpecialAccessContent> {
   @override
   Widget build(BuildContext context) {
-    return widget.checker(App.auth.user)
+    return widget.checker(SQApp.auth.user)
         ? Text("You do not have access to this content")
         : widget.child;
   }

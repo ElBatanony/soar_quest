@@ -1,4 +1,4 @@
-export 'src/app.dart';
+export 'src/sq_app.dart';
 export 'db.dart';
 export 'features.dart';
 export 'screens.dart';

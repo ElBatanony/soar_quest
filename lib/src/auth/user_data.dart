@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-import '../app.dart';
+import '../sq_app.dart';
 import '../db/sq_doc.dart';
 
 abstract class UserData {
@@ -19,7 +19,7 @@ abstract class UserData {
       this.publicFields = const []});
 
   userDataPath() {
-    return "${App.instance.getAppPath()}users/$userId/data/";
+    return "${SQApp.instance.getAppPath()}users/$userId/data/";
   }
 }
 
@@ -46,9 +46,9 @@ class FirebaseSignedInUser extends SignedInUser {
       : super(
           userId: firebaseUser.uid,
           isAnonymous: firebaseUser.isAnonymous,
-          docFields: App.instance.userDocFields,
+          docFields: SQApp.instance.userDocFields,
         ) {
-    userDoc = SQDoc(userId, collection: App.usersCollection);
+    userDoc = SQDoc(userId, collection: SQApp.usersCollection);
     userDoc.loadDoc();
   }
 

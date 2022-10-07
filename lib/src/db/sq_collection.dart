@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 
-import '../app.dart';
+import '../sq_app.dart';
 import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
@@ -37,7 +37,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     if (parentDoc != null)
       path = "${parentDoc!.path}/$id";
     else
-      path = App.instance.getAppPath() + id;
+      path = SQApp.instance.getAppPath() + id;
 
     if (byPath(path) == null) _collections.add(this);
   }

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../auth/user_data.dart';
-import '../app.dart';
+import '../sq_app.dart';
 import '../screens/screen.dart';
 import 'sq_button.dart';
 
@@ -33,7 +33,7 @@ class _SignedInContentState extends State<SignedInContent> {
 
   @override
   void initState() {
-    listener = App.auth.authStateChanges().listen((userData) {
+    listener = SQApp.auth.authStateChanges().listen((userData) {
       if (userData != null) {
         setState(() {
           isHidden = userData.isAnonymous;
@@ -59,9 +59,9 @@ class _SignedInContentState extends State<SignedInContent> {
               Text("Sign in to view this content"),
               SQButton("Sign In",
                   onPressed: () =>
-                      goToScreen(App.auth.signInScreen(), context: context))
+                      goToScreen(SQApp.auth.signInScreen(), context: context))
             ],
           )
-        : widget.builder(context, App.auth.user as SignedInUser);
+        : widget.builder(context, SQApp.auth.user as SignedInUser);
   }
 }
