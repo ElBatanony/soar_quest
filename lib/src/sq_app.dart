@@ -10,7 +10,6 @@ import 'screens/screen.dart';
 import 'auth/auth_manager.dart';
 
 class SQApp {
-  // TODO: make everything static
   String name;
   late ThemeData theme;
 
