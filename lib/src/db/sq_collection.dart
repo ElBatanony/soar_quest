@@ -37,7 +37,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     if (parentDoc != null)
       path = "${parentDoc!.path}/$id";
     else
-      path = SQApp.instance.getAppPath() + id;
+      path = "Example Apps/${SQApp.instance.name}/$id";
 
     if (byPath(path) == null) _collections.add(this);
   }
