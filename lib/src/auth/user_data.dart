@@ -17,10 +17,6 @@ abstract class UserData {
       required this.isAnonymous,
       required this.docFields,
       this.publicFields = const []});
-
-  userDataPath() {
-    return "${SQApp.instance.getAppPath()}users/$userId/data/";
-  }
 }
 
 abstract class SignedInUser extends UserData {
