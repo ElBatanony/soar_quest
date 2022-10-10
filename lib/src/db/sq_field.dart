@@ -50,6 +50,9 @@ abstract class SQFormFieldState<Field extends SQField>
   Field get field => formField.field;
   SQDoc? get doc => formField.doc;
 
+  @override
+  SQFormField<Field> get value => throw "Do not use FormField.value";
+
   void onChanged() {
     if (formField.onChanged != null) formField.onChanged!();
     setState(() {});
