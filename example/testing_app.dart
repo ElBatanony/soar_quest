@@ -9,12 +9,12 @@ void main() async {
     SQStringField("Name"),
   ];
 
-  SQApp testingApp = SQApp("Testing App",
-      theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-      userDocFields: userDocFields);
-
-  await testingApp.init();
+  await SQApp.init(
+    "Testing App",
+    theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+    userDocFields: userDocFields,
+    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+  );
 
   SQCollection simpleCollection = FirestoreCollection(
     id: "Simple Collection",
@@ -44,12 +44,12 @@ void main() async {
 
   SQCollection testUserCollection = FirestoreCollection(
       id: "Test User Collection",
-      parentDoc: SQApp.userDoc,
+      parentDoc: SQAuth.userDoc,
       fields: [
         SQStringField("Name"),
       ]);
 
-  testingApp.run(MainScreen([
+  SQApp.run(MainScreen([
     CollectionScreen(
       collection: testCollection,
       canCreate: true,

@@ -1,11 +1,11 @@
-import '../../sq_app.dart';
+import '../../auth/sq_auth.dart';
 import 'sq_ref_field.dart';
 
 class SQUserRefField extends SQRefField {
   SQUserRefField(super.name, {super.value, super.readOnly})
-      : super(collection: SQApp.usersCollection);
+      : super(collection: SQAuth.usersCollection);
 
-  static SQRef get currentUserRef => SQRef.fromDoc(SQApp.auth.user.userDoc);
+  static SQRef get currentUserRef => SQRef.fromDoc(SQAuth.userDoc);
 
   @override
   SQUserRefField copy() =>

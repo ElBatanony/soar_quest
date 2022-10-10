@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'sq_auth.dart';
 
-import '../sq_app.dart';
 import '../db/fields/sq_string_field.dart';
 import '../ui/sq_button.dart';
 import '../screens/screen.dart';
@@ -24,18 +24,18 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
 
   @override
   void initState() {
-    if (widget.forceSignIn == false && SQApp.auth.user.isAnonymous == false) {
+    if (widget.forceSignIn == false && SQAuth.user.isAnonymous == false) {
       exitScreen(context);
     }
     super.initState();
   }
 
   signIn() {
-    SQApp.auth
+    SQAuth.auth
         .signInWithEmailAndPassword(
             email: emailField.value ?? "", password: passwordField.value ?? "")
         .then((_) {
-      if (SQApp.auth.user.isAnonymous) {
+      if (SQAuth.user.isAnonymous) {
         print("Did not sign in");
       } else {
         print("Signed in");
@@ -54,7 +54,7 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
         SQButton(
           "Sign Up",
           onPressed: () =>
-              replaceScreen(SQApp.auth.signUpScreen(), context: context),
+              replaceScreen(SQAuth.auth.signUpScreen(), context: context),
         )
       ],
     );

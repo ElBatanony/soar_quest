@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sq_app.dart';
+import '../auth/sq_auth.dart';
 import '../db/sq_field.dart';
 import '../db/fields/show_field_dialog.dart';
 import '../db/fields/sq_string_field.dart';
@@ -24,12 +24,12 @@ class ProfileScreen extends Screen {
 
 class _ProfileScreenState extends ScreenState<ProfileScreen> {
   signOut() async {
-    await SQApp.auth.signOut();
+    await SQAuth.auth.signOut();
     refreshScreen();
   }
 
   Future goToSignIn() {
-    return goToScreen(SQApp.auth.signInScreen(forceSignIn: true),
+    return goToScreen(SQAuth.auth.signInScreen(forceSignIn: true),
         context: context);
   }
 
@@ -71,8 +71,8 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     return Center(
       child: Column(
         children: [
-          Text("User ID: ${SQApp.auth.user.userId}"),
-          Text("User Anonymous: ${SQApp.auth.user.isAnonymous}"),
+          Text("User ID: ${SQAuth.user.userId}"),
+          Text("User Anonymous: ${SQAuth.user.isAnonymous}"),
           SignedInContent(
               builder: (BuildContext context, SignedInUser user) {
                 return Column(
@@ -81,7 +81,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                     Text("Email: ${user.email ?? "No-email"}"),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: SQApp.auth.user.userDoc.fields
+                      children: SQAuth.userDoc.fields
                           .map((field) => Text(field.toString()))
                           .toList(),
                     ),
@@ -99,7 +99,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                           onPressed: () async {
                             await goToScreen(
                                 docEditScreen(
-                                  SQApp.auth.user.userDoc,
+                                  SQAuth.userDoc,
                                 ),
                                 context: context);
                             refreshScreen();

@@ -6,10 +6,8 @@ import '../firebase_options.dart';
 late SQCollection items, inventory;
 
 void main() async {
-  SQApp simpleInventoryApp = SQApp("Simple Inventory",
+  await SQApp.init("Simple Inventory",
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
-
-  await simpleInventoryApp.init();
 
   items = FirestoreCollection(id: "Items", fields: [
     SQStringField("Name", isRequired: true),
@@ -31,7 +29,7 @@ void main() async {
   items.fields.add(SQInverseRefField("Inventory Change Log",
       refFieldName: "Item", collection: inventory));
 
-  simpleInventoryApp.run(MainScreen([
+  SQApp.run(MainScreen([
     CollectionScreen(
       collection: items,
       icon: Icons.factory,

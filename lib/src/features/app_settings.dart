@@ -1,8 +1,8 @@
+import '../auth/sq_auth.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
 import '../screens/form_screens/doc_edit_screen.dart';
 import '../screens/screen.dart';
-import '../sq_app.dart';
 
 class AppSettings {
   static SQCollection? _settingsCollection;
@@ -12,7 +12,7 @@ class AppSettings {
   static setSettings(List<SQField> settings) {
     settingsFields = settings;
     _settingsCollection = FirestoreCollection(
-        id: 'Settings', parentDoc: SQApp.userDoc, fields: settingsFields);
+        id: 'Settings', parentDoc: SQAuth.userDoc, fields: settingsFields);
     settingsDoc = SQDoc('default', collection: _settingsCollection!);
   }
 

@@ -1,4 +1,5 @@
 export 'src/sq_app.dart';
+export 'src/auth/sq_auth.dart';
 export 'db.dart';
 export 'features.dart';
 export 'screens.dart';
