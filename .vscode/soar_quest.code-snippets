@@ -95,5 +95,24 @@
 			"  CollectionScreen(collection: sampleCollection),",
 			"]));"
 		],
+	},
+	"New SQFormField": {
+		"scope": "dart",
+		"prefix": "sqformfield",
+		"body": [
+			"class _SQ$1FormField extends SQFormField<SQ$1Field> {",
+			"  const _SQ$1FormField(super.field, {required super.onChanged, super.doc});",
+			"",
+			"  @override",
+			"  createState() => _SQ$1FormFieldState();",
+			"}",
+			"",
+			"class _SQ$1FormFieldState extends SQFormFieldState<SQ$1Field> {",
+			"  @override",
+			"  Widget fieldBuilder(BuildContext context) {",
+			"    return Text(\"SQ$1FormField\");",
+			"  }",
+			"}",
+		],
 	}
 }
