@@ -1,10 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show FirebaseFirestore, CollectionReference, SetOptions;
 
 import 'sq_collection.dart';
 
-final firestore = FirebaseFirestore.instance;
-
 class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
+  late CollectionReference ref;
+
   FirestoreCollection({
     required super.id,
     required super.fields,
@@ -13,9 +14,9 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     super.readOnly,
     super.canDeleteDoc,
     super.docScreen,
-  });
-
-  CollectionReference get ref => firestore.collection(path);
+  }) {
+    ref = FirebaseFirestore.instance.collection(path);
+  }
 
   @override
   Future loadCollection() async {
@@ -55,7 +56,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
 
   @override
   Future saveDoc(DocType doc) async {
-    await firestore.doc(doc.path).set(doc.serialize(), SetOptions(merge: true));
+    await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
     return loadCollection();
   }
 }
