@@ -39,10 +39,6 @@ class SQDoc {
     initialized = true;
   }
 
-  Future saveDoc() {
-    return collection.saveDoc(this);
-  }
-
   Map<String, dynamic> serializeFields() {
     Map<String, dynamic> ret = {};
     for (var field in fields) {
