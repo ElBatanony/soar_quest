@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+import '../../ui/sq_button.dart';
+import '../../../screens.dart';
 import '../sq_collection.dart';
 import 'sq_list_field.dart';
 import 'sq_ref_field.dart';
@@ -20,4 +24,51 @@ class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
   @override
   SQRefDocsField copy() => SQRefDocsField(name,
       refCollection: refCollection, refFieldName: refFieldName);
+
+  @override
+  formField({Function? onChanged, SQDoc? doc}) {
+    return _SQRefDocsFormField(
+      this,
+      refDocs: valueBuilder(doc!),
+      onChanged: onChanged,
+      doc: doc,
+    );
+  }
+}
+
+class _SQRefDocsFormField extends SQFormField<SQRefDocsField> {
+  final List<SQDoc> refDocs;
+  const _SQRefDocsFormField(super.field,
+      {required this.refDocs, required super.onChanged, required super.doc});
+
+  @override
+  createState() => _SQRefDocsFormFieldState();
+}
+
+class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
+  @override
+  Widget readOnlyBuilder(BuildContext context) {
+    List<SQDoc> refDocs = (formField as _SQRefDocsFormField).refDocs;
+    return Column(
+      children: [
+        Table(border: TableBorder.all(), children: [
+          TableRow(children: [Text(field.refCollection().fields[0].name)]),
+          ...refDocs
+              .map((refDoc) => TableRow(children: [Text(refDoc.toString())]))
+              .toList(),
+        ]),
+        SQButton("Add", onPressed: () async {
+          await goToScreen(
+              docCreateScreen(field.refCollection(), initialFields: [
+                SQRefField(field.refFieldName,
+                    collection: doc!.collection,
+                    value: doc!.ref,
+                    readOnly: true)
+              ]),
+              context: context);
+          setState(() {});
+        })
+      ],
+    );
+  }
 }
