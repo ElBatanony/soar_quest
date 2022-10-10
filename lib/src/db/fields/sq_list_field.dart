@@ -1,5 +1,7 @@
 import '../sq_doc.dart';
 
+List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
+
 class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
@@ -8,8 +10,6 @@ class SQListField<T> extends SQField<List<T>> {
   }) : super(value: list);
 
   List<T> get list => value!;
-
-  List<T> copyList(List<T> list) => list.map((e) => e).toList();
 
   @override
   SQListField<T> copy() => SQListField<T>(name, list: copyList(list));
