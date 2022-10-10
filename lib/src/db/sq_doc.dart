@@ -39,7 +39,7 @@ class SQDoc {
     initialized = true;
   }
 
-  Map<String, dynamic> serializeFields() {
+  Map<String, dynamic> serialize() {
     Map<String, dynamic> ret = {};
     for (var field in fields) {
       ret[field.name] = field.serialize();
