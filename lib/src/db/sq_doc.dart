@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 import '../storage/sq_image_field.dart';
@@ -58,14 +56,14 @@ class SQDoc {
     return ret;
   }
 
-  T? getField<T extends SQField>(String fieldName) {
+  T getField<T extends SQField>(String fieldName) {
     return fields
         .whereType<T>()
-        .singleWhereOrNull((field) => field.name == fieldName);
+        .singleWhere((field) => field.name == fieldName);
   }
 
   T? value<T>(String fieldName) {
-    return getField(fieldName)?.value;
+    return getField(fieldName).value;
   }
 
   String get label => fields.first.value.toString();
