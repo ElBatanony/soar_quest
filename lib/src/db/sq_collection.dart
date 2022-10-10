@@ -52,7 +52,7 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   Future<void> loadDoc(DocType doc);
   Future saveDoc(DocType doc);
-  Future deleteDoc(String docId);
+  Future deleteDoc(DocType doc);
 
   String getANewDocId();
 

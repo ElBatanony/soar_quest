@@ -16,7 +16,7 @@ class DocDeleteButton extends StatelessWidget {
       : super(key: key);
 
   void deleteDoc(BuildContext context) {
-    doc.collection.deleteDoc(doc.id).then((_) {
+    doc.collection.deleteDoc(doc).then((_) {
       if (deleteCallback != null) deleteCallback!();
       if (popAfterDelete) Navigator.pop(context);
     });

@@ -55,7 +55,7 @@ class FavouritesFeature {
   }
 
   removeFavourite(SQDoc favDoc) {
-    favouritesCollection.deleteDoc(favDoc.id);
+    favouritesCollection.deleteDoc(favDoc);
   }
 
   loadFavourites() {
@@ -84,7 +84,7 @@ class FavouritesScreen extends CollectionScreen {
 
 class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
   void removeFromFavourites(SQDoc doc) async {
-    await doc.collection.deleteDoc(doc.id);
+    await doc.collection.deleteDoc(doc);
     refreshScreen();
   }
 

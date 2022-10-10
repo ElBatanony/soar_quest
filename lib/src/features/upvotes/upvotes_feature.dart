@@ -15,7 +15,8 @@ class UpvotesFeature {
   }
 
   static removeUpvote(SQCollection upvotesCollection, String upvoteId) {
-    return upvotesCollection.deleteDoc(upvoteId);
+    return upvotesCollection.deleteDoc(
+        upvotesCollection.docs.firstWhere((doc) => doc.id == upvoteId));
   }
 
   static canUpvote(SQCollection upvotesCollection, String upvoteId) {
