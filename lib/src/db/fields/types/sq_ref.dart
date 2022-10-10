@@ -37,4 +37,13 @@ class SQRef {
   SQDoc getDoc() {
     return SQDoc(docId, collection: SQCollection.byPath(collectionPath)!);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! SQRef) return false;
+    return other.docId == docId && other.collectionPath == collectionPath;
+  }
+
+  @override
+  int get hashCode => docId.hashCode ^ collectionPath.hashCode;
 }
