@@ -9,13 +9,13 @@ class SQEnumField<T> extends SQField<T> {
   SQField<T> subfield;
   List<T> options;
 
-  SQEnumField({required this.subfield, required this.options, super.value})
+  SQEnumField(this.subfield, {required this.options, super.value})
       : super(subfield.name);
 
   @override
   SQEnumField<T> copy() {
-    return SQEnumField<T>(
-        subfield: subfield.copy(), options: copyList<T>(options), value: value);
+    return SQEnumField<T>(subfield.copy(),
+        options: copyList<T>(options), value: value);
   }
 
   @override
