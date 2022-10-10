@@ -62,8 +62,9 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
       title: Text(doc.label),
       subtitle:
           doc.fields.length >= 2 ? Text(doc.fields[1].value.toString()) : null,
-      leading:
-          doc.hasImage ? Image.network(doc.imageLabel.value!, width: 35) : null,
+      leading: doc.imageLabel != null
+          ? Image.network(doc.imageLabel!.value!, width: 35)
+          : null,
       onTap: () => goToDocScreen(docScreen(doc)),
     );
   }
