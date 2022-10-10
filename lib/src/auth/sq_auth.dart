@@ -1,7 +1,10 @@
-import 'package:soar_quest/soar_quest.dart';
-import 'package:soar_quest/src/auth/auth_manager.dart';
+import '../db/fields/sq_string_field.dart';
+import '../db/firestore_collection.dart';
+import '../db/sq_collection.dart';
 
+import 'sq_auth_manager.dart';
 import 'firebase_auth_manager.dart';
+import 'user_data.dart';
 
 class SQAuth {
   static late SQAuthManager auth;

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'user_data.dart';
 import '../screens/screen.dart';
-import 'auth_manager.dart';
+import 'sq_auth_manager.dart';
 import 'sign_in_screen.dart';
 import 'sign_up_screen.dart';
 
