@@ -8,11 +8,9 @@ import 'sq_list_field.dart';
 class SQFieldListField extends SQListField<SQField> {
   List<SQField> allowedTypes;
 
-  SQFieldListField(super.name,
-      {List<SQField> list = const <SQField>[], required this.allowedTypes})
-      : super(list: list);
+  SQFieldListField(super.name, {super.value, required this.allowedTypes});
 
-  List<SQField> get fields => list;
+  List<SQField> get fields => value ?? [];
 
   @override
   List<SQField> parse(source) {
@@ -36,7 +34,7 @@ class SQFieldListField extends SQListField<SQField> {
 
   @override
   SQFieldListField copy() => SQFieldListField(name,
-      list: fields.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
+      value: copyList(fields), allowedTypes: allowedTypes);
 
   @override
   List<dynamic> serialize() {

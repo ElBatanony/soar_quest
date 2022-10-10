@@ -7,14 +7,13 @@ List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
 class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
-    List<T> list = const [],
+    super.value,
     super.readOnly,
-  }) : super(value: list);
-
-  List<T> get list => value!;
+  });
 
   @override
-  SQListField<T> copy() => SQListField<T>(name, list: copyList(list));
+  SQListField<T> copy() =>
+      SQListField<T>(name, value: copyList(value ?? []), readOnly: readOnly);
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {
