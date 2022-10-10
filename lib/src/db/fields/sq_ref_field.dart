@@ -55,7 +55,6 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(field.name),
         Text(field.value?.label ?? "not-set"),
         if (field.readOnly == false)
           SQButton(
