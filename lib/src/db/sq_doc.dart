@@ -11,18 +11,15 @@ class SQDoc {
   bool initialized = false;
   late String path;
 
-  static List<SQField> copyFields(List<SQField> fields) {
-    return fields.map((field) {
-      SQField fieldCopy = field.copy();
-      assert(field.runtimeType == fieldCopy.runtimeType,
-          "SQDocField not copied properly (${field.runtimeType} vs. ${fieldCopy.runtimeType})");
-      return fieldCopy;
-    }).toList();
-  }
-
   SQDoc(this.id, {required this.collection}) {
     path = "${collection.path}/$id";
-    fields = SQDoc.copyFields(collection.fields);
+
+    fields = collection.fields.map((field) {
+      SQField fieldCopy = field.copy();
+      assert(field.runtimeType == fieldCopy.runtimeType,
+          "SQField not copied properly (${field.runtimeType} vs. ${fieldCopy.runtimeType})");
+      return fieldCopy;
+    }).toList();
   }
 
   void parse(Map<String, dynamic> source) {
