@@ -23,16 +23,7 @@ class SQDoc {
   }
 
   void parse(Map<String, dynamic> source) {
-    for (var entry in source.entries) {
-      var key = entry.key;
-      var value = entry.value;
-
-      if (fields.any((field) => field.name == key) == false) continue;
-
-      SQField field = fields.singleWhere((field) => field.name == key);
-
-      field.value = field.parse(value);
-    }
+    for (var field in fields) field.value = field.parse(source[field.name]);
     initialized = true;
   }
 
