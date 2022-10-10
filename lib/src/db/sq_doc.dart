@@ -25,8 +25,8 @@ class SQDoc {
     fields = SQDoc.copyFields(collection.fields);
   }
 
-  setData(Map<String, dynamic> dataToSet) {
-    for (var entry in dataToSet.entries) {
+  void parse(Map<String, dynamic> source) {
+    for (var entry in source.entries) {
       var key = entry.key;
       var value = entry.value;
 

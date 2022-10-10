@@ -24,7 +24,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     print('${snap.docs.length} docs fetched for $id!');
     docs = snap.docs
         .map((doc) => constructDoc(doc.id)
-          ..setData(
+          ..parse(
             doc.data() as Map<String, dynamic>,
           ))
         .toList();
@@ -50,8 +50,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   Future loadDoc(DocType doc) async {
     if (doc.initialized) return;
     final docSnap = await ref.doc(doc.id).get();
-    doc.setData(
-        (docSnap.data() ?? <String, dynamic>{}) as Map<String, dynamic>);
+    doc.parse((docSnap.data() ?? {}) as Map<String, dynamic>);
   }
 
   @override
