@@ -24,7 +24,7 @@ class CollectionScreen extends Screen {
       this.docDisplay,
       super.prebody,
       super.postbody,
-      this.canCreate = false,
+      this.canCreate = true,
       super.isInline,
       super.icon,
       this.filters = const [],
