@@ -28,6 +28,9 @@ class Screen extends StatefulWidget {
 
   @override
   State<Screen> createState() => ScreenState();
+
+  // TODO: replace goToScreens in code
+  Future go(BuildContext context) => goToScreen(this, context: context);
 }
 
 class ScreenState<T extends Screen> extends State<T> {
