@@ -25,11 +25,6 @@ class SQDoc {
     fields = SQDoc.copyFields(collection.fields);
   }
 
-  Future loadDoc({bool forceFetch = false}) async {
-    if (initialized && forceFetch == false) return;
-    await collection.loadDoc(this);
-  }
-
   setData(Map<String, dynamic> dataToSet) {
     for (var entry in dataToSet.entries) {
       var key = entry.key;
