@@ -15,7 +15,7 @@ abstract class SQField<T> {
     this.isRequired = false,
   });
 
-  SQField copy();
+  SQField<T> copy();
 
   dynamic serialize() => value;
 
