@@ -9,11 +9,6 @@ class UnimplementCollection extends SQCollection {
   }
 
   @override
-  bool doesDocExist(String docId) {
-    throw UnimplementedError();
-  }
-
-  @override
   String getANewDocId() {
     throw UnimplementedError();
   }

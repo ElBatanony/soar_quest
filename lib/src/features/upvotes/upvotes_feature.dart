@@ -19,7 +19,7 @@ class UpvotesFeature {
   }
 
   static canUpvote(SQCollection upvotesCollection, String upvoteId) {
-    return upvotesCollection.doesDocExist(upvoteId) == false;
+    return upvotesCollection.docs.any((doc) => doc.id == upvoteId);
   }
 }
 

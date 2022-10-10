@@ -40,11 +40,6 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  bool doesDocExist(String docId) {
-    return docs.any((doc) => doc.id == docId);
-  }
-
-  @override
   String getANewDocId() => ref.doc().id;
 
   @override

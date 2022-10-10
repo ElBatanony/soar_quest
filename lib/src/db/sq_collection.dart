@@ -54,8 +54,6 @@ abstract class SQCollection<DocType extends SQDoc> {
   Future saveDoc(DocType doc);
   Future deleteDoc(String docId);
 
-  bool doesDocExist(String docId);
-
   String getANewDocId();
 
   T? getField<T extends SQField>(String fieldName) {
