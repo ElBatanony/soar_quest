@@ -6,7 +6,7 @@ import '../../db/fields/sq_virtual_field.dart';
 import '../../db/fields/sq_inverse_ref_field.dart';
 
 Future createDoc(SQDoc doc, BuildContext context) async {
-  return doc.collection.createDoc(doc);
+  return doc.collection.saveDoc(doc);
 }
 
 DocFormScreen docCreateScreen(

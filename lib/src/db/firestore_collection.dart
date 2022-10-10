@@ -32,13 +32,6 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  Future createDoc(DocType doc) async {
-    docs.add(doc);
-    await firestore.doc(doc.path).set(doc.serialize());
-    return loadCollection();
-  }
-
-  @override
   Future deleteDoc(String docId) async {
     docs.removeWhere((doc) => doc.id == docId);
     await ref.doc(docId).delete();

@@ -52,7 +52,6 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   Future<void> loadDoc(DocType doc);
   Future saveDoc(DocType doc);
-  Future createDoc(DocType doc);
   Future deleteDoc(String docId);
 
   bool doesDocExist(String docId);

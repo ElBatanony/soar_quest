@@ -11,7 +11,7 @@ class UpvotesFeature {
 
   static addUpvote(SQCollection upvotesCollection, String upvoteId) {
     return upvotesCollection
-        .createDoc(SQDoc(upvoteId, collection: upvotesCollection));
+        .saveDoc(SQDoc(upvoteId, collection: upvotesCollection));
   }
 
   static removeUpvote(SQCollection upvotesCollection, String upvoteId) {

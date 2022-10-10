@@ -4,11 +4,6 @@ class UnimplementCollection extends SQCollection {
   UnimplementCollection({required super.id, required super.fields});
 
   @override
-  Future createDoc(SQDoc doc) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future deleteDoc(String docId) {
     throw UnimplementedError();
   }
