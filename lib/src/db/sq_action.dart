@@ -14,8 +14,8 @@ abstract class SQAction {
   Future execute(SQDoc doc, BuildContext context);
 }
 
-class CloneEditAction extends SQAction {
-  CloneEditAction(super.name);
+class GoEditCloneAction extends SQAction {
+  GoEditCloneAction(super.name);
 
   @override
   Future execute(SQDoc doc, BuildContext context) async {

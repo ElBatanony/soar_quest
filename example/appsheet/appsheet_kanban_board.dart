@@ -23,7 +23,7 @@ void main() async {
     SQRefDocsField("Related Projects",
         refCollection: () => projects, refFieldName: "Workstream"),
   ], actions: [
-    CloneEditAction("Clone Workspace"),
+    GoEditCloneAction("Clone Workspace"),
     GoScreenAction("Go Empty",
         screen: (doc) => Screen("Empty Screen for ${doc.label}")),
     GoEditAction("Edit Workspace"),
