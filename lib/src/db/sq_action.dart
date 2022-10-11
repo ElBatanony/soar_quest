@@ -56,9 +56,7 @@ class DeleteDocAction extends SQAction {
   DeleteDocAction(super.name);
 
   @override
-  Future execute(SQDoc doc, BuildContext context) async {
-    return doc.collection.deleteDoc(doc).then((_) => exitScreen(context));
-  }
+  execute(SQDoc doc, BuildContext context) => doc.collection.deleteDoc(doc);
 }
 
 class SetFieldsAction extends SQAction {
