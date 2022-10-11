@@ -11,6 +11,8 @@ class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
   String refFieldName;
   SQCollection Function() refCollection;
 
+  SQCollection get collection => refCollection();
+
   SQRefDocsField(String name,
       {required this.refCollection, required this.refFieldName})
       : super(
@@ -49,13 +51,13 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
     return Column(
       children: [
         Table(border: TableBorder.all(), children: [
-          TableRow(children: [Text(field.refCollection().fields[0].name)]),
+          TableRow(children: [Text(field.collection.fields[0].name)]),
           ...refDocs
               .map((refDoc) => TableRow(children: [Text(refDoc.toString())]))
               .toList(),
         ]),
         SQButton("Add", onPressed: () async {
-          SQDoc newDoc = field.refCollection().newDoc(initialFields: [
+          SQDoc newDoc = field.collection.newDoc(initialFields: [
             SQRefField(field.refFieldName,
                 collection: doc!.collection, value: doc!.ref, readOnly: true)
           ]);
