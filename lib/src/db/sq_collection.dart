@@ -76,6 +76,8 @@ abstract class SQCollection<DocType extends SQDoc> {
       newDoc.fields[index] = initialField.copy();
     }
 
+    newDoc.initialized = true;
+
     for (var field in newDoc.fields)
       if (field.runtimeType == SQCreatedByField)
         field.value = SQUserRefField.currentUserRef;
