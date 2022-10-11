@@ -7,22 +7,17 @@ import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';
 
-Future _defaultSubmitDoc(SQDoc doc, BuildContext context) =>
-    doc.collection.saveDoc(doc);
-
 class FormScreen extends Screen {
   late final SQDoc doc;
   final List<String>? hiddenFields;
   final String submitButtonText;
   final List<String>? shownFields;
-  final Future Function(SQDoc, BuildContext) submitFunction;
 
   SQCollection get collection => doc.collection;
 
   FormScreen(
     this.doc, {
     String? title,
-    this.submitFunction = _defaultSubmitDoc,
     this.hiddenFields,
     this.shownFields,
     this.submitButtonText = "Save",
@@ -60,7 +55,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
       }
     }
 
-    await widget.submitFunction(widget.doc, context).then(
+    await widget.collection.saveDoc(widget.doc).then(
           (_) => exitScreen(context, value: true),
         );
   }
