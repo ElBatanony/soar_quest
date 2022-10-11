@@ -12,7 +12,7 @@ Future _defaultSubmitDoc(SQDoc doc, BuildContext context) =>
 
 class FormScreen extends Screen {
   late final SQDoc doc;
-  late final List<String> hiddenFields;
+  final List<String>? hiddenFields;
   final String submitButtonText;
   final List<String>? shownFields;
   final Future Function(SQDoc, BuildContext) submitFunction;
@@ -23,17 +23,11 @@ class FormScreen extends Screen {
     this.doc, {
     String? title,
     this.submitFunction = _defaultSubmitDoc,
-    List<String>? hiddenFields,
+    this.hiddenFields,
     this.shownFields,
     this.submitButtonText = "Save",
     super.key,
-  }) : super(title ?? "Edit ${doc.collection.singleDocName}") {
-    this.hiddenFields = hiddenFields ?? [];
-
-    this.hiddenFields.addAll(doc.fields
-        .where((field) => field is SQVirtualField)
-        .map((field) => field.name));
-  }
+  }) : super(title ?? "Edit ${doc.collection.singleDocName}");
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -79,7 +73,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
         ..._generateDocFormFields(
           widget.doc,
           shownFields: widget.shownFields,
-          hiddenFields: widget.hiddenFields,
+          hiddenFields: widget.hiddenFields ?? [],
           onChanged: refreshScreen,
         ),
         SQButton(widget.submitButtonText, onPressed: submitForm)
@@ -104,6 +98,8 @@ List<SQFormField> _generateDocFormFields(
   fields = fields
       .where((field) => hiddenFields.contains(field.name) == false)
       .toList();
+
+  fields = fields.where((field) => field is! SQVirtualField).toList();
 
   return fields
       .map((field) => field.formField(onChanged: onChanged, doc: doc))
