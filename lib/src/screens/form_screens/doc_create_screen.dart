@@ -9,7 +9,7 @@ Future createDoc(SQDoc doc, BuildContext context) async {
   return doc.collection.saveDoc(doc);
 }
 
-DocFormScreen docCreateScreen(
+FormScreen docCreateScreen(
   SQCollection collection, {
   String? title,
   List<SQField> initialFields = const [],
@@ -30,7 +30,7 @@ DocFormScreen docCreateScreen(
   hiddenFields.addAll(
       newDoc.fields.whereType<SQInverseRefField>().map((field) => field.name));
 
-  return DocFormScreen(
+  return FormScreen(
     newDoc,
     submitFunction: createDoc,
     title: title,

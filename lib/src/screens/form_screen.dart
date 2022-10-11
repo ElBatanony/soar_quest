@@ -6,7 +6,7 @@ import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';
 
-class DocFormScreen extends Screen {
+class FormScreen extends Screen {
   late final SQCollection collection;
   final List<String> hiddenFields;
   final String submitButtonText;
@@ -14,7 +14,7 @@ class DocFormScreen extends Screen {
   final SQDoc doc;
   final Future Function(SQDoc, BuildContext) submitFunction;
 
-  DocFormScreen(
+  FormScreen(
     this.doc, {
     String? title,
     required this.submitFunction,
@@ -27,7 +27,7 @@ class DocFormScreen extends Screen {
   }
 
   @override
-  State<DocFormScreen> createState() => DocFormScreenState();
+  State<FormScreen> createState() => FormScreenState();
 
   @override
   SQButton button(BuildContext context, {String? label}) {
@@ -36,7 +36,7 @@ class DocFormScreen extends Screen {
   }
 }
 
-class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
+class FormScreenState<T extends FormScreen> extends ScreenState<T> {
   @override
   void initState() {
     if (widget.doc.initialized == false)

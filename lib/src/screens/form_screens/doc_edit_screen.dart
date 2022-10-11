@@ -7,14 +7,14 @@ Future updateItem(SQDoc doc, BuildContext context) async {
   return doc.collection.saveDoc(doc);
 }
 
-DocFormScreen docEditScreen(
+FormScreen docEditScreen(
   SQDoc doc, {
   String? title,
   List<String>? shownFields,
   List<String> hiddenFields = const [],
   String submitButtonText = "Edit",
 }) {
-  return DocFormScreen(
+  return FormScreen(
     doc,
     submitFunction: updateItem,
     title: title,
