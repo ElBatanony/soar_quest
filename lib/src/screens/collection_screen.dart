@@ -50,7 +50,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   Future goToDocScreen(DocScreen docScreen) async {
-    await goToScreen(docScreen, context: context);
+    await docScreen.go(context);
     refreshScreen();
   }
 

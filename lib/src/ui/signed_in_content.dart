@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../auth/user_data.dart';
 import '../auth/sq_auth.dart';
-import '../screens/screen.dart';
 import 'sq_button.dart';
 
 export '../auth/user_data.dart';
@@ -58,8 +57,7 @@ class _SignedInContentState extends State<SignedInContent> {
             children: [
               Text("Sign in to view this content"),
               SQButton("Sign In",
-                  onPressed: () =>
-                      goToScreen(SQAuth.auth.signInScreen(), context: context))
+                  onPressed: () => SQAuth.auth.signInScreen().go(context))
             ],
           )
         : widget.builder(context, SQAuth.user as SignedInUser);

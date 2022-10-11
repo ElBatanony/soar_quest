@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'screen_navigation.dart';
 import '../ui/sq_button.dart';
 
 export 'screen_navigation.dart';
+
+Future _goToScreen(Screen screen, BuildContext context) =>
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 
 class Screen extends StatefulWidget {
   final String title;
@@ -22,15 +24,13 @@ class Screen extends StatefulWidget {
   });
 
   SQButton button(BuildContext context, {String? label}) {
-    return SQButton(label ?? title,
-        onPressed: () => goToScreen(this, context: context));
+    return SQButton(label ?? title, onPressed: () => go(context));
   }
 
   @override
   State<Screen> createState() => ScreenState();
 
-  // TODO: replace goToScreens in code
-  Future go(BuildContext context) => goToScreen(this, context: context);
+  Future go(BuildContext context) => _goToScreen(this, context);
 }
 
 class ScreenState<T extends Screen> extends State<T> {

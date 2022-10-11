@@ -94,8 +94,8 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
     return ListTile(
       title: SQButton(doc.label,
-          onPressed: () => goToScreen(widget.docScreen(originalDocRef.getDoc()),
-              context: context)),
+          onPressed: () =>
+              widget.docScreen(originalDocRef.getDoc()).go(context)),
       trailing: SQButton(
         'Remove',
         onPressed: () => removeFromFavourites(doc),

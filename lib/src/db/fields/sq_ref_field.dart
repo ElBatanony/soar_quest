@@ -60,11 +60,10 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
           SQButton(
             'Select',
             onPressed: () async {
-              SQDoc? retDoc = await goToScreen(
-                  SelectDocScreen(
+              SQDoc? retDoc = await SelectDocScreen(
                       title: "Select ${field.name}",
-                      collection: field.collection),
-                  context: context);
+                      collection: field.collection)
+                  .go(context);
 
               if (retDoc != null) {
                 SQRef ref = SQRef(

@@ -29,8 +29,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
   }
 
   Future goToSignIn() {
-    return goToScreen(SQAuth.auth.signInScreen(forceSignIn: true),
-        context: context);
+    return SQAuth.auth.signInScreen(forceSignIn: true).go(context);
   }
 
   updateUserField(SQField field, Function updateFunction) async {

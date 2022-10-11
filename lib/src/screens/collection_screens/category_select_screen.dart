@@ -5,7 +5,6 @@ import '../../db/fields/sq_ref_field.dart';
 import '../../ui/sq_button.dart';
 
 import '../collection_screen.dart';
-import '../screen_navigation.dart';
 import 'collection_filter_screen.dart';
 
 class CategorySelectScreen extends CollectionScreen {
@@ -45,13 +44,12 @@ class _CategorySelectScreenState
         print(categoryFieldCopy.value);
         CollectionFilter filter =
             DocRefFieldFilter(docRefField: categoryFieldCopy);
-        goToScreen(
-            CollectionFilterScreen(
+        CollectionFilterScreen(
                 title: "Category of",
                 collection: widget.collection,
                 filters: [filter],
-                docScreen: widget.docScreen),
-            context: context);
+                docScreen: widget.docScreen)
+            .go(context);
       },
     );
   }
