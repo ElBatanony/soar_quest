@@ -28,9 +28,7 @@ class GoScreenAction extends SQAction {
   GoScreenAction(super.name, {required this.screen});
 
   @override
-  Future execute(SQDoc doc, BuildContext context) async {
-    return screen(doc).go(context);
-  }
+  execute(SQDoc doc, BuildContext context) => screen(doc).go(context);
 }
 
 // TODO: replace in DocScreen
