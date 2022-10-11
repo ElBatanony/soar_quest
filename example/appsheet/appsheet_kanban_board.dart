@@ -22,6 +22,30 @@ void main() async {
         options: ["#4285F4", "#DB4437", "#F4B400", "#0F9D58"]),
     SQRefDocsField("Related Projects",
         refCollection: () => projects, refFieldName: "Workstream"),
+  ], actions: [
+    CloneEditAction("Clone Workspace"),
+    GoScreenAction("Go Empty",
+        screen: (doc) => Screen("Empty Screen for ${doc.label}")),
+    GoEditDocAction("Edit Workspace"),
+    NewDocFromDataAction(
+      "New Project",
+      getCollection: () => projects,
+      initialFields: (doc) => [
+        SQRefField("Workstream", collection: workstreams, value: doc.ref),
+        SQStringField("Project", value: "From Workstream ${doc.label}"),
+      ],
+    ),
+    DeleteDocAction("Delete Workflow"),
+    ExecuteOnDocsAction("Make Project Hamada",
+        getDocs: (doc) => [projects.docs[0]],
+        action: SetFieldsAction("Status Hamada",
+            getFields: (projectDoc) =>
+                [SQStringField("Status", value: "Hamada")])),
+    OpenUrlAction("Search",
+        getUrl: (doc) => "https://www.google.com/search?q=${doc.label}"),
+    CustomAction("Custom Action",
+        customExecute: (doc, context) async =>
+            showSnackBar("Hamada ${doc.label}", context: context)),
   ]);
 
   projects = FirestoreCollection(id: "Projects", fields: [
