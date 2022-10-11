@@ -20,7 +20,7 @@ class FormScreen extends Screen {
     required this.submitFunction,
     this.hiddenFields = const [],
     this.shownFields = const [],
-    this.submitButtonText = "Submit",
+    this.submitButtonText = "Save",
     super.key,
   }) : super(title ?? "Edit ${doc.collection.singleDocName}") {
     collection = doc.collection;
