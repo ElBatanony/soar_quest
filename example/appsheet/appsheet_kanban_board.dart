@@ -26,7 +26,7 @@ void main() async {
     CloneEditAction("Clone Workspace"),
     GoScreenAction("Go Empty",
         screen: (doc) => Screen("Empty Screen for ${doc.label}")),
-    GoEditDocAction("Edit Workspace"),
+    GoEditAction("Edit Workspace"),
     NewDocFromDataAction(
       "New Project",
       getCollection: () => projects,

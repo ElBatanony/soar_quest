@@ -36,14 +36,8 @@ class GoScreenAction extends SQAction {
 }
 
 // TODO: replace in DocScreen
-class GoEditDocAction extends SQAction {
-  GoEditDocAction(super.name);
-
-  @override
-  Future execute(SQDoc doc, BuildContext context) {
-    // TODO: use GoScreen as parent class
-    return FormScreen(doc).go(context);
-  }
+class GoEditAction extends GoScreenAction {
+  GoEditAction(super.name) : super(screen: (doc) => FormScreen(doc));
 }
 
 class NewDocFromDataAction extends SQAction {
