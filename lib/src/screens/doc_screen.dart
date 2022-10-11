@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import '../db/sq_doc.dart';
 import '../ui/sq_button.dart';
 
-import '../ui/doc_delete_button.dart';
-
 import 'screen.dart';
 import 'form_screen.dart';
 
@@ -80,7 +78,12 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
                   },
                 ),
               if (doc.collection.canDeleteDoc && widget.canDelete)
-                DocDeleteButton(doc, deleteCallback: refreshScreen)
+                SQButton("Delete ${doc.collection.singleDocName}",
+                    onPressed: () async {
+                  await doc.collection
+                      .deleteDoc(doc)
+                      .then((_) => exitScreen(context));
+                })
             ],
           ),
       ],
