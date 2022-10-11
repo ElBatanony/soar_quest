@@ -6,8 +6,8 @@ import '../ui/sq_button.dart';
 
 import '../ui/doc_delete_button.dart';
 
-import 'form_screens/doc_edit_screen.dart';
 import 'screen.dart';
+import 'form_screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
@@ -75,7 +75,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
                 SQButton(
                   "Edit ${doc.collection.singleDocName}",
                   onPressed: () async {
-                    await goToScreen(docEditScreen(doc), context: context);
+                    await FormScreen(doc).go(context);
                     refreshScreen();
                   },
                 ),

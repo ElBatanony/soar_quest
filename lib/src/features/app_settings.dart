@@ -1,8 +1,8 @@
 import '../auth/sq_auth.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_collection.dart';
-import '../screens/form_screens/doc_edit_screen.dart';
 import '../screens/screen.dart';
+import '../screens/form_screen.dart';
 
 class AppSettings {
   static SQCollection? _settingsCollection;
@@ -22,6 +22,6 @@ class AppSettings {
 
   static Screen settingsScreen() {
     if (settingsDoc == null) throw "Settings not initialized";
-    return docEditScreen(settingsDoc!, title: "Settings");
+    return FormScreen(settingsDoc!, title: "Settings");
   }
 }

@@ -6,6 +6,9 @@ import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';
 
+Future _defaultSubmitDoc(SQDoc doc, BuildContext context) =>
+    doc.collection.saveDoc(doc);
+
 class FormScreen extends Screen {
   late final SQCollection collection;
   final List<String> hiddenFields;
@@ -17,7 +20,7 @@ class FormScreen extends Screen {
   FormScreen(
     this.doc, {
     String? title,
-    required this.submitFunction,
+    this.submitFunction = _defaultSubmitDoc,
     this.hiddenFields = const [],
     this.shownFields = const [],
     this.submitButtonText = "Save",

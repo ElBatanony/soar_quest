@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/db.dart';
-import 'package:soar_quest/screens.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../screens/form_screen.dart';
+import '../screens/form_screens/doc_create_screen.dart';
+import '../screens/screen.dart';
+import 'fields/sq_list_field.dart';
+import 'sq_collection.dart';
 
 abstract class SQAction {
   final String name;
@@ -39,7 +43,7 @@ class GoEditDocAction extends SQAction {
   @override
   Future execute(SQDoc doc, BuildContext context) {
     // TODO: use GoScreen as parent class
-    return docEditScreen(doc).go(context);
+    return FormScreen(doc).go(context);
   }
 }
 

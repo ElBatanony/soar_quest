@@ -8,7 +8,7 @@ import '../features/app_settings.dart';
 import '../ui/signed_in_content.dart';
 import '../ui/sq_button.dart';
 import 'screen.dart';
-import 'form_screens/doc_edit_screen.dart';
+import 'form_screen.dart';
 
 class ProfileScreen extends Screen {
   const ProfileScreen({
@@ -97,11 +97,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                         SQButton(
                           "Edit Profile Info",
                           onPressed: () async {
-                            await goToScreen(
-                                docEditScreen(
-                                  SQAuth.userDoc,
-                                ),
-                                context: context);
+                            await FormScreen(SQAuth.userDoc).go(context);
                             refreshScreen();
                           },
                         ),
