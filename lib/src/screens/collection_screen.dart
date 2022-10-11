@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../db.dart';
 import 'doc_screen.dart';
+import 'form_screen.dart';
 import 'screen.dart';
-import 'form_screens/doc_create_screen.dart';
 
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
 
@@ -78,7 +78,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   Future createNewDoc() async {
-    await goToScreen(docCreateScreen(widget.collection), context: context);
+    await FormScreen(collection: widget.collection).go(context);
     loadData();
   }
 

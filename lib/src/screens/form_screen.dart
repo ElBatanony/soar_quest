@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../db/fields/sq_inverse_ref_field.dart';
+import '../db/fields/sq_virtual_field.dart';
 import '../db/sq_collection.dart';
 import '../db/fields/sq_user_ref_field.dart';
 import '../ui/sq_button.dart';
@@ -10,26 +12,44 @@ Future _defaultSubmitDoc(SQDoc doc, BuildContext context) =>
     doc.collection.saveDoc(doc);
 
 class FormScreen extends Screen {
+  late final SQDoc doc;
   late final SQCollection collection;
-  final List<String> hiddenFields;
+  late final List<String> hiddenFields;
   final String submitButtonText;
   final List<String>? shownFields;
-  late final SQDoc doc;
   final Future Function(SQDoc, BuildContext) submitFunction;
 
   FormScreen({
     SQDoc? doc,
+    SQCollection? collection,
     String? title,
     this.submitFunction = _defaultSubmitDoc,
-    this.hiddenFields = const [],
-    this.shownFields = const [],
+    List<String>? hiddenFields,
+    this.shownFields,
+    List<SQField> initialFields = const [],
     this.submitButtonText = "Save",
     super.key,
-        super(title ?? "Edit ${doc?.collection.singleDocName}") {
+  })  : assert(doc != null || collection != null),
+        super(title ??
+            "Edit ${doc?.collection.singleDocName ?? collection?.singleDocName}") {
     if (doc != null) {
       this.doc = doc;
       this.collection = this.doc.collection;
     }
+
+    if (collection != null) {
+      this.collection = collection;
+      this.doc = this.collection.newDoc(initialFields: initialFields)
+        ..initialized = true;
+    }
+
+    this.hiddenFields = hiddenFields ?? [];
+
+    this.hiddenFields.addAll(this
+        .doc
+        .fields
+        .where((field) => field is SQVirtualField || field is SQInverseRefField)
+        .map((field) => field.name));
   }
 
   @override

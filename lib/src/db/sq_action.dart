@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../screens/form_screen.dart';
-import '../screens/form_screens/doc_create_screen.dart';
 import '../screens/screen.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
@@ -20,7 +19,8 @@ class CloneEditAction extends SQAction {
 
   @override
   Future execute(SQDoc doc, BuildContext context) async {
-    return docCreateScreen(doc.collection, initialFields: copyList(doc.fields))
+    return FormScreen(
+            collection: doc.collection, initialFields: copyList(doc.fields))
         .go(context);
   }
 }
@@ -57,7 +57,8 @@ class NewDocFromDataAction extends SQAction {
   @override
   Future execute(SQDoc doc, BuildContext context) {
     // TODO: maybe inherit from GoScreenAction
-    return docCreateScreen(getCollection(), initialFields: initialFields(doc))
+    return FormScreen(
+            collection: getCollection(), initialFields: initialFields(doc))
         .go(context);
   }
 }
