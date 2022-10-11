@@ -26,12 +26,6 @@ class FormScreen extends Screen {
 
   @override
   State<FormScreen> createState() => FormScreenState();
-
-  @override
-  SQButton button(BuildContext context, {String? label}) {
-    return super
-        .button(context, label: label ?? "Edit a ${collection.singleDocName}");
-  }
 }
 
 class FormScreenState<T extends FormScreen> extends ScreenState<T> {

@@ -55,19 +55,20 @@ void main() async {
       canCreate: true,
       docScreen: (doc) => DocScreen(
         doc,
-        postbody: (context) => CollectionScreen(
-                canCreate: true,
-                collection: FirestoreCollection(
-                    id: "Child Collection",
-                    fields: [
-                      SQStringField("Name"),
-                      SQRefField("Parent Doc",
-                          collection: testCollection,
-                          value: doc.ref,
-                          readOnly: true),
-                    ],
-                    parentDoc: doc))
-            .button(context),
+        postbody: (context) => SQButton("Go to child collection",
+            onPressed: () => CollectionScreen(
+                    canCreate: true,
+                    collection: FirestoreCollection(
+                        id: "Child Collection",
+                        fields: [
+                          SQStringField("Name"),
+                          SQRefField("Parent Doc",
+                              collection: testCollection,
+                              value: doc.ref,
+                              readOnly: true),
+                        ],
+                        parentDoc: doc))
+                .go(context)),
       ),
     ),
     CollectionScreen(collection: simpleCollection, canCreate: true),

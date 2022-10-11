@@ -101,8 +101,9 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                           },
                         ),
                         if (AppSettings.settingsDoc != null)
-                          AppSettings.settingsScreen()
-                              .button(context, label: "Settings"),
+                          SQButton("Settings",
+                              onPressed: () =>
+                                  AppSettings.settingsScreen().go(context)),
                         SQButton("Sign out", onPressed: signOut),
                       ],
                     ),
