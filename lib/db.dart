@@ -2,6 +2,8 @@ export 'src/db/firestore_collection.dart';
 export 'src/db/sq_collection.dart';
 export 'src/db/unimplemented_collection.dart';
 
+export 'src/db/sq_action.dart';
+
 export 'src/db/fields/sq_field_list_field.dart';
 export 'src/db/fields/sq_ref_field.dart';
 export 'src/db/fields/sq_time_of_day_field.dart';
