@@ -21,28 +21,18 @@ class FormScreen extends Screen {
 
   FormScreen({
     SQDoc? doc,
-    SQCollection? collection,
     String? title,
     this.submitFunction = _defaultSubmitDoc,
     List<String>? hiddenFields,
     this.shownFields,
-    List<SQField> initialFields = const [],
     this.submitButtonText = "Save",
     super.key,
-  })  : assert(doc != null || collection != null),
-        super(title ??
-            "Edit ${doc?.collection.singleDocName ?? collection?.singleDocName}") {
+  })  : assert(doc != null),
+        super(title ?? "Edit ${doc?.collection.singleDocName}") {
     if (doc != null) {
       this.doc = doc;
-      this.collection = this.doc.collection;
+      collection = this.doc.collection;
     }
-
-    if (collection != null) {
-      this.collection = collection;
-      this.doc = this.collection.newDoc(initialFields: initialFields)
-        ..initialized = true;
-    }
-
     this.hiddenFields = hiddenFields ?? [];
 
     this.hiddenFields.addAll(this

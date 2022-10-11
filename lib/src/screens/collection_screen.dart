@@ -78,7 +78,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   Future createNewDoc() async {
-    await FormScreen(collection: widget.collection).go(context);
+    await FormScreen(doc: widget.collection.newDoc()).go(context);
     loadData();
   }
 
