@@ -61,6 +61,11 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Wrap(
+            children: doc.collection.actions
+                .map((action) => SQButton(action.name,
+                    onPressed: () => action.execute(doc, context)))
+                .toList()),
         ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
         if (doc.collection.readOnly == false)
           Row(
