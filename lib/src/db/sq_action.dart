@@ -14,14 +14,12 @@ abstract class SQAction {
   Future execute(SQDoc doc, BuildContext context);
 }
 
-class GoEditCloneAction extends SQAction {
-  GoEditCloneAction(super.name);
-
-  @override
-  Future execute(SQDoc doc, BuildContext context) async {
-    SQDoc newDoc = doc.collection.newDoc(initialFields: copyList(doc.fields));
-    return FormScreen(newDoc).go(context);
-  }
+class GoEditCloneAction extends GoScreenAction {
+  GoEditCloneAction(super.name)
+      : super(
+          screen: (doc) => FormScreen(
+              doc.collection.newDoc(initialFields: copyList(doc.fields))),
+        );
 }
 
 class GoScreenAction extends SQAction {
