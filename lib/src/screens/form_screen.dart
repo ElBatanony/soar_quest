@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../db/fields/sq_inverse_ref_field.dart';
 import '../db/fields/sq_virtual_field.dart';
 import '../db/sq_collection.dart';
 import '../db/fields/sq_user_ref_field.dart';
@@ -32,7 +31,7 @@ class FormScreen extends Screen {
     this.hiddenFields = hiddenFields ?? [];
 
     this.hiddenFields.addAll(doc.fields
-        .where((field) => field is SQVirtualField || field is SQInverseRefField)
+        .where((field) => field is SQVirtualField)
         .map((field) => field.name));
   }
 

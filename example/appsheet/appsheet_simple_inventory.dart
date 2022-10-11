@@ -18,6 +18,8 @@ void main() async {
             .getField<SQIntField>("Amount")!
             .sumDocs(inventory.filterBy([DocRefFilter("Item", doc.ref)]))),
     SQImageField("Image"),
+    SQRefDocsField("Inventory Change Log",
+        refCollection: () => inventory, refFieldName: "Item"),
   ]);
 
   inventory = FirestoreCollection(id: "Inventory", fields: [
@@ -25,9 +27,6 @@ void main() async {
     SQTimestampField("DateTime"),
     SQIntField("Amount", isRequired: true),
   ]);
-
-  items.fields.add(SQInverseRefField("Inventory Change Log",
-      refFieldName: "Item", collection: inventory));
 
   SQApp.run(MainScreen([
     CollectionScreen(
