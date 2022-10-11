@@ -13,31 +13,25 @@ Future _defaultSubmitDoc(SQDoc doc, BuildContext context) =>
 
 class FormScreen extends Screen {
   late final SQDoc doc;
-  late final SQCollection collection;
   late final List<String> hiddenFields;
   final String submitButtonText;
   final List<String>? shownFields;
   final Future Function(SQDoc, BuildContext) submitFunction;
 
-  FormScreen({
-    SQDoc? doc,
+  SQCollection get collection => doc.collection;
+
+  FormScreen(
+    this.doc, {
     String? title,
     this.submitFunction = _defaultSubmitDoc,
     List<String>? hiddenFields,
     this.shownFields,
     this.submitButtonText = "Save",
     super.key,
-  })  : assert(doc != null),
-        super(title ?? "Edit ${doc?.collection.singleDocName}") {
-    if (doc != null) {
-      this.doc = doc;
-      collection = this.doc.collection;
-    }
+  }) : super(title ?? "Edit ${doc.collection.singleDocName}") {
     this.hiddenFields = hiddenFields ?? [];
 
-    this.hiddenFields.addAll(this
-        .doc
-        .fields
+    this.hiddenFields.addAll(doc.fields
         .where((field) => field is SQVirtualField || field is SQInverseRefField)
         .map((field) => field.name));
   }

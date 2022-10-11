@@ -59,7 +59,7 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
             SQRefField(field.refFieldName,
                 collection: doc!.collection, value: doc!.ref, readOnly: true)
           ]);
-          await FormScreen(doc: newDoc).go(context);
+          await FormScreen(newDoc).go(context);
           setState(() {});
         })
       ],

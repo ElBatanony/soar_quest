@@ -20,7 +20,7 @@ class CloneEditAction extends SQAction {
   @override
   Future execute(SQDoc doc, BuildContext context) async {
     SQDoc newDoc = doc.collection.newDoc(initialFields: copyList(doc.fields));
-    return FormScreen(doc: newDoc).go(context);
+    return FormScreen(newDoc).go(context);
   }
 }
 
@@ -42,7 +42,7 @@ class GoEditDocAction extends SQAction {
   @override
   Future execute(SQDoc doc, BuildContext context) {
     // TODO: use GoScreen as parent class
-    return FormScreen(doc: doc).go(context);
+    return FormScreen(doc).go(context);
   }
 }
 
@@ -57,7 +57,7 @@ class NewDocFromDataAction extends SQAction {
   Future execute(SQDoc doc, BuildContext context) {
     // TODO: maybe inherit from GoScreenAction
     SQDoc newDoc = getCollection().newDoc(initialFields: initialFields(doc));
-    return FormScreen(doc: newDoc).go(context);
+    return FormScreen(newDoc).go(context);
   }
 }
 
