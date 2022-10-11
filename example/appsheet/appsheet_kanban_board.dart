@@ -27,7 +27,7 @@ void main() async {
     GoScreenAction("Go Empty",
         screen: (doc) => Screen("Empty Screen for ${doc.label}")),
     GoEditAction("Edit Workspace"),
-    NewDocFromDataAction(
+    GoDerivedDocAction(
       "New Project",
       getCollection: () => projects,
       initialFields: (doc) => [

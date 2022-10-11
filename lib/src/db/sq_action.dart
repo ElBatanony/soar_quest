@@ -31,27 +31,25 @@ class GoScreenAction extends SQAction {
   execute(SQDoc doc, BuildContext context) => screen(doc).go(context);
 }
 
-// TODO: replace in DocScreen
 class GoEditAction extends GoScreenAction {
   GoEditAction(super.name) : super(screen: (doc) => FormScreen(doc));
 }
 
-class NewDocFromDataAction extends SQAction {
+class GoDerivedDocAction extends GoScreenAction {
   SQCollection Function() getCollection;
   List<SQField> Function(SQDoc) initialFields;
 
-  NewDocFromDataAction(super.name,
-      {required this.getCollection, required this.initialFields});
-
-  @override
-  Future execute(SQDoc doc, BuildContext context) {
-    // TODO: maybe inherit from GoScreenAction
-    SQDoc newDoc = getCollection().newDoc(initialFields: initialFields(doc));
-    return FormScreen(newDoc).go(context);
-  }
+  GoDerivedDocAction(
+    super.name, {
+    required this.getCollection,
+    required this.initialFields,
+  }) : super(
+          screen: (doc) => FormScreen(
+            getCollection().newDoc(initialFields: initialFields(doc)),
+          ),
+        );
 }
 
-// TODO: replace in DocScreen
 class DeleteDocAction extends SQAction {
   DeleteDocAction(super.name);
 
