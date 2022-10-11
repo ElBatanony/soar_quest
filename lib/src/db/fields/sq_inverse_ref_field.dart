@@ -4,6 +4,7 @@ import 'package:soar_quest/screens.dart';
 import '../sq_collection.dart';
 import 'sq_list_field.dart';
 
+// TODO: delete and use SQRefDocs instead
 class SQInverseRefField extends SQListField {
   SQCollection collection;
   String refFieldName;
