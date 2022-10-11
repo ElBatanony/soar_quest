@@ -45,6 +45,18 @@ class _SQRefDocsFormField extends SQFormField<SQRefDocsField> {
 }
 
 class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
+  initializeRefCollection() async {
+    if (field.collection.initialized == false)
+      await field.collection.loadCollection();
+    onChanged();
+  }
+
+  @override
+  void initState() {
+    initializeRefCollection();
+    super.initState();
+  }
+
   @override
   Widget readOnlyBuilder(BuildContext context) {
     List<SQDoc> refDocs = (formField as _SQRefDocsFormField).refDocs;
