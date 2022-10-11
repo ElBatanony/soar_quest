@@ -43,7 +43,7 @@ class GoEditDocAction extends SQAction {
   @override
   Future execute(SQDoc doc, BuildContext context) {
     // TODO: use GoScreen as parent class
-    return FormScreen(doc).go(context);
+    return FormScreen(doc: doc).go(context);
   }
 }
 

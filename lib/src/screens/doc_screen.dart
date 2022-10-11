@@ -75,7 +75,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
                 SQButton(
                   "Edit ${doc.collection.singleDocName}",
                   onPressed: () async {
-                    await FormScreen(doc).go(context);
+                    await FormScreen(doc: doc).go(context);
                     refreshScreen();
                   },
                 ),

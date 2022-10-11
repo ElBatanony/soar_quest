@@ -97,7 +97,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                         SQButton(
                           "Edit Profile Info",
                           onPressed: () async {
-                            await FormScreen(SQAuth.userDoc).go(context);
+                            await FormScreen(doc: SQAuth.userDoc).go(context);
                             refreshScreen();
                           },
                         ),

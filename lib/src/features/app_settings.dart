@@ -22,6 +22,6 @@ class AppSettings {
 
   static Screen settingsScreen() {
     if (settingsDoc == null) throw "Settings not initialized";
-    return FormScreen(settingsDoc!, title: "Settings");
+    return FormScreen(doc: settingsDoc!, title: "Settings");
   }
 }

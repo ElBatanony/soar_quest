@@ -14,19 +14,22 @@ class FormScreen extends Screen {
   final List<String> hiddenFields;
   final String submitButtonText;
   final List<String>? shownFields;
-  final SQDoc doc;
+  late final SQDoc doc;
   final Future Function(SQDoc, BuildContext) submitFunction;
 
-  FormScreen(
-    this.doc, {
+  FormScreen({
+    SQDoc? doc,
     String? title,
     this.submitFunction = _defaultSubmitDoc,
     this.hiddenFields = const [],
     this.shownFields = const [],
     this.submitButtonText = "Save",
     super.key,
-  }) : super(title ?? "Edit ${doc.collection.singleDocName}") {
-    collection = doc.collection;
+        super(title ?? "Edit ${doc?.collection.singleDocName}") {
+    if (doc != null) {
+      this.doc = doc;
+      this.collection = this.doc.collection;
+    }
   }
 
   @override
