@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 
+import 'sq_action.dart';
 import '../sq_app.dart';
 import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
@@ -20,6 +21,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   DocScreenBuilder docScreen;
   bool initialized = false;
   late String path;
+  List<SQAction> actions;
 
   static final List<SQCollection> _collections = [];
 
@@ -31,6 +33,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.readOnly = false,
     this.canDeleteDoc = true,
     this.docScreen = defaultDocScreen,
+    this.actions = const [],
   }) {
     this.singleDocName = singleDocName ?? id;
 
