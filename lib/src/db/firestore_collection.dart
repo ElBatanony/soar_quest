@@ -30,7 +30,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
             doc.data() as Map<String, dynamic>,
           ))
         .toList();
-    super.loadCollection();
+    initialized = true;
   }
 
   @override

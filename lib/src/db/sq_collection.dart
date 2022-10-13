@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter/material.dart';
 
 import 'sq_action.dart';
 import '../sq_app.dart';
@@ -45,11 +44,9 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   DocType constructDoc(String id) => SQDoc(id, collection: this) as DocType;
 
-  @mustCallSuper
-  Future<void> loadCollection() async => initialized = true;
-
-  Future<void> loadDoc(DocType doc);
+  Future<void> loadCollection();
   Future<void> saveDoc(DocType doc);
+  Future<void> loadDoc(DocType doc);
   Future<void> deleteDoc(DocType doc);
 
   String getANewDocId() => Uuid().v1();
