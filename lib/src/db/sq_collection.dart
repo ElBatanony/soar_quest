@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 
 import 'sq_action.dart';
 import '../sq_app.dart';
@@ -12,15 +13,12 @@ export 'collection_filter.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
+  SQDoc? parentDoc;
   List<SQField> fields;
   List<DocType> docs = [];
-  late String singleDocName;
-  SQDoc? parentDoc;
-  bool readOnly;
-  bool canDeleteDoc;
+  late String singleDocName, path;
+  bool readOnly, canDeleteDoc, initialized = false;
   DocScreenBuilder docScreen;
-  bool initialized = false;
-  late String path;
   List<SQAction> actions;
 
   static final List<SQCollection> _collections = [];
@@ -37,21 +35,17 @@ abstract class SQCollection<DocType extends SQDoc> {
   }) {
     this.singleDocName = singleDocName ?? id;
 
-    if (parentDoc != null)
-      path = "${parentDoc!.path}/$id";
-    else
-      path = "Example Apps/${SQApp.name}/$id";
+    path = parentDoc == null
+        ? "Example Apps/${SQApp.name}/$id"
+        : "${parentDoc!.path}/$id";
 
     if (byPath(path) == null) _collections.add(this);
   }
 
-  DocType constructDoc(String id) {
-    return SQDoc(id, collection: this) as DocType;
-  }
+  DocType constructDoc(String id) => SQDoc(id, collection: this) as DocType;
 
-  Future<void> loadCollection() async {
-    initialized = true;
-  }
+  @mustCallSuper
+  Future<void> loadCollection() async => initialized = true;
 
   Future<void> loadDoc(DocType doc);
   Future<void> saveDoc(DocType doc);
@@ -60,43 +54,34 @@ abstract class SQCollection<DocType extends SQDoc> {
   String getANewDocId();
 
   T? getField<T extends SQField>(String fieldName) {
-    return fields
-        .whereType<T>()
-        .singleWhereOrNull((field) => field.name == fieldName);
+    return fields.singleWhereOrNull(
+        (field) => field.name == fieldName && field is T) as T?;
   }
-
-  int get docsCount => docs.length;
 
   DocType newDoc({List<SQField> initialFields = const []}) {
     DocType newDoc = constructDoc(getANewDocId());
 
-    for (var initialField in initialFields) {
+    for (final initialField in initialFields) {
       int index =
           newDoc.fields.indexWhere((field) => field.name == initialField.name);
       newDoc.fields[index] = initialField.copy();
     }
 
+    fields
+        .whereType<SQCreatedByField>()
+        .forEach((field) => field.value = SQUserRefField.currentUserRef);
+
     newDoc.initialized = true;
-
-    for (var field in newDoc.fields)
-      if (field.runtimeType == SQCreatedByField)
-        field.value = SQUserRefField.currentUserRef;
-
-    docs.add(newDoc);
-
     return newDoc;
   }
 
   List<DocType> filterBy(List<CollectionFilter> filters) {
-    List<DocType> ret = docs;
-    for (var filter in filters) {
-      ret = filter.filter(ret) as List<DocType>;
-    }
-    return ret;
+    return filters.fold(
+        docs,
+        (remainingDocs, filter) =>
+            filter.filter(remainingDocs) as List<DocType>);
   }
 
-  static SQCollection? byPath(String path) {
-    return _collections
-        .singleWhereOrNull((collection) => collection.path == path);
-  }
+  static SQCollection? byPath(String path) =>
+      _collections.singleWhereOrNull((collection) => collection.path == path);
 }

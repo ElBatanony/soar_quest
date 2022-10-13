@@ -14,9 +14,7 @@ class UnimplementCollection extends SQCollection {
   }
 
   @override
-  Future loadCollection() {
-    throw UnimplementedError();
-  }
+  Future loadCollection() => super.loadCollection();
 
   @override
   Future<SQDoc> loadDoc(SQDoc doc) {
