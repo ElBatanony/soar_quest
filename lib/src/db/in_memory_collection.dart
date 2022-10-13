@@ -21,12 +21,11 @@ class InMemoryCollection extends SQCollection {
   String getANewDocId() => Uuid().v1();
 
   @override
-  loadCollection() async => {};
+  loadCollection() async => super.loadCollection();
 
   @override
-  loadDoc(SQDoc doc) async => docs.firstWhere((e) => e.id == doc.id);
+  loadDoc(SQDoc doc) async => docs.singleWhere((e) => e.id == doc.id);
 
   @override
-  saveDoc(SQDoc doc) async =>
-      docs.any((e) => e.id == doc.id) ? {} : docs.add(doc);
+  saveDoc(SQDoc doc) async => docs.add(doc);
 }
