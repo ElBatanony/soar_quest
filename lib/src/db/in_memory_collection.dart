@@ -19,7 +19,7 @@ class InMemoryCollection extends SQCollection {
   saveDoc(SQDoc doc) async => docs.add(doc);
 
   @override
-  loadDoc(SQDoc doc) async => docs.singleWhere((d) => d.id == doc.id);
+  loadDoc(SQDoc doc) async => {};
 
   @override
   deleteDoc(SQDoc doc) async => docs.removeWhere((d) => d.id == doc.id);
