@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 import 'sq_collection.dart';
 
 class InMemoryCollection extends SQCollection {
@@ -16,9 +14,6 @@ class InMemoryCollection extends SQCollection {
 
   @override
   deleteDoc(SQDoc doc) async => docs.removeWhere((e) => e.id == doc.id);
-
-  @override
-  String getANewDocId() => Uuid().v1();
 
   @override
   loadCollection() async => super.loadCollection();

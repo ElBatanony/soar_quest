@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 
 import 'sq_action.dart';
@@ -51,7 +52,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   Future<void> saveDoc(DocType doc);
   Future<void> deleteDoc(DocType doc);
 
-  String getANewDocId();
+  String getANewDocId() => Uuid().v1();
 
   T? getField<T extends SQField>(String fieldName) {
     return fields.singleWhereOrNull(
