@@ -49,13 +49,13 @@ abstract class SQCollection<DocType extends SQDoc> {
     return SQDoc(id, collection: this) as DocType;
   }
 
-  Future loadCollection() async {
+  Future<void> loadCollection() async {
     initialized = true;
   }
 
   Future<void> loadDoc(DocType doc);
-  Future saveDoc(DocType doc);
-  Future deleteDoc(DocType doc);
+  Future<void> saveDoc(DocType doc);
+  Future<void> deleteDoc(DocType doc);
 
   String getANewDocId();
 
