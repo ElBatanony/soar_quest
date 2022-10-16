@@ -24,7 +24,7 @@ class CategorySelectScreen extends CollectionScreen {
 class _CategorySelectScreenState
     extends CollectionScreenState<CategorySelectScreen> {
   @override
-  Future loadData() async {
+  Future<void> loadData() async {
     await widget.categoryField.collection.loadCollection();
     refreshScreen();
   }

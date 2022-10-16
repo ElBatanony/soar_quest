@@ -16,7 +16,7 @@ class SQVirtualField<T> extends SQField<T> {
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {
-    SQField fieldCopy = field.copy();
+    SQField<T> fieldCopy = field.copy();
     fieldCopy.value = valueBuilder(doc!);
     fieldCopy.readOnly = true;
     return fieldCopy.formField();

@@ -15,7 +15,7 @@ class FirebaseFileStorage extends SQFileStorage {
   }
 
   @override
-  Future uploadFile({
+  Future<void> uploadFile({
     required SQDoc doc,
     required XFile file,
     required Function onUpload,
@@ -46,14 +46,15 @@ class FirebaseFileStorage extends SQFileStorage {
   }
 
   @override
-  Future getFileDownloadURL(SQDoc doc, SQFileField field) async {
+  Future<String> getFileDownloadURL(SQDoc doc, SQFileField field) async {
     final ref = getRef(doc, field);
     final fileUrl = await ref.getDownloadURL();
     return fileUrl;
   }
 
   @override
-  Future deleteFile({required SQDoc doc, required SQFileField field}) async {
+  Future<void> deleteFile(
+      {required SQDoc doc, required SQFileField field}) async {
     final ref = getRef(doc, field);
     field.value = null;
     await ref.delete();

@@ -28,11 +28,12 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     refreshScreen();
   }
 
-  Future goToSignIn() {
+  Future<void> goToSignIn() {
     return SQAuth.auth.signInScreen(forceSignIn: true).go(context);
   }
 
-  Future<void> updateUserField(SQField field, Function updateFunction) async {
+  Future<void> updateUserField(
+      SQField<dynamic> field, Function updateFunction) async {
     dynamic newValue = await showFieldDialog(context: context, field: field);
     if (newValue != null) {
       await updateFunction(newValue);

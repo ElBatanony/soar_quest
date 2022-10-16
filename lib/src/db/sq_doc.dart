@@ -7,7 +7,7 @@ import '../storage/sq_image_field.dart';
 export 'sq_field.dart';
 
 class SQDoc {
-  late List<SQField> fields;
+  late List<SQField<dynamic>> fields;
   String id;
   SQCollection collection;
   bool initialized = false;
@@ -17,7 +17,7 @@ class SQDoc {
     path = "${collection.path}/$id";
 
     fields = collection.fields.map((field) {
-      SQField fieldCopy = field.copy();
+      SQField<dynamic> fieldCopy = field.copy();
       assert(field.runtimeType == fieldCopy.runtimeType,
           "SQField not copied properly (${field.runtimeType} vs. ${fieldCopy.runtimeType})");
       return fieldCopy;
@@ -37,14 +37,13 @@ class SQDoc {
     return ret;
   }
 
-  T getField<T extends SQField>(String fieldName) {
-    return fields
-        .whereType<T>()
-        .singleWhere((field) => field.name == fieldName);
+  F? getField<F extends SQField<dynamic>>(String fieldName) {
+    return fields.singleWhereOrNull(
+        (field) => field.name == fieldName && field is F) as F?;
   }
 
   T? value<T>(String fieldName) {
-    return getField<SQField<T>>(fieldName).value;
+    return getField<SQField<T>>(fieldName)?.value;
   }
 
   String get label => fields.first.value.toString();

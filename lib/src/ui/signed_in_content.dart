@@ -28,7 +28,7 @@ class SignedInContent extends StatefulWidget {
 class _SignedInContentState extends State<SignedInContent> {
   bool isHidden = true;
 
-  late StreamSubscription listener;
+  late StreamSubscription<UserData?> listener;
 
   @override
   void initState() {

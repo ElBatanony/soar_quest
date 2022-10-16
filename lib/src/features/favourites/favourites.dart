@@ -26,7 +26,7 @@ class FavouritesCollection extends FirestoreCollection {
       : super(parentDoc: SQAuth.userDoc);
 
   @override
-  Future loadCollection() async {
+  Future<void> loadCollection() async {
     await super.loadCollection();
     favDocs = docs.map((doc) => FavDoc.fromDoc(doc)).toList();
   }
@@ -52,7 +52,7 @@ class FavouritesFeature {
 
   void addFavourite(SQDoc doc) {
     var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
-    newFavDoc.getField<SQRefField>("ref").value = doc.ref;
+    newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
     favouritesCollection.saveDoc(newFavDoc);
   }
 

@@ -15,7 +15,7 @@ export 'collection_filter.dart';
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
   SQDoc? parentDoc;
-  List<SQField> fields;
+  List<SQField<dynamic>> fields;
   List<DocType> docs = [];
   late String singleDocName, path;
   bool readOnly, canDeleteDoc, initialized = false;
@@ -69,12 +69,12 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   String newDocId() => Uuid().v1();
 
-  T? getField<T extends SQField>(String fieldName) {
+  F? getField<F extends SQField<dynamic>>(String fieldName) {
     return fields.singleWhereOrNull(
-        (field) => field.name == fieldName && field is T) as T?;
+        (field) => field.name == fieldName && field is F) as F?;
   }
 
-  DocType newDoc({List<SQField> initialFields = const []}) {
+  DocType newDoc({List<SQField<dynamic>> initialFields = const []}) {
     DocType newDoc = constructDoc(newDocId());
 
     for (final initialField in initialFields) {

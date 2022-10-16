@@ -5,7 +5,7 @@ import 'package:soar_quest/soar_quest.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  List<SQField> userDocFields = [
+  List<SQField<dynamic>> userDocFields = [
     SQStringField("Name"),
   ];
 

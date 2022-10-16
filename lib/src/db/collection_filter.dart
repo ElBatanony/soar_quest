@@ -6,7 +6,7 @@ abstract class CollectionFilter {
 }
 
 abstract class CollectionFieldFilter extends CollectionFilter {
-  SQField field;
+  SQField<dynamic> field;
   CollectionFieldFilter(this.field);
 }
 
@@ -83,7 +83,8 @@ class CompareFuncFilter extends CollectionFieldFilter {
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where(
       (doc) {
-        Comparable? comparableValue = doc.value<Comparable>(field.name);
+        Comparable<dynamic>? comparableValue =
+            doc.value<Comparable<dynamic>>(field.name);
         if (comparableValue == null)
           throw "Comparable value is null in CompareFuncFilter";
         return compareFunc(

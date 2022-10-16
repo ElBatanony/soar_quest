@@ -25,7 +25,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
   List<SQDoc> filteredDocs = [];
 
   @override
-  Future loadData() async {
+  Future<void> loadData() async {
     await super.loadData();
     updateDocs();
   }

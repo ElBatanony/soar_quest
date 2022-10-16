@@ -18,10 +18,11 @@ class LocalCollection extends SQCollection {
     super.actions,
   });
 
-  Future _initPrefs() async => _prefs ??= await SharedPreferences.getInstance();
+  Future<void> _initPrefs() async =>
+      _prefs ??= await SharedPreferences.getInstance();
 
   @override
-  Future loadCollection() async {
+  Future<void> loadCollection() async {
     await _initPrefs();
     List<String> prefsStrings = _prefs!.getStringList(path) ?? [];
     docs = prefsStrings.map((e) {

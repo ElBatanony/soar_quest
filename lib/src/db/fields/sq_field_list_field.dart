@@ -5,24 +5,24 @@ import '../sq_doc.dart';
 import '../../ui/sq_button.dart';
 import 'sq_list_field.dart';
 
-class SQFieldListField extends SQListField<SQField> {
-  List<SQField> allowedTypes;
+class SQFieldListField extends SQListField<SQField<dynamic>> {
+  List<SQField<dynamic>> allowedTypes;
 
   SQFieldListField(super.name, {super.value, required this.allowedTypes});
 
-  List<SQField> get fields => value ?? [];
+  List<SQField<dynamic>> get fields => value ?? [];
 
   @override
-  List<SQField> parse(source) {
+  List<SQField<dynamic>> parse(source) {
     List<dynamic> dynamicList = source as List;
-    List<SQField> fields = [];
+    List<SQField<dynamic>> fields = [];
     for (var dynamicFieldValue in dynamicList) {
-      for (SQField allowedType in allowedTypes) {
+      for (SQField<dynamic> allowedType in allowedTypes) {
         var parsed = allowedType.parse(dynamicFieldValue);
 
         if (parsed != null &&
             parsed.runtimeType == allowedType.value.runtimeType) {
-          SQField newField = allowedType.copy();
+          SQField<dynamic> newField = allowedType.copy();
           newField.value = parsed;
           fields.add(newField);
           break;
@@ -47,9 +47,9 @@ class SQFieldListField extends SQListField<SQField> {
   }
 }
 
-Future<SQField?> showFieldOptions(SQFieldListField fieldListfield,
+Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
     {required BuildContext context}) {
-  return showDialog<SQField>(
+  return showDialog<SQField<dynamic>>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -58,8 +58,8 @@ Future<SQField?> showFieldOptions(SQFieldListField fieldListfield,
               children: [
                 ...fieldListfield.allowedTypes
                     .map((field) => SQButton(field.value.runtimeType.toString(),
-                        onPressed: () =>
-                            exitScreen<SQField>(context, value: field.copy())))
+                        onPressed: () => exitScreen<SQField<dynamic>>(context,
+                            value: field.copy())))
                     .toList(),
               ],
             ),
@@ -89,7 +89,8 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
   }
 
   void addField() async {
-    SQField? newValue = await showFieldOptions(listField, context: context);
+    SQField<dynamic>? newValue =
+        await showFieldOptions(listField, context: context);
     if (newValue != null) {
       setState(() {
         listField.fields.add(newValue);

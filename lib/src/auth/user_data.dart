@@ -9,8 +9,8 @@ abstract class UserData {
 
   late SQDoc userDoc;
 
-  List<SQField> docFields;
-  List<SQField> publicFields;
+  List<SQField<dynamic>> docFields;
+  List<SQField<dynamic>> publicFields; // TODO: remove publicFields
 
   UserData(
       {required this.userId,
@@ -28,9 +28,9 @@ abstract class SignedInUser extends UserData {
   String? get email;
   String? get displayName;
 
-  Future updateEmail(String newEmail);
+  Future<void> updateEmail(String newEmail);
 
-  Future updatePassword(String newPassword);
+  Future<void> updatePassword(String newPassword);
 
   Future<void> updateDisplayName(String displayName);
 }
@@ -59,13 +59,13 @@ class FirebaseSignedInUser extends SignedInUser {
   String? get displayName => firebaseUser.displayName;
 
   @override
-  Future updateEmail(String newEmail) async {
+  Future<void> updateEmail(String newEmail) async {
     await firebaseUser.updateEmail(newEmail);
     refreshUser();
   }
 
   @override
-  Future updatePassword(String newPassword) async {
+  Future<void> updatePassword(String newPassword) async {
     await firebaseUser.updatePassword(newPassword);
     refreshUser();
   }

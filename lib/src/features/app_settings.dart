@@ -7,9 +7,9 @@ import '../screens/form_screen.dart';
 class AppSettings {
   static SQCollection? _settingsCollection;
   static SQDoc? settingsDoc;
-  static List<SQField> settingsFields = [];
+  static List<SQField<dynamic>> settingsFields = [];
 
-  static void setSettings(List<SQField> settings) {
+  static void setSettings(List<SQField<dynamic>> settings) {
     settingsFields = settings;
     _settingsCollection = FirestoreCollection(
         id: 'Settings', parentDoc: SQAuth.userDoc, fields: settingsFields);

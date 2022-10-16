@@ -36,7 +36,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
   Widget readOnlyBuilder(BuildContext context) {
-    SQField subfieldCopy = field.subfield.copy();
+    SQField<T> subfieldCopy = field.subfield.copy();
     subfieldCopy.value = field.value;
     subfieldCopy.readOnly = true;
     return subfieldCopy.formField();

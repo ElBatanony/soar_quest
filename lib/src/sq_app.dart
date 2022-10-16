@@ -10,10 +10,10 @@ class SQApp {
   static late String name;
   static late ThemeData theme;
 
-  static Future init(
+  static Future<void> init(
     String name, {
     ThemeData? theme,
-    List<SQField>? userDocFields,
+    List<SQField<dynamic>>? userDocFields,
     FirebaseOptions? firebaseOptions,
   }) async {
     SQApp.name = name;

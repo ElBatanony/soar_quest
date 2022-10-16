@@ -47,7 +47,7 @@ class FirebaseAuthManager extends SQAuthManager {
   }
 
   @override
-  Future signInWithEmailAndPassword({
+  Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -63,7 +63,7 @@ class FirebaseAuthManager extends SQAuthManager {
   }
 
   @override
-  Future signUpWithEmailAndPassword({
+  Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
   }) async {

@@ -5,7 +5,7 @@ import '../firebase_options.dart';
 late SQCollection workstreams, projects, tasks;
 
 void main() async {
-  List<SQField> userDocFields = [
+  List<SQField<dynamic>> userDocFields = [
     SQStringField("Name"),
     SQStringField("Role"),
     SQImageField("Photo"),

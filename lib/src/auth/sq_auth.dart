@@ -11,11 +11,11 @@ class SQAuth {
   static late SQCollection usersCollection;
   static UserData get user => auth.user;
   static SQDoc get userDoc => user.userDoc;
-  static List<SQField> userDocFields = [];
+  static List<SQField<dynamic>> userDocFields = [];
 
-  static Future init({
+  static Future<void> init({
     SQAuthManager? authManager,
-    List<SQField>? userDocFields,
+    List<SQField<dynamic>>? userDocFields,
   }) async {
     SQAuth.userDocFields = userDocFields ?? [SQStringField("Full Name")];
     SQAuth.auth = authManager ?? FirebaseAuthManager();

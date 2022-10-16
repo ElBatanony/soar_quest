@@ -11,7 +11,7 @@ abstract class SQAction {
 
   SQAction(this.name);
 
-  Future execute(SQDoc doc, BuildContext context);
+  Future<void> execute(SQDoc doc, BuildContext context);
 }
 
 class GoEditCloneAction extends GoScreenAction {
@@ -37,7 +37,7 @@ class GoEditAction extends GoScreenAction {
 
 class GoDerivedDocAction extends GoScreenAction {
   SQCollection Function() getCollection;
-  List<SQField> Function(SQDoc) initialFields;
+  List<SQField<dynamic>> Function(SQDoc) initialFields;
 
   GoDerivedDocAction(
     super.name, {
@@ -58,15 +58,17 @@ class DeleteDocAction extends SQAction {
 }
 
 class SetFieldsAction extends SQAction {
-  List<SQField> Function(SQDoc) getFields;
+  List<SQField<dynamic>> Function(SQDoc) getFields;
 
   SetFieldsAction(super.name, {required this.getFields});
 
   @override
-  Future execute(SQDoc doc, BuildContext context) async {
-    List<SQField> newFields = getFields(doc);
+  Future<void> execute(SQDoc doc, BuildContext context) async {
+    List<SQField<dynamic>> newFields = getFields(doc);
     for (final field in newFields) {
-      doc.getField(field.name).value = field.value;
+      SQField<dynamic>? docField = doc.getField(field.name);
+      if (docField == null) throw "SetFieldsAction null doc field";
+      docField.value = field.value;
     }
   }
 }
@@ -79,7 +81,7 @@ class ExecuteOnDocsAction extends SQAction {
       {required this.getDocs, required this.action});
 
   @override
-  Future execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, BuildContext context) async {
     List<SQDoc> fetchedDocs = getDocs(doc);
     for (final doc in fetchedDocs) {
       await action.execute(doc, context);
@@ -93,7 +95,7 @@ class OpenUrlAction extends SQAction {
   OpenUrlAction(super.name, {required this.getUrl});
 
   @override
-  Future execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, BuildContext context) async {
     String url = getUrl(doc);
     if (!await launchUrl(Uri.parse(url),
         mode: LaunchMode.externalApplication)) {
@@ -108,7 +110,7 @@ class SequencesAction extends SQAction {
   SequencesAction(super.name, {required this.actions});
 
   @override
-  Future execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, BuildContext context) async {
     for (final action in actions) {
       await action.execute(doc, context);
     }
@@ -121,7 +123,7 @@ class CustomAction extends SQAction {
   CustomAction(super.name, {required this.customExecute});
 
   @override
-  Future execute(SQDoc doc, BuildContext context) {
+  Future<void> execute(SQDoc doc, BuildContext context) {
     return customExecute(doc, context);
   }
 }

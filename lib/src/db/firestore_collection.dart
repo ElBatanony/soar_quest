@@ -20,7 +20,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  Future loadCollection() async {
+  Future<void> loadCollection() async {
     print("Fetching collection from ${ref.path}");
     final snap = await ref.get();
     print('${snap.docs.length} docs fetched for $id!');
@@ -34,7 +34,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  Future deleteDoc(DocType doc) async {
+  Future<void> deleteDoc(DocType doc) async {
     await ref.doc(doc.id).delete();
     return loadCollection();
   }
@@ -43,14 +43,14 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   String newDocId() => ref.doc().id;
 
   @override
-  Future ensureInitialized(DocType doc) async {
+  Future<void> ensureInitialized(DocType doc) async {
     if (doc.initialized) return;
     final docSnap = await ref.doc(doc.id).get();
     doc.parse((docSnap.data() ?? <String, dynamic>{}) as Map<String, dynamic>);
   }
 
   @override
-  Future saveDoc(DocType doc) async {
+  Future<void> saveDoc(DocType doc) async {
     await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
     return loadCollection();
   }

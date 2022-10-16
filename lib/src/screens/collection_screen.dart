@@ -37,7 +37,7 @@ class CollectionScreen extends Screen {
 }
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
-  Future loadData() async {
+  Future<void> loadData() async {
     await widget.collection.loadCollection();
     refreshScreen();
     return;
@@ -49,7 +49,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     super.initState();
   }
 
-  Future goToDocScreen(DocScreen docScreen) async {
+  Future<void> goToDocScreen(DocScreen docScreen) async {
     await docScreen.go(context);
     refreshScreen();
   }
@@ -77,7 +77,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
         .toList();
   }
 
-  Future createNewDoc() async {
+  Future<void> createNewDoc() async {
     await FormScreen(widget.collection.newDoc()).go(context);
     loadData();
   }
