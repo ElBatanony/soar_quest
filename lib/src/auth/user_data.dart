@@ -10,13 +10,12 @@ abstract class UserData {
   late SQDoc userDoc;
 
   List<SQField<dynamic>> docFields;
-  List<SQField<dynamic>> publicFields; // TODO: remove publicFields
 
-  UserData(
-      {required this.userId,
-      required this.isAnonymous,
-      required this.docFields,
-      this.publicFields = const []});
+  UserData({
+    required this.userId,
+    required this.isAnonymous,
+    required this.docFields,
+  });
 }
 
 abstract class SignedInUser extends UserData {
