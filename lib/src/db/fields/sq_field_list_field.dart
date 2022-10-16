@@ -59,7 +59,7 @@ Future<SQField?> showFieldOptions(SQFieldListField fieldListfield,
                 ...fieldListfield.allowedTypes
                     .map((field) => SQButton(field.value.runtimeType.toString(),
                         onPressed: () =>
-                            exitScreen(context, value: field.copy())))
+                            exitScreen<SQField>(context, value: field.copy())))
                     .toList(),
               ],
             ),

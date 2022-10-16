@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 
-export 'screen_navigation.dart';
+Future<T?> _goToScreen<T>(
+  Screen screen,
+  BuildContext context, {
+  bool replace = false,
+}) {
+  if (replace)
+    return Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => screen),
+    );
 
-Future<T?> _goToScreen<T>(Screen screen, BuildContext context) =>
-    Navigator.push<T>(context, MaterialPageRoute(builder: (context) => screen));
+  return Navigator.push<T>(
+      context, MaterialPageRoute(builder: (context) => screen));
+}
 
 class Screen extends StatefulWidget {
   final String title;
@@ -24,8 +34,9 @@ class Screen extends StatefulWidget {
   @override
   State<Screen> createState() => ScreenState();
 
-  Future<T?> go<T extends Object?>(BuildContext context) =>
-      _goToScreen<T>(this, context);
+  Future<T?> go<T extends Object?>(BuildContext context,
+          {bool replace = false}) =>
+      _goToScreen<T>(this, context, replace: replace);
 }
 
 class ScreenState<T extends Screen> extends State<T> {
@@ -68,4 +79,8 @@ class ScreenState<T extends Screen> extends State<T> {
       floatingActionButton: floatingActionButton(),
     );
   }
+}
+
+void exitScreen<T extends Object?>(BuildContext context, {T? value}) {
+  if (Navigator.canPop(context)) return Navigator.pop<T>(context, value);
 }

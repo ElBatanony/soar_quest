@@ -4,8 +4,8 @@ import '../../screens/screen.dart';
 import '../../ui/sq_button.dart';
 import '../sq_field.dart';
 
-Future showFieldDialog(
-    {required SQField field, required BuildContext context}) {
+Future showFieldDialog<T>(
+    {required SQField<T> field, required BuildContext context}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -16,7 +16,7 @@ Future showFieldDialog(
               SQButton('Cancel', onPressed: () => exitScreen(context)),
               SQButton(
                 'Save',
-                onPressed: () => exitScreen(context, value: field.value),
+                onPressed: () => exitScreen<T>(context, value: field.value),
               ),
             ]);
       });

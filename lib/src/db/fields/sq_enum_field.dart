@@ -72,7 +72,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   }
 }
 
-Future<T?> showEnumOptionsDialog<T>(SQEnumField enumField,
+Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
     {required BuildContext context}) {
   return showDialog<T?>(
       context: context,
@@ -83,7 +83,7 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField enumField,
               children: [
                 ...enumField.options
                     .map((v) => SQButton(v.toString(),
-                        onPressed: () => exitScreen(context, value: v)))
+                        onPressed: () => exitScreen<T>(context, value: v)))
                     .toList(),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../db/sq_doc.dart';
 import '../../ui/sq_button.dart';
 
 import '../collection_screen.dart';
@@ -17,7 +18,7 @@ class _SelectDocScreenState extends CollectionScreenState<SelectDocScreen> {
   Widget build(BuildContext context) {
     var itemsDisplay = widget.collection.docs
         .map((doc) => SQButton(doc.label,
-            onPressed: () => exitScreen(context, value: doc)))
+            onPressed: () => exitScreen<SQDoc>(context, value: doc)))
         .toList();
 
     return Scaffold(

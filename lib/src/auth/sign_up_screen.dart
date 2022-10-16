@@ -54,7 +54,7 @@ class _SQSignUpScreenState extends ScreenState<SQSignUpScreen> {
         SQButton(
           "Sign In",
           onPressed: () =>
-              replaceScreen(SQAuth.auth.signInScreen(), context: context),
+              SQAuth.auth.signInScreen().go(context, replace: true),
         )
       ],
     );
