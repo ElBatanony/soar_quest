@@ -42,12 +42,29 @@ abstract class SQCollection<DocType extends SQDoc> {
     if (byPath(path) == null) _collections.add(this);
   }
 
+  bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
+
+  // TODO: move newDoc logic here
   DocType constructDoc(String id) => SQDoc(id, collection: this) as DocType;
 
   Future<void> loadCollection();
-  Future<void> saveDoc(DocType doc);
-  Future<void> loadDoc(DocType doc);
-  Future<void> deleteDoc(DocType doc);
+  Future<void> saveCollection();
+
+  Future<void> saveDoc(DocType doc) {
+    if (hasDoc(doc)) docs.removeWhere((d) => d.id == doc.id);
+    docs.add(doc);
+    return saveCollection();
+  }
+
+  Future<void> deleteDoc(DocType doc) {
+    if (hasDoc(doc)) deleteDoc(doc);
+    return saveCollection();
+  }
+
+  Future<void> ensureInitialized(DocType doc) async {
+    if (doc.initialized) return;
+    throw "Doc not initialized";
+  }
 
   String getANewDocId() => Uuid().v1();
 
@@ -70,6 +87,7 @@ abstract class SQCollection<DocType extends SQDoc> {
         .forEach((field) => field.value = SQUserRefField.currentUserRef);
 
     newDoc.initialized = true;
+    docs.add(newDoc);
     return newDoc;
   }
 
