@@ -49,7 +49,20 @@ void main() async {
         SQStringField("Name"),
       ]);
 
+  SQCollection testInMemoryCollection =
+      InMemoryCollection(id: "Test InMemory", fields: [
+    SQStringField("Name"),
+    SQBoolField("Bool"),
+  ]);
+
+  SQCollection testLocalCollection = LocalCollection(id: "Test Local", fields: [
+    SQStringField("Name"),
+    SQBoolField("Bool"),
+  ]);
+
   SQApp.run(MainScreen([
+    CollectionScreen(collection: testInMemoryCollection),
+    CollectionScreen(collection: testLocalCollection),
     CollectionScreen(
       collection: testCollection,
       canCreate: true,
