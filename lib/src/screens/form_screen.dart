@@ -32,7 +32,9 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
   @override
   void initState() {
     if (widget.doc.initialized == false)
-      widget.collection.loadDoc(widget.doc).then((_) => refreshScreen());
+      widget.collection
+          .ensureInitialized(widget.doc)
+          .then((_) => refreshScreen());
 
     for (var field in widget.doc.fields)
       if (field.runtimeType == SQEditedByField)

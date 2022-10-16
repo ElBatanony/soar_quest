@@ -45,7 +45,7 @@ class FirebaseSignedInUser extends SignedInUser {
           docFields: SQAuth.userDocFields,
         ) {
     userDoc = SQDoc(userId, collection: SQAuth.usersCollection);
-    SQAuth.usersCollection.loadDoc(userDoc);
+    SQAuth.usersCollection.ensureInitialized(userDoc);
   }
 
   refreshUser() {

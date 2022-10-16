@@ -39,11 +39,12 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     return loadCollection();
   }
 
+  // TODO: rename to newDocID
   @override
   String getANewDocId() => ref.doc().id;
 
   @override
-  Future loadDoc(DocType doc) async {
+  Future ensureInitialized(DocType doc) async {
     if (doc.initialized) return;
     final docSnap = await ref.doc(doc.id).get();
     doc.parse((docSnap.data() ?? <String, dynamic>{}) as Map<String, dynamic>);
@@ -54,4 +55,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
     return loadCollection();
   }
+
+  @override
+  Future<void> saveCollection() async => {};
 }

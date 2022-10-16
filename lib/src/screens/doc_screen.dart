@@ -29,7 +29,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   late SQDoc doc;
 
   void loadData() async {
-    await doc.collection.loadDoc(doc);
+    await doc.collection.ensureInitialized(doc);
     refreshScreen();
   }
 
