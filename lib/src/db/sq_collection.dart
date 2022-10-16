@@ -66,7 +66,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     throw "Doc not initialized";
   }
 
-  String getANewDocId() => Uuid().v1();
+  String newDocId() => Uuid().v1();
 
   T? getField<T extends SQField>(String fieldName) {
     return fields.singleWhereOrNull(
@@ -74,7 +74,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   }
 
   DocType newDoc({List<SQField> initialFields = const []}) {
-    DocType newDoc = constructDoc(getANewDocId());
+    DocType newDoc = constructDoc(newDocId());
 
     for (final initialField in initialFields) {
       int index =

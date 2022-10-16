@@ -39,9 +39,8 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     return loadCollection();
   }
 
-  // TODO: rename to newDocID
   @override
-  String getANewDocId() => ref.doc().id;
+  String newDocId() => ref.doc().id;
 
   @override
   Future ensureInitialized(DocType doc) async {
