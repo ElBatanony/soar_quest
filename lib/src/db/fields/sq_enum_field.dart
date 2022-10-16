@@ -72,7 +72,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   }
 }
 
-Future showEnumOptionsDialog<T>(SQEnumField enumField,
+Future<T?> showEnumOptionsDialog<T>(SQEnumField enumField,
     {required BuildContext context}) {
   return showDialog<T?>(
       context: context,

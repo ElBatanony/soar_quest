@@ -13,8 +13,9 @@ class SQTimeOfDay extends TimeOfDay {
   }
 
   static SQTimeOfDay? parse(Map<String, dynamic> source) {
-    if (source["hour"] != null && source["minute"] != null)
-      return SQTimeOfDay(hour: source["hour"], minute: source["minute"]);
+    if (source["hour"] is int && source["minute"] is int)
+      return SQTimeOfDay(
+          hour: source["hour"] as int, minute: source["minute"] as int);
 
     return null;
   }

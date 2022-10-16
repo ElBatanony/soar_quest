@@ -44,7 +44,7 @@ class SQDoc {
   }
 
   T? value<T>(String fieldName) {
-    return getField(fieldName).value;
+    return getField<SQField<T>>(fieldName).value;
   }
 
   String get label => fields.first.value.toString();

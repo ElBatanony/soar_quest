@@ -29,7 +29,7 @@ class StringContainsFilter extends CollectionFieldFilter {
     return docs
         .where((doc) => (doc.value(field.name) as String)
             .toLowerCase()
-            .contains(field.value.toLowerCase()))
+            .contains(field.value.toLowerCase() as String))
         .toList();
   }
 }
@@ -44,7 +44,8 @@ class DocRefFilter extends CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
       if (doc.value(fieldName) == null) return false;
-      SQRef docRef = doc.value(fieldName);
+      SQRef? docRef = doc.value<SQRef>(fieldName);
+      if (docRef == null) throw "Filtering null docRef";
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
@@ -52,17 +53,20 @@ class DocRefFilter extends CollectionFilter {
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {
-  SQRefField docRefField;
+  DocRefFieldFilter({required SQRefField docRefField}) : super(docRefField);
 
-  DocRefFieldFilter({required this.docRefField}) : super(docRefField);
+  @override
+  SQRefField get field => super.field as SQRefField;
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
       if (doc.value(field.name) == null) return false;
 
-      SQRef docRef = doc.value(field.name);
-      SQRef fieldValue = field.value;
+      SQRef? docRef = doc.value<SQRef>(field.name);
+      SQRef? fieldValue = field.value;
+      if (docRef == null || fieldValue == null)
+        throw "Null doc refs in DocRefFieldFilter";
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
@@ -76,12 +80,15 @@ class CompareFuncFilter extends CollectionFieldFilter {
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where(
-          (doc) => compareFunc(
-            doc.value(field.name).compareTo(field.value),
-          ),
-        )
-        .toList();
+    return docs.where(
+      (doc) {
+        Comparable? comparableValue = doc.value<Comparable>(field.name);
+        if (comparableValue == null)
+          throw "Comparable value is null in CompareFuncFilter";
+        return compareFunc(
+          comparableValue.compareTo(field.value),
+        );
+      },
+    ).toList();
   }
 }

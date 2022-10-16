@@ -26,7 +26,12 @@ class LocalCollection extends SQCollection {
     List<String> prefsStrings = _prefs!.getStringList(path) ?? [];
     docs = prefsStrings.map((e) {
       final docObject = jsonDecode(e);
-      return constructDoc(docObject['id'])..parse(docObject['data']);
+      String? newDocId = docObject['id'] as String?;
+      Map<String, dynamic>? newDocData =
+          docObject['data'] as Map<String, dynamic>?;
+      if (newDocId == null) throw "Doc ID is null";
+      if (newDocData == null) throw "Doc data is null";
+      return constructDoc(newDocId)..parse(newDocData);
     }).toList();
     initialized = true;
   }

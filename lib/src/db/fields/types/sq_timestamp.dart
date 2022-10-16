@@ -9,7 +9,7 @@ class SQTimestamp extends Timestamp {
     return SQTimestamp(timestamp.seconds, timestamp.nanoseconds);
   }
 
-  factory SQTimestamp.fromTimestamp(dynamic timestamp) {
+  factory SQTimestamp.fromTimestamp(Timestamp timestamp) {
     return SQTimestamp(timestamp.seconds, timestamp.nanoseconds);
   }
 
@@ -19,10 +19,10 @@ class SQTimestamp extends Timestamp {
   }
 
   static SQTimestamp? parse(dynamic source) {
-    if (source.runtimeType == Timestamp)
+    if (source is Timestamp)
       return SQTimestamp.fromTimestamp(source);
-    else if (source["_seconds"] != null)
-      return SQTimestamp(source["_seconds"], 0);
+    else if (source["_seconds"] is int)
+      return SQTimestamp(source["_seconds"] as int, 0);
     return null;
   }
 }

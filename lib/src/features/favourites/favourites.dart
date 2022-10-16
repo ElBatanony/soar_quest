@@ -5,16 +5,18 @@ import '../../db/firestore_collection.dart';
 import '../../db/sq_collection.dart';
 import '../../db/fields/sq_ref_field.dart';
 import '../../../screens.dart';
+import '../../ui/snackbar.dart';
 import 'toggle_in_favourites_button.dart';
 import '../../ui/sq_button.dart';
 
 class FavDoc extends SQDoc {
-  SQRef favedDocRef;
+  SQRef? favedDocRef;
 
   FavDoc(super.id, {required this.favedDocRef, required super.collection});
 
   FavDoc.fromDoc(SQDoc doc)
-      : this(doc.id, favedDocRef: doc.value('ref'), collection: doc.collection);
+      : this(doc.id,
+            favedDocRef: doc.value<SQRef>('ref'), collection: doc.collection);
 }
 
 class FavouritesCollection extends FirestoreCollection {
@@ -90,12 +92,13 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
 
   @override
   Widget docDisplay(SQDoc doc) {
-    SQRef originalDocRef = doc.value("ref");
+    SQRef? originalDocRef = doc.value<SQRef>("ref");
 
     return ListTile(
       title: SQButton(doc.label,
-          onPressed: () =>
-              widget.docScreen(originalDocRef.getDoc()).go(context)),
+          onPressed: () => originalDocRef != null
+              ? showSnackBar("Doc Ref is Null", context: context)
+              : widget.docScreen(originalDocRef!.getDoc()).go(context)),
       trailing: SQButton(
         'Remove',
         onPressed: () => removeFromFavourites(doc),

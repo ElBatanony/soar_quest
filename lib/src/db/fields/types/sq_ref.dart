@@ -21,9 +21,9 @@ class SQRef {
   String toString() => label;
 
   static SQRef? parse(Map<String, dynamic> source) {
-    String? docId = source["docId"];
-    String? collectionPath = source["collectionPath"];
-    String? label = source["label"];
+    String? docId = source["docId"] as String?;
+    String? collectionPath = source["collectionPath"] as String?;
+    String? label = source["label"] as String?;
 
     if (docId == null || collectionPath == null || label == null) return null;
 

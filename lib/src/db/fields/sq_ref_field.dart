@@ -63,7 +63,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
               SQDoc? retDoc = await SelectDocScreen(
                       title: "Select ${field.name}",
                       collection: field.collection)
-                  .go(context);
+                  .go<SQDoc>(context);
 
               if (retDoc != null) {
                 SQRef ref = SQRef(

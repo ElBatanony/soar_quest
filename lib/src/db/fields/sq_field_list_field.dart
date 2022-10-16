@@ -47,7 +47,7 @@ class SQFieldListField extends SQListField<SQField> {
   }
 }
 
-Future showFieldOptions(SQFieldListField fieldListfield,
+Future<SQField?> showFieldOptions(SQFieldListField fieldListfield,
     {required BuildContext context}) {
   return showDialog<SQField>(
       context: context,
@@ -100,7 +100,7 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
   @override
   Widget build(BuildContext context) {
     var listItems = listField.fields;
-    var listItemsWidgets = [];
+    var listItemsWidgets = <Widget>[];
 
     for (int i = 0; i < listItems.length; i++) {
       listItemsWidgets.add(Column(

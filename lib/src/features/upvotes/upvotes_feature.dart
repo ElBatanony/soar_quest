@@ -19,7 +19,7 @@ class UpvotesFeature {
         upvotesCollection.docs.firstWhere((doc) => doc.id == upvoteId));
   }
 
-  static canUpvote(SQCollection upvotesCollection, String upvoteId) {
+  static bool canUpvote(SQCollection upvotesCollection, String upvoteId) {
     return upvotesCollection.docs.any((doc) => doc.id == upvoteId);
   }
 }
