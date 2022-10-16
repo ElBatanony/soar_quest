@@ -17,7 +17,9 @@ class ValueFilter extends CollectionFilter {
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs.where((doc) => doc.value(fieldName) == fieldValue).toList();
+    return docs
+        .where((doc) => doc.value<dynamic>(fieldName) == fieldValue)
+        .toList();
   }
 }
 
@@ -43,7 +45,7 @@ class DocRefFilter extends CollectionFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
-      if (doc.value(fieldName) == null) return false;
+      if (doc.value<SQRef>(fieldName) == null) return false;
       SQRef? docRef = doc.value<SQRef>(fieldName);
       if (docRef == null) throw "Filtering null docRef";
       return docRef.docId == fieldValue.docId &&
@@ -60,13 +62,12 @@ class DocRefFieldFilter extends CollectionFieldFilter {
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs.where((doc) {
-      if (doc.value(field.name) == null) return false;
+    SQRef? fieldValue = field.value;
+    if (fieldValue == null) throw "Null field value ref in DocRefFieldFilter";
 
+    return docs.where((doc) {
       SQRef? docRef = doc.value<SQRef>(field.name);
-      SQRef? fieldValue = field.value;
-      if (docRef == null || fieldValue == null)
-        throw "Null doc refs in DocRefFieldFilter";
+      if (docRef == null) return false;
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();

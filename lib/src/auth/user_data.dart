@@ -48,7 +48,7 @@ class FirebaseSignedInUser extends SignedInUser {
     SQAuth.usersCollection.ensureInitialized(userDoc);
   }
 
-  refreshUser() {
+  void refreshUser() {
     firebaseUser = firebase_auth.FirebaseAuth.instance.currentUser!;
   }
 

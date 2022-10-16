@@ -9,12 +9,14 @@ class UpvotesFeature {
     return _UpvoteButton(doc: doc);
   }
 
-  static addUpvote(SQCollection upvotesCollection, String upvoteId) {
+  static Future<void> addUpvote(
+      SQCollection upvotesCollection, String upvoteId) {
     return upvotesCollection
         .saveDoc(SQDoc(upvoteId, collection: upvotesCollection));
   }
 
-  static removeUpvote(SQCollection upvotesCollection, String upvoteId) {
+  static Future<void> removeUpvote(
+      SQCollection upvotesCollection, String upvoteId) {
     return upvotesCollection.deleteDoc(
         upvotesCollection.docs.firstWhere((doc) => doc.id == upvoteId));
   }

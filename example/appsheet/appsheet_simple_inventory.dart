@@ -41,7 +41,7 @@ void main() async {
       docDisplay: (doc, s) => ListTile(
         title: Text(doc.label),
         onTap: () => s.goToDocScreen(s.docScreen(doc)),
-        trailing: Text(doc.value("Amount").toString()),
+        trailing: Text(doc.value<int>("Amount").toString()),
       ),
     ),
   ]));

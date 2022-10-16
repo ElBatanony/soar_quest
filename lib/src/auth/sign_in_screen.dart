@@ -30,7 +30,7 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
     super.initState();
   }
 
-  signIn() {
+  void signIn() {
     SQAuth.auth
         .signInWithEmailAndPassword(
             email: emailField.value ?? "", password: passwordField.value ?? "")

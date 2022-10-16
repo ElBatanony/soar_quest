@@ -6,7 +6,7 @@ abstract class SQAuthManager {
 
   late UserData user;
 
-  updateUserData();
+  Future updateUserData();
 
   Stream<UserData?> authStateChanges();
 

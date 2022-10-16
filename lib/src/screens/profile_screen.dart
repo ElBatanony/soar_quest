@@ -23,7 +23,7 @@ class ProfileScreen extends Screen {
 }
 
 class _ProfileScreenState extends ScreenState<ProfileScreen> {
-  signOut() async {
+  Future<void> signOut() async {
     await SQAuth.auth.signOut();
     refreshScreen();
   }
@@ -32,7 +32,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     return SQAuth.auth.signInScreen(forceSignIn: true).go(context);
   }
 
-  updateUserField(SQField field, Function updateFunction) async {
+  Future<void> updateUserField(SQField field, Function updateFunction) async {
     dynamic newValue = await showFieldDialog(context: context, field: field);
     if (newValue != null) {
       await updateFunction(newValue);
@@ -40,13 +40,13 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     }
   }
 
-  updateUsername(SignedInUser user) async {
+  Future<void> updateUsername(SignedInUser user) async {
     return updateUserField(
         SQStringField("Username", value: user.displayName ?? ""),
         user.updateDisplayName);
   }
 
-  updateEmail(SignedInUser user) async {
+  Future<void> updateEmail(SignedInUser user) async {
     try {
       await updateUserField(
           SQStringField("Email", value: user.email ?? ""), user.updateEmail);
@@ -56,7 +56,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
     }
   }
 
-  updatePassword(SignedInUser user) async {
+  Future<void> updatePassword(SignedInUser user) async {
     try {
       await updateUserField(SQStringField("Password"), user.updatePassword);
     } catch (e) {

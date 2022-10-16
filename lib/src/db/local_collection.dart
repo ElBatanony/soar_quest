@@ -18,7 +18,7 @@ class LocalCollection extends SQCollection {
     super.actions,
   });
 
-  _initPrefs() async => _prefs ??= await SharedPreferences.getInstance();
+  Future _initPrefs() async => _prefs ??= await SharedPreferences.getInstance();
 
   @override
   Future loadCollection() async {

@@ -9,14 +9,14 @@ class AppSettings {
   static SQDoc? settingsDoc;
   static List<SQField> settingsFields = [];
 
-  static setSettings(List<SQField> settings) {
+  static void setSettings(List<SQField> settings) {
     settingsFields = settings;
     _settingsCollection = FirestoreCollection(
         id: 'Settings', parentDoc: SQAuth.userDoc, fields: settingsFields);
     settingsDoc = SQDoc('default', collection: _settingsCollection!);
   }
 
-  getSetting(String settingsName) {
+  T? getSetting<T>(String settingsName) {
     return settingsDoc?.value(settingsName);
   }
 

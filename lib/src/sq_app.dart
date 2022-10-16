@@ -27,7 +27,7 @@ class SQApp {
     }
   }
 
-  static run(Screen homescreen) {
+  static void run(Screen homescreen) {
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,

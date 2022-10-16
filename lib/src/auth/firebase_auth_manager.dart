@@ -10,7 +10,7 @@ class FirebaseAuthManager extends SQAuthManager {
   static late final FirebaseAuth _auth;
 
   @override
-  updateUserData() {
+  Future<void> updateUserData() async {
     final firebaseUser = _auth.currentUser!;
     user = FirebaseSignedInUser(firebaseUser);
   }

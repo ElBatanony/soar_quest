@@ -30,7 +30,7 @@ class _SQSignUpScreenState extends ScreenState<SQSignUpScreen> {
     super.initState();
   }
 
-  redirect() {
+  void redirect() {
     exitScreen(context);
   }
 

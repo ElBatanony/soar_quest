@@ -42,7 +42,7 @@ class SQFileFormField<FileField extends SQFileField>
 
 class SQFileFormFieldState<FileField extends SQFileField>
     extends SQFormFieldState<FileField> {
-  openFileUrl() async {
+  Future<void> openFileUrl() async {
     if (field.downloadUrl == null)
       throw "Download URL for ${field.name} is null";
     if (!await launchUrl(Uri.parse(field.downloadUrl!),
@@ -51,7 +51,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
     }
   }
 
-  selectAndUploadFile() async {
+  Future<void> selectAndUploadFile() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -63,7 +63,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
     }
   }
 
-  deleteFile() async {
+  Future<void> deleteFile() async {
     await field.storage.deleteFile(doc: doc!, field: field);
     onChanged();
   }

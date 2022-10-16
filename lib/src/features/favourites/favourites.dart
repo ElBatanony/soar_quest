@@ -50,17 +50,17 @@ class FavouritesFeature {
     return ToggleInFavouritesButton(doc, favouritesFeature: this);
   }
 
-  addFavourite(SQDoc doc) {
+  void addFavourite(SQDoc doc) {
     var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
     newFavDoc.getField<SQRefField>("ref").value = doc.ref;
     favouritesCollection.saveDoc(newFavDoc);
   }
 
-  removeFavourite(SQDoc favDoc) {
+  void removeFavourite(SQDoc favDoc) {
     favouritesCollection.deleteDoc(favDoc);
   }
 
-  loadFavourites() {
+  void loadFavourites() {
     favouritesCollection.loadCollection();
   }
 
