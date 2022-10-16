@@ -16,11 +16,5 @@ class InMemoryCollection extends SQCollection {
   loadCollection() async => initialized = true;
 
   @override
-  saveDoc(SQDoc doc) async => docs.add(doc);
-
-  @override
-  loadDoc(SQDoc doc) async => {};
-
-  @override
-  deleteDoc(SQDoc doc) async => docs.removeWhere((d) => d.id == doc.id);
+  Future<void> saveCollection() async {}
 }
