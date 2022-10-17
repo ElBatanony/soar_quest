@@ -12,7 +12,11 @@ Future<T?> _goToScreen<T>(
   if (replace)
     return Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => screen),
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => screen,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
     );
 
   return Navigator.push<T>(
