@@ -55,6 +55,12 @@ class ScreenState<T extends Screen> extends State<T> {
     return Center(child: Text('${widget.title} Screen'));
   }
 
+  AppBar appBar() {
+    return AppBar(title: Text(widget.title), actions: [
+      IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
+    ]);
+  }
+
   FloatingActionButton? floatingActionButton() => null;
 
   @override
@@ -77,9 +83,7 @@ class ScreenState<T extends Screen> extends State<T> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(title: Text(widget.title), actions: [
-        IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
-      ]),
+      appBar: appBar(),
       drawer: SQApp.drawer,
       body: body,
       floatingActionButton: floatingActionButton(),
