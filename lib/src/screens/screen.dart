@@ -56,9 +56,13 @@ class ScreenState<T extends Screen> extends State<T> {
   }
 
   AppBar appBar() {
-    return AppBar(title: Text(widget.title), actions: [
-      IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
-    ]);
+    return AppBar(
+      title: Text(widget.title),
+      leading: Navigator.of(context).canPop() ? BackButton() : null,
+      actions: [
+        IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
+      ],
+    );
   }
 
   FloatingActionButton? floatingActionButton() => null;
