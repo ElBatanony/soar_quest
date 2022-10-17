@@ -17,7 +17,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   SQDoc? parentDoc;
   List<SQField<dynamic>> fields;
   List<DocType> docs = [];
-  late String singleDocName, path;
+  late String path;
   bool readOnly, canDeleteDoc, initialized = false;
   DocScreenBuilder docScreen;
   List<SQAction> actions;
@@ -34,8 +34,6 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.docScreen = defaultDocScreen,
     this.actions = const [],
   }) {
-    this.singleDocName = singleDocName ?? id;
-
     path = parentDoc == null
         ? "Example Apps/${SQApp.name}/$id"
         : "${parentDoc!.path}/$id";

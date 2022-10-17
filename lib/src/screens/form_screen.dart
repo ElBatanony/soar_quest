@@ -22,7 +22,7 @@ class FormScreen extends Screen {
     this.shownFields,
     this.submitButtonText = "Save",
     super.key,
-  }) : super(title ?? "Edit ${doc.collection.singleDocName}");
+  }) : super(title ?? "Edit ${doc.collection.id}");
 
   @override
   State<FormScreen> createState() => FormScreenState();

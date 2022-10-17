@@ -71,15 +71,14 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             children: [
               if (widget.canEdit)
                 SQButton(
-                  "Edit ${doc.collection.singleDocName}",
+                  "Edit",
                   onPressed: () async {
                     await FormScreen(doc).go(context);
                     refreshScreen();
                   },
                 ),
               if (doc.collection.canDeleteDoc && widget.canDelete)
-                SQButton("Delete ${doc.collection.singleDocName}",
-                    onPressed: () async {
+                SQButton("Delete", onPressed: () async {
                   await doc.collection
                       .deleteDoc(doc)
                       .then((_) => exitScreen(context));
