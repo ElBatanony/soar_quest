@@ -10,6 +10,8 @@ class SQApp {
   static late String name;
   static late ThemeData theme;
   static SQDrawer? drawer;
+  static SQNavBar? navbar;
+  static int selectedNavScreen = 0;
 
   static Future<void> init(
     String name, {
@@ -28,13 +30,14 @@ class SQApp {
     }
   }
 
-  static void run(Screen homescreen, {SQDrawer? drawer}) {
+  static void run(SQNavBar navbar, {SQDrawer? drawer}) {
     SQApp.drawer = drawer;
+    SQApp.navbar = navbar;
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
         theme: theme,
-        home: homescreen));
+        home: navbar.screens[0]));
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
 
+export 'sq_navbar.dart';
 export 'sq_drawer.dart';
 
 Future<T?> _goToScreen<T>(
@@ -82,6 +83,7 @@ class ScreenState<T extends Screen> extends State<T> {
       drawer: SQApp.drawer,
       body: body,
       floatingActionButton: floatingActionButton(),
+      bottomNavigationBar: SQApp.navbar,
     );
   }
 }
