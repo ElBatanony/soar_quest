@@ -28,7 +28,7 @@ void main() async {
     SQIntField("Amount", isRequired: true),
   ]);
 
-  SQApp.run(MainScreen([
+  SQApp.run(SQNavBar([
     CollectionScreen(
       collection: items,
       icon: Icons.factory,

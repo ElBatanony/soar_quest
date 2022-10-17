@@ -49,21 +49,8 @@ void main() async {
         SQStringField("Name"),
       ]);
 
-  SQCollection testInMemoryCollection =
-      InMemoryCollection(id: "Test InMemory", fields: [
-    SQStringField("Name"),
-    SQBoolField("Bool"),
-  ]);
-
-  SQCollection testLocalCollection = LocalCollection(id: "Test Local", fields: [
-    SQStringField("Name"),
-    SQBoolField("Bool"),
-  ]);
-
   SQApp.run(
-    MainScreen([
-      CollectionScreen(collection: testInMemoryCollection),
-      CollectionScreen(collection: testLocalCollection),
+    SQNavBar([
       CollectionScreen(
         collection: testCollection,
         canCreate: true,
@@ -86,11 +73,10 @@ void main() async {
         ),
       ),
       CollectionScreen(collection: simpleCollection, canCreate: true),
-      CollectionScreen(collection: testUserCollection, canCreate: true),
-      ProfileScreen(),
     ]),
     drawer: SQDrawer([
-      Screen("Hamada"),
+      CollectionScreen(collection: testUserCollection, canCreate: true),
+      ProfileScreen(),
     ]),
   );
 }
