@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../sq_app.dart';
+
+export 'sq_drawer.dart';
+
 Future<T?> _goToScreen<T>(
   Screen screen,
   BuildContext context, {
@@ -71,6 +75,7 @@ class ScreenState<T extends Screen> extends State<T> {
       appBar: AppBar(title: Text(widget.title), actions: [
         IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
       ]),
+      drawer: SQApp.drawer,
       body: body,
       floatingActionButton: floatingActionButton(),
     );

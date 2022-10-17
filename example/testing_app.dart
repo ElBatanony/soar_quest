@@ -60,32 +60,37 @@ void main() async {
     SQBoolField("Bool"),
   ]);
 
-  SQApp.run(MainScreen([
-    CollectionScreen(collection: testInMemoryCollection),
-    CollectionScreen(collection: testLocalCollection),
-    CollectionScreen(
-      collection: testCollection,
-      canCreate: true,
-      docScreen: (doc) => DocScreen(
-        doc,
-        postbody: (context) => SQButton("Go to child collection",
-            onPressed: () => CollectionScreen(
-                    canCreate: true,
-                    collection: FirestoreCollection(
-                        id: "Child Collection",
-                        fields: [
-                          SQStringField("Name"),
-                          SQRefField("Parent Doc",
-                              collection: testCollection,
-                              value: doc.ref,
-                              readOnly: true),
-                        ],
-                        parentDoc: doc))
-                .go(context)),
+  SQApp.run(
+    MainScreen([
+      CollectionScreen(collection: testInMemoryCollection),
+      CollectionScreen(collection: testLocalCollection),
+      CollectionScreen(
+        collection: testCollection,
+        canCreate: true,
+        docScreen: (doc) => DocScreen(
+          doc,
+          postbody: (context) => SQButton("Go to child collection",
+              onPressed: () => CollectionScreen(
+                      canCreate: true,
+                      collection: FirestoreCollection(
+                          id: "Child Collection",
+                          fields: [
+                            SQStringField("Name"),
+                            SQRefField("Parent Doc",
+                                collection: testCollection,
+                                value: doc.ref,
+                                readOnly: true),
+                          ],
+                          parentDoc: doc))
+                  .go(context)),
+        ),
       ),
-    ),
-    CollectionScreen(collection: simpleCollection, canCreate: true),
-    CollectionScreen(collection: testUserCollection, canCreate: true),
-    ProfileScreen(),
-  ]));
+      CollectionScreen(collection: simpleCollection, canCreate: true),
+      CollectionScreen(collection: testUserCollection, canCreate: true),
+      ProfileScreen(),
+    ]),
+    drawer: SQDrawer([
+      Screen("Hamada"),
+    ]),
+  );
 }

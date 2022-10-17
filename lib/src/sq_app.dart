@@ -9,6 +9,7 @@ import 'screens/screen.dart';
 class SQApp {
   static late String name;
   static late ThemeData theme;
+  static SQDrawer? drawer;
 
   static Future<void> init(
     String name, {
@@ -27,7 +28,8 @@ class SQApp {
     }
   }
 
-  static void run(Screen homescreen) {
+  static void run(Screen homescreen, {SQDrawer? drawer}) {
+    SQApp.drawer = drawer;
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
