@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import 'sq_action.dart';
@@ -48,7 +47,6 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
 
-  @protected
   DocType constructDoc(String id) => SQDoc(id, collection: this) as DocType;
 
   Future<void> loadCollection();
