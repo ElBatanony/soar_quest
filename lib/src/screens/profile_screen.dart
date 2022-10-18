@@ -101,7 +101,7 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                             refreshScreen();
                           },
                         ),
-                        if (UserSettings.settingsDoc != null)
+                        if (UserSettings.initialized)
                           SQButton("Settings",
                               onPressed: () =>
                                   UserSettings.settingsScreen().go(context)),

@@ -8,6 +8,8 @@ class UserSettings {
   static SQCollection? _settingsCollection;
   static SQDoc? _settingsDoc;
 
+  static bool get initialized => _settingsDoc?.initialized ?? false;
+
   static void setSettings(List<SQField<dynamic>> settings) {
     _settingsCollection = FirestoreCollection(
         id: 'Settings', parentDoc: SQAuth.userDoc, fields: settings);
