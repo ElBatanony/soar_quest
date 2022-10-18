@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../db/sq_doc.dart';
+import '../db/sq_collection.dart';
 import '../ui/sq_button.dart';
 
 import 'screen.dart';
@@ -9,14 +9,11 @@ import 'form_screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
-  final bool canEdit, canDelete;
 
   DocScreen(
     this.doc, {
     super.prebody,
     super.postbody,
-    this.canEdit = true,
-    this.canDelete = true,
     super.icon,
     super.key,
   }) : super(doc.label);
@@ -26,16 +23,16 @@ class DocScreen extends Screen {
 }
 
 class DocScreenState<T extends DocScreen> extends ScreenState<T> {
-  late SQDoc doc;
+  SQDoc get doc => widget.doc;
+  SQCollection get collection => doc.collection;
 
   void loadData() async {
-    await doc.collection.ensureInitialized(doc);
+    await collection.ensureInitialized(doc);
     refreshScreen();
   }
 
   @override
   void initState() {
-    doc = widget.doc;
     loadData();
     super.initState();
   }
@@ -60,16 +57,16 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Wrap(
-            children: doc.collection.actions
+            children: collection.actions
                 .map((action) => SQButton(action.name,
                     onPressed: () => action.execute(doc, context)))
                 .toList()),
         ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
-        if (doc.collection.readOnly == false)
+        if (collection.readOnly == false)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              if (widget.canEdit)
+              if (collection.updates)
                 SQButton(
                   "Edit",
                   onPressed: () async {
@@ -77,9 +74,9 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
                     refreshScreen();
                   },
                 ),
-              if (doc.collection.canDeleteDoc && widget.canDelete)
+              if (collection.deletes)
                 SQButton("Delete", onPressed: () async {
-                  await doc.collection
+                  await collection
                       .deleteDoc(doc)
                       .then((_) => exitScreen(context));
                 })
