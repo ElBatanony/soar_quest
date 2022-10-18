@@ -18,7 +18,8 @@ abstract class SQCollection<DocType extends SQDoc> {
   List<SQField<dynamic>> fields;
   List<DocType> docs = [];
   late String path;
-  bool readOnly, canDeleteDoc, initialized = false;
+  bool readOnly, initialized = false;
+  bool updates, adds, deletes;
   DocScreenBuilder docScreen;
   List<SQAction> actions;
 
@@ -30,13 +31,17 @@ abstract class SQCollection<DocType extends SQDoc> {
     String? singleDocName,
     this.parentDoc,
     this.readOnly = false,
-    this.canDeleteDoc = true,
+    this.updates = true,
+    this.adds = true,
+    this.deletes = true,
     this.docScreen = defaultDocScreen,
     this.actions = const [],
   }) {
     path = parentDoc == null
         ? "Example Apps/${SQApp.name}/$id"
         : "${parentDoc!.path}/$id";
+
+    if (readOnly) updates = adds = deletes = false;
 
     if (byPath(path) == null) _collections.add(this);
   }

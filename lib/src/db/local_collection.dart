@@ -13,7 +13,9 @@ class LocalCollection extends SQCollection {
     String? singleDocName,
     super.parentDoc,
     super.readOnly,
-    super.canDeleteDoc,
+    super.updates,
+    super.adds,
+    super.deletes,
     super.docScreen,
     super.actions,
   });

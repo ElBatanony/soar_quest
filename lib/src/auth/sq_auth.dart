@@ -23,7 +23,7 @@ class SQAuth {
       id: "Users",
       fields: SQAuth.userDocFields,
       singleDocName: "Profile Info",
-      canDeleteDoc: false,
+      deletes: false,
     );
     await auth.init();
   }

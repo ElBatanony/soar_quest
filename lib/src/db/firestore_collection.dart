@@ -12,7 +12,9 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     super.singleDocName,
     super.parentDoc,
     super.readOnly,
-    super.canDeleteDoc,
+    super.updates,
+    super.adds,
+    super.deletes,
     super.docScreen,
     super.actions,
   }) {
