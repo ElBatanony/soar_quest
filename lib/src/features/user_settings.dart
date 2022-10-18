@@ -4,7 +4,7 @@ import '../db/sq_collection.dart';
 import '../screens/screen.dart';
 import '../screens/form_screen.dart';
 
-class AppSettings {
+class UserSettings {
   static SQCollection? _settingsCollection;
   static SQDoc? settingsDoc;
   static List<SQField<dynamic>> settingsFields = [];

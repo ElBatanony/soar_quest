@@ -4,7 +4,7 @@ import '../auth/sq_auth.dart';
 import '../db/sq_field.dart';
 import '../db/fields/show_field_dialog.dart';
 import '../db/fields/sq_string_field.dart';
-import '../features/app_settings.dart';
+import '../features/user_settings.dart';
 import '../ui/signed_in_content.dart';
 import '../ui/sq_button.dart';
 import 'screen.dart';
@@ -101,10 +101,10 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                             refreshScreen();
                           },
                         ),
-                        if (AppSettings.settingsDoc != null)
+                        if (UserSettings.settingsDoc != null)
                           SQButton("Settings",
                               onPressed: () =>
-                                  AppSettings.settingsScreen().go(context)),
+                                  UserSettings.settingsScreen().go(context)),
                         SQButton("Sign out", onPressed: signOut),
                       ],
                     ),
