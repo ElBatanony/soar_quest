@@ -1,5 +1,5 @@
 import '../auth/sq_auth.dart';
-import '../db/firestore_collection.dart';
+import '../db/local_collection.dart';
 import '../db/sq_collection.dart';
 import '../screens/screen.dart';
 import '../screens/form_screen.dart';
@@ -11,7 +11,7 @@ class UserSettings {
   static bool get initialized => _settingsDoc?.initialized ?? false;
 
   static void setSettings(List<SQField<dynamic>> settings) {
-    _settingsCollection = FirestoreCollection(
+    _settingsCollection = LocalCollection(
         id: 'Settings', parentDoc: SQAuth.userDoc, fields: settings);
     _settingsDoc = SQDoc('default', collection: _settingsCollection!);
   }
