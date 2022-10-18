@@ -34,8 +34,12 @@ class SQRef {
     );
   }
 
-  SQDoc getDoc() {
-    return SQDoc(docId, collection: SQCollection.byPath(collectionPath)!);
+  Future<SQDoc> doc() async {
+    SQCollection? collection = SQCollection.byPath(collectionPath);
+    if (collection == null) throw "Referencing a non-existing collection";
+    SQDoc doc = collection.constructDoc(docId);
+    await collection.ensureInitialized(doc);
+    return doc;
   }
 
   @override
