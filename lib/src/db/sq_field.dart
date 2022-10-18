@@ -6,13 +6,13 @@ abstract class SQField<T> {
   String name = "";
   T? value;
   bool readOnly;
-  bool isRequired;
+  bool require;
 
   SQField(
     this.name, {
     this.value,
     this.readOnly = false,
-    this.isRequired = false,
+    this.require = false,
   });
 
   SQField<T> copy();
@@ -59,7 +59,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   }
 
   Widget fieldLabel() {
-    return Text(field.name + (field.isRequired ? " *" : ""),
+    return Text(field.name + (field.require ? " *" : ""),
         style: Theme.of(context).textTheme.headline6);
   }
 

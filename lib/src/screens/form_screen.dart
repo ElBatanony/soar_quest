@@ -45,7 +45,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
 
   Future<void> submitForm() async {
     for (final field in widget.doc.fields) {
-      if (field.isRequired && field.value == null) {
+      if (field.require && field.value == null) {
         showSnackBar("${field.name} is required!", context: context);
         return;
       }

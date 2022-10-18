@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../sq_doc.dart';
 
 class SQStringField extends SQField<String> {
-  SQStringField(super.name, {super.value, super.readOnly, super.isRequired});
+  SQStringField(super.name, {super.value, super.readOnly, super.require});
 
   @override
   String? parse(source) {
@@ -12,8 +12,8 @@ class SQStringField extends SQField<String> {
   }
 
   @override
-  SQStringField copy() => SQStringField(name,
-      value: value, readOnly: readOnly, isRequired: isRequired);
+  SQStringField copy() =>
+      SQStringField(name, value: value, readOnly: readOnly, require: require);
 
   @override
   SQFormField formField({Function? onChanged, SQDoc? doc}) {
