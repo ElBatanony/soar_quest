@@ -67,6 +67,10 @@ class ScreenState<T extends Screen> extends State<T> {
 
   FloatingActionButton? floatingActionButton() => null;
 
+  Widget inlineHeader() => widget.isInline
+      ? Text(widget.title, style: Theme.of(context).textTheme.titleLarge)
+      : Container();
+
   @override
   Widget build(BuildContext context) {
     final Widget body = Padding(
