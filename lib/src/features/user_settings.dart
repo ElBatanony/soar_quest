@@ -6,22 +6,18 @@ import '../screens/form_screen.dart';
 
 class UserSettings {
   static SQCollection? _settingsCollection;
-  static SQDoc? settingsDoc;
-  static List<SQField<dynamic>> settingsFields = [];
+  static SQDoc? _settingsDoc;
 
   static void setSettings(List<SQField<dynamic>> settings) {
-    settingsFields = settings;
     _settingsCollection = FirestoreCollection(
-        id: 'Settings', parentDoc: SQAuth.userDoc, fields: settingsFields);
-    settingsDoc = SQDoc('default', collection: _settingsCollection!);
+        id: 'Settings', parentDoc: SQAuth.userDoc, fields: settings);
+    _settingsDoc = SQDoc('default', collection: _settingsCollection!);
   }
 
-  T? getSetting<T>(String settingsName) {
-    return settingsDoc?.value(settingsName);
-  }
+  T? getSetting<T>(String settingName) => _settingsDoc?.value(settingName);
 
   static Screen settingsScreen() {
-    if (settingsDoc == null) throw "Settings not initialized";
-    return FormScreen(settingsDoc!, title: "Settings");
+    if (_settingsDoc == null) throw "Settings not initialized";
+    return FormScreen(_settingsDoc!, title: "Settings");
   }
 }
