@@ -53,12 +53,10 @@ void main() async {
     SQNavBar([
       CollectionScreen(
         collection: testCollection,
-        canCreate: true,
         docScreen: (doc) => DocScreen(
           doc,
           postbody: (context) => SQButton("Go to child collection",
               onPressed: () => CollectionScreen(
-                      canCreate: true,
                       collection: FirestoreCollection(
                           id: "Child Collection",
                           fields: [
@@ -72,10 +70,10 @@ void main() async {
                   .go(context)),
         ),
       ),
-      CollectionScreen(collection: simpleCollection, canCreate: true),
+      CollectionScreen(collection: simpleCollection),
     ]),
     drawer: SQDrawer([
-      CollectionScreen(collection: testUserCollection, canCreate: true),
+      CollectionScreen(collection: testUserCollection),
       ProfileScreen(),
     ]),
   );

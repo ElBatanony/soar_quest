@@ -32,12 +32,10 @@ void main() async {
     CollectionScreen(
       collection: items,
       icon: Icons.factory,
-      canCreate: true,
     ),
     CollectionScreen(
       collection: inventory,
       icon: Icons.storage,
-      canCreate: true,
       docDisplay: (doc, s) => ListTile(
         title: Text(doc.label),
         onTap: () => s.goToDocScreen(s.docScreen(doc)),

@@ -13,7 +13,6 @@ typedef DocDisplayBuilder = Widget Function(SQDoc doc, CollectionScreenState s);
 class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
-  final bool canCreate;
   final List<CollectionFilter> filters;
   final DocDisplayBuilder? docDisplay;
 
@@ -24,7 +23,6 @@ class CollectionScreen extends Screen {
       this.docDisplay,
       super.prebody,
       super.postbody,
-      this.canCreate = true,
       super.isInline,
       super.icon,
       this.filters = const [],
@@ -84,7 +82,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   FloatingActionButton? floatingActionButton() {
-    if (widget.canCreate)
+    if (widget.collection.adds)
       return FloatingActionButton(
           heroTag: null,
           shape: CircleBorder(),
