@@ -11,12 +11,12 @@ class SQRefField extends SQField<SQRef> {
   SQCollection collection;
 
   SQRefField(super.name,
-      {required this.collection, super.value, super.readOnly});
+      {required this.collection, super.value, super.editable});
 
   @override
   SQRefField copy() {
     return SQRefField(name,
-        collection: collection, value: value, readOnly: readOnly);
+        collection: collection, value: value, editable: editable);
   }
 
   @override
@@ -56,7 +56,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.value?.label ?? "not-set"),
-        if (field.readOnly == false)
+        if (field.editable)
           SQButton(
             'Select',
             onPressed: () async {

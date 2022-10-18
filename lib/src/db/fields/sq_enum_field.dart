@@ -38,7 +38,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   Widget readOnlyBuilder(BuildContext context) {
     SQField<T> subfieldCopy = field.subfield.copy();
     subfieldCopy.value = field.value;
-    subfieldCopy.readOnly = true;
+    subfieldCopy.editable = false;
     return subfieldCopy.formField();
   }
 
@@ -60,7 +60,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
 
   @override
   Widget build(BuildContext context) {
-    if (field.readOnly) return readOnlyBuilder(context);
+    if (field.editable == false) return readOnlyBuilder(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),

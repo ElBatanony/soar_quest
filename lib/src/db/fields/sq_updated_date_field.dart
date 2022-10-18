@@ -3,7 +3,7 @@ import 'types/sq_timestamp.dart';
 
 class UpdatedDateField extends SQField<SQTimestamp> {
   UpdatedDateField(String name, {SQTimestamp? value})
-      : super(name, value: value, readOnly: true);
+      : super(name, value: value, editable: false);
 
   @override
   SQTimestamp? parse(source) {

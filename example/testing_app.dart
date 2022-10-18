@@ -38,7 +38,7 @@ void main() async {
         SQTimeOfDayField("Time of Day"),
         SQTimestampField("Timestamp"),
         SQStringField("Readonly String",
-            value: "I am readonly", readOnly: true),
+            value: "I am readonly", editable: false),
       ],
       singleDocName: "Test Doc");
 
@@ -66,7 +66,7 @@ void main() async {
                             SQRefField("Parent Doc",
                                 collection: testCollection,
                                 value: doc.ref,
-                                readOnly: true),
+                                editable: false),
                           ],
                           parentDoc: doc))
                   .go(context)),

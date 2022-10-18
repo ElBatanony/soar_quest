@@ -5,13 +5,13 @@ import 'sq_doc.dart';
 abstract class SQField<T> {
   String name = "";
   T? value;
-  bool readOnly;
+  bool editable;
   bool require;
 
   SQField(
     this.name, {
     this.value,
-    this.readOnly = false,
+    this.editable = true,
     this.require = false,
   });
 
@@ -80,7 +80,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
         children: [
           fieldLabel(),
           SizedBox(height: 4),
-          (field.readOnly) ? readOnlyBuilder(context) : fieldBuilder(context),
+          (field.editable) ? fieldBuilder(context) : readOnlyBuilder(context),
         ],
       ),
     );

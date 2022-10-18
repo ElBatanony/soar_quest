@@ -5,7 +5,7 @@ class SQVirtualField<T> extends SQField<T> {
   T Function(SQDoc doc) valueBuilder;
 
   SQVirtualField({required this.field, required this.valueBuilder})
-      : super(field.name, readOnly: true);
+      : super(field.name, editable: false);
 
   @override
   T? parse(source) => null;
@@ -18,7 +18,7 @@ class SQVirtualField<T> extends SQField<T> {
   formField({Function? onChanged, SQDoc? doc}) {
     SQField<T> fieldCopy = field.copy();
     fieldCopy.value = valueBuilder(doc!);
-    fieldCopy.readOnly = true;
+    fieldCopy.editable = false;
     return fieldCopy.formField();
   }
 }

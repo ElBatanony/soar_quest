@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../sq_doc.dart';
 
 class SQDoubleField extends SQField<double> {
-  SQDoubleField(super.name, {super.value, super.readOnly});
+  SQDoubleField(super.name, {super.value, super.editable});
 
   @override
   double? parse(source) {
@@ -13,7 +13,7 @@ class SQDoubleField extends SQField<double> {
   }
 
   @override
-  SQDoubleField copy() => SQDoubleField(name, value: value, readOnly: readOnly);
+  SQDoubleField copy() => SQDoubleField(name, value: value, editable: editable);
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {

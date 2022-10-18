@@ -8,12 +8,12 @@ class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
     super.value,
-    super.readOnly,
+    super.editable,
   });
 
   @override
   SQListField<T> copy() =>
-      SQListField<T>(name, value: copyList(value ?? []), readOnly: readOnly);
+      SQListField<T>(name, value: copyList(value ?? []), editable: editable);
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {
