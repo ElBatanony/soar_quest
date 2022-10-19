@@ -13,14 +13,17 @@ export 'collection_filter.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
-  SQDoc? parentDoc;
-  List<SQField<dynamic>> fields;
+  final SQDoc? parentDoc;
+  final DocScreenBuilder docScreen;
+
+  final List<SQField<dynamic>> fields;
+  final List<SQAction> actions;
+
+  late final String path;
+  late final bool updates, adds, deletes, readOnly;
+
   List<DocType> docs = [];
-  late String path;
-  bool readOnly, initialized = false;
-  bool updates, adds, deletes;
-  DocScreenBuilder docScreen;
-  List<SQAction> actions;
+  bool initialized = false;
 
   static final List<SQCollection> _collections = [];
 
