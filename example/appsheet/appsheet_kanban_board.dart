@@ -39,8 +39,7 @@ void main() async {
     ExecuteOnDocsAction("Make Project Hamada",
         getDocs: (doc) => [projects.docs[0]],
         action: SetFieldsAction("Status Hamada",
-            getFields: (projectDoc) =>
-                [SQStringField("Status", value: "Hamada")])),
+            getFields: (projectDoc) => {"Status": "Hamada"})),
     OpenUrlAction("Search",
         getUrl: (doc) => "https://www.google.com/search?q=${doc.label}"),
     CustomAction("Custom Action",
