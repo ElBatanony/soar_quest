@@ -18,10 +18,14 @@ class _SQNavBarState extends State<SQNavBar> {
     return widget.screens.length > 1
         ? NavigationBar(
             onDestinationSelected: (int index) {
-              setState(() {
-                SQApp.selectedNavScreen = index;
-                widget.screens[SQApp.selectedNavScreen]
-                    .go(context, replace: true);
+              int oldIndex = SQApp.selectedNavScreen;
+              SQApp.selectedNavScreen = index;
+              setState(() {});
+              widget.screens[SQApp.selectedNavScreen]
+                  .go(context, replace: true)
+                  .then((_) {
+                SQApp.selectedNavScreen = oldIndex;
+                if (mounted) setState(() {});
               });
             },
             selectedIndex: SQApp.selectedNavScreen,
