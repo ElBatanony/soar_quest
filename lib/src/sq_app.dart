@@ -30,14 +30,19 @@ class SQApp {
     }
   }
 
-  static void run(SQNavBar navbar, {SQDrawer? drawer}) {
+  static void run(
+    SQNavBar navbar, {
+    SQDrawer? drawer,
+    int? startingScreen,
+  }) {
     SQApp.drawer = drawer;
     SQApp.navbar = navbar;
+    SQApp.selectedNavScreen = startingScreen ?? 0;
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
         theme: theme,
-        home: navbar.screens[0]));
+        home: navbar.screens[SQApp.selectedNavScreen]));
   }
 }
 
