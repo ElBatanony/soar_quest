@@ -30,12 +30,20 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
 class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
   @override
   Widget fieldBuilder(BuildContext context) {
-    return Switch(
-      value: field.value,
-      onChanged: (value) {
-        field.value = value;
-        onChanged();
-      },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ToggleButtons(
+          borderRadius: BorderRadius.circular(10),
+          constraints: BoxConstraints(minWidth: 100, minHeight: 40),
+          onPressed: (index) {
+            field.value = index == 1;
+            onChanged();
+          },
+          isSelected: [field.value == false, field.value == true],
+          children: [Text("No"), Text("Yes")],
+        ),
+      ],
     );
   }
 }
