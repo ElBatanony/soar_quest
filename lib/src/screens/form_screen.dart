@@ -66,7 +66,10 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
     return BottomNavigationBar(
       currentIndex: 1,
       onTap: (index) async {
-        if (index == 0) return exitScreen(context);
+        if (index == 0) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          return exitScreen(context);
+        }
         await submitForm();
       },
       items: [
