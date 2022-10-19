@@ -26,6 +26,12 @@ class FormScreen extends Screen {
 
   @override
   State<FormScreen> createState() => FormScreenState();
+
+  @override
+  Future<T?> go<T extends Object?>(BuildContext context,
+      {bool replace = false}) {
+    return super.go(context, replace: false);
+  }
 }
 
 class FormScreenState<T extends FormScreen> extends ScreenState<T> {
