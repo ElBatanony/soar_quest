@@ -82,17 +82,22 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ..._generateDocFormFields(
-            widget.doc,
-            shownFields: widget.shownFields,
-            hiddenFields: widget.hiddenFields ?? [],
-            onChanged: refreshScreen,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ..._generateDocFormFields(
+              widget.doc,
+              shownFields: widget.shownFields,
+              hiddenFields: widget.hiddenFields ?? [],
+              onChanged: refreshScreen,
+            ),
+          ],
+        ),
       ),
     );
   }
