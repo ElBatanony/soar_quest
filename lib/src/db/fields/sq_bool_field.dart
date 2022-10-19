@@ -33,18 +33,12 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
 class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
   @override
   Widget fieldBuilder(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(field.name),
-        Switch(
-          value: field.value,
-          onChanged: (value) {
-            field.value = value;
-            onChanged();
-          },
-        ),
-      ],
+    return Switch(
+      value: field.value,
+      onChanged: (value) {
+        field.value = value;
+        onChanged();
+      },
     );
   }
 }
