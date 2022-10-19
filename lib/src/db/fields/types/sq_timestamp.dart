@@ -13,6 +13,8 @@ class SQTimestamp extends Timestamp {
     return SQTimestamp(timestamp.seconds, timestamp.nanoseconds);
   }
 
+  factory SQTimestamp.now() => SQTimestamp.fromDate(DateTime.now());
+
   @override
   String toString() {
     return toDate().toString().substring(0, 10);
