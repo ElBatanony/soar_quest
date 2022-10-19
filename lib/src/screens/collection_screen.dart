@@ -13,7 +13,6 @@ typedef DocDisplayBuilder = Widget Function(SQDoc doc, CollectionScreenState s);
 class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
-  final List<CollectionFilter> filters;
   final DocDisplayBuilder? docDisplay;
 
   CollectionScreen(
@@ -25,7 +24,6 @@ class CollectionScreen extends Screen {
       super.postbody,
       super.isInline,
       super.icon,
-      this.filters = const [],
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);
@@ -69,10 +67,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   List<Widget> docsDisplay(BuildContext context) {
-    return widget.collection
-        .filterBy(widget.filters)
-        .map((doc) => docDisplay(doc))
-        .toList();
+    return widget.collection.docs.map((doc) => docDisplay(doc)).toList();
   }
 
   Future<void> createNewDoc() async {
