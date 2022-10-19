@@ -54,39 +54,41 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Wrap(
-            children: collection.actions
-                .map((action) => SQButton(action.name, onPressed: () async {
-                      await action.execute(doc, context);
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Wrap(
+              children: collection.actions
+                  .map((action) => SQButton(action.name, onPressed: () async {
+                        await action.execute(doc, context);
+                        refreshScreen();
+                        await collection.saveDoc(doc);
+                      }))
+                  .toList()),
+          ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
+          if (collection.readOnly == false)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                if (collection.updates)
+                  SQButton(
+                    "Edit",
+                    onPressed: () async {
+                      await FormScreen(doc).go(context);
                       refreshScreen();
-                      await collection.saveDoc(doc);
-                    }))
-                .toList()),
-        ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
-        if (collection.readOnly == false)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              if (collection.updates)
-                SQButton(
-                  "Edit",
-                  onPressed: () async {
-                    await FormScreen(doc).go(context);
-                    refreshScreen();
-                  },
-                ),
-              if (collection.deletes)
-                SQButton("Delete", onPressed: () async {
-                  await collection
-                      .deleteDoc(doc)
-                      .then((_) => exitScreen(context));
-                })
-            ],
-          ),
-      ],
+                    },
+                  ),
+                if (collection.deletes)
+                  SQButton("Delete", onPressed: () async {
+                    await collection
+                        .deleteDoc(doc)
+                        .then((_) => exitScreen(context));
+                  })
+              ],
+            ),
+        ],
+      ),
     );
   }
 }
