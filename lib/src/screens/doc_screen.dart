@@ -59,8 +59,11 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
       children: [
         Wrap(
             children: collection.actions
-                .map((action) => SQButton(action.name,
-                    onPressed: () => action.execute(doc, context)))
+                .map((action) => SQButton(action.name, onPressed: () async {
+                      await action.execute(doc, context);
+                      refreshScreen();
+                      await collection.saveDoc(doc);
+                    }))
                 .toList()),
         ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
         if (collection.readOnly == false)
