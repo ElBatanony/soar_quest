@@ -45,7 +45,10 @@ class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {
         field.value = text;
         onChanged();
       },
-      onEditingComplete: onChanged,
+      onEditingComplete: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        onChanged();
+      },
       decoration: InputDecoration(
         border: OutlineInputBorder(),
       ),
