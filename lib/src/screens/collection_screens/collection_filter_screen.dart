@@ -4,10 +4,12 @@ import '../../../db.dart';
 import '../collection_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
+  final List<CollectionFilter> filters;
+
   CollectionFilterScreen({
     super.title,
     required super.collection,
-    required super.filters,
+    required this.filters,
     super.docScreen,
     super.prebody,
     super.postbody,
