@@ -101,10 +101,9 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
                             refreshScreen();
                           },
                         ),
-                        if (UserSettings.initialized)
-                          SQButton("Settings",
-                              onPressed: () =>
-                                  UserSettings.settingsScreen().go(context)),
+                        SQButton("Settings",
+                            onPressed: () =>
+                                UserSettings.settingsScreen().go(context)),
                         SQButton("Sign out", onPressed: signOut),
                       ],
                     ),
