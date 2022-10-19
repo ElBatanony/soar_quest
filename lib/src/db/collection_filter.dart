@@ -3,6 +3,20 @@ import 'fields/sq_ref_field.dart';
 
 abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);
+
+  CollectionFilter inverse() => InverseFilter(this);
+}
+
+class InverseFilter extends CollectionFilter {
+  CollectionFilter originalFilter;
+
+  InverseFilter(this.originalFilter);
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    List<SQDoc> filtered = originalFilter.filter(docs);
+    return docs.where((doc) => filtered.contains(doc) == false).toList();
+  }
 }
 
 abstract class CollectionFieldFilter extends CollectionFilter {
