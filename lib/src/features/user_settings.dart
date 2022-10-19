@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../auth/sq_auth.dart';
 import '../db/local_collection.dart';
 import '../db/sq_collection.dart';
@@ -20,6 +22,6 @@ class UserSettings {
 
   static Screen settingsScreen() {
     if (_settingsDoc == null) throw "Settings not initialized";
-    return FormScreen(_settingsDoc!, title: "Settings");
+    return FormScreen(_settingsDoc!, title: "Settings", icon: Icons.settings);
   }
 }
