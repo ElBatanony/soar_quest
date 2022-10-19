@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
 import 'screen.dart';
+import '../features/user_settings.dart';
 
 class SQDrawer extends StatelessWidget {
   final List<Screen> screens;
 
-  const SQDrawer(this.screens);
+  SQDrawer(this.screens) {
+    if (UserSettings.initialized &&
+        screens.any((screen) => screen.title == "Settings") == false)
+      screens.add(UserSettings.settingsScreen());
+  }
 
   @override
   Widget build(BuildContext context) {
