@@ -20,6 +20,7 @@ class FormScreen extends Screen {
     this.hiddenFields,
     this.shownFields,
     this.submitButtonText = "Save",
+    super.icon,
     super.key,
   }) : super(title ?? "Edit ${doc.collection.id}");
 
