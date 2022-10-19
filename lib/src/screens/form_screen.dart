@@ -58,17 +58,19 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ..._generateDocFormFields(
-          widget.doc,
-          shownFields: widget.shownFields,
-          hiddenFields: widget.hiddenFields ?? [],
-          onChanged: refreshScreen,
-        ),
-        SQButton(widget.submitButtonText, onPressed: submitForm)
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ..._generateDocFormFields(
+            widget.doc,
+            shownFields: widget.shownFields,
+            hiddenFields: widget.hiddenFields ?? [],
+            onChanged: refreshScreen,
+          ),
+          SQButton(widget.submitButtonText, onPressed: submitForm)
+        ],
+      ),
     );
   }
 }
