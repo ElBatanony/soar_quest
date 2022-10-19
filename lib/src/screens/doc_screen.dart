@@ -12,11 +12,12 @@ class DocScreen extends Screen {
 
   DocScreen(
     this.doc, {
+    String? title,
     super.prebody,
     super.postbody,
     super.icon,
     super.key,
-  }) : super(doc.label);
+  }) : super(title ?? doc.label);
 
   @override
   State<DocScreen> createState() => DocScreenState();
