@@ -58,17 +58,17 @@ class DeleteDocAction extends SQAction {
 }
 
 class SetFieldsAction extends SQAction {
-  List<SQField<dynamic>> Function(SQDoc) getFields;
+  Map<String, dynamic> Function(SQDoc) getFields;
 
   SetFieldsAction(super.name, {required this.getFields});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
-    List<SQField<dynamic>> newFields = getFields(doc);
-    for (final field in newFields) {
-      SQField<dynamic>? docField = doc.getField(field.name);
+    Map<String, dynamic> newFields = getFields(doc);
+    for (final entry in newFields.entries) {
+      SQField<dynamic>? docField = doc.getField(entry.key);
       if (docField == null) throw "SetFieldsAction null doc field";
-      docField.value = field.value;
+      docField.value = entry.value;
     }
   }
 }
