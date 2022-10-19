@@ -57,11 +57,10 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(field.name),
         Text(field.value.toString()),
         SQButton(
           'Select Date',
