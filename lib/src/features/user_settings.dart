@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../auth/sq_auth.dart';
@@ -6,22 +7,30 @@ import '../db/sq_collection.dart';
 import '../screens/screen.dart';
 import '../screens/form_screen.dart';
 
+const _settingsCollectionId = "Settings";
+const _defaultSettingsDocId = "default";
+
 class UserSettings {
-  static SQCollection? _settingsCollection;
-  static SQDoc? _settingsDoc;
+  static late SQCollection _settingsCollection;
 
-  static bool get initialized => _settingsDoc?.initialized ?? false;
+  static bool initialized = false;
 
-  static void setSettings(List<SQField<dynamic>> settings) {
-    _settingsCollection = LocalCollection(
-        id: 'Settings', parentDoc: SQAuth.userDoc, fields: settings);
-    _settingsDoc = SQDoc('default', collection: _settingsCollection!);
+  static SQDoc get _settingsDoc {
+    return _settingsCollection.docs
+            .firstWhereOrNull((doc) => doc.id == _defaultSettingsDocId) ??
+        _settingsCollection.constructDoc(_defaultSettingsDocId);
   }
 
-  T? getSetting<T>(String settingName) => _settingsDoc?.value(settingName);
+  static Future<void> setSettings(List<SQField<dynamic>> settings) async {
+    _settingsCollection = LocalCollection(
+        id: _settingsCollectionId, parentDoc: SQAuth.userDoc, fields: settings);
+    await _settingsCollection.loadCollection();
+    initialized = true;
+  }
+
+  T? getSetting<T>(String settingName) => _settingsDoc.value(settingName);
 
   static Screen settingsScreen() {
-    if (_settingsDoc == null) throw "Settings not initialized";
-    return FormScreen(_settingsDoc!, title: "Settings", icon: Icons.settings);
+    return FormScreen(_settingsDoc, title: "Settings", icon: Icons.settings);
   }
 }
