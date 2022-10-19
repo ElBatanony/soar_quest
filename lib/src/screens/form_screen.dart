@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../db/fields/sq_virtual_field.dart';
 import '../db/sq_collection.dart';
 import '../db/fields/sq_user_ref_field.dart';
-import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
 import 'screen.dart';
 
@@ -63,6 +62,22 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
   }
 
   @override
+  Widget? bottomNavBar() {
+    return BottomNavigationBar(
+      currentIndex: 1,
+      onTap: (index) async {
+        if (index == 0) return exitScreen(context);
+        await submitForm();
+      },
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.cancel), label: "Cancel"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.save), label: widget.submitButtonText),
+      ],
+    );
+  }
+
+  @override
   Widget screenBody(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
@@ -74,7 +89,6 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
             hiddenFields: widget.hiddenFields ?? [],
             onChanged: refreshScreen,
           ),
-          SQButton(widget.submitButtonText, onPressed: submitForm)
         ],
       ),
     );
