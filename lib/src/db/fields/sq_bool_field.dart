@@ -15,9 +15,6 @@ class SQBoolField extends SQField<bool> {
   SQBoolField copy() => SQBoolField(name, value: value, editable: editable);
 
   @override
-  bool get value => super.value ?? false;
-
-  @override
   formField({Function? onChanged, SQDoc? doc}) {
     return _SQBoolFormField(this, onChanged: onChanged);
   }
