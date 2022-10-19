@@ -67,6 +67,8 @@ class ScreenState<T extends Screen> extends State<T> {
 
   FloatingActionButton? floatingActionButton() => null;
 
+  Widget? bottomNavBar() => SQApp.navbar;
+
   Widget inlineHeader() => widget.isInline
       ? Text(widget.title, style: Theme.of(context).textTheme.titleLarge)
       : Container();
@@ -99,7 +101,7 @@ class ScreenState<T extends Screen> extends State<T> {
       drawer: SQApp.drawer,
       body: body,
       floatingActionButton: floatingActionButton(),
-      bottomNavigationBar: SQApp.navbar,
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 }
