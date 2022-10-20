@@ -30,7 +30,6 @@ void main() async {
     adds: false,
   );
 
-  // TODO: add icons to actions
   // TODO: show/applicable condition to actions
   // TODO: add concept of conditions to SQ. apply to show field later
   // TODO: add confirmation message/bool to actions

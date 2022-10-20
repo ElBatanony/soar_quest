@@ -8,8 +8,9 @@ import 'sq_collection.dart';
 
 abstract class SQAction {
   final String name;
+  final IconData icon;
 
-  SQAction(this.name);
+  SQAction(this.name, [this.icon = Icons.double_arrow_outlined]);
 
   Future<void> execute(SQDoc doc, BuildContext context);
 }
