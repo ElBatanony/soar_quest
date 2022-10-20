@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../sq_doc.dart';
+import 'sq_text_field.dart';
 
 class SQIntField extends SQField<int> {
   SQIntField(super.name, {super.value, super.editable, super.require});
@@ -33,26 +34,8 @@ class _SQIntFormField extends SQFormField<SQIntField> {
 }
 
 class _SQIntFormFieldState extends SQFormFieldState<SQIntField> {
-  final fieldTextController = TextEditingController();
-
-  @override
-  void initState() {
-    fieldTextController.text = (field.value ?? "").toString();
-    super.initState();
-  }
-
   @override
   Widget fieldBuilder(BuildContext context) {
-    return TextField(
-      controller: fieldTextController,
-      onChanged: (text) {
-        field.value = int.tryParse(text);
-      },
-      onEditingComplete: onChanged,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: field.name,
-      ),
-    );
+    return SQTextField(formField, textParse: (text) => int.tryParse(text));
   }
 }
