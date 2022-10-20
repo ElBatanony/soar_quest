@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../auth/sq_auth.dart';
-import '../db/local_collection.dart';
-import '../db/sq_collection.dart';
+import 'local_collection.dart';
+import 'sq_collection.dart';
 import '../screens/screen.dart';
 import '../screens/form_screen.dart';
 

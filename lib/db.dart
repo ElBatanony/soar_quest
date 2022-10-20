@@ -6,6 +6,8 @@ export 'src/db/local_collection.dart';
 export 'src/db/collection_slice.dart';
 export 'src/db/sq_action.dart';
 
+export 'src/db/user_settings.dart';
+
 export 'src/db/fields/sq_field_list_field.dart';
 export 'src/db/fields/sq_ref_field.dart';
 export 'src/db/fields/sq_time_of_day_field.dart';
