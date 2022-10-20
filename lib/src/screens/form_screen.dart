@@ -65,6 +65,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
   @override
   Widget? bottomNavBar() {
     return BottomNavigationBar(
+      backgroundColor: Colors.grey[100],
       currentIndex: 1,
       onTap: (index) async {
         if (index == 0) {
