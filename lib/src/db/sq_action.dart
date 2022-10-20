@@ -10,13 +10,13 @@ abstract class SQAction {
   final String name;
   final IconData icon;
 
-  SQAction(this.name, [this.icon = Icons.double_arrow_outlined]);
+  SQAction(this.name, {this.icon = Icons.double_arrow_outlined});
 
   Future<void> execute(SQDoc doc, BuildContext context);
 }
 
 class GoEditCloneAction extends GoScreenAction {
-  GoEditCloneAction(super.name)
+  GoEditCloneAction(super.name, {super.icon})
       : super(
           screen: (doc) => FormScreen(
               doc.collection.newDoc(initialFields: copyList(doc.fields))),
@@ -26,14 +26,15 @@ class GoEditCloneAction extends GoScreenAction {
 class GoScreenAction extends SQAction {
   Screen Function(SQDoc) screen;
 
-  GoScreenAction(super.name, {required this.screen});
+  GoScreenAction(super.name, {super.icon, required this.screen});
 
   @override
   execute(SQDoc doc, BuildContext context) => screen(doc).go(context);
 }
 
 class GoEditAction extends GoScreenAction {
-  GoEditAction(super.name) : super(screen: (doc) => FormScreen(doc));
+  GoEditAction(super.name, {super.icon})
+      : super(screen: (doc) => FormScreen(doc));
 }
 
 class GoDerivedDocAction extends GoScreenAction {
@@ -42,6 +43,7 @@ class GoDerivedDocAction extends GoScreenAction {
 
   GoDerivedDocAction(
     super.name, {
+    super.icon,
     required this.getCollection,
     required this.initialFields,
   }) : super(
@@ -52,7 +54,7 @@ class GoDerivedDocAction extends GoScreenAction {
 }
 
 class DeleteDocAction extends SQAction {
-  DeleteDocAction(super.name);
+  DeleteDocAction(super.name, {super.icon});
 
   @override
   execute(SQDoc doc, BuildContext context) => doc.collection.deleteDoc(doc);
@@ -61,7 +63,7 @@ class DeleteDocAction extends SQAction {
 class SetFieldsAction extends SQAction {
   Map<String, dynamic> Function(SQDoc) getFields;
 
-  SetFieldsAction(super.name, {required this.getFields});
+  SetFieldsAction(super.name, {super.icon, required this.getFields});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
@@ -79,7 +81,7 @@ class ExecuteOnDocsAction extends SQAction {
   SQAction action;
 
   ExecuteOnDocsAction(super.name,
-      {required this.getDocs, required this.action});
+      {super.icon, required this.getDocs, required this.action});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
@@ -93,7 +95,7 @@ class ExecuteOnDocsAction extends SQAction {
 class OpenUrlAction extends SQAction {
   String Function(SQDoc) getUrl;
 
-  OpenUrlAction(super.name, {required this.getUrl});
+  OpenUrlAction(super.name, {super.icon, required this.getUrl});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
@@ -108,7 +110,7 @@ class OpenUrlAction extends SQAction {
 class SequencesAction extends SQAction {
   List<SQAction> actions;
 
-  SequencesAction(super.name, {required this.actions});
+  SequencesAction(super.name, {super.icon, required this.actions});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
@@ -121,7 +123,7 @@ class SequencesAction extends SQAction {
 class CustomAction extends SQAction {
   Future<void> Function(SQDoc, BuildContext) customExecute;
 
-  CustomAction(super.name, {required this.customExecute});
+  CustomAction(super.name, {super.icon, required this.customExecute});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) {
