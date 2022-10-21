@@ -89,16 +89,12 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
+  Widget actionsDisplay() => Container();
+
+  @override
   Widget screenBody(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: fieldsDisplay(context),
-      )),
-    );
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: super.screenBody(context));
   }
 }
