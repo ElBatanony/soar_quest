@@ -49,16 +49,19 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     );
   }
 
+  Widget actionsDisplay() {
+    return Wrap(
+      children: collection.actions.map((action) => action.button(doc)).toList(),
+    );
+  }
+
   @override
   Widget screenBody(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Wrap(
-              children: collection.actions
-                  .map((action) => action.button(doc))
-                  .toList()),
+          actionsDisplay(),
           ...doc.fields
               .map((field) =>
                   field.show(doc) ? fieldDisplay(field.copy()) : Container())
