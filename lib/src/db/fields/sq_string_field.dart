@@ -4,7 +4,8 @@ import '../sq_doc.dart';
 import 'sq_text_field.dart';
 
 class SQStringField extends SQField<String> {
-  SQStringField(super.name, {super.value, super.editable, super.require});
+  SQStringField(super.name,
+      {super.value, super.editable, super.require, super.show});
 
   @override
   String? parse(source) {
@@ -13,8 +14,8 @@ class SQStringField extends SQField<String> {
   }
 
   @override
-  SQStringField copy() =>
-      SQStringField(name, value: value, editable: editable, require: require);
+  SQStringField copy() => SQStringField(name,
+      value: value, editable: editable, require: require, show: show);
 
   @override
   SQFormField formField({Function? onChanged, SQDoc? doc}) {

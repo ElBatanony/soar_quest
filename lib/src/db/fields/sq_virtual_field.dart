@@ -4,6 +4,8 @@ class SQVirtualField<T> extends SQField<T> {
   SQField<T> field;
   T Function(SQDoc doc) valueBuilder;
 
+  // TODO: add show check that not FormScreen, FormScreenState<FormScreen>
+
   SQVirtualField({required this.field, required this.valueBuilder})
       : super(field.name, editable: false);
 
