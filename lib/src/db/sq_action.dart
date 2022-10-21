@@ -183,3 +183,21 @@ class CustomAction extends SQAction {
     return customExecute(doc, context);
   }
 }
+
+Future<bool> showConfirmationDialog(
+    {required SQAction action, required BuildContext context}) async {
+  bool? ret = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("Confirm"),
+            content: Text(action.confirmMessage),
+            actions: [
+              SQButton('Cancel',
+                  onPressed: () => Navigator.pop(context, false)),
+              SQButton(action.name,
+                  onPressed: () => Navigator.pop(context, true)),
+            ]);
+      });
+  return ret ?? false;
+}
