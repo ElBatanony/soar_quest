@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'conditions.dart';
 import 'sq_doc.dart';
@@ -67,7 +68,16 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   }
 
   Widget readOnlyBuilder(BuildContext context) {
-    return Text(field.value.toString());
+    String valueString = field.value.toString();
+    return GestureDetector(
+      onLongPress: () {
+        Clipboard.setData(ClipboardData(text: valueString));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 500),
+            content: Text('Copied field: $valueString')));
+      },
+      child: Text(valueString),
+    );
   }
 
   Widget fieldBuilder(BuildContext context) {

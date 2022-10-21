@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:soar_quest/db.dart';
 
 import 'screen.dart';
@@ -38,16 +37,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
     SQField<dynamic> fieldCopy = field.copy();
     fieldCopy.editable = false;
-    return GestureDetector(
-      onLongPress: () {
-        String fieldValue = fieldCopy.value.toString();
-        Clipboard.setData(ClipboardData(text: fieldValue));
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(milliseconds: 500),
-            content: Text('Copied field: $fieldValue')));
-      },
-      child: fieldCopy.formField(doc: doc),
-    );
+    return fieldCopy.formField(doc: doc);
   }
 
   List<Widget> fieldsDisplay(BuildContext context) {
