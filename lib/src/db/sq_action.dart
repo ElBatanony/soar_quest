@@ -33,11 +33,17 @@ abstract class SQAction {
           icon,
           text: isIcon ? null : name,
           onPressed: () async {
-            ScreenState screenState = ScreenState.of(context);
-            await execute(doc, context);
-            screenState.refreshScreen();
-            await doc.collection.saveDoc(doc);
-            screenState.refreshScreen();
+            Future<void> onConfirmed(BuildContext newContext) async {
+              ScreenState screenState = ScreenState.of(newContext);
+              await execute(doc, newContext);
+              screenState.refreshScreen();
+              await doc.collection.saveDoc(doc);
+              screenState.refreshScreen();
+            }
+
+            if (confirm == false) return onConfirmed(context);
+            return showConfirmationDialog(action: this, context: context)
+                .then((confirmed) => confirmed ? onConfirmed(context) : {});
           },
         ),
       );
