@@ -70,13 +70,6 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
         children: [
           actionsDisplay(),
           ...fieldsDisplay(context),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GoEditAction().button(doc),
-              DeleteDocAction(exitScreen: true).button(doc),
-            ],
-          ),
         ],
       ),
     );
