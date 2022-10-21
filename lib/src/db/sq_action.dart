@@ -89,8 +89,12 @@ class GoDerivedDocAction extends GoScreenAction {
 }
 
 class DeleteDocAction extends SQAction {
-  DeleteDocAction(super.name, {super.icon, super.show});
-  // TODO: use inside of Doc Screen. add confirmation
+  DeleteDocAction({
+    String name = "Delete",
+    super.icon = Icons.delete,
+    DocCondition show = alwaysShow,
+    this.exitScreen = false,
+  }) : super(name, show: (doc) => doc.collection.deletes && show(doc));
 
   @override
   execute(SQDoc doc, BuildContext context) => doc.collection.deleteDoc(doc);

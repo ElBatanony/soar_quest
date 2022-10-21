@@ -35,7 +35,7 @@ void main() async {
         SQStringField("Project", value: "From Workstream ${doc.label}"),
       ],
     ),
-    DeleteDocAction("Delete Workflow"),
+    DeleteDocAction(name: "Delete Workflow"),
     ExecuteOnDocsAction("Make Project Hamada",
         getDocs: (doc) => [projects.docs[0]],
         action: SetFieldsAction("Status Hamada",
