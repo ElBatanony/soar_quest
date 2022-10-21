@@ -89,6 +89,9 @@ class GoDerivedDocAction extends GoScreenAction {
 }
 
 class DeleteDocAction extends SQAction {
+  bool exitScreen;
+  // TODO: add confirmation
+
   DeleteDocAction({
     String name = "Delete",
     super.icon = Icons.delete,
@@ -97,7 +100,11 @@ class DeleteDocAction extends SQAction {
   }) : super(name, show: (doc) => doc.collection.deletes && show(doc));
 
   @override
-  execute(SQDoc doc, BuildContext context) => doc.collection.deleteDoc(doc);
+  execute(SQDoc doc, BuildContext context) {
+    return doc.collection.deleteDoc(doc).then((_) {
+      if (exitScreen) ScreenState.of(context).exitScreen();
+    });
+  }
 }
 
 class SetFieldsAction extends SQAction {
