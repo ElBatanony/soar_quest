@@ -19,8 +19,7 @@ class SQButton extends StatelessWidget {
       child: icon == null
           ? ElevatedButton(onPressed: onPressed, child: Text(text!))
           : text == null
-              ? IconButton(
-                  onPressed: onPressed, icon: Icon(icon), isSelected: true)
+              ? IconButton(onPressed: onPressed, icon: Icon(icon))
               : ElevatedButton.icon(
                   onPressed: onPressed, icon: Icon(icon), label: Text(text!)),
     );
