@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../screens/form_screen.dart';
+import '../ui/sq_button.dart';
 import '../screens/screen.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
@@ -18,6 +19,18 @@ abstract class SQAction {
       {this.icon = Icons.double_arrow_outlined, this.show = alwaysShow});
 
   Future<void> execute(SQDoc doc, BuildContext context);
+
+  Widget button(SQDoc doc, ScreenState s, BuildContext context,
+      {bool iconOnly = false}) {
+    if (show(doc))
+      return SQButton.icon(iconOnly ? "" : name, icon, onPressed: () async {
+        await execute(doc, context);
+        s.refreshScreen();
+        await doc.collection.saveDoc(doc);
+        s.refreshScreen();
+      });
+    return Container();
+  }
 }
 
 class GoEditCloneAction extends GoScreenAction {
