@@ -35,9 +35,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   }
 
   Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
-    SQField<dynamic> fieldCopy = field.copy();
-    fieldCopy.editable = false;
-    return fieldCopy.formField(doc: doc);
+    return field.formField(onChanged: refreshScreen, doc: doc);
   }
 
   List<Widget> fieldsDisplay(BuildContext context) {
