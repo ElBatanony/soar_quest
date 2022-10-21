@@ -124,6 +124,8 @@ List<SQFormField> _generateDocFormFields(
 
   fields = fields.where((field) => field is! SQVirtualField).toList();
 
+  fields = fields.where((field) => field.show(doc) == true).toList();
+
   return fields
       .map((field) => field.formField(onChanged: onChanged, doc: doc))
       .toList();
