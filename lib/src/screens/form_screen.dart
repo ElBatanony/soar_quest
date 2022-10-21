@@ -77,8 +77,6 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   List<Widget> fieldsDisplay(BuildContext inScreenContext) {
     List<SQField<dynamic>> fields = doc.fields;
 
-    fields = fields.where((field) => field is! SQVirtualField).toList();
-
     fields = fields
         .where((field) => field.show(doc, inScreenContext) == true)
         .toList();

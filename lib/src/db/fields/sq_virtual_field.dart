@@ -1,20 +1,25 @@
 import '../sq_doc.dart';
+import '../conditions.dart';
 
 class SQVirtualField<T> extends SQField<T> {
   SQField<T> field;
   T Function(SQDoc doc) valueBuilder;
 
-  // TODO: add show check that not FormScreen, FormScreenState<FormScreen>
-
-  SQVirtualField({required this.field, required this.valueBuilder})
-      : super(field.name, editable: false);
+  SQVirtualField(
+      {required this.field,
+      required this.valueBuilder,
+      DocContextCondition show = trueContextCond})
+      : super(field.name,
+            editable: false,
+            show: (doc, context) =>
+                !inFormScreen(doc, context) && show(doc, context));
 
   @override
   T? parse(source) => null;
 
   @override
   SQVirtualField<T> copy() =>
-      SQVirtualField<T>(field: field, valueBuilder: valueBuilder);
+      SQVirtualField<T>(field: field, valueBuilder: valueBuilder, show: show);
 
   @override
   formField({Function? onChanged, SQDoc? doc}) {
