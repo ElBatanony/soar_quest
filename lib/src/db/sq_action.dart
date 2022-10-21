@@ -7,12 +7,14 @@ import '../screens/screen.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
 
+typedef DocCondition = bool Function(SQDoc doc);
+
 bool alwaysShow(SQDoc doc) => true;
 
 abstract class SQAction {
   final String name;
   final IconData icon;
-  final bool Function(SQDoc) show;
+  final DocCondition show;
   // TODO: add confirmation bool and message
 
   SQAction(this.name,
