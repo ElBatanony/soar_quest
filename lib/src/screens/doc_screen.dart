@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:soar_quest/db.dart';
 
-import '../db/sq_collection.dart';
 import '../ui/sq_button.dart';
 
 import 'screen.dart';
-import 'form_screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
@@ -67,14 +66,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                if (collection.updates)
-                  SQButton(
-                    "Edit",
-                    onPressed: () async {
-                      await FormScreen(doc).go(context);
-                      refreshScreen();
-                    },
-                  ),
+                GoEditAction().button(doc),
                 if (collection.deletes)
                   SQButton("Delete", onPressed: () async {
                     await collection.deleteDoc(doc).then((_) => exitScreen());
