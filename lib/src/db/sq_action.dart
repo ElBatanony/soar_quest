@@ -20,12 +20,12 @@ abstract class SQAction {
 
   Future<void> execute(SQDoc doc, BuildContext context);
 
-  Widget button(SQDoc doc, {bool iconOnly = false}) {
+  Widget button(SQDoc doc, {bool isIcon = false}) {
     if (show(doc))
       return Builder(
         builder: (context) => SQButton.icon(
-          iconOnly ? "" : name,
           icon,
+          text: isIcon ? null : name,
           onPressed: () async {
             ScreenState screenState = ScreenState.of(context);
             await execute(doc, context);
