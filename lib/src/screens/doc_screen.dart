@@ -59,7 +59,10 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
               children: collection.actions
                   .map((action) => action.button(doc))
                   .toList()),
-          ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
+          ...doc.fields
+              .map((field) =>
+                  field.show(doc) ? fieldDisplay(field.copy()) : Container())
+              .toList(),
           if (collection.readOnly == false)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
