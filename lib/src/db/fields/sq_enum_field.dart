@@ -34,6 +34,9 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
+  Widget fieldLabel() => Container();
+
+  @override
   Widget readOnlyBuilder(BuildContext context) {
     SQField<T> subfieldCopy = field.subfield.copy();
     subfieldCopy.value = field.value;
