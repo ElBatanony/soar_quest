@@ -67,9 +67,6 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
-  Widget actionsDisplay(BuildContext context) => Container();
-
-  @override
   Widget screenBody(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

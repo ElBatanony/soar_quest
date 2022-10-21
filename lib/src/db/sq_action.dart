@@ -28,7 +28,7 @@ abstract class SQAction {
   }
 }
 
-class SQActionButton extends StatelessWidget {
+class SQActionButton extends StatefulWidget {
   final SQAction action;
   final bool isIcon;
   final SQDoc doc;
@@ -36,22 +36,37 @@ class SQActionButton extends StatelessWidget {
   const SQActionButton(
       {required this.action, required this.doc, this.isIcon = false});
 
+  @override
+  State<SQActionButton> createState() => _SQActionButtonState();
+}
+
+class _SQActionButtonState extends State<SQActionButton> {
+  late bool inForm;
+
+  @override
+  void initState() {
+    inForm = ScreenState.of(context) is FormScreenState;
+    super.initState();
+  }
+
   Future<void> onConfirmed(BuildContext context) async {
     ScreenState screenState = ScreenState.of(context);
-    await action.execute(doc, context);
+    await widget.action.execute(widget.doc, context);
     screenState.refreshScreen();
-    await doc.collection.saveDoc(doc);
+    await widget.doc.collection.saveDoc(widget.doc);
     screenState.refreshScreen();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (inForm) return Container();
+
     return SQButton.icon(
-      action.icon,
-      text: isIcon ? null : action.name,
+      widget.action.icon,
+      text: widget.isIcon ? null : widget.action.name,
       onPressed: () async {
-        if (action.confirm == false) return onConfirmed(context);
-        return showConfirmationDialog(action: action, context: context)
+        if (widget.action.confirm == false) return onConfirmed(context);
+        return showConfirmationDialog(action: widget.action, context: context)
             .then((confirmed) => confirmed ? onConfirmed(context) : {});
       },
     );
