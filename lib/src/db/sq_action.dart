@@ -15,10 +15,14 @@ abstract class SQAction {
   final String name;
   final IconData icon;
   final DocCondition show;
-  // TODO: add confirmation bool and message
+  final bool confirm;
+  final String confirmMessage;
 
   SQAction(this.name,
-      {this.icon = Icons.double_arrow_outlined, this.show = alwaysShow});
+      {this.icon = Icons.double_arrow_outlined,
+      this.show = alwaysShow,
+      this.confirm = false,
+      this.confirmMessage = "Are you sure?"});
 
   Future<void> execute(SQDoc doc, BuildContext context);
 
@@ -90,13 +94,13 @@ class GoDerivedDocAction extends GoScreenAction {
 
 class DeleteDocAction extends SQAction {
   bool exitScreen;
-  // TODO: add confirmation
 
   DeleteDocAction({
     String name = "Delete",
     super.icon = Icons.delete,
     DocCondition show = alwaysShow,
     this.exitScreen = false,
+    super.confirm = true,
   }) : super(name, show: (doc) => doc.collection.deletes && show(doc));
 
   @override
