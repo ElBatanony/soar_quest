@@ -30,7 +30,7 @@ class _CategorySelectScreenState
   }
 
   @override
-  Widget docDisplay(SQDoc doc) {
+  Widget docDisplay(SQDoc doc, BuildContext context) {
     return SQButton(
       doc.label,
       onPressed: () {
@@ -57,7 +57,7 @@ class _CategorySelectScreenState
   @override
   List<Widget> docsDisplay(BuildContext context) {
     return widget.categoryField.collection.docs
-        .map((doc) => docDisplay(doc))
+        .map((doc) => docDisplay(doc, context))
         .toList();
   }
 

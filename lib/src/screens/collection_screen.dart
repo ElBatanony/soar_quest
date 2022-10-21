@@ -52,7 +52,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   DocScreen docScreen(SQDoc doc) => widget.docScreen(doc);
 
-  Widget docDisplay(SQDoc doc) {
+  Widget docDisplay(SQDoc doc, BuildContext context) {
     if (widget.docDisplay != null) return widget.docDisplay!(doc, this);
     return ListTile(
       title: Text(doc.label),
@@ -74,7 +74,9 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   List<Widget> docsDisplay(BuildContext context) {
-    return widget.collection.docs.map((doc) => docDisplay(doc)).toList();
+    return widget.collection.docs
+        .map((doc) => docDisplay(doc, context))
+        .toList();
   }
 
   Future<void> createNewDoc() async {
@@ -83,7 +85,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   @override
-  FloatingActionButton? floatingActionButton() {
+  FloatingActionButton? floatingActionButton(BuildContext context) {
     if (widget.collection.adds)
       return FloatingActionButton(
           heroTag: null,

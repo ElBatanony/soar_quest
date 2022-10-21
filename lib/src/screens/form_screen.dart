@@ -42,7 +42,7 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
-  Widget? bottomNavBar() {
+  Widget? bottomNavBar(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Colors.grey[100],
       currentIndex: 1,
@@ -62,12 +62,12 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
-  Widget fieldDisplay(SQField<dynamic> field) {
+  Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
     return field.formField(onChanged: refreshScreen, doc: doc);
   }
 
   @override
-  Widget actionsDisplay() => Container();
+  Widget actionsDisplay(BuildContext context) => Container();
 
   @override
   Widget screenBody(BuildContext context) {

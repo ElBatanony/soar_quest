@@ -91,7 +91,7 @@ class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
   }
 
   @override
-  Widget docDisplay(SQDoc doc) {
+  Widget docDisplay(SQDoc doc, BuildContext context) {
     SQRef? originalDocRef = doc.value<SQRef>("ref");
 
     return ListTile(

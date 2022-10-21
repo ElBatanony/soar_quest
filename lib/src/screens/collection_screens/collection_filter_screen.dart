@@ -38,7 +38,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
 
   @override
   List<Widget> docsDisplay(BuildContext context) {
-    return filteredDocs.map((doc) => docDisplay(doc)).toList();
+    return filteredDocs.map((doc) => docDisplay(doc, context)).toList();
   }
 
   @override

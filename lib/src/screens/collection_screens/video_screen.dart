@@ -23,7 +23,7 @@ class VideoCollectionScreen extends CollectionScreen {
 class _VideoCollectionScreenState
     extends CollectionScreenState<VideoCollectionScreen> {
   @override
-  Widget docDisplay(SQDoc doc) {
+  Widget docDisplay(SQDoc doc, BuildContext context) {
     return VideoDocDisplay(
       doc: doc,
       videoField: widget.videoField,

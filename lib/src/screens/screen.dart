@@ -55,23 +55,23 @@ class ScreenState<T extends Screen> extends State<T> {
     return Center(child: Text('${widget.title} Screen'));
   }
 
-  List<Widget> appBarActions() {
+  List<Widget> appBarActions(BuildContext context) {
     return [IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))];
   }
 
-  AppBar appBar() {
+  AppBar appBar(BuildContext context) {
     return AppBar(
       title: Text(widget.title),
       leading: Navigator.of(context).canPop() ? BackButton() : null,
-      actions: appBarActions(),
+      actions: appBarActions(context),
     );
   }
 
-  FloatingActionButton? floatingActionButton() => null;
+  FloatingActionButton? floatingActionButton(BuildContext context) => null;
 
-  Widget? bottomNavBar() => SQApp.navbar;
+  Widget? bottomNavBar(BuildContext context) => SQApp.navbar;
 
-  Widget inlineHeader() => widget.isInline
+  Widget inlineHeader(BuildContext context) => widget.isInline
       ? Text(widget.title, style: Theme.of(context).textTheme.titleLarge)
       : Container();
 
@@ -87,7 +87,7 @@ class ScreenState<T extends Screen> extends State<T> {
             : SingleChildScrollView(
                 child: Column(
                   children: [
-                    inlineHeader(),
+                    inlineHeader(context),
                     if (widget.prebody != null) widget.prebody!(context2),
                     screenBody(context2),
                     if (widget.postbody != null) widget.postbody!(context2),
@@ -101,11 +101,11 @@ class ScreenState<T extends Screen> extends State<T> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: appBar(),
+      appBar: appBar(context),
       drawer: SQApp.drawer,
       body: body,
-      floatingActionButton: floatingActionButton(),
-      bottomNavigationBar: bottomNavBar(),
+      floatingActionButton: floatingActionButton(context),
+      bottomNavigationBar: bottomNavBar(context),
     );
   }
 

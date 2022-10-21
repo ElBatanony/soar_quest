@@ -35,7 +35,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     super.initState();
   }
 
-  Widget fieldDisplay(SQField<dynamic> field) {
+  Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
     SQField<dynamic> fieldCopy = field.copy();
     fieldCopy.editable = false;
     return GestureDetector(
@@ -50,14 +50,14 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     );
   }
 
-  List<Widget> fieldsDisplay(BuildContext inScreenContext) {
+  List<Widget> fieldsDisplay(BuildContext context) {
     return doc.fields
-        .where((field) => field.show(doc, inScreenContext))
-        .map((field) => fieldDisplay(field))
+        .where((field) => field.show(doc, context))
+        .map((field) => fieldDisplay(field, context))
         .toList();
   }
 
-  Widget actionsDisplay() {
+  Widget actionsDisplay(BuildContext context) {
     return Wrap(
       children: collection.actions
           .where((action) => action.show(doc))
@@ -72,7 +72,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          actionsDisplay(),
+          actionsDisplay(context),
           ...fieldsDisplay(context),
         ],
       ),

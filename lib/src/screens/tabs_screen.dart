@@ -23,7 +23,7 @@ class _TabsScreenState extends ScreenState<TabsScreen>
   }
 
   @override
-  AppBar appBar() {
+  AppBar appBar(BuildContext context) {
     return AppBar(
       title: Text(widget.title),
       actions: [
