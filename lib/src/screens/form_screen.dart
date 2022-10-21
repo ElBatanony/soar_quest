@@ -32,14 +32,10 @@ class FormScreen extends DocScreen {
 class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   @override
   void initState() {
-    if (widget.doc.initialized == false)
-      widget.collection
-          .ensureInitialized(widget.doc)
-          .then((_) => refreshScreen());
-
     for (var field in widget.doc.fields)
       if (field.runtimeType == SQEditedByField)
         field.value = SQUserRefField.currentUserRef;
+    // TODO: move to a check when collecting the field. check if first time FormScreen
 
     super.initState();
   }
@@ -78,37 +74,31 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
+  List<Widget> fieldsDisplay(BuildContext inScreenContext) {
+    List<SQField<dynamic>> fields = doc.fields;
+
+    fields = fields.where((field) => field is! SQVirtualField).toList();
+
+    fields = fields
+        .where((field) => field.show(doc, inScreenContext) == true)
+        .toList();
+
+    return fields
+        .map((field) => field.formField(onChanged: refreshScreen, doc: doc))
+        .toList();
+  }
+
+  @override
   Widget screenBody(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ..._generateDocFormFields(
-              widget.doc,
-              onChanged: refreshScreen,
-            ),
-          ],
-        ),
-      ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: fieldsDisplay(context),
+      )),
     );
   }
-}
-
-List<SQFormField> _generateDocFormFields(
-  SQDoc doc, {
-  Function? onChanged,
-}) {
-  List<SQField<dynamic>> fields = doc.fields;
-
-  fields = fields.where((field) => field is! SQVirtualField).toList();
-
-  fields = fields.where((field) => field.show(doc) == true).toList();
-
-  return fields
-      .map((field) => field.formField(onChanged: onChanged, doc: doc))
-      .toList();
 }
