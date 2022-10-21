@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SQButton extends StatelessWidget {
-  final String text;
+  final String? text;
   final void Function()? onPressed;
   final IconData? icon;
 
@@ -9,7 +9,7 @@ class SQButton extends StatelessWidget {
       : icon = null,
         super(key: key);
 
-  const SQButton.icon(this.text, this.icon, {required this.onPressed, Key? key})
+  const SQButton.icon(this.icon, {this.text, required this.onPressed, Key? key})
       : super(key: key);
 
   @override
