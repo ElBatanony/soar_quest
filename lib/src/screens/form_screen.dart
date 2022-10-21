@@ -8,17 +8,13 @@ import 'screen.dart';
 
 class FormScreen extends Screen {
   late final SQDoc doc;
-  final List<String>? hiddenFields;
   final String submitButtonText;
-  final List<String>? shownFields;
 
   SQCollection get collection => doc.collection;
 
   FormScreen(
     this.doc, {
     String? title,
-    this.hiddenFields,
-    this.shownFields,
     this.submitButtonText = "Save",
     super.icon,
     super.key,
@@ -94,8 +90,6 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
           children: [
             ..._generateDocFormFields(
               widget.doc,
-              shownFields: widget.shownFields,
-              hiddenFields: widget.hiddenFields ?? [],
               onChanged: refreshScreen,
             ),
           ],
@@ -107,20 +101,9 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
 
 List<SQFormField> _generateDocFormFields(
   SQDoc doc, {
-  List<String> hiddenFields = const [],
-  List<String>? shownFields,
   Function? onChanged,
 }) {
   List<SQField<dynamic>> fields = doc.fields;
-
-  if (shownFields != null)
-    fields = fields
-        .where((field) => shownFields.contains(field.name) == true)
-        .toList();
-
-  fields = fields
-      .where((field) => hiddenFields.contains(field.name) == false)
-      .toList();
 
   fields = fields.where((field) => field is! SQVirtualField).toList();
 
