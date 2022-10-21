@@ -62,6 +62,12 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
       leading: doc.imageLabel != null
           ? Image.network(doc.imageLabel!.value!, width: 35)
           : null,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: widget.collection.actions
+            .map((action) => action.button(doc, this, context, iconOnly: true))
+            .toList(),
+      ),
       onTap: () => goToDocScreen(docScreen(doc)),
     );
   }
