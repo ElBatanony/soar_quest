@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
 import '../firebase_options.dart';
@@ -8,6 +9,17 @@ late CollectionSlice pendingTasks, doneTasks;
 void main() async {
   await SQApp.init("Task Manager",
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+
+  await UserSettings.setSettings([SQStringField("hai"), SQBoolField("Dope")]);
+
+  var checkTaskAction = SetFieldsAction("Check",
+      getFields: (doc) => {"Last Updated": SQTimestamp.now(), "Status": "Done"},
+      show: (doc) => doc.getField("Status")?.value != "Done");
+
+  var uncheckTaskAction = SetFieldsAction("UNCheck",
+      getFields: (doc) => {"Status": "To-Do"},
+      icon: Icons.arrow_back,
+      show: (doc) => doc.getField("Status")?.value == "Done");
 
   tasks = FirestoreCollection(
     id: "Tasks",
@@ -20,24 +32,13 @@ void main() async {
       SQTimestampField("Due Date"),
       SQTimestampField("Last Updated"),
     ],
-    actions: [
-      SetFieldsAction("Check",
-          getFields: (doc) => {
-                "Last Updated": SQTimestamp.now(),
-                "Status": "Done",
-              })
-    ],
+    actions: [checkTaskAction, uncheckTaskAction],
     adds: false,
   );
 
-  // TODO: show/applicable condition to actions
   // TODO: add concept of conditions to SQ. apply to show field later
-  // TODO: add confirmation message/bool to actions
-  // TODO: close keyboard when click ok
-  // TODO: add user setting
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
-
   doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
   pendingTasks = CollectionSlice(tasks, filter: doneFilter.inverse());
 
@@ -47,6 +48,7 @@ void main() async {
           tasks.newDoc(),
           title: "New Task",
           hiddenFields: ["Status"],
+          icon: Icons.add,
         ),
         TabsScreen("Tasks", [
           CollectionScreen(
@@ -56,5 +58,6 @@ void main() async {
         ]),
         CollectionScreen(title: "Tasks 2", collection: tasks),
       ]),
+      drawer: SQDrawer([]),
       startingScreen: 1);
 }
