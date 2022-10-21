@@ -63,7 +63,6 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   @override
   void initState() {
     inForm = ScreenState.of(context) is FormScreenState;
-    print(inForm);
     super.initState();
   }
 
