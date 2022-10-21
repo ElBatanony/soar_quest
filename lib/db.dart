@@ -5,6 +5,7 @@ export 'src/db/local_collection.dart';
 
 export 'src/db/collection_slice.dart';
 export 'src/db/sq_action.dart';
+export 'src/db/conditions.dart';
 
 export 'src/db/user_settings.dart';
 
