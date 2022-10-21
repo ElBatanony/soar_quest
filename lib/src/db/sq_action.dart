@@ -24,27 +24,41 @@ abstract class SQAction {
   Future<void> execute(SQDoc doc, BuildContext context);
 
   Widget button(SQDoc doc, {bool isIcon = false}) {
-    return Builder(
-      builder: (context) => SQButton.icon(
-        icon,
-        text: isIcon ? null : name,
-        onPressed: () async {
-          Future<void> onConfirmed(BuildContext newContext) async {
-            ScreenState screenState = ScreenState.of(newContext);
-            await execute(doc, newContext);
-            screenState.refreshScreen();
-            await doc.collection.saveDoc(doc);
-            screenState.refreshScreen();
-          }
+    return SQActionButton(action: this, doc: doc, isIcon: isIcon);
+  }
+}
 
-          if (confirm == false) return onConfirmed(context);
-          return showConfirmationDialog(action: this, context: context)
-              .then((confirmed) => confirmed ? onConfirmed(context) : {});
-        },
-      ),
+class SQActionButton extends StatelessWidget {
+  final SQAction action;
+  final bool isIcon;
+  final SQDoc doc;
+
+  const SQActionButton(
+      {required this.action, required this.doc, this.isIcon = false});
+
+  Future<void> onConfirmed(BuildContext context) async {
+    ScreenState screenState = ScreenState.of(context);
+    await action.execute(doc, context);
+    screenState.refreshScreen();
+    await doc.collection.saveDoc(doc);
+    screenState.refreshScreen();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SQButton.icon(
+      action.icon,
+      text: isIcon ? null : action.name,
+      onPressed: () async {
+        if (action.confirm == false) return onConfirmed(context);
+        return showConfirmationDialog(action: action, context: context)
+            .then((confirmed) => confirmed ? onConfirmed(context) : {});
+      },
     );
   }
 }
+
+// TODO: do not save Doc on GoEditScreen
 
 class GoEditCloneAction extends GoScreenAction {
   GoEditCloneAction(super.name, {super.icon, super.show})
