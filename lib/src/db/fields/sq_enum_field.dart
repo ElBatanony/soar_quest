@@ -56,19 +56,6 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
       ],
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    if (field.editable == false) return readOnlyBuilder(context);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [fieldLabel(), SizedBox(height: 4), fieldBuilder(context)],
-      ),
-    );
-  }
 }
 
 Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
