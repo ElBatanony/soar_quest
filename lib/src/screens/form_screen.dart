@@ -4,21 +4,20 @@ import '../db/fields/sq_virtual_field.dart';
 import '../db/sq_collection.dart';
 import '../db/fields/sq_user_ref_field.dart';
 import '../ui/snackbar.dart';
-import 'screen.dart';
+import 'doc_screen.dart';
 
-class FormScreen extends Screen {
-  late final SQDoc doc;
+class FormScreen extends DocScreen {
   final String submitButtonText;
 
   SQCollection get collection => doc.collection;
 
   FormScreen(
-    this.doc, {
+    SQDoc doc, {
     String? title,
     this.submitButtonText = "Save",
     super.icon,
     super.key,
-  }) : super(title ?? "Edit ${doc.collection.id}");
+  }) : super(doc, title: title ?? "Edit ${doc.collection.id}");
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -30,7 +29,7 @@ class FormScreen extends Screen {
   }
 }
 
-class FormScreenState<T extends FormScreen> extends ScreenState<T> {
+class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   @override
   void initState() {
     if (widget.doc.initialized == false)
