@@ -74,24 +74,26 @@ class ScreenState<T extends Screen> extends State<T> {
       : Container();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     bool onlyBody = widget.prebody == null && widget.postbody == null;
 
-    final Widget body = Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: onlyBody
-          ? screenBody(context)
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  inlineHeader(),
-                  if (widget.prebody != null) widget.prebody!(context),
-                  screenBody(context),
-                  if (widget.postbody != null) widget.postbody!(context),
-                ],
+    final Widget body = Builder(builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: onlyBody
+            ? screenBody(context)
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    inlineHeader(),
+                    if (widget.prebody != null) widget.prebody!(context),
+                    screenBody(context),
+                    if (widget.postbody != null) widget.postbody!(context),
+                  ],
+                ),
               ),
-            ),
-    );
+      );
+    });
 
     if (widget.isInline) return body;
 
