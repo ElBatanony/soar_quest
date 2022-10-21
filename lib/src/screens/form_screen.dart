@@ -62,11 +62,6 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
-  Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
-    return field.formField(onChanged: refreshScreen, doc: doc);
-  }
-
-  @override
   Widget screenBody(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
