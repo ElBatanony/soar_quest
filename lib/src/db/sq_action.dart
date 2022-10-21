@@ -53,8 +53,6 @@ class _SQActionButtonState extends State<SQActionButton> {
     ScreenState screenState = ScreenState.of(context);
     await widget.action.execute(widget.doc, context);
     screenState.refreshScreen();
-    await widget.doc.collection.saveDoc(widget.doc);
-    screenState.refreshScreen();
   }
 
   @override
@@ -72,8 +70,6 @@ class _SQActionButtonState extends State<SQActionButton> {
     );
   }
 }
-
-// TODO: do not save Doc on GoEditScreen
 
 class GoEditCloneAction extends GoScreenAction {
   GoEditCloneAction(super.name, {super.icon, super.show})
