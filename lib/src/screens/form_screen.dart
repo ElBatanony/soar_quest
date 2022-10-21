@@ -62,16 +62,8 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
   }
 
   @override
-  List<Widget> fieldsDisplay(BuildContext inScreenContext) {
-    List<SQField<dynamic>> fields = doc.fields;
-
-    fields = fields
-        .where((field) => field.show(doc, inScreenContext) == true)
-        .toList();
-
-    return fields
-        .map((field) => field.formField(onChanged: refreshScreen, doc: doc))
-        .toList();
+  Widget fieldDisplay(SQField<dynamic> field) {
+    return field.formField(onChanged: refreshScreen, doc: doc);
   }
 
   @override
