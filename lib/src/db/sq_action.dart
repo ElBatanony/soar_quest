@@ -59,12 +59,15 @@ class GoScreenAction extends SQAction {
 }
 
 class GoEditAction extends GoScreenAction {
-  GoEditAction({String? name, IconData? icon, DocCondition show = alwaysShow})
-      : super(
-          name ?? "Edit",
-          icon: icon ?? Icons.edit,
-          screen: (doc) => FormScreen(doc),
+  GoEditAction({
+    String name = "Edit",
+    IconData icon = Icons.edit,
+    DocCondition show = alwaysShow,
+  }) : super(
+          name,
+          icon: icon,
           show: (doc) => doc.collection.updates && show(doc),
+          screen: (doc) => FormScreen(doc),
         );
 }
 
