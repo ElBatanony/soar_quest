@@ -16,8 +16,8 @@ class _SelectDocScreenState extends CollectionScreenState<SelectDocScreen> {
   @override
   Widget build(BuildContext context) {
     var itemsDisplay = widget.collection.docs
-        .map((doc) => SQButton(doc.label,
-            onPressed: () => exitScreen<SQDoc>(context, value: doc)))
+        .map((doc) =>
+            SQButton(doc.label, onPressed: () => exitScreen<SQDoc>(value: doc)))
         .toList();
 
     return Scaffold(

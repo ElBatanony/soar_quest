@@ -58,7 +58,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
     }
 
     await widget.collection.saveDoc(widget.doc).then(
-          (_) => exitScreen<bool>(context, value: true),
+          (_) => exitScreen<bool>(value: true),
         );
   }
 
@@ -70,7 +70,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
       onTap: (index) async {
         if (index == 0) {
           FocusManager.instance.primaryFocus?.unfocus();
-          return exitScreen(context);
+          return exitScreen();
         }
         await submitForm();
       },

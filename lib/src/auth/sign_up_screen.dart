@@ -31,7 +31,7 @@ class _SQSignUpScreenState extends ScreenState<SQSignUpScreen> {
   }
 
   void redirect() {
-    exitScreen(context);
+    exitScreen();
   }
 
   @override

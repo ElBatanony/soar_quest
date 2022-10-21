@@ -77,9 +77,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
                   ),
                 if (collection.deletes)
                   SQButton("Delete", onPressed: () async {
-                    await collection
-                        .deleteDoc(doc)
-                        .then((_) => exitScreen(context));
+                    await collection.deleteDoc(doc).then((_) => exitScreen());
                   })
               ],
             ),

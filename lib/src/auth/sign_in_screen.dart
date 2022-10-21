@@ -25,7 +25,7 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
   @override
   void initState() {
     if (widget.forceSignIn == false && SQAuth.user.isAnonymous == false) {
-      exitScreen(context);
+      exitScreen();
     }
     super.initState();
   }
@@ -39,7 +39,7 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
         print("Did not sign in");
       } else {
         print("Signed in");
-        exitScreen(context);
+        exitScreen();
       }
     });
   }
