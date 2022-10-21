@@ -58,7 +58,7 @@ class FormScreenState<T extends FormScreen> extends ScreenState<T> {
     }
 
     await widget.collection.saveDoc(widget.doc).then(
-          (_) => exitScreen<bool>(value: true),
+          (_) => exitScreen<bool>(true),
         );
   }
 
