@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../sq_collection.dart';
-import 'types/sq_ref.dart';
 import '../../ui/sq_button.dart';
 import '../../../screens.dart';
+import '../sq_collection.dart';
+import 'sq_user_ref_field.dart';
+import 'types/sq_ref.dart';
 
 export 'types/sq_ref.dart';
 
@@ -50,6 +51,13 @@ class _SQRefFormField extends SQFormField<SQRefField> {
 }
 
 class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
+  @override
+  void initState() {
+    if (field is SQEditedByField && ScreenState.of(context) is FormScreenState)
+      field.value = SQUserRefField.currentUserRef;
+    super.initState();
+  }
+
   @override
   Widget fieldBuilder(BuildContext context) {
     return Row(
