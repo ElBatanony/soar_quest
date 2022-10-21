@@ -73,8 +73,11 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   }
 
   Widget fieldLabel() {
-    return Text(field.name + (field.require ? " *" : ""),
-        style: Theme.of(context).textTheme.headline6);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Text(field.name + (field.require ? " *" : ""),
+          style: Theme.of(context).textTheme.headline6),
+    );
   }
 
   Widget readOnlyBuilder(BuildContext context) {
