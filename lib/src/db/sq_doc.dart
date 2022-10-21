@@ -18,8 +18,13 @@ class SQDoc {
 
     fields = collection.fields.map((field) {
       SQField<dynamic> fieldCopy = field.copy();
-      assert(field.runtimeType == fieldCopy.runtimeType,
-          "SQField not copied properly (${field.runtimeType} vs. ${fieldCopy.runtimeType})");
+      assert(
+        field.runtimeType == fieldCopy.runtimeType &&
+            field.name == fieldCopy.name &&
+            field.editable == fieldCopy.editable &&
+            field.require == fieldCopy.require,
+        "Incorrect SQField copy operation ${field.runtimeType}",
+      );
       return fieldCopy;
     }).toList();
   }
