@@ -17,9 +17,12 @@ class SQButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(3),
       child: icon == null
-          ? ElevatedButton(onPressed: onPressed, child: Text(text))
-          : ElevatedButton.icon(
-              onPressed: onPressed, icon: Icon(icon), label: Text(text)),
+          ? ElevatedButton(onPressed: onPressed, child: Text(text!))
+          : text == null
+              ? IconButton(
+                  onPressed: onPressed, icon: Icon(icon), isSelected: true)
+              : ElevatedButton.icon(
+                  onPressed: onPressed, icon: Icon(icon), label: Text(text!)),
     );
   }
 }
