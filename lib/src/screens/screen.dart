@@ -108,8 +108,8 @@ class ScreenState<T extends Screen> extends State<T> {
   static ScreenState of(BuildContext context) {
     return context.findAncestorStateOfType<ScreenState>()!;
   }
-}
 
-void exitScreen<T extends Object?>(BuildContext context, {T? value}) {
-  if (Navigator.canPop(context)) return Navigator.pop<T>(context, value);
+  void exitScreen<V extends Object?>(BuildContext context, {V? value}) {
+    if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
+  }
 }

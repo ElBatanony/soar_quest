@@ -4,7 +4,6 @@ import '../../db/sq_doc.dart';
 import '../../ui/sq_button.dart';
 
 import '../collection_screen.dart';
-import '../screen.dart';
 
 class SelectDocScreen extends CollectionScreen {
   SelectDocScreen({super.title, required super.collection, super.key});
