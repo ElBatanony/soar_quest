@@ -4,12 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/form_screen.dart';
 import '../ui/sq_button.dart';
 import '../screens/screen.dart';
+import 'conditions.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
-
-typedef DocCondition = bool Function(SQDoc doc);
-
-bool alwaysShow(SQDoc doc) => true;
 
 abstract class SQAction {
   final String name;
@@ -20,7 +17,7 @@ abstract class SQAction {
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
-      this.show = alwaysShow,
+      this.show = trueCond,
       this.confirm = false,
       this.confirmMessage = "Are you sure?"});
 
@@ -72,7 +69,7 @@ class GoEditAction extends GoScreenAction {
   GoEditAction({
     String name = "Edit",
     IconData icon = Icons.edit,
-    DocCondition show = alwaysShow,
+    DocCondition show = trueCond,
   }) : super(
           name,
           icon: icon,
@@ -104,7 +101,7 @@ class DeleteDocAction extends SQAction {
   DeleteDocAction({
     String name = "Delete",
     super.icon = Icons.delete,
-    DocCondition show = alwaysShow,
+    DocCondition show = trueCond,
     this.exitScreen = false,
     super.confirm = true,
   }) : super(name, show: (doc) => doc.collection.deletes && show(doc));
