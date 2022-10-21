@@ -49,9 +49,9 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
     );
   }
 
-  List<Widget> fieldsDisplay() {
+  List<Widget> fieldsDisplay(BuildContext inScreenContext) {
     return doc.fields
-        .where((field) => field.show(doc))
+        .where((field) => field.show(doc, inScreenContext))
         .map((field) => fieldDisplay(field.copy()))
         .toList();
   }
@@ -69,7 +69,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           actionsDisplay(),
-          ...fieldsDisplay(),
+          ...fieldsDisplay(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
