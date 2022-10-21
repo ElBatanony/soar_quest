@@ -104,6 +104,10 @@ class ScreenState<T extends Screen> extends State<T> {
       bottomNavigationBar: bottomNavBar(),
     );
   }
+
+  static ScreenState of(BuildContext context) {
+    return context.findAncestorStateOfType<ScreenState>()!;
+  }
 }
 
 void exitScreen<T extends Object?>(BuildContext context, {T? value}) {
