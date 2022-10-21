@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'conditions.dart';
 import 'sq_doc.dart';
 
 abstract class SQField<T> {
@@ -7,12 +8,14 @@ abstract class SQField<T> {
   T? value;
   bool editable;
   bool require;
+  DocCondition show;
 
   SQField(
     this.name, {
     this.value,
     this.editable = true,
     this.require = false,
+    this.show = trueCond,
   });
 
   SQField<T> copy();
