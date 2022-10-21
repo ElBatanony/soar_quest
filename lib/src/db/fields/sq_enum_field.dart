@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/screen.dart';
 import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
 import 'sq_list_field.dart';
@@ -83,12 +82,12 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
               children: [
                 ...enumField.options
                     .map((v) => SQButton(v.toString(),
-                        onPressed: () => exitScreen<T>(context, value: v)))
+                        onPressed: () => Navigator.pop<T>(context, v)))
                     .toList(),
               ],
             ),
             actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton('Cancel', onPressed: () => Navigator.pop(context)),
             ]);
       });
 }

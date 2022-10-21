@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/screen.dart';
 import '../../ui/sq_button.dart';
 import '../sq_field.dart';
 
@@ -13,10 +12,10 @@ Future<T?> showFieldDialog<T>(
             title: Text("Set ${field.name}"),
             content: field.formField(),
             actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton('Cancel', onPressed: () => Navigator.pop<T>(context)),
               SQButton(
                 'Save',
-                onPressed: () => exitScreen<T>(context, value: field.value),
+                onPressed: () => Navigator.pop<T>(context, field.value),
               ),
             ]);
       });

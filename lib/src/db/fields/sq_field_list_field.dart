@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/screen.dart';
 import '../sq_doc.dart';
 import '../../ui/sq_button.dart';
 import 'sq_list_field.dart';
@@ -57,14 +56,16 @@ Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
             content: Wrap(
               children: [
                 ...fieldListfield.allowedTypes
-                    .map((field) => SQButton(field.value.runtimeType.toString(),
-                        onPressed: () => exitScreen<SQField<dynamic>>(context,
-                            value: field.copy())))
+                    .map((field) => SQButton(
+                          field.value.runtimeType.toString(),
+                          onPressed: () => Navigator.pop<SQField<dynamic>>(
+                              context, field.copy()),
+                        ))
                     .toList(),
               ],
             ),
             actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton('Cancel', onPressed: () => Navigator.pop(context)),
             ]);
       });
 }
