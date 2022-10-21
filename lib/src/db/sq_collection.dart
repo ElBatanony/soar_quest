@@ -37,8 +37,8 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.adds = true,
     this.deletes = true,
     this.docScreen = defaultDocScreen,
-    this.actions = const [],
-  }) {
+    List<SQAction>? actions,
+  }) : actions = actions ?? [] {
     path = parentDoc == null
         ? "Example Apps/${SQApp.name}/$id"
         : "${parentDoc!.path}/$id";
@@ -46,6 +46,8 @@ abstract class SQCollection<DocType extends SQDoc> {
     if (readOnly) updates = adds = deletes = false;
 
     if (byPath(path) == null) _collections.add(this);
+
+    this.actions.addAll([GoEditAction(), DeleteDocAction(exitScreen: true)]);
   }
 
   bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
