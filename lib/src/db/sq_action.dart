@@ -20,15 +20,21 @@ abstract class SQAction {
 
   Future<void> execute(SQDoc doc, BuildContext context);
 
-  Widget button(SQDoc doc, ScreenState s, BuildContext context,
-      {bool iconOnly = false}) {
+  Widget button(SQDoc doc, {bool iconOnly = false}) {
     if (show(doc))
-      return SQButton.icon(iconOnly ? "" : name, icon, onPressed: () async {
-        await execute(doc, context);
-        s.refreshScreen();
-        await doc.collection.saveDoc(doc);
-        s.refreshScreen();
-      });
+      return Builder(
+        builder: (context) => SQButton.icon(
+          iconOnly ? "" : name,
+          icon,
+          onPressed: () async {
+            ScreenState screenState = ScreenState.of(context);
+            await execute(doc, context);
+            screenState.refreshScreen();
+            await doc.collection.saveDoc(doc);
+            screenState.refreshScreen();
+          },
+        ),
+      );
     return Container();
   }
 }

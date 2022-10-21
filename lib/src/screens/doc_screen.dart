@@ -60,7 +60,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
         children: [
           Wrap(
               children: collection.actions
-                  .map((action) => action.button(doc, this, context))
+                  .map((action) => action.button(doc))
                   .toList()),
           ...doc.fields.map((field) => fieldDisplay(field.copy())).toList(),
           if (collection.readOnly == false)
