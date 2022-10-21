@@ -55,13 +55,15 @@ class ScreenState<T extends Screen> extends State<T> {
     return Center(child: Text('${widget.title} Screen'));
   }
 
+  List<Widget> appBarActions() {
+    return [IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))];
+  }
+
   AppBar appBar() {
     return AppBar(
       title: Text(widget.title),
       leading: Navigator.of(context).canPop() ? BackButton() : null,
-      actions: [
-        IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))
-      ],
+      actions: appBarActions(),
     );
   }
 
