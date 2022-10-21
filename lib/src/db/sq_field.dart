@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../screens/form_screen.dart';
+import '../screens/screen.dart';
 import 'conditions.dart';
 import 'sq_doc.dart';
 
@@ -53,9 +55,17 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   SQFormField<Field> get formField => (widget as SQFormField<Field>);
   Field get field => formField.field;
   SQDoc? get doc => formField.doc;
+  late bool inForm;
 
   @override
   SQFormField<Field> get value => throw "Do not use FormField.value";
+
+  @override
+  void initState() {
+    inForm = ScreenState.of(context) is FormScreenState;
+    print(inForm);
+    super.initState();
+  }
 
   void onChanged() {
     if (formField.onChanged != null) formField.onChanged!();
@@ -92,8 +102,9 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           fieldLabel(),
-          SizedBox(height: 4),
-          (field.editable) ? fieldBuilder(context) : readOnlyBuilder(context),
+          (field.editable && inForm)
+              ? fieldBuilder(context)
+              : readOnlyBuilder(context),
         ],
       ),
     );
