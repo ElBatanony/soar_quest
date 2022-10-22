@@ -29,17 +29,6 @@ class _VideoCollectionScreenState
       videoField: widget.videoField,
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text(widget.title)),
-        body: Scaffold(
-            body: SingleChildScrollView(
-                child: Column(
-          children: docsDisplay(context),
-        ))));
-  }
 }
 
 class VideoDocDisplay extends StatefulWidget {
