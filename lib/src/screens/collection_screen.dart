@@ -95,7 +95,11 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   List<Widget> docsDisplay(BuildContext context) {
     if (widget.groupBy != null) return groupByDocs(context);
 
-    return collection.docs.map((doc) => docDisplay(doc, context)).toList();
+  Widget docsDisplay(List<SQDoc> docs, BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      children: docs.map((doc) => docDisplay(doc, context)).toList(),
+    );
   }
 
   Future<void> createNewDoc() async {
@@ -116,17 +120,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Flexible(
-          fit: FlexFit.loose,
-          child: ListView(
-            shrinkWrap: true,
-            children: docsDisplay(context),
-          ),
-        ),
-      ],
-    );
+    if (widget.groupBy != null) return groupByDocs(docs, context);
+    return docsDisplay(docs, context);
   }
 }
