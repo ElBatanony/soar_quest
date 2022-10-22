@@ -1,4 +1,6 @@
+import '../db/conditions.dart';
 import '../db/fields/sq_string_field.dart';
+import '../db/fields/sq_virtual_field.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_action.dart';
 import '../db/sq_collection.dart';
@@ -19,9 +21,28 @@ class SQAuth {
     SQAuthManager? authManager,
     List<SQField<dynamic>>? userDocFields,
   }) async {
-    SQAuth.userDocFields = userDocFields ?? [SQStringField("Full Name")];
+    SQAuth.userDocFields = userDocFields ??
+        [
+          SQStringField("Full Name", show: isSignedIn),
+          SQVirtualField(
+              field: SQStringField("User ID"),
+              valueBuilder: (doc) => SQAuth.user.userId),
+          SQVirtualField(
+              field: SQStringField("Email"),
+              show: isSignedIn,
+              valueBuilder: (doc) => (SQAuth.user as SignedInUser).email),
+          SQVirtualField(
+              field: SQStringField("Display Name"),
+              show: isSignedIn,
+              valueBuilder: (doc) => (SQAuth.user as SignedInUser).displayName),
+        ];
     SQAuth.auth = authManager ?? FirebaseAuthManager();
     usersCollection = FirestoreCollection(
+        id: "Users",
+        fields: SQAuth.userDocFields,
+        singleDocName: "Profile Info",
+        deletes: false,
+        actions: [
           CustomAction("Sign Out", customExecute: (doc, context) async {
             await SQAuth.auth.signOut();
             ScreenState.of(context).refreshScreen();
