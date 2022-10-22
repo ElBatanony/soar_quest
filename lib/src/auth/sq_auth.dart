@@ -52,7 +52,7 @@ class SQAuth {
             },
           ),
           GoScreenAction("Sign In",
-              show: (doc, context) => !isSignedIn(doc, context),
+              show: isSignedIn.not(),
               screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true))
         ]);
     await auth.init();

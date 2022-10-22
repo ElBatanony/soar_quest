@@ -29,7 +29,7 @@ void main() async {
         SQStringField("Status"),
         options: ["Done", "To-Do"],
         value: "To-Do",
-        show: (doc, context) => !inFormScreen(doc, context),
+        show: inFormScreen.not(),
       ),
       SQEditedByField("hamada user"),
       SQBoolField("Repeat"),

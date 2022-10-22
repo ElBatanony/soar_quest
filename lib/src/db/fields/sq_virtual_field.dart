@@ -9,10 +9,11 @@ class SQVirtualField<T> extends SQField<T> {
       {required this.field,
       required this.valueBuilder,
       DocCond show = trueCond})
-      : super(field.name,
-            editable: false,
-            show: (doc, context) =>
-                !inFormScreen(doc, context) && show(doc, context));
+      : super(
+          field.name,
+          editable: false,
+          show: inFormScreen.not().and(show),
+        );
 
   @override
   T? parse(source) => null;

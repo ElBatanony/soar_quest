@@ -40,7 +40,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
 
   List<Widget> fieldsDisplay(BuildContext context) {
     return doc.fields
-        .where((field) => field.show(doc, context))
+        .where((field) => field.show.check(doc, context))
         .map((field) => fieldDisplay(field, context))
         .toList();
   }
@@ -48,7 +48,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   Widget actionsDisplay(BuildContext context) {
     return Wrap(
       children: collection.actions
-          .where((action) => action.show(doc, context))
+          .where((action) => action.show.check(doc, context))
           .map((action) => action.button(doc))
           .toList(),
     );
