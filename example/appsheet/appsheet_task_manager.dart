@@ -45,7 +45,6 @@ void main() async {
   );
 
   // TODO: add view types: Card, Deck, Gallery, Table (see where before), Onboarding
-  // TODO: add groupBy status
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
   doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
@@ -64,7 +63,8 @@ void main() async {
           CollectionScreen(
               title: "Done", collection: doneTasks, isInline: true),
         ]),
-        CollectionScreen(title: "Tasks 2", collection: tasks),
+        CollectionScreen(
+            title: "Tasks 2", collection: tasks, groupBy: "Status"),
         ProfileScreen(),
       ]),
       drawer: SQDrawer([]),

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../db.dart';
@@ -14,6 +15,7 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
   final DocDisplayBuilder? docDisplay;
+  final String? groupBy;
 
   CollectionScreen(
       {String? title,
@@ -24,6 +26,7 @@ class CollectionScreen extends Screen {
       super.postbody,
       super.isInline,
       super.icon,
+      this.groupBy,
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);
@@ -73,7 +76,24 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     );
   }
 
+  List<Widget> groupByDocs(BuildContext context) {
+    Map<dynamic, List<SQDoc>> groups = groupBy<SQDoc, dynamic>(
+        widget.collection.docs, (doc) => doc.value<dynamic>(widget.groupBy!));
+    print(groups);
+
+    return groups.entries
+        .map((entry) => Column(
+              children: [
+                Text(entry.key.toString()),
+                ...entry.value.map((doc) => docDisplay(doc, context))
+              ],
+            ))
+        .toList();
+  }
+
   List<Widget> docsDisplay(BuildContext context) {
+    if (widget.groupBy != null) return groupByDocs(context);
+
     return widget.collection.docs
         .map((doc) => docDisplay(doc, context))
         .toList();
