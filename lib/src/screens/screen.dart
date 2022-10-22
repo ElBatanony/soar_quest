@@ -26,15 +26,11 @@ Future<T?> _goToScreen<T>(
 
 class Screen extends StatefulWidget {
   final String title;
-  final Widget Function(BuildContext)? prebody;
-  final Widget Function(BuildContext)? postbody;
   final IconData? icon;
   final bool isInline;
 
   const Screen(
     this.title, {
-    this.prebody,
-    this.postbody,
     this.isInline = false,
     this.icon,
     super.key,
@@ -71,29 +67,12 @@ class ScreenState<T extends Screen> extends State<T> {
 
   Widget? bottomNavBar(BuildContext context) => SQApp.navbar;
 
-  Widget inlineHeader(BuildContext context) => widget.isInline
-      ? Text(widget.title, style: Theme.of(context).textTheme.titleLarge)
-      : Container();
-
   @override
   Widget build(BuildContext context) {
-    bool onlyBody = widget.prebody == null && widget.postbody == null;
-
     final Widget body = Builder(builder: (context2) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
-        child: onlyBody
-            ? screenBody(context2)
-            : SingleChildScrollView(
-                child: Column(
-                  children: [
-                    inlineHeader(context),
-                    if (widget.prebody != null) widget.prebody!(context2),
-                    screenBody(context2),
-                    if (widget.postbody != null) widget.postbody!(context2),
-                  ],
-                ),
-              ),
+        child: screenBody(context2),
       );
     });
 

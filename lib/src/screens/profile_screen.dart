@@ -12,8 +12,6 @@ class ProfileScreen extends DocScreen {
   ProfileScreen({
     super.title = "Profile",
     super.icon = Icons.account_circle,
-    super.prebody,
-    super.postbody,
     super.key,
   }) : super(SQAuth.userDoc);
 

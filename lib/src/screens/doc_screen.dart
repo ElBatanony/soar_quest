@@ -9,8 +9,6 @@ class DocScreen extends Screen {
   DocScreen(
     this.doc, {
     String? title,
-    super.prebody,
-    super.postbody,
     super.icon,
     super.isInline,
     super.key,

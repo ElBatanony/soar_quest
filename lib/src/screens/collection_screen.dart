@@ -22,8 +22,6 @@ class CollectionScreen extends Screen {
       required this.collection,
       DocScreenBuilder? docScreen,
       this.docDisplay,
-      super.prebody,
-      super.postbody,
       super.isInline,
       super.icon,
       this.groupBy,
