@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../auth/sq_auth.dart';
+import '../../db/conditions.dart';
 import '../../db/firestore_collection.dart';
+import '../../db/sq_action.dart';
 import '../../db/sq_collection.dart';
 import '../../db/fields/sq_ref_field.dart';
-import '../../../screens.dart';
+import '../../screens/collection_screen.dart';
 import '../../ui/snackbar.dart';
-import 'toggle_in_favourites_button.dart';
 import '../../ui/sq_button.dart';
 
 class FavDoc extends SQDoc {
@@ -36,6 +37,23 @@ class FavouritesFeature {
   SQCollection collection;
   late final FavouritesCollection favouritesCollection;
 
+  SQAction addToFavouritesAction() => CustomAction(
+        "Fav",
+        icon: Icons.favorite,
+        show: isInFavourites().not(),
+        customExecute: (doc, context) async {
+          var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
+          newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
+          favouritesCollection.saveDoc(newFavDoc);
+        },
+      );
+
+  SQAction removeFromFavouritesAction() => CustomAction("UnFav",
+          icon: Icons.delete_forever_sharp,
+          show: isInFavourites(), customExecute: (doc, context) async {
+        favouritesCollection.deleteDoc(doc);
+      });
+
   FavouritesFeature({required this.collection}) {
     favouritesCollection = FavouritesCollection(
       id: "Favourite ${collection.id}",
@@ -43,39 +61,19 @@ class FavouritesFeature {
         SQRefField("ref", collection: collection),
       ],
     );
+    collection.actions
+        .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
     favouritesCollection.loadCollection();
   }
 
-  Widget addToFavouritesButton(SQDoc doc) {
-    return ToggleInFavouritesButton(doc, favouritesFeature: this);
-  }
-
-  void addFavourite(SQDoc doc) {
-    var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
-    newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
-    favouritesCollection.saveDoc(newFavDoc);
-  }
-
-  void removeFavourite(SQDoc favDoc) {
-    favouritesCollection.deleteDoc(favDoc);
-  }
-
-  void loadFavourites() {
-    favouritesCollection.loadCollection();
-  }
-
-  bool isInFavourites(SQDoc doc) {
-    return favouritesCollection.docs
-        .any((SQDoc someDoc) => someDoc.id == doc.id);
-  }
+  DocCond isInFavourites() => DocCond((doc, _) =>
+      favouritesCollection.docs.any((SQDoc someDoc) => someDoc.id == doc.id));
 }
 
 class FavouritesScreen extends CollectionScreen {
   FavouritesScreen(
       {required FavouritesFeature favouritesFeature,
       super.docScreen,
-      super.prebody,
-      super.postbody,
       super.isInline,
       super.key})
       : super(collection: favouritesFeature.favouritesCollection);
@@ -85,32 +83,21 @@ class FavouritesScreen extends CollectionScreen {
 }
 
 class _FavouritesScreenState extends CollectionScreenState<FavouritesScreen> {
-  void removeFromFavourites(SQDoc doc) async {
-    await doc.collection.deleteDoc(doc);
-    refreshScreen();
-  }
-
   @override
   Widget docDisplay(SQDoc doc, BuildContext context) {
     SQRef? originalDocRef = doc.value<SQRef>("ref");
-
     return ListTile(
       title: SQButton(doc.label,
-          onPressed: () async => originalDocRef != null
+          onPressed: () async => originalDocRef == null
               ? showSnackBar("Doc Ref is Null", context: context)
-              : widget.docScreen(await originalDocRef!.doc()).go(context)),
-      trailing: SQButton(
-        'Remove',
-        onPressed: () => removeFromFavourites(doc),
-      ),
+              : widget.docScreen(await originalDocRef.doc()).go(context)),
     );
   }
 
   @override
   Widget screenBody(BuildContext context) {
-    return Column(
-        children: widget.collection.docs.isEmpty
-            ? [Center(child: Text("Your favourites list is empty"))]
-            : docsDisplay(context));
+    return docs.isEmpty
+        ? Center(child: Text("Your favourites list is empty"))
+        : super.screenBody(context);
   }
 }
