@@ -33,11 +33,11 @@ class SQApp {
   static void run(
     SQNavBar navbar, {
     SQDrawer? drawer,
-    int? startingScreen,
+    int startingScreen = 0,
   }) {
     SQApp.drawer = drawer;
     SQApp.navbar = navbar;
-    SQApp.selectedNavScreen = startingScreen ?? 0;
+    SQApp.selectedNavScreen = startingScreen;
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
