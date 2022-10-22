@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import '../../db.dart';
+import '../db/sq_collection.dart';
 import 'doc_screen.dart';
 import 'form_screen.dart';
 import 'screen.dart';
@@ -79,22 +79,17 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     );
   }
 
-  List<Widget> groupByDocs(BuildContext context) {
+  Widget groupByDocs(List<SQDoc> docs, BuildContext context) {
     Map<dynamic, List<SQDoc>> groups = groupBy<SQDoc, dynamic>(
-        collection.docs, (doc) => doc.value<dynamic>(widget.groupBy!));
+        docs, (doc) => doc.value<dynamic>(widget.groupBy!));
 
-    return groups.entries
-        .map((entry) => Column(
-              children: [
-                Text(entry.key.toString()),
-                ...entry.value.map((doc) => docDisplay(doc, context))
-              ],
-            ))
-        .toList();
+    List<Widget> tiles = [];
+    for (final entry in groups.entries) {
+      tiles.add(ListTile(title: Text(entry.key.toString())));
+      tiles.addAll(entry.value.map((doc) => docDisplay(doc, context)));
+    }
+    return ListView(shrinkWrap: true, children: tiles);
   }
-
-  List<Widget> docsDisplay(BuildContext context) {
-    if (widget.groupBy != null) return groupByDocs(context);
 
   Widget docsDisplay(List<SQDoc> docs, BuildContext context) {
     return ListView(
