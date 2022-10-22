@@ -37,7 +37,7 @@ class CollectionScreen extends Screen {
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   SQCollection get collection => widget.collection;
-  List<SQDoc> get docs => widget.collection.docs;
+  List<SQDoc> get docs => collection.docs;
 
   Future<void> loadData() async {
     await collection.loadCollection();
