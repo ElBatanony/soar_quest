@@ -19,24 +19,34 @@ void main() async {
   var uncheckTaskAction = SetFieldsAction("UNCheck",
       getFields: (doc) => {"Status": "To-Do"},
       icon: Icons.arrow_back,
-      show: (doc) => doc.getField("Status")?.value == "Done");
+      show: (doc) => doc.value<String>("Status") == "Done");
 
   tasks = FirestoreCollection(
     id: "Tasks",
     fields: [
       SQStringField("Task", require: true),
-      SQEnumField(SQStringField("Status"),
-          options: ["Done", "To-Do"],
-          value: "To-Do"), // TODO: add Show IF condition
+      SQEnumField<String>(
+        SQStringField("Status"),
+        options: ["Done", "To-Do"],
+        value: "To-Do",
+        show: (doc, context) => !inFormScreen(doc, context),
+      ),
+      SQEditedByField("hamada user"),
       SQBoolField("Repeat"),
-      SQTimestampField("Due Date"),
+      SQIntField("Repeat Every (Hours)",
+          show: (doc, context) => doc.getField("Repeat")?.value == true),
+      SQVirtualField(
+        field: SQStringField("Hamada"),
+        valueBuilder: (doc) => "hamada yo",
+      ),
       SQTimestampField("Last Updated"),
     ],
     actions: [checkTaskAction, uncheckTaskAction],
     adds: false,
   );
 
-  // TODO: add concept of conditions to SQ. apply to show field later
+  // TODO: add view types: Card, Deck, Gallery, Table (see where before), Onboarding
+  // TODO: add groupBy status
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
   doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
@@ -47,7 +57,6 @@ void main() async {
         FormScreen(
           tasks.newDoc(),
           title: "New Task",
-          hiddenFields: ["Status"],
           icon: Icons.add,
         ),
         TabsScreen("Tasks", [
@@ -57,6 +66,7 @@ void main() async {
               title: "Done", collection: doneTasks, isInline: true),
         ]),
         CollectionScreen(title: "Tasks 2", collection: tasks),
+        ProfileScreen(),
       ]),
       drawer: SQDrawer([]),
       startingScreen: 1);
