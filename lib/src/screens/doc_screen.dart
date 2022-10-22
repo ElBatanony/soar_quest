@@ -12,6 +12,7 @@ class DocScreen extends Screen {
     super.prebody,
     super.postbody,
     super.icon,
+    super.isInline,
     super.key,
   }) : super(title ?? doc.label);
 
