@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../db.dart';
+import '../../ui/sq_button.dart';
 import '../collection_screen.dart';
+import '../form_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
   final List<CollectionFilter> filters;
@@ -11,8 +13,6 @@ class CollectionFilterScreen extends CollectionScreen {
     required super.collection,
     required this.filters,
     super.docScreen,
-    super.prebody,
-    super.postbody,
     super.icon,
     super.key,
   });
@@ -23,53 +23,48 @@ class CollectionFilterScreen extends CollectionScreen {
 
 class CollectionFilterScreenState<T extends CollectionFilterScreen>
     extends CollectionScreenState<T> {
-  List<SQDoc> filteredDocs = [];
+  @override
+  List<SQDoc> get docs => collection.filterBy(fieldFilters);
+
+  late FormScreen fieldsFormScreen;
+  List<CollectionFieldFilter> fieldFilters = [];
 
   @override
-  Future<void> loadData() async {
-    await super.loadData();
-    updateDocs();
+  void initState() {
+    fieldFilters = widget.filters.whereType<CollectionFieldFilter>().toList();
+
+    SQCollection fakeColl = InMemoryCollection(
+        id: "hi",
+        fields: fieldFilters.map((fieldFilter) => fieldFilter.field).toList());
+
+    SQDoc fakeDoc = fakeColl.newDoc();
+    for (final fieldFilter in fieldFilters) {
+      fieldFilter.field = fakeDoc.getField(fieldFilter.field.name)!;
+    }
+
+    fieldsFormScreen = FormScreen(fakeDoc, isInline: true);
+
+    super.initState();
   }
 
-  void updateDocs() {
-    filteredDocs = widget.collection.filterBy(widget.filters);
-    setState(() {});
-  }
-
-  @override
-  List<Widget> docsDisplay(BuildContext context) {
-    return filteredDocs.map((doc) => docDisplay(doc, context)).toList();
+  Widget filterFieldsDisplay() {
+    return Column(
+      children: [
+        fieldsFormScreen,
+        Text('Total docs: ${widget.collection.docs.length}'),
+        Text('Showing docs: ${docs.length}')
+      ],
+    );
   }
 
   @override
   Widget screenBody(BuildContext context) {
-    List<CollectionFieldFilter> fieldFilters =
-        widget.filters.whereType<CollectionFieldFilter>().toList();
-
-    return Column(children: [
-      ...fieldFilters
-          .map((fieldFilter) =>
-              fieldFilter.field.formField(onChanged: (_) => updateDocs()))
-          .toList(),
-      SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Total docs: ${widget.collection.docs.length}',
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                'Showing docs: ${filteredDocs.length}',
-                textAlign: TextAlign.center,
-              ),
-              super.screenBody(context),
-            ],
-          ),
-        ),
-      )
-    ]);
+    return Column(
+      children: [
+        filterFieldsDisplay(),
+        SQButton("Filter", onPressed: () => refreshScreen()),
+        Expanded(child: super.screenBody(context)),
+      ],
+    );
   }
 }
