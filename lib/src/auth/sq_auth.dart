@@ -43,12 +43,16 @@ class SQAuth {
         singleDocName: "Profile Info",
         deletes: false,
         actions: [
-          CustomAction("Sign Out", customExecute: (doc, context) async {
-            await SQAuth.auth.signOut();
-            ScreenState.of(context).refreshScreen();
-          }),
-          // TODO: add condition for showing sign in
+          CustomAction(
+            "Sign Out",
+            show: isSignedIn,
+            customExecute: (doc, context) async {
+              await SQAuth.auth.signOut();
+              ScreenState.of(context).refreshScreen();
+            },
+          ),
           GoScreenAction("Sign In",
+              show: (doc, context) => !isSignedIn(doc, context),
               screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true))
         ]);
     await auth.init();
