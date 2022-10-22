@@ -26,6 +26,10 @@ class TableScreenState extends CollectionScreenState<TableScreen> {
     return TableRow(children: collection.fields.map(tableHeaderCell).toList());
   }
 
+  TableRow tableDocRow(SQDoc doc) {
+    return TableRow(children: (docDisplay(doc, context) as Row).children);
+  }
+
   Widget tableFieldCell(SQDoc doc, SQField<dynamic> field) {
     return GestureDetector(
       onTap: () =>
@@ -38,8 +42,9 @@ class TableScreenState extends CollectionScreenState<TableScreen> {
     );
   }
 
-  TableRow tableDocRow(SQDoc doc) {
-    return TableRow(
+  @override
+  Widget docDisplay(SQDoc doc, BuildContext context) {
+    return Row(
         children: collection.fields
             .map((field) => tableFieldCell(doc, field))
             .toList());
@@ -52,10 +57,7 @@ class TableScreenState extends CollectionScreenState<TableScreen> {
       child: Table(
         border: TableBorder.all(),
         defaultColumnWidth: IntrinsicColumnWidth(),
-        children: [
-          tableHeaderRow(),
-          ...collection.docs.map(tableDocRow).toList()
-        ],
+        children: [tableHeaderRow(), ...docs.map(tableDocRow).toList()],
       ),
     );
   }
