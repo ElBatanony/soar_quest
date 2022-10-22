@@ -6,12 +6,12 @@ import '../screens/screen.dart';
 import '../ui/signed_in_content.dart';
 import 'sq_doc.dart';
 
-typedef DocContextCondition = bool Function(SQDoc doc, BuildContext context);
+typedef DocCond = bool Function(SQDoc doc, BuildContext context);
 
-bool trueContextCond(SQDoc doc, BuildContext context) => true;
+bool trueCond(SQDoc doc, BuildContext context) => true;
 
-DocContextCondition inFormScreen =
+DocCond inFormScreen =
     (_, context) => ScreenState.of(context) is FormScreenState;
 
-DocContextCondition isSignedIn =
+DocCond isSignedIn =
     (_, context) => SQAuth.user is SignedInUser && !SQAuth.user.isAnonymous;

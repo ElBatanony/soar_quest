@@ -11,14 +11,14 @@ abstract class SQField<T> {
   T? value;
   bool editable;
   bool require;
-  DocContextCondition show;
+  DocCond show;
 
   SQField(
     this.name, {
     this.value,
     this.editable = true,
     this.require = false,
-    this.show = trueContextCond,
+    this.show = trueCond,
   });
 
   SQField<T> copy();

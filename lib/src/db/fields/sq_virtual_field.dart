@@ -8,7 +8,7 @@ class SQVirtualField<T> extends SQField<T> {
   SQVirtualField(
       {required this.field,
       required this.valueBuilder,
-      DocContextCondition show = trueContextCond})
+      DocCond show = trueCond})
       : super(field.name,
             editable: false,
             show: (doc, context) =>

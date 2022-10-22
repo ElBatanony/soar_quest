@@ -11,13 +11,13 @@ import 'sq_collection.dart';
 abstract class SQAction {
   final String name;
   final IconData icon;
-  final DocContextCondition show;
+  final DocCond show;
   final bool confirm;
   final String confirmMessage;
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
-      this.show = trueContextCond,
+      this.show = trueCond,
       this.confirm = false,
       this.confirmMessage = "Are you sure?"});
 
@@ -93,7 +93,7 @@ class GoEditAction extends GoScreenAction {
   GoEditAction({
     String name = "Edit",
     IconData icon = Icons.edit,
-    DocContextCondition show = trueContextCond,
+    DocCond show = trueCond,
   }) : super(
           name,
           icon: icon,
@@ -125,7 +125,7 @@ class DeleteDocAction extends SQAction {
   DeleteDocAction({
     String name = "Delete",
     super.icon = Icons.delete,
-    DocContextCondition show = trueContextCond,
+    DocCond show = trueCond,
     this.exitScreen = false,
     super.confirm = true,
   }) : super(name,
