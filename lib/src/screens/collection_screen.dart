@@ -37,10 +37,15 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   SQCollection get collection => widget.collection;
   List<SQDoc> get docs => collection.docs;
 
+  @override
+  void refreshScreen() {
+    loadData();
+    super.refreshScreen();
+  }
+
   Future<void> loadData() async {
     await collection.loadCollection();
-    refreshScreen();
-    return;
+    super.refreshScreen();
   }
 
   @override
