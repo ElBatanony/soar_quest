@@ -24,10 +24,7 @@ class CategorySelectScreen extends CollectionScreen {
 class _CategorySelectScreenState
     extends CollectionScreenState<CategorySelectScreen> {
   @override
-  Future<void> loadData() async {
-    await widget.categoryField.collection.loadCollection();
-    refreshScreen();
-  }
+  SQCollection<SQDoc> get collection => widget.categoryField.collection;
 
   @override
   Widget docDisplay(SQDoc doc, BuildContext context) {
@@ -51,29 +48,6 @@ class _CategorySelectScreenState
                 docScreen: widget.docScreen)
             .go(context);
       },
-    );
-  }
-
-  @override
-  List<Widget> docsDisplay(BuildContext context) {
-    return widget.categoryField.collection.docs
-        .map((doc) => docDisplay(doc, context))
-        .toList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: docsDisplay(context),
-        ),
-      ),
     );
   }
 }
