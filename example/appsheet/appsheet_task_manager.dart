@@ -14,12 +14,12 @@ void main() async {
 
   var checkTaskAction = SetFieldsAction("Check",
       getFields: (doc) => {"Last Updated": SQTimestamp.now(), "Status": "Done"},
-      show: (doc, _) => doc.getField("Status")?.value != "Done");
+      show: DocValueCond("Status", "Done").not());
 
   var uncheckTaskAction = SetFieldsAction("UNCheck",
       getFields: (doc) => {"Status": "To-Do"},
       icon: Icons.arrow_back,
-      show: (doc, _) => doc.value<String>("Status") == "Done");
+      show: DocValueCond("Status", "Done"));
 
   tasks = FirestoreCollection(
     id: "Tasks",
@@ -33,8 +33,7 @@ void main() async {
       ),
       SQEditedByField("hamada user"),
       SQBoolField("Repeat"),
-      SQIntField("Repeat Every (Hours)",
-          show: (doc, context) => doc.getField("Repeat")?.value == true),
+      SQIntField("Repeat Every (Hours)", show: DocValueCond("Repeat", true)),
       SQVirtualField(
         field: SQStringField("Hamada"),
         valueBuilder: (doc) => "hamada yo",

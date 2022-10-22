@@ -34,3 +34,8 @@ DocCond inFormScreen =
 
 DocCond isSignedIn = DocCond(
     (doc, context) => SQAuth.user is SignedInUser && !SQAuth.user.isAnonymous);
+
+class DocValueCond<T> extends DocCond {
+  DocValueCond(String fieldName, T expectedValue)
+      : super((doc, context) => doc.value<T>(fieldName) == expectedValue);
+}
