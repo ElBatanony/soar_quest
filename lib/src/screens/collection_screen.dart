@@ -36,8 +36,10 @@ class CollectionScreen extends Screen {
 }
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
+  SQCollection get collection => widget.collection;
+
   Future<void> loadData() async {
-    await widget.collection.loadCollection();
+    await collection.loadCollection();
     refreshScreen();
     return;
   }
@@ -67,7 +69,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
           : null,
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
-        children: widget.collection.actions
+        children: collection.actions
             .where((action) => action.show.check(doc, context))
             .map((action) => action.button(doc, isIcon: true))
             .toList(),
@@ -78,8 +80,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   List<Widget> groupByDocs(BuildContext context) {
     Map<dynamic, List<SQDoc>> groups = groupBy<SQDoc, dynamic>(
-        widget.collection.docs, (doc) => doc.value<dynamic>(widget.groupBy!));
-    print(groups);
+        collection.docs, (doc) => doc.value<dynamic>(widget.groupBy!));
 
     return groups.entries
         .map((entry) => Column(
@@ -94,19 +95,17 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   List<Widget> docsDisplay(BuildContext context) {
     if (widget.groupBy != null) return groupByDocs(context);
 
-    return widget.collection.docs
-        .map((doc) => docDisplay(doc, context))
-        .toList();
+    return collection.docs.map((doc) => docDisplay(doc, context)).toList();
   }
 
   Future<void> createNewDoc() async {
-    await FormScreen(widget.collection.newDoc()).go(context);
+    await FormScreen(collection.newDoc()).go(context);
     loadData();
   }
 
   @override
   FloatingActionButton? floatingActionButton(BuildContext context) {
-    if (widget.collection.adds)
+    if (collection.adds)
       return FloatingActionButton(
           heroTag: null,
           shape: CircleBorder(),
