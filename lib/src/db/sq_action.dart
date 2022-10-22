@@ -151,6 +151,8 @@ class SetFieldsAction extends SQAction {
       SQField<dynamic>? docField = doc.getField(entry.key);
       if (docField == null) throw "SetFieldsAction null doc field";
       docField.value = entry.value;
+      await doc.collection.saveDoc(doc);
+      ScreenState.of(context).refreshScreen();
     }
   }
 }
