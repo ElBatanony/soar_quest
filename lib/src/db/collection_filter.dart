@@ -43,9 +43,11 @@ class StringContainsFilter extends CollectionFieldFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs
-        .where((doc) => (doc.value(field.name) as String)
+        .where((doc) => doc
+            .value<dynamic>(field.name)
+            .toString()
             .toLowerCase()
-            .contains(field.value.toLowerCase() as String))
+            .contains(field.value.toString().toLowerCase()))
         .toList();
   }
 }
