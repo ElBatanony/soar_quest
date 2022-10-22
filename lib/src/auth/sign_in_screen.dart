@@ -30,18 +30,16 @@ class _SignInScreenState extends ScreenState<SignInScreen> {
     super.initState();
   }
 
-  void signIn() {
-    SQAuth.auth
-        .signInWithEmailAndPassword(
-            email: emailField.value ?? "", password: passwordField.value ?? "")
-        .then((_) {
-      if (SQAuth.user.isAnonymous) {
-        print("Did not sign in");
-      } else {
-        print("Signed in");
-        exitScreen();
-      }
-    });
+  void signIn() async {
+    await SQAuth.auth.signInWithEmailAndPassword(
+        email: emailField.value ?? "", password: passwordField.value ?? "");
+
+    if (SQAuth.user.isAnonymous) {
+      print("Did not sign in");
+    } else {
+      print("Signed in");
+      exitScreen();
+    }
   }
 
   @override
