@@ -46,10 +46,6 @@ class Screen extends StatefulWidget {
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
-
-  static Screen of(BuildContext context) {
-    return context.findAncestorWidgetOfExactType<Screen>()!;
-  }
 }
 
 class ScreenState<T extends Screen> extends State<T> {
