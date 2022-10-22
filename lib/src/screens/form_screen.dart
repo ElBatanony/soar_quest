@@ -36,9 +36,10 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
       }
     }
 
-    await widget.collection.saveDoc(widget.doc).then(
-          (_) => exitScreen<bool>(true),
-        );
+    // TODO: make a copy of the fields, not to edit if form cancelled
+
+    await widget.collection.saveDoc(widget.doc);
+    exitScreen<bool>(true);
   }
 
   @override
