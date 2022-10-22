@@ -66,8 +66,8 @@ class FavouritesFeature {
     favouritesCollection.loadCollection();
   }
 
-  DocCond isInFavourites() => DocCond((doc, _) =>
-      favouritesCollection.docs.any((SQDoc someDoc) => someDoc.id == doc.id));
+  DocCond isInFavourites() =>
+      DocCond((doc, _) => favouritesCollection.hasDoc(doc));
 }
 
 class FavouritesScreen extends CollectionScreen {
