@@ -14,12 +14,12 @@ void main() async {
 
   var checkTaskAction = SetFieldsAction("Check",
       getFields: (doc) => {"Last Updated": SQTimestamp.now(), "Status": "Done"},
-      show: (doc) => doc.getField("Status")?.value != "Done");
+      show: (doc, _) => doc.getField("Status")?.value != "Done");
 
   var uncheckTaskAction = SetFieldsAction("UNCheck",
       getFields: (doc) => {"Status": "To-Do"},
       icon: Icons.arrow_back,
-      show: (doc) => doc.value<String>("Status") == "Done");
+      show: (doc, _) => doc.value<String>("Status") == "Done");
 
   tasks = FirestoreCollection(
     id: "Tasks",

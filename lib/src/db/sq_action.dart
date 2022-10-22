@@ -11,13 +11,13 @@ import 'sq_collection.dart';
 abstract class SQAction {
   final String name;
   final IconData icon;
-  final DocCondition show;
+  final DocContextCondition show;
   final bool confirm;
   final String confirmMessage;
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
-      this.show = trueCond,
+      this.show = trueContextCond,
       this.confirm = false,
       this.confirmMessage = "Are you sure?"});
 
@@ -93,11 +93,11 @@ class GoEditAction extends GoScreenAction {
   GoEditAction({
     String name = "Edit",
     IconData icon = Icons.edit,
-    DocCondition show = trueCond,
+    DocContextCondition show = trueContextCond,
   }) : super(
           name,
           icon: icon,
-          show: (doc) => doc.collection.updates && show(doc),
+          show: (doc, context) => doc.collection.updates && show(doc, context),
           screen: (doc) => FormScreen(doc),
         );
 }
@@ -125,10 +125,12 @@ class DeleteDocAction extends SQAction {
   DeleteDocAction({
     String name = "Delete",
     super.icon = Icons.delete,
-    DocCondition show = trueCond,
+    DocContextCondition show = trueContextCond,
     this.exitScreen = false,
     super.confirm = true,
-  }) : super(name, show: (doc) => doc.collection.deletes && show(doc));
+  }) : super(name,
+            show: (doc, context) =>
+                doc.collection.deletes && show(doc, context));
 
   @override
   execute(SQDoc doc, BuildContext context) {

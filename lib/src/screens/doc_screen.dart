@@ -48,7 +48,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   Widget actionsDisplay(BuildContext context) {
     return Wrap(
       children: collection.actions
-          .where((action) => action.show(doc))
+          .where((action) => action.show(doc, context))
           .map((action) => action.button(doc))
           .toList(),
     );
