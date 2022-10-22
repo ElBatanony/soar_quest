@@ -14,6 +14,7 @@ class FormScreen extends DocScreen {
     String? title,
     this.submitButtonText = "Save",
     super.icon,
+    super.isInline,
     super.key,
   }) : super(doc, title: title ?? "Edit ${doc.collection.id}");
 
@@ -37,6 +38,7 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
     }
 
     // TODO: make a copy of the fields, not to edit if form cancelled
+    // TODO: create a completely new doc each time and save values when submitting
 
     await widget.collection.saveDoc(widget.doc);
     exitScreen<bool>(true);
