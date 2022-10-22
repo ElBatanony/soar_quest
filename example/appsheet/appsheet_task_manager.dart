@@ -44,7 +44,7 @@ void main() async {
     adds: false,
   );
 
-  // TODO: add view types: Card, Deck, Gallery, Table (see where before), Onboarding
+  // TODO: add view types: Card, Deck, Gallery, Onboarding
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
   doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
@@ -57,6 +57,7 @@ void main() async {
           title: "New Task",
           icon: Icons.add,
         ),
+        TableScreen(title: "Table", collection: tasks),
         TabsScreen("Tasks", [
           CollectionScreen(
               title: "Pending Tasks", collection: pendingTasks, isInline: true),
@@ -65,7 +66,6 @@ void main() async {
         ]),
         CollectionScreen(
             title: "Tasks 2", collection: tasks, groupBy: "Status"),
-        ProfileScreen(),
       ]),
       drawer: SQDrawer([]),
       startingScreen: 1);
