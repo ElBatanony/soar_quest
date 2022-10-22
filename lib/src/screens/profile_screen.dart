@@ -1,33 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../auth/sq_auth.dart';
-import '../db/sq_field.dart';
 import '../db/fields/show_field_dialog.dart';
 import '../db/fields/sq_string_field.dart';
-import '../db/user_settings.dart';
+import '../db/sq_field.dart';
 import '../ui/signed_in_content.dart';
 import '../ui/sq_button.dart';
-import 'screen.dart';
-import 'form_screen.dart';
+import 'doc_screen.dart';
 
-class ProfileScreen extends Screen {
-  const ProfileScreen({
-    String title = "Profile",
+class ProfileScreen extends DocScreen {
+  ProfileScreen({
+    super.title = "Profile",
+    super.icon = Icons.account_circle,
     super.prebody,
     super.postbody,
     super.key,
-  }) : super(title, icon: Icons.account_circle);
+  }) : super(SQAuth.userDoc);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends ScreenState<ProfileScreen> {
-  Future<void> signOut() async {
-    await SQAuth.auth.signOut();
-    refreshScreen();
-  }
-
+class _ProfileScreenState extends DocScreenState<ProfileScreen> {
   Future<void> goToSignIn() {
     return SQAuth.auth.signInScreen(forceSignIn: true).go(context);
   }
@@ -68,51 +62,31 @@ class _ProfileScreenState extends ScreenState<ProfileScreen> {
 
   @override
   Widget screenBody(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text("User ID: ${SQAuth.user.userId}"),
-          Text("User Anonymous: ${SQAuth.user.isAnonymous}"),
-          SignedInContent(
-              builder: (BuildContext context, SignedInUser user) {
-                return Column(
-                  children: [
-                    Text("Username: ${user.displayName}"),
-                    Text("Email: ${user.email ?? "No-email"}"),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: SQAuth.userDoc.fields
-                          .map((field) => Text(field.toString()))
-                          .toList(),
-                    ),
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        SQButton('Update username',
-                            onPressed: () => updateUsername(user)),
-                        SQButton('Update email',
-                            onPressed: () => updateEmail(user)),
-                        SQButton('Update password',
-                            onPressed: () => updatePassword(user)),
-                        SQButton(
-                          "Edit Profile Info",
-                          onPressed: () async {
-                            await FormScreen(SQAuth.userDoc).go(context);
-                            refreshScreen();
-                          },
-                        ),
-                        SQButton("Settings",
-                            onPressed: () =>
-                                UserSettings.settingsScreen().go(context)),
-                        SQButton("Sign out", onPressed: signOut),
-                      ],
-                    ),
-                  ],
-                );
-              },
-              refreshUp: refreshScreen),
-        ],
-      ),
+    return Column(
+      children: [
+        super.screenBody(context),
+        SignedInContent(
+            builder: (BuildContext context, SignedInUser user) {
+              return Column(
+                children: [
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    // TODO: add username and email as doc fields
+                    // NOTE: this is broken for now
+                    children: [
+                      SQButton('Update username',
+                          onPressed: () => updateUsername(user)),
+                      SQButton('Update email',
+                          onPressed: () => updateEmail(user)),
+                      SQButton('Update password',
+                          onPressed: () => updatePassword(user))
+                    ],
+                  ),
+                ],
+              );
+            },
+            refreshUp: refreshScreen),
+      ],
     );
   }
 }
