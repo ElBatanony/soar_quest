@@ -26,6 +26,14 @@ abstract class SQAction {
   Widget button(SQDoc doc, {bool isIcon = false}) {
     return SQActionButton(action: this, doc: doc, isIcon: isIcon);
   }
+
+  FloatingActionButton fab(SQDoc doc, BuildContext context) {
+    return FloatingActionButton(
+        heroTag: null,
+        shape: CircleBorder(),
+        onPressed: () => execute(doc, context),
+        child: Icon(icon));
+  }
 }
 
 class SQActionButton extends StatefulWidget {
