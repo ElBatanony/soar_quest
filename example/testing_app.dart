@@ -40,6 +40,20 @@ void main() async {
         SQStringField("Readonly String",
             value: "I am readonly", editable: false),
       ],
+      actions: [
+        GoScreenAction("Child Coll",
+            screen: (doc) => CollectionScreen(
+                collection: FirestoreCollection(
+                    id: "Child Collection",
+                    fields: [
+                      SQStringField("Name"),
+                      SQRefField("Parent Doc",
+                          collection: doc.collection,
+                          value: doc.ref,
+                          editable: false),
+                    ],
+                    parentDoc: doc)))
+      ],
       singleDocName: "Test Doc");
 
   SQCollection testUserCollection = FirestoreCollection(
@@ -51,26 +65,7 @@ void main() async {
 
   SQApp.run(
     SQNavBar([
-      CollectionScreen(
-        collection: testCollection,
-        docScreen: (doc) => DocScreen(
-          doc,
-          // postbody: (context) => SQButton("Go to child collection",
-          //     onPressed: () => CollectionScreen(
-          //             collection: FirestoreCollection(
-          //                 id: "Child Collection",
-          //                 fields: [
-          //                   SQStringField("Name"),
-          //                   SQRefField("Parent Doc",
-          //                       collection: testCollection,
-          //                       value: doc.ref,
-          //                       editable: false),
-          //                 ],
-          //                 parentDoc: doc))
-          //         .go(context)),
-          // TODO: implement as Action
-        ),
-      ),
+      CollectionScreen(collection: testCollection),
       CollectionScreen(collection: simpleCollection),
     ]),
     drawer: SQDrawer([
