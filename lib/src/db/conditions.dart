@@ -4,7 +4,9 @@ import '../auth/sq_auth.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
 import '../ui/signed_in_content.dart';
-import 'sq_doc.dart';
+import 'sq_collection.dart';
+
+// TODO: create SQCond. has many nullable fields: doc, collection
 
 class DocCond {
   final bool Function(SQDoc, BuildContext) condition;
@@ -38,4 +40,11 @@ DocCond isSignedIn = DocCond(
 class DocValueCond<T> extends DocCond {
   DocValueCond(String fieldName, T expectedValue)
       : super((doc, context) => doc.value<T>(fieldName) == expectedValue);
+}
+
+class CollectionCond extends DocCond {
+  bool Function(SQCollection) collectionCondition;
+
+  CollectionCond(this.collectionCondition)
+      : super((doc, context) => collectionCondition(doc.collection));
 }
