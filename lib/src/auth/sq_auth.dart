@@ -16,6 +16,7 @@ class SQAuth {
   static UserData get user => auth.user;
   static SQDoc get userDoc => user.userDoc;
   static List<SQField<dynamic>> userDocFields = [];
+  static SignedInUser get signedInUser => user as SignedInUser;
 
   static Future<void> init({
     SQAuthManager? authManager,
