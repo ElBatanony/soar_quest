@@ -14,14 +14,19 @@ abstract class SQAction {
   final DocCond show;
   final bool confirm;
   final String confirmMessage;
+  void Function()? onExecute;
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
       this.show = trueCond,
+      this.onExecute,
       this.confirm = false,
       this.confirmMessage = "Are you sure?"});
 
-  Future<void> execute(SQDoc doc, BuildContext context);
+  Future<void> execute(SQDoc doc, BuildContext context) async {
+    print("Executing action: $name");
+    if (onExecute != null) return onExecute!();
+  }
 
   Widget button(SQDoc doc, {bool isIcon = false}) {
     return SQActionButton(action: this, doc: doc, isIcon: isIcon);
@@ -91,18 +96,23 @@ class GoEditCloneAction extends GoScreenAction {
 class GoScreenAction extends SQAction {
   Screen Function(SQDoc) screen;
 
-  GoScreenAction(super.name, {super.icon, super.show, required this.screen});
+  GoScreenAction(super.name,
+      {super.icon, super.show, super.onExecute, required this.screen});
 
   @override
-  execute(SQDoc doc, BuildContext context) => screen(doc).go(context);
+  execute(SQDoc doc, BuildContext context) async {
+    await screen(doc).go(context);
+    super.execute(doc, context);
+  }
 }
 
 class GoEditAction extends GoScreenAction {
-  GoEditAction({
-    String name = "Edit",
-    IconData icon = Icons.edit,
-    DocCond show = trueCond,
-  }) : super(
+  GoEditAction(
+      {String name = "Edit",
+      IconData icon = Icons.edit,
+      DocCond show = trueCond,
+      super.onExecute})
+      : super(
           name,
           icon: icon,
           show: DocCond((doc, _) => doc.collection.updates).and(show),
@@ -118,6 +128,7 @@ class GoDerivedDocAction extends GoScreenAction {
     super.name, {
     super.icon,
     super.show,
+    super.onExecute,
     required this.getCollection,
     required this.initialFields,
   }) : super(
@@ -134,6 +145,7 @@ class DeleteDocAction extends SQAction {
     String name = "Delete",
     super.icon = Icons.delete,
     DocCond show = trueCond,
+    super.onExecute,
     this.exitScreen = false,
     super.confirm = true,
   }) : super(name, show: DocCond((doc, _) => doc.collection.deletes).and(show));
@@ -141,6 +153,7 @@ class DeleteDocAction extends SQAction {
   @override
   execute(SQDoc doc, BuildContext context) {
     return doc.collection.deleteDoc(doc).then((_) {
+      super.execute(doc, context);
       if (exitScreen) ScreenState.of(context).exitScreen();
     });
   }
@@ -150,7 +163,7 @@ class SetFieldsAction extends SQAction {
   Map<String, dynamic> Function(SQDoc) getFields;
 
   SetFieldsAction(super.name,
-      {super.icon, super.show, required this.getFields});
+      {super.icon, super.show, super.onExecute, required this.getFields});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
@@ -162,6 +175,7 @@ class SetFieldsAction extends SQAction {
       await doc.collection.saveDoc(doc);
       ScreenState.of(context).refreshScreen();
     }
+    super.execute(doc, context);
   }
 }
 
@@ -169,8 +183,14 @@ class ExecuteOnDocsAction extends SQAction {
   List<SQDoc> Function(SQDoc) getDocs;
   SQAction action;
 
-  ExecuteOnDocsAction(super.name,
-      {super.icon, super.show, required this.getDocs, required this.action});
+  ExecuteOnDocsAction(
+    super.name, {
+    super.icon,
+    super.show,
+    super.onExecute,
+    required this.getDocs,
+    required this.action,
+  });
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
@@ -178,6 +198,7 @@ class ExecuteOnDocsAction extends SQAction {
     for (final doc in fetchedDocs) {
       await action.execute(doc, context);
     }
+    super.execute(doc, context);
   }
 }
 
@@ -193,6 +214,7 @@ class OpenUrlAction extends SQAction {
         mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
+    super.execute(doc, context);
   }
 }
 
@@ -206,6 +228,7 @@ class SequencesAction extends SQAction {
     for (final action in actions) {
       await action.execute(doc, context);
     }
+    super.execute(doc, context);
   }
 }
 
@@ -216,8 +239,9 @@ class CustomAction extends SQAction {
       {super.icon, super.show, required this.customExecute});
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) {
-    return customExecute(doc, context);
+  Future<void> execute(SQDoc doc, BuildContext context) async {
+    await customExecute(doc, context);
+    super.execute(doc, context);
   }
 }
 
