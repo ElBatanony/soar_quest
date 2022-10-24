@@ -71,10 +71,6 @@ class CollectionSlice implements SQCollection {
   Future<void> deleteDoc(SQDoc doc) => collection.deleteDoc(doc);
 
   @override
-  Future<void> ensureInitialized(SQDoc doc) =>
-      collection.ensureInitialized(doc);
-
-  @override
   List<SQDoc> filterBy(List<CollectionFilter> filters) =>
       collection.filterBy(filters);
 

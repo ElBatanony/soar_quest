@@ -48,9 +48,4 @@ class LocalCollection extends SQCollection {
             .map((d) => jsonEncode({'id': d.id, 'data': d.serialize()}))
             .toList());
   }
-
-  @override
-  Future<void> ensureInitialized(SQDoc doc) async {
-    if (initialized == false) return loadCollection();
-  }
 }

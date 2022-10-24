@@ -45,13 +45,6 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   String newDocId() => ref.doc().id;
 
   @override
-  Future<void> ensureInitialized(DocType doc) async {
-    if (doc.initialized) return;
-    final docSnap = await ref.doc(doc.id).get();
-    doc.parse((docSnap.data() ?? <String, dynamic>{}) as Map<String, dynamic>);
-  }
-
-  @override
   Future<void> saveDoc(DocType doc) async {
     await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
     return loadCollection();
