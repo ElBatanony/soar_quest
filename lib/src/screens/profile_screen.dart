@@ -33,12 +33,6 @@ class _ProfileScreenState extends DocScreenState<ProfileScreen> {
     }
   }
 
-  Future<void> updateUsername(SignedInUser user) async {
-    return updateUserField(
-        SQStringField("Username", value: user.displayName ?? ""),
-        user.updateDisplayName);
-  }
-
   Future<void> updateEmail(SignedInUser user) async {
     try {
       await updateUserField(
@@ -72,8 +66,6 @@ class _ProfileScreenState extends DocScreenState<ProfileScreen> {
                     // TODO: add username and email as doc fields
                     // NOTE: this is broken for now
                     children: [
-                      SQButton('Update username',
-                          onPressed: () => updateUsername(user)),
                       SQButton('Update email',
                           onPressed: () => updateEmail(user)),
                       SQButton('Update password',
