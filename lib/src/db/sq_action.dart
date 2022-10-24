@@ -8,24 +8,27 @@ import 'conditions.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
 
+Future<void> emptyOnExecute(doc) async {}
+
 abstract class SQAction {
   final String name;
   final IconData icon;
   final DocCond show;
   final bool confirm;
   final String confirmMessage;
-  void Function()? onExecute;
+  Future<void> Function(SQDoc) onExecute;
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
       this.show = trueCond,
-      this.onExecute,
+      this.onExecute = emptyOnExecute,
       this.confirm = false,
       this.confirmMessage = "Are you sure?"});
 
   Future<void> execute(SQDoc doc, BuildContext context) async {
     ScreenState screenState = ScreenState.of(context);
     print("Executing action: $name");
+    await onExecute(doc);
     screenState.refreshScreen();
   }
 
