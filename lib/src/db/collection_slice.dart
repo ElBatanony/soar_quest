@@ -102,4 +102,6 @@ class CollectionSlice implements SQCollection {
   @override
   List<SQField<dynamic>> copyFields() => collection.copyFields();
 
+  @override
+  SQDoc? getDoc(String id) => collection.getDoc(id);
 }
