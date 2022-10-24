@@ -38,7 +38,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   @override
   Future<void> deleteDoc(DocType doc) async {
     await ref.doc(doc.id).delete();
-    return loadCollection();
+    return super.deleteDoc(doc);
   }
 
   @override
