@@ -51,5 +51,5 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  Future<void> saveCollection() async => {};
+  Future<void> saveCollection() => loadCollection();
 }
