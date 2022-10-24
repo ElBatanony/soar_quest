@@ -26,6 +26,7 @@ class CollectionScreen extends Screen {
       super.isInline,
       super.icon,
       this.groupBy,
+      super.show,
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);

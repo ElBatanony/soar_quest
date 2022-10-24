@@ -24,16 +24,19 @@ Future<T?> _goToScreen<T>(
       context, MaterialPageRoute(builder: (context) => screen));
 }
 
+bool alwaysShowScreen(BuildContext context) => true;
+
 class Screen extends StatefulWidget {
   final String title;
   final IconData? icon;
   final bool isInline;
-  // TODO: add show condition. use in NavBar and Drawer and GoScreenAction
+  final bool Function(BuildContext) show;
 
   const Screen(
     this.title, {
     this.isInline = false,
     this.icon,
+    this.show = alwaysShowScreen,
     super.key,
   });
 
