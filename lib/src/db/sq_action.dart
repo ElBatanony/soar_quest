@@ -32,8 +32,9 @@ abstract class SQAction {
     screenState.refreshScreen();
   }
 
-  Widget button(SQDoc doc, {bool isIcon = false}) {
-    return SQActionButton(action: this, doc: doc, isIcon: isIcon);
+  Widget button(SQDoc doc, {bool isIcon = false, double iconSize = 24.0}) {
+    return SQActionButton(
+        action: this, doc: doc, isIcon: isIcon, iconSize: iconSize);
   }
 
   FloatingActionButton fab(SQDoc doc, BuildContext context) {
@@ -49,9 +50,13 @@ class SQActionButton extends StatefulWidget {
   final SQAction action;
   final bool isIcon;
   final SQDoc doc;
+  final double iconSize;
 
   const SQActionButton(
-      {required this.action, required this.doc, this.isIcon = false});
+      {required this.action,
+      required this.doc,
+      this.isIcon = false,
+      this.iconSize = 24.0});
 
   @override
   State<SQActionButton> createState() => _SQActionButtonState();
@@ -72,6 +77,7 @@ class _SQActionButtonState extends State<SQActionButton> {
 
     return SQButton.icon(
       widget.action.icon,
+      iconSize: widget.iconSize,
       text: widget.isIcon ? null : widget.action.name,
       onPressed: () async {
         bool confirmed = widget.action.confirm == false ||
