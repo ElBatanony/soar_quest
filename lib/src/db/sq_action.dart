@@ -148,7 +148,8 @@ class DeleteDocAction extends SQAction {
     super.onExecute,
     this.exitScreen = false,
     super.confirm = true,
-  }) : super(name, show: DocCond((doc, _) => doc.collection.deletes).and(show));
+  }) : super(name,
+            show: CollectionCond((collection) => collection.deletes).and(show));
 
   @override
   execute(SQDoc doc, BuildContext context) {
