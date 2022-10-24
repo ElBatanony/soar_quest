@@ -30,6 +30,7 @@ class SQAuth {
               valueBuilder: (doc) => SQAuth.signedInUser.email),
           SQVirtualField(
               field: SQStringField("User ID"),
+              show: isSignedIn,
               valueBuilder: (doc) => SQAuth.user.userId),
           SQVirtualField(
               field: SQStringField("Username"),
@@ -37,6 +38,7 @@ class SQAuth {
               valueBuilder: (doc) => SQAuth.signedInUser.displayName),
           SQStringField("New Username", show: inFormScreen),
           SQStringField("New Email", show: inFormScreen),
+          SQStringField("New Password", show: inFormScreen),
         ];
     SQAuth.auth = authManager ?? FirebaseAuthManager();
     usersCollection = FirestoreCollection(
@@ -58,13 +60,17 @@ class SQAuth {
               screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true)),
           GoEditAction(
               name: "Edit Profile",
+              show: isSignedIn,
               onExecute: (doc, context) async {
                 String newUsername = doc.value("New Username") ?? "";
                 String newEmail = doc.value("New Email") ?? "";
+                String newPassword = doc.value("New Password") ?? "";
                 if (newUsername != SQAuth.signedInUser.displayName)
                   await SQAuth.signedInUser.updateDisplayName(newUsername);
                 if (newEmail != SQAuth.signedInUser.email)
                   await SQAuth.signedInUser.updateEmail(newEmail);
+                if (newPassword != "")
+                  await SQAuth.signedInUser.updatePassword(newPassword);
               })
         ]);
     usersCollection.actions.removeWhere((action) => action.name == "Edit");

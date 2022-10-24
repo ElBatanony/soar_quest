@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/form_screen.dart';
 import 'sq_auth.dart';
 import '../ui/sq_button.dart';
+import '../ui/snackbar.dart';
 
 class SignInScreen extends FormScreen {
   final bool forceSignIn;
@@ -27,13 +29,16 @@ class _SignInScreenState extends FormScreenState<SignInScreen> {
   }
 
   void signIn() async {
-    await SQAuth.auth.signInWithEmailAndPassword(
-        email: doc.value<String>("Email")!,
-        password: doc.value<String>("Password")!);
+    await SQAuth.auth
+        .signInWithEmailAndPassword(
+            email: doc.value<String>("Email")!,
+            password: doc.value<String>("Password")!)
+        .catchError((dynamic err) {
+      showSnackBar((err as FirebaseAuthException).message ?? "Error signing in",
+          context: context);
+    });
 
-    if (SQAuth.user.isAnonymous) {
-      print("Did not sign in");
-    } else {
+    if (SQAuth.user.isAnonymous == false) {
       print("Signed in");
       exitScreen();
     }
