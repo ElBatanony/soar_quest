@@ -31,20 +31,15 @@ void main() async {
         value: "To-Do",
         show: inFormScreen.not(),
       ),
+      // SQImageField("Image"),
       SQEditedByField("hamada user"),
-      SQBoolField("Repeat"),
+      SQBoolField("Repeat", value: false),
       SQIntField("Repeat Every (Hours)", show: DocValueCond("Repeat", true)),
-      SQVirtualField(
-        field: SQStringField("Hamada"),
-        valueBuilder: (doc) => "hamada yo",
-      ),
       SQTimestampField("Last Updated"),
     ],
     actions: [checkTaskAction, uncheckTaskAction],
-    adds: false,
+    adds: true,
   );
-
-  // TODO: add view types: Card, Deck, Gallery, Onboarding
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
   doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
@@ -57,16 +52,25 @@ void main() async {
           title: "New Task",
           icon: Icons.add,
         ),
-        TableScreen(title: "Table", collection: tasks),
+        CardsScreen(collection: tasks),
+        CollectionScreen(
+          show: (context) => true,
+          title: "Tasks 2",
+          collection: tasks,
+          groupBy: "Status",
+        ),
+        // CollectionFilterScreen(collection: tasks, filters: [
+        //   StringContainsFilter(SQStringField("Task")),
+        //   FieldValueFilter(SQBoolField("Repeat"))
+        // ]),
+        // TableScreen(title: "Table", collection: tasks),
         TabsScreen("Tasks", [
           CollectionScreen(
               title: "Pending Tasks", collection: pendingTasks, isInline: true),
           CollectionScreen(
               title: "Done", collection: doneTasks, isInline: true),
         ]),
-        CollectionScreen(
-            title: "Tasks 2", collection: tasks, groupBy: "Status"),
       ]),
-      drawer: SQDrawer([]),
+      drawer: SQDrawer([ProfileScreen()]),
       startingScreen: 1);
 }
