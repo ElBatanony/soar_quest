@@ -27,7 +27,7 @@ abstract class SignedInUser extends UserData {
       required super.docFields});
 
   String? get email;
-  String? get displayName;
+  String? get username;
 
   Future<void> updateEmail(String newEmail);
 
@@ -54,7 +54,7 @@ class FirebaseSignedInUser extends SignedInUser {
   String? get email => firebaseUser.email;
 
   @override
-  String? get displayName => firebaseUser.displayName;
+  String? get username => firebaseUser.displayName;
 
   @override
   Future<void> updateEmail(String newEmail) async {

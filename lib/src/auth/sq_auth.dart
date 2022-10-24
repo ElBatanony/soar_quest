@@ -35,7 +35,7 @@ class SQAuth {
           SQVirtualField(
               field: SQStringField("Username"),
               show: isSignedIn,
-              valueBuilder: (doc) => SQAuth.signedInUser.displayName),
+              valueBuilder: (doc) => SQAuth.signedInUser.username),
           SQStringField("New Username", show: inFormScreen),
           SQStringField("New Email", show: inFormScreen),
           SQStringField("New Password", show: inFormScreen),
@@ -65,7 +65,7 @@ class SQAuth {
                 String newUsername = doc.value("New Username") ?? "";
                 String newEmail = doc.value("New Email") ?? "";
                 String newPassword = doc.value("New Password") ?? "";
-                if (newUsername != SQAuth.signedInUser.displayName)
+                if (newUsername != SQAuth.signedInUser.username)
                   await SQAuth.signedInUser.updateDisplayName(newUsername);
                 if (newEmail != SQAuth.signedInUser.email)
                   await SQAuth.signedInUser.updateEmail(newEmail);

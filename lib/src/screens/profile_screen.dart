@@ -17,7 +17,7 @@ class ProfileScreen extends DocScreen {
 class _ProfileScreenState extends DocScreenState<ProfileScreen> {
   @override
   void initState() {
-    doc.getField("New Username")?.value = SQAuth.signedInUser.displayName;
+    doc.getField("New Username")?.value = SQAuth.signedInUser.username;
     doc.getField("New Email")?.value = SQAuth.signedInUser.email;
     super.initState();
   }
