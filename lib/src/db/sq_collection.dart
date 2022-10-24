@@ -105,4 +105,7 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   static SQCollection? byPath(String path) =>
       _collections.singleWhereOrNull((collection) => collection.path == path);
+
+  List<SQField<dynamic>> copyFields() =>
+      fields.map((field) => field.copy()).toList();
 }

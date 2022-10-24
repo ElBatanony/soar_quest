@@ -98,4 +98,8 @@ class CollectionSlice implements SQCollection {
 
   @override
   Future<void> saveDoc(SQDoc doc) => collection.saveDoc(doc);
+
+  @override
+  List<SQField<dynamic>> copyFields() => collection.copyFields();
+
 }
