@@ -28,6 +28,7 @@ class Screen extends StatefulWidget {
   final String title;
   final IconData? icon;
   final bool isInline;
+  // TODO: add show condition. use in NavBar and Drawer and GoScreenAction
 
   const Screen(
     this.title, {
