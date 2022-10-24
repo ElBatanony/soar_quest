@@ -56,7 +56,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     createNewDocAction = GoEditAction(
         name: "Create Doc",
         icon: Icons.add,
-        onExecute: (doc) async => refreshScreen(),
+        onExecute: (doc, context) async => refreshScreen(),
         show: CollectionCond((collection) => collection.adds));
     loadData();
     super.initState();

@@ -8,7 +8,7 @@ import 'conditions.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
 
-Future<void> emptyOnExecute(doc) async {}
+Future<void> emptyOnExecute(doc, context) async {}
 
 abstract class SQAction {
   final String name;
@@ -16,7 +16,7 @@ abstract class SQAction {
   final DocCond show;
   final bool confirm;
   final String confirmMessage;
-  Future<void> Function(SQDoc) onExecute;
+  Future<void> Function(SQDoc, BuildContext) onExecute;
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
@@ -28,7 +28,7 @@ abstract class SQAction {
   Future<void> execute(SQDoc doc, BuildContext context) async {
     ScreenState screenState = ScreenState.of(context);
     print("Executing action: $name");
-    await onExecute(doc);
+    await onExecute(doc, context);
     screenState.refreshScreen();
   }
 
@@ -113,7 +113,7 @@ class GoScreenAction extends SQAction {
   @override
   execute(SQDoc doc, BuildContext context) async {
     await screen(doc).go(context, replace: replace);
-    super.execute(doc, context);
+    await super.execute(doc, context);
   }
 }
 
@@ -246,7 +246,7 @@ class CustomAction extends SQAction {
   Future<void> Function(SQDoc, BuildContext) customExecute;
 
   CustomAction(super.name,
-      {super.icon, super.show, required this.customExecute});
+      {super.icon, super.show, required this.customExecute, super.onExecute});
 
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
