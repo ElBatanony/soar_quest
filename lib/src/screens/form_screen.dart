@@ -13,8 +13,6 @@ class FormScreen extends DocScreen {
 
   final void Function(SQDoc) onFieldsChanged;
 
-  // TODO: use action instead of fixed submit function
-
   FormScreen(
     SQDoc doc, {
     String? title,
