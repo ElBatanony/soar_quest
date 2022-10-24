@@ -24,8 +24,9 @@ abstract class SQAction {
       this.confirmMessage = "Are you sure?"});
 
   Future<void> execute(SQDoc doc, BuildContext context) async {
+    ScreenState screenState = ScreenState.of(context);
     print("Executing action: $name");
-    if (onExecute != null) return onExecute!();
+    screenState.refreshScreen();
   }
 
   Widget button(SQDoc doc, {bool isIcon = false}) {
