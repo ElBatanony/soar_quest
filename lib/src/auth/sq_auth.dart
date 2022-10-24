@@ -12,7 +12,8 @@ import 'user_data.dart';
 
 class SQAuth {
   static late SQAuthManager auth;
-  static late SQCollection usersCollection;
+  static late SQCollection
+      usersCollection; // TODO: make fetch only current user
   static UserData get user => auth.user;
   static SQDoc get userDoc => user.userDoc;
   static List<SQField<dynamic>> userDocFields = [];
