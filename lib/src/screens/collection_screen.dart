@@ -77,13 +77,13 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
           ? Text((doc.fields[1].value ?? "").toString())
           : null,
       leading: doc.imageLabel != null
-          ? Image.network(doc.imageLabel!.value!, width: 35)
+          ? Image.network(doc.imageLabel!.value!, width: 70)
           : null,
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: collection.actions
             .where((action) => action.show.check(doc, context))
-            .take(3)
+            .take(2)
             .map((action) => action.button(doc, isIcon: true))
             .toList(),
       ),
