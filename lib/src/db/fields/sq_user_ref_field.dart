@@ -5,7 +5,12 @@ class SQUserRefField extends SQRefField {
   SQUserRefField(super.name, {super.value, super.editable})
       : super(collection: SQAuth.usersCollection);
 
-  static SQRef get currentUserRef => SQRef.fromDoc(SQAuth.userDoc);
+  static SQRef get currentUserRef => SQRef(
+      collectionPath: SQAuth.usersCollection.path,
+      docId: SQAuth.user.userId,
+      label: SQAuth.user.isAnonymous
+          ? SQAuth.user.userId
+          : SQAuth.signedInUser.email ?? "");
 
   @override
   SQUserRefField copy() =>
