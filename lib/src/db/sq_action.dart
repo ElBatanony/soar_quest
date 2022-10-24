@@ -95,13 +95,20 @@ class GoEditCloneAction extends GoScreenAction {
 
 class GoScreenAction extends SQAction {
   Screen Function(SQDoc) screen;
+  bool replace;
 
-  GoScreenAction(super.name,
-      {super.icon, super.show, super.onExecute, required this.screen});
+  GoScreenAction(
+    super.name, {
+    super.icon,
+    super.show,
+    super.onExecute,
+    required this.screen,
+    this.replace = false,
+  });
 
   @override
   execute(SQDoc doc, BuildContext context) async {
-    await screen(doc).go(context);
+    await screen(doc).go(context, replace: replace);
     super.execute(doc, context);
   }
 }
