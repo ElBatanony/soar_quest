@@ -64,7 +64,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   }
 
   Future<void> deleteDoc(DocType doc) {
-    if (hasDoc(doc)) deleteDoc(doc);
+    if (hasDoc(doc)) docs.removeWhere((d) => d.id == doc.id);
     return saveCollection();
   }
 
