@@ -26,6 +26,7 @@ class SQDrawer extends StatelessWidget {
             ),
           ),
           ...screens
+              .where((screen) => screen.show(context))
               .map((screen) => ListTile(
                     leading: Icon(screen.icon),
                     title: Text(screen.title),
