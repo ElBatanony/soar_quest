@@ -9,6 +9,9 @@ class FormScreen extends DocScreen {
 
   SQCollection get collection => doc.collection;
 
+  // TODO: use action instead of fixed submit function
+  // TODO: add onFieldsUpdate callback
+
   FormScreen(
     SQDoc doc, {
     String? title,
@@ -29,16 +32,27 @@ class FormScreen extends DocScreen {
 }
 
 class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
+  late SQDoc formDoc;
+
+  @override
+  SQDoc get doc => formDoc;
+
+  @override
+  void initState() {
+    formDoc =
+        widget.doc.collection.newDoc(initialFields: widget.doc.copyFields());
+    super.initState();
+  }
+
   Future<void> submitForm() async {
-    for (final field in widget.doc.fields) {
+    for (final field in doc.fields) {
       if (field.require && field.value == null) {
         showSnackBar("${field.name} is required!", context: context);
         return;
       }
     }
 
-    // TODO: make a copy of the fields, not to edit if form cancelled
-    // TODO: create a completely new doc each time and save values when submitting
+    widget.doc.fields = doc.copyFields();
 
     await widget.collection.saveDoc(widget.doc);
     exitScreen<bool>(true);
