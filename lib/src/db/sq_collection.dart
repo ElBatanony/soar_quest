@@ -52,9 +52,6 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
 
-  DocType constructDoc([String? id]) =>
-      SQDoc(id ?? newDocId(), collection: this) as DocType;
-
   Future<void> loadCollection();
   Future<void> saveCollection();
 

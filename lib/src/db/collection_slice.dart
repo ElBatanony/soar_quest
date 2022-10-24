@@ -68,9 +68,6 @@ class CollectionSlice implements SQCollection {
   ////////////////////////////////////////////////
 
   @override
-  SQDoc constructDoc([String? id]) => collection.constructDoc(id);
-
-  @override
   Future<void> deleteDoc(SQDoc doc) => collection.deleteDoc(doc);
 
   @override
