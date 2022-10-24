@@ -6,8 +6,6 @@ import '../screens/screen.dart';
 import '../ui/signed_in_content.dart';
 import 'sq_collection.dart';
 
-// TODO: create SQCond. has many nullable fields: doc, collection
-
 class DocCond {
   final bool Function(SQDoc, BuildContext) condition;
 
