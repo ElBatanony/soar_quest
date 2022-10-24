@@ -66,6 +66,7 @@ class SQAuth {
               })
         ]);
     usersCollection.actions.removeWhere((action) => action.name == "Edit");
+    await usersCollection.loadCollection();
     await auth.init();
   }
 }
