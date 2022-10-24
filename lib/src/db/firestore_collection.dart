@@ -47,7 +47,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   @override
   Future<void> saveDoc(DocType doc) async {
     await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
-    return loadCollection();
+    return super.saveDoc(doc);
   }
 
   @override
