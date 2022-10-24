@@ -10,7 +10,6 @@ class SQDoc {
   late List<SQField<dynamic>> fields;
   String id;
   SQCollection collection;
-  bool initialized = false;
   late String path;
 
   SQDoc(this.id, {required this.collection}) {
@@ -31,7 +30,6 @@ class SQDoc {
 
   void parse(Map<String, dynamic> source) {
     for (var field in fields) field.value = field.parse(source[field.name]);
-    initialized = true;
   }
 
   Map<String, dynamic> serialize() {
