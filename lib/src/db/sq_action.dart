@@ -63,12 +63,6 @@ class _SQActionButtonState extends State<SQActionButton> {
     super.initState();
   }
 
-  Future<void> onConfirmed(BuildContext context) async {
-    ScreenState screenState = ScreenState.of(context);
-    await widget.action.execute(widget.doc, context);
-    screenState.refreshScreen();
-  }
-
   @override
   Widget build(BuildContext context) {
     if (inForm) return Container();
@@ -80,7 +74,7 @@ class _SQActionButtonState extends State<SQActionButton> {
         bool confirmed = widget.action.confirm == false ||
             await showConfirmationDialog(
                 action: widget.action, context: context);
-        if (confirmed) return onConfirmed(context);
+        if (confirmed) return widget.action.execute(widget.doc, context);
       },
     );
   }
