@@ -25,18 +25,18 @@ class SQAuth {
   }) async {
     SQAuth.userDocFields = userDocFields ??
         [
-          SQStringField("Full Name", show: isSignedIn),
+          SQVirtualField(
+              field: SQStringField("Email"),
+              show: isSignedIn,
+              valueBuilder: (doc) => SQAuth.signedInUser.email),
           SQVirtualField(
               field: SQStringField("User ID"),
               valueBuilder: (doc) => SQAuth.user.userId),
           SQVirtualField(
-              field: SQStringField("Email"),
+              field: SQStringField("Username"),
               show: isSignedIn,
-              valueBuilder: (doc) => (SQAuth.user as SignedInUser).email),
-          SQVirtualField(
-              field: SQStringField("Display Name"),
-              show: isSignedIn,
-              valueBuilder: (doc) => (SQAuth.user as SignedInUser).displayName),
+              valueBuilder: (doc) => SQAuth.signedInUser.displayName),
+          SQStringField("New Username", show: inFormScreen),
         ];
     SQAuth.auth = authManager ?? FirebaseAuthManager();
     usersCollection = FirestoreCollection(
