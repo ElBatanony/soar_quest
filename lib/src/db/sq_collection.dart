@@ -56,8 +56,10 @@ abstract class SQCollection<DocType extends SQDoc> {
   Future<void> saveCollection();
 
   Future<void> saveDoc(DocType doc) {
-    if (hasDoc(doc)) docs.removeWhere((d) => d.id == doc.id);
-    docs.add(doc);
+    if (hasDoc(doc))
+      docs[docs.indexWhere((d) => d.id == doc.id)] = doc;
+    else
+      docs.add(doc);
     return saveCollection();
   }
 
