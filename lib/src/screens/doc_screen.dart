@@ -22,17 +22,6 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   SQDoc get doc => widget.doc;
   SQCollection get collection => doc.collection;
 
-  void loadData() async {
-    await collection.ensureInitialized(doc);
-    refreshScreen();
-  }
-
-  @override
-  void initState() {
-    loadData();
-    super.initState();
-  }
-
   Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
     return field.formField(onChanged: refreshScreen, doc: doc);
   }
