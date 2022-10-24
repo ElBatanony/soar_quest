@@ -4,13 +4,16 @@ import '../db/sq_collection.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
 
+void _emptyVoid(SQDoc doc) {}
+
 class FormScreen extends DocScreen {
   final String submitButtonText;
 
   SQCollection get collection => doc.collection;
 
+  final void Function(SQDoc) onFieldsChanged;
+
   // TODO: use action instead of fixed submit function
-  // TODO: add onFieldsUpdate callback
 
   FormScreen(
     SQDoc doc, {
@@ -18,6 +21,7 @@ class FormScreen extends DocScreen {
     this.submitButtonText = "Save",
     super.icon,
     super.isInline,
+    this.onFieldsChanged = _emptyVoid,
     super.key,
   }) : super(doc, title: title ?? "Edit ${doc.collection.id}");
 
@@ -42,6 +46,12 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
     formDoc =
         widget.doc.collection.newDoc(initialFields: widget.doc.copyFields());
     super.initState();
+  }
+
+  @override
+  void refreshScreen() {
+    widget.onFieldsChanged(doc);
+    super.refreshScreen();
   }
 
   Future<void> submitForm() async {
