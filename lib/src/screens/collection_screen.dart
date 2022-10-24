@@ -1,9 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import '../db/conditions.dart';
+import '../db/sq_action.dart';
 import '../db/sq_collection.dart';
 import 'doc_screen.dart';
-import 'form_screen.dart';
 import 'screen.dart';
 
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
@@ -36,6 +37,7 @@ class CollectionScreen extends Screen {
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   SQCollection get collection => widget.collection;
   List<SQDoc> get docs => collection.docs;
+  late SQAction createNewDocAction;
 
   @override
   void refreshScreen() {
@@ -50,6 +52,11 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   void initState() {
+    createNewDocAction = GoEditAction(
+        name: "Create Doc",
+        icon: Icons.add,
+        onExecute: (doc) async => refreshScreen(),
+        show: CollectionCond((collection) => collection.adds));
     loadData();
     super.initState();
   }
@@ -101,19 +108,10 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     );
   }
 
-  Future<void> createNewDoc() async {
-    await FormScreen(collection.newDoc()).go(context);
-    loadData();
-  }
-
   @override
   FloatingActionButton? floatingActionButton(BuildContext context) {
     if (collection.adds)
-      return FloatingActionButton(
-          heroTag: null,
-          shape: CircleBorder(),
-          onPressed: createNewDoc,
-          child: Icon(Icons.add));
+      return createNewDocAction.fab(collection.newDoc(), context);
     return null;
   }
 
