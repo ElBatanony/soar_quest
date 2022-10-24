@@ -46,8 +46,7 @@ class _SQRefDocsFormField extends SQFormField<SQRefDocsField> {
 
 class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
   Future<void> initializeRefCollection() async {
-    if (field.collection.initialized == false)
-      await field.collection.loadCollection();
+    if (field.collection.docs.isEmpty) await field.collection.loadCollection();
     onChanged();
   }
 

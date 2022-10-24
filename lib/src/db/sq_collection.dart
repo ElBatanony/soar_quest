@@ -23,7 +23,6 @@ abstract class SQCollection<DocType extends SQDoc> {
   late final bool updates, adds, deletes, readOnly;
 
   List<DocType> docs = [];
-  bool initialized = false;
 
   static final List<SQCollection> _collections = [];
 

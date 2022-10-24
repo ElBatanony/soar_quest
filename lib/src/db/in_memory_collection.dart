@@ -15,7 +15,7 @@ class InMemoryCollection extends SQCollection {
   });
 
   @override
-  loadCollection() async => initialized = true;
+  loadCollection() async {}
 
   @override
   Future<void> saveCollection() async {}

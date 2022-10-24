@@ -36,7 +36,6 @@ class LocalCollection extends SQCollection {
       if (newDocData == null) throw "Doc data is null";
       return newDoc(id: newDocId)..parse(newDocData);
     }).toList();
-    initialized = true;
   }
 
   @override
