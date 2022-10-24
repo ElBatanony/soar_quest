@@ -154,11 +154,10 @@ class DeleteDocAction extends SQAction {
             show: CollectionCond((collection) => collection.deletes).and(show));
 
   @override
-  execute(SQDoc doc, BuildContext context) {
-    return doc.collection.deleteDoc(doc).then((_) {
-      super.execute(doc, context);
-      if (exitScreen) ScreenState.of(context).exitScreen();
-    });
+  execute(SQDoc doc, BuildContext context) async {
+    await doc.collection.deleteDoc(doc);
+    if (exitScreen) ScreenState.of(context).exitScreen();
+    await super.execute(doc, context);
   }
 }
 
@@ -175,10 +174,9 @@ class SetFieldsAction extends SQAction {
       SQField<dynamic>? docField = doc.getField(entry.key);
       if (docField == null) throw "SetFieldsAction null doc field";
       docField.value = entry.value;
-      await doc.collection.saveDoc(doc);
-      ScreenState.of(context).refreshScreen();
     }
-    super.execute(doc, context);
+    await doc.collection.saveDoc(doc);
+    await super.execute(doc, context);
   }
 }
 
@@ -201,7 +199,7 @@ class ExecuteOnDocsAction extends SQAction {
     for (final doc in fetchedDocs) {
       await action.execute(doc, context);
     }
-    super.execute(doc, context);
+    await super.execute(doc, context);
   }
 }
 
@@ -217,7 +215,7 @@ class OpenUrlAction extends SQAction {
         mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
-    super.execute(doc, context);
+    await super.execute(doc, context);
   }
 }
 
@@ -231,7 +229,7 @@ class SequencesAction extends SQAction {
     for (final action in actions) {
       await action.execute(doc, context);
     }
-    super.execute(doc, context);
+    await super.execute(doc, context);
   }
 }
 
@@ -244,7 +242,7 @@ class CustomAction extends SQAction {
   @override
   Future<void> execute(SQDoc doc, BuildContext context) async {
     await customExecute(doc, context);
-    super.execute(doc, context);
+    await super.execute(doc, context);
   }
 }
 
