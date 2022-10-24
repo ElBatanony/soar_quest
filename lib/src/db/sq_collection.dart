@@ -91,8 +91,6 @@ abstract class SQCollection<DocType extends SQDoc> {
         .whereType<SQCreatedByField>()
         .forEach((field) => field.value = SQUserRefField.currentUserRef);
 
-    newDoc.initialized = true;
-    docs.add(newDoc);
     return newDoc;
   }
 
