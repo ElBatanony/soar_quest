@@ -24,6 +24,17 @@ abstract class CollectionFieldFilter extends CollectionFilter {
   CollectionFieldFilter(this.field);
 }
 
+class FieldValueFilter<T> extends CollectionFieldFilter {
+  FieldValueFilter(SQField<T> field) : super(field);
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    return docs
+        .where((doc) => doc.value<T>(field.name) == field.value as T)
+        .toList();
+  }
+}
+
 class ValueFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
