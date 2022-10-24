@@ -15,6 +15,9 @@ class SQNavBar extends StatefulWidget {
 class _SQNavBarState extends State<SQNavBar> {
   late int initialIndex;
 
+  List<Screen> get screens =>
+      widget.screens.where((screen) => screen.show(context)).toList();
+
   @override
   void initState() {
     initialIndex = SQApp.selectedNavScreen;
@@ -23,17 +26,16 @@ class _SQNavBarState extends State<SQNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.screens.length > 1
+    return screens.length > 1
         ? NavigationBar(
             onDestinationSelected: (int index) async {
               SQApp.selectedNavScreen = index;
-              await widget.screens[SQApp.selectedNavScreen]
-                  .go(context, replace: true);
+              await screens[SQApp.selectedNavScreen].go(context, replace: true);
               ScreenState.of(context).refreshScreen();
             },
             selectedIndex: initialIndex,
             surfaceTintColor: Colors.white,
-            destinations: widget.screens
+            destinations: screens
                 .map((screen) => NavigationDestination(
                       icon: Icon(screen.icon ?? Icons.explore),
                       label: screen.title,
