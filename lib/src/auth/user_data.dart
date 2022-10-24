@@ -7,7 +7,9 @@ abstract class UserData {
   String userId;
   bool isAnonymous;
 
-  late SQDoc userDoc;
+  SQDoc get userDoc =>
+      SQAuth.usersCollection.getDoc(userId) ??
+      SQAuth.usersCollection.newDoc(id: userId);
 
   List<SQField<dynamic>> docFields;
 
@@ -42,10 +44,7 @@ class FirebaseSignedInUser extends SignedInUser {
           userId: firebaseUser.uid,
           isAnonymous: firebaseUser.isAnonymous,
           docFields: SQAuth.userDocFields,
-        ) {
-    userDoc = SQDoc(userId, collection: SQAuth.usersCollection);
-    SQAuth.usersCollection.ensureInitialized(userDoc);
-  }
+        );
 
   void refreshUser() {
     firebaseUser = firebase_auth.FirebaseAuth.instance.currentUser!;
