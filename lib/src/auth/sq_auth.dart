@@ -36,6 +36,7 @@ class SQAuth {
               show: isSignedIn,
               valueBuilder: (doc) => SQAuth.signedInUser.displayName),
           SQStringField("New Username", show: inFormScreen),
+          SQStringField("New Email", show: inFormScreen),
         ];
     SQAuth.auth = authManager ?? FirebaseAuthManager();
     usersCollection = FirestoreCollection(
@@ -57,11 +58,13 @@ class SQAuth {
               screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true)),
           GoEditAction(
               name: "Edit Profile",
-              onExecute: (doc) async {
+              onExecute: (doc, context) async {
                 String newUsername = doc.value("New Username") ?? "";
-                if (newUsername == SQAuth.signedInUser.displayName) return;
-                print("Updating username");
-                await SQAuth.signedInUser.updateDisplayName(newUsername);
+                String newEmail = doc.value("New Email") ?? "";
+                if (newUsername != SQAuth.signedInUser.displayName)
+                  await SQAuth.signedInUser.updateDisplayName(newUsername);
+                if (newEmail != SQAuth.signedInUser.email)
+                  await SQAuth.signedInUser.updateEmail(newEmail);
               })
         ]);
     usersCollection.actions.removeWhere((action) => action.name == "Edit");

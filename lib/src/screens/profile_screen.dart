@@ -24,22 +24,19 @@ class _ProfileScreenState extends DocScreenState<ProfileScreen> {
     return SQAuth.auth.signInScreen(forceSignIn: true).go(context);
   }
 
+  @override
+  void initState() {
+    doc.getField("New Username")?.value = SQAuth.signedInUser.displayName;
+    doc.getField("New Email")?.value = SQAuth.signedInUser.email;
+    super.initState();
+  }
+
   Future<void> updateUserField(
       SQField<dynamic> field, Function updateFunction) async {
     dynamic newValue = await showFieldDialog(context: context, field: field);
     if (newValue != null) {
       await updateFunction(newValue);
       refreshScreen();
-    }
-  }
-
-  Future<void> updateEmail(SignedInUser user) async {
-    try {
-      await updateUserField(
-          SQStringField("Email", value: user.email ?? ""), user.updateEmail);
-    } catch (e) {
-      print(e.toString());
-      await goToSignIn();
     }
   }
 
@@ -66,8 +63,6 @@ class _ProfileScreenState extends DocScreenState<ProfileScreen> {
                     // TODO: add username and email as doc fields
                     // NOTE: this is broken for now
                     children: [
-                      SQButton('Update email',
-                          onPressed: () => updateEmail(user)),
                       SQButton('Update password',
                           onPressed: () => updatePassword(user))
                     ],
