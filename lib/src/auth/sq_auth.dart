@@ -55,8 +55,17 @@ class SQAuth {
           ),
           GoScreenAction("Sign In",
               show: isSignedIn.not(),
-              screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true))
+              screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true)),
+          GoEditAction(
+              name: "Edit Profile",
+              onExecute: (doc) async {
+                String newUsername = doc.value("New Username") ?? "";
+                if (newUsername == SQAuth.signedInUser.displayName) return;
+                print("Updating username");
+                await SQAuth.signedInUser.updateDisplayName(newUsername);
+              })
         ]);
+    usersCollection.actions.removeWhere((action) => action.name == "Edit");
     await auth.init();
   }
 }
