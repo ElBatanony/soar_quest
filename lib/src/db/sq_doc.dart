@@ -59,4 +59,7 @@ class SQDoc {
   SQImageField? get imageLabel => fields
       .whereType<SQImageField>()
       .firstWhereOrNull((field) => field.value != null);
+
+  List<SQField<dynamic>> copyFields() =>
+      fields.map((field) => field.copy()).toList();
 }
