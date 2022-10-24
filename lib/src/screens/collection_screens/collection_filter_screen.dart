@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../db.dart';
-import '../../ui/sq_button.dart';
 import '../collection_screen.dart';
 import '../form_screen.dart';
 
@@ -65,7 +64,6 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
     return Column(
       children: [
         filterFieldsDisplay(),
-        SQButton("Filter", onPressed: () => refreshScreen()),
         Expanded(child: super.screenBody(context)),
       ],
     );
