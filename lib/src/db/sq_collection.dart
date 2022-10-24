@@ -66,11 +66,6 @@ abstract class SQCollection<DocType extends SQDoc> {
     return saveCollection();
   }
 
-  Future<void> ensureInitialized(DocType doc) async {
-    if (doc.initialized) return;
-    throw "Doc not initialized";
-  }
-
   String newDocId() => Uuid().v1();
 
   F? getField<F extends SQField<dynamic>>(String fieldName) {
