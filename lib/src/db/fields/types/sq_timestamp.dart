@@ -27,4 +27,6 @@ class SQTimestamp extends Timestamp {
       return SQTimestamp(source["_seconds"] as int, 0);
     return null;
   }
+
+  Map<String, dynamic> toJson() => {'_seconds': seconds};
 }
