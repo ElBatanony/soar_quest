@@ -82,6 +82,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: collection.actions
+            .take(3)
             .where((action) => action.show.check(doc, context))
             .map((action) => action.button(doc, isIcon: true))
             .toList(),
