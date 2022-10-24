@@ -34,7 +34,7 @@ class LocalCollection extends SQCollection {
           docObject['data'] as Map<String, dynamic>?;
       if (newDocId == null) throw "Doc ID is null";
       if (newDocData == null) throw "Doc data is null";
-      return constructDoc(newDocId)..parse(newDocData);
+      return newDoc(id: newDocId)..parse(newDocData);
     }).toList();
     initialized = true;
   }

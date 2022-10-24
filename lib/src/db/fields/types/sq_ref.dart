@@ -37,8 +37,7 @@ class SQRef {
   Future<SQDoc> doc() async {
     SQCollection? collection = SQCollection.byPath(collectionPath);
     if (collection == null) throw "Referencing a non-existing collection";
-    SQDoc doc = collection.constructDoc(docId);
-    await collection.ensureInitialized(doc);
+    SQDoc doc = collection.newDoc(id: docId);
     return doc;
   }
 

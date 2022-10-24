@@ -78,8 +78,9 @@ abstract class SQCollection<DocType extends SQDoc> {
         (field) => field.name == fieldName && field is F) as F?;
   }
 
-  DocType newDoc({List<SQField<dynamic>> initialFields = const []}) {
-    DocType newDoc = constructDoc(newDocId());
+  DocType newDoc(
+      {List<SQField<dynamic>> initialFields = const [], String? id}) {
+    DocType newDoc = SQDoc(id ?? newDocId(), collection: this) as DocType;
 
     for (final initialField in initialFields) {
       int index =

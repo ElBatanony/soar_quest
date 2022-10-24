@@ -18,7 +18,7 @@ class UserSettings {
   static SQDoc get _settingsDoc {
     return _settingsCollection.docs
             .firstWhereOrNull((doc) => doc.id == _defaultSettingsDocId) ??
-        _settingsCollection.constructDoc(_defaultSettingsDocId);
+        _settingsCollection.newDoc(id: _defaultSettingsDocId);
   }
 
   static Future<void> setSettings(List<SQField<dynamic>> settings) async {
