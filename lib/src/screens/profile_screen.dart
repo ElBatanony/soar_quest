@@ -19,6 +19,7 @@ class _ProfileScreenState extends DocScreenState<ProfileScreen> {
   void initState() {
     doc.getField("New Username")?.value = SQAuth.signedInUser.username;
     doc.getField("New Email")?.value = SQAuth.signedInUser.email;
+    doc.getField("New Password")?.value = "";
     super.initState();
   }
 }
