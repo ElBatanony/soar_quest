@@ -170,7 +170,7 @@ class DeleteDocAction extends SQAction {
 }
 
 class SetFieldsAction extends SQAction {
-  Map<String, dynamic> Function(SQDoc) getFields;
+  Map<String, dynamic> Function(SQDoc doc) getFields;
 
   SetFieldsAction(super.name,
       {super.icon, super.show, super.onExecute, required this.getFields});
@@ -242,7 +242,7 @@ class SequencesAction extends SQAction {
 }
 
 class CustomAction extends SQAction {
-  Future<void> Function(SQDoc, BuildContext) customExecute;
+  Future<void> Function(SQDoc doc, BuildContext context) customExecute;
 
   CustomAction(super.name,
       {super.icon, super.show, required this.customExecute, super.onExecute});
