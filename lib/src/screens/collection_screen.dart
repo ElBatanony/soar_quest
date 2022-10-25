@@ -62,12 +62,12 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     super.initState();
   }
 
-  Future<void> goToDocScreen(DocScreen docScreen) async {
+  Future<void> goToDocScreen(Screen docScreen) async {
     await docScreen.go(context);
     refreshScreen();
   }
 
-  DocScreen docScreen(SQDoc doc) => widget.docScreen(doc);
+  Screen docScreen(SQDoc doc) => widget.docScreen(doc);
 
   Widget docDisplay(SQDoc doc, BuildContext context) {
     if (widget.docDisplay != null) return widget.docDisplay!(doc, this);
