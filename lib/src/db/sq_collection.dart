@@ -46,7 +46,8 @@ abstract class SQCollection<DocType extends SQDoc> {
 
     if (byPath(path) == null) _collections.add(this);
 
-    this.actions.addAll([GoEditAction(), DeleteDocAction(exitScreen: true)]);
+    if (updates) this.actions.add(GoEditAction());
+    if (deletes) this.actions.add(DeleteDocAction(exitScreen: true));
   }
 
   bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
