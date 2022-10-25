@@ -15,11 +15,14 @@ class DocCond {
 
   DocCond get not => DocCond((doc, context) => !condition(doc, context));
 
+  DocCond operator &(DocCond other) {
+    return DocCond((doc, context) =>
+        condition(doc, context) && other.condition(doc, context));
   }
 
-  DocCond and(DocCond otherCond) {
+  DocCond operator |(DocCond other) {
     return DocCond((doc, context) =>
-        condition(doc, context) && otherCond.condition(doc, context));
+        condition(doc, context) || other.condition(doc, context));
   }
 }
 
