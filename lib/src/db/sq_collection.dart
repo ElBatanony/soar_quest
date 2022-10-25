@@ -20,7 +20,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   final List<SQAction> actions;
 
   late final String path;
-  late final bool updates, adds, deletes, readOnly;
+  late bool updates, adds, deletes, readOnly;
 
   List<DocType> docs = [];
 
