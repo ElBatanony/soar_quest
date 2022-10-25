@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
+import 'profile_screen.dart';
 import 'screen.dart';
 import '../db/user_settings.dart';
 
@@ -11,6 +12,7 @@ class SQDrawer extends StatelessWidget {
     if (UserSettings.initialized &&
         screens.any((screen) => screen.title == "Settings") == false)
       screens.add(UserSettings.settingsScreen());
+    screens.add(ProfileScreen());
   }
 
   @override
