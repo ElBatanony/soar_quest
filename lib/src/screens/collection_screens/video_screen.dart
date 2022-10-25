@@ -5,6 +5,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../db/sq_doc.dart';
 import '../../db/fields/sq_video_link_field.dart';
 import '../collection_screen.dart';
+import '../doc_screen.dart';
 
 class VideoCollectionScreen extends CollectionScreen {
   final VideoLinkField videoField;
@@ -25,24 +26,23 @@ class _VideoCollectionScreenState
   @override
   Widget docDisplay(SQDoc doc, BuildContext context) {
     return VideoDocDisplay(
-      doc: doc,
+      doc,
       videoField: widget.videoField,
     );
   }
 }
 
-class VideoDocDisplay extends StatefulWidget {
-  final SQDoc doc;
+class VideoDocDisplay extends DocScreen {
   final VideoLinkField videoField;
 
-  const VideoDocDisplay({required this.doc, required this.videoField, Key? key})
-      : super(key: key);
+  VideoDocDisplay(super.doc,
+      {required this.videoField, super.isInline, super.key});
 
   @override
   State<VideoDocDisplay> createState() => _VideoDocDisplayState();
 }
 
-class _VideoDocDisplayState extends State<VideoDocDisplay> {
+class _VideoDocDisplayState extends DocScreenState<VideoDocDisplay> {
   YoutubePlayerController? _controller;
 
   @override
