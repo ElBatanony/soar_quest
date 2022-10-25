@@ -5,7 +5,7 @@ import '../../db/sq_doc.dart';
 import '../collection_screen.dart';
 
 class TableScreen extends CollectionScreen {
-  TableScreen({required super.collection, super.title});
+  TableScreen({required super.collection, super.title, super.isInline});
 
   @override
   createState() => TableScreenState();
