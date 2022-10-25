@@ -22,24 +22,24 @@ class SQAuth {
     SQAuthManager? authManager,
     List<SQField<dynamic>>? userDocFields,
   }) async {
-    SQAuth.userDocFields = userDocFields ??
-        [
-          SQVirtualField(
-              field: SQStringField("Email"),
-              show: isSignedIn,
-              valueBuilder: (doc) => SQAuth.signedInUser.email),
-          SQVirtualField(
-              field: SQStringField("User ID"),
-              show: isSignedIn,
-              valueBuilder: (doc) => SQAuth.user.userId),
-          SQVirtualField(
-              field: SQStringField("Username"),
-              show: isSignedIn,
-              valueBuilder: (doc) => SQAuth.signedInUser.username),
-          SQStringField("New Username", show: inFormScreen),
-          SQStringField("New Email", show: inFormScreen),
-          SQStringField("New Password", show: inFormScreen),
-        ];
+    SQAuth.userDocFields = userDocFields ?? [];
+    SQAuth.userDocFields.addAll([
+      SQVirtualField(
+          field: SQStringField("Email"),
+          show: isSignedIn,
+          valueBuilder: (doc) => SQAuth.signedInUser.email),
+      SQVirtualField(
+          field: SQStringField("User ID"),
+          show: isSignedIn,
+          valueBuilder: (doc) => SQAuth.user.userId),
+      SQVirtualField(
+          field: SQStringField("Username"),
+          show: isSignedIn,
+          valueBuilder: (doc) => SQAuth.signedInUser.username),
+      SQStringField("New Username", show: inFormScreen),
+      SQStringField("New Email", show: inFormScreen),
+      SQStringField("New Password", show: inFormScreen),
+    ]);
     SQAuth.auth = authManager ?? FirebaseAuthManager();
     usersCollection = FirestoreCollection(
         id: "Users",
