@@ -119,6 +119,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   Widget screenBody(BuildContext context) {
+    if (docs.isEmpty) return Center(child: Text("This list is empty"));
     if (widget.groupBy != null) return groupByDocs(docs, context);
     return docsDisplay(docs, context);
   }
