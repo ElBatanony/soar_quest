@@ -65,11 +65,13 @@ class SQAuth {
                 String newUsername = doc.value("New Username") ?? "";
                 String newEmail = doc.value("New Email") ?? "";
                 String newPassword = doc.value("New Password") ?? "";
-                if (newUsername != SQAuth.signedInUser.username)
+                if (newUsername != SQAuth.signedInUser.username &&
+                    newUsername.isNotEmpty)
                   await SQAuth.signedInUser.updateDisplayName(newUsername);
-                if (newEmail != SQAuth.signedInUser.email)
+                if (newEmail != SQAuth.signedInUser.email &&
+                    newEmail.isNotEmpty)
                   await SQAuth.signedInUser.updateEmail(newEmail);
-                if (newPassword != "")
+                if (newPassword.isNotEmpty)
                   await SQAuth.signedInUser.updatePassword(newPassword);
               })
         ]);
