@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../ui/sq_button.dart';
 import '../../../screens.dart';
+import '../sq_action.dart';
 import '../sq_collection.dart';
 import 'sq_user_ref_field.dart';
 import 'types/sq_ref.dart';
@@ -59,11 +60,26 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
   }
 
   @override
+  Widget readOnlyBuilder(BuildContext context) {
+    final SQRef? ref = field.value;
+    if (ref == null) return Text("Not Set");
+    SQDoc? doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(ref.label),
+        if (doc != null)
+          GoScreenAction("View", screen: (doc) => DocScreen(doc)).button(doc)
+      ],
+    );
+  }
+
+  @override
   Widget fieldBuilder(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(field.value?.label ?? "not-set"),
+        Text(field.value?.label ?? "Not Set"),
         if (field.editable)
           SQButton(
             'Select',
