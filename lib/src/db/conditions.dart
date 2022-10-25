@@ -13,8 +13,8 @@ class DocCond {
 
   bool check(SQDoc doc, BuildContext context) => condition(doc, context);
 
-  DocCond not() {
-    return DocCond((doc, context) => !condition(doc, context));
+  DocCond get not => DocCond((doc, context) => !condition(doc, context));
+
   }
 
   DocCond and(DocCond otherCond) {
