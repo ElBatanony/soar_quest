@@ -101,6 +101,7 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: separate SQFieldListFormField into readonly
     var listItems = listField.fields;
     var listItemsWidgets = <Widget>[];
 
