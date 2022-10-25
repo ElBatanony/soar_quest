@@ -34,7 +34,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
-  Widget fieldLabel() => Container();
+  Widget fieldLabel() => inForm ? super.fieldLabel() : Container();
 
   @override
   Widget readOnlyBuilder(BuildContext context) {
@@ -47,6 +47,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
   Widget fieldBuilder(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.value.toString()),
         SQButton("Select", onPressed: () async {
