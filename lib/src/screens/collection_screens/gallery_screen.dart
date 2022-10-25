@@ -10,7 +10,8 @@ class GalleryScreen extends CollectionScreen {
   createState() => GalleryScreenState();
 }
 
-class GalleryScreenState extends CollectionScreenState<GalleryScreen> {
+class GalleryScreenState<S extends GalleryScreen>
+    extends CollectionScreenState<S> {
   @override
   Widget docDisplay(SQDoc doc, BuildContext context) {
     return Card(
