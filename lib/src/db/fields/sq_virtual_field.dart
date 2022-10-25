@@ -12,7 +12,7 @@ class SQVirtualField<T> extends SQField<T> {
       : super(
           field.name,
           editable: false,
-          show: inFormScreen.not().and(show),
+          show: inFormScreen.not & show,
         );
 
   @override

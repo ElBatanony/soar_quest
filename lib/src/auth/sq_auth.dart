@@ -56,7 +56,7 @@ class SQAuth {
             },
           ),
           GoScreenAction("Sign In",
-              show: isSignedIn.not(),
+              show: isSignedIn.not,
               screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true)),
           GoEditAction(
               name: "Edit Profile",

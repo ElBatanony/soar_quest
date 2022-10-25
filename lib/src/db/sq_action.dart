@@ -126,7 +126,7 @@ class GoEditAction extends GoScreenAction {
       : super(
           name,
           icon: icon,
-          show: DocCond((doc, _) => doc.collection.updates).and(show),
+          show: DocCond((doc, _) => doc.collection.updates) & show,
           screen: (doc) => FormScreen(doc),
         );
 }
@@ -160,7 +160,7 @@ class DeleteDocAction extends SQAction {
     this.exitScreen = false,
     super.confirm = true,
   }) : super(name,
-            show: CollectionCond((collection) => collection.deletes).and(show));
+            show: CollectionCond((collection) => collection.deletes) & show);
 
   @override
   execute(SQDoc doc, BuildContext context) async {

@@ -14,7 +14,7 @@ void main() async {
 
   var checkTaskAction = SetFieldsAction("Check",
       getFields: (doc) => {"Last Updated": SQTimestamp.now(), "Status": "Done"},
-      show: DocValueCond("Status", "Done").not());
+      show: DocValueCond("Status", "Done").not);
 
   var uncheckTaskAction = SetFieldsAction("UNCheck",
       getFields: (doc) => {"Status": "To-Do"},
@@ -29,7 +29,7 @@ void main() async {
         SQStringField("Status"),
         options: ["Done", "To-Do"],
         value: "To-Do",
-        show: inFormScreen.not(),
+        show: inFormScreen.not,
       ),
       // SQImageField("Image"),
       SQEditedByField("hamada user"),
