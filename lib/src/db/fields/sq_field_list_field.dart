@@ -1,33 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/screen.dart';
 import '../sq_doc.dart';
 import '../../ui/sq_button.dart';
 import 'sq_list_field.dart';
 
-class SQFieldListField extends SQListField<SQDocField> {
-  List<SQDocField> allowedTypes;
+class SQFieldListField extends SQListField<SQField<dynamic>> {
+  List<SQField<dynamic>> allowedTypes;
 
-  SQFieldListField(super.name,
-      {List<SQDocField> list = const <SQDocField>[],
-      required this.allowedTypes})
-      : super(list: list);
+  SQFieldListField(super.name, {super.value, required this.allowedTypes});
 
-  @override
-  Type get type => List;
-
-  List<SQDocField> get fields => list;
+  List<SQField<dynamic>> get fields => value ?? [];
 
   @override
-  List<SQDocField> parse(source) {
+  List<SQField<dynamic>> parse(source) {
     List<dynamic> dynamicList = source as List;
-    List<SQDocField> fields = [];
+    List<SQField<dynamic>> fields = [];
     for (var dynamicFieldValue in dynamicList) {
-      for (SQDocField allowedType in allowedTypes) {
+      for (SQField<dynamic> allowedType in allowedTypes) {
         var parsed = allowedType.parse(dynamicFieldValue);
 
-        if (parsed != null && parsed.runtimeType == allowedType.type) {
-          SQDocField newField = allowedType.copy();
+        if (parsed != null &&
+            parsed.runtimeType == allowedType.value.runtimeType) {
+          SQField<dynamic> newField = allowedType.copy();
           newField.value = parsed;
           fields.add(newField);
           break;
@@ -39,22 +33,22 @@ class SQFieldListField extends SQListField<SQDocField> {
 
   @override
   SQFieldListField copy() => SQFieldListField(name,
-      list: fields.map((e) => e.copy()).toList(), allowedTypes: allowedTypes);
+      value: copyList(fields), allowedTypes: allowedTypes);
 
   @override
-  List<dynamic> collectField() {
-    return fields.map((listItemField) => listItemField.collectField()).toList();
+  List<dynamic> serialize() {
+    return fields.map((listItemField) => listItemField.serialize()).toList();
   }
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQFieldListFormField(this, onChanged: onChanged);
   }
 }
 
-Future showFieldOptions(SQFieldListField fieldListfield,
+Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
     {required BuildContext context}) {
-  return showDialog<SQDocField>(
+  return showDialog<SQField<dynamic>>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -62,19 +56,21 @@ Future showFieldOptions(SQFieldListField fieldListfield,
             content: Wrap(
               children: [
                 ...fieldListfield.allowedTypes
-                    .map((field) => SQButton(field.type.toString(),
-                        onPressed: () =>
-                            exitScreen(context, value: field.copy())))
+                    .map((field) => SQButton(
+                          field.value.runtimeType.toString(),
+                          onPressed: () => Navigator.pop<SQField<dynamic>>(
+                              context, field.copy()),
+                        ))
                     .toList(),
               ],
             ),
             actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton('Cancel', onPressed: () => Navigator.pop(context)),
             ]);
       });
 }
 
-class _SQFieldListFormField extends DocFormField<SQFieldListField> {
+class _SQFieldListFormField extends SQFormField<SQFieldListField> {
   final SQFieldListField listField;
 
   const _SQFieldListFormField(this.listField, {required super.onChanged})
@@ -84,7 +80,7 @@ class _SQFieldListFormField extends DocFormField<SQFieldListField> {
   createState() => _SQFieldListFormFieldState();
 }
 
-class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
+class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
   SQFieldListField get listField => field;
 
   void deleteListItem(int index) {
@@ -94,7 +90,8 @@ class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
   }
 
   void addField() async {
-    SQDocField? newValue = await showFieldOptions(listField, context: context);
+    SQField<dynamic>? newValue =
+        await showFieldOptions(listField, context: context);
     if (newValue != null) {
       setState(() {
         listField.fields.add(newValue);
@@ -104,8 +101,9 @@ class _SQFieldListFormFieldState extends DocFormFieldState<SQFieldListField> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: separate SQFieldListFormField into readonly
     var listItems = listField.fields;
-    var listItemsWidgets = [];
+    var listItemsWidgets = <Widget>[];
 
     for (int i = 0; i < listItems.length; i++) {
       listItemsWidgets.add(Column(

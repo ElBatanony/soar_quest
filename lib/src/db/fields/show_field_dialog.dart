@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/screen.dart';
 import '../../ui/sq_button.dart';
-import '../sq_doc_field.dart';
+import '../sq_field.dart';
 
-Future showFieldDialog(
-    {required SQDocField field, required BuildContext context}) {
+Future<T?> showFieldDialog<T>(
+    {required SQField<T> field, required BuildContext context}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -13,10 +12,10 @@ Future showFieldDialog(
             title: Text("Set ${field.name}"),
             content: field.formField(),
             actions: [
-              SQButton('Cancel', onPressed: () => exitScreen(context)),
+              SQButton('Cancel', onPressed: () => Navigator.pop<T>(context)),
               SQButton(
                 'Save',
-                onPressed: () => exitScreen(context, value: field.value),
+                onPressed: () => Navigator.pop<T>(context, field.value),
               ),
             ]);
       });

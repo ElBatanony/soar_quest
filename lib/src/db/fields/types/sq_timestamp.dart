@@ -9,9 +9,11 @@ class SQTimestamp extends Timestamp {
     return SQTimestamp(timestamp.seconds, timestamp.nanoseconds);
   }
 
-  factory SQTimestamp.fromTimestamp(dynamic timestamp) {
+  factory SQTimestamp.fromTimestamp(Timestamp timestamp) {
     return SQTimestamp(timestamp.seconds, timestamp.nanoseconds);
   }
+
+  factory SQTimestamp.now() => SQTimestamp.fromDate(DateTime.now());
 
   @override
   String toString() {
@@ -19,10 +21,12 @@ class SQTimestamp extends Timestamp {
   }
 
   static SQTimestamp? parse(dynamic source) {
-    if (source.runtimeType == Timestamp)
-      return SQTimestamp.fromTimestamp(source);
-    else if (source["_seconds"] != null)
-      return SQTimestamp(source["_seconds"], 0);
+    if (source == null) return null;
+    if (source is Timestamp) return SQTimestamp.fromTimestamp(source);
+    if (source["_seconds"] is int)
+      return SQTimestamp(source["_seconds"] as int, 0);
     return null;
   }
+
+  Map<String, dynamic> toJson() => {'_seconds': seconds};
 }

@@ -1,9 +1,9 @@
 import '../sq_doc.dart';
 import 'types/sq_timestamp.dart';
 
-class UpdatedDateField extends SQDocField<SQTimestamp> {
+class UpdatedDateField extends SQField<SQTimestamp> {
   UpdatedDateField(String name, {SQTimestamp? value})
-      : super(name, value: value, readOnly: true);
+      : super(name, value: value, editable: false);
 
   @override
   SQTimestamp? parse(source) {
@@ -14,10 +14,10 @@ class UpdatedDateField extends SQDocField<SQTimestamp> {
   UpdatedDateField copy() => UpdatedDateField(name, value: value);
 
   @override
-  collectField() => value = SQTimestamp.fromDate(DateTime.now());
+  serialize() => value = SQTimestamp.now();
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     throw UnimplementedError();
   }
 }

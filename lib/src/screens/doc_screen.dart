@@ -1,57 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:soar_quest/db.dart';
 
-import '../db/sq_doc.dart';
-import '../ui/sq_button.dart';
-
-import '../ui/doc_delete_button.dart';
-
-import 'form_screens/doc_edit_screen.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {
   final SQDoc doc;
-  final bool canEdit, canDelete;
 
   DocScreen(
     this.doc, {
-    super.prebody,
-    super.postbody,
-    this.canEdit = true,
-    this.canDelete = true,
+    String? title,
     super.icon,
+    super.isInline,
     super.key,
-  }) : super(doc.identifier);
+  }) : super(title ?? doc.label);
 
   @override
   State<DocScreen> createState() => DocScreenState();
 }
 
 class DocScreenState<T extends DocScreen> extends ScreenState<T> {
-  late SQDoc doc;
+  SQDoc get doc => widget.doc;
+  SQCollection get collection => doc.collection;
 
-  void loadData() async {
-    await doc.loadDoc();
-    refreshScreen();
+  Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
+    return field.formField(onChanged: refreshScreen, doc: doc);
   }
 
-  @override
-  void initState() {
-    doc = widget.doc;
-    loadData();
-    super.initState();
+  List<Widget> fieldsDisplay(BuildContext context) {
+    return doc.fields
+        .where((field) => field.show.check(doc, context))
+        .map((field) => fieldDisplay(field, context))
+        .toList();
   }
 
-  Widget fieldDisplay(SQDocField field) {
-    return GestureDetector(
-      onLongPress: () {
-        String fieldValue = field.value.toString();
-        Clipboard.setData(ClipboardData(text: fieldValue));
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(milliseconds: 500),
-            content: Text('Copied field: $fieldValue')));
-      },
-      child: field.readOnlyField(doc: doc),
+  Widget actionsDisplay(BuildContext context) {
+    return Wrap(
+      children: collection.actions
+          .where((action) => action.show.check(doc, context))
+          .map((action) => action.button(doc))
+          .toList(),
     );
   }
 
@@ -59,29 +46,10 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   Widget screenBody(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Doc path: ${doc.getPath()}', textAlign: TextAlign.center),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: doc.fields.map(fieldDisplay).toList()),
-          if (doc.collection.readOnly == false)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                if (widget.canEdit)
-                  SQButton(
-                    "Edit ${doc.collection.singleDocName}",
-                    onPressed: () async {
-                      await goToScreen(docEditScreen(doc), context: context);
-                      refreshScreen();
-                    },
-                  ),
-                if (doc.collection.canDeleteDoc && widget.canDelete)
-                  DocDeleteButton(doc, deleteCallback: refreshScreen)
-              ],
-            ),
+          actionsDisplay(context),
+          ...fieldsDisplay(context),
         ],
       ),
     );

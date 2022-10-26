@@ -1,100 +1,97 @@
 import 'package:flutter/material.dart';
 
 import '../db/sq_collection.dart';
-import '../db/fields/sq_user_ref_field.dart';
-import '../ui/sq_button.dart';
 import '../ui/snackbar.dart';
-import 'screen.dart';
+import 'doc_screen.dart';
 
-class DocFormScreen extends Screen {
-  late final SQCollection collection;
-  final List<String> hiddenFields;
+void _emptyVoid(SQDoc doc) {}
+
+class FormScreen extends DocScreen {
   final String submitButtonText;
-  final List<String>? shownFields;
-  final SQDoc doc;
-  final Future Function(SQDoc, BuildContext) submitFunction;
 
-  DocFormScreen(
-    this.doc, {
+  SQCollection get collection => doc.collection;
+
+  final void Function(SQDoc) onFieldsChanged;
+
+  FormScreen(
+    SQDoc doc, {
     String? title,
-    required this.submitFunction,
-    this.hiddenFields = const [],
-    this.shownFields = const [],
-    this.submitButtonText = "Submit",
+    this.submitButtonText = "Save",
+    super.icon,
+    super.isInline,
+    this.onFieldsChanged = _emptyVoid,
     super.key,
-  }) : super(title ?? "Edit ${doc.collection.singleDocName}") {
-    collection = doc.collection;
-  }
+  }) : super(doc, title: title ?? "Edit ${doc.collection.id}");
 
   @override
-  State<DocFormScreen> createState() => DocFormScreenState();
+  State<FormScreen> createState() => FormScreenState();
 
   @override
-  SQButton button(BuildContext context, {String? label}) {
-    return super
-        .button(context, label: label ?? "Edit a ${collection.singleDocName}");
+  Future<T?> go<T extends Object?>(BuildContext context,
+      {bool replace = false}) {
+    return super.go(context, replace: false);
   }
 }
 
-class DocFormScreenState<T extends DocFormScreen> extends ScreenState<T> {
+class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
+  late SQDoc formDoc;
+
+  @override
+  SQDoc get doc => formDoc;
+
   @override
   void initState() {
-    for (var field in widget.doc.fields)
-      if (field.runtimeType == SQEditedByField)
-        field.value = SQUserRefField.currentUserRef;
-
+    formDoc =
+        widget.doc.collection.newDoc(initialFields: widget.doc.copyFields());
     super.initState();
   }
 
-  Future submitForm() async {
-    for (SQDocField field in widget.doc.fields) {
-      if (field.required && field.isNull) {
+  @override
+  void refreshScreen() {
+    widget.onFieldsChanged(doc);
+    super.refreshScreen();
+  }
+
+  Future<void> submitForm() async {
+    for (final field in doc.fields) {
+      if (field.require && field.value == null) {
         showSnackBar("${field.name} is required!", context: context);
         return;
       }
     }
 
-    await widget.submitFunction(widget.doc, context).then(
-          (_) => exitScreen(context, value: true),
-        );
+    widget.doc.fields = doc.copyFields();
+
+    await widget.collection.saveDoc(widget.doc);
+    exitScreen<bool>(true);
+
+    // TODO: make sure to update previous scren collection
+  }
+
+  @override
+  Widget? bottomNavBar(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.grey[100],
+      currentIndex: 1,
+      onTap: (index) async {
+        if (index == 0) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          return exitScreen();
+        }
+        await submitForm();
+      },
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.cancel), label: "Cancel"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.save), label: widget.submitButtonText),
+      ],
+    );
   }
 
   @override
   Widget screenBody(BuildContext context) {
-    return Column(
-      children: [
-        ..._generateDocFormFields(
-          widget.doc,
-          shownFields: widget.shownFields,
-          hiddenFields: widget.hiddenFields,
-          onChanged: refreshScreen,
-        ),
-        SQButton(widget.submitButtonText, onPressed: submitForm)
-      ],
-    );
+    return GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: super.screenBody(context));
   }
-}
-
-List<DocFormField> _generateDocFormFields(
-  SQDoc doc, {
-  List<String> hiddenFields = const [],
-  List<String>? shownFields,
-  Function? onChanged,
-}) {
-  List<SQDocField> fields = doc.fields;
-
-  if (shownFields != null)
-    fields = fields
-        .where((field) => shownFields.contains(field.name) == true)
-        .toList();
-
-  fields = fields
-      .where((field) => hiddenFields.contains(field.name) == false)
-      .toList();
-
-  return fields
-      .map((field) => field.readOnly
-          ? field.readOnlyField(doc: doc)
-          : field.formField(onChanged: onChanged, doc: doc))
-      .toList();
 }

@@ -1,4 +1,8 @@
-import '../app/app.dart';
+import 'package:collection/collection.dart';
+import 'package:uuid/uuid.dart';
+
+import 'sq_action.dart';
+import '../sq_app.dart';
 import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
@@ -9,76 +13,97 @@ export 'collection_filter.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
-  List<SQDocField> fields;
-  List<DocType> docs = [];
-  late String singleDocName;
-  SQDoc? parentDoc;
-  bool readOnly;
-  bool canDeleteDoc;
-  DocScreenBuilder docScreen;
-  bool initialized = false;
+  final SQDoc? parentDoc;
+  final DocScreenBuilder docScreen;
 
-  SQCollection(
-    this.id,
-    this.fields, {
+  final List<SQField<dynamic>> fields;
+  final List<SQAction> actions;
+
+  late final String path;
+  late bool updates, adds, deletes, readOnly;
+
+  List<DocType> docs = [];
+
+  static final List<SQCollection> _collections = [];
+
+  SQCollection({
+    required this.id,
+    required this.fields,
     String? singleDocName,
     this.parentDoc,
     this.readOnly = false,
-    this.canDeleteDoc = true,
+    this.updates = true,
+    this.adds = true,
+    this.deletes = true,
     this.docScreen = defaultDocScreen,
-  }) {
-    this.singleDocName = singleDocName ?? id;
-    App.registerCollection(this);
+    List<SQAction>? actions,
+  }) : actions = actions ?? [] {
+    path = parentDoc == null
+        ? "Example Apps/${SQApp.name}/$id"
+        : "${parentDoc!.path}/$id";
+
+    if (readOnly) updates = adds = deletes = false;
+
+    if (byPath(path) == null) _collections.add(this);
+
+    if (updates) this.actions.add(GoEditAction());
+    if (deletes) this.actions.add(DeleteDocAction(exitScreen: true));
   }
 
-  DocType constructDoc(String id) {
-    return SQDoc(id, collection: this) as DocType;
+  bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
+
+  Future<void> loadCollection();
+  Future<void> saveCollection();
+
+  Future<void> saveDoc(DocType doc) {
+    if (hasDoc(doc))
+      docs[docs.indexWhere((d) => d.id == doc.id)] = doc;
+    else
+      docs.add(doc);
+    return saveCollection();
   }
 
-  Future loadCollection() async {
-    initialized = true;
+  Future<void> deleteDoc(DocType doc) {
+    if (hasDoc(doc)) docs.removeWhere((d) => d.id == doc.id);
+    return saveCollection();
   }
 
-  Future<void> loadDoc(DocType doc);
-  Future saveDoc(DocType doc);
-  Future createDoc(DocType doc);
-  Future deleteDoc(String docId);
+  String newDocId() => Uuid().v1();
 
-  bool doesDocExist(String docId);
-
-  String getPath();
-  String getANewDocId();
-
-  SQDocField? getFieldByName(String fieldName) {
-    if (!fields.any((field) => field.name == fieldName)) return null;
-    return fields.singleWhere((field) => field.name == fieldName);
+  F? getField<F extends SQField<dynamic>>(String fieldName) {
+    return fields.singleWhereOrNull(
+        (field) => field.name == fieldName && field is F) as F?;
   }
 
-  int get docsCount => docs.length;
+  DocType newDoc(
+      {List<SQField<dynamic>> initialFields = const [], String? id}) {
+    DocType newDoc = SQDoc(id ?? newDocId(), collection: this) as DocType;
 
-  DocType newDoc({List<SQDocField> initialFields = const []}) {
-    DocType newDoc = constructDoc(getANewDocId());
-
-    for (var initialField in initialFields) {
+    for (final initialField in initialFields) {
       int index =
           newDoc.fields.indexWhere((field) => field.name == initialField.name);
       newDoc.fields[index] = initialField.copy();
     }
 
-    for (var field in newDoc.fields)
-      if (field.runtimeType == SQCreatedByField)
-        field.value = SQUserRefField.currentUserRef;
-
-    docs.add(newDoc);
+    fields
+        .whereType<SQCreatedByField>()
+        .forEach((field) => field.value = SQUserRefField.currentUserRef);
 
     return newDoc;
   }
 
-  List<DocType> filter(List<CollectionFilter> filters) {
-    List<DocType> ret = docs;
-    for (var filter in filters) {
-      ret = filter.filter(ret) as List<DocType>;
-    }
-    return ret;
+  List<DocType> filterBy(List<CollectionFilter> filters) {
+    return filters.fold(
+        docs,
+        (remainingDocs, filter) =>
+            filter.filter(remainingDocs) as List<DocType>);
   }
+
+  static SQCollection? byPath(String path) =>
+      _collections.singleWhereOrNull((collection) => collection.path == path);
+
+  List<SQField<dynamic>> copyFields() =>
+      fields.map((field) => field.copy()).toList();
+
+  SQDoc? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 }

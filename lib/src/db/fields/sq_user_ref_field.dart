@@ -1,32 +1,37 @@
-import '../../app/app.dart';
-import 'sq_doc_ref_field.dart';
+import '../../auth/sq_auth.dart';
+import 'sq_ref_field.dart';
 
-class SQUserRefField extends SQDocRefField {
-  SQUserRefField(super.name, {super.value, super.readOnly})
-      : super(collection: App.usersCollection);
+class SQUserRefField extends SQRefField {
+  SQUserRefField(super.name, {super.value, super.editable})
+      : super(collection: SQAuth.usersCollection);
 
-  static SQDocRef get currentUserRef => SQDocRef.fromDoc(App.auth.user.userDoc);
+  static SQRef get currentUserRef => SQRef(
+      collectionPath: SQAuth.usersCollection.path,
+      docId: SQAuth.user.userId,
+      label: SQAuth.user.isAnonymous
+          ? SQAuth.user.userId
+          : SQAuth.signedInUser.email ?? "");
 
   @override
   SQUserRefField copy() =>
-      SQUserRefField(name, value: value, readOnly: readOnly);
+      SQUserRefField(name, value: value, editable: editable);
 }
 
 class SQEditedByField extends SQUserRefField {
-  SQEditedByField(super.name, {super.value}) : super(readOnly: true);
+  SQEditedByField(super.name, {super.value}) : super(editable: false);
 
   @override
   SQEditedByField copy() => SQEditedByField(name, value: value);
 
   @override
-  collectField() {
+  serialize() {
     value ??= SQUserRefField.currentUserRef;
-    return super.collectField();
+    return super.serialize();
   }
 }
 
 class SQCreatedByField extends SQUserRefField {
-  SQCreatedByField(super.name, {super.value}) : super(readOnly: true);
+  SQCreatedByField(super.name, {super.value}) : super(editable: false);
 
   @override
   SQCreatedByField copy() => SQCreatedByField(name, value: value);

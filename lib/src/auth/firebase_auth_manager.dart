@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../db/fields/sq_string_field.dart';
+import '../db/in_memory_collection.dart';
 import 'user_data.dart';
 import '../screens/screen.dart';
-import 'auth_manager.dart';
+import 'sq_auth_manager.dart';
 import 'sign_in_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -10,7 +12,7 @@ class FirebaseAuthManager extends SQAuthManager {
   static late final FirebaseAuth _auth;
 
   @override
-  updateUserData() {
+  Future<void> updateUserData() async {
     final firebaseUser = _auth.currentUser!;
     user = FirebaseSignedInUser(firebaseUser);
   }
@@ -38,7 +40,14 @@ class FirebaseAuthManager extends SQAuthManager {
 
   @override
   Screen signInScreen({bool forceSignIn = false}) {
-    return SignInScreen(forceSignIn: forceSignIn);
+    InMemoryCollection fakeSignInCollection =
+        InMemoryCollection(id: "Sign In", fields: [
+      SQStringField("Email", value: "test@email.com"),
+      SQStringField("Password", value: "testtest")
+    ]);
+
+    return SignInScreen(fakeSignInCollection.newDoc(),
+        forceSignIn: forceSignIn);
   }
 
   @override
@@ -47,7 +56,7 @@ class FirebaseAuthManager extends SQAuthManager {
   }
 
   @override
-  Future signInWithEmailAndPassword({
+  Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -63,7 +72,7 @@ class FirebaseAuthManager extends SQAuthManager {
   }
 
   @override
-  Future signUpWithEmailAndPassword({
+  Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
   }) async {

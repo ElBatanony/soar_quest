@@ -1,79 +1,54 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show FirebaseFirestore, CollectionReference, SetOptions;
 
-import '../app/app.dart';
 import 'sq_collection.dart';
 
-final firestore = FirebaseFirestore.instance;
-
 class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
+  late CollectionReference ref;
+
   FirestoreCollection({
-    required String id,
-    required List<SQDocField> fields,
+    required super.id,
+    required super.fields,
     super.singleDocName,
     super.parentDoc,
     super.readOnly,
-    super.canDeleteDoc,
+    super.updates,
+    super.adds,
+    super.deletes,
     super.docScreen,
-  }) : super(id, fields);
-
-  CollectionReference get ref => firestore.collection(getPath());
+    super.actions,
+  }) {
+    ref = FirebaseFirestore.instance.collection(path);
+  }
 
   @override
-  Future loadCollection() async {
+  Future<void> loadCollection() async {
     print("Fetching collection from ${ref.path}");
     final snap = await ref.get();
     print('${snap.docs.length} docs fetched for $id!');
     docs = snap.docs
-        .map((doc) => constructDoc(doc.id)
-          ..setData(
+        .map((doc) => newDoc(id: doc.id)
+          ..parse(
             doc.data() as Map<String, dynamic>,
           ))
         .toList();
-    super.loadCollection();
   }
 
   @override
-  Future createDoc(DocType doc) async {
-    docs.add(doc);
-    await firestore.doc("${getPath()}/${doc.id}").set(doc.collectFields());
-    return loadCollection();
+  Future<void> deleteDoc(DocType doc) async {
+    await ref.doc(doc.id).delete();
+    return super.deleteDoc(doc);
   }
 
   @override
-  Future deleteDoc(String docId) async {
-    docs.removeWhere((doc) => doc.id == docId);
-    await ref.doc(docId).delete();
-    return loadCollection();
+  String newDocId() => ref.doc().id;
+
+  @override
+  Future<void> saveDoc(DocType doc) async {
+    await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
+    return super.saveDoc(doc);
   }
 
   @override
-  bool doesDocExist(String docId) {
-    return docs.any((doc) => doc.id == docId);
-  }
-
-  @override
-  String getPath() {
-    if (parentDoc != null) return "${parentDoc!.getPath()}/$id";
-    return App.instance.getAppPath() + id;
-  }
-
-  DocumentReference getANewDocRef() => ref.doc();
-
-  @override
-  String getANewDocId() => getANewDocRef().id;
-
-  @override
-  Future loadDoc(DocType doc) async {
-    final docSnap = await ref.doc(doc.id).get();
-    doc.setData(
-        (docSnap.data() ?? <String, dynamic>{}) as Map<String, dynamic>);
-  }
-
-  @override
-  Future saveDoc(DocType doc) async {
-    await firestore
-        .doc("${getPath()}/${doc.id}")
-        .set(doc.collectFields(), SetOptions(merge: true));
-    return loadCollection();
-  }
+  Future<void> saveCollection() => loadCollection();
 }

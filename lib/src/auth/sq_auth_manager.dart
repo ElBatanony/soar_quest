@@ -2,25 +2,25 @@ import 'user_data.dart';
 import '../screens/screen.dart';
 
 abstract class SQAuthManager {
-  Future init();
+  Future<void> init();
 
   late UserData user;
 
-  updateUserData();
+  Future<void> updateUserData();
 
   Stream<UserData?> authStateChanges();
 
   Screen signInScreen({bool forceSignIn = false});
   Screen signUpScreen();
 
-  Future signInWithEmailAndPassword({
+  Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
 
-  Future signOut();
+  Future<void> signOut();
 
-  Future signUpWithEmailAndPassword({
+  Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
   });

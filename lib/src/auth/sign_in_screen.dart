@@ -1,61 +1,64 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../app/app.dart';
-import '../db/fields/sq_string_field.dart';
+import '../screens/form_screen.dart';
+import 'sq_auth.dart';
 import '../ui/sq_button.dart';
-import '../screens/screen.dart';
+import '../ui/snackbar.dart';
 
-class SignInScreen extends Screen {
+class SignInScreen extends FormScreen {
   final bool forceSignIn;
 
-  const SignInScreen({
+  SignInScreen(
+    super.doc, {
     String title = "Sign In",
     this.forceSignIn = false,
-    Key? key,
-  }) : super(title, key: key);
+  }) : super(title: title);
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends ScreenState<SignInScreen> {
-  final emailField = SQStringField("Email", value: "test@email.com");
-  final passwordField = SQStringField("Password", value: "testtest");
-
+class _SignInScreenState extends FormScreenState<SignInScreen> {
   @override
   void initState() {
-    if (widget.forceSignIn == false && App.auth.user.isAnonymous == false) {
-      exitScreen(context);
+    if (widget.forceSignIn == false && SQAuth.user.isAnonymous == false) {
+      exitScreen();
     }
     super.initState();
   }
 
-  signIn() {
-    App.auth
+  void signIn() async {
+    await SQAuth.auth
         .signInWithEmailAndPassword(
-            email: emailField.value, password: passwordField.value)
-        .then((_) {
-      if (App.auth.user.isAnonymous) {
-        print("Did not sign in");
-      } else {
-        print("Signed in");
-        exitScreen(context);
-      }
+            email: doc.value<String>("Email")!,
+            password: doc.value<String>("Password")!)
+        .catchError((dynamic err) {
+      showSnackBar((err as FirebaseAuthException).message ?? "Error signing in",
+          context: context);
     });
+
+    if (SQAuth.user.isAnonymous == false) {
+      print("Signed in");
+      exitScreen();
+    }
   }
 
   @override
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        emailField.formField(),
-        passwordField.formField(),
-        SQButton("Sign In", onPressed: signIn),
-        SQButton(
-          "Sign Up",
-          onPressed: () =>
-              replaceScreen(App.auth.signUpScreen(), context: context),
-        )
+        super.screenBody(context),
+        Row(
+          children: [
+            SQButton("Sign In", onPressed: signIn),
+            SQButton(
+              "Sign Up",
+              onPressed: () =>
+                  SQAuth.auth.signUpScreen().go(context, replace: true),
+            )
+          ],
+        ),
       ],
     );
   }

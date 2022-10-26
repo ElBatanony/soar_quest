@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../auth/user_data.dart';
-import '../app/app.dart';
-import '../screens/screen.dart';
+import '../auth/sq_auth.dart';
 import 'sq_button.dart';
 
 export '../auth/user_data.dart';
@@ -13,13 +12,11 @@ typedef SignedInContentBuilder = Widget Function(
     BuildContext context, SignedInUser user);
 
 class SignedInContent extends StatefulWidget {
-  final Screen? redirectScreen; // TODO: remove redirectScreen for now
   final Function? refreshUp;
   final SignedInContentBuilder builder;
 
   const SignedInContent({
     required this.builder,
-    this.redirectScreen,
     this.refreshUp,
     super.key,
   });
@@ -31,11 +28,11 @@ class SignedInContent extends StatefulWidget {
 class _SignedInContentState extends State<SignedInContent> {
   bool isHidden = true;
 
-  late StreamSubscription listener;
+  late StreamSubscription<UserData?> listener;
 
   @override
   void initState() {
-    listener = App.auth.authStateChanges().listen((userData) {
+    listener = SQAuth.auth.authStateChanges().listen((userData) {
       if (userData != null) {
         setState(() {
           isHidden = userData.isAnonymous;
@@ -60,10 +57,9 @@ class _SignedInContentState extends State<SignedInContent> {
             children: [
               Text("Sign in to view this content"),
               SQButton("Sign In",
-                  onPressed: () =>
-                      goToScreen(App.auth.signInScreen(), context: context))
+                  onPressed: () => SQAuth.auth.signInScreen().go(context))
             ],
           )
-        : widget.builder(context, App.auth.user as SignedInUser);
+        : widget.builder(context, SQAuth.user as SignedInUser);
   }
 }

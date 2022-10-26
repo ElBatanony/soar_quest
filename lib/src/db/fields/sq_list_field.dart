@@ -1,27 +1,47 @@
+import 'package:flutter/material.dart';
+
 import '../sq_doc.dart';
 
-class SQListField<T> extends SQDocField<List<T>> {
+List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
+
+class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
-    List<T> list = const [],
-    super.readOnly,
-  }) : super(value: list);
-
-  List<T> get list => value!;
-
-  List<T> copyList(List<T> list) => list.map((e) => e).toList();
+    super.value,
+    super.editable,
+  });
 
   @override
-  SQListField<T> copy() => SQListField<T>(name, list: copyList(list));
+  SQListField<T> copy() =>
+      SQListField<T>(name, value: copyList(value ?? []), editable: editable);
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
-    throw UnimplementedError();
+  formField({Function? onChanged, SQDoc? doc}) {
+    return _SQListFormField(this, onChanged: onChanged);
   }
 
   @override
   List<T>? parse(source) {
     if (source is! List) return null;
     return source.whereType<T>().toList();
+  }
+}
+
+class _SQListFormField<T> extends SQFormField<SQListField<T>> {
+  const _SQListFormField(super.field, {required super.onChanged});
+
+  @override
+  createState() => _SQListFormFieldState<T>();
+}
+
+class _SQListFormFieldState<T> extends SQFormFieldState<SQListField<T>> {
+  @override
+  Widget readOnlyBuilder(BuildContext context) {
+    return Text((field.value ?? []).toString());
+  }
+
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    throw UnimplementedError();
   }
 }

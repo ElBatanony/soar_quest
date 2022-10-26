@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:soar_quest/app.dart';
-import 'package:soar_quest/db.dart';
-import 'package:soar_quest/screens.dart';
+import 'package:soar_quest/soar_quest.dart';
 
 import 'firebase_options.dart';
 
 void main() async {
-  List<SQDocField> userDocFields = [
+  List<SQField<dynamic>> userDocFields = [
     SQStringField("Name"),
   ];
 
-  App testingApp = App("Testing App",
-      theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-      userDocFields: userDocFields);
-
-  await testingApp.init();
+  await SQApp.init(
+    "Testing App",
+    theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+    userDocFields: userDocFields,
+    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+  );
 
   SQCollection simpleCollection = FirestoreCollection(
     id: "Simple Collection",
@@ -26,52 +24,53 @@ void main() async {
     ],
   );
 
+  SQFileStorage firebaseFileStorage = FirebaseFileStorage();
+
   SQCollection testCollection = FirestoreCollection(
       id: "Test Collection",
       fields: [
         SQStringField("String"),
         SQBoolField("Bool"),
-        SQDocRefField("Doc Ref", collection: simpleCollection),
+        SQRefField("Doc Ref", collection: simpleCollection),
         SQDoubleField("Double"),
-        SQFileField("File"),
+        SQFileField("File", storage: firebaseFileStorage),
         SQIntField("Int"),
         SQTimeOfDayField("Time of Day"),
         SQTimestampField("Timestamp"),
         SQStringField("Readonly String",
-            value: "I am readonly", readOnly: true),
+            value: "I am readonly", editable: false),
+      ],
+      actions: [
+        GoScreenAction("Child Coll",
+            screen: (doc) => CollectionScreen(
+                collection: FirestoreCollection(
+                    id: "Child Collection",
+                    fields: [
+                      SQStringField("Name"),
+                      SQRefField("Parent Doc",
+                          collection: doc.collection,
+                          value: doc.ref,
+                          editable: false),
+                    ],
+                    parentDoc: doc)))
       ],
       singleDocName: "Test Doc");
 
   SQCollection testUserCollection = FirestoreCollection(
       id: "Test User Collection",
-      parentDoc: App.userDoc,
+      parentDoc: SQAuth.userDoc,
       fields: [
         SQStringField("Name"),
       ]);
 
-  testingApp.run(MainScreen([
-    CollectionScreen(
-      collection: testCollection,
-      canCreate: true,
-      docScreen: (doc) => DocScreen(
-        doc,
-        postbody: (context) => CollectionScreen(
-                canCreate: true,
-                collection: FirestoreCollection(
-                    id: "Child Collection",
-                    fields: [
-                      SQStringField("Name"),
-                      SQDocRefField("Parent Doc",
-                          collection: testCollection,
-                          value: doc.ref,
-                          readOnly: true),
-                    ],
-                    parentDoc: doc))
-            .button(context),
-      ),
-    ),
-    CollectionScreen(collection: simpleCollection, canCreate: true),
-    CollectionScreen(collection: testUserCollection, canCreate: true),
-    ProfileScreen(),
-  ]));
+  SQApp.run(
+    SQNavBar([
+      CollectionScreen(collection: testCollection),
+      CollectionScreen(collection: simpleCollection),
+    ]),
+    drawer: SQDrawer([
+      CollectionScreen(collection: testUserCollection),
+      ProfileScreen(),
+    ]),
+  );
 }

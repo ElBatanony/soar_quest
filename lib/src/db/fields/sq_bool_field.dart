@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../sq_doc.dart';
 
-class SQBoolField extends SQDocField<bool> {
-  SQBoolField(super.name, {super.value, super.readOnly});
+class SQBoolField extends SQField<bool> {
+  SQBoolField(super.name, {super.value, super.editable});
 
   @override
   bool? parse(source) {
@@ -12,37 +12,36 @@ class SQBoolField extends SQDocField<bool> {
   }
 
   @override
-  SQBoolField copy() => SQBoolField(name, value: value, readOnly: readOnly);
+  SQBoolField copy() => SQBoolField(name, value: value, editable: editable);
 
   @override
-  bool get value => super.value ?? false;
-
-  @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQBoolFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQBoolFormField extends DocFormField<SQBoolField> {
+class _SQBoolFormField extends SQFormField<SQBoolField> {
   const _SQBoolFormField(super.field, {super.onChanged});
 
   @override
   createState() => _SQBoolFormFieldState();
 }
 
-class _SQBoolFormFieldState extends DocFormFieldState<SQBoolField> {
+class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
   @override
   Widget fieldBuilder(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(field.name),
-        Switch(
-          value: field.value,
-          onChanged: (value) {
-            field.value = value;
+        ToggleButtons(
+          borderRadius: BorderRadius.circular(10),
+          constraints: BoxConstraints(minWidth: 100, minHeight: 40),
+          onPressed: (index) {
+            field.value = index == 1;
             onChanged();
           },
+          isSelected: [field.value == false, field.value == true],
+          children: [Text("No"), Text("Yes")],
         ),
       ],
     );

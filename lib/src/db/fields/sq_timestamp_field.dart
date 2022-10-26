@@ -6,9 +6,9 @@ import '../../ui/sq_button.dart';
 
 export 'types/sq_timestamp.dart';
 
-class SQTimestampField extends SQDocField<SQTimestamp> {
-  SQTimestampField(String name, {SQTimestamp? value, super.readOnly})
-      : super(name, value: value ?? SQTimestamp.fromDate(DateTime.now()));
+class SQTimestampField extends SQField<SQTimestamp> {
+  SQTimestampField(String name, {SQTimestamp? value, super.editable})
+      : super(name, value: value ?? SQTimestamp.now());
 
   @override
   SQTimestamp? parse(source) {
@@ -17,22 +17,22 @@ class SQTimestampField extends SQDocField<SQTimestamp> {
 
   @override
   SQTimestampField copy() =>
-      SQTimestampField(name, value: value, readOnly: readOnly);
+      SQTimestampField(name, value: value, editable: editable);
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQTimestampFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQTimestampFormField extends DocFormField<SQTimestampField> {
+class _SQTimestampFormField extends SQFormField<SQTimestampField> {
   const _SQTimestampFormField(super.field, {super.onChanged});
 
   @override
   createState() => _SQTimestampFormFieldState();
 }
 
-class _SQTimestampFormFieldState extends DocFormFieldState<SQTimestampField> {
+class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
   static Route<DateTime> _datePickerRoute(
     BuildContext context,
   ) {
@@ -57,11 +57,10 @@ class _SQTimestampFormFieldState extends DocFormFieldState<SQTimestampField> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(field.name),
         Text(field.value.toString()),
         SQButton(
           'Select Date',

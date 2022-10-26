@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../sq_doc.dart';
+import 'sq_text_field.dart';
 
-class SQStringField extends SQDocField<String> {
-  SQStringField(String name,
-      {String value = "", super.readOnly, super.required})
-      : super(name, value: value);
+class SQStringField extends SQField<String> {
+  SQStringField(super.name,
+      {super.value, super.editable, super.require, super.show});
 
   @override
   String? parse(source) {
@@ -15,50 +15,24 @@ class SQStringField extends SQDocField<String> {
 
   @override
   SQStringField copy() => SQStringField(name,
-      value: value, readOnly: readOnly, required: this.required);
+      value: value, editable: editable, require: require, show: show);
 
   @override
-  String get value => super.value ?? "";
-
-  @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  SQFormField formField({Function? onChanged, SQDoc? doc}) {
     return _SQStringFormField(this, onChanged: onChanged);
   }
-
-  @override
-  bool get isNull => value.isEmpty;
 }
 
-class _SQStringFormField extends DocFormField<SQStringField> {
+class _SQStringFormField extends SQFormField<SQStringField> {
   const _SQStringFormField(super.field, {required super.onChanged});
 
   @override
   createState() => _SQStringFormFieldState();
 }
 
-class _SQStringFormFieldState extends DocFormFieldState<SQStringField> {
-  final fieldTextController = TextEditingController();
-
+class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {
   @override
-  void initState() {
-    fieldTextController.text = field.value.toString();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: fieldTextController,
-      onChanged: (text) {
-        field.value = text;
-        onChanged();
-      },
-      onEditingComplete: onChanged,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: field.name,
-        labelText: field.name,
-      ),
-    );
+  Widget fieldBuilder(BuildContext context) {
+    return SQTextField(formField, textParse: (text) => text);
   }
 }

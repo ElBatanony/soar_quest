@@ -1,13 +1,38 @@
 import 'sq_doc.dart';
-import 'fields/sq_doc_ref_field.dart';
+import 'fields/sq_ref_field.dart';
 
 abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);
+
+  CollectionFilter inverse() => InverseFilter(this);
+}
+
+class InverseFilter extends CollectionFilter {
+  CollectionFilter originalFilter;
+
+  InverseFilter(this.originalFilter);
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    List<SQDoc> filtered = originalFilter.filter(docs);
+    return docs.where((doc) => filtered.contains(doc) == false).toList();
+  }
 }
 
 abstract class CollectionFieldFilter extends CollectionFilter {
-  SQDocField field;
+  SQField<dynamic> field;
   CollectionFieldFilter(this.field);
+}
+
+class FieldValueFilter<T> extends CollectionFieldFilter {
+  FieldValueFilter(SQField<T> field) : super(field);
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) {
+    return docs
+        .where((doc) => doc.value<T>(field.name) == field.value as T)
+        .toList();
+  }
 }
 
 class ValueFilter extends CollectionFilter {
@@ -17,7 +42,9 @@ class ValueFilter extends CollectionFilter {
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs.where((doc) => doc.value(fieldName) == fieldValue).toList();
+    return docs
+        .where((doc) => doc.value<dynamic>(fieldName) == fieldValue)
+        .toList();
   }
 }
 
@@ -27,9 +54,11 @@ class StringContainsFilter extends CollectionFieldFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs
-        .where((doc) => (doc.value(field.name) as String)
+        .where((doc) => doc
+            .value<dynamic>(field.name)
+            .toString()
             .toLowerCase()
-            .contains(field.value.toLowerCase()))
+            .contains(field.value.toString().toLowerCase()))
         .toList();
   }
 }
@@ -43,8 +72,9 @@ class DocRefFilter extends CollectionFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     return docs.where((doc) {
-      if (doc.value(fieldName) == null) return false;
-      SQDocRef docRef = doc.value(fieldName);
+      if (doc.value<SQRef>(fieldName) == null) return false;
+      SQRef? docRef = doc.value<SQRef>(fieldName);
+      if (docRef == null) throw "Filtering null docRef";
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
@@ -52,17 +82,19 @@ class DocRefFilter extends CollectionFilter {
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {
-  SQDocRefField docRefField;
+  DocRefFieldFilter({required SQRefField docRefField}) : super(docRefField);
 
-  DocRefFieldFilter({required this.docRefField}) : super(docRefField);
+  @override
+  SQRefField get field => super.field as SQRefField;
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs.where((doc) {
-      if (doc.value(field.name) == null) return false;
+    SQRef? fieldValue = field.value;
+    if (fieldValue == null) throw "Null field value ref in DocRefFieldFilter";
 
-      SQDocRef docRef = doc.value(field.name);
-      SQDocRef fieldValue = field.value;
+    return docs.where((doc) {
+      SQRef? docRef = doc.value<SQRef>(field.name);
+      if (docRef == null) return false;
       return docRef.docId == fieldValue.docId &&
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
@@ -76,12 +108,16 @@ class CompareFuncFilter extends CollectionFieldFilter {
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where(
-          (doc) => compareFunc(
-            doc.value(field.name).compareTo(field.value),
-          ),
-        )
-        .toList();
+    return docs.where(
+      (doc) {
+        Comparable<dynamic>? comparableValue =
+            doc.value<Comparable<dynamic>>(field.name);
+        if (comparableValue == null)
+          throw "Comparable value is null in CompareFuncFilter";
+        return compareFunc(
+          comparableValue.compareTo(field.value),
+        );
+      },
+    ).toList();
   }
 }

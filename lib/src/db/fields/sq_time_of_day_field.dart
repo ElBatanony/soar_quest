@@ -6,21 +6,22 @@ import '../../ui/sq_button.dart';
 
 export 'types/sq_time_of_day.dart';
 
-class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
-  SQTimeOfDayField(String name, {SQTimeOfDay? value, super.readOnly})
+class SQTimeOfDayField extends SQField<SQTimeOfDay> {
+  SQTimeOfDayField(String name, {SQTimeOfDay? value, super.editable})
       : super(name, value: value ?? SQTimeOfDay.fromTimeOfDay(TimeOfDay.now()));
 
   @override
-  SQTimeOfDay parse(source) {
+  SQTimeOfDay? parse(source) {
+    if (source is! Map<String, dynamic>) return null;
     return SQTimeOfDay.parse(source);
   }
 
   @override
   SQTimeOfDayField copy() =>
-      SQTimeOfDayField(name, value: value, readOnly: readOnly);
+      SQTimeOfDayField(name, value: value, editable: editable);
 
   @override
-  collectField() {
+  serialize() {
     if (value == null) return null;
     return {
       "hour": value?.hour,
@@ -29,25 +30,28 @@ class SQTimeOfDayField extends SQDocField<SQTimeOfDay> {
   }
 
   @override
-  DocFormField formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, SQDoc? doc}) {
     return _SQTimeOfDayFormField(this, onChanged: onChanged);
   }
 }
 
-class _SQTimeOfDayFormField extends DocFormField<SQTimeOfDayField> {
+class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
   const _SQTimeOfDayFormField(super.field, {required super.onChanged});
 
   @override
   createState() => _SQTimeOfDayFormFieldState();
 }
 
-class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
+class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
   void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
     if (newSelectedTimeOfDay != null) {
       field.value = SQTimeOfDay.fromTimeOfDay(newSelectedTimeOfDay);
       onChanged();
     }
   }
+
+  TimeOfDay toTimeOfDay(SQTimeOfDay sqTimeOfDay) =>
+      TimeOfDay(hour: sqTimeOfDay.hour, minute: sqTimeOfDay.minute);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +65,9 @@ class _SQTimeOfDayFormFieldState extends DocFormFieldState<SQTimeOfDayField> {
           onPressed: () async {
             TimeOfDay? newTimeOfDay = await showTimePicker(
               context: context,
-              initialTime: field.value?.toTimeOfDay() ?? TimeOfDay.now(),
+              initialTime: field.value != null
+                  ? toTimeOfDay(field.value!)
+                  : TimeOfDay.now(),
             );
             if (newTimeOfDay != null) {
               _selectTimeOfDay(newTimeOfDay);

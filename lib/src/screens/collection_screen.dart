@@ -1,32 +1,32 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:soar_quest/src/screens/form_screens/doc_create_screen.dart';
 
-import '../ui/sq_button.dart';
-
-import '../../db.dart';
+import '../db/conditions.dart';
+import '../db/sq_action.dart';
+import '../db/sq_collection.dart';
 import 'doc_screen.dart';
 import 'screen.dart';
 
 DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
 
 typedef DocScreenBuilder = DocScreen Function(SQDoc doc);
+typedef DocDisplayBuilder = Widget Function(SQDoc doc, CollectionScreenState s);
 
 class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder docScreen;
-  final bool canCreate;
-  final List<CollectionFilter> filters;
+  final DocDisplayBuilder? docDisplay;
+  final String? groupBy;
 
   CollectionScreen(
       {String? title,
       required this.collection,
       DocScreenBuilder? docScreen,
-      super.prebody,
-      super.postbody,
-      this.canCreate = false,
+      this.docDisplay,
       super.isInline,
       super.icon,
-      this.filters = const [],
+      this.groupBy,
+      super.show,
       super.key})
       : docScreen = docScreen ?? collection.docScreen,
         super(title ?? collection.id);
@@ -36,60 +36,91 @@ class CollectionScreen extends Screen {
 }
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
-  Future loadData() async {
-    await widget.collection.loadCollection();
-    refreshScreen();
-    return;
+  SQCollection get collection => widget.collection;
+  List<SQDoc> get docs => collection.docs;
+  late SQAction createNewDocAction;
+
+  @override
+  void refreshScreen() {
+    loadData();
+    super.refreshScreen();
+  }
+
+  Future<void> loadData() async {
+    await collection.loadCollection();
+    super.refreshScreen();
   }
 
   @override
   void initState() {
+    createNewDocAction = GoEditAction(
+        name: "Create Doc",
+        icon: Icons.add,
+        onExecute: (doc, context) async => refreshScreen(),
+        show: CollectionCond((collection) => collection.adds));
     loadData();
     super.initState();
   }
 
-  Future goToDocScreen(DocScreen docScreen) async {
-    await goToScreen(docScreen, context: context);
+  Future<void> goToDocScreen(Screen docScreen) async {
+    await docScreen.go(context);
     refreshScreen();
   }
 
-  DocScreen docScreen(SQDoc doc) => widget.docScreen(doc);
+  Screen docScreen(SQDoc doc) => widget.docScreen(doc);
 
-  Widget docDisplay(SQDoc doc) {
-    return SQButton(
-      doc.identifier,
-      onPressed: () => goToDocScreen(docScreen(doc)),
+  Widget docDisplay(SQDoc doc, BuildContext context) {
+    if (widget.docDisplay != null) return widget.docDisplay!(doc, this);
+    return ListTile(
+      title: Text(doc.label),
+      subtitle: doc.fields.length >= 2
+          ? Text((doc.fields[1].value ?? "").toString())
+          : null,
+      leading: doc.imageLabel != null
+          ? Image.network(doc.imageLabel!.value!, width: 70)
+          : null,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: collection.actions
+            .where((action) => action.show.check(doc, context))
+            .take(2)
+            .map((action) => action.button(doc, isIcon: true))
+            .toList(),
+      ),
+      onTap: () => goToDocScreen(docScreen(doc)),
     );
   }
 
-  List<Widget> docsDisplay(BuildContext context) {
-    return widget.collection
-        .filter(widget.filters)
-        .map((doc) => docDisplay(doc))
-        .toList();
+  Widget groupByDocs(List<SQDoc> docs, BuildContext context) {
+    Map<dynamic, List<SQDoc>> groups = groupBy<SQDoc, dynamic>(
+        docs, (doc) => doc.value<dynamic>(widget.groupBy!));
+
+    List<Widget> tiles = [];
+    for (final entry in groups.entries) {
+      tiles.add(ListTile(title: Text(entry.key.toString())));
+      tiles.addAll(entry.value.map((doc) => docDisplay(doc, context)));
+    }
+    return ListView(shrinkWrap: true, children: tiles);
+  }
+
+  Widget docsDisplay(List<SQDoc> docs, BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      children: docs.map((doc) => docDisplay(doc, context)).toList(),
+    );
+  }
+
+  @override
+  FloatingActionButton? floatingActionButton(BuildContext context) {
+    if (collection.adds)
+      return createNewDocAction.fab(collection.newDoc(), context);
+    return null;
   }
 
   @override
   Widget screenBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ...docsDisplay(context),
-            if (widget.collection.readOnly == false && widget.canCreate)
-              SQButton(
-                "Create ${widget.collection.singleDocName}",
-                onPressed: () async {
-                  await goToScreen(docCreateScreen(widget.collection),
-                      context: context);
-                  loadData();
-                },
-              ),
-          ],
-        ),
-      ),
-    );
+    if (docs.isEmpty) return Center(child: Text("This list is empty"));
+    if (widget.groupBy != null) return groupByDocs(docs, context);
+    return docsDisplay(docs, context);
   }
 }

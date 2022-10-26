@@ -1,79 +1,65 @@
-import 'fields/types/sq_doc_ref.dart';
-import 'sq_collection.dart';
+import 'package:collection/collection.dart';
 
-export 'sq_doc_field.dart';
+import 'fields/types/sq_ref.dart';
+import 'sq_collection.dart';
+import '../storage/sq_image_field.dart';
+
+export 'sq_field.dart';
 
 class SQDoc {
-  late List<SQDocField> fields;
+  late List<SQField<dynamic>> fields;
   String id;
   SQCollection collection;
-  bool initialized = false;
+  late String path;
 
-  static List<SQDocField> copyFields(List<SQDocField> fields) {
-    return fields.map((field) {
-      SQDocField fieldCopy = field.copy();
-      assert(field.runtimeType == fieldCopy.runtimeType,
-          "SQDocField not copied properly");
+  SQDoc(this.id, {required this.collection}) {
+    path = "${collection.path}/$id";
+
+    fields = collection.fields.map((field) {
+      SQField<dynamic> fieldCopy = field.copy();
+      assert(
+        field.runtimeType == fieldCopy.runtimeType &&
+            field.name == fieldCopy.name &&
+            field.editable == fieldCopy.editable &&
+            field.require == fieldCopy.require,
+        "Incorrect SQField copy operation ${field.runtimeType}",
+      );
       return fieldCopy;
     }).toList();
   }
 
-  SQDoc(this.id, {required this.collection}) {
-    fields = SQDoc.copyFields(collection.fields);
+  void parse(Map<String, dynamic> source) {
+    for (var field in fields) field.value = field.parse(source[field.name]);
   }
 
-  Future loadDoc({bool forceFetch = false}) async {
-    if (initialized && forceFetch == false) return;
-    await collection.loadDoc(this);
-  }
-
-  setData(Map<String, dynamic> dataToSet) {
-    for (var entry in dataToSet.entries) {
-      var key = entry.key;
-      var value = entry.value;
-
-      if (fields.any((field) => field.name == key) == false) continue;
-
-      SQDocField field = fields.firstWhere((field) => field.name == key);
-
-      field.value = field.parse(value);
-    }
-    initialized = true;
-  }
-
-  Future saveDoc() {
-    return collection.saveDoc(this);
-  }
-
-  Map<String, dynamic> collectFields() {
+  Map<String, dynamic> serialize() {
     Map<String, dynamic> ret = {};
     for (var field in fields) {
-      ret[field.name] = field.collectField();
+      ret[field.name] = field.serialize();
     }
     return ret;
   }
 
-  SQDocField? getField(String fieldName) {
-    return fields.singleWhere((field) => field.name == fieldName);
+  F? getField<F extends SQField<dynamic>>(String fieldName) {
+    return fields.singleWhereOrNull(
+        (field) => field.name == fieldName && field is F) as F?;
   }
 
-  dynamic value(String fieldName) {
-    return getField(fieldName)?.value;
+  T? value<T>(String fieldName) {
+    return getField<SQField<T>>(fieldName)?.value;
   }
 
-  void setDocFieldByName(String fieldName, dynamic value) {
-    SQDocField? field = getField(fieldName);
-    field?.value = value;
-  }
+  String get label => fields.first.value.toString();
 
-  String getPath() {
-    return "${collection.getPath()}/$id";
-  }
-
-  String get identifier => fields.first.value.toString();
-
-  SQDocRef get ref => SQDocRef.fromDoc(this);
+  SQRef get ref => SQRef.fromDoc(this);
 
   @override
-  String toString() => identifier;
+  String toString() => label;
+
+  SQImageField? get imageLabel => fields
+      .whereType<SQImageField>()
+      .firstWhereOrNull((field) => field.value != null);
+
+  List<SQField<dynamic>> copyFields() =>
+      fields.map((field) => field.copy()).toList();
 }

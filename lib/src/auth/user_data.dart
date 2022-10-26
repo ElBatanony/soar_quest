@@ -1,26 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-import '../app/app.dart';
+import 'sq_auth.dart';
 import '../db/sq_doc.dart';
 
 abstract class UserData {
   String userId;
   bool isAnonymous;
 
-  late SQDoc userDoc;
+  SQDoc get userDoc =>
+      SQAuth.usersCollection.getDoc(userId) ??
+      SQAuth.usersCollection.newDoc(id: userId);
 
-  List<SQDocField> docFields;
-  List<SQDocField> publicFields;
+  List<SQField<dynamic>> docFields;
 
-  UserData(
-      {required this.userId,
-      required this.isAnonymous,
-      required this.docFields,
-      this.publicFields = const []});
-
-  userDataPath() {
-    return "${App.instance.getAppPath()}users/$userId/data/";
-  }
+  UserData({
+    required this.userId,
+    required this.isAnonymous,
+    required this.docFields,
+  });
 }
 
 abstract class SignedInUser extends UserData {
@@ -30,11 +27,11 @@ abstract class SignedInUser extends UserData {
       required super.docFields});
 
   String? get email;
-  String? get displayName;
+  String? get username;
 
-  Future updateEmail(String newEmail);
+  Future<void> updateEmail(String newEmail);
 
-  Future updatePassword(String newPassword);
+  Future<void> updatePassword(String newPassword);
 
   Future<void> updateDisplayName(String displayName);
 }
@@ -46,13 +43,10 @@ class FirebaseSignedInUser extends SignedInUser {
       : super(
           userId: firebaseUser.uid,
           isAnonymous: firebaseUser.isAnonymous,
-          docFields: App.instance.userDocFields,
-        ) {
-    userDoc = SQDoc(userId, collection: App.usersCollection);
-    userDoc.loadDoc();
-  }
+          docFields: SQAuth.userDocFields,
+        );
 
-  refreshUser() {
+  void refreshUser() {
     firebaseUser = firebase_auth.FirebaseAuth.instance.currentUser!;
   }
 
@@ -60,16 +54,16 @@ class FirebaseSignedInUser extends SignedInUser {
   String? get email => firebaseUser.email;
 
   @override
-  String? get displayName => firebaseUser.displayName;
+  String? get username => firebaseUser.displayName;
 
   @override
-  Future updateEmail(String newEmail) async {
+  Future<void> updateEmail(String newEmail) async {
     await firebaseUser.updateEmail(newEmail);
     refreshUser();
   }
 
   @override
-  Future updatePassword(String newPassword) async {
+  Future<void> updatePassword(String newPassword) async {
     await firebaseUser.updatePassword(newPassword);
     refreshUser();
   }

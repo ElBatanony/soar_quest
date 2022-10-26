@@ -9,17 +9,20 @@ class UpvotesFeature {
     return _UpvoteButton(doc: doc);
   }
 
-  static addUpvote(SQCollection upvotesCollection, String upvoteId) {
+  static Future<void> addUpvote(
+      SQCollection upvotesCollection, String upvoteId) {
     return upvotesCollection
-        .createDoc(SQDoc(upvoteId, collection: upvotesCollection));
+        .saveDoc(SQDoc(upvoteId, collection: upvotesCollection));
   }
 
-  static removeUpvote(SQCollection upvotesCollection, String upvoteId) {
-    return upvotesCollection.deleteDoc(upvoteId);
+  static Future<void> removeUpvote(
+      SQCollection upvotesCollection, String upvoteId) {
+    return upvotesCollection.deleteDoc(
+        upvotesCollection.docs.firstWhere((doc) => doc.id == upvoteId));
   }
 
-  static canUpvote(SQCollection upvotesCollection, String upvoteId) {
-    return upvotesCollection.doesDocExist(upvoteId) == false;
+  static bool canUpvote(SQCollection upvotesCollection, String upvoteId) {
+    return upvotesCollection.docs.any((doc) => doc.id == upvoteId);
   }
 }
 
