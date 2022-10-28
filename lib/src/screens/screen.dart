@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
+import 'sq_navbar.dart';
 
 export 'sq_navbar.dart';
 export 'sq_drawer.dart';
@@ -69,7 +70,10 @@ class ScreenState<T extends Screen> extends State<T> {
 
   FloatingActionButton? floatingActionButton(BuildContext context) => null;
 
-  Widget? bottomNavBar(BuildContext context) => SQApp.navbar;
+  Widget? bottomNavBar(BuildContext context) {
+    if (SQApp.navbarScreens.length > 1) return SQNavBar(SQApp.navbarScreens);
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
