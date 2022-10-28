@@ -8,7 +8,7 @@ import '../collection_screen.dart';
 import '../doc_screen.dart';
 
 class VideoCollectionScreen extends CollectionScreen {
-  final VideoLinkField videoField;
+  final SQVideoLinkField videoField;
 
   VideoCollectionScreen({
     super.title,
@@ -33,7 +33,7 @@ class _VideoCollectionScreenState
 }
 
 class VideoDocDisplay extends DocScreen {
-  final VideoLinkField videoField;
+  final SQVideoLinkField videoField;
 
   VideoDocDisplay(super.doc,
       {required this.videoField, super.isInline, super.key});

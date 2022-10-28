@@ -51,7 +51,7 @@ void main() async {
       SQStringField("Lesson Name"),
       SQStringField("Lesson Description"),
       SQRefField("Course", collection: courses),
-      VideoLinkField("Video Link"),
+      SQVideoLinkField("Video Link"),
     ],
     readOnly: !isAdmin,
   );
