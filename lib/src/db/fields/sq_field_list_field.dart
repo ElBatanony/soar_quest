@@ -101,8 +101,24 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: separate SQFieldListFormField into readonly
+  Widget readOnlyBuilder(BuildContext context) {
+    var listItems = listField.fields;
+    var listItemsWidgets = <Widget>[];
+
+    for (int i = 0; i < listItems.length; i++) {
+      listItemsWidgets.add(listItems[i].formField(doc));
+    }
+
+    return Column(
+      children: [
+        Text("${listField.name} (List of ${listItems.length})"),
+        ...listItemsWidgets,
+      ],
+    );
+  }
+
+  @override
+  Widget fieldBuilder(BuildContext context) {
     var listItems = listField.fields;
     var listItemsWidgets = <Widget>[];
 
