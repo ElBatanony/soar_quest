@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../ui/sq_button.dart';
 import '../screens/screen.dart';
@@ -133,6 +134,7 @@ class GoEditAction extends GoScreenAction {
 class GoDerivedDocAction extends GoScreenAction {
   SQCollection Function() getCollection;
   List<SQField<dynamic>> Function(SQDoc) initialFields;
+  bool form;
 
   GoDerivedDocAction(
     super.name, {
@@ -141,11 +143,12 @@ class GoDerivedDocAction extends GoScreenAction {
     super.onExecute,
     required this.getCollection,
     required this.initialFields,
-  }) : super(
-          screen: (doc) => FormScreen(
-            getCollection().newDoc(initialFields: initialFields(doc)),
-          ),
-        );
+    this.form = true,
+  }) : super(screen: (doc) {
+          final newDoc =
+              getCollection().newDoc(initialFields: initialFields(doc));
+          return form ? FormScreen(newDoc) : DocScreen(newDoc);
+        });
 }
 
 class DeleteDocAction extends SQAction {
