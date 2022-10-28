@@ -19,13 +19,12 @@ class SQStringField extends SQField<String> {
 
   @override
   SQFormField formField(SQDoc doc, {Function? onChanged}) {
-    return _SQStringFormField(this, onChanged: onChanged, doc: doc);
+    return _SQStringFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQStringFormField extends SQFormField<SQStringField> {
-  const _SQStringFormField(super.field,
-      {required super.onChanged, required super.doc});
+  const _SQStringFormField(super.field, super.doc, {required super.onChanged});
 
   @override
   createState() => _SQStringFormFieldState();

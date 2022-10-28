@@ -19,15 +19,14 @@ class SQEnumField<T> extends SQField<T> {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) =>
-      _SQEnumFormField(this, onChanged: onChanged, doc: doc);
+      _SQEnumFormField(this, doc, onChanged: onChanged);
 
   @override
   T? parse(source) => subfield.parse(source);
 }
 
 class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
-  const _SQEnumFormField(super.field,
-      {required super.onChanged, required super.doc});
+  const _SQEnumFormField(super.field, super.doc, {required super.onChanged});
 
   @override
   createState() => _SQEnumFormFieldState<T>();

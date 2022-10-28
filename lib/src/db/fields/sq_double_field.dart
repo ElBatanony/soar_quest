@@ -18,12 +18,12 @@ class SQDoubleField extends SQField<double> {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQDoubleFormField(this, onChanged: onChanged, doc: doc);
+    return _SQDoubleFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQDoubleFormField extends SQFormField<SQDoubleField> {
-  const _SQDoubleFormField(super.field, {super.onChanged, required super.doc});
+  const _SQDoubleFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQDoubleFormFieldState();

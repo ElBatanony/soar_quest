@@ -40,12 +40,12 @@ class SQRefField extends SQField<SQRef> {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQRefFormField(this, onChanged: onChanged, doc: doc);
+    return _SQRefFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQRefFormField extends SQFormField<SQRefField> {
-  const _SQRefFormField(super.field, {super.onChanged, required super.doc});
+  const _SQRefFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQRefFormFieldState();

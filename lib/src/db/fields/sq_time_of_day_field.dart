@@ -31,13 +31,13 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQTimeOfDayFormField(this, onChanged: onChanged, doc: doc);
+    return _SQTimeOfDayFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
-  const _SQTimeOfDayFormField(super.field,
-      {required super.onChanged, required super.doc});
+  const _SQTimeOfDayFormField(super.field, super.doc,
+      {required super.onChanged});
 
   @override
   createState() => _SQTimeOfDayFormFieldState();

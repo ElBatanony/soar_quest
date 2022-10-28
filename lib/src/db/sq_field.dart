@@ -38,10 +38,10 @@ abstract class SQField<T> {
 abstract class SQFormField<Field extends SQField<dynamic>>
     extends FormField<SQFormField<Field>> {
   final Field field;
-  final Function? onChanged;
   final SQDoc doc;
+  final Function? onChanged;
 
-  const SQFormField(this.field, {this.onChanged, required this.doc, super.key})
+  const SQFormField(this.field, this.doc, {this.onChanged, super.key})
       : super(builder: emptyBuilder);
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();

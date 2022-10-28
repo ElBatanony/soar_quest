@@ -42,7 +42,7 @@ class SQFieldListField extends SQListField<SQField<dynamic>> {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQFieldListFormField(this, onChanged: onChanged, doc: doc);
+    return _SQFieldListFormField(this, doc, onChanged: onChanged);
   }
 }
 
@@ -73,9 +73,9 @@ Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
 class _SQFieldListFormField extends SQFormField<SQFieldListField> {
   final SQFieldListField listField;
 
-  const _SQFieldListFormField(this.listField,
-      {required super.onChanged, required super.doc})
-      : super(listField);
+  const _SQFieldListFormField(this.listField, SQDoc doc,
+      {required super.onChanged})
+      : super(listField, doc);
 
   @override
   createState() => _SQFieldListFormFieldState();

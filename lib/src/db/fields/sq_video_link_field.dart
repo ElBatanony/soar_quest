@@ -21,13 +21,13 @@ class SQVideoLinkField extends SQStringField {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQVideoLinkFormField(this, onChanged: onChanged, doc: doc);
+    return _SQVideoLinkFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQVideoLinkFormField extends SQFormField<SQVideoLinkField> {
-  const _SQVideoLinkFormField(super.field,
-      {required super.onChanged, required super.doc});
+  const _SQVideoLinkFormField(super.field, super.doc,
+      {required super.onChanged});
 
   @override
   createState() => _SQVideoLinkFormFieldState();

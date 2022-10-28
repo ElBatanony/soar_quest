@@ -14,13 +14,12 @@ class SQLinkField extends SQStringField {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQLinkFormField(this, onChanged: onChanged, doc: doc);
+    return _SQLinkFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQLinkFormField extends SQFormField<SQLinkField> {
-  const _SQLinkFormField(super.field,
-      {required super.onChanged, required super.doc});
+  const _SQLinkFormField(super.field, super.doc, {required super.onChanged});
 
   @override
   createState() => _SQLinkFormFieldState();
