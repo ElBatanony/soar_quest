@@ -92,10 +92,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     );
   }
 
-  Widget fieldBuilder(BuildContext context) {
-    // TODO: make unimplemented
-    return field.formField(doc, onChanged: onChanged);
-  }
+  Widget fieldBuilder(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
