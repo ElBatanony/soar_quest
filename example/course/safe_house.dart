@@ -59,10 +59,10 @@ void main() async {
       filter: DocRefFilter("Tenant", SQUserRefField.currentUserRef));
 
   SQApp.run(
-    SQNavBar([
+    [
       CollectionScreen(collection: places),
       CollectionScreen(collection: myBookings),
-    ]),
+    ],
     drawer: SQDrawer([CollectionScreen(collection: bookings)]),
   );
 }

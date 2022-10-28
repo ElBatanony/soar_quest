@@ -28,7 +28,7 @@ void main() async {
     SQIntField("Amount", require: true),
   ]);
 
-  SQApp.run(SQNavBar([
+  SQApp.run([
     CollectionScreen(
       collection: items,
       icon: Icons.factory,
@@ -42,5 +42,5 @@ void main() async {
         trailing: Text(doc.value<int>("Amount").toString()),
       ),
     ),
-  ]));
+  ]);
 }

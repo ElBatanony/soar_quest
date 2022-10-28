@@ -63,10 +63,10 @@ void main() async {
     SQUserRefField("Owner"),
   ]);
 
-  SQApp.run(SQNavBar([
+  SQApp.run([
     CollectionScreen(collection: workstreams),
     CollectionScreen(collection: projects),
     CollectionScreen(collection: tasks),
     ProfileScreen(),
-  ]));
+  ]);
 }

@@ -45,32 +45,28 @@ void main() async {
   doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
   pendingTasks = CollectionSlice(tasks, filter: doneFilter.inverse());
 
-  SQApp.run(
-      SQNavBar([
-        FormScreen(
-          tasks.newDoc(),
-          title: "New Task",
-          icon: Icons.add,
-        ),
-        CardsScreen(collection: tasks),
-        CollectionScreen(
-          show: (context) => true,
-          title: "Tasks 2",
-          collection: tasks,
-          groupBy: "Status",
-        ),
-        // CollectionFilterScreen(collection: tasks, filters: [
-        //   StringContainsFilter(SQStringField("Task")),
-        //   FieldValueFilter(SQBoolField("Repeat"))
-        // ]),
-        // TableScreen(title: "Table", collection: tasks),
-        TabsScreen("Tasks", [
-          CollectionScreen(
-              title: "Pending Tasks", collection: pendingTasks, isInline: true),
-          CollectionScreen(
-              title: "Done", collection: doneTasks, isInline: true),
-        ]),
-      ]),
-      drawer: SQDrawer([ProfileScreen()]),
-      startingScreen: 1);
+  SQApp.run([
+    FormScreen(
+      tasks.newDoc(),
+      title: "New Task",
+      icon: Icons.add,
+    ),
+    CardsScreen(collection: tasks),
+    CollectionScreen(
+      show: (context) => true,
+      title: "Tasks 2",
+      collection: tasks,
+      groupBy: "Status",
+    ),
+    // CollectionFilterScreen(collection: tasks, filters: [
+    //   StringContainsFilter(SQStringField("Task")),
+    //   FieldValueFilter(SQBoolField("Repeat"))
+    // ]),
+    // TableScreen(title: "Table", collection: tasks),
+    TabsScreen("Tasks", [
+      CollectionScreen(
+          title: "Pending Tasks", collection: pendingTasks, isInline: true),
+      CollectionScreen(title: "Done", collection: doneTasks, isInline: true),
+    ]),
+  ], drawer: SQDrawer([ProfileScreen()]), startingScreen: 1);
 }

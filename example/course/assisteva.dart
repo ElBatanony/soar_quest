@@ -57,7 +57,7 @@ void main() async {
   );
 
   SQApp.run(
-    SQNavBar([
+    [
       CategorySelectScreen(
         title: "Categories",
         collection: courses,
@@ -73,7 +73,7 @@ void main() async {
       ),
       CollectionScreen(collection: lessons, show: (context) => isAdmin),
       if (!isAdmin) UserSettings.settingsScreen()
-    ]),
+    ],
     drawer: SQDrawer([ProfileScreen()]),
   );
 }

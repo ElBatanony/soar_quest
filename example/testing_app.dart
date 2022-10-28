@@ -64,10 +64,10 @@ void main() async {
       ]);
 
   SQApp.run(
-    SQNavBar([
+    [
       CollectionScreen(collection: testCollection),
       CollectionScreen(collection: simpleCollection),
-    ]),
+    ],
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
       ProfileScreen(),

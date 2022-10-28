@@ -83,10 +83,10 @@ void main() async {
   await events.loadCollection();
 
   SQApp.run(
-    SQNavBar([
+    [
       CollectionScreen(collection: feedPosts),
       CollectionScreen(collection: events),
-    ]),
+    ],
     drawer: SQDrawer([
       CollectionScreen(collection: bookings),
       CollectionScreen(collection: teams),
