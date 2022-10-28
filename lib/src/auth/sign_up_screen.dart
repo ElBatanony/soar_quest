@@ -50,6 +50,9 @@ class _SQSignUpScreenState extends FormScreenState<SQSignUpScreen> {
   }
 
   @override
+  Widget? bottomNavBar(BuildContext context) => null;
+
+  @override
   Widget screenBody(BuildContext context) {
     return Column(
       children: [

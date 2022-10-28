@@ -40,7 +40,8 @@ class _SignInScreenState extends FormScreenState<SignInScreen> {
     }
   }
 
-  // TODO: hide bottomNavBar in sign in screen
+  @override
+  Widget? bottomNavBar(BuildContext context) => null;
 
   @override
   Widget screenBody(BuildContext context) {
@@ -48,6 +49,7 @@ class _SignInScreenState extends FormScreenState<SignInScreen> {
       children: [
         super.screenBody(context),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SQButton("Sign In", onPressed: signIn),
             SQButton(
