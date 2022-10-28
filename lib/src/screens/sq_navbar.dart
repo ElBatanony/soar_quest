@@ -26,22 +26,20 @@ class _SQNavBarState extends State<SQNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return screens.length > 1
-        ? NavigationBar(
-            onDestinationSelected: (int index) {
-              SQApp.selectedNavScreen = index;
-              screens[SQApp.selectedNavScreen].go(context, replace: true);
-              // ScreenState.of(context).refreshScreen();
-            },
-            selectedIndex: initialIndex,
-            surfaceTintColor: Colors.white,
-            destinations: screens
-                .map((screen) => NavigationDestination(
-                      icon: Icon(screen.icon ?? Icons.explore),
-                      label: screen.title,
-                    ))
-                .toList(),
-          )
-        : Container();
+    if (SQApp.navbarScreens.length < 2) throw "Too few screens for SQNavBar";
+    return NavigationBar(
+      onDestinationSelected: (int index) {
+        SQApp.selectedNavScreen = index;
+        screens[SQApp.selectedNavScreen].go(context, replace: true);
+      },
+      selectedIndex: initialIndex,
+      surfaceTintColor: Colors.white,
+      destinations: screens
+          .map((screen) => NavigationDestination(
+                icon: Icon(screen.icon ?? Icons.explore),
+                label: screen.title,
+              ))
+          .toList(),
+    );
   }
 }
