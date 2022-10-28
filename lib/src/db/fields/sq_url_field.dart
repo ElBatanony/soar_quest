@@ -13,7 +13,7 @@ class SQLinkField extends SQStringField {
   SQLinkField copy() => SQLinkField(name, value: value, editable: editable);
 
   @override
-  formField({Function? onChanged, required SQDoc doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     return _SQLinkFormField(this, onChanged: onChanged, doc: doc);
   }
 }

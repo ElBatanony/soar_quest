@@ -18,7 +18,7 @@ class SQStringField extends SQField<String> {
       value: value, editable: editable, require: require, show: show);
 
   @override
-  SQFormField formField({Function? onChanged, required SQDoc doc}) {
+  SQFormField formField(SQDoc doc, {Function? onChanged}) {
     return _SQStringFormField(this, onChanged: onChanged, doc: doc);
   }
 }

@@ -12,7 +12,7 @@ class SQImageField extends SQFileField {
   }
 
   @override
-  formField({Function? onChanged, required SQDoc doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     return _SQImageFormField(this, onChanged: onChanged, doc: doc);
   }
 }

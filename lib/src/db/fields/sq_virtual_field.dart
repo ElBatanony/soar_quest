@@ -23,11 +23,11 @@ class SQVirtualField<T> extends SQField<T> {
       SQVirtualField<T>(field: field, valueBuilder: valueBuilder, show: show);
 
   @override
-  formField({Function? onChanged, required SQDoc doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     value = valueBuilder(doc);
     SQField<T> fieldCopy = field.copy();
     fieldCopy.value = value;
     fieldCopy.editable = false;
-    return fieldCopy.formField(doc: doc);
+    return fieldCopy.formField(doc);
   }
 }

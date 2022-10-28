@@ -27,7 +27,7 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  SQFormField formField({Function? onChanged, required SQDoc doc});
+  SQFormField formField(SQDoc doc, {Function? onChanged});
 
   @override
   String toString() {
@@ -93,7 +93,8 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   }
 
   Widget fieldBuilder(BuildContext context) {
-    return field.formField(onChanged: onChanged, doc: doc);
+    // TODO: make unimplemented
+    return field.formField(doc, onChanged: onChanged);
   }
 
   @override

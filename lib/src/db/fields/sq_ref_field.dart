@@ -39,7 +39,7 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  formField({Function? onChanged, required SQDoc doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     return _SQRefFormField(this, onChanged: onChanged, doc: doc);
   }
 }

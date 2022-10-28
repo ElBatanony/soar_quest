@@ -24,10 +24,10 @@ class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
       refCollection: refCollection, refFieldName: refFieldName);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     return _SQRefDocsFormField(
       this,
-      refDocs: valueBuilder(doc!),
+      refDocs: valueBuilder(doc),
       onChanged: onChanged,
       doc: doc,
     );

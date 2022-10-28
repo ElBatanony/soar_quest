@@ -26,7 +26,7 @@ class SQFileField extends SQStringField {
   }
 
   @override
-  formField({Function? onChanged, required SQDoc doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     return SQFileFormField(this, onChanged: onChanged, doc: doc);
   }
 }
