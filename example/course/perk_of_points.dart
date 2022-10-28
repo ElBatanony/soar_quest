@@ -6,7 +6,7 @@ late SQCollection games, gameInstances, players, rounds;
 
 void main() async {
   await SQApp.init("Perk of Points",
-      theme: ThemeData(primaryColor: Colors.yellow, useMaterial3: true));
+      theme: ThemeData(primarySwatch: Colors.yellow, useMaterial3: true));
 
   games = LocalCollection(id: "Games", fields: [
     SQStringField("Name"),
@@ -15,49 +15,25 @@ void main() async {
     GoDerivedDocAction("Start Game",
         getCollection: () => gameInstances,
         form: false,
+        goBack: false,
         initialFields: (gameDoc) => [
               SQRefField("Game",
                   collection: games, value: gameDoc.ref, editable: false)
             ])
   ]);
 
-  gameInstances = LocalCollection(
-    id: "Game Instances",
-    fields: [
-      SQRefField("Game", collection: games),
-      SQRefDocsField("Players",
-          refCollection: () => players, refFieldName: "Game"),
-      SQRefDocsField("Rounds",
-          refCollection: () => rounds, refFieldName: "Game"),
-    ],
-    updates: false,
-    actions: [
-      GoDerivedDocAction("Add Player",
-          getCollection: () => players,
-          initialFields: (gameInstanceDoc) => [
-                SQRefField("Game",
-                    collection: gameInstances,
-                    value: gameInstanceDoc.ref,
-                    editable: false),
-              ]),
-      GoDerivedDocAction("Start Round",
-          getCollection: () => rounds,
-          initialFields: (gameInstanceDoc) => [
-                SQRefField("Game",
-                    collection: gameInstances,
-                    value: gameInstanceDoc.ref,
-                    editable: false),
-                SQRefField(
-                  "Player",
-                  collection: CollectionSlice(players,
-                      filter: DocRefFilter("Game", gameInstanceDoc.ref)),
-                ),
-                SQIntField("Points", editable: false, value: 0),
-              ]),
-    ],
-  );
+  gameInstances = InMemoryCollection(
+      id: "Game Instances",
+      fields: [
+        SQRefField("Game", collection: games),
+        SQRefDocsField("Players",
+            refCollection: () => players, refFieldName: "Game"),
+        SQRefDocsField("Rounds",
+            refCollection: () => rounds, refFieldName: "Game"),
+      ],
+      updates: false);
 
-  players = LocalCollection(
+  players = InMemoryCollection(
     id: "Players",
     fields: [
       SQStringField("Player Name"),
@@ -67,7 +43,10 @@ void main() async {
           valueBuilder: (playerDoc) {
             int points = 0;
             List<SQDoc> playerRounds = rounds.docs
-                .where((round) => round.value<SQRef>("Player") == playerDoc.ref)
+                .where((round) =>
+                    round.value<SQRef>("Player") == playerDoc.ref &&
+                    round.value<SQRef>("Game") ==
+                        playerDoc.value<SQRef>("Game"))
                 .toList();
             for (final playerRound in playerRounds) {
               points += playerRound.value<int>("Points") ?? 0;
@@ -75,36 +54,26 @@ void main() async {
             return points;
           })
     ],
-    actions: [
-      // GoDerivedDocAction("Start Round",
-      //     getCollection: () => rounds,
-      //     form: false,
-      //     initialFields: (playerDoc) => [
-      //           SQRefField("Game",
-      //               collection: gameInstances,
-      //               value: playerDoc.value<SQRef>("Game")),
-      //           SQRefField("Player", collection: players, value: playerDoc.ref),
-      //         ])
-    ],
   );
 
-  rounds = LocalCollection(id: "Rounds", fields: [
+  final unoPoints = {'1': 1, '2': 2, '3': 3, 'Super': 10, 'Duper': 20};
+
+  rounds = InMemoryCollection(id: "Rounds", fields: [
     SQRefField("Game", collection: gameInstances),
     SQRefField("Player", collection: players),
-    SQIntField("Points", value: 0),
+    SQIntField("Points", value: 0, editable: false),
   ], actions: [
-    SetFieldsAction("1",
-        getFields: (roundDoc) =>
-            {"Points": (roundDoc.value<int>("Points") ?? 0) + 1}),
+    ...unoPoints.entries
+        .map((pointEntry) => SetFieldsAction(pointEntry.key,
+            getFields: (roundDoc) => {
+                  "Points":
+                      (roundDoc.value<int>("Points") ?? 0) + pointEntry.value
+                }))
+        .toList(),
     CustomAction("Finish Round",
         customExecute: (doc, context) async =>
             ScreenState.of(context).exitScreen()),
   ]);
 
-  SQApp.run(
-    SQNavBar([
-      CollectionScreen(collection: games),
-      CollectionScreen(collection: gameInstances),
-    ]),
-  );
+  SQApp.run([CollectionScreen(collection: games)]);
 }
