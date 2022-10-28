@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../screens.dart';
+import '../../ui/sq_button.dart';
 import '../collection_slice.dart';
 import '../sq_collection.dart';
 import 'sq_list_field.dart';
+import 'sq_ref_field.dart';
 import 'sq_virtual_field.dart';
 
 class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
@@ -52,30 +54,29 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
   }
 
   @override
+  Widget fieldLabel(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        super.fieldLabel(context),
+        if (field.collection.adds)
+          SQButton("Add", onPressed: () async {
+            SQDoc newDoc = field.collection.newDoc(initialFields: [
+              SQRefField(field.refFieldName,
+                  collection: doc.collection, value: doc.ref, editable: false)
+            ]);
+            await FormScreen(newDoc).go(context);
+            setState(() {});
+          })
+      ],
+    );
+  }
+
+  @override
   Widget readOnlyBuilder(BuildContext context) {
     CollectionSlice slice = CollectionSlice(field.collection,
         filter: DocRefFilter(field.refFieldName, doc.ref));
     return TableScreen(collection: slice, isInline: true);
-    // TODO: add button to add new items
-    // List<SQDoc> refDocs = (formField as _SQRefDocsFormField).refDocs;
-    // return Column(
-    //   children: [
-    //     Table(border: TableBorder.all(), children: [
-    //       TableRow(children: [Text(field.collection.fields[0].name)]),
-    //       ...refDocs
-    //           .map((refDoc) => TableRow(children: [Text(refDoc.toString())]))
-    //           .toList(),
-    //     ]),
-    //     SQButton("Add", onPressed: () async {
-    //       SQDoc newDoc = field.collection.newDoc(initialFields: [
-    //         SQRefField(field.refFieldName,
-    //             collection: doc!.collection, value: doc!.ref, editable: false)
-    //       ]);
-    //       await FormScreen(newDoc).go(context);
-    //       setState(() {});
-    //     })
-    //   ],
-    // );
   }
 
   @override
