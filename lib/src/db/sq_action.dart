@@ -131,10 +131,11 @@ class GoEditAction extends GoScreenAction {
         );
 }
 
-class GoDerivedDocAction extends GoScreenAction {
+class GoDerivedDocAction extends SQAction {
   SQCollection Function() getCollection;
   List<SQField<dynamic>> Function(SQDoc) initialFields;
   bool form;
+  bool goBack;
 
   GoDerivedDocAction(
     super.name, {
@@ -144,11 +145,25 @@ class GoDerivedDocAction extends GoScreenAction {
     required this.getCollection,
     required this.initialFields,
     this.form = true,
-  }) : super(screen: (doc) {
-          final newDoc =
-              getCollection().newDoc(initialFields: initialFields(doc));
-          return form ? FormScreen(newDoc) : DocScreen(newDoc);
-        });
+    this.goBack = true,
+  });
+
+  @override
+  Future<void> execute(SQDoc doc, BuildContext context) async {
+    final newDoc = getCollection().newDoc(initialFields: initialFields(doc));
+
+    if (form) {
+      bool created = await FormScreen(newDoc).go<bool>(context) ?? false;
+      if (created && !goBack) await DocScreen(newDoc).go(context);
+    } else {
+      getCollection().saveDoc(newDoc);
+      if (!goBack) DocScreen(newDoc).go(context);
+    }
+
+    ScreenState.of(context).refreshScreen();
+
+    return super.execute(doc, context);
+  }
 }
 
 class DeleteDocAction extends SQAction {
