@@ -11,6 +11,8 @@ import 'sign_up_screen.dart';
 class FirebaseAuthManager extends SQAuthManager {
   static late final FirebaseAuth _auth;
 
+  late InMemoryCollection fakeSignInCollection;
+
   @override
   Future<void> updateUserData() async {
     final firebaseUser = _auth.currentUser!;
@@ -20,6 +22,12 @@ class FirebaseAuthManager extends SQAuthManager {
   @override
   init() async {
     _auth = FirebaseAuth.instance;
+
+    fakeSignInCollection = InMemoryCollection(id: "Sign In", fields: [
+      SQStringField("Email", value: "test@email.com"),
+      SQStringField("Password", value: "testtest")
+    ]);
+
     if (_auth.currentUser == null) await _auth.signInAnonymously();
     updateUserData();
 
@@ -40,19 +48,13 @@ class FirebaseAuthManager extends SQAuthManager {
 
   @override
   Screen signInScreen({bool forceSignIn = false}) {
-    InMemoryCollection fakeSignInCollection =
-        InMemoryCollection(id: "Sign In", fields: [
-      SQStringField("Email", value: "test@email.com"),
-      SQStringField("Password", value: "testtest")
-    ]);
-
     return SignInScreen(fakeSignInCollection.newDoc(),
         forceSignIn: forceSignIn);
   }
 
   @override
   Screen signUpScreen() {
-    return SQSignUpScreen();
+    return SQSignUpScreen(fakeSignInCollection.newDoc());
   }
 
   @override
