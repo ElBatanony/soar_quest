@@ -28,6 +28,7 @@ class SQVirtualField<T> extends SQField<T> {
     SQField<T> fieldCopy = field.copy();
     fieldCopy.value = value;
     fieldCopy.editable = false;
+    fieldCopy.isInline = isInline;
     return fieldCopy.formField(doc);
   }
 }
