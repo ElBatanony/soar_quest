@@ -77,4 +77,9 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
     //   ],
     // );
   }
+
+  @override
+  Widget fieldBuilder(BuildContext context) {
+    throw UnimplementedError();
+  }
 }
