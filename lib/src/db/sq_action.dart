@@ -29,7 +29,6 @@ abstract class SQAction {
   Future<void> execute(SQDoc doc, BuildContext context) async {
     print("Executing action: $name");
     await onExecute(doc, context);
-    ScreenState.of(context).refreshScreen();
   }
 
   Widget button(SQDoc doc, {bool isIcon = false, double iconSize = 24.0}) {
@@ -113,6 +112,7 @@ class GoScreenAction extends SQAction {
   @override
   execute(SQDoc doc, BuildContext context) async {
     await screen(doc).go(context, replace: replace);
+    ScreenState.of(context).refreshScreen();
     await super.execute(doc, context);
   }
 }
@@ -187,6 +187,7 @@ class SetFieldsAction extends SQAction {
       docField.value = entry.value;
     }
     await doc.collection.saveDoc(doc);
+    ScreenState.of(context).refreshScreen();
     await super.execute(doc, context);
   }
 }
