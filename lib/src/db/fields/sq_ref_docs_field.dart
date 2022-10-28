@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../screens.dart';
-import '../../ui/sq_button.dart';
 import '../collection_slice.dart';
+import '../sq_action.dart';
 import '../sq_collection.dart';
 import 'sq_list_field.dart';
 import 'sq_ref_field.dart';
@@ -60,14 +60,14 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
       children: [
         super.fieldLabel(context),
         if (field.collection.adds)
-          SQButton("Add", onPressed: () async {
-            SQDoc newDoc = field.collection.newDoc(initialFields: [
-              SQRefField(field.refFieldName,
-                  collection: doc.collection, value: doc.ref, editable: false)
-            ]);
-            await FormScreen(newDoc).go(context);
-            setState(() {});
-          })
+          GoDerivedDocAction("Add",
+              getCollection: () => field.collection,
+              initialFields: (_) => [
+                    SQRefField(field.refFieldName,
+                        collection: doc.collection,
+                        value: doc.ref,
+                        editable: false)
+                  ]).button(doc)
       ],
     );
   }
