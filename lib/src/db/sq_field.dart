@@ -12,6 +12,7 @@ abstract class SQField<T> {
   bool editable;
   bool require;
   DocCond show;
+  bool isInline = false;
 
   SQField(
     this.name, {
@@ -101,7 +102,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          fieldLabel(),
+          if (field.isInline == false) fieldLabel(),
           (field.editable && inForm)
               ? fieldBuilder(context)
               : readOnlyBuilder(context),
