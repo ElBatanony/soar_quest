@@ -86,14 +86,16 @@ class ScreenState<T extends Screen> extends State<T> {
 
     if (widget.isInline) return body;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: appBar(context),
-      drawer: SQApp.drawer,
-      body: body,
-      floatingActionButton: floatingActionButton(context),
-      bottomNavigationBar: bottomNavBar(context),
-    );
+    return Builder(builder: (context2) {
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: appBar(context2),
+        drawer: SQApp.drawer,
+        body: body,
+        floatingActionButton: floatingActionButton(context2),
+        bottomNavigationBar: bottomNavBar(context2),
+      );
+    });
   }
 
   static ScreenState of(BuildContext context) {
