@@ -34,7 +34,8 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
-  Widget fieldLabel() => inForm ? super.fieldLabel() : Container();
+  Widget fieldLabel(context) =>
+      inForm ? super.fieldLabel(context) : Container();
 
   @override
   Widget readOnlyBuilder(BuildContext context) {

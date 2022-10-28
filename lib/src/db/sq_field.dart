@@ -72,7 +72,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  Widget fieldLabel() {
+  Widget fieldLabel(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(field.name + (field.require ? " *" : ""),
@@ -102,7 +102,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (field.isInline == false) fieldLabel(),
+          if (field.isInline == false) fieldLabel(context),
           (field.editable && inForm)
               ? fieldBuilder(context)
               : readOnlyBuilder(context),
