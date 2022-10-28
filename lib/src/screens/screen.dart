@@ -74,8 +74,8 @@ class ScreenState<T extends Screen> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final Widget body = Builder(builder: (context2) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
+      return Container(
+        padding: widget.isInline ? null : EdgeInsets.all(16.0),
         child: screenBody(context2),
       );
     });
