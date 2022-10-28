@@ -38,8 +38,9 @@ class _SQSignUpScreenState extends ScreenState<SQSignUpScreen> {
   Widget screenBody(BuildContext context) {
     return Column(
       children: [
-        emailField.formField(),
-        passwordField.formField(),
+        // TODO: fix signUp screen
+        // emailField.formField(),
+        // passwordField.formField(),
         SQButton("Sign Up", onPressed: () async {
           await SQAuth.auth.signUpWithEmailAndPassword(
               email: emailField.value ?? "",

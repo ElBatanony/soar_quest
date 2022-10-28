@@ -27,7 +27,7 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  SQFormField formField({Function? onChanged, SQDoc? doc});
+  SQFormField formField({Function? onChanged, required SQDoc doc});
 
   @override
   String toString() {
@@ -39,9 +39,9 @@ abstract class SQFormField<Field extends SQField<dynamic>>
     extends FormField<SQFormField<Field>> {
   final Field field;
   final Function? onChanged;
-  final SQDoc? doc;
+  final SQDoc doc;
 
-  const SQFormField(this.field, {this.onChanged, this.doc, super.key})
+  const SQFormField(this.field, {this.onChanged, required this.doc, super.key})
       : super(builder: emptyBuilder);
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
@@ -54,7 +54,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     extends FormFieldState<SQFormField<Field>> {
   SQFormField<Field> get formField => (widget as SQFormField<Field>);
   Field get field => formField.field;
-  SQDoc? get doc => formField.doc;
+  SQDoc get doc => formField.doc;
   late bool inForm;
 
   @override

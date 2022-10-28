@@ -58,7 +58,7 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
   @override
   Widget readOnlyBuilder(BuildContext context) {
     CollectionSlice slice = CollectionSlice(field.collection,
-        filter: DocRefFilter(field.refFieldName, doc!.ref));
+        filter: DocRefFilter(field.refFieldName, doc.ref));
     return TableScreen(collection: slice, isInline: true);
     // TODO: add button to add new items
     // List<SQDoc> refDocs = (formField as _SQRefDocsFormField).refDocs;

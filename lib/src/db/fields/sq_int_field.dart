@@ -18,8 +18,8 @@ class SQIntField extends SQField<int> {
       value: value, editable: editable, require: require, show: show);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQIntFormField(this, onChanged: onChanged);
+  formField({Function? onChanged, required SQDoc doc}) {
+    return _SQIntFormField(this, onChanged: onChanged, doc: doc);
   }
 
   int sumDocs(List<SQDoc> docs) {
@@ -28,7 +28,8 @@ class SQIntField extends SQField<int> {
 }
 
 class _SQIntFormField extends SQFormField<SQIntField> {
-  const _SQIntFormField(super.field, {required super.onChanged});
+  const _SQIntFormField(super.field,
+      {required super.onChanged, required super.doc});
 
   @override
   createState() => _SQIntFormFieldState();

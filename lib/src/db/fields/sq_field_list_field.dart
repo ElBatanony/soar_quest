@@ -41,8 +41,8 @@ class SQFieldListField extends SQListField<SQField<dynamic>> {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQFieldListFormField(this, onChanged: onChanged);
+  formField({Function? onChanged, required SQDoc doc}) {
+    return _SQFieldListFormField(this, onChanged: onChanged, doc: doc);
   }
 }
 
@@ -73,7 +73,8 @@ Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
 class _SQFieldListFormField extends SQFormField<SQFieldListField> {
   final SQFieldListField listField;
 
-  const _SQFieldListFormField(this.listField, {required super.onChanged})
+  const _SQFieldListFormField(this.listField,
+      {required super.onChanged, required super.doc})
       : super(listField);
 
   @override
@@ -110,7 +111,7 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
         children: [
           Row(
             children: [
-              Expanded(child: listItems[i].formField()),
+              Expanded(child: listItems[i].formField(doc: doc)),
               IconButton(
                   onPressed: () {
                     deleteListItem(i);

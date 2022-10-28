@@ -16,8 +16,8 @@ class SQListField<T> extends SQField<List<T>> {
       SQListField<T>(name, value: copyList(value ?? []), editable: editable);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQListFormField(this, onChanged: onChanged);
+  formField({Function? onChanged, required SQDoc doc}) {
+    return _SQListFormField(this, onChanged: onChanged, doc: doc);
   }
 
   @override
@@ -28,7 +28,8 @@ class SQListField<T> extends SQField<List<T>> {
 }
 
 class _SQListFormField<T> extends SQFormField<SQListField<T>> {
-  const _SQListFormField(super.field, {required super.onChanged});
+  const _SQListFormField(super.field,
+      {required super.onChanged, required super.doc});
 
   @override
   createState() => _SQListFormFieldState<T>();

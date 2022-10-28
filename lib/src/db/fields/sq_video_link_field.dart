@@ -20,7 +20,7 @@ class SQVideoLinkField extends SQStringField {
       SQVideoLinkField(name, url: value, editable: editable);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
+  formField({Function? onChanged, required SQDoc doc}) {
     return _SQVideoLinkFormField(this, onChanged: onChanged, doc: doc);
   }
 }
@@ -36,8 +36,7 @@ class _SQVideoLinkFormField extends SQFormField<SQVideoLinkField> {
 class _SQVideoLinkFormFieldState extends SQFormFieldState<SQVideoLinkField> {
   @override
   Widget readOnlyBuilder(BuildContext context) {
-    if (formField.doc == null) return super.readOnlyBuilder(context);
-    return VideoDocDisplay(formField.doc!, videoField: field);
+    return VideoDocDisplay(formField.doc, videoField: field);
   }
 
   @override

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../ui/sq_button.dart';
-import '../sq_field.dart';
+import '../sq_doc.dart';
 
 Future<T?> showFieldDialog<T>(
-    {required SQField<T> field, required BuildContext context}) {
+    {required SQField<T> field,
+    required SQDoc doc,
+    required BuildContext context}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
             title: Text("Set ${field.name}"),
-            content: field.formField(),
+            content: field.formField(doc: doc),
             actions: [
               SQButton('Cancel', onPressed: () => Navigator.pop<T>(context)),
               SQButton(
