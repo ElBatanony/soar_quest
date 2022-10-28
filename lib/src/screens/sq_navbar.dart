@@ -28,10 +28,10 @@ class _SQNavBarState extends State<SQNavBar> {
   Widget build(BuildContext context) {
     return screens.length > 1
         ? NavigationBar(
-            onDestinationSelected: (int index) async {
+            onDestinationSelected: (int index) {
               SQApp.selectedNavScreen = index;
-              await screens[SQApp.selectedNavScreen].go(context, replace: true);
-              ScreenState.of(context).refreshScreen();
+              screens[SQApp.selectedNavScreen].go(context, replace: true);
+              // ScreenState.of(context).refreshScreen();
             },
             selectedIndex: initialIndex,
             surfaceTintColor: Colors.white,
