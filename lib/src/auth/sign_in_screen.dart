@@ -9,11 +9,7 @@ import '../ui/snackbar.dart';
 class SignInScreen extends FormScreen {
   final bool forceSignIn;
 
-  SignInScreen(
-    super.doc, {
-    String title = "Sign In",
-    this.forceSignIn = false,
-  }) : super(title: title);
+  SignInScreen(super.doc, {super.title = "Sign In", this.forceSignIn = false});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -43,6 +39,8 @@ class _SignInScreenState extends FormScreenState<SignInScreen> {
       exitScreen();
     }
   }
+
+  // TODO: hide bottomNavBar in sign in screen
 
   @override
   Widget screenBody(BuildContext context) {

@@ -30,6 +30,7 @@ class SQApp {
     }
   }
 
+  // TODO: handle one navbar screen
   static void run(
     SQNavBar navbar, {
     SQDrawer? drawer,
