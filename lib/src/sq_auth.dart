@@ -20,15 +20,23 @@ class SQAuth {
   static Future<void> init({
     List<SQField<dynamic>>? userDocFields,
   }) async {
-    userDocFields = userDocFields ?? [SQStringField("Test Profile Field")];
+    userDocFields = userDocFields ?? [];
+    userDocFields.insert(0, SQStringField("Email", editable: false));
     usersCollection =
         FirestoreCollection(id: "Users", fields: userDocFields, readOnly: true);
     await usersCollection.loadCollection();
     if (isSignedIn) {
       userDoc = usersCollection.getDoc(user!.uid);
       if (userDoc == null) {
-        userDoc = usersCollection.newDoc(id: user!.uid);
+        userDoc = usersCollection.newDoc(id: user!.uid, initialFields: [
+          SQStringField("Email", value: SQAuth.user!.email!, editable: false)
+        ]);
         await usersCollection.saveDoc(userDoc!);
+      } else {
+        if (userDoc!.value<String>("Email") != SQAuth.user!.email) {
+          userDoc!.getField("Email")!.value = SQAuth.user!.email;
+          await usersCollection.saveDoc(userDoc!);
+        }
       }
     }
   }
