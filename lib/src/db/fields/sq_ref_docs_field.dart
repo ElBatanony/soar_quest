@@ -16,10 +16,7 @@ class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
 
   SQRefDocsField(String name,
       {required this.refCollection, required this.refFieldName})
-      : super(
-            field: SQListField(name),
-            valueBuilder: (doc) =>
-                refCollection().filterBy([RefFilter(refFieldName, doc.ref)]));
+      : super(field: SQListField(name), valueBuilder: (doc) => []);
 
   @override
   SQRefDocsField copy() => SQRefDocsField(name,
@@ -75,7 +72,7 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
   @override
   Widget readOnlyBuilder(BuildContext context) {
     CollectionSlice slice = CollectionSlice(field.collection,
-        filter: DocRefFilter(field.refFieldName, doc.ref));
+        filter: RefFilter(field.refFieldName, doc.ref));
     return TableScreen(collection: slice, isInline: true);
   }
 
