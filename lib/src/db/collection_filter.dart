@@ -1,3 +1,4 @@
+import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
 import 'fields/sq_ref_field.dart';
 
@@ -79,6 +80,11 @@ class DocRefFilter extends CollectionFilter {
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
   }
+}
+
+class UserFilter extends DocRefFilter {
+  UserFilter(String userFieldName)
+      : super(userFieldName, SQUserRefField.currentUserRef);
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {
