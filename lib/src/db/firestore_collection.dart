@@ -9,7 +9,6 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   FirestoreCollection({
     required super.id,
     required super.fields,
-    super.singleDocName,
     super.parentDoc,
     super.readOnly,
     super.updates,

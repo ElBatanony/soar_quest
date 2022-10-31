@@ -29,7 +29,6 @@ abstract class SQCollection<DocType extends SQDoc> {
   SQCollection({
     required this.id,
     required this.fields,
-    String? singleDocName,
     this.parentDoc,
     this.readOnly = false,
     this.updates = true,
