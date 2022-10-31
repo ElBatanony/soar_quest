@@ -10,8 +10,9 @@ import 'db/sq_action.dart';
 import 'screens/screen.dart';
 
 class SQAuth {
-  // TODO: create SQUser
-  static User? get user => FirebaseAuth.instance.currentUser;
+  static SQUser? get user =>
+      FirebaseAuth.instance.currentUser == null ? null : SQUser();
+
   static bool get isSignedIn => user != null;
 
   static late SQCollection usersCollection;
@@ -26,10 +27,10 @@ class SQAuth {
         FirestoreCollection(id: "Users", fields: userDocFields, readOnly: true);
     await usersCollection.loadCollection();
     if (isSignedIn) {
-      userDoc = usersCollection.getDoc(user!.uid);
+      userDoc = usersCollection.getDoc(user!.userId);
       if (userDoc == null) {
-        userDoc = usersCollection.newDoc(id: user!.uid, initialFields: [
-          SQStringField("Email", value: SQAuth.user!.email!, editable: false)
+        userDoc = usersCollection.newDoc(id: user!.userId, initialFields: [
+          SQStringField("Email", value: SQAuth.user!.email, editable: false)
         ]);
         await usersCollection.saveDoc(userDoc!);
       } else {
@@ -40,6 +41,13 @@ class SQAuth {
       }
     }
   }
+}
+
+class SQUser {
+  User get firebaseUser => FirebaseAuth.instance.currentUser!;
+
+  String get userId => firebaseUser.uid;
+  String get email => firebaseUser.email!;
 }
 
 class SQProfileScreen extends Screen {
