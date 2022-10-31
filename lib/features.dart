@@ -1,1 +1,1 @@
-export 'src/features/favourites/favourites.dart';
+export 'src/features/favourites.dart';

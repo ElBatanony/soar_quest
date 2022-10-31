@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/screens.dart';
 
-import '../../sq_auth.dart';
-import '../../db/local_collection.dart';
-import '../../db/sq_action.dart';
-import '../../db/sq_collection.dart';
-import '../../db/fields/sq_ref_field.dart';
+import '../sq_auth.dart';
+import '../db/local_collection.dart';
+import '../db/sq_action.dart';
+import '../db/sq_collection.dart';
+import '../db/fields/sq_ref_field.dart';
 
 class FavouritesFeature {
   SQCollection collection;
