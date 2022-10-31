@@ -18,8 +18,8 @@ class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
       {required this.refCollection, required this.refFieldName})
       : super(
             field: SQListField(name),
-            valueBuilder: (doc) => refCollection()
-                .filterBy([DocRefFilter(refFieldName, doc.ref)]));
+            valueBuilder: (doc) =>
+                refCollection().filterBy([RefFilter(refFieldName, doc.ref)]));
 
   @override
   SQRefDocsField copy() => SQRefDocsField(name,

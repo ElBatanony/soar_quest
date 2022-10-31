@@ -56,7 +56,7 @@ void main() async {
       readOnly: true);
 
   CollectionSlice myBookings = CollectionSlice(bookings,
-      filter: DocRefFilter("Tenant", SQUserRefField.currentUserRef));
+      filter: RefFilter("Tenant", SQUserRefField.currentUserRef));
 
   SQApp.run(
     [

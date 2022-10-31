@@ -28,7 +28,7 @@ class _CategorySelectScreenState
   @override
   Screen docScreen(SQDoc doc) {
     final slice = CollectionSlice(widget.collection,
-        filter: DocRefFilter(widget.categoryField.name, doc.ref));
+        filter: RefFilter(widget.categoryField.name, doc.ref));
     return CollectionScreen(
         title: "${doc.label} ${widget.collection.id}", collection: slice);
   }

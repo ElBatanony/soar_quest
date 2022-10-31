@@ -64,11 +64,11 @@ class StringContainsFilter extends CollectionFieldFilter {
   }
 }
 
-class DocRefFilter extends CollectionFilter {
+class RefFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
 
-  DocRefFilter(this.fieldName, this.fieldValue);
+  RefFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
@@ -82,9 +82,9 @@ class DocRefFilter extends CollectionFilter {
   }
 }
 
-class UserFilter extends DocRefFilter {
-  UserFilter(String userFieldName)
-      : super(userFieldName, SQUserRefField.currentUserRef);
+class UserFilter extends RefFilter {
+  UserFilter(String userFieldName, {SQRef? userRef})
+      : super(userFieldName, userRef ?? SQUserRefField.currentUserRef);
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {

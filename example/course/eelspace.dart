@@ -24,7 +24,7 @@ void main() async {
     GoScreenAction("View Service",
         screen: (talentDoc) => CollectionScreen(
             collection: CollectionSlice(services,
-                filter: DocRefFilter("Talent", talentDoc.ref))))
+                filter: RefFilter("Talent", talentDoc.ref))))
   ]);
 
   services = FirestoreCollection(id: "Services", fields: [

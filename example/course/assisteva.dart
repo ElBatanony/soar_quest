@@ -38,9 +38,9 @@ void main() async {
     ],
     actions: [
       GoScreenAction("View Lessons",
-          screen: (doc) => CollectionScreen(
+          screen: (courseDoc) => CollectionScreen(
               collection: CollectionSlice(lessons,
-                  filter: DocRefFilter("Course", doc.ref))))
+                  filter: RefFilter("Course", courseDoc.ref))))
     ],
     readOnly: !isAdmin,
   );

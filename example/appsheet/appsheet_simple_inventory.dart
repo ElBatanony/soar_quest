@@ -16,7 +16,7 @@ void main() async {
         field: SQIntField("Total Stock Available"),
         valueBuilder: (doc) => inventory
             .getField<SQIntField>("Amount")!
-            .sumDocs(inventory.filterBy([DocRefFilter("Item", doc.ref)]))),
+            .sumDocs(inventory.filterBy([RefFilter("Item", doc.ref)]))),
     SQImageField("Image"),
     SQRefDocsField("Inventory Change Log",
         refCollection: () => inventory, refFieldName: "Item"),
