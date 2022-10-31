@@ -6,7 +6,8 @@ import '../../ui/sq_button.dart';
 import '../collection_screen.dart';
 
 class SelectDocScreen extends CollectionScreen {
-  SelectDocScreen({super.title, required super.collection, super.key});
+  SelectDocScreen({String? title, required super.collection, super.key})
+      : super(title: title ?? "Select ${collection.id}");
 
   @override
   State<SelectDocScreen> createState() => _SelectDocScreenState();
@@ -14,24 +15,7 @@ class SelectDocScreen extends CollectionScreen {
 
 class _SelectDocScreenState extends CollectionScreenState<SelectDocScreen> {
   @override
-  Widget build(BuildContext context) {
-    var itemsDisplay = widget.collection.docs
-        .map((doc) =>
-            SQButton(doc.label, onPressed: () => exitScreen<SQDoc>(doc)))
-        .toList();
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("${widget.title} ${widget.collection.id}"),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: itemsDisplay,
-            ),
-          ),
-        ));
+  Widget docDisplay(SQDoc doc, BuildContext context) {
+    return SQButton(doc.label, onPressed: () => exitScreen<SQDoc>(doc));
   }
 }
