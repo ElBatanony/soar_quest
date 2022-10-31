@@ -2,6 +2,9 @@ import 'user_data.dart';
 import '../screens/screen.dart';
 
 abstract class SQAuthManager {
+  // TODO: combine with SQAuth
+  // TODO: use Firebase Auth UI package
+
   Future<void> init();
 
   late UserData user;
