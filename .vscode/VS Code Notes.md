@@ -1,4 +1,4 @@
-# Notes
+# VS Code Notes
 
 ## Logs to ignore in VS Code
 
