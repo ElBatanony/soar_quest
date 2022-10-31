@@ -50,6 +50,7 @@ class SQAuth {
         fields: SQAuth.userDocFields,
         singleDocName: "Profile Info",
         deletes: false,
+        adds: false,
         actions: [
           CustomAction(
             "Sign Out",
