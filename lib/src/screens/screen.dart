@@ -36,7 +36,7 @@ class Screen extends StatefulWidget {
   const Screen(
     this.title, {
     this.isInline = false,
-    this.icon,
+    this.icon = Icons.stay_current_landscape,
     this.show = alwaysShowScreen,
     super.key,
   });
