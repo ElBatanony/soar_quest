@@ -105,5 +105,5 @@ abstract class SQCollection<DocType extends SQDoc> {
   List<SQField<dynamic>> copyFields() =>
       fields.map((field) => field.copy()).toList();
 
-  SQDoc? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
+  DocType? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 }
