@@ -5,6 +5,7 @@ import 'sq_collection.dart';
 import '../storage/sq_image_field.dart';
 
 export 'sq_field.dart';
+export 'conditions.dart';
 
 class SQDoc {
   late List<SQField<dynamic>> fields;

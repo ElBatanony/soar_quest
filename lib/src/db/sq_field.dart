@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import 'conditions.dart';
 import 'sq_doc.dart';
 
 abstract class SQField<T> {

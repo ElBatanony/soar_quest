@@ -1,5 +1,4 @@
 import '../sq_doc.dart';
-import '../conditions.dart';
 
 class SQVirtualField<T> extends SQField<T> {
   SQField<T> field;

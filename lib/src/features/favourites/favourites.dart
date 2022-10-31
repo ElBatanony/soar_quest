@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/screens.dart';
 
 import '../../auth/sq_auth.dart';
-import '../../db/conditions.dart';
 import '../../db/local_collection.dart';
 import '../../db/sq_action.dart';
 import '../../db/sq_collection.dart';

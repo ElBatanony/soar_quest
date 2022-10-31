@@ -5,7 +5,6 @@ import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../ui/sq_button.dart';
 import '../screens/screen.dart';
-import 'conditions.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
 
