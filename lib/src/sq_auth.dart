@@ -67,6 +67,12 @@ class SQProfileScreen extends Screen {
 
 class _ProfileScreenState extends ScreenState<SQProfileScreen> {
   @override
+  void refreshScreen() {
+    SQAuth.initUserDoc();
+    super.refreshScreen();
+  }
+
+  @override
   Widget screenBody(BuildContext context) {
     if (SQAuth.user == null) {
       return SignInScreen(
