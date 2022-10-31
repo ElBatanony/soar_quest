@@ -74,6 +74,6 @@ void main() async {
       CollectionScreen(collection: lessons, show: (context) => isAdmin),
       if (!isAdmin) UserSettings.settingsScreen()
     ],
-    drawer: SQDrawer([ProfileScreen()]),
+    drawer: SQDrawer([]),
   );
 }

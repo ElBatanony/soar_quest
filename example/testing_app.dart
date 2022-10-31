@@ -70,7 +70,6 @@ void main() async {
     ],
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
-      ProfileScreen(),
     ]),
   );
 }

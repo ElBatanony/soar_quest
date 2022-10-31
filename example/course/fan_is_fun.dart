@@ -91,7 +91,7 @@ void main() async {
       CollectionScreen(collection: bookings),
       CollectionScreen(collection: teams),
       CollectionScreen(collection: sports),
-      ProfileScreen(),
+      SQProfileScreen(),
     ]),
   );
 }

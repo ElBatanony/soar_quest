@@ -67,6 +67,6 @@ void main() async {
     CollectionScreen(collection: workstreams),
     CollectionScreen(collection: projects),
     CollectionScreen(collection: tasks),
-    ProfileScreen(),
+    SQProfileScreen(),
   ]);
 }

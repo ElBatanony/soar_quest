@@ -68,5 +68,5 @@ void main() async {
           title: "Pending Tasks", collection: pendingTasks, isInline: true),
       CollectionScreen(title: "Done", collection: doneTasks, isInline: true),
     ]),
-  ], drawer: SQDrawer([ProfileScreen()]), startingScreen: 1);
+  ], startingScreen: 1);
 }
