@@ -24,9 +24,13 @@ class SQAuth {
     usersCollection =
         FirestoreCollection(id: "Users", fields: userDocFields, readOnly: true);
     await usersCollection.loadCollection();
-    if (isSignedIn)
-      userDoc = (usersCollection.getDoc(user!.uid) ??
-          usersCollection.newDoc(id: user!.uid));
+    if (isSignedIn) {
+      userDoc = usersCollection.getDoc(user!.uid);
+      if (userDoc == null) {
+        userDoc = usersCollection.newDoc(id: user!.uid);
+        await usersCollection.saveDoc(userDoc!);
+      }
+    }
   }
 }
 
