@@ -14,11 +14,11 @@ dependencies:
   flutter:
     sdk: flutter
     
-  firebase_core: ^1.17.0
-  cloud_firestore: ^3.1.16
-  firebase_auth: ^3.3.20
+  firebase_core: ^2.1.1
+  cloud_firestore: ^4.0.3
+  firebase_auth: ^4.1.0
+  firebase_storage: ^11.0.3
   youtube_player_flutter: ^8.1.0
-  firebase_storage: ^10.3.6
   image_picker: ^0.8.5+3
   path_provider: ^2.0.11
   url_launcher: ^6.1.5
