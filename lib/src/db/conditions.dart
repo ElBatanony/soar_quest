@@ -4,6 +4,8 @@ import '../auth/sq_auth.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
 import '../ui/signed_in_content.dart';
+import 'fields/sq_user_ref_field.dart';
+import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 
 class DocCond {
@@ -48,4 +50,9 @@ class CollectionCond extends DocCond {
 
   CollectionCond(this.collectionCondition)
       : super((doc, context) => collectionCondition(doc.collection));
+}
+
+class DocUserCond extends DocValueCond<SQRef> {
+  DocUserCond(String fieldName, {SQRef? userRef})
+      : super(fieldName, userRef ?? SQUserRefField.currentUserRef);
 }
