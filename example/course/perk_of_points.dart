@@ -26,9 +26,9 @@ void main() async {
       id: "Game Instances",
       fields: [
         SQRefField("Game", collection: games),
-        SQRefDocsField("Players",
+        SQInverseRefsField("Players",
             refCollection: () => players, refFieldName: "Game"),
-        SQRefDocsField("Rounds",
+        SQInverseRefsField("Rounds",
             refCollection: () => rounds, refFieldName: "Game"),
       ],
       updates: false);

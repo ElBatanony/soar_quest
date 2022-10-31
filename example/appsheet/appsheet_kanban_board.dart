@@ -20,7 +20,7 @@ void main() async {
     SQStringField("test readonly", editable: false, value: "hamada"),
     SQEnumField(SQStringField("Color"),
         options: ["#4285F4", "#DB4437", "#F4B400", "#0F9D58"]),
-    SQRefDocsField("Related Projects",
+    SQInverseRefsField("Related Projects",
         refCollection: () => projects, refFieldName: "Workstream"),
   ], actions: [
     GoEditCloneAction("Clone Workspace"),
@@ -52,7 +52,7 @@ void main() async {
     SQRefField("Workstream", collection: workstreams),
     SQEnumField(SQStringField("Status"),
         options: ["Not Started", "In Progress", "Complete"]),
-    SQRefDocsField("Tasks",
+    SQInverseRefsField("Tasks",
         refCollection: () => tasks, refFieldName: "Project"),
   ]);
 

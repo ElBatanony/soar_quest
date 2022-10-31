@@ -8,18 +8,18 @@ import 'sq_list_field.dart';
 import 'sq_ref_field.dart';
 import 'sq_virtual_field.dart';
 
-class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
+class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   String refFieldName;
   SQCollection Function() refCollection;
 
   SQCollection get collection => refCollection();
 
-  SQRefDocsField(String name,
+  SQInverseRefsField(String name,
       {required this.refCollection, required this.refFieldName})
       : super(field: SQListField(name), valueBuilder: (doc) => []);
 
   @override
-  SQRefDocsField copy() => SQRefDocsField(name,
+  SQInverseRefsField copy() => SQInverseRefsField(name,
       refCollection: refCollection, refFieldName: refFieldName);
 
   @override
@@ -29,7 +29,7 @@ class SQRefDocsField extends SQVirtualField<List<SQDoc>> {
   }
 }
 
-class _SQRefDocsFormField extends SQFormField<SQRefDocsField> {
+class _SQRefDocsFormField extends SQFormField<SQInverseRefsField> {
   final List<SQDoc> refDocs;
   const _SQRefDocsFormField(super.field, super.doc,
       {required this.refDocs, required super.onChanged});
@@ -38,7 +38,7 @@ class _SQRefDocsFormField extends SQFormField<SQRefDocsField> {
   createState() => _SQRefDocsFormFieldState();
 }
 
-class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
+class _SQRefDocsFormFieldState extends SQFormFieldState<SQInverseRefsField> {
   Future<void> initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
     onChanged();

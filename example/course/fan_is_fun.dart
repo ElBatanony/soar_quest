@@ -32,7 +32,7 @@ void main() async {
         valueBuilder: (doc) => bookings.docs
             .where((booking) => booking.value<SQRef>("Event") == doc.ref)
             .length),
-    SQRefDocsField("Bookings",
+    SQInverseRefsField("Bookings",
         refCollection: () => bookings, refFieldName: "Event"),
   ], actions: [
     CustomAction(

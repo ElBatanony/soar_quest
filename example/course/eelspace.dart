@@ -18,7 +18,7 @@ void main() async {
     SQStringField("Skill"),
     SQStringField("Country"),
     SQStringField("Contact Details"),
-    SQRefDocsField("Services",
+    SQInverseRefsField("Services",
         refCollection: () => services, refFieldName: "Talent"),
   ], actions: [
     GoScreenAction("View Service",
