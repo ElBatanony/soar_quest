@@ -23,7 +23,8 @@ class SQAuth {
     List<SQField<dynamic>>? userDocFields,
   }) async {
     SQAuth.userDocFields = userDocFields ?? [];
-    SQAuth.userDocFields.addAll([
+
+    SQAuth.userDocFields.insertAll(0, [
       SQVirtualField(
           field: SQStringField("Email"),
           show: isSignedIn,
@@ -35,7 +36,10 @@ class SQAuth {
       SQVirtualField(
           field: SQStringField("Username"),
           show: isSignedIn,
-          valueBuilder: (doc) => SQAuth.signedInUser.username),
+          valueBuilder: (doc) => SQAuth.signedInUser.username)
+    ]);
+
+    SQAuth.userDocFields.addAll([
       SQStringField("New Username", show: inFormScreen),
       SQStringField("New Email", show: inFormScreen),
       SQStringField("New Password", show: inFormScreen),
