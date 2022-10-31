@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../db/fields/sq_string_field.dart';
-import '../db/firestore_collection.dart';
-import '../db/sq_collection.dart';
+import 'db/fields/sq_string_field.dart';
+import 'db/firestore_collection.dart';
+import 'db/sq_collection.dart';
 
-import '../db/sq_action.dart';
-import '../screens/screen.dart';
+import 'db/sq_action.dart';
+import 'screens/screen.dart';
 
 class SQAuth {
   // TODO: create SQUser

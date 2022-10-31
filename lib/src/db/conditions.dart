@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../auth/sq_auth.dart';
+import '../sq_auth.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
 import 'fields/sq_user_ref_field.dart';

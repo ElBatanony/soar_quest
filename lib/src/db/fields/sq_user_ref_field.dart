@@ -1,4 +1,4 @@
-import '../../auth/sq_auth.dart';
+import '../../sq_auth.dart';
 import 'sq_ref_field.dart';
 
 class SQUserRefField extends SQRefField {

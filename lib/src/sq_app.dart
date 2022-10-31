@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
-import 'auth/sq_auth.dart';
+import 'sq_auth.dart';
 import 'db/sq_field.dart';
 import 'screens/screen.dart';
 
