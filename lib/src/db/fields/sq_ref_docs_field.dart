@@ -60,7 +60,7 @@ class _SQRefDocsFormFieldState extends SQFormFieldState<SQRefDocsField> {
       children: [
         super.fieldLabel(context),
         if (field.collection.adds)
-          GoDerivedDocAction("Add",
+          CreateDocAction("Add",
               getCollection: () => field.collection,
               initialFields: (_) => [
                     SQRefField(field.refFieldName,

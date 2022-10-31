@@ -135,13 +135,13 @@ class GoEditAction extends GoScreenAction {
         );
 }
 
-class GoDerivedDocAction extends SQAction {
+class CreateDocAction extends SQAction {
   SQCollection Function() getCollection;
   List<SQField<dynamic>> Function(SQDoc) initialFields;
   bool form;
   bool goBack;
 
-  GoDerivedDocAction(
+  CreateDocAction(
     super.name, {
     super.icon,
     super.show,

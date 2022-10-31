@@ -12,7 +12,7 @@ void main() async {
     SQStringField("Name"),
     SQLinkField("Rules Link"),
   ], actions: [
-    GoDerivedDocAction("Start Game",
+    CreateDocAction("Start Game",
         getCollection: () => gameInstances,
         form: false,
         goBack: false,
