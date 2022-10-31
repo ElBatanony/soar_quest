@@ -18,14 +18,7 @@ class SQAuth {
   static late SQCollection usersCollection;
   static late SQDoc? userDoc;
 
-  static Future<void> init({
-    List<SQField<dynamic>>? userDocFields,
-  }) async {
-    userDocFields = userDocFields ?? [];
-    userDocFields.insert(0, SQStringField("Email", editable: false));
-    usersCollection =
-        FirestoreCollection(id: "Users", fields: userDocFields, readOnly: true);
-    await usersCollection.loadCollection();
+  static Future<void> initUserDoc() async {
     if (isSignedIn) {
       userDoc = usersCollection.getDoc(user!.userId);
       if (userDoc == null) {
@@ -39,7 +32,20 @@ class SQAuth {
           await usersCollection.saveDoc(userDoc!);
         }
       }
+    } else {
+      userDoc = null;
     }
+  }
+
+  static Future<void> init({
+    List<SQField<dynamic>>? userDocFields,
+  }) async {
+    userDocFields = userDocFields ?? [];
+    userDocFields.insert(0, SQStringField("Email", editable: false));
+    usersCollection =
+        FirestoreCollection(id: "Users", fields: userDocFields, readOnly: true);
+    await usersCollection.loadCollection();
+    await initUserDoc();
   }
 }
 
