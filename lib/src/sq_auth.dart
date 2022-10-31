@@ -78,20 +78,14 @@ class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
       return SignInScreen(
         providers: [EmailAuthProvider()],
         actions: [
-          AuthStateChangeAction<SignedIn>((context, state) {
-            refreshScreen();
-          }),
+          AuthStateChangeAction<SignedIn>((context, state) => refreshScreen()),
         ],
       );
     }
     return ProfileScreen(
       actions: [
-        AuthStateChangeAction<SignedIn>((context, state) {
-          refreshScreen();
-        }),
-        SignedOutAction((context) {
-          refreshScreen();
-        }),
+        AuthStateChangeAction<SignedIn>((context, state) => refreshScreen()),
+        SignedOutAction((context) => refreshScreen()),
       ],
       children: [
         if (SQAuth.userDoc != null)
