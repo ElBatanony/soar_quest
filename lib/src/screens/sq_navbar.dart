@@ -36,9 +36,7 @@ class _SQNavBarState extends State<SQNavBar> {
       surfaceTintColor: Colors.white,
       destinations: screens
           .map((screen) => NavigationDestination(
-                icon: Icon(screen.icon ?? Icons.explore),
-                label: screen.title,
-              ))
+              icon: Icon(screen.icon), label: screen.title))
           .toList(),
     );
   }
