@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../sq_auth.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import 'fields/sq_user_ref_field.dart';
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 
@@ -52,5 +51,6 @@ class CollectionCond extends DocCond {
 
 class DocUserCond extends DocValueCond<SQRef?> {
   DocUserCond(String fieldName, {SQRef? userRef})
-      : super(fieldName, userRef ?? SQUserRefField.currentUserRef);
+      : super(fieldName,
+            userRef ?? (SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null));
 }

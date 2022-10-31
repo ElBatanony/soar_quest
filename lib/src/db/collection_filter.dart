@@ -1,4 +1,4 @@
-import 'fields/sq_user_ref_field.dart';
+import '../sq_auth.dart';
 import 'sq_doc.dart';
 import 'fields/sq_ref_field.dart';
 
@@ -84,7 +84,8 @@ class RefFilter extends CollectionFilter {
 
 class UserFilter extends RefFilter {
   UserFilter(String userFieldName, {SQRef? userRef})
-      : super(userFieldName, userRef ?? SQUserRefField.currentUserRef);
+      : super(userFieldName,
+            userRef ?? (SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null));
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {

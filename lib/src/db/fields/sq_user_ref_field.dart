@@ -5,9 +5,6 @@ class SQUserRefField extends SQRefField {
   SQUserRefField(super.name, {super.value, super.editable})
       : super(collection: SQAuth.usersCollection);
 
-  static SQRef? get currentUserRef =>
-      SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null;
-
   @override
   SQUserRefField copy() =>
       SQUserRefField(name, value: value, editable: editable);
@@ -21,7 +18,7 @@ class SQEditedByField extends SQUserRefField {
 
   @override
   serialize() {
-    value ??= SQUserRefField.currentUserRef;
+    value ??= SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null;
     return super.serialize();
   }
 }

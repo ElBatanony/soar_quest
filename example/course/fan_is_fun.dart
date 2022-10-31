@@ -37,8 +37,9 @@ void main() async {
   ], actions: [
     CustomAction(
       "Book Event",
-      show: DocCond((eventDoc, context) => !bookings.docs.any((booking) =>
-              booking.value<SQRef>("User") == SQUserRefField.currentUserRef &&
+      show: isSignedIn &
+          DocCond((eventDoc, context) => !bookings.docs.any((booking) =>
+              booking.value<SQRef>("User") == SQAuth.userDoc!.ref &&
               booking.value<SQRef>("Event") == eventDoc.ref)) &
           DocCond((eventDoc, context) =>
               bookings.docs
@@ -48,7 +49,7 @@ void main() async {
               eventDoc.value<int>("Capacity")!),
       customExecute: (eventDoc, context) async {
         final newBooking = bookings.newDoc(initialFields: [
-          SQUserRefField("User", value: SQUserRefField.currentUserRef),
+          SQUserRefField("User", value: SQAuth.userDoc!.ref),
           SQRefField("Event", collection: events, value: eventDoc.ref),
         ]);
         await bookings.saveDoc(newBooking);

@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
+import '../sq_auth.dart';
 import 'sq_action.dart';
 import '../sq_app.dart';
 import '../screens/collection_screen.dart';
@@ -84,9 +85,10 @@ abstract class SQCollection<DocType extends SQDoc> {
       newDoc.fields[index] = initialField.copy();
     }
 
-    fields
-        .whereType<SQCreatedByField>()
-        .forEach((field) => field.value = SQUserRefField.currentUserRef);
+    if (SQAuth.isSignedIn)
+      fields
+          .whereType<SQCreatedByField>()
+          .forEach((field) => field.value = SQAuth.userDoc!.ref);
 
     return newDoc;
   }

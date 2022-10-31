@@ -26,9 +26,10 @@ void main() async {
     actions: [
       CreateDocAction("Book",
           getCollection: () => bookings,
+          show: isSignedIn,
           initialFields: (placeDoc) => [
                 SQRefField("Place", collection: places, value: placeDoc.ref),
-                SQUserRefField("Tenant", value: SQUserRefField.currentUserRef),
+                SQUserRefField("Tenant", value: SQAuth.userDoc!.ref),
                 SQUserRefField("Host", value: placeDoc.value("Host"))
               ]),
     ],
@@ -41,8 +42,7 @@ void main() async {
         SQStringField("Status",
             value: "Pending", editable: false, show: inFormScreen.not),
         SQUserRefField("Host"),
-        SQUserRefField("Tenant",
-            value: SQUserRefField.currentUserRef, editable: false),
+        SQUserRefField("Tenant", editable: false),
         SQEditedByField("Booking User"),
       ],
       actions: [
