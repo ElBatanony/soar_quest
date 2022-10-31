@@ -62,10 +62,10 @@ class SQProfileScreen extends Screen {
       : super(title);
 
   @override
-  State<SQProfileScreen> createState() => _ProfileScreenState();
+  State<SQProfileScreen> createState() => _SQProfileScreenState();
 }
 
-class _ProfileScreenState extends ScreenState<SQProfileScreen> {
+class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
   @override
   void refreshScreen() {
     SQAuth.initUserDoc();
