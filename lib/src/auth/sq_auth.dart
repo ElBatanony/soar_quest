@@ -1,6 +1,5 @@
 import '../db/conditions.dart';
 import '../db/fields/sq_string_field.dart';
-import '../db/fields/sq_virtual_field.dart';
 import '../db/firestore_collection.dart';
 import '../db/sq_action.dart';
 import '../db/sq_collection.dart';
@@ -25,18 +24,9 @@ class SQAuth {
     SQAuth.userDocFields = userDocFields ?? [];
 
     SQAuth.userDocFields.insertAll(0, [
-      SQVirtualField(
-          field: SQStringField("Email"),
-          show: isSignedIn,
-          valueBuilder: (doc) => SQAuth.signedInUser.email),
-      SQVirtualField(
-          field: SQStringField("User ID"),
-          show: isSignedIn,
-          valueBuilder: (doc) => SQAuth.user.userId),
-      SQVirtualField(
-          field: SQStringField("Username"),
-          show: isSignedIn,
-          valueBuilder: (doc) => SQAuth.signedInUser.username)
+      SQStringField("Email", editable: false),
+      SQStringField("User ID", editable: false),
+      SQStringField("Username", editable: false),
     ]);
 
     SQAuth.userDocFields.addAll([
@@ -78,6 +68,7 @@ class SQAuth {
                   await SQAuth.signedInUser.updateEmail(newEmail);
                 if (newPassword.isNotEmpty)
                   await SQAuth.signedInUser.updatePassword(newPassword);
+                SQAuth.usersCollection.saveDoc(SQAuth.userDoc);
               })
         ]);
     usersCollection.actions.removeWhere((action) => action.name == "Edit");
