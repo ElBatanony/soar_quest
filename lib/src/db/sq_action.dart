@@ -77,7 +77,11 @@ class _SQActionButtonState extends State<SQActionButton> {
     return SQButton.icon(
       widget.action.icon,
       iconSize: widget.iconSize,
-      text: widget.isIcon ? null : widget.action.name,
+      text: widget.isIcon
+          ? null
+          : widget.action.name.isEmpty
+              ? null
+              : widget.action.name,
       onPressed: () async {
         bool confirmed = widget.action.confirm == false ||
             await showConfirmationDialog(
