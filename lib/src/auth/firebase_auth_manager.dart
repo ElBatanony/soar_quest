@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../db/fields/sq_string_field.dart';
 import '../db/in_memory_collection.dart';
+import 'sq_auth.dart';
 import 'user_data.dart';
 import '../screens/screen.dart';
 import 'sq_auth_manager.dart';
@@ -17,6 +18,10 @@ class FirebaseAuthManager extends SQAuthManager {
   Future<void> updateUserData() async {
     final firebaseUser = _auth.currentUser!;
     user = FirebaseSignedInUser(firebaseUser);
+    SQAuth.userDoc.getField("Email")!.value = firebaseUser.email;
+    SQAuth.userDoc.getField("User ID")!.value = firebaseUser.uid;
+    SQAuth.userDoc.getField("Username")!.value = firebaseUser.displayName;
+    SQAuth.usersCollection.saveDoc(SQAuth.userDoc);
   }
 
   @override
