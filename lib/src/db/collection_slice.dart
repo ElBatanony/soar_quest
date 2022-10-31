@@ -20,6 +20,10 @@ class CollectionSlice implements SQCollection {
       this.filter,
       this.sliceFields,
       this.sliceActions}) {
+    updates = updates && collection.updates;
+    adds = adds && collection.adds;
+    deletes = deletes && collection.deletes;
+    readOnly = readOnly && collection.readOnly;
     if (readOnly) updates = adds = deletes = false;
   }
 
