@@ -50,3 +50,5 @@ lib/screens/playground_screen.dart
 lib/playground/
 .VSCodeCounter/
 example/playground/
+
+android/
