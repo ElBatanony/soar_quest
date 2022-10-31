@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../auth/sq_auth.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import '../ui/signed_in_content.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
@@ -37,8 +36,7 @@ const falseCond = DocCond(_alwaysFalse);
 DocCond inFormScreen =
     DocCond((_, context) => ScreenState.of(context) is FormScreenState);
 
-DocCond isSignedIn = DocCond(
-    (doc, context) => SQAuth.user is SignedInUser && !SQAuth.user.isAnonymous);
+DocCond isSignedIn = DocCond((doc, context) => SQAuth.isSignedIn);
 
 class DocValueCond<T> extends DocCond {
   DocValueCond(String fieldName, T expectedValue)
@@ -52,7 +50,7 @@ class CollectionCond extends DocCond {
       : super((doc, context) => collectionCondition(doc.collection));
 }
 
-class DocUserCond extends DocValueCond<SQRef> {
+class DocUserCond extends DocValueCond<SQRef?> {
   DocUserCond(String fieldName, {SQRef? userRef})
       : super(fieldName, userRef ?? SQUserRefField.currentUserRef);
 }

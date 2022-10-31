@@ -1,78 +1,71 @@
-import '../db/conditions.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter/material.dart';
+
 import '../db/fields/sq_string_field.dart';
 import '../db/firestore_collection.dart';
-import '../db/sq_action.dart';
 import '../db/sq_collection.dart';
 
+import '../db/sq_action.dart';
 import '../screens/screen.dart';
-import 'sq_auth_manager.dart';
-import 'firebase_auth_manager.dart';
-import 'user_data.dart';
 
 class SQAuth {
-  static late SQAuthManager auth;
+  // TODO: create SQUser
+  static User? get user => FirebaseAuth.instance.currentUser;
+  static bool get isSignedIn => user != null;
+
   static late SQCollection usersCollection;
-  static UserData get user => auth.user;
-  static SQDoc get userDoc => user.userDoc;
-  static List<SQField<dynamic>> userDocFields = [];
-  static SignedInUser get signedInUser => user as SignedInUser;
+  static late SQDoc? userDoc;
 
   static Future<void> init({
-    SQAuthManager? authManager,
     List<SQField<dynamic>>? userDocFields,
   }) async {
-    SQAuth.userDocFields = userDocFields ?? [];
-
-    SQAuth.userDocFields.insertAll(0, [
-      SQStringField("Email", editable: false),
-      SQStringField("User ID", editable: false),
-      SQStringField("Username", editable: false),
-    ]);
-
-    SQAuth.userDocFields.addAll([
-      SQStringField("New Username", show: inFormScreen),
-      SQStringField("New Email", show: inFormScreen),
-      SQStringField("New Password", show: inFormScreen),
-    ]);
-    SQAuth.auth = authManager ?? FirebaseAuthManager();
-    usersCollection = FirestoreCollection(
-        id: "Users",
-        fields: SQAuth.userDocFields,
-        singleDocName: "Profile Info",
-        deletes: false,
-        adds: false,
-        actions: [
-          CustomAction(
-            "Sign Out",
-            show: isSignedIn,
-            customExecute: (doc, context) async {
-              await SQAuth.auth.signOut();
-              ScreenState.of(context).refreshScreen();
-            },
-          ),
-          GoScreenAction("Sign In",
-              show: isSignedIn.not,
-              screen: (doc) => SQAuth.auth.signInScreen(forceSignIn: true)),
-          GoEditAction(
-              name: "Edit Profile",
-              show: isSignedIn,
-              onExecute: (doc, context) async {
-                String newUsername = doc.value("New Username") ?? "";
-                String newEmail = doc.value("New Email") ?? "";
-                String newPassword = doc.value("New Password") ?? "";
-                if (newUsername != SQAuth.signedInUser.username &&
-                    newUsername.isNotEmpty)
-                  await SQAuth.signedInUser.updateDisplayName(newUsername);
-                if (newEmail != SQAuth.signedInUser.email &&
-                    newEmail.isNotEmpty)
-                  await SQAuth.signedInUser.updateEmail(newEmail);
-                if (newPassword.isNotEmpty)
-                  await SQAuth.signedInUser.updatePassword(newPassword);
-                SQAuth.usersCollection.saveDoc(SQAuth.userDoc);
-              })
-        ]);
-    usersCollection.actions.removeWhere((action) => action.name == "Edit");
+    userDocFields = userDocFields ?? [SQStringField("Test Profile Field")];
+    usersCollection =
+        FirestoreCollection(id: "Users", fields: userDocFields, readOnly: true);
     await usersCollection.loadCollection();
-    await auth.init();
+    if (isSignedIn)
+      userDoc = (usersCollection.getDoc(user!.uid) ??
+          usersCollection.newDoc(id: user!.uid));
+  }
+}
+
+class SQProfileScreen extends Screen {
+  const SQProfileScreen(
+      {String title = "Profile", super.icon = Icons.account_circle})
+      : super(title);
+
+  @override
+  State<SQProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ScreenState<SQProfileScreen> {
+  @override
+  Widget screenBody(BuildContext context) {
+    if (SQAuth.user == null) {
+      return SignInScreen(
+        providers: [EmailAuthProvider()],
+        actions: [
+          AuthStateChangeAction<SignedIn>((context, state) {
+            refreshScreen();
+          }),
+        ],
+      );
+    }
+    return ProfileScreen(
+      actions: [
+        AuthStateChangeAction<SignedIn>((context, state) {
+          refreshScreen();
+        }),
+        SignedOutAction((context) {
+          refreshScreen();
+        }),
+      ],
+      children: [
+        if (SQAuth.userDoc != null)
+          GoEditAction(name: "Edit Profile", show: isSignedIn)
+              .button(SQAuth.userDoc!),
+      ],
+    );
   }
 }
