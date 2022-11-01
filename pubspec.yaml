@@ -5,6 +5,8 @@ description: An app development framework built on Flutter and Firebase.
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
+respository: https://github.com/ElBatanony/soar_quest
+
 version: 0.5.0
 
 environment:
