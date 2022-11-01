@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/collection_screens/select_doc_screen.dart';
+import '../../screens/doc_screen.dart';
+import '../../screens/form_screen.dart';
+import '../../screens/screen.dart';
 import '../../sq_auth.dart';
 import '../../ui/sq_button.dart';
-import '../../../screens.dart';
 import '../sq_action.dart';
 import '../sq_collection.dart';
 import 'sq_user_ref_field.dart';
