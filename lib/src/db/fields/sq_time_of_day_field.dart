@@ -30,13 +30,14 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQTimeOfDayFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQTimeOfDayFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
-  const _SQTimeOfDayFormField(super.field, {required super.onChanged});
+  const _SQTimeOfDayFormField(super.field, super.doc,
+      {required super.onChanged});
 
   @override
   createState() => _SQTimeOfDayFormFieldState();
@@ -54,11 +55,10 @@ class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
       TimeOfDay(hour: sqTimeOfDay.hour, minute: sqTimeOfDay.minute);
 
   @override
-  Widget build(BuildContext context) {
+  Widget fieldBuilder(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(field.name),
         Text(field.value.toString()),
         SQButton(
           'Select Time',

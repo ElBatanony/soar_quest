@@ -50,3 +50,8 @@ lib/screens/playground_screen.dart
 lib/playground/
 .VSCodeCounter/
 example/playground/
+
+android/
+web/
+example/firebase_options.dart
+pubspec.lock

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/db.dart';
 
+import '../db/sq_collection.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {
@@ -23,7 +23,7 @@ class DocScreenState<T extends DocScreen> extends ScreenState<T> {
   SQCollection get collection => doc.collection;
 
   Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
-    return field.formField(onChanged: refreshScreen, doc: doc);
+    return field.formField(doc, onChanged: refreshScreen);
   }
 
   List<Widget> fieldsDisplay(BuildContext context) {

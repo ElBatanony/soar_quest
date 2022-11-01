@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import '../auth/sq_auth.dart';
+import '../sq_auth.dart';
 import 'local_collection.dart';
 import 'sq_collection.dart';
 import '../screens/screen.dart';

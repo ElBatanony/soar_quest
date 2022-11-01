@@ -27,34 +27,33 @@ void main() async {
   SQFileStorage firebaseFileStorage = FirebaseFileStorage();
 
   SQCollection testCollection = FirestoreCollection(
-      id: "Test Collection",
-      fields: [
-        SQStringField("String"),
-        SQBoolField("Bool"),
-        SQRefField("Doc Ref", collection: simpleCollection),
-        SQDoubleField("Double"),
-        SQFileField("File", storage: firebaseFileStorage),
-        SQIntField("Int"),
-        SQTimeOfDayField("Time of Day"),
-        SQTimestampField("Timestamp"),
-        SQStringField("Readonly String",
-            value: "I am readonly", editable: false),
-      ],
-      actions: [
-        GoScreenAction("Child Coll",
-            screen: (doc) => CollectionScreen(
-                collection: FirestoreCollection(
-                    id: "Child Collection",
-                    fields: [
-                      SQStringField("Name"),
-                      SQRefField("Parent Doc",
-                          collection: doc.collection,
-                          value: doc.ref,
-                          editable: false),
-                    ],
-                    parentDoc: doc)))
-      ],
-      singleDocName: "Test Doc");
+    id: "Test Collection",
+    fields: [
+      SQStringField("String"),
+      SQBoolField("Bool"),
+      SQRefField("Doc Ref", collection: simpleCollection),
+      SQDoubleField("Double"),
+      SQFileField("File", storage: firebaseFileStorage),
+      SQIntField("Int"),
+      SQTimeOfDayField("Time of Day"),
+      SQTimestampField("Timestamp"),
+      SQStringField("Readonly String", value: "I am readonly", editable: false),
+    ],
+    actions: [
+      GoScreenAction("Child Coll",
+          screen: (doc) => CollectionScreen(
+              collection: FirestoreCollection(
+                  id: "Child Collection",
+                  fields: [
+                    SQStringField("Name"),
+                    SQRefField("Parent Doc",
+                        collection: doc.collection,
+                        value: doc.ref,
+                        editable: false),
+                  ],
+                  parentDoc: doc)))
+    ],
+  );
 
   SQCollection testUserCollection = FirestoreCollection(
       id: "Test User Collection",
@@ -64,13 +63,12 @@ void main() async {
       ]);
 
   SQApp.run(
-    SQNavBar([
+    [
       CollectionScreen(collection: testCollection),
       CollectionScreen(collection: simpleCollection),
-    ]),
+    ],
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
-      ProfileScreen(),
     ]),
   );
 }

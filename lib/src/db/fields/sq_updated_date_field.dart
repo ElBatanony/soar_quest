@@ -17,7 +17,7 @@ class UpdatedDateField extends SQField<SQTimestamp> {
   serialize() => value = SQTimestamp.now();
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
+  formField(SQDoc doc, {Function? onChanged}) {
     throw UnimplementedError();
   }
 }

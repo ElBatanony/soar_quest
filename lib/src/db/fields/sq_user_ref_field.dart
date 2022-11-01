@@ -1,16 +1,9 @@
-import '../../auth/sq_auth.dart';
+import '../../sq_auth.dart';
 import 'sq_ref_field.dart';
 
 class SQUserRefField extends SQRefField {
   SQUserRefField(super.name, {super.value, super.editable})
       : super(collection: SQAuth.usersCollection);
-
-  static SQRef get currentUserRef => SQRef(
-      collectionPath: SQAuth.usersCollection.path,
-      docId: SQAuth.user.userId,
-      label: SQAuth.user.isAnonymous
-          ? SQAuth.user.userId
-          : SQAuth.signedInUser.email ?? "");
 
   @override
   SQUserRefField copy() =>
@@ -25,7 +18,7 @@ class SQEditedByField extends SQUserRefField {
 
   @override
   serialize() {
-    value ??= SQUserRefField.currentUserRef;
+    value ??= SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null;
     return super.serialize();
   }
 }

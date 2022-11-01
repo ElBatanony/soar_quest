@@ -12,13 +12,13 @@ class SQImageField extends SQFileField {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQImageFormField(this, onChanged: onChanged, doc: doc);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQImageFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQImageFormField extends SQFileFormField<SQImageField> {
-  const _SQImageFormField(super.field, {super.onChanged, required super.doc});
+  const _SQImageFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQImageFormFieldState();

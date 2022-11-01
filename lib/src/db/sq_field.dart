@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import 'conditions.dart';
 import 'sq_doc.dart';
 
 abstract class SQField<T> {
@@ -12,6 +11,7 @@ abstract class SQField<T> {
   bool editable;
   bool require;
   DocCond show;
+  bool isInline = false;
 
   SQField(
     this.name, {
@@ -27,7 +27,7 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  SQFormField formField({Function? onChanged, SQDoc? doc});
+  SQFormField formField(SQDoc doc, {Function? onChanged});
 
   @override
   String toString() {
@@ -38,10 +38,10 @@ abstract class SQField<T> {
 abstract class SQFormField<Field extends SQField<dynamic>>
     extends FormField<SQFormField<Field>> {
   final Field field;
+  final SQDoc doc;
   final Function? onChanged;
-  final SQDoc? doc;
 
-  const SQFormField(this.field, {this.onChanged, this.doc, super.key})
+  const SQFormField(this.field, this.doc, {this.onChanged, super.key})
       : super(builder: emptyBuilder);
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
@@ -54,7 +54,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     extends FormFieldState<SQFormField<Field>> {
   SQFormField<Field> get formField => (widget as SQFormField<Field>);
   Field get field => formField.field;
-  SQDoc? get doc => formField.doc;
+  SQDoc get doc => formField.doc;
   late bool inForm;
 
   @override
@@ -71,7 +71,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  Widget fieldLabel() {
+  Widget fieldLabel(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(field.name + (field.require ? " *" : ""),
@@ -92,9 +92,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     );
   }
 
-  Widget fieldBuilder(BuildContext context) {
-    return field.formField(onChanged: onChanged, doc: doc);
-  }
+  Widget fieldBuilder(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +101,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          fieldLabel(),
+          if (field.isInline == false) fieldLabel(context),
           (field.editable && inForm)
               ? fieldBuilder(context)
               : readOnlyBuilder(context),

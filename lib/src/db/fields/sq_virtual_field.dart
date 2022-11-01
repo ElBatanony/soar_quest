@@ -1,5 +1,4 @@
 import '../sq_doc.dart';
-import '../conditions.dart';
 
 class SQVirtualField<T> extends SQField<T> {
   SQField<T> field;
@@ -23,11 +22,12 @@ class SQVirtualField<T> extends SQField<T> {
       SQVirtualField<T>(field: field, valueBuilder: valueBuilder, show: show);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    value = valueBuilder(doc!);
+  formField(SQDoc doc, {Function? onChanged}) {
+    value = valueBuilder(doc);
     SQField<T> fieldCopy = field.copy();
     fieldCopy.value = value;
     fieldCopy.editable = false;
-    return fieldCopy.formField();
+    fieldCopy.isInline = isInline;
+    return fieldCopy.formField(doc);
   }
 }

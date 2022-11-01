@@ -64,8 +64,6 @@ class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
 
     await widget.collection.saveDoc(widget.doc);
     exitScreen<bool>(true);
-
-    // TODO: make sure to update previous scren collection
   }
 
   @override

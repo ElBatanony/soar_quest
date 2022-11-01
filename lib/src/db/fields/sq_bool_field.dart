@@ -15,13 +15,13 @@ class SQBoolField extends SQField<bool> {
   SQBoolField copy() => SQBoolField(name, value: value, editable: editable);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQBoolFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQBoolFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQBoolFormField extends SQFormField<SQBoolField> {
-  const _SQBoolFormField(super.field, {super.onChanged});
+  const _SQBoolFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQBoolFormFieldState();

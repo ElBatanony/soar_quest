@@ -41,8 +41,8 @@ class SQFieldListField extends SQListField<SQField<dynamic>> {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQFieldListFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQFieldListFormField(this, doc, onChanged: onChanged);
   }
 }
 
@@ -73,8 +73,9 @@ Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
 class _SQFieldListFormField extends SQFormField<SQFieldListField> {
   final SQFieldListField listField;
 
-  const _SQFieldListFormField(this.listField, {required super.onChanged})
-      : super(listField);
+  const _SQFieldListFormField(this.listField, SQDoc doc,
+      {required super.onChanged})
+      : super(listField, doc);
 
   @override
   createState() => _SQFieldListFormFieldState();
@@ -100,8 +101,24 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: separate SQFieldListFormField into readonly
+  Widget readOnlyBuilder(BuildContext context) {
+    var listItems = listField.fields;
+    var listItemsWidgets = <Widget>[];
+
+    for (int i = 0; i < listItems.length; i++) {
+      listItemsWidgets.add(listItems[i].formField(doc));
+    }
+
+    return Column(
+      children: [
+        Text("${listField.name} (List of ${listItems.length})"),
+        ...listItemsWidgets,
+      ],
+    );
+  }
+
+  @override
+  Widget fieldBuilder(BuildContext context) {
     var listItems = listField.fields;
     var listItemsWidgets = <Widget>[];
 
@@ -110,7 +127,7 @@ class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
         children: [
           Row(
             children: [
-              Expanded(child: listItems[i].formField()),
+              Expanded(child: listItems[i].formField(doc)),
               IconButton(
                   onPressed: () {
                     deleteListItem(i);

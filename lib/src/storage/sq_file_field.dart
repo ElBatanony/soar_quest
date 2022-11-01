@@ -26,15 +26,14 @@ class SQFileField extends SQStringField {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return SQFileFormField(this, onChanged: onChanged, doc: doc);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return SQFileFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class SQFileFormField<FileField extends SQFileField>
     extends SQFormField<FileField> {
-  const SQFileFormField(super.field,
-      {super.key, super.onChanged, required super.doc});
+  const SQFileFormField(super.field, super.doc, {super.key, super.onChanged});
 
   @override
   createState() => SQFileFormFieldState<FileField>();
@@ -56,7 +55,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       await field.storage.uploadFile(
-          doc: doc!,
+          doc: doc,
           file: pickedFile,
           field: field,
           onUpload: () => onChanged());
@@ -64,7 +63,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
   }
 
   Future<void> deleteFile() async {
-    await field.storage.deleteFile(doc: doc!, field: field);
+    await field.storage.deleteFile(doc: doc, field: field);
     onChanged();
   }
 

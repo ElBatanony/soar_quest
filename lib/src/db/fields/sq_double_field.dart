@@ -17,13 +17,13 @@ class SQDoubleField extends SQField<double> {
   SQDoubleField copy() => SQDoubleField(name, value: value, editable: editable);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQDoubleFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQDoubleFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQDoubleFormField extends SQFormField<SQDoubleField> {
-  const _SQDoubleFormField(super.field, {super.onChanged});
+  const _SQDoubleFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQDoubleFormFieldState();

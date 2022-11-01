@@ -38,9 +38,9 @@ void main() async {
     ],
     actions: [
       GoScreenAction("View Lessons",
-          screen: (doc) => CollectionScreen(
+          screen: (courseDoc) => CollectionScreen(
               collection: CollectionSlice(lessons,
-                  filter: DocRefFilter("Course", doc.ref))))
+                  filter: RefFilter("Course", courseDoc.ref))))
     ],
     readOnly: !isAdmin,
   );
@@ -51,13 +51,13 @@ void main() async {
       SQStringField("Lesson Name"),
       SQStringField("Lesson Description"),
       SQRefField("Course", collection: courses),
-      VideoLinkField("Video Link"),
+      SQVideoLinkField("Video Link"),
     ],
     readOnly: !isAdmin,
   );
 
   SQApp.run(
-    SQNavBar([
+    [
       CategorySelectScreen(
         title: "Categories",
         collection: courses,
@@ -73,7 +73,7 @@ void main() async {
       ),
       CollectionScreen(collection: lessons, show: (context) => isAdmin),
       if (!isAdmin) UserSettings.settingsScreen()
-    ]),
-    drawer: SQDrawer([ProfileScreen()]),
+    ],
+    drawer: SQDrawer([]),
   );
 }

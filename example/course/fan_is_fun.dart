@@ -32,13 +32,14 @@ void main() async {
         valueBuilder: (doc) => bookings.docs
             .where((booking) => booking.value<SQRef>("Event") == doc.ref)
             .length),
-    SQRefDocsField("Bookings",
+    SQInverseRefsField("Bookings",
         refCollection: () => bookings, refFieldName: "Event"),
   ], actions: [
     CustomAction(
       "Book Event",
-      show: DocCond((eventDoc, context) => !bookings.docs.any((booking) =>
-              booking.value<SQRef>("User") == SQUserRefField.currentUserRef &&
+      show: isSignedIn &
+          DocCond((eventDoc, context) => !bookings.docs.any((booking) =>
+              booking.value<SQRef>("User") == SQAuth.userDoc!.ref &&
               booking.value<SQRef>("Event") == eventDoc.ref)) &
           DocCond((eventDoc, context) =>
               bookings.docs
@@ -48,7 +49,7 @@ void main() async {
               eventDoc.value<int>("Capacity")!),
       customExecute: (eventDoc, context) async {
         final newBooking = bookings.newDoc(initialFields: [
-          SQUserRefField("User", value: SQUserRefField.currentUserRef),
+          SQUserRefField("User", value: SQAuth.userDoc!.ref),
           SQRefField("Event", collection: events, value: eventDoc.ref),
         ]);
         await bookings.saveDoc(newBooking);
@@ -83,15 +84,15 @@ void main() async {
   await events.loadCollection();
 
   SQApp.run(
-    SQNavBar([
+    [
       CollectionScreen(collection: feedPosts),
       CollectionScreen(collection: events),
-    ]),
+    ],
     drawer: SQDrawer([
       CollectionScreen(collection: bookings),
       CollectionScreen(collection: teams),
       CollectionScreen(collection: sports),
-      ProfileScreen(),
+      SQProfileScreen(),
     ]),
   );
 }

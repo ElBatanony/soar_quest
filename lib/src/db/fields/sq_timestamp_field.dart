@@ -20,13 +20,13 @@ class SQTimestampField extends SQField<SQTimestamp> {
       SQTimestampField(name, value: value, editable: editable);
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQTimestampFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQTimestampFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQTimestampFormField extends SQFormField<SQTimestampField> {
-  const _SQTimestampFormField(super.field, {super.onChanged});
+  const _SQTimestampFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQTimestampFormFieldState();

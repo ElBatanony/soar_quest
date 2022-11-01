@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
-
-export 'sq_navbar.dart';
-export 'sq_drawer.dart';
+import '../ui/sq_navbar.dart';
 
 Future<T?> _goToScreen<T>(
   Screen screen,
@@ -35,7 +33,7 @@ class Screen extends StatefulWidget {
   const Screen(
     this.title, {
     this.isInline = false,
-    this.icon,
+    this.icon = Icons.stay_current_landscape,
     this.show = alwaysShowScreen,
     super.key,
   });
@@ -69,27 +67,32 @@ class ScreenState<T extends Screen> extends State<T> {
 
   FloatingActionButton? floatingActionButton(BuildContext context) => null;
 
-  Widget? bottomNavBar(BuildContext context) => SQApp.navbar;
+  Widget? bottomNavBar(BuildContext context) {
+    if (SQApp.navbarScreens.length > 1) return SQNavBar(SQApp.navbarScreens);
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
     final Widget body = Builder(builder: (context2) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
+      return Container(
+        padding: widget.isInline ? null : EdgeInsets.all(16.0),
         child: screenBody(context2),
       );
     });
 
     if (widget.isInline) return body;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: appBar(context),
-      drawer: SQApp.drawer,
-      body: body,
-      floatingActionButton: floatingActionButton(context),
-      bottomNavigationBar: bottomNavBar(context),
-    );
+    return Builder(builder: (context2) {
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: appBar(context2),
+        drawer: SQApp.drawer,
+        body: body,
+        floatingActionButton: floatingActionButton(context2),
+        bottomNavigationBar: bottomNavBar(context2),
+      );
+    });
   }
 
   static ScreenState of(BuildContext context) {

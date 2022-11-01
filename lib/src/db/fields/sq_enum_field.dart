@@ -18,15 +18,15 @@ class SQEnumField<T> extends SQField<T> {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) =>
-      _SQEnumFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) =>
+      _SQEnumFormField(this, doc, onChanged: onChanged);
 
   @override
   T? parse(source) => subfield.parse(source);
 }
 
 class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
-  const _SQEnumFormField(super.field, {required super.onChanged});
+  const _SQEnumFormField(super.field, super.doc, {required super.onChanged});
 
   @override
   createState() => _SQEnumFormFieldState<T>();
@@ -34,14 +34,15 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
-  Widget fieldLabel() => inForm ? super.fieldLabel() : Container();
+  Widget fieldLabel(context) =>
+      inForm ? super.fieldLabel(context) : Container();
 
   @override
   Widget readOnlyBuilder(BuildContext context) {
     SQField<T> subfieldCopy = field.subfield.copy();
     subfieldCopy.value = field.value;
     subfieldCopy.editable = false;
-    return subfieldCopy.formField();
+    return subfieldCopy.formField(formField.doc);
   }
 
   @override

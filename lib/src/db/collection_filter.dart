@@ -1,3 +1,4 @@
+import '../sq_auth.dart';
 import 'sq_doc.dart';
 import 'fields/sq_ref_field.dart';
 
@@ -63,11 +64,11 @@ class StringContainsFilter extends CollectionFieldFilter {
   }
 }
 
-class DocRefFilter extends CollectionFilter {
+class RefFilter extends CollectionFilter {
   String fieldName;
   dynamic fieldValue;
 
-  DocRefFilter(this.fieldName, this.fieldValue);
+  RefFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
@@ -79,6 +80,12 @@ class DocRefFilter extends CollectionFilter {
           docRef.collectionPath == fieldValue.collectionPath;
     }).toList();
   }
+}
+
+class UserFilter extends RefFilter {
+  UserFilter(String userFieldName, {SQRef? userRef})
+      : super(userFieldName,
+            userRef ?? (SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null));
 }
 
 class DocRefFieldFilter extends CollectionFieldFilter {

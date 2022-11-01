@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../ui/sq_button.dart';
 import '../screens/screen.dart';
-import 'conditions.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
 
@@ -28,7 +28,6 @@ abstract class SQAction {
   Future<void> execute(SQDoc doc, BuildContext context) async {
     print("Executing action: $name");
     await onExecute(doc, context);
-    ScreenState.of(context).refreshScreen();
   }
 
   Widget button(SQDoc doc, {bool isIcon = false, double iconSize = 24.0}) {
@@ -77,7 +76,11 @@ class _SQActionButtonState extends State<SQActionButton> {
     return SQButton.icon(
       widget.action.icon,
       iconSize: widget.iconSize,
-      text: widget.isIcon ? null : widget.action.name,
+      text: widget.isIcon
+          ? null
+          : widget.action.name.isEmpty
+              ? null
+              : widget.action.name,
       onPressed: () async {
         bool confirmed = widget.action.confirm == false ||
             await showConfirmationDialog(
@@ -112,6 +115,7 @@ class GoScreenAction extends SQAction {
   @override
   execute(SQDoc doc, BuildContext context) async {
     await screen(doc).go(context, replace: replace);
+    ScreenState.of(context).refreshScreen();
     await super.execute(doc, context);
   }
 }
@@ -130,22 +134,39 @@ class GoEditAction extends GoScreenAction {
         );
 }
 
-class GoDerivedDocAction extends GoScreenAction {
+class CreateDocAction extends SQAction {
   SQCollection Function() getCollection;
   List<SQField<dynamic>> Function(SQDoc) initialFields;
+  bool form;
+  bool goBack;
 
-  GoDerivedDocAction(
+  CreateDocAction(
     super.name, {
     super.icon,
     super.show,
     super.onExecute,
     required this.getCollection,
     required this.initialFields,
-  }) : super(
-          screen: (doc) => FormScreen(
-            getCollection().newDoc(initialFields: initialFields(doc)),
-          ),
-        );
+    this.form = true,
+    this.goBack = true,
+  });
+
+  @override
+  Future<void> execute(SQDoc doc, BuildContext context) async {
+    final newDoc = getCollection().newDoc(initialFields: initialFields(doc));
+
+    if (form) {
+      bool created = await FormScreen(newDoc).go<bool>(context) ?? false;
+      if (created && !goBack) await DocScreen(newDoc).go(context);
+    } else {
+      getCollection().saveDoc(newDoc);
+      if (!goBack) DocScreen(newDoc).go(context);
+    }
+
+    ScreenState.of(context).refreshScreen();
+
+    return super.execute(doc, context);
+  }
 }
 
 class DeleteDocAction extends SQAction {
@@ -184,6 +205,7 @@ class SetFieldsAction extends SQAction {
       docField.value = entry.value;
     }
     await doc.collection.saveDoc(doc);
+    ScreenState.of(context).refreshScreen();
     await super.execute(doc, context);
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/collection_screens/select_doc_screen.dart';
+import '../../screens/doc_screen.dart';
+import '../../screens/form_screen.dart';
+import '../../screens/screen.dart';
+import '../../sq_auth.dart';
 import '../../ui/sq_button.dart';
-import '../../../screens.dart';
 import '../sq_action.dart';
 import '../sq_collection.dart';
 import 'sq_user_ref_field.dart';
@@ -39,13 +43,13 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  formField({Function? onChanged, SQDoc? doc}) {
-    return _SQRefFormField(this, onChanged: onChanged);
+  formField(SQDoc doc, {Function? onChanged}) {
+    return _SQRefFormField(this, doc, onChanged: onChanged);
   }
 }
 
 class _SQRefFormField extends SQFormField<SQRefField> {
-  const _SQRefFormField(super.field, {super.onChanged});
+  const _SQRefFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQRefFormFieldState();
@@ -54,8 +58,10 @@ class _SQRefFormField extends SQFormField<SQRefField> {
 class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
   @override
   void initState() {
-    if (field is SQEditedByField && ScreenState.of(context) is FormScreenState)
-      field.value = SQUserRefField.currentUserRef;
+    if (SQAuth.isSignedIn &&
+        field is SQEditedByField &&
+        ScreenState.of(context) is FormScreenState)
+      field.value = SQAuth.userDoc!.ref;
     super.initState();
   }
 
@@ -69,7 +75,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
       children: [
         Text(ref.label),
         if (doc != null)
-          GoScreenAction("View", screen: (doc) => DocScreen(doc)).button(doc)
+          GoScreenAction("", screen: (doc) => DocScreen(doc)).button(doc)
       ],
     );
   }
