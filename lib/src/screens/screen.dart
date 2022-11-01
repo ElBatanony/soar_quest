@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
-import 'sq_navbar.dart';
+import '../ui/sq_navbar.dart';
 
 Future<T?> _goToScreen<T>(
   Screen screen,
