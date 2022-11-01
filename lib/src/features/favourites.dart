@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/screens.dart';
 
+import '../screens/collection_screen.dart';
+import '../screens/doc_screen.dart';
 import '../sq_auth.dart';
 import '../db/local_collection.dart';
 import '../db/sq_action.dart';
