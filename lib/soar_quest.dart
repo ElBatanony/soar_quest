@@ -2,6 +2,7 @@ export 'src/sq_app.dart';
 export 'src/sq_auth.dart';
 export 'db.dart';
 export 'screens.dart';
+export 'fields.dart';
 
 // File Storage
 export 'src/storage/sq_file_storage.dart';
