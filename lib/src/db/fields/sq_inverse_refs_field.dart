@@ -24,21 +24,22 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
-    return _SQRefDocsFormField(this, doc,
+    return _SQInverseRefsFormField(this, doc,
         refDocs: valueBuilder(doc), onChanged: onChanged);
   }
 }
 
-class _SQRefDocsFormField extends SQFormField<SQInverseRefsField> {
+class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
   final List<SQDoc> refDocs;
-  const _SQRefDocsFormField(super.field, super.doc,
+  const _SQInverseRefsFormField(super.field, super.doc,
       {required this.refDocs, required super.onChanged});
 
   @override
-  createState() => _SQRefDocsFormFieldState();
+  createState() => _SQInverseRefsFormFieldState();
 }
 
-class _SQRefDocsFormFieldState extends SQFormFieldState<SQInverseRefsField> {
+class _SQInverseRefsFormFieldState
+    extends SQFormFieldState<SQInverseRefsField> {
   Future<void> initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
     onChanged();

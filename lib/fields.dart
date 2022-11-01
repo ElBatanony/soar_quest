@@ -13,7 +13,7 @@ export 'src/db/fields/sq_list_field.dart';
 export 'src/db/fields/show_field_dialog.dart';
 export 'src/db/fields/sq_virtual_field.dart';
 export 'src/db/fields/sq_enum_field.dart';
-export 'src/db/fields/sq_ref_docs_field.dart';
+export 'src/db/fields/sq_inverse_refs_field.dart';
 
 // File Storage Fields
 export 'src/storage/sq_file_field.dart';
