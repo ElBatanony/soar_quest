@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../screens.dart';
+import '../../screens/collection_screens/table_screen.dart';
 import '../collection_slice.dart';
 import '../sq_action.dart';
 import '../sq_collection.dart';
