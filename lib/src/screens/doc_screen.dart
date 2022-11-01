@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/db.dart';
 
+import '../db/sq_collection.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {
