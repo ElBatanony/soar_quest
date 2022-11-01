@@ -12,6 +12,8 @@ export 'src/storage/sq_image_field.dart';
 // UI Components
 export 'src/ui/sq_button.dart';
 export 'src/ui/snackbar.dart';
+export 'src/screens/sq_navbar.dart';
+export 'src/screens/sq_drawer.dart';
 
 // Features
 export 'src/features/favourites.dart';

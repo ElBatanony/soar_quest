@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../sq_app.dart';
 import 'sq_navbar.dart';
 
-export 'sq_navbar.dart';
-export 'sq_drawer.dart';
-
 Future<T?> _goToScreen<T>(
   Screen screen,
   BuildContext context, {
