@@ -109,3 +109,88 @@ await SQApp.init("My Cool App",
       userDocFields: [SQStringField("Telegram Handle")],
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 ```
+
+### App Settings
+
+Local data used to configure the application. Example: dark mode vs light mode.
+
+See `UserSettings`.
+
+## Data: Collections, Docs, and Fields
+
+Compared to Google Sheets. Collections are sheets. Docs are rows. Fields are column cells.
+
+Compared to SQL. Collections are Tables. Docs are rows (entries). Fields are data values.
+
+Each collection has a set of fields describing the data the docs of the collection would have.
+
+### SQCollection
+
+There are several collections provided by SQ.
+The difference if the location of storage.
+The behave the same.
+
+- `FirestoreCollection`
+- `LocalCollection`
+- `InMemoryCollection`
+
+#### CollectionSlice
+
+A way to filter some docs from a collection. TBC.
+
+## DocCondition
+
+### SQDoc
+
+Each piece of information in your app is contained in a doc.
+Docs have fields that contain values.
+
+### Fields
+
+Fields represent the data values (or types) that your docs could contain.
+Soar Quest provides numerous fields. Some of them include:
+
+- `SQStringField`. Text.
+- `SQBoolField`. True/False. Yes/No.
+- `SQIntField`. Integer numbers.
+- `SQDoubleField`. Floating point (fractional) numbers.
+- `SQRefField`. A value that points to another doc (in a collection).
+- `SQInverseRefsField`. An automatically generated list of docs referring/pointing to this doc.
+- `SQTimestampField`. Date (day/month/year).
+- `SQTimeOfDayField`. Time of day (hour/minutes).
+- `SQFileField`. Storing files.
+- `SQImageField`. Storing images.
+
+## Screens
+
+Screens include by default the `AppBar` and bottom `NavBar`.
+
+Screens could be extended and customized.
+
+### DocScreen
+
+<!-- Each document comes with a doc screen that displays -->
+
+### FormScreen
+
+### Collection Screens
+
+- `CollectionScreen`
+- `GalleryScreen`
+- `TableScreen`
+
+## SQAction
+
+Actions on data (docs).
+
+- `GoScreenAction`
+- `SetFieldsAction`
+- `GoEditAction`
+- `CreateDocAction`
+- `DeleteDocAction`
+- `OpenUrlAction`
+- `CustomAction`
+
+## File Storage
+
+Uses Firebase Cloud Storage.
