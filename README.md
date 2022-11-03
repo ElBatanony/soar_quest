@@ -171,13 +171,16 @@ Screens could be extended and customized.
 
 <!-- Each document comes with a doc screen that displays -->
 
-### FormScreen
-
 ### Collection Screens
 
 - `CollectionScreen`
 - `GalleryScreen`
 - `TableScreen`
+
+### FormScreen
+
+The `FormScreen` is the screen where you edit the data (fields) of an `SQDoc`.
+You do not need to interact with the `FormScreen` directly.
 
 ## SQAction
 
