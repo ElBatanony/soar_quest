@@ -196,4 +196,10 @@ Actions on data (docs).
 
 ## File Storage
 
-Uses Firebase Cloud Storage.
+File storage is handled by Firebase Cloud Stroage.
+You need to have Firebase set up to be able to upload files and images.
+
+To use the storage capabilities, add the following fields to your collection's fields:
+
+- `SQFileField`. For storing files.
+- `SQImageField`. Fot Storing images.
