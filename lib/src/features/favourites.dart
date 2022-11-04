@@ -19,7 +19,8 @@ class FavouritesFeature {
         customExecute: (doc, context) async {
           var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
           newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
-          favouritesCollection.saveDoc(newFavDoc);
+          await favouritesCollection.saveDoc(newFavDoc);
+          ScreenState.of(context).refreshScreen();
         },
       );
 
@@ -28,7 +29,8 @@ class FavouritesFeature {
         icon: Icons.delete_forever_sharp,
         show: isInFavourites(),
         customExecute: (doc, context) async {
-          favouritesCollection.deleteDoc(doc);
+          await favouritesCollection.deleteDoc(doc);
+          ScreenState.of(context).refreshScreen();
         },
       );
 
