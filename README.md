@@ -38,6 +38,20 @@ dependencies:
   firebase_core:
 ```
 
+### Android Setup
+
+To compile your app in Android, update your `minSdkVersion` to 19 (or higher), and enable `multiDex`.
+You can find the settings in `android\app\build.gradle`.
+
+```gradle
+android {
+  defaultConfig {
+    minSdkVersion 19
+    multiDexEnabled true
+  }
+}                                                              
+```
+
 ## SQApp
 
 The root of your application uses `SQApp`.
