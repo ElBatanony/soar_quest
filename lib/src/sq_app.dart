@@ -26,10 +26,10 @@ class SQApp {
         theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
 
     WidgetsFlutterBinding.ensureInitialized();
-    if (firebaseOptions != null) {
-      await initializeFirebaseApp(firebaseOptions);
-      await SQAuth.init(userDocFields: userDocFields, methods: authMethods);
-    }
+    if (firebaseOptions != null) await initializeFirebaseApp(firebaseOptions);
+
+    SQAuth.offline = firebaseOptions == null;
+    await SQAuth.init(userDocFields: userDocFields, methods: authMethods);
   }
 
   static void run(
