@@ -12,7 +12,7 @@ class SQDrawer extends StatelessWidget {
     if (UserSettings.initialized &&
         screens.any((screen) => screen.title == "Settings") == false)
       screens.add(UserSettings.settingsScreen());
-    screens.add(SQProfileScreen());
+    if (SQAuth.offline == false) screens.add(SQProfileScreen());
   }
 
   @override
