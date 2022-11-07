@@ -25,7 +25,7 @@ The functionality is described briefly in the following sections.
 Add the following line to your dependencies in `pubspec.yaml`.
 
 ```yaml
-soar_quest: ^0.5.0
+soar_quest: ^0.6.0
 ```
 
 The depndencies section will look something like:
@@ -34,7 +34,7 @@ The depndencies section will look something like:
 dependencies:
   flutter:
     sdk: flutter
-  soar_quest: ^0.5.0
+  soar_quest: ^0.6.0
   firebase_core:
 ```
 
