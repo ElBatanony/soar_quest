@@ -304,4 +304,5 @@ To use the storage capabilities, add the following fields to your collection's f
 
 ## Contribution
 
-The best way to contribute is to suggest additions to the package (as GitHub issues) and using it in your projects 😉.
+The best way to contribute is to [suggest additions](https://github.com/ElBatanony/soar_quest/issues/new) to the package and using it in your projects.
+Consider leaving a star on GitHub 😉.
