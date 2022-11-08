@@ -301,3 +301,7 @@ To use the storage capabilities, add the following fields to your collection's f
 
 - `SQFileField`. For storing files.
 - `SQImageField`. Fot Storing images.
+
+## Contribution
+
+The best way to contribute is to suggest additions to the package (as GitHub issues) and using it in your projects 😉.
