@@ -282,15 +282,48 @@ You would not need to interact with the `FormScreen` directly, unless you want t
 
 ## SQAction
 
-Actions on data (docs).
+Actions on (or from) data (docs).
+Actions are assigned when creating a `SQCollection`.
 
-- `GoScreenAction`
+The following examples are the most common examples of actions provided by default:
+
 - `SetFieldsAction`
-- `GoEditAction`
+- `GoScreenAction`
 - `CreateDocAction`
-- `DeleteDocAction`
 - `OpenUrlAction`
 - `CustomAction`
+
+The following are a few examples of how to set actions for a collection.
+
+```dart
+late SQCollection simpleCollection;
+simpleCollection = FirestoreCollection(id: "Simple Collection", fields: [
+  SQStringField("Name"),
+  SQBoolField("Magic"),
+  SQStringField("Status", value: "To-Do"),
+  SQIntField("Points"),
+], actions: [
+  SetFieldsAction("Mark as Done",
+      getFields: (doc) => {
+            "Status": "Done",
+            "Points": (doc.value<int>("Points") ?? 0) + 1,
+          }),
+  CreateDocAction("Create Magic Doc",
+      getCollection: () => simpleCollection,
+      initialFields: (doc) => [
+            SQStringField("Name", value: "Magic Doc"),
+            SQBoolField("Magic", value: true),
+            SQIntField("Points", value: 99),
+          ]),
+  CustomAction("Do Maths", customExecute: (doc, context) async {
+    int x = doc.value<int>("Points") ?? 0;
+    int y = x + 5;
+    print("Magic number: $y");
+  }),
+  CustomAction("print hi",
+      customExecute: (doc, context) async => print("hi")),
+]);
+```
 
 ## File Storage
 
