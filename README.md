@@ -195,21 +195,90 @@ Soar Quest provides numerous fields. Some of them include:
 Screens include by default the `AppBar` and bottom `NavBar`.
 
 Screens could be extended and customized.
+The following piece of code shows how to create a custom screen.
+Add your custom implementation inside the `screenBody` method.
 
-### DocScreen
+```dart
+class MyCustomScreen extends Screen {
+  const MyCustomScreen(String title, {Key? key}) : super(title, key: key);
 
-<!-- Each document comes with a doc screen that displays -->
+  @override
+  State<MyCustomScreen> createState() => _MyCustomScreenState();
+}
+
+class _MyCustomScreenState extends ScreenState<MyCustomScreen> {
+  @override
+  Widget screenBody(BuildContext context) {
+    // TODO: implement screenBody
+    return super.screenBody(context);
+  }
+}
+```
 
 ### Collection Screens
 
-- `CollectionScreen`
-- `GalleryScreen`
-- `TableScreen`
+Prebuild screens that displays the docs of a collection.
+
+- `CollectionScreen`. The default list of docs screen.
+- `GalleryScreen`. A grid (2 per row) screen.
+- `TableScreen`. Displays doc fields and values in table format.
+
+```dart
+SQApp.run(
+  [
+    CollectionScreen(collection: testCollection),
+    GalleryScreen(collection: testCollection),
+    TableScreen(collection: testCollection),
+  ],
+);
+```
+
+Use the following code to create a custom `CollectionScreen`.
+
+```dart
+class MyCustomCollectionScreen extends CollectionScreen {
+  MyCustomCollectionScreen({super.title, required super.collection, super.key});
+
+  @override
+  State<MyCustomCollectionScreen> createState() => _MyCustomCollectionScreenState();
+}
+
+class _MyCustomCollectionScreenState extends CollectionScreenState<MyCustomCollectionScreen> {
+  @override
+  Widget screenBody(BuildContext context) {
+    // TODO: implement screenBody for MyCustomCollectionScreen
+    return super.screenBody(context);
+  }
+}
+```
+
+### DocScreen
+
+A screen that displays the fields of a single document.
+
+Use the following code to create a custom `DocScreen`.
+
+```dart
+class MyCustomDocScreen extends DocScreen {
+  MyCustomDocScreen(super.doc,{super.key});
+
+  @override
+  State<MyCustomDocScreen> createState() => _MyCustomDocScreenState();
+}
+
+class _MyCustomDocScreenState extends DocScreenState<MyCustomDocScreen> {
+  @override
+  Widget screenBody(BuildContext context) {
+    // TODO: implement screenBody for MyCustomDocScreen
+    return super.screenBody(context);
+  }
+}
+```
 
 ### FormScreen
 
 The `FormScreen` is the screen where you edit the data (fields) of an `SQDoc`.
-You do not need to interact with the `FormScreen` directly.
+You would not need to interact with the `FormScreen` directly, unless you want to customize the form.
 
 ## SQAction
 
