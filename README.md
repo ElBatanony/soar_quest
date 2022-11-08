@@ -157,7 +157,15 @@ The behave the same.
 
 #### CollectionSlice
 
-A way to filter some docs from a collection. TBC.
+`CollectionSlice` method to filter docs from a collection.
+Treated by other components of SQ as an `SQCollection`.
+
+```dart
+CollectionSlice slice =
+      CollectionSlice(testCollection, filter: ValueFilter("Status", "Done"));
+
+SQApp.run([CollectionScreen(collection: slice)]);
+```
 
 ## DocCondition
 
