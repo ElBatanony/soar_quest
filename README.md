@@ -124,11 +124,18 @@ await SQApp.init("My Cool App",
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 ```
 
-### App Settings
+### User Settings
 
 Local data used to configure the application. Example: dark mode vs light mode.
+The Settings screen appears automatically in the drawer (if you include a drawer).
 
-See `UserSettings`.
+```dart
+await UserSettings.setSettings([ SQBoolField("Enable feature X") ]);
+
+SQApp.run([
+  CollectionScreen(collection: testCollection),
+], drawer: SQDrawer([]) );
+```
 
 ## Data: Collections, Docs, and Fields
 
