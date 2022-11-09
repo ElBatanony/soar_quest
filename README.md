@@ -25,6 +25,13 @@ The framework provides the following set of functionality and components:
 
 The functionality is described briefly in the following sections.
 
+### Motivation
+
+This project is driven by a belief that the current software engineering processes are too inefficient.
+A guiding principle is that new code should be added only to provide new value to the app's user.
+This would entail less code to create apps, less effort, and faster development.
+Many design decisions here are inspired by No-code tools, due to the efficiency they provide for creators.
+
 ## Installing
 
 Add the following line to your dependencies in `pubspec.yaml`.
