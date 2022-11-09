@@ -2,6 +2,8 @@
 
 A framework to build applications faster. Built on Flutter and Firebase.
 
+[![pub package](https://img.shields.io/pub/v/soar_quest.svg?&logo=Flutter&color=blue)](https://pub.dev/packages/soar_quest)
+
 ![Soar Quest Logo](logo.png)
 
 ## Introduction
