@@ -2,6 +2,8 @@
 
 A framework to build applications faster. Built on Flutter and Firebase.
 
+![Soar Quest Logo](logo.png)
+
 ## Introduction
 
 Soar Quest is designed to help you get straight to providing value to your users.
@@ -339,3 +341,7 @@ To use the storage capabilities, add the following fields to your collection's f
 
 The best way to contribute is to [suggest additions](https://github.com/ElBatanony/soar_quest/issues/new) to the package and using it in your projects.
 Consider leaving a star on GitHub 😉.
+
+## Acknowledgements
+
+The logo was generated using the [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion) AI image generation tool.
