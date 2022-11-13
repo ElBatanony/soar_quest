@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
+import '../screens/screen.dart';
 import '../sq_auth.dart';
 import '../db/local_collection.dart';
 import '../db/sq_action.dart';
@@ -19,7 +20,8 @@ class FavouritesFeature {
         customExecute: (doc, context) async {
           var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
           newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
-          favouritesCollection.saveDoc(newFavDoc);
+          await favouritesCollection.saveDoc(newFavDoc);
+          ScreenState.of(context).refreshScreen();
         },
       );
 
@@ -28,7 +30,8 @@ class FavouritesFeature {
         icon: Icons.delete_forever_sharp,
         show: isInFavourites(),
         customExecute: (doc, context) async {
-          favouritesCollection.deleteDoc(doc);
+          await favouritesCollection.deleteDoc(doc);
+          ScreenState.of(context).refreshScreen();
         },
       );
 
@@ -54,9 +57,8 @@ class FavouritesFeature {
 
 class FavouritesScreen extends CollectionScreen {
   FavouritesScreen(
-      {required FavouritesFeature favouritesFeature,
-      super.docScreen,
-      super.isInline,
-      super.key})
-      : super(collection: favouritesFeature.favouritesCollection);
+      {required FavouritesFeature favouritesFeature, super.isInline, super.key})
+      : super(
+            collection: favouritesFeature.favouritesCollection,
+            docScreen: (favDoc) => DocScreen(favDoc.value<SQRef>("ref")!.doc));
 }

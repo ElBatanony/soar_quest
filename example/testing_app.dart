@@ -66,6 +66,8 @@ void main() async {
     [
       CollectionScreen(collection: testCollection),
       CollectionScreen(collection: simpleCollection),
+      FavouritesScreen(
+          favouritesFeature: FavouritesFeature(collection: simpleCollection))
     ],
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),

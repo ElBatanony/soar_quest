@@ -19,16 +19,17 @@ class SQApp {
     ThemeData? theme,
     List<SQField<dynamic>>? userDocFields,
     FirebaseOptions? firebaseOptions,
+    List<AuthMethod>? authMethods,
   }) async {
     SQApp.name = name;
     SQApp.theme =
         theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
 
     WidgetsFlutterBinding.ensureInitialized();
-    if (firebaseOptions != null) {
-      await initializeFirebaseApp(firebaseOptions);
-      await SQAuth.init(userDocFields: userDocFields);
-    }
+    if (firebaseOptions != null) await initializeFirebaseApp(firebaseOptions);
+
+    SQAuth.offline = firebaseOptions == null;
+    await SQAuth.init(userDocFields: userDocFields, methods: authMethods);
   }
 
   static void run(

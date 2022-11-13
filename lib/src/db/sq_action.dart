@@ -185,6 +185,7 @@ class DeleteDocAction extends SQAction {
   @override
   execute(SQDoc doc, BuildContext context) async {
     await doc.collection.deleteDoc(doc);
+    ScreenState.of(context).refreshScreen();
     if (exitScreen) ScreenState.of(context).exitScreen();
     await super.execute(doc, context);
   }

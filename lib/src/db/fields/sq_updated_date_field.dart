@@ -1,8 +1,8 @@
 import '../sq_doc.dart';
 import 'types/sq_timestamp.dart';
 
-class UpdatedDateField extends SQField<SQTimestamp> {
-  UpdatedDateField(String name, {SQTimestamp? value})
+class SQUpdatedDateField extends SQField<SQTimestamp> {
+  SQUpdatedDateField(String name, {SQTimestamp? value})
       : super(name, value: value, editable: false);
 
   @override
@@ -11,7 +11,7 @@ class UpdatedDateField extends SQField<SQTimestamp> {
   }
 
   @override
-  UpdatedDateField copy() => UpdatedDateField(name, value: value);
+  SQUpdatedDateField copy() => SQUpdatedDateField(name, value: value);
 
   @override
   serialize() => value = SQTimestamp.now();
