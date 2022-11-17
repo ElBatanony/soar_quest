@@ -9,21 +9,16 @@ class CollectionSlice implements SQCollection {
   final List<String>? sliceActions;
 
   @override
-  bool updates, adds, deletes, readOnly;
+  late SQUpdates updates;
 
-  CollectionSlice(this.collection,
-      {this.updates = true,
-      this.adds = true,
-      this.deletes = true,
-      this.readOnly = false,
-      this.filter,
-      this.sliceFields,
-      this.sliceActions}) {
-    updates = updates && collection.updates;
-    adds = adds && collection.adds;
-    deletes = deletes && collection.deletes;
-    readOnly = readOnly && collection.readOnly;
-    if (readOnly) updates = adds = deletes = false;
+  CollectionSlice(
+    this.collection, {
+    this.filter,
+    this.sliceFields,
+    this.sliceActions,
+    SQUpdates updates = const SQUpdates(),
+  }) {
+    this.updates = updates & collection.updates;
   }
 
   @override

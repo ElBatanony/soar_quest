@@ -11,6 +11,28 @@ import 'collection_filter.dart';
 export 'sq_doc.dart';
 export 'collection_filter.dart';
 
+class SQUpdates {
+  final bool edits, adds, deletes;
+
+  const SQUpdates({
+    this.edits = true,
+    this.adds = true,
+    this.deletes = true,
+  });
+
+  SQUpdates.readOnly() : this(edits: false, adds: false, deletes: false);
+
+  bool get readOnly => !edits && !adds && !deletes;
+
+  SQUpdates operator &(SQUpdates other) {
+    return SQUpdates(
+      edits: edits && other.edits,
+      adds: adds && other.adds,
+      deletes: deletes && other.deletes,
+    );
+  }
+}
+
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
   final SQDoc? parentDoc;
@@ -19,7 +41,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   final List<SQAction> actions;
 
   late final String path;
-  late bool updates, adds, deletes, readOnly;
+  SQUpdates updates;
 
   List<DocType> docs = [];
 
@@ -29,22 +51,17 @@ abstract class SQCollection<DocType extends SQDoc> {
     required this.id,
     required this.fields,
     this.parentDoc,
-    this.readOnly = false,
-    this.updates = true,
-    this.adds = true,
-    this.deletes = true,
+    this.updates = const SQUpdates(),
     List<SQAction>? actions,
   }) : actions = actions ?? [] {
     path = parentDoc == null
         ? "Example Apps/${SQApp.name}/$id"
         : "${parentDoc!.path}/$id";
 
-    if (readOnly) updates = adds = deletes = false;
-
     if (byPath(path) == null) _collections.add(this);
 
-    if (updates) this.actions.add(GoEditAction());
-    if (deletes) this.actions.add(DeleteDocAction(exitScreen: true));
+    if (updates.edits) this.actions.add(GoEditAction());
+    if (updates.deletes) this.actions.add(DeleteDocAction(exitScreen: true));
   }
 
   bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);

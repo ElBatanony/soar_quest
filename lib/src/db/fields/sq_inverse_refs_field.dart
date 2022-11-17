@@ -57,7 +57,7 @@ class _SQInverseRefsFormFieldState
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         super.fieldLabel(context),
-        if (field.collection.adds)
+        if (field.collection.updates.adds)
           CreateDocAction("Add",
               getCollection: () => field.collection,
               initialFields: (_) => [

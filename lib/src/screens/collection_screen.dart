@@ -56,7 +56,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
         name: "Create Doc",
         icon: Icons.add,
         onExecute: (doc, context) async => refreshScreen(),
-        show: CollectionCond((collection) => collection.adds));
+        show: CollectionCond((collection) => collection.updates.adds));
     loadData();
     super.initState();
   }
@@ -111,7 +111,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
 
   @override
   FloatingActionButton? floatingActionButton(BuildContext context) {
-    if (collection.adds)
+    if (collection.updates.adds)
       return createNewDocAction.fab(collection.newDoc(), context);
     return null;
   }

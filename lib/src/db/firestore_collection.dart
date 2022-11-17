@@ -10,10 +10,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     required super.id,
     required super.fields,
     super.parentDoc,
-    super.readOnly,
     super.updates,
-    super.adds,
-    super.deletes,
     super.actions,
   }) {
     ref = FirebaseFirestore.instance.collection(path);

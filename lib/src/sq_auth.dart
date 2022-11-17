@@ -56,11 +56,11 @@ class SQAuth {
     userDocFields = userDocFields ?? [];
     userDocFields.insert(0, SQStringField("Email", editable: false));
     if (offline) {
-      usersCollection =
-          LocalCollection(id: "Users", fields: userDocFields, readOnly: true);
+      usersCollection = LocalCollection(
+          id: "Users", fields: userDocFields, updates: SQUpdates.readOnly());
     } else {
       usersCollection = FirestoreCollection(
-          id: "Users", fields: userDocFields, readOnly: true);
+          id: "Users", fields: userDocFields, updates: SQUpdates.readOnly());
     }
     await usersCollection.loadCollection();
     await initUserDoc();

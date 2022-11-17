@@ -12,10 +12,7 @@ class LocalCollection extends SQCollection {
     required super.fields,
     String? singleDocName,
     super.parentDoc,
-    super.readOnly,
     super.updates,
-    super.adds,
-    super.deletes,
     super.actions,
   });
 

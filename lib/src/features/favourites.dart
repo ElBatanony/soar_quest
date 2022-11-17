@@ -45,7 +45,7 @@ class FavouritesFeature {
                   DocScreen(collection.getDoc(doc.value<SQRef>("ref")!.docId)!))
         ],
         parentDoc: SQAuth.userDoc,
-        readOnly: true);
+        updates: SQUpdates.readOnly());
     collection.actions
         .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
     favouritesCollection.loadCollection();
