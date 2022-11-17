@@ -31,7 +31,7 @@ void main() async {
         SQInverseRefsField("Rounds",
             refCollection: () => rounds, refFieldName: "Game"),
       ],
-      updates: false);
+      updates: SQUpdates(edits: false));
 
   players = InMemoryCollection(
     id: "Players",

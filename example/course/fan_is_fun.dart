@@ -78,7 +78,7 @@ void main() async {
         return DocScreen(events.getDoc(eventRef.docId)!);
       })
     ],
-    readOnly: !isAdmin,
+    updates: isAdmin ? SQUpdates() : SQUpdates.readOnly(),
   );
 
   await events.loadCollection();

@@ -38,11 +38,12 @@ void main() async {
       SQTimestampField("Last Updated"),
     ],
     actions: [checkTaskAction, uncheckTaskAction],
-    adds: true,
+    updates: SQUpdates(edits: true),
   );
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
-  doneTasks = CollectionSlice(tasks, filter: doneFilter, readOnly: true);
+  doneTasks =
+      CollectionSlice(tasks, filter: doneFilter, updates: SQUpdates.readOnly());
   pendingTasks = CollectionSlice(tasks, filter: doneFilter.inverse());
 
   SQApp.run([

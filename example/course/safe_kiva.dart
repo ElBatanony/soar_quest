@@ -36,21 +36,22 @@ void main() async {
   );
 
   bookings = FirestoreCollection(
-      id: "Bookings",
-      fields: [
-        SQRefField("Place", collection: places),
-        SQStringField("Status",
-            value: "Pending", editable: false, show: inFormScreen.not),
-        SQUserRefField("Host"),
-        SQUserRefField("Tenant", editable: false),
-        SQEditedByField("Booking User"),
-      ],
-      actions: [
-        SetFieldsAction("Accept",
-            show: DocValueCond("Status", "Pending") & DocUserCond("Host"),
-            getFields: (doc) => {"Status": "Accepted"})
-      ],
-      readOnly: true);
+    id: "Bookings",
+    fields: [
+      SQRefField("Place", collection: places),
+      SQStringField("Status",
+          value: "Pending", editable: false, show: inFormScreen.not),
+      SQUserRefField("Host"),
+      SQUserRefField("Tenant", editable: false),
+      SQEditedByField("Booking User"),
+    ],
+    actions: [
+      SetFieldsAction("Accept",
+          show: DocValueCond("Status", "Pending") & DocUserCond("Host"),
+          getFields: (doc) => {"Status": "Accepted"})
+    ],
+    updates: SQUpdates.readOnly(),
+  );
 
   CollectionSlice myBookings =
       CollectionSlice(bookings, filter: UserFilter("Tenant"));
