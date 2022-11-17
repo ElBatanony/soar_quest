@@ -4,7 +4,6 @@ import 'package:uuid/uuid.dart';
 import '../sq_auth.dart';
 import 'sq_action.dart';
 import '../sq_app.dart';
-import '../screens/collection_screen.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
 import 'collection_filter.dart';
@@ -15,7 +14,6 @@ export 'collection_filter.dart';
 abstract class SQCollection<DocType extends SQDoc> {
   final String id;
   final SQDoc? parentDoc;
-  final DocScreenBuilder docScreen;
 
   final List<SQField<dynamic>> fields;
   final List<SQAction> actions;
@@ -35,7 +33,6 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.updates = true,
     this.adds = true,
     this.deletes = true,
-    this.docScreen = defaultDocScreen,
     List<SQAction>? actions,
   }) : actions = actions ?? [] {
     path = parentDoc == null

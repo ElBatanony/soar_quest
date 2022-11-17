@@ -27,7 +27,7 @@ class CollectionScreen extends Screen {
       this.groupBy,
       super.show,
       super.key})
-      : docScreen = docScreen ?? collection.docScreen,
+      : docScreen = docScreen ?? defaultDocScreen,
         super(title ?? collection.id);
 
   @override

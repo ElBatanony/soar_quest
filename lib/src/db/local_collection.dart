@@ -16,7 +16,6 @@ class LocalCollection extends SQCollection {
     super.updates,
     super.adds,
     super.deletes,
-    super.docScreen,
     super.actions,
   });
 

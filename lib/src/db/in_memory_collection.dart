@@ -10,7 +10,6 @@ class InMemoryCollection extends SQCollection {
     super.updates,
     super.adds,
     super.deletes,
-    super.docScreen,
     super.actions,
   });
 

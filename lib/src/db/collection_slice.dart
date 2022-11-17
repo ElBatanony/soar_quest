@@ -1,4 +1,3 @@
-import '../screens/collection_screen.dart';
 import 'sq_action.dart';
 import 'sq_collection.dart';
 
@@ -75,9 +74,6 @@ class CollectionSlice implements SQCollection {
 
   @override
   SQDoc? get parentDoc => collection.parentDoc;
-
-  @override
-  DocScreenBuilder get docScreen => collection.docScreen;
 
   @override
   String get id => collection.id;
