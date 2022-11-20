@@ -8,20 +8,22 @@ void _emptyVoid(SQDoc doc) {}
 
 class FormScreen extends DocScreen {
   final String submitButtonText;
-
-  SQCollection get collection => doc.collection;
+  final SQDoc originalDoc;
 
   final void Function(SQDoc) onFieldsChanged;
 
   FormScreen(
-    SQDoc doc, {
+    this.originalDoc, {
     String? title,
     this.submitButtonText = "Save",
     super.icon,
     super.isInline,
     this.onFieldsChanged = _emptyVoid,
     super.key,
-  }) : super(doc, title: title ?? "Edit ${doc.collection.id}");
+  }) : super(
+            originalDoc.collection
+                .newDoc(initialFields: originalDoc.copyFields()),
+            title: title ?? "Edit ${originalDoc.collection.id}");
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -31,65 +33,54 @@ class FormScreen extends DocScreen {
       {bool replace = false}) {
     return super.go(context, replace: false);
   }
-}
 
-class FormScreenState<T extends FormScreen> extends DocScreenState<T> {
-  late SQDoc formDoc;
-
-  @override
-  SQDoc get doc => formDoc;
-
-  @override
-  void initState() {
-    formDoc =
-        widget.doc.collection.newDoc(initialFields: widget.doc.copyFields());
-    super.initState();
-  }
-
-  @override
-  void refreshScreen() {
-    widget.onFieldsChanged(doc);
-    super.refreshScreen();
-  }
-
-  Future<void> submitForm() async {
+  Future<void> submitForm(ScreenState screenState) async {
     for (final field in doc.fields) {
       if (field.require && field.value == null) {
-        showSnackBar("${field.name} is required!", context: context);
+        showSnackBar("${field.name} is required!",
+            context: screenState.context);
         return;
       }
     }
 
-    widget.doc.fields = doc.copyFields();
+    originalDoc.fields = doc.copyFields();
 
-    await widget.collection.saveDoc(widget.doc);
-    exitScreen<bool>(true);
+    await collection.saveDoc(originalDoc);
+    screenState.exitScreen<bool>(true);
   }
 
   @override
-  Widget? bottomNavBar(BuildContext context) {
+  Widget? bottomNavBar(ScreenState screenState) {
     return BottomNavigationBar(
       backgroundColor: Colors.grey[100],
       currentIndex: 1,
       onTap: (index) async {
         if (index == 0) {
           FocusManager.instance.primaryFocus?.unfocus();
-          return exitScreen();
+          return screenState.exitScreen();
         }
-        await submitForm();
+        await submitForm(screenState);
       },
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.cancel), label: "Cancel"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.save), label: widget.submitButtonText),
+            icon: Icon(Icons.save), label: submitButtonText),
       ],
     );
   }
 
   @override
-  Widget screenBody(BuildContext context) {
+  Widget screenBody(ScreenState screenState) {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: super.screenBody(context));
+        child: super.screenBody(screenState));
+  }
+}
+
+class FormScreenState<T extends FormScreen> extends ScreenState<T> {
+  @override
+  void refreshScreen() {
+    widget.onFieldsChanged(widget.doc);
+    super.refreshScreen();
   }
 }

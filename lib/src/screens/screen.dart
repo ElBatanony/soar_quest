@@ -44,53 +44,56 @@ class Screen extends StatefulWidget {
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
-}
 
-class ScreenState<T extends Screen> extends State<T> {
-  void refreshScreen() => mounted ? setState(() {}) : {};
-
-  Widget screenBody(BuildContext context) {
-    return Center(child: Text('${widget.title} Screen'));
-  }
-
-  List<Widget> appBarActions(BuildContext context) {
-    return [IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))];
-  }
-
-  AppBar appBar(BuildContext context) {
+  AppBar appBar(ScreenState screenState) {
     return AppBar(
-      title: Text(widget.title),
-      leading: Navigator.of(context).canPop() ? BackButton() : null,
-      actions: appBarActions(context),
+      title: Text(title),
+      leading: Navigator.of(screenState.context).canPop() ? BackButton() : null,
+      actions: appBarActions(screenState),
     );
   }
 
-  FloatingActionButton? floatingActionButton(BuildContext context) => null;
+  Widget screenBody(ScreenState screenState) {
+    return Center(child: Text('$title Screen'));
+  }
 
-  Widget? bottomNavBar(BuildContext context) {
+  List<Widget> appBarActions(ScreenState screenState) {
+    return [
+      IconButton(
+          onPressed: screenState.refreshScreen, icon: Icon(Icons.refresh))
+    ];
+  }
+
+  FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
+
+  Widget? bottomNavBar(ScreenState screenState) {
     if (SQApp.navbarScreens.length > 1) return SQNavBar(SQApp.navbarScreens);
     return null;
   }
+}
+
+class ScreenState<T extends Screen> extends State<T> {
+  void refreshScreen() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
-    final Widget body = Builder(builder: (context2) {
+    final Widget body = Builder(builder: (_) {
       return Container(
         padding: widget.isInline ? null : EdgeInsets.all(16.0),
-        child: screenBody(context2),
+        child: widget.screenBody(this),
       );
     });
 
     if (widget.isInline) return body;
 
-    return Builder(builder: (context2) {
+    return Builder(builder: (_) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: appBar(context2),
+        appBar: widget.appBar(this),
         drawer: SQApp.drawer,
         body: body,
-        floatingActionButton: floatingActionButton(context2),
-        bottomNavigationBar: bottomNavBar(context2),
+        floatingActionButton: widget.floatingActionButton(this),
+        bottomNavigationBar: widget.bottomNavBar(this),
       );
     });
   }

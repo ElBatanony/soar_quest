@@ -7,6 +7,7 @@ import '../form_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
   final List<CollectionFilter> filters;
+  final List<CollectionFieldFilter> fieldFilters = [];
 
   CollectionFilterScreen({
     super.title,
@@ -19,13 +20,36 @@ class CollectionFilterScreen extends CollectionScreen {
 
   @override
   State<CollectionFilterScreen> createState() => CollectionFilterScreenState();
+
+  @override
+  List<SQDoc> get docs => collection.filterBy(fieldFilters);
+
+  Widget filterFieldsDisplay(ScreenState screenState) {
+    fieldFilters.clear();
+    fieldFilters
+        .addAll((screenState as CollectionFilterScreenState).fieldFilters);
+    return Column(
+      children: [
+        screenState.fieldsFormScreen,
+        Text('Total docs: ${collection.docs.length}'),
+        Text('Showing docs: ${docs.length}')
+      ],
+    );
+  }
+
+  @override
+  Widget screenBody(ScreenState screenState) {
+    return Column(
+      children: [
+        filterFieldsDisplay(screenState),
+        Expanded(child: super.screenBody(screenState)),
+      ],
+    );
+  }
 }
 
 class CollectionFilterScreenState<T extends CollectionFilterScreen>
     extends CollectionScreenState<T> {
-  @override
-  List<SQDoc> get docs => collection.filterBy(fieldFilters);
-
   late FormScreen fieldsFormScreen;
   List<CollectionFieldFilter> fieldFilters = [];
 
@@ -48,25 +72,5 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
     });
 
     super.initState();
-  }
-
-  Widget filterFieldsDisplay() {
-    return Column(
-      children: [
-        fieldsFormScreen,
-        Text('Total docs: ${widget.collection.docs.length}'),
-        Text('Showing docs: ${docs.length}')
-      ],
-    );
-  }
-
-  @override
-  Widget screenBody(BuildContext context) {
-    return Column(
-      children: [
-        filterFieldsDisplay(),
-        Expanded(child: super.screenBody(context)),
-      ],
-    );
   }
 }

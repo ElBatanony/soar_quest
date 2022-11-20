@@ -8,33 +8,40 @@ class TableScreen extends CollectionScreen {
   TableScreen({required super.collection, super.title, super.isInline});
 
   @override
-  createState() => TableScreenState();
-}
+  Widget docDisplay(SQDoc doc, ScreenState screenState) {
+    return Row(
+        children: collection.fields
+            .map((field) => tableFieldCell(doc, field, screenState))
+            .toList());
+  }
 
-class TableScreenState extends CollectionScreenState<TableScreen> {
-  Widget tableHeaderCell(SQField<dynamic> field) {
+  Widget tableHeaderCell(SQField<dynamic> field, ScreenState screenState) {
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: Text(
         field.name,
-        style: Theme.of(context).textTheme.titleSmall,
+        style: Theme.of(screenState.context).textTheme.titleSmall,
       ),
     );
   }
 
-  TableRow tableHeaderRow() {
-    return TableRow(children: collection.fields.map(tableHeaderCell).toList());
+  TableRow tableHeaderRow(ScreenState screenState) {
+    return TableRow(
+        children: collection.fields
+            .map((field) => tableHeaderCell(field, screenState))
+            .toList());
   }
 
-  TableRow tableDocRow(SQDoc doc) {
-    return TableRow(children: (docDisplay(doc, context) as Row).children);
+  TableRow tableDocRow(SQDoc doc, ScreenState screenState) {
+    return TableRow(children: (docDisplay(doc, screenState) as Row).children);
   }
 
-  Widget tableFieldCell(SQDoc doc, SQField<dynamic> field) {
+  Widget tableFieldCell(
+      SQDoc doc, SQField<dynamic> field, ScreenState screenState) {
     return GestureDetector(
       onTap: () =>
           GoScreenAction("Go Doc Screen", screen: (doc) => docScreen(doc))
-              .execute(doc, context),
+              .execute(doc, screenState),
       child: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Text(doc.value<dynamic>(field.name).toString()),
@@ -43,21 +50,16 @@ class TableScreenState extends CollectionScreenState<TableScreen> {
   }
 
   @override
-  Widget docDisplay(SQDoc doc, BuildContext context) {
-    return Row(
-        children: collection.fields
-            .map((field) => tableFieldCell(doc, field))
-            .toList());
-  }
-
-  @override
-  Widget screenBody(BuildContext context) {
+  Widget screenBody(ScreenState screenState) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Table(
         border: TableBorder.all(),
         defaultColumnWidth: IntrinsicColumnWidth(),
-        children: [tableHeaderRow(), ...docs.map(tableDocRow).toList()],
+        children: [
+          tableHeaderRow(screenState),
+          ...docs.map((doc) => tableDocRow(doc, screenState)).toList()
+        ],
       ),
     );
   }

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../db/collection_slice.dart';
 import '../../db/fields/sq_ref_field.dart';
 import '../../db/sq_collection.dart';
@@ -9,27 +7,19 @@ import 'gallery_screen.dart';
 
 class CategorySelectScreen extends GalleryScreen {
   final SQRefField categoryField;
+  final SQCollection itemsCollection;
 
   CategorySelectScreen({
     super.title,
-    required super.collection,
+    required this.itemsCollection,
     required this.categoryField,
-  });
-
-  @override
-  State<CategorySelectScreen> createState() => _CategorySelectScreenState();
-}
-
-class _CategorySelectScreenState
-    extends GalleryScreenState<CategorySelectScreen> {
-  @override
-  SQCollection<SQDoc> get collection => widget.categoryField.collection;
+  }) : super(collection: categoryField.collection);
 
   @override
   Screen docScreen(SQDoc doc) {
-    final slice = CollectionSlice(widget.collection,
-        filter: RefFilter(widget.categoryField.name, doc.ref));
+    final slice = CollectionSlice(itemsCollection,
+        filter: RefFilter(categoryField.name, doc.ref));
     return CollectionScreen(
-        title: "${doc.label} ${widget.collection.id}", collection: slice);
+        title: "${doc.label} ${itemsCollection.id}", collection: slice);
   }
 }

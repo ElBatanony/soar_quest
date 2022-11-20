@@ -7,16 +7,18 @@ class GalleryScreen extends CollectionScreen {
   GalleryScreen({required super.collection, super.title});
 
   @override
-  createState() => GalleryScreenState();
-}
+  Widget docsDisplay(List<SQDoc> docs, ScreenState screenState) {
+    return GridView.count(
+      crossAxisCount: 2,
+      children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
+    );
+  }
 
-class GalleryScreenState<S extends GalleryScreen>
-    extends CollectionScreenState<S> {
   @override
-  Widget docDisplay(SQDoc doc, BuildContext context) {
+  Widget docDisplay(SQDoc doc, ScreenState screenState) {
     return Card(
       child: InkWell(
-        onTap: () => goToDocScreen(docScreen(doc)),
+        onTap: () => goToDocScreen(docScreen(doc), screenState),
         child: Column(
           children: [
             doc.imageLabel != null
@@ -26,14 +28,6 @@ class GalleryScreenState<S extends GalleryScreen>
           ],
         ),
       ),
-    );
-  }
-
-  @override
-  Widget docsDisplay(List<SQDoc> docs, BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: docs.map((doc) => docDisplay(doc, context)).toList(),
     );
   }
 }

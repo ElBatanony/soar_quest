@@ -7,15 +7,10 @@ class CardsScreen extends CollectionScreen {
   CardsScreen({required super.collection, super.title});
 
   @override
-  createState() => _CardsScreenState();
-}
-
-class _CardsScreenState extends CollectionScreenState<CardsScreen> {
-  @override
-  Widget docDisplay(SQDoc doc, BuildContext context) {
+  Widget docDisplay(SQDoc doc, ScreenState screenState) {
     return Card(
       child: InkWell(
-        onTap: () => goToDocScreen(docScreen(doc)),
+        onTap: () => goToDocScreen(docScreen(doc), screenState),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -27,7 +22,8 @@ class _CardsScreenState extends CollectionScreenState<CardsScreen> {
                     children: [
                       Text(
                         doc.label,
-                        style: Theme.of(context).textTheme.headline6,
+                        style:
+                            Theme.of(screenState.context).textTheme.headline6,
                       ),
                       doc.fields.length >= 2
                           ? Text((doc.fields[1].value ?? "").toString())
@@ -42,9 +38,10 @@ class _CardsScreenState extends CollectionScreenState<CardsScreen> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: collection.actions
-                      .where((action) => action.show.check(doc, context))
+                      .where((action) => action.show.check(doc, screenState))
                       .take(3)
-                      .map((action) => action.button(doc, isIcon: true))
+                      .map((action) => action.button(doc,
+                          screenState: screenState, isIcon: true))
                       .toList()),
             ],
           ),

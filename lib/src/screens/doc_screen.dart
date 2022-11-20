@@ -14,42 +14,36 @@ class DocScreen extends Screen {
     super.key,
   }) : super(title ?? doc.label);
 
-  @override
-  State<DocScreen> createState() => DocScreenState();
-}
-
-class DocScreenState<T extends DocScreen> extends ScreenState<T> {
-  SQDoc get doc => widget.doc;
   SQCollection get collection => doc.collection;
 
-  Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
-    return field.formField(doc, onChanged: refreshScreen);
+  Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) {
+    return field.formField(doc, onChanged: screenState.refreshScreen);
   }
 
-  List<Widget> fieldsDisplay(BuildContext context) {
+  List<Widget> fieldsDisplay(ScreenState screenState) {
     return doc.fields
-        .where((field) => field.show.check(doc, context))
-        .map((field) => fieldDisplay(field, context))
+        .where((field) => field.show.check(doc, screenState))
+        .map((field) => fieldDisplay(field, screenState))
         .toList();
   }
 
-  Widget actionsDisplay(BuildContext context) {
+  Widget actionsDisplay(ScreenState screenState) {
     return Wrap(
       children: collection.actions
-          .where((action) => action.show.check(doc, context))
-          .map((action) => action.button(doc))
+          .where((action) => action.show.check(doc, screenState))
+          .map((action) => action.button(doc, screenState: screenState))
           .toList(),
     );
   }
 
   @override
-  Widget screenBody(BuildContext context) {
+  Widget screenBody(ScreenState screenState) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          actionsDisplay(context),
-          ...fieldsDisplay(context),
+          actionsDisplay(screenState),
+          ...fieldsDisplay(screenState),
         ],
       ),
     );

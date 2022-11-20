@@ -18,17 +18,8 @@ class VideoCollectionScreen extends CollectionScreen {
   });
 
   @override
-  State<VideoCollectionScreen> createState() => _VideoCollectionScreenState();
-}
-
-class _VideoCollectionScreenState
-    extends CollectionScreenState<VideoCollectionScreen> {
-  @override
-  Widget docDisplay(SQDoc doc, BuildContext context) {
-    return VideoDocDisplay(
-      doc,
-      videoField: widget.videoField,
-    );
+  Widget docDisplay(SQDoc doc, ScreenState screenState) {
+    return VideoDocDisplay(doc, videoField: videoField);
   }
 }
 
@@ -42,7 +33,7 @@ class VideoDocDisplay extends DocScreen {
   State<VideoDocDisplay> createState() => _VideoDocDisplayState();
 }
 
-class _VideoDocDisplayState extends DocScreenState<VideoDocDisplay> {
+class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   YoutubePlayerController? _controller;
 
   @override
