@@ -16,7 +16,7 @@ abstract class SQAction {
   final DocCond show;
   final bool confirm;
   final String confirmMessage;
-  Future<void> Function(SQDoc, BuildContext) onExecute;
+  Future<void> Function(SQDoc doc, ScreenState screenState) onExecute;
 
   SQAction(this.name,
       {this.icon = Icons.double_arrow_outlined,
@@ -25,21 +25,28 @@ abstract class SQAction {
       this.confirm = false,
       this.confirmMessage = "Are you sure?"});
 
-  Future<void> execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
     print("Executing action: $name");
-    await onExecute(doc, context);
+    await onExecute(doc, screenState);
   }
 
-  Widget button(SQDoc doc, {bool isIcon = false, double iconSize = 24.0}) {
+  Widget button(SQDoc doc,
+      {required ScreenState screenState,
+      bool isIcon = false,
+      double iconSize = 24.0}) {
     return SQActionButton(
-        action: this, doc: doc, isIcon: isIcon, iconSize: iconSize);
+        action: this,
+        doc: doc,
+        screenState: screenState,
+        isIcon: isIcon,
+        iconSize: iconSize);
   }
 
-  FloatingActionButton fab(SQDoc doc, BuildContext context) {
+  FloatingActionButton fab(SQDoc doc, ScreenState screenState) {
     return FloatingActionButton(
         heroTag: null,
         shape: CircleBorder(),
-        onPressed: () => execute(doc, context),
+        onPressed: () => execute(doc, screenState),
         child: Icon(icon));
   }
 }
@@ -49,12 +56,15 @@ class SQActionButton extends StatefulWidget {
   final bool isIcon;
   final SQDoc doc;
   final double iconSize;
+  final ScreenState screenState;
 
-  const SQActionButton(
-      {required this.action,
-      required this.doc,
-      this.isIcon = false,
-      this.iconSize = 24.0});
+  const SQActionButton({
+    required this.action,
+    required this.doc,
+    required this.screenState,
+    this.isIcon = false,
+    this.iconSize = 24.0,
+  });
 
   @override
   State<SQActionButton> createState() => _SQActionButtonState();
@@ -65,7 +75,7 @@ class _SQActionButtonState extends State<SQActionButton> {
 
   @override
   void initState() {
-    inForm = ScreenState.of(context) is FormScreenState;
+    inForm = widget.screenState is FormScreenState;
     super.initState();
   }
 
@@ -85,7 +95,8 @@ class _SQActionButtonState extends State<SQActionButton> {
         bool confirmed = widget.action.confirm == false ||
             await showConfirmationDialog(
                 action: widget.action, context: context);
-        if (confirmed) return widget.action.execute(widget.doc, context);
+        if (confirmed)
+          return widget.action.execute(widget.doc, widget.screenState);
       },
     );
   }
@@ -113,10 +124,10 @@ class GoScreenAction extends SQAction {
   });
 
   @override
-  execute(SQDoc doc, BuildContext context) async {
-    await screen(doc).go(context, replace: replace);
-    ScreenState.of(context).refreshScreen();
-    await super.execute(doc, context);
+  execute(SQDoc doc, ScreenState screenState) async {
+    await screen(doc).go(screenState.context, replace: replace);
+    screenState.refreshScreen();
+    await super.execute(doc, screenState);
   }
 }
 
@@ -152,20 +163,21 @@ class CreateDocAction extends SQAction {
   });
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
     final newDoc = getCollection().newDoc(initialFields: initialFields(doc));
 
     if (form) {
-      bool created = await FormScreen(newDoc).go<bool>(context) ?? false;
-      if (created && !goBack) await DocScreen(newDoc).go(context);
+      bool created =
+          await FormScreen(newDoc).go<bool>(screenState.context) ?? false;
+      if (created && !goBack) await DocScreen(newDoc).go(screenState.context);
     } else {
       getCollection().saveDoc(newDoc);
-      if (!goBack) DocScreen(newDoc).go(context);
+      if (!goBack) DocScreen(newDoc).go(screenState.context);
     }
 
-    ScreenState.of(context).refreshScreen();
+    screenState.refreshScreen();
 
-    return super.execute(doc, context);
+    return super.execute(doc, screenState);
   }
 }
 
@@ -184,11 +196,11 @@ class DeleteDocAction extends SQAction {
                 show);
 
   @override
-  execute(SQDoc doc, BuildContext context) async {
+  execute(SQDoc doc, ScreenState screenState) async {
     await doc.collection.deleteDoc(doc);
-    ScreenState.of(context).refreshScreen();
-    if (exitScreen) ScreenState.of(context).exitScreen();
-    await super.execute(doc, context);
+    screenState.refreshScreen();
+    if (exitScreen) screenState.exitScreen();
+    await super.execute(doc, screenState);
   }
 }
 
@@ -199,7 +211,7 @@ class SetFieldsAction extends SQAction {
       {super.icon, super.show, super.onExecute, required this.getFields});
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
     Map<String, dynamic> newFields = getFields(doc);
     for (final entry in newFields.entries) {
       SQField<dynamic>? docField = doc.getField(entry.key);
@@ -207,8 +219,8 @@ class SetFieldsAction extends SQAction {
       docField.value = entry.value;
     }
     await doc.collection.saveDoc(doc);
-    ScreenState.of(context).refreshScreen();
-    await super.execute(doc, context);
+    screenState.refreshScreen();
+    await super.execute(doc, screenState);
   }
 }
 
@@ -226,12 +238,12 @@ class ExecuteOnDocsAction extends SQAction {
   });
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
     List<SQDoc> fetchedDocs = getDocs(doc);
     for (final doc in fetchedDocs) {
-      await action.execute(doc, context);
+      await action.execute(doc, screenState);
     }
-    await super.execute(doc, context);
+    await super.execute(doc, screenState);
   }
 }
 
@@ -241,13 +253,13 @@ class OpenUrlAction extends SQAction {
   OpenUrlAction(super.name, {super.icon, super.show, required this.getUrl});
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
     String url = getUrl(doc);
     if (!await launchUrl(Uri.parse(url),
         mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
-    await super.execute(doc, context);
+    await super.execute(doc, screenState);
   }
 }
 
@@ -257,24 +269,24 @@ class SequencesAction extends SQAction {
   SequencesAction(super.name, {super.icon, super.show, required this.actions});
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) async {
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
     for (final action in actions) {
-      await action.execute(doc, context);
+      await action.execute(doc, screenState);
     }
-    await super.execute(doc, context);
+    await super.execute(doc, screenState);
   }
 }
 
 class CustomAction extends SQAction {
-  Future<void> Function(SQDoc doc, BuildContext context) customExecute;
+  Future<void> Function(SQDoc doc, ScreenState screenState) customExecute;
 
   CustomAction(super.name,
       {super.icon, super.show, required this.customExecute, super.onExecute});
 
   @override
-  Future<void> execute(SQDoc doc, BuildContext context) async {
-    await customExecute(doc, context);
-    await super.execute(doc, context);
+  Future<void> execute(SQDoc doc, ScreenState screenState) async {
+    await customExecute(doc, screenState);
+    await super.execute(doc, screenState);
   }
 }
 

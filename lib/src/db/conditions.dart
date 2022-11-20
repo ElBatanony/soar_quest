@@ -1,17 +1,14 @@
-import 'package:flutter/material.dart';
-
 import '../sq_auth.dart';
 import '../screens/form_screen.dart';
-import '../screens/screen.dart';
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 
 class DocCond {
-  final bool Function(SQDoc, BuildContext) condition;
+  final bool Function(SQDoc doc, ScreenState screenState) condition;
 
   const DocCond(this.condition);
 
-  bool check(SQDoc doc, BuildContext context) => condition(doc, context);
+  bool check(SQDoc doc, ScreenState screenState) => condition(doc, screenState);
 
   DocCond get not => DocCond((doc, context) => !condition(doc, context));
 
@@ -33,7 +30,7 @@ const trueCond = DocCond(_alwaysTrue);
 const falseCond = DocCond(_alwaysFalse);
 
 DocCond inFormScreen =
-    DocCond((_, context) => ScreenState.of(context) is FormScreenState);
+    DocCond((_, screenState) => screenState is FormScreenState);
 
 DocCond isSignedIn = DocCond((doc, context) => SQAuth.isSignedIn);
 

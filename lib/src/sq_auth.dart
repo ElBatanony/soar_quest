@@ -89,34 +89,21 @@ class OfflineUser extends SQUser {
 }
 
 class SQProfileScreen extends Screen {
-  const SQProfileScreen(
-      {String title = "Profile", super.icon = Icons.account_circle})
-      : super(title);
+  late final List<AuthProvider> providers;
 
-  @override
-  State<SQProfileScreen> createState() => _SQProfileScreenState();
-}
-
-class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
-  late List<AuthProvider> providers;
-
-  @override
-  void initState() {
+  SQProfileScreen({String title = "Profile", super.icon = Icons.account_circle})
+      : super(title) {
     providers = [
       if (SQAuth.methods.contains(AuthMethod.email)) EmailAuthProvider(),
       if (SQAuth.methods.contains(AuthMethod.phone)) PhoneAuthProvider(),
     ];
-    super.initState();
   }
 
   @override
-  void refreshScreen() {
-    SQAuth.initUserDoc();
-    super.refreshScreen();
-  }
+  State<SQProfileScreen> createState() => _SQProfileScreenState();
 
   @override
-  Widget screenBody(BuildContext context) {
+  Widget screenBody(ScreenState screenState) {
     if (SQAuth.offline) {
       return Center(child: Text("Profile Screen"));
     }
@@ -125,21 +112,31 @@ class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
       return SignInScreen(
         providers: providers,
         actions: [
-          AuthStateChangeAction<SignedIn>((context, state) => refreshScreen()),
+          AuthStateChangeAction<SignedIn>(
+              (bcontext, state) => screenState.refreshScreen()),
         ],
       );
     }
     return ProfileScreen(
       actions: [
-        AuthStateChangeAction<SignedIn>((context, state) => refreshScreen()),
-        SignedOutAction((context) => refreshScreen()),
+        AuthStateChangeAction<SignedIn>(
+            (bcontext, state) => screenState.refreshScreen()),
+        SignedOutAction((bcontext) => screenState.refreshScreen()),
       ],
       providers: providers,
       children: [
         if (SQAuth.userDoc != null)
           GoEditAction(name: "Edit Profile", show: isSignedIn)
-              .button(SQAuth.userDoc!),
+              .button(SQAuth.userDoc!, screenState: screenState),
       ],
     );
+  }
+}
+
+class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
+  @override
+  void refreshScreen() {
+    SQAuth.initUserDoc();
+    super.refreshScreen();
   }
 }
