@@ -21,7 +21,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   final List<SQAction> actions;
 
   late final String path;
-  SQUpdates updates;
+  final SQUpdates updates;
 
   List<DocType> docs = [];
 
