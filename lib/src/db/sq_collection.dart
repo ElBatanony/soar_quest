@@ -20,7 +20,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   final List<SQField<dynamic>> fields;
   final List<SQAction> actions;
 
-  late final String path;
+  final String path;
   final SQUpdates updates;
 
   List<DocType> docs = [];
@@ -33,11 +33,10 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.parentDoc,
     this.updates = const SQUpdates(),
     List<SQAction>? actions,
-  }) : actions = actions ?? [] {
-    path = parentDoc == null
-        ? "Example Apps/${SQApp.name}/$id"
-        : "${parentDoc!.path}/$id";
-
+  })  : actions = actions ?? [],
+        path = parentDoc == null
+            ? "Example Apps/${SQApp.name}/$id"
+            : "${parentDoc.path}/$id" {
     if (byPath(path) == null) _collections.add(this);
 
     if (updates.edits) this.actions.add(GoEditAction());

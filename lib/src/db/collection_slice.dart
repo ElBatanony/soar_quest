@@ -55,8 +55,6 @@ class CollectionSlice implements SQCollection {
 
   @override
   String get path => collection.path;
-  @override
-  set path(_) => throw UnimplementedError();
 
   ////////////////////////////////////////////////
 
