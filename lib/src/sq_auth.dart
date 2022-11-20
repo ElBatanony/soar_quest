@@ -91,8 +91,8 @@ class OfflineUser extends SQUser {
 class SQProfileScreen extends Screen {
   late final List<AuthProvider> providers;
 
-  SQProfileScreen({String title = "Profile", super.icon = Icons.account_circle})
-      : super(title) {
+  SQProfileScreen(
+      {super.title = "Profile", super.icon = Icons.account_circle}) {
     providers = [
       if (SQAuth.methods.contains(AuthMethod.email)) EmailAuthProvider(),
       if (SQAuth.methods.contains(AuthMethod.phone)) PhoneAuthProvider(),

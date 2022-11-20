@@ -20,7 +20,7 @@ class CollectionScreen extends Screen {
       this.groupByField,
       super.show,
       super.key})
-      : super(title ?? collection.id);
+      : super(title: title ?? collection.id);
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();

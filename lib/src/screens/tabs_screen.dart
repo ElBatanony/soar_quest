@@ -5,7 +5,7 @@ import 'screen.dart';
 class TabsScreen extends Screen {
   final List<Screen> screens;
 
-  TabsScreen(super.title, this.screens)
+  TabsScreen({required super.title, required this.screens})
       : assert(screens.every((screen) => screen.isInline));
 
   @override

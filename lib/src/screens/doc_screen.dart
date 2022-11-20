@@ -12,7 +12,7 @@ class DocScreen extends Screen {
     super.icon,
     super.isInline,
     super.key,
-  }) : super(title ?? doc.label);
+  }) : super(title: title ?? doc.label);
 
   SQCollection get collection => doc.collection;
 

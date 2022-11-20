@@ -42,9 +42,10 @@ void main() async {
 
   SQApp.run(
     [
-      Screen("Home", icon: Icons.home),
+      Screen(title: "Home", icon: Icons.home),
       CollectionScreen(collection: talents, icon: Icons.group),
-      Screen("Chats",
+      Screen(
+          title: "Chats",
           icon: Icons.chat), // Use Telegram or LinkedIn instead? 😉😉
       CollectionScreen(collection: services, icon: Icons.room_service),
     ],

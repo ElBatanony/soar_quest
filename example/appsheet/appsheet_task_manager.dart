@@ -64,7 +64,7 @@ void main() async {
     //   FieldValueFilter(SQBoolField("Repeat"))
     // ]),
     // TableScreen(title: "Table", collection: tasks),
-    TabsScreen("Tasks", [
+    TabsScreen(title: "Tasks", screens: [
       CollectionScreen(
           title: "Pending Tasks", collection: pendingTasks, isInline: true),
       CollectionScreen(title: "Done", collection: doneTasks, isInline: true),

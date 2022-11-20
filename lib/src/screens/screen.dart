@@ -30,8 +30,8 @@ class Screen extends StatefulWidget {
   final bool isInline;
   final bool Function(BuildContext) show;
 
-  const Screen(
-    this.title, {
+  const Screen({
+    required this.title,
     this.isInline = false,
     this.icon = Icons.stay_current_landscape,
     this.show = alwaysShowScreen,
