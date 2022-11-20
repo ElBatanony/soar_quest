@@ -13,7 +13,6 @@ class CollectionFilterScreen extends CollectionScreen {
     super.title,
     required super.collection,
     required this.filters,
-    super.docScreen,
     super.icon,
     super.key,
   });

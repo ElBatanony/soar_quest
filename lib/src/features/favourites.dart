@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
+import '../screens/screen.dart';
 import '../sq_auth.dart';
 import '../db/local_collection.dart';
 import '../db/sq_action.dart';
@@ -57,7 +58,8 @@ class FavouritesFeature {
 class FavouritesScreen extends CollectionScreen {
   FavouritesScreen(
       {required FavouritesFeature favouritesFeature, super.isInline, super.key})
-      : super(
-            collection: favouritesFeature.favouritesCollection,
-            docScreen: (favDoc) => DocScreen(favDoc.value<SQRef>("ref")!.doc));
+      : super(collection: favouritesFeature.favouritesCollection);
+
+  @override
+  Screen docScreen(SQDoc doc) => DocScreen(doc.value<SQRef>("ref")!.doc);
 }

@@ -6,27 +6,19 @@ import '../db/sq_collection.dart';
 import 'doc_screen.dart';
 import 'screen.dart';
 
-DocScreen defaultDocScreen(SQDoc doc) => DocScreen(doc);
-
-typedef DocScreenBuilder = DocScreen Function(SQDoc doc);
-typedef DocDisplayBuilder = Widget Function(SQDoc doc, ScreenState screenState);
-
 class CollectionScreen extends Screen {
   final SQCollection collection;
-  final DocScreenBuilder customDocScreen;
   final String? groupByField;
 
   CollectionScreen(
       {String? title,
       required this.collection,
-      DocScreenBuilder? docScreen,
       super.isInline,
       super.icon,
       this.groupByField,
       super.show,
       super.key})
-      : customDocScreen = docScreen ?? defaultDocScreen,
-        super(title ?? collection.id);
+      : super(title ?? collection.id);
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();
@@ -88,7 +80,7 @@ class CollectionScreen extends Screen {
     screenState.refreshScreen();
   }
 
-  Screen docScreen(SQDoc doc) => customDocScreen(doc);
+  Screen docScreen(SQDoc doc) => DocScreen(doc);
 
   @override
   Widget screenBody(ScreenState screenState) {
