@@ -57,7 +57,7 @@ void main() async {
       show: (context) => true,
       title: "Tasks 2",
       collection: tasks,
-      groupBy: "Status",
+      groupByField: "Status",
     ),
     // CollectionFilterScreen(collection: tasks, filters: [
     //   StringContainsFilter(SQStringField("Task")),

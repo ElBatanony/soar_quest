@@ -61,7 +61,7 @@ void main() async {
     [
       CategorySelectScreen(
         title: "Categories",
-        collection: courses,
+        itemsCollection: courses,
         categoryField: courseCategoryRefField,
       ),
       CollectionScreen(

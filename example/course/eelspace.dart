@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
-import '../firebase_options.dart';
+import 'firebase_options.dart';
 
 bool isAdmin = true;
 
@@ -35,8 +35,8 @@ void main() async {
     SQStringField("Duration"),
     SQStringField("Price"),
   ], actions: [
-    CustomAction("Order Now", customExecute: (doc, context) async {
-      showSnackBar("Should order service", context: context);
+    CustomAction("Order Now", customExecute: (doc, screenState) async {
+      showSnackBar("Should order service", context: screenState.context);
     })
   ]);
 

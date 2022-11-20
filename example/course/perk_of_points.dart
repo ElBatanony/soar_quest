@@ -71,8 +71,7 @@ void main() async {
                 }))
         .toList(),
     CustomAction("Finish Round",
-        customExecute: (doc, context) async =>
-            ScreenState.of(context).exitScreen()),
+        customExecute: (doc, screenState) async => screenState.exitScreen()),
   ]);
 
   SQApp.run([CollectionScreen(collection: games)]);

@@ -43,8 +43,8 @@ void main() async {
     OpenUrlAction("Search",
         getUrl: (doc) => "https://www.google.com/search?q=${doc.label}"),
     CustomAction("Custom Action",
-        customExecute: (doc, context) async =>
-            showSnackBar("Hamada ${doc.label}", context: context)),
+        customExecute: (doc, screenState) async =>
+            showSnackBar("Hamada ${doc.label}", context: screenState.context)),
   ]);
 
   projects = FirestoreCollection(id: "Projects", fields: [

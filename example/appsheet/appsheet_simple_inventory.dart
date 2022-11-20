@@ -36,9 +36,9 @@ void main() async {
     CollectionScreen(
       collection: inventory,
       icon: Icons.storage,
-      docDisplay: (doc, s) => ListTile(
+      customDocDisplay: (doc, screenState) => ListTile(
         title: Text(doc.label),
-        onTap: () => s.goToDocScreen(s.docScreen(doc)),
+        onTap: () => DocScreen(doc).go(screenState.context),
         trailing: Text(doc.value<int>("Amount").toString()),
       ),
     ),
