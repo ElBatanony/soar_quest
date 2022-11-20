@@ -26,13 +26,13 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
 
 class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
   @override
-  Widget readOnlyBuilder(BuildContext context) {
+  Widget readOnlyBuilder(ScreenState screenState) {
     if (field.fileExists == false) return Text("No Image");
     return Image.network(field.downloadUrl!);
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     if (field.fileExists == false)
       return GestureDetector(
         onTap: selectAndUploadFile,

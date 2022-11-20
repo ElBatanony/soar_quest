@@ -68,7 +68,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

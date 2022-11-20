@@ -57,7 +57,7 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -65,8 +65,9 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
         SQButton(
           'Select Date',
           onPressed: () async {
-            DateTime? ret = await Navigator.of(context).push(_datePickerRoute(
-              context,
+            DateTime? ret =
+                await Navigator.of(screenState.context).push(_datePickerRoute(
+              screenState.context,
             ));
             if (ret != null) {
               _selectDate(ret);

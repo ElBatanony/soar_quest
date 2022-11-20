@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../screens/collection_screens/select_doc_screen.dart';
 import '../../screens/doc_screen.dart';
 import '../../screens/form_screen.dart';
-import '../../screens/screen.dart';
 import '../../sq_auth.dart';
 import '../../ui/sq_button.dart';
 import '../sq_action.dart';
@@ -66,7 +65,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
   }
 
   @override
-  Widget readOnlyBuilder(BuildContext context) {
+  Widget readOnlyBuilder(ScreenState screenState) {
     final SQRef? ref = field.value;
     if (ref == null) return Text("Not Set");
     SQDoc? doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
@@ -75,13 +74,14 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
       children: [
         Text(ref.label),
         if (doc != null)
-          GoScreenAction("", screen: (doc) => DocScreen(doc)).button(doc)
+          GoScreenAction("", screen: (doc) => DocScreen(doc))
+              .button(doc, screenState: screenState)
       ],
     );
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -93,7 +93,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
               SQDoc? retDoc = await SelectDocScreen(
                       title: "Select ${field.name}",
                       collection: field.collection)
-                  .go<SQDoc>(context);
+                  .go<SQDoc>(screenState.context);
 
               if (retDoc != null) {
                 SQRef ref = SQRef(

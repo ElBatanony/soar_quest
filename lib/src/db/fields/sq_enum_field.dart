@@ -38,7 +38,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
       inForm ? super.fieldLabel(context) : Container();
 
   @override
-  Widget readOnlyBuilder(BuildContext context) {
+  Widget readOnlyBuilder(ScreenState screenState) {
     SQField<T> subfieldCopy = field.subfield.copy();
     subfieldCopy.value = field.value;
     subfieldCopy.editable = false;
@@ -46,13 +46,14 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.value.toString()),
         SQButton("Select", onPressed: () async {
-          T? newValue = await showEnumOptionsDialog(field, context: context);
+          T? newValue =
+              await showEnumOptionsDialog(field, context: screenState.context);
           if (newValue != null) {
             field.value = newValue;
             setState(() {});

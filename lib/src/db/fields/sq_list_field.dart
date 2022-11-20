@@ -36,12 +36,12 @@ class _SQListFormField<T> extends SQFormField<SQListField<T>> {
 
 class _SQListFormFieldState<T> extends SQFormFieldState<SQListField<T>> {
   @override
-  Widget readOnlyBuilder(BuildContext context) {
+  Widget readOnlyBuilder(ScreenState screenState) {
     return Text((field.value ?? []).toString());
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     throw UnimplementedError();
   }
 }

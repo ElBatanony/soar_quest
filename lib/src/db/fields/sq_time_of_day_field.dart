@@ -55,7 +55,7 @@ class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
       TimeOfDay(hour: sqTimeOfDay.hour, minute: sqTimeOfDay.minute);
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -64,7 +64,7 @@ class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
           'Select Time',
           onPressed: () async {
             TimeOfDay? newTimeOfDay = await showTimePicker(
-              context: context,
+              context: screenState.context,
               initialTime: field.value != null
                   ? toTimeOfDay(field.value!)
                   : TimeOfDay.now(),

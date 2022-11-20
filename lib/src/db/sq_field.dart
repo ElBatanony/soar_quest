@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../screens/form_screen.dart';
-import '../screens/screen.dart';
 import 'sq_doc.dart';
 
 abstract class SQField<T> {
@@ -57,11 +56,14 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   SQDoc get doc => formField.doc;
   late bool inForm;
 
+  late ScreenState screenState;
+
   @override
   SQFormField<Field> get value => throw "Do not use FormField.value";
 
   @override
   void initState() {
+    screenState = ScreenState.of(context);
     inForm = ScreenState.of(context) is FormScreenState;
     super.initState();
   }
@@ -71,20 +73,20 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  Widget fieldLabel(BuildContext context) {
+  Widget fieldLabel(ScreenState screenState) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(field.name + (field.require ? " *" : ""),
-          style: Theme.of(context).textTheme.headline6),
+          style: Theme.of(screenState.context).textTheme.headline6),
     );
   }
 
-  Widget readOnlyBuilder(BuildContext context) {
+  Widget readOnlyBuilder(ScreenState screenState) {
     String valueString = field.value.toString();
     return GestureDetector(
       onLongPress: () {
         Clipboard.setData(ClipboardData(text: valueString));
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(screenState.context).showSnackBar(SnackBar(
             duration: Duration(milliseconds: 500),
             content: Text('Copied field: $valueString')));
       },
@@ -92,7 +94,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     );
   }
 
-  Widget fieldBuilder(BuildContext context);
+  Widget fieldBuilder(ScreenState screenState);
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +103,10 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (field.isInline == false) fieldLabel(context),
+          if (field.isInline == false) fieldLabel(screenState),
           (field.editable && inForm)
-              ? fieldBuilder(context)
-              : readOnlyBuilder(context),
+              ? fieldBuilder(screenState)
+              : readOnlyBuilder(screenState),
         ],
       ),
     );

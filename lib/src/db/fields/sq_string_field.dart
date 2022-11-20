@@ -32,7 +32,7 @@ class _SQStringFormField extends SQFormField<SQStringField> {
 
 class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     return SQTextField(formField, textParse: (text) => text);
   }
 }

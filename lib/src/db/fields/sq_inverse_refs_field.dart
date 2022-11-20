@@ -52,11 +52,11 @@ class _SQInverseRefsFormFieldState
   }
 
   @override
-  Widget fieldLabel(BuildContext context) {
+  Widget fieldLabel(ScreenState screenState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        super.fieldLabel(context),
+        super.fieldLabel(screenState),
         if (field.collection.updates.adds)
           CreateDocAction("Add",
               getCollection: () => field.collection,
@@ -65,20 +65,20 @@ class _SQInverseRefsFormFieldState
                         collection: doc.collection,
                         value: doc.ref,
                         editable: false)
-                  ]).button(doc)
+                  ]).button(doc, screenState: screenState)
       ],
     );
   }
 
   @override
-  Widget readOnlyBuilder(BuildContext context) {
+  Widget readOnlyBuilder(ScreenState screenState) {
     CollectionSlice slice = CollectionSlice(field.collection,
         filter: RefFilter(field.refFieldName, doc.ref));
     return TableScreen(collection: slice, isInline: true);
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) {
+  Widget fieldBuilder(ScreenState screenState) {
     throw UnimplementedError();
   }
 }
