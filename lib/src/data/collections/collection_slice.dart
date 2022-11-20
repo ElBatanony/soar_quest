@@ -1,7 +1,7 @@
-import 'sq_action.dart';
-import 'sq_collection.dart';
+import '../sq_action.dart';
+import '../sq_collection.dart';
 
-export 'sq_collection.dart';
+export '../sq_collection.dart';
 
 class CollectionSlice implements SQCollection {
   final SQCollection collection;

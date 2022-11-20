@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'sq_collection.dart';
+import '../sq_collection.dart';
 
-export 'sq_collection.dart';
+export '../sq_collection.dart';
 
 class LocalCollection extends SQCollection {
   static SharedPreferences? _prefs;

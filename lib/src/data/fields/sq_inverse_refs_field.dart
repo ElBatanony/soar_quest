@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../screens/collection_screens/table_screen.dart';
-import '../collection_slice.dart';
+import '../collections/collection_slice.dart';
 import '../sq_action.dart';
 import 'sq_list_field.dart';
 import 'sq_ref_field.dart';

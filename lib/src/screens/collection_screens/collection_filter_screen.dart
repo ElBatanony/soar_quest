@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/in_memory_collection.dart';
+import '../../data/collections/in_memory_collection.dart';
 import '../collection_screen.dart';
 import '../form_screen.dart';
 

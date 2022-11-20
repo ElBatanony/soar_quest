@@ -1,4 +1,4 @@
-import '../../data/collection_slice.dart';
+import '../../data/collections/collection_slice.dart';
 import '../../data/fields/sq_ref_field.dart';
 import '../collection_screen.dart';
 import '../screen.dart';

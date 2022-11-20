@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../sq_auth.dart';
-import 'local_collection.dart';
+import 'collections/local_collection.dart';
 import '../screens/screen.dart';
 import '../screens/form_screen.dart';
 

@@ -1,6 +1,6 @@
-import 'sq_collection.dart';
+import '../sq_collection.dart';
 
-export 'sq_collection.dart';
+export '../sq_collection.dart';
 
 class InMemoryCollection extends SQCollection {
   InMemoryCollection({

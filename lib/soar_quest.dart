@@ -4,11 +4,11 @@ export 'fields.dart';
 
 // Database
 export 'src/data/sq_collection.dart';
-export 'src/data/firestore_collection.dart';
-export 'src/data/in_memory_collection.dart';
-export 'src/data/local_collection.dart';
+export 'src/data/collections/collection_slice.dart';
+export 'src/data/collections/firestore_collection.dart';
+export 'src/data/collections/in_memory_collection.dart';
+export 'src/data/collections/local_collection.dart';
 
-export 'src/data/collection_slice.dart';
 export 'src/data/sq_action.dart';
 export 'src/data/conditions.dart';
 

@@ -4,7 +4,7 @@ import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
 import '../screens/screen.dart';
 import '../sq_auth.dart';
-import '../data/local_collection.dart';
+import '../data/collections/local_collection.dart';
 import '../data/sq_action.dart';
 import '../data/fields/sq_ref_field.dart';
 
