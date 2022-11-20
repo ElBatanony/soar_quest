@@ -10,6 +10,8 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final String? groupByField;
 
+  List<SQDoc> get docs => collection.docs;
+
   CollectionScreen(
       {String? title,
       required this.collection,
@@ -22,8 +24,6 @@ class CollectionScreen extends Screen {
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();
-
-  List<SQDoc> get docs => collection.docs;
 
   Widget groupByDocs(List<SQDoc> docs, ScreenState screenState) {
     Map<dynamic, List<SQDoc>> groups = groupBy<SQDoc, dynamic>(
@@ -39,10 +39,14 @@ class CollectionScreen extends Screen {
 
   @override
   FloatingActionButton? floatingActionButton(ScreenState screenState) {
-    if (collection.updates.adds)
-      return (screenState as CollectionScreenState)
-          .createNewDocAction
-          .fab(collection.newDoc(), screenState);
+    if (collection.updates.adds) {
+      final SQAction createNewDocAction = GoEditAction(
+          name: "Create Doc",
+          icon: Icons.add,
+          onExecute: (doc, context) async => screenState.refreshScreen(),
+          show: CollectionCond((collection) => collection.updates.adds));
+      return createNewDocAction.fab(collection.newDoc(), screenState);
+    }
     return null;
   }
 
@@ -91,9 +95,6 @@ class CollectionScreen extends Screen {
 }
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
-  SQCollection get collection => widget.collection;
-  late final SQAction createNewDocAction;
-
   @override
   void refreshScreen() {
     loadData();
@@ -101,17 +102,12 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   Future<void> loadData() async {
-    await collection.loadCollection();
+    await widget.collection.loadCollection();
     super.refreshScreen();
   }
 
   @override
   void initState() {
-    createNewDocAction = GoEditAction(
-        name: "Create Doc",
-        icon: Icons.add,
-        onExecute: (doc, context) async => refreshScreen(),
-        show: CollectionCond((collection) => collection.updates.adds));
     loadData();
     super.initState();
   }
