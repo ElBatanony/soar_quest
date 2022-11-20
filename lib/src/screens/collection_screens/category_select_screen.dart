@@ -1,6 +1,5 @@
-import '../../db/collection_slice.dart';
-import '../../db/fields/sq_ref_field.dart';
-import '../../db/sq_collection.dart';
+import '../../data/collection_slice.dart';
+import '../../data/fields/sq_ref_field.dart';
 import '../collection_screen.dart';
 import '../screen.dart';
 import 'gallery_screen.dart';

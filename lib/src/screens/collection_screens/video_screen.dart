@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../db/sq_doc.dart';
-import '../../db/fields/sq_video_link_field.dart';
+import '../../data/sq_doc.dart';
+import '../../data/fields/sq_video_link_field.dart';
 import '../collection_screen.dart';
 import '../doc_screen.dart';
 

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../db/sq_doc.dart';
+import '../data/sq_doc.dart';
 import 'firebase_file_storage.dart';
 import 'sq_file_storage.dart';
 import '../ui/sq_button.dart';
-import '../db/fields/sq_string_field.dart';
+import '../data/fields/sq_string_field.dart';
 
 class SQFileField extends SQStringField {
   late SQFileStorage storage;

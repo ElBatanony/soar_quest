@@ -3,12 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart'
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'db/fields/sq_string_field.dart';
-import 'db/firestore_collection.dart';
-import 'db/sq_collection.dart';
-import 'db/local_collection.dart';
+import 'data/fields/sq_string_field.dart';
+import 'data/firestore_collection.dart';
+import 'data/local_collection.dart';
 
-import 'db/sq_action.dart';
+import 'data/sq_action.dart';
 import 'screens/screen.dart';
 
 enum AuthMethod { email, phone }

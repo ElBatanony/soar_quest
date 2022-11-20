@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../sq_auth.dart';
 import 'local_collection.dart';
-import 'sq_collection.dart';
 import '../screens/screen.dart';
 import '../screens/form_screen.dart';
 

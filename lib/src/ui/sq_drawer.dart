@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../sq_auth.dart';
 import '../sq_app.dart';
 import '../screens/screen.dart';
-import '../db/user_settings.dart';
+import '../data/user_settings.dart';
 
 class SQDrawer extends StatelessWidget {
   final List<Screen> screens;

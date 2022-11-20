@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart'
 
 import 'sq_collection.dart';
 
+export 'sq_collection.dart';
+
 class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   late CollectionReference ref;
 

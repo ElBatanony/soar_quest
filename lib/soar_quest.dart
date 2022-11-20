@@ -3,16 +3,16 @@ export 'src/sq_auth.dart';
 export 'fields.dart';
 
 // Database
-export 'src/db/sq_collection.dart';
-export 'src/db/firestore_collection.dart';
-export 'src/db/in_memory_collection.dart';
-export 'src/db/local_collection.dart';
+export 'src/data/sq_collection.dart';
+export 'src/data/firestore_collection.dart';
+export 'src/data/in_memory_collection.dart';
+export 'src/data/local_collection.dart';
 
-export 'src/db/collection_slice.dart';
-export 'src/db/sq_action.dart';
-export 'src/db/conditions.dart';
+export 'src/data/collection_slice.dart';
+export 'src/data/sq_action.dart';
+export 'src/data/conditions.dart';
 
-export 'src/db/user_settings.dart';
+export 'src/data/user_settings.dart';
 
 // File Storage
 export 'src/storage/sq_file_storage.dart';

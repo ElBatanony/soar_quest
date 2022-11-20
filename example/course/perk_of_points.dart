@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
-import 'package:soar_quest/src/db/fields/sq_url_field.dart';
 
 late SQCollection games, gameInstances, players, rounds;
 

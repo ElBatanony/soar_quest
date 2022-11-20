@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../db/sq_collection.dart';
+import '../data/sq_collection.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {

@@ -1,5 +1,7 @@
 import 'sq_collection.dart';
 
+export 'sq_collection.dart';
+
 class InMemoryCollection extends SQCollection {
   InMemoryCollection({
     required super.id,

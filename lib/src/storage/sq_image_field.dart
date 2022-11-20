@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../db/sq_doc.dart';
+import '../data/sq_doc.dart';
 import 'sq_file_field.dart';
 
 class SQImageField extends SQFileField {

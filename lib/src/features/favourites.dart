@@ -4,10 +4,9 @@ import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
 import '../screens/screen.dart';
 import '../sq_auth.dart';
-import '../db/local_collection.dart';
-import '../db/sq_action.dart';
-import '../db/sq_collection.dart';
-import '../db/fields/sq_ref_field.dart';
+import '../data/local_collection.dart';
+import '../data/sq_action.dart';
+import '../data/fields/sq_ref_field.dart';
 
 class FavouritesFeature {
   SQCollection collection;

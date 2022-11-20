@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../db/sq_action.dart';
-import '../../db/sq_doc.dart';
+import '../../data/sq_action.dart';
+import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 
 class TableScreen extends CollectionScreen {

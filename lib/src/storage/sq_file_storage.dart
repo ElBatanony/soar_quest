@@ -1,7 +1,7 @@
 import 'package:image_picker/image_picker.dart';
 
 import 'sq_file_field.dart';
-import '../db/sq_doc.dart';
+import '../data/sq_doc.dart';
 
 abstract class SQFileStorage {
   Future<void> uploadFile({
