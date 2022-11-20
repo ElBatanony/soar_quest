@@ -14,14 +14,12 @@ typedef DocDisplayBuilder = Widget Function(SQDoc doc, ScreenState screenState);
 class CollectionScreen extends Screen {
   final SQCollection collection;
   final DocScreenBuilder customDocScreen;
-  final DocDisplayBuilder? customDocDisplay;
   final String? groupByField;
 
   CollectionScreen(
       {String? title,
       required this.collection,
       DocScreenBuilder? docScreen,
-      this.customDocDisplay,
       super.isInline,
       super.icon,
       this.groupByField,
@@ -57,7 +55,6 @@ class CollectionScreen extends Screen {
   }
 
   Widget docDisplay(SQDoc doc, ScreenState screenState) {
-    if (customDocDisplay != null) return customDocDisplay!(doc, screenState);
     return ListTile(
       title: Text(doc.label),
       subtitle: doc.fields.length >= 2

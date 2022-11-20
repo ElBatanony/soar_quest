@@ -36,11 +36,6 @@ void main() async {
     CollectionScreen(
       collection: inventory,
       icon: Icons.storage,
-      customDocDisplay: (doc, screenState) => ListTile(
-        title: Text(doc.label),
-        onTap: () => DocScreen(doc).go(screenState.context),
-        trailing: Text(doc.value<int>("Amount").toString()),
-      ),
     ),
   ]);
 }
