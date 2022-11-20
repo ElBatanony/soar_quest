@@ -10,7 +10,6 @@ class LocalCollection extends SQCollection {
   LocalCollection({
     required super.id,
     required super.fields,
-    String? singleDocName,
     super.parentDoc,
     super.updates,
     super.actions,
