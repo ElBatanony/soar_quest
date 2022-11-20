@@ -35,7 +35,6 @@ class Screen extends StatefulWidget {
     this.isInline = false,
     this.icon = Icons.stay_current_landscape,
     this.show = alwaysShowScreen,
-    super.key,
   });
 
   @override

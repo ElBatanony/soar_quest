@@ -14,7 +14,6 @@ class CollectionFilterScreen extends CollectionScreen {
     required super.collection,
     required this.filters,
     super.icon,
-    super.key,
   });
 
   @override

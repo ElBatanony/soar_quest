@@ -6,7 +6,7 @@ import '../../ui/sq_button.dart';
 import '../collection_screen.dart';
 
 class SelectDocScreen extends CollectionScreen {
-  SelectDocScreen({String? title, required super.collection, super.key})
+  SelectDocScreen({String? title, required super.collection})
       : super(title: title ?? "Select ${collection.id}");
 
   @override

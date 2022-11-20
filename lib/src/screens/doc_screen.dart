@@ -11,7 +11,6 @@ class DocScreen extends Screen {
     String? title,
     super.icon,
     super.isInline,
-    super.key,
   }) : super(title: title ?? doc.label);
 
   SQCollection get collection => doc.collection;

@@ -19,7 +19,6 @@ class FormScreen extends DocScreen {
     super.icon,
     super.isInline,
     this.onFieldsChanged = _emptyVoid,
-    super.key,
   }) : super(
             originalDoc.collection
                 .newDoc(initialFields: originalDoc.copyFields()),

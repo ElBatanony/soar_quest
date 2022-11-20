@@ -14,7 +14,6 @@ class VideoCollectionScreen extends CollectionScreen {
     super.title,
     required super.collection,
     required this.videoField,
-    super.key,
   });
 
   @override
@@ -26,8 +25,7 @@ class VideoCollectionScreen extends CollectionScreen {
 class VideoDocDisplay extends DocScreen {
   final SQVideoLinkField videoField;
 
-  VideoDocDisplay(super.doc,
-      {required this.videoField, super.isInline, super.key});
+  VideoDocDisplay(super.doc, {required this.videoField, super.isInline});
 
   @override
   State<VideoDocDisplay> createState() => _VideoDocDisplayState();
