@@ -18,6 +18,7 @@ class CollectionScreen extends Screen {
       super.isInline,
       super.icon,
       this.groupByField,
+      super.signedIn,
       super.show})
       : super(title: title ?? collection.id);
 
