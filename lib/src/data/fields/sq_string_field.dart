@@ -4,8 +4,14 @@ import '../sq_doc.dart';
 import 'sq_text_field.dart';
 
 class SQStringField extends SQField<String> {
+  final int maxLines;
+
   SQStringField(super.name,
-      {super.value, super.editable, super.require, super.show});
+      {super.value,
+      super.editable,
+      super.require,
+      super.show,
+      this.maxLines = 1});
 
   @override
   String? parse(source) {
@@ -15,7 +21,11 @@ class SQStringField extends SQField<String> {
 
   @override
   SQStringField copy() => SQStringField(name,
-      value: value, editable: editable, require: require, show: show);
+      value: value,
+      editable: editable,
+      require: require,
+      show: show,
+      maxLines: maxLines);
 
   @override
   SQFormField formField(SQDoc doc, {Function? onChanged}) {
@@ -33,6 +43,10 @@ class _SQStringFormField extends SQFormField<SQStringField> {
 class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {
   @override
   Widget fieldBuilder(ScreenState screenState) {
-    return SQTextField(formField, textParse: (text) => text);
+    return SQTextField(
+      formField,
+      textParse: (text) => text,
+      maxLines: field.maxLines,
+    );
   }
 }
