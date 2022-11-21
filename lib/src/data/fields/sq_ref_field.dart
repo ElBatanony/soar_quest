@@ -16,12 +16,12 @@ class SQRefField extends SQField<SQRef> {
   SQCollection collection;
 
   SQRefField(super.name,
-      {required this.collection, super.value, super.editable});
+      {required this.collection, super.value, super.editable, super.show});
 
   @override
   SQRefField copy() {
     return SQRefField(name,
-        collection: collection, value: value, editable: editable);
+        collection: collection, value: value, editable: editable, show: show);
   }
 
   @override

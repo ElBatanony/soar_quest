@@ -7,7 +7,8 @@ import '../../ui/sq_button.dart';
 export 'types/sq_timestamp.dart';
 
 class SQTimestampField extends SQField<SQTimestamp> {
-  SQTimestampField(String name, {SQTimestamp? value, super.editable})
+  SQTimestampField(String name,
+      {SQTimestamp? value, super.editable, super.show})
       : super(name, value: value ?? SQTimestamp.now());
 
   @override
@@ -17,7 +18,7 @@ class SQTimestampField extends SQField<SQTimestamp> {
 
   @override
   SQTimestampField copy() =>
-      SQTimestampField(name, value: value, editable: editable);
+      SQTimestampField(name, value: value, editable: editable, show: show);
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {

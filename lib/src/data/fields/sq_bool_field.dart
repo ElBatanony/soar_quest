@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../sq_doc.dart';
 
 class SQBoolField extends SQField<bool> {
-  SQBoolField(super.name, {super.value, super.editable});
+  SQBoolField(super.name, {super.value, super.editable, super.show});
 
   @override
   bool? parse(source) {
@@ -12,7 +12,8 @@ class SQBoolField extends SQField<bool> {
   }
 
   @override
-  SQBoolField copy() => SQBoolField(name, value: value, editable: editable);
+  SQBoolField copy() =>
+      SQBoolField(name, value: value, editable: editable, show: show);
 
   @override
   formField(SQDoc doc, {Function? onChanged}) {
