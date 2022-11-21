@@ -51,7 +51,7 @@
 		"body": [
 			"await SQApp.init(\"$1\", firebaseOptions: DefaultFirebaseOptions.currentPlatform);",
 			"",
-			"SQApp.run([Screen(\"Hello World\")]);",
+			"SQApp.run([Screen(title: \"Hello World\")]);",
 		],
 	},
 	"New SQFormField": {
