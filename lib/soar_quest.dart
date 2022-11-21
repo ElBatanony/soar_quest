@@ -10,7 +10,7 @@ export 'src/data/collections/in_memory_collection.dart';
 export 'src/data/collections/local_collection.dart';
 
 export 'src/data/sq_action.dart';
-export 'src/data/conditions.dart';
+export 'src/data/sq_condition.dart';
 
 export 'src/data/user_settings.dart';
 

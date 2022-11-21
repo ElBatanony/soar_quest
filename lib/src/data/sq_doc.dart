@@ -5,7 +5,7 @@ import 'sq_collection.dart';
 import '../storage/sq_image_field.dart';
 
 export 'sq_field.dart';
-export 'conditions.dart';
+export 'sq_condition.dart';
 export '../screens/screen.dart' show ScreenState;
 
 class SQDoc {
