@@ -248,7 +248,7 @@ class ExecuteOnDocsAction extends SQAction {
 }
 
 class OpenUrlAction extends SQAction {
-  String Function(SQDoc) getUrl;
+  String Function(SQDoc doc) getUrl;
 
   OpenUrlAction(super.name, {super.icon, super.show, required this.getUrl});
 
