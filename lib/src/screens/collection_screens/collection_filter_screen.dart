@@ -18,8 +18,14 @@ class CollectionFilterScreen extends CollectionScreen {
   @override
   State<CollectionFilterScreen> createState() => CollectionFilterScreenState();
 
+  List<SQDoc> filterDocs(
+      List<SQDoc> initialDocs, List<CollectionFilter> filters) {
+    return filters.fold(
+        initialDocs, (remainingDocs, filter) => filter.filter(remainingDocs));
+  }
+
   @override
-  List<SQDoc> get docs => collection.filterBy(fieldFilters);
+  List<SQDoc> get docs => filterDocs(collection.docs, fieldFilters);
 
   Widget filterFieldsDisplay(ScreenState screenState) {
     fieldFilters.clear();
