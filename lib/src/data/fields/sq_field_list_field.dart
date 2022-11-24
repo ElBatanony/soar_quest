@@ -1,154 +1,96 @@
 import 'package:flutter/material.dart';
 
-import '../sq_doc.dart';
 import '../../ui/sq_button.dart';
+import '../sq_doc.dart';
 import 'sq_list_field.dart';
 
-class SQFieldListField extends SQListField<SQField<dynamic>> {
-  List<SQField<dynamic>> allowedTypes;
+class SQFieldListField<T> extends SQListField<SQField<T>> {
+  SQField<T> field;
 
-  SQFieldListField(super.name, {super.value, required this.allowedTypes});
+  SQFieldListField(super.name, this.field, {super.value});
 
-  List<SQField<dynamic>> get fields => value ?? [];
+  List<SQField<T>> get fields => value ?? [];
 
   @override
-  List<SQField<dynamic>> parse(source) {
-    List<dynamic> dynamicList = source as List;
-    List<SQField<dynamic>> fields = [];
+  List<SQField<T>> parse(dynamic source) {
+    List<dynamic> dynamicList = (source ?? <dynamic>[]) as List;
+    List<SQField<T>> fields = [];
     for (var dynamicFieldValue in dynamicList) {
-      for (SQField<dynamic> allowedType in allowedTypes) {
-        var parsed = allowedType.parse(dynamicFieldValue);
+      SQField<T> newField = field.copy();
+      var parsed = newField.parse(dynamicFieldValue);
 
-        if (parsed != null &&
-            parsed.runtimeType == allowedType.value.runtimeType) {
-          SQField<dynamic> newField = allowedType.copy();
-          newField.value = parsed;
-          fields.add(newField);
-          break;
-        }
+      if (parsed != null && parsed.runtimeType == field.value.runtimeType) {
+        newField.value = parsed;
+        fields.add(newField);
+        break;
       }
     }
     return fields;
   }
 
   @override
-  SQFieldListField copy() => SQFieldListField(name,
-      value: copyList(fields), allowedTypes: allowedTypes);
+  SQFieldListField<T> copy() =>
+      SQFieldListField(name, field, value: copyList(fields));
 
   @override
   List<dynamic> serialize() {
-    return fields.map((listItemField) => listItemField.serialize()).toList();
+    return fields.map((field) => field.serialize()).toList();
   }
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQFieldListFormField(this, doc, onChanged: onChanged);
   }
 }
 
-Future<SQField<dynamic>?> showFieldOptions(SQFieldListField fieldListfield,
-    {required BuildContext context}) {
-  return showDialog<SQField<dynamic>>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            title: Text("Select new field type"),
-            content: Wrap(
-              children: [
-                ...fieldListfield.allowedTypes
-                    .map((field) => SQButton(
-                          field.value.runtimeType.toString(),
-                          onPressed: () => Navigator.pop<SQField<dynamic>>(
-                              context, field.copy()),
-                        ))
-                    .toList(),
-              ],
-            ),
-            actions: [
-              SQButton('Cancel', onPressed: () => Navigator.pop(context)),
-            ]);
-      });
-}
-
-class _SQFieldListFormField extends SQFormField<SQFieldListField> {
-  final SQFieldListField listField;
-
-  const _SQFieldListFormField(this.listField, SQDoc doc,
-      {required super.onChanged})
-      : super(listField, doc);
+class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
+  const _SQFieldListFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => _SQFieldListFormFieldState();
 }
 
-class _SQFieldListFormFieldState extends SQFormFieldState<SQFieldListField> {
-  SQFieldListField get listField => field;
+class _SQFieldListFormFieldState<T>
+    extends SQFormFieldState<SQFieldListField<T>> {
+  SQFieldListField<T> get listField => field;
 
-  void deleteListItem(int index) {
+  void addField() async {
+    SQField<T> newField = listField.field.copy();
     setState(() {
-      listField.fields.removeAt(index);
+      listField.fields.add(newField);
     });
   }
 
-  void addField() async {
-    SQField<dynamic>? newValue =
-        await showFieldOptions(listField, context: context);
-    if (newValue != null) {
-      setState(() {
-        listField.fields.add(newValue);
-      });
-    }
-  }
+  @override
+  String get fieldLabelText =>
+      "${listField.name} (${listField.fields.length} items)";
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    var listItems = listField.fields;
-    var listItemsWidgets = <Widget>[];
-
-    for (int i = 0; i < listItems.length; i++) {
-      listItemsWidgets.add(listItems[i].formField(doc));
-    }
-
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("${listField.name} (List of ${listItems.length})"),
-        ...listItemsWidgets,
+        for (final field in listField.fields)
+          (field..isInline = true).formField(doc),
       ],
     );
   }
 
   @override
   Widget fieldBuilder(ScreenState screenState) {
-    var listItems = listField.fields;
-    var listItemsWidgets = <Widget>[];
-
-    for (int i = 0; i < listItems.length; i++) {
-      listItemsWidgets.add(Column(
-        children: [
-          Row(
-            children: [
-              Expanded(child: listItems[i].formField(doc)),
-              IconButton(
-                  onPressed: () {
-                    deleteListItem(i);
-                  },
-                  icon: Icon(Icons.delete)),
-            ],
-          ),
-        ],
-      ));
-    }
-
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("${listField.name} (List of ${listItems.length})"),
-            IconButton(onPressed: addField, icon: Icon(Icons.add)),
-          ],
-        ),
-        ...listItemsWidgets,
+        for (final field in listField.fields)
+          Row(
+            children: [
+              Expanded(child: (field..isInline = true).formField(doc)),
+              SQButton.icon(
+                Icons.delete,
+                onPressed: () => listField.fields.remove(field),
+              ),
+            ],
+          ),
+        SQButton.icon(Icons.add, text: "Insert Item", onPressed: addField),
       ],
     );
   }
