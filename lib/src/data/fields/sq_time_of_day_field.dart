@@ -30,7 +30,7 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQTimeOfDayFormField(this, doc, onChanged: onChanged);
   }
 }

@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import '../screens/form_screen.dart';
 import 'sq_doc.dart';
 
+export 'package:flutter/material.dart' show VoidCallback;
+
 abstract class SQField<T> {
   String name = "";
   T? value;
@@ -26,7 +28,7 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  SQFormField formField(SQDoc doc, {Function? onChanged});
+  SQFormField formField(SQDoc doc, {VoidCallback? onChanged});
 
   @override
   String toString() {
@@ -38,7 +40,7 @@ abstract class SQFormField<Field extends SQField<dynamic>>
     extends FormField<SQFormField<Field>> {
   final Field field;
   final SQDoc doc;
-  final Function? onChanged;
+  final VoidCallback? onChanged;
 
   const SQFormField(this.field, this.doc, {this.onChanged, super.key})
       : super(builder: emptyBuilder);

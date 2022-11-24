@@ -28,7 +28,7 @@ class SQStringField extends SQField<String> {
       maxLines: maxLines);
 
   @override
-  SQFormField formField(SQDoc doc, {Function? onChanged}) {
+  SQFormField formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQStringFormField(this, doc, onChanged: onChanged);
   }
 }

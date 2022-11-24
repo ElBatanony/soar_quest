@@ -22,7 +22,7 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
       refCollection: refCollection, refFieldName: refFieldName);
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQInverseRefsFormField(this, doc,
         refDocs: valueBuilder(doc), onChanged: onChanged);
   }

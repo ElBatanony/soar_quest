@@ -7,7 +7,7 @@ abstract class SQFileStorage {
   Future<void> uploadFile({
     required SQDoc doc,
     required XFile file,
-    required Function onUpload,
+    required VoidCallback onUpload,
     required SQFileField field,
   });
 

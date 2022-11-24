@@ -17,7 +17,7 @@ class SQDoubleField extends SQField<double> {
   SQDoubleField copy() => SQDoubleField(name, value: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQDoubleFormField(this, doc, onChanged: onChanged);
   }
 }

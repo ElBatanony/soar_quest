@@ -18,7 +18,7 @@ class SQIntField extends SQField<int> {
       value: value, editable: editable, require: require, show: show);
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQIntFormField(this, doc, onChanged: onChanged);
   }
 

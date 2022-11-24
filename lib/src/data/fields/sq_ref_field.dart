@@ -42,7 +42,7 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQRefFormField(this, doc, onChanged: onChanged);
   }
 }

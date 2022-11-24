@@ -18,7 +18,7 @@ class SQEnumField<T> extends SQField<T> {
   }
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) =>
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
       _SQEnumFormField(this, doc, onChanged: onChanged);
 
   @override

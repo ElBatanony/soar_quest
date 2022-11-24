@@ -20,7 +20,7 @@ class SQVideoLinkField extends SQStringField {
       SQVideoLinkField(name, url: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQVideoLinkFormField(this, doc, onChanged: onChanged);
   }
 }

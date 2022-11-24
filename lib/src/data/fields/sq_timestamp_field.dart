@@ -21,7 +21,7 @@ class SQTimestampField extends SQField<SQTimestamp> {
       SQTimestampField(name, value: value, editable: editable, show: show);
 
   @override
-  formField(SQDoc doc, {Function? onChanged}) {
+  formField(SQDoc doc, {VoidCallback? onChanged}) {
     return _SQTimestampFormField(this, doc, onChanged: onChanged);
   }
 }
