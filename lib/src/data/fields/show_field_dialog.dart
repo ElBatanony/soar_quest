@@ -9,7 +9,7 @@ Future<T?> showFieldDialog<T>(
     required BuildContext context}) {
   return showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
             title: Text("Set ${field.name}"),
             content: field.formField(doc),

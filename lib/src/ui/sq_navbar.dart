@@ -16,7 +16,7 @@ class SQNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     if (SQApp.navbarScreens.length < 2) throw "Too few screens for SQNavBar";
     return NavigationBar(
-      onDestinationSelected: (int index) async {
+      onDestinationSelected: (index) async {
         SQApp.selectedNavScreen = index;
         visibleScreens(context)[SQApp.selectedNavScreen]
             .go(context, replace: true);

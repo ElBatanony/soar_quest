@@ -39,7 +39,7 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
   ) {
     return DialogRoute<DateTime>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return DatePickerDialog(
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: DateTime.now(),

@@ -68,7 +68,7 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
     {required BuildContext context}) {
   return showDialog<T?>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
             title: Text("Select ${enumField.name} value"),
             content: Wrap(

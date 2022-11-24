@@ -295,7 +295,7 @@ Future<bool> showConfirmationDialog(
     {required SQAction action, required BuildContext context}) async {
   bool? ret = await showDialog<bool>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
             title: Text("Confirm"),
             content: Text(action.confirmMessage),
