@@ -101,13 +101,13 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
     super.refreshScreen();
   }
 
-  Future<void> loadData() async {
+  void loadData() async {
     await widget.collection.loadCollection();
     super.refreshScreen();
   }
 
   @override
-  void initState() async {
+  void initState() {
     loadData();
     super.initState();
   }

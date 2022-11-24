@@ -39,13 +39,13 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
 
 class _SQInverseRefsFormFieldState
     extends SQFormFieldState<SQInverseRefsField> {
-  Future<void> initializeRefCollection() async {
+  void initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
     onChanged();
   }
 
   @override
-  void initState() async {
+  void initState() {
     initializeRefCollection();
     super.initState();
   }
