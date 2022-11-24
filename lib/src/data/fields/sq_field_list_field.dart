@@ -54,7 +54,7 @@ class _SQFieldListFormFieldState<T>
     extends SQFormFieldState<SQFieldListField<T>> {
   SQFieldListField<T> get listField => field;
 
-  void addField() async {
+  void addField() {
     SQField<T> newField = listField.field.copy();
     setState(() {
       listField.fields.add(newField);

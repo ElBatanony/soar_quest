@@ -7,7 +7,7 @@ import '../ui/sq_button.dart';
 class TelegramButton extends SQButton {
   final String username;
 
-  static void openTelegramUrl(String username) async {
+  static Future<void> openTelegramUrl(String username) async {
     launchUrlString(
       "https://t.me/$username",
       mode: LaunchMode.externalNonBrowserApplication,

@@ -67,7 +67,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
     SQDoc fakeDoc = fakeColl.newDoc();
 
     fieldsFormScreen =
-        FormScreen(fakeDoc, isInline: true, onFieldsChanged: (doc) {
+        FormScreen(fakeDoc, isInline: true, onFieldsChanged: (doc) async {
       for (final fieldFilter in fieldFilters) {
         fieldFilter.field = doc.getField(fieldFilter.field.name)!;
       }

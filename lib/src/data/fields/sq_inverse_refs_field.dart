@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../screens/collection_screens/table_screen.dart';
@@ -39,14 +41,14 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
 
 class _SQInverseRefsFormFieldState
     extends SQFormFieldState<SQInverseRefsField> {
-  void initializeRefCollection() async {
+  Future<void> initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
     onChanged();
   }
 
   @override
   void initState() {
-    initializeRefCollection();
+    unawaited(initializeRefCollection());
     super.initState();
   }
 

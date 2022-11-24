@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
@@ -96,19 +98,19 @@ class CollectionScreen extends Screen {
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
-  void refreshScreen() async {
+  Future<void> refreshScreen() async {
     loadData();
     super.refreshScreen();
   }
 
-  void loadData() async {
+  Future<void> loadData() async {
     await widget.collection.loadCollection();
     super.refreshScreen();
   }
 
   @override
   void initState() {
-    loadData();
+    unawaited(loadData());
     super.initState();
   }
 }

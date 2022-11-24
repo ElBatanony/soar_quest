@@ -134,7 +134,7 @@ class SQProfileScreen extends Screen {
 
 class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
   @override
-  void refreshScreen() async {
+  refreshScreen() async {
     SQAuth.initUserDoc();
     super.refreshScreen();
   }
