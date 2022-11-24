@@ -32,7 +32,8 @@ class CollectionSlice implements SQCollection {
 
   @override
   List<SQDoc> get docs =>
-      filter == null ? collection.docs : collection.filterBy([filter!]);
+      filter == null ? collection.docs : filter!.filter(collection.docs);
+
   @override
   set docs(_) => throw UnimplementedError();
 
@@ -63,10 +64,6 @@ class CollectionSlice implements SQCollection {
 
   @override
   Future<void> deleteDoc(SQDoc doc) => collection.deleteDoc(doc);
-
-  @override
-  List<SQDoc> filterBy(List<CollectionFilter> filters) =>
-      collection.filterBy(filters);
 
   @override
   SQDoc? get parentDoc => collection.parentDoc;

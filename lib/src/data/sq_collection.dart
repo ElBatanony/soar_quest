@@ -6,7 +6,6 @@ import 'sq_action.dart';
 import '../sq_app.dart';
 import 'fields/sq_user_ref_field.dart';
 import 'sq_doc.dart';
-import 'collections/collection_filter.dart';
 import 'sq_updates.dart';
 
 export 'sq_doc.dart';
@@ -84,13 +83,6 @@ abstract class SQCollection<DocType extends SQDoc> {
           .forEach((field) => field.value = SQAuth.userDoc!.ref);
 
     return newDoc;
-  }
-
-  List<DocType> filterBy(List<CollectionFilter> filters) {
-    return filters.fold(
-        docs,
-        (remainingDocs, filter) =>
-            filter.filter(remainingDocs) as List<DocType>);
   }
 
   static SQCollection? byPath(String path) =>
