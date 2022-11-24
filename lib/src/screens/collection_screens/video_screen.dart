@@ -11,9 +11,9 @@ class VideoCollectionScreen extends CollectionScreen {
   final SQVideoLinkField videoField;
 
   VideoCollectionScreen({
-    super.title,
     required super.collection,
     required this.videoField,
+    super.title,
   });
 
   @override

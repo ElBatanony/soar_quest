@@ -12,15 +12,15 @@ class CollectionScreen extends Screen {
 
   List<SQDoc> get docs => collection.docs;
 
-  CollectionScreen(
-      {String? title,
-      required this.collection,
-      super.isInline,
-      super.icon,
-      this.groupByField,
-      super.signedIn,
-      super.show})
-      : super(title: title ?? collection.id);
+  CollectionScreen({
+    required this.collection,
+    String? title,
+    super.isInline,
+    super.icon,
+    this.groupByField,
+    super.signedIn,
+    super.show,
+  }) : super(title: title ?? collection.id);
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();

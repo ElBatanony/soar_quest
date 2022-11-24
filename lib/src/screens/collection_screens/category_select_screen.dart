@@ -9,9 +9,9 @@ class CategorySelectScreen extends GalleryScreen {
   final SQCollection itemsCollection;
 
   CategorySelectScreen({
-    super.title,
     required this.itemsCollection,
     required this.categoryField,
+    super.title,
   }) : super(collection: categoryField.collection);
 
   @override

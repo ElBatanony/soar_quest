@@ -16,8 +16,8 @@ class SQButton extends StatelessWidget {
 
   const SQButton.icon(
     this.icon, {
-    this.text,
     required this.onPressed,
+    this.text,
     this.iconSize = 24,
     Key? key,
   }) : super(key: key);

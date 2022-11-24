@@ -42,6 +42,10 @@ linter:
     secure_pubspec_urls: true
     sort_pub_dependencies: true
 
+
+    # style
+    always_put_required_named_parameters_first: true
+
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
 # https://dart-lang.github.io/linter/lints/index.html

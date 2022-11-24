@@ -9,9 +9,9 @@ class CollectionFilterScreen extends CollectionScreen {
   final List<CollectionFieldFilter> fieldFilters = [];
 
   CollectionFilterScreen({
-    super.title,
     required super.collection,
     required this.filters,
+    super.title,
     super.icon,
   });
 

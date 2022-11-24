@@ -116,10 +116,10 @@ class GoScreenAction extends SQAction {
 
   GoScreenAction(
     super.name, {
+    required this.screen,
     super.icon,
     super.show,
     super.onExecute,
-    required this.screen,
     this.replace = false,
   });
 
@@ -153,11 +153,11 @@ class CreateDocAction extends SQAction {
 
   CreateDocAction(
     super.name, {
+    required this.getCollection,
+    required this.initialFields,
     super.icon,
     super.show,
     super.onExecute,
-    required this.getCollection,
-    required this.initialFields,
     this.form = true,
     this.goBack = true,
   });
@@ -209,7 +209,7 @@ class SetFieldsAction extends SQAction {
   Map<String, dynamic> Function(SQDoc doc) getFields;
 
   SetFieldsAction(super.name,
-      {super.icon, super.show, super.onExecute, required this.getFields});
+      {required this.getFields, super.icon, super.show, super.onExecute});
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -231,11 +231,11 @@ class ExecuteOnDocsAction extends SQAction {
 
   ExecuteOnDocsAction(
     super.name, {
+    required this.getDocs,
+    required this.action,
     super.icon,
     super.show,
     super.onExecute,
-    required this.getDocs,
-    required this.action,
   });
 
   @override
@@ -251,7 +251,7 @@ class ExecuteOnDocsAction extends SQAction {
 class OpenUrlAction extends SQAction {
   String Function(SQDoc doc) getUrl;
 
-  OpenUrlAction(super.name, {super.icon, super.show, required this.getUrl});
+  OpenUrlAction(super.name, {required this.getUrl, super.icon, super.show});
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -267,7 +267,7 @@ class OpenUrlAction extends SQAction {
 class SequencesAction extends SQAction {
   List<SQAction> actions;
 
-  SequencesAction(super.name, {super.icon, super.show, required this.actions});
+  SequencesAction(super.name, {required this.actions, super.icon, super.show});
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -282,7 +282,7 @@ class CustomAction extends SQAction {
   Future<void> Function(SQDoc doc, ScreenState screenState) customExecute;
 
   CustomAction(super.name,
-      {super.icon, super.show, required this.customExecute, super.onExecute});
+      {required this.customExecute, super.icon, super.show, super.onExecute});
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
