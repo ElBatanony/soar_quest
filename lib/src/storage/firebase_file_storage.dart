@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,11 +37,11 @@ class FirebaseFileStorage extends SQFileStorage {
         case TaskState.success:
           String downloadUrl = await ref.getDownloadURL();
           field.value = downloadUrl;
-          print("File uploaded!!");
+          debugPrint("File uploaded!!");
           onUpload();
           break;
         default:
-          print(taskSnapshot.state);
+          debugPrint(taskSnapshot.state.toString());
       }
     });
   }

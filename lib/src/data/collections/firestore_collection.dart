@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'
     show FirebaseFirestore, CollectionReference, SetOptions;
 
@@ -20,9 +21,9 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
 
   @override
   Future<void> loadCollection() async {
-    print("Fetching collection from ${ref.path}");
+    debugPrint("Fetching collection from ${ref.path}");
     final snap = await ref.get();
-    print('${snap.docs.length} docs fetched for $id!');
+    debugPrint('${snap.docs.length} docs fetched for $id!');
     docs = snap.docs
         .map((doc) => newDoc(id: doc.id)
           ..parse(

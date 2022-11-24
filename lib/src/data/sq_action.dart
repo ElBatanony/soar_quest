@@ -26,7 +26,7 @@ abstract class SQAction {
       this.confirmMessage = "Are you sure?"});
 
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    print("Executing action: $name");
+    debugPrint("Executing action: $name");
     await onExecute(doc, screenState);
   }
 
