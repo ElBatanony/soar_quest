@@ -26,6 +26,8 @@ class LocalCollection extends SQCollection {
     List<String> prefsStrings = _prefs!.getStringList(path) ?? [];
     docs = prefsStrings.map((e) {
       final docObject = jsonDecode(e);
+      if (docObject is! Map<String, dynamic>)
+        throw "Error loading local collection doc";
       String? newDocId = docObject['id'] as String?;
       Map<String, dynamic>? newDocData =
           docObject['data'] as Map<String, dynamic>?;

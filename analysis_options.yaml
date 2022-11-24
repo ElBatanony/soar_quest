@@ -17,6 +17,7 @@ linter:
     use_key_in_widget_constructors: false
     
     use_build_context_synchronously: true
+    avoid_dynamic_calls : true
     discarded_futures: true
 
     avoid_empty_else: true

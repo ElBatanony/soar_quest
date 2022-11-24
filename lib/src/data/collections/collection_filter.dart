@@ -66,18 +66,19 @@ class StringContainsFilter extends CollectionFieldFilter {
 
 class RefFilter extends CollectionFilter {
   String fieldName;
-  dynamic fieldValue;
+  SQRef? fieldValue;
 
   RefFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
+    if (fieldValue == null) return [];
     return docs.where((doc) {
       if (doc.value<SQRef>(fieldName) == null) return false;
       SQRef? docRef = doc.value<SQRef>(fieldName);
       if (docRef == null) throw "Filtering null docRef";
-      return docRef.docId == fieldValue.docId &&
-          docRef.collectionPath == fieldValue.collectionPath;
+      return docRef.docId == fieldValue!.docId &&
+          docRef.collectionPath == fieldValue!.collectionPath;
     }).toList();
   }
 }
