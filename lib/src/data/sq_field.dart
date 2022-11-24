@@ -75,10 +75,12 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
+  String get fieldLabelText => field.name + (field.require ? " *" : "");
+
   Widget fieldLabel(ScreenState screenState) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
-      child: Text(field.name + (field.require ? " *" : ""),
+      child: Text(fieldLabelText,
           style: Theme.of(screenState.context).textTheme.headline6),
     );
   }
