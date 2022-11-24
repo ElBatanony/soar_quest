@@ -9,9 +9,9 @@ class SQButton extends StatelessWidget {
   const SQButton(
     this.text, {
     required this.onPressed,
-    this.iconSize = 24,
     Key? key,
   })  : icon = null,
+        iconSize = 24,
         super(key: key);
 
   const SQButton.icon(
