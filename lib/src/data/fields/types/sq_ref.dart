@@ -1,11 +1,14 @@
+import 'package:flutter/material.dart';
+
 import '../../sq_collection.dart';
 
+@immutable
 class SQRef {
-  String docId;
-  String label;
-  String collectionPath;
+  final String docId;
+  final String label;
+  final String collectionPath;
 
-  SQRef({
+  const SQRef({
     required this.collectionPath,
     required this.docId,
     required this.label,
