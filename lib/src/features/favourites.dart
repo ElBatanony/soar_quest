@@ -47,8 +47,9 @@ class FavouritesFeature {
         updates: SQUpdates.readOnly());
     collection.actions
         .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
-    favouritesCollection.loadCollection();
   }
+
+  Future<void> loadFavourites() => favouritesCollection.loadCollection();
 
   DocCond isInFavourites() =>
       DocCond((doc, _) => favouritesCollection.hasDoc(doc));

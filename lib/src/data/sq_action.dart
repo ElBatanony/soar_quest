@@ -46,7 +46,7 @@ abstract class SQAction {
     return FloatingActionButton(
         heroTag: null,
         shape: CircleBorder(),
-        onPressed: () => execute(doc, screenState),
+        onPressed: () async => execute(doc, screenState),
         child: Icon(icon));
   }
 }

@@ -45,7 +45,7 @@ class _SQInverseRefsFormFieldState
   }
 
   @override
-  void initState() {
+  void initState() async {
     initializeRefCollection();
     super.initState();
   }

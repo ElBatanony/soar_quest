@@ -15,7 +15,7 @@ class MenuScreen extends Screen {
         for (final screen in screens)
           SQButton(
             screen.title,
-            onPressed: () => screen.go(screenState.context),
+            onPressed: () async => screen.go(screenState.context),
           ),
       ],
     );

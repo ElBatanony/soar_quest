@@ -18,7 +18,7 @@ class GalleryScreen extends CollectionScreen {
   Widget docDisplay(SQDoc doc, ScreenState screenState) {
     return Card(
       child: InkWell(
-        onTap: () => goToDocScreen(docScreen(doc), screenState),
+        onTap: () async => goToDocScreen(docScreen(doc), screenState),
         child: Column(
           children: [
             doc.imageLabel != null

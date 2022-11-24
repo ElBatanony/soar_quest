@@ -68,7 +68,7 @@ class CollectionScreen extends Screen {
                 action.button(doc, screenState: screenState, isIcon: true))
             .toList(),
       ),
-      onTap: () => goToDocScreen(docScreen(doc), screenState),
+      onTap: () async => goToDocScreen(docScreen(doc), screenState),
     );
   }
 
@@ -96,7 +96,7 @@ class CollectionScreen extends Screen {
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
-  void refreshScreen() {
+  void refreshScreen() async {
     loadData();
     super.refreshScreen();
   }
@@ -107,7 +107,7 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   @override
-  void initState() {
+  void initState() async {
     loadData();
     super.initState();
   }

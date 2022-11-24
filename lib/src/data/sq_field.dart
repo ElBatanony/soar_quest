@@ -84,7 +84,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   Widget readOnlyBuilder(ScreenState screenState) {
     String valueString = field.value.toString();
     return GestureDetector(
-      onLongPress: () {
+      onLongPress: () async {
         Clipboard.setData(ClipboardData(text: valueString));
         ScaffoldMessenger.of(screenState.context).showSnackBar(SnackBar(
             duration: Duration(milliseconds: 500),

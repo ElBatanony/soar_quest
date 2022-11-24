@@ -20,7 +20,7 @@ class SocialFeed extends Screen {
         ),
         SQButton(
           "View Telegram Channels",
-          onPressed: () => launchUrlString("https://tlgrm.eu/channels",
+          onPressed: () async => launchUrlString("https://tlgrm.eu/channels",
               mode: LaunchMode.externalApplication),
         ),
       ],

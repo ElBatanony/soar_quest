@@ -32,7 +32,7 @@ class SQDrawer extends StatelessWidget {
               .map((screen) => ListTile(
                     leading: Icon(screen.icon),
                     title: Text(screen.title),
-                    onTap: () => screen.go(context, replace: true),
+                    onTap: () async => screen.go(context, replace: true),
                   ))
               .toList(),
         ],

@@ -10,7 +10,7 @@ class CardsScreen extends CollectionScreen {
   Widget docDisplay(SQDoc doc, ScreenState screenState) {
     return Card(
       child: InkWell(
-        onTap: () => goToDocScreen(docScreen(doc), screenState),
+        onTap: () async => goToDocScreen(docScreen(doc), screenState),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

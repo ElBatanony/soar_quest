@@ -92,7 +92,7 @@ class ScreenState<T extends Screen> extends State<T> {
             children: [
               Text("You should be signed in to view this screen."),
               SQButton("Sign In",
-                  onPressed: () => SQProfileScreen().go(context))
+                  onPressed: () async => SQProfileScreen().go(context))
             ],
           ),
         ),
