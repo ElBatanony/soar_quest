@@ -42,6 +42,7 @@ export 'src/screens/collection_screens/cards_screen.dart';
 
 // Features
 export 'src/features/favourites.dart';
+export 'src/features/feedback_screen.dart';
 
 // Unfeatures
 export 'src/unfeatures/social_feed.dart';
