@@ -13,8 +13,7 @@ void main() async {
     SQTimestampField("Date"),
     SQStringField("Description", maxLines: 3),
     SQBoolField("Completed", value: false, editable: false, show: falseCond),
-    SQTimestampField("Completed Date",
-        value: null, editable: false, show: inFormScreen.not),
+    SQTimestampField("Completed Date", editable: false, show: inFormScreen.not),
     SQEditedByField("User", show: falseCond),
   ], actions: [
     SetFieldsAction("Mark As Complete",

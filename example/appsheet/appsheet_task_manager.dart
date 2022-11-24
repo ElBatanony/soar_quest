@@ -38,7 +38,6 @@ void main() async {
       SQTimestampField("Last Updated"),
     ],
     actions: [checkTaskAction, uncheckTaskAction],
-    updates: SQUpdates(edits: true),
   );
 
   CollectionFilter doneFilter = ValueFilter("Status", "Done");
