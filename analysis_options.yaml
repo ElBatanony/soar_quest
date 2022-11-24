@@ -15,7 +15,10 @@ linter:
     unused_local_variable: false
     prefer_const_literals_to_create_immutables: false
     use_key_in_widget_constructors: false
-    use_build_context_synchronously: false
+
+    # pubspec
+    secure_pubspec_urls: true
+    sort_pub_dependencies: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
