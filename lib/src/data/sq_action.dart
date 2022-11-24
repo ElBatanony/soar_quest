@@ -169,7 +169,8 @@ class CreateDocAction extends SQAction {
     if (form) {
       bool created =
           await FormScreen(newDoc).go<bool>(screenState.context) ?? false;
-      if (created && !goBack) await DocScreen(newDoc).go(screenState.context);
+      if (created && !goBack && screenState.mounted)
+        await DocScreen(newDoc).go(screenState.context);
     } else {
       getCollection().saveDoc(newDoc);
       if (!goBack) DocScreen(newDoc).go(screenState.context);
