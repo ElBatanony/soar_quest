@@ -9,18 +9,17 @@ analyzer:
 
 linter:
   rules:
+
+    # Disabled rules
     prefer_const_constructors: false
     curly_braces_in_flow_control_structures: false
     use_key_in_widget_constructors: false
-    diagnostic_describe_all_properties: false
     
-    avoid_print: true
-    unused_local_variable: true
-    use_build_context_synchronously: true
+    # Error rules
     avoid_dynamic_calls : true
     discarded_futures: true
-    prefer_const_literals_to_create_immutables: true
 
+    # Error rules (no change)
     avoid_empty_else: true
     avoid_returning_null_for_future: true
     avoid_type_to_string: true
@@ -38,12 +37,11 @@ linter:
     unnecessary_statements: true
     unsafe_html: true
 
-    # pubspec
+    # pubspec rules
     secure_pubspec_urls: true
     sort_pub_dependencies: true
 
-
-    # style
+    # Style rules
     always_put_required_named_parameters_first: true
     avoid_equals_and_hash_code_on_mutable_classes: true
     avoid_redundant_argument_values: true
@@ -56,6 +54,50 @@ linter:
     omit_local_variable_types: true
     parameter_assignments: true
     prefer_asserts_with_message: true
+    prefer_const_literals_to_create_immutables: true
+
+    # Style rules (no change)
+    unnecessary_library_directive: true
+    avoid_bool_literals_in_conditional_expressions: true
+    avoid_catches_without_on_clauses: true
+    avoid_catching_errors: true
+    avoid_double_and_int_checks: true
+    avoid_escaping_inner_quotes: true
+    avoid_field_initializers_in_const_classes: true
+    avoid_final_parameters: true
+    avoid_implementing_value_types: true
+    avoid_js_rounded_ints: true
+    avoid_positional_boolean_parameters: true
+    avoid_private_typedef_functions: true
+    avoid_returning_null: true
+    avoid_returning_this: true
+    avoid_setters_without_getters: true
+    avoid_unused_constructor_parameters: true
+    combinators_ordering: true
+    conditional_uri_does_not_exist: true
+    dangling_library_doc_comments: true
+    deprecated_consistency: true
+    do_not_use_environment: true
+    enable_null_safety: true
+    eol_at_end_of_file: true
+    implicit_call_tearoffs: true
+    join_return_with_assignment: true
+    leading_newlines_in_multiline_strings: true
+    library_annotations: true
+    missing_whitespace_between_adjacent_strings: true
+    noop_primitive_operations: true
+    no_runtimeType_toString: true
+    one_member_abstracts: true
+    package_api_docs: true
+    prefer_asserts_in_initializer_lists: true
+    prefer_bool_in_asserts: true
+    
+    # to enable:
+    # avoid_classes_with_only_static_members: true
+    # no_default_cases: true
+    # only_throw_errors: true
+    # use_key_in_widget_constructors: true
+    # prefer_const_constructors: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
