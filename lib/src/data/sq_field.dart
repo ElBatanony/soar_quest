@@ -53,7 +53,7 @@ abstract class SQFormField<Field extends SQField<dynamic>>
 
 abstract class SQFormFieldState<Field extends SQField<dynamic>>
     extends FormFieldState<SQFormField<Field>> {
-  SQFormField<Field> get formField => (widget as SQFormField<Field>);
+  SQFormField<Field> get formField => widget as SQFormField<Field>;
   Field get field => formField.field;
   SQDoc get doc => formField.doc;
   late bool inForm;
