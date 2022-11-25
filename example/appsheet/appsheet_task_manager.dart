@@ -12,11 +12,11 @@ void main() async {
 
   await UserSettings.setSettings([SQStringField("hai"), SQBoolField("Dope")]);
 
-  var checkTaskAction = SetFieldsAction("Check",
+  final checkTaskAction = SetFieldsAction("Check",
       getFields: (doc) => {"Last Updated": SQTimestamp.now(), "Status": "Done"},
       show: DocValueCond("Status", "Done").not);
 
-  var uncheckTaskAction = SetFieldsAction("UNCheck",
+  final uncheckTaskAction = SetFieldsAction("UNCheck",
       getFields: (doc) => {"Status": "To-Do"},
       icon: Icons.arrow_back,
       show: DocValueCond("Status", "Done"));
@@ -40,7 +40,7 @@ void main() async {
     actions: [checkTaskAction, uncheckTaskAction],
   );
 
-  CollectionFilter doneFilter = ValueFilter("Status", "Done");
+  final doneFilter = ValueFilter("Status", "Done");
   doneTasks =
       CollectionSlice(tasks, filter: doneFilter, updates: SQUpdates.readOnly());
   pendingTasks = CollectionSlice(tasks, filter: doneFilter.inverse());

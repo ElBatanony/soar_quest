@@ -17,7 +17,7 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
     final fields = <SQField<T>>[];
     for (final dynamicFieldValue in dynamicList) {
       final newField = field.copy();
-      var parsed = newField.parse(dynamicFieldValue);
+      final parsed = newField.parse(dynamicFieldValue);
 
       if (parsed != null && parsed.runtimeType == field.value.runtimeType) {
         newField.value = parsed;

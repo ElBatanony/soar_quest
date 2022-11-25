@@ -17,7 +17,7 @@ class FavouritesFeature {
         icon: Icons.favorite,
         show: isInFavourites().not,
         customExecute: (doc, screenState) async {
-          var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
+          final newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
           newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
           await favouritesCollection.saveDoc(newFavDoc);
           screenState.refreshScreen();

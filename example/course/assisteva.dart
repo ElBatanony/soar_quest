@@ -18,7 +18,7 @@ void main() async {
         options: ["Normal", "Blind", "Deaf"])
   ]);
 
-  SQCollection categories = FirestoreCollection(
+  final categories = FirestoreCollection(
     id: "Categories",
     fields: [
       SQStringField("Name"),
@@ -29,7 +29,7 @@ void main() async {
 
   final courseCategoryRefField = SQRefField("Category", collection: categories);
 
-  SQCollection courses = FirestoreCollection(
+  final courses = FirestoreCollection(
     id: "Courses",
     fields: [
       SQStringField("Course Name"),

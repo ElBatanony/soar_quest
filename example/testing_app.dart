@@ -16,7 +16,7 @@ void main() async {
     firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   );
 
-  SQCollection simpleCollection = FirestoreCollection(
+  final simpleCollection = FirestoreCollection(
     id: "Simple Collection",
     fields: [
       SQStringField("Name"),
@@ -24,9 +24,9 @@ void main() async {
     ],
   );
 
-  SQFileStorage firebaseFileStorage = FirebaseFileStorage();
+  final firebaseFileStorage = FirebaseFileStorage();
 
-  SQCollection testCollection = FirestoreCollection(
+  final testCollection = FirestoreCollection(
     id: "Test Collection",
     fields: [
       SQStringField("String"),
@@ -55,7 +55,7 @@ void main() async {
     ],
   );
 
-  SQCollection testUserCollection = FirestoreCollection(
+  final testUserCollection = FirestoreCollection(
       id: "Test User Collection",
       parentDoc: SQAuth.userDoc,
       fields: [
