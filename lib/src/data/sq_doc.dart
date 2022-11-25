@@ -1,12 +1,12 @@
 import 'package:collection/collection.dart';
 
+import '../storage/sq_image_field.dart';
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
-import '../storage/sq_image_field.dart';
 
-export 'sq_field.dart';
-export 'sq_condition.dart';
 export '../screens/screen.dart' show ScreenState;
+export 'sq_condition.dart';
+export 'sq_field.dart';
 
 class SQDoc {
   late List<SQField<dynamic>> fields;

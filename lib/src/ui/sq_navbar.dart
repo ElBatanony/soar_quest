@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../sq_app.dart';
 import '../screens/screen.dart';
+import '../sq_app.dart';
 
 class SQNavBar extends StatelessWidget {
   final List<Screen> screens;

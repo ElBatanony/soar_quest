@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart'
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'data/fields/sq_string_field.dart';
 import 'data/collections/firestore_collection.dart';
 import 'data/collections/local_collection.dart';
+import 'data/fields/sq_string_field.dart';
 
 import 'data/sq_action.dart';
 import 'screens/screen.dart';

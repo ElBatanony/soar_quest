@@ -1,10 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/form_screen.dart';
+import '../screens/screen.dart';
 import '../sq_auth.dart';
 import 'collections/local_collection.dart';
-import '../screens/screen.dart';
-import '../screens/form_screen.dart';
 
 const _settingsCollectionId = "Settings";
 const _defaultSettingsDocId = "default";

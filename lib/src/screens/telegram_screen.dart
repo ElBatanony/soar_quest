@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import 'screen.dart';
 import '../ui/sq_button.dart';
+import 'screen.dart';
 
 class TelegramButton extends SQButton {
   final String username;

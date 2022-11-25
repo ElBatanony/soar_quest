@@ -1,15 +1,15 @@
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
-import '../sq_auth.dart';
-import 'sq_action.dart';
 import '../sq_app.dart';
+import '../sq_auth.dart';
 import 'fields/sq_user_ref_field.dart';
+import 'sq_action.dart';
 import 'sq_doc.dart';
 import 'sq_updates.dart';
 
-export 'sq_doc.dart';
 export 'collections/collection_filter.dart';
+export 'sq_doc.dart';
 export 'sq_updates.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {

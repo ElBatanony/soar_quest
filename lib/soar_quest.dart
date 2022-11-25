@@ -1,3 +1,5 @@
+// ignore_for_file: directives_ordering
+
 export 'src/sq_app.dart';
 export 'src/sq_auth.dart';
 export 'fields.dart';

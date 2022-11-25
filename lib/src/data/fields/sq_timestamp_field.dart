@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
 import 'types/sq_timestamp.dart';
-import '../../ui/sq_button.dart';
 
 export 'types/sq_timestamp.dart';
 

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'
     show FirebaseFirestore, CollectionReference, SetOptions;
+import 'package:flutter/material.dart';
 
 import '../sq_collection.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../sq_auth.dart';
-import '../sq_app.dart';
-import '../screens/screen.dart';
 import '../data/user_settings.dart';
+import '../screens/screen.dart';
+import '../sq_app.dart';
+import '../sq_auth.dart';
 
 class SQDrawer extends StatelessWidget {
   final List<Screen> screens;

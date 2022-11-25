@@ -1,11 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-
-import 'ui/sq_drawer.dart';
-import 'sq_auth.dart';
 import 'data/sq_field.dart';
 import 'screens/screen.dart';
+import 'sq_auth.dart';
+import 'ui/sq_drawer.dart';
 
 class SQApp {
   static late String name;

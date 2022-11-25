@@ -1,5 +1,5 @@
-import '../sq_auth.dart';
 import '../screens/form_screen.dart';
+import '../sq_auth.dart';
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 
