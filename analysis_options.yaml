@@ -102,8 +102,29 @@ linter:
     one_member_abstracts: true
     package_api_docs: true
     prefer_asserts_in_initializer_lists: true
-    prefer_bool_in_asserts: true
-    
+    prefer_constructors_over_static_methods: true
+    prefer_foreach: true
+    prefer_mixin: true
+    sized_box_shrink_expand: true
+    sort_unnamed_constructors_first: true
+    tighten_type_of_initializing_formals: true
+    unnecessary_await_in_return: true
+    unnecessary_null_aware_operator_on_extension_on_nullable: true
+    unnecessary_null_checks: true
+    unnecessary_raw_strings: true
+    unreachable_from_main: true
+    use_colored_box: true
+    use_decorated_box: true
+    use_enums: true
+    use_is_even_rather_than_modulo: true
+    use_late_for_private_fields_and_variables: true
+    use_named_constants: true
+    use_raw_strings: true
+    use_setters_to_change_properties: true
+    use_string_buffers: true
+    use_string_in_part_of_directives: true
+    use_test_throws_matchers: true
+
     # to enable:
     # avoid_classes_with_only_static_members: true
     # no_default_cases: true
