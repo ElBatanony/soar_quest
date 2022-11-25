@@ -8,7 +8,7 @@ import '../sq_auth.dart';
 class SQDrawer extends StatelessWidget {
   final List<Screen> screens;
 
-  SQDrawer(this.screens) {
+  SQDrawer([this.screens = const []]) {
     if (UserSettings.initialized &&
         screens.any((screen) => screen.title == "Settings") == false)
       screens.add(UserSettings.settingsScreen());

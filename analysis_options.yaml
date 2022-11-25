@@ -11,7 +11,6 @@ linter:
   rules:
     prefer_const_constructors: false
     curly_braces_in_flow_control_structures: false
-    prefer_const_literals_to_create_immutables: false
     use_key_in_widget_constructors: false
     diagnostic_describe_all_properties: false
     
@@ -20,6 +19,7 @@ linter:
     use_build_context_synchronously: true
     avoid_dynamic_calls : true
     discarded_futures: true
+    prefer_const_literals_to_create_immutables: true
 
     avoid_empty_else: true
     avoid_returning_null_for_future: true

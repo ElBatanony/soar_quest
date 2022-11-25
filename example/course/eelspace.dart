@@ -49,7 +49,7 @@ void main() async {
           icon: Icons.chat), // Use Telegram or LinkedIn instead? 😉😉
       CollectionScreen(collection: services, icon: Icons.room_service),
     ],
-    drawer: SQDrawer([]),
+    drawer: SQDrawer(),
     startingScreen: 1,
   );
 }

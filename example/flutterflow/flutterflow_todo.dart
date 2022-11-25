@@ -42,5 +42,5 @@ void main() async {
       icon: Icons.task_alt,
       signedIn: true,
     ),
-  ], drawer: SQDrawer([]));
+  ], drawer: SQDrawer());
 }
