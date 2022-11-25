@@ -5,7 +5,8 @@ class SocialFeed extends TelegramScreen {
       : super(
           message:
               "Soar Quest does not promote social feeds (posts, likes, etc.). "
-              "We recommend using tools such as Telegram Channels for such purposes.",
+              "We recommend using tools such as Telegram Channels"
+              " for such purposes.",
           telegramUsername: "",
           buttonText: "Checkout Telegram",
         );
