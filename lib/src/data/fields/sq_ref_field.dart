@@ -74,7 +74,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
       children: [
         Text(ref.label),
         if (doc != null)
-          GoScreenAction("", screen: (doc) => DocScreen(doc))
+          GoScreenAction("", screen: DocScreen.new)
               .button(doc, screenState: screenState)
       ],
     );

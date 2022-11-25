@@ -39,9 +39,8 @@ class TableScreen extends CollectionScreen {
   Widget tableFieldCell(
       SQDoc doc, SQField<dynamic> field, ScreenState screenState) {
     return GestureDetector(
-      onTap: () async =>
-          GoScreenAction("Go Doc Screen", screen: (doc) => docScreen(doc))
-              .execute(doc, screenState),
+      onTap: () async => GoScreenAction("Go Doc Screen", screen: docScreen)
+          .execute(doc, screenState),
       child: Padding(
         padding: const EdgeInsets.all(3),
         child: Text(doc.value<dynamic>(field.name).toString()),

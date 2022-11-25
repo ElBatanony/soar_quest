@@ -55,10 +55,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       await field.storage.uploadFile(
-          doc: doc,
-          file: pickedFile,
-          field: field,
-          onUpload: () => onChanged());
+          doc: doc, file: pickedFile, field: field, onUpload: onChanged);
     }
   }
 

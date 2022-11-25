@@ -61,6 +61,7 @@ linter:
     prefer_int_literals: true
     prefer_null_aware_method_calls: true
     unawaited_futures: true
+    unnecessary_lambdas: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

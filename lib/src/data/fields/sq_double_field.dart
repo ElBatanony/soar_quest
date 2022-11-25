@@ -32,6 +32,6 @@ class _SQDoubleFormField extends SQFormField<SQDoubleField> {
 class _SQDoubleFormFieldState extends SQFormFieldState<SQDoubleField> {
   @override
   Widget fieldBuilder(ScreenState screenState) {
-    return SQTextField(formField, textParse: (text) => double.tryParse(text));
+    return SQTextField(formField, textParse: double.tryParse);
   }
 }

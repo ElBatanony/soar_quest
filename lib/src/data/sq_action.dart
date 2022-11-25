@@ -141,7 +141,7 @@ class GoEditAction extends GoScreenAction {
           name,
           icon: icon,
           show: DocCond((doc, _) => doc.collection.updates.edits) & show,
-          screen: (doc) => FormScreen(doc),
+          screen: FormScreen.new,
         );
 }
 
