@@ -9,13 +9,13 @@ class SQTimeOfDay extends TimeOfDay {
   @override
   String toString() {
     String pad(int x) => x.toString().padLeft(2, '0');
-    return "${pad(hour)}:${pad(minute)}";
+    return '${pad(hour)}:${pad(minute)}';
   }
 
   static SQTimeOfDay? parse(Map<String, dynamic> source) {
-    if (source["hour"] is int && source["minute"] is int)
+    if (source['hour'] is int && source['minute'] is int)
       return SQTimeOfDay(
-          hour: source["hour"] as int, minute: source["minute"] as int);
+          hour: source['hour'] as int, minute: source['minute'] as int);
 
     return null;
   }

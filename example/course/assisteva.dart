@@ -8,50 +8,50 @@ bool isAdmin = false;
 late SQCollection lessons;
 
 void main() async {
-  await SQApp.init("Assisteva",
+  await SQApp.init('Assisteva',
       theme:
           ThemeData(primaryColor: Colors.deepPurpleAccent, useMaterial3: true),
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
   await UserSettings.setSettings([
-    SQEnumField(SQStringField("Disability", value: "Normal"),
-        options: ["Normal", "Blind", "Deaf"])
+    SQEnumField(SQStringField('Disability', value: 'Normal'),
+        options: ['Normal', 'Blind', 'Deaf'])
   ]);
 
   final categories = FirestoreCollection(
-    id: "Categories",
+    id: 'Categories',
     fields: [
-      SQStringField("Name"),
-      SQImageField("Picture"),
+      SQStringField('Name'),
+      SQImageField('Picture'),
     ],
     updates: isAdmin ? const SQUpdates() : SQUpdates.readOnly(),
   );
 
-  final courseCategoryRefField = SQRefField("Category", collection: categories);
+  final courseCategoryRefField = SQRefField('Category', collection: categories);
 
   final courses = FirestoreCollection(
-    id: "Courses",
+    id: 'Courses',
     fields: [
-      SQStringField("Course Name"),
-      SQStringField("Course Description"),
+      SQStringField('Course Name'),
+      SQStringField('Course Description'),
       courseCategoryRefField,
     ],
     actions: [
-      GoScreenAction("View Lessons",
+      GoScreenAction('View Lessons',
           screen: (courseDoc) => CollectionScreen(
               collection: CollectionSlice(lessons,
-                  filter: RefFilter("Course", courseDoc.ref))))
+                  filter: RefFilter('Course', courseDoc.ref))))
     ],
     updates: isAdmin ? const SQUpdates() : SQUpdates.readOnly(),
   );
 
   lessons = FirestoreCollection(
-    id: "Lessons",
+    id: 'Lessons',
     fields: [
-      SQStringField("Lesson Name"),
-      SQStringField("Lesson Description"),
-      SQRefField("Course", collection: courses),
-      SQVideoLinkField("Video Link"),
+      SQStringField('Lesson Name'),
+      SQStringField('Lesson Description'),
+      SQRefField('Course', collection: courses),
+      SQVideoLinkField('Video Link'),
     ],
     updates: isAdmin ? const SQUpdates() : SQUpdates.readOnly(),
   );
@@ -59,7 +59,7 @@ void main() async {
   SQApp.run(
     [
       CategorySelectScreen(
-        title: "Categories",
+        title: 'Categories',
         itemsCollection: courses,
         categoryField: courseCategoryRefField,
       ),

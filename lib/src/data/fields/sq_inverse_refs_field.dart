@@ -59,7 +59,7 @@ class _SQInverseRefsFormFieldState
       children: [
         super.fieldLabel(screenState),
         if (field.collection.updates.adds)
-          CreateDocAction("Add",
+          CreateDocAction('Add',
               getCollection: () => field.collection,
               initialFields: (_) => [
                     SQRefField(field.refFieldName,

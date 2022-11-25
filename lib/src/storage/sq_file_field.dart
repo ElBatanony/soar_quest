@@ -43,7 +43,7 @@ class SQFileFormFieldState<FileField extends SQFileField>
     extends SQFormFieldState<FileField> {
   Future<void> openFileUrl() async {
     if (field.downloadUrl == null)
-      throw "Download URL for ${field.name} is null";
+      throw 'Download URL for ${field.name} is null';
     if (!await launchUrl(Uri.parse(field.downloadUrl!),
         mode: LaunchMode.externalApplication)) {
       throw 'Could not launch ${field.downloadUrl}';
@@ -71,9 +71,9 @@ class SQFileFormFieldState<FileField extends SQFileField>
       children: [
         Text(field.name),
         if (field.fileExists)
-          SQButton("Download", onPressed: openFileUrl)
+          SQButton('Download', onPressed: openFileUrl)
         else
-          const Text("File not set"),
+          const Text('File not set'),
         SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
             onPressed: selectAndUploadFile),
         if (field.fileExists)

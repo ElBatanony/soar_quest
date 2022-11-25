@@ -24,8 +24,8 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   serialize() {
     if (value == null) return null;
     return {
-      "hour": value?.hour,
-      "minute": value?.minute,
+      'hour': value?.hour,
+      'minute': value?.minute,
     };
   }
 

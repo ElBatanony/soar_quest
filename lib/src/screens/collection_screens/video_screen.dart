@@ -75,7 +75,7 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
                 showVideoProgressIndicator: true,
               )
             else
-              const Text("No video here")
+              const Text('No video here')
           ],
         ),
       ),

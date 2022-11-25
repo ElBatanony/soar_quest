@@ -66,6 +66,7 @@ linter:
     use_if_null_to_convert_nulls_to_bools: true
     use_super_parameters: true
     use_to_and_as_if_applicable: true
+    prefer_single_quotes: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

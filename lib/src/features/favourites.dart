@@ -13,19 +13,19 @@ class FavouritesFeature {
   late final SQCollection favouritesCollection;
 
   SQAction addToFavouritesAction() => CustomAction(
-        "Fav",
+        'Fav',
         icon: Icons.favorite,
         show: isInFavourites().not,
         customExecute: (doc, screenState) async {
           final newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
-          newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
+          newFavDoc.getField<SQRefField>('ref')!.value = doc.ref;
           await favouritesCollection.saveDoc(newFavDoc);
           screenState.refreshScreen();
         },
       );
 
   SQAction removeFromFavouritesAction() => CustomAction(
-        "UnFav",
+        'UnFav',
         icon: Icons.delete_forever_sharp,
         show: isInFavourites(),
         customExecute: (doc, screenState) async {
@@ -36,12 +36,12 @@ class FavouritesFeature {
 
   FavouritesFeature({required this.collection}) {
     favouritesCollection = LocalCollection(
-        id: "Favourite ${collection.id}",
-        fields: [SQRefField("ref", collection: collection)],
+        id: 'Favourite ${collection.id}',
+        fields: [SQRefField('ref', collection: collection)],
         actions: [
-          GoScreenAction("",
+          GoScreenAction('',
               screen: (doc) =>
-                  DocScreen(collection.getDoc(doc.value<SQRef>("ref")!.docId)!))
+                  DocScreen(collection.getDoc(doc.value<SQRef>('ref')!.docId)!))
         ],
         parentDoc: SQAuth.userDoc,
         updates: SQUpdates.readOnly());
@@ -61,5 +61,5 @@ class FavouritesScreen extends CollectionScreen {
       : super(collection: favouritesFeature.favouritesCollection);
 
   @override
-  Screen docScreen(SQDoc doc) => DocScreen(doc.value<SQRef>("ref")!.doc);
+  Screen docScreen(SQDoc doc) => DocScreen(doc.value<SQRef>('ref')!.doc);
 }

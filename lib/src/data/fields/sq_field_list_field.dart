@@ -63,7 +63,7 @@ class _SQFieldListFormFieldState<T>
 
   @override
   String get fieldLabelText =>
-      "${listField.name} (${listField.fields.length} items)";
+      '${listField.name} (${listField.fields.length} items)';
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
@@ -90,7 +90,7 @@ class _SQFieldListFormFieldState<T>
               ),
             ],
           ),
-        SQButton.icon(Icons.add, text: "Insert Item", onPressed: addField),
+        SQButton.icon(Icons.add, text: 'Insert Item', onPressed: addField),
       ],
     );
   }

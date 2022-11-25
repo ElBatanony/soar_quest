@@ -9,7 +9,7 @@ class TelegramButton extends SQButton {
 
   static Future<void> openTelegramUrl(String username) async {
     await launchUrlString(
-      "https://t.me/$username",
+      'https://t.me/$username',
       mode: LaunchMode.externalNonBrowserApplication,
     );
   }

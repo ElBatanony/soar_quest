@@ -27,7 +27,7 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
 class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    if (field.fileExists == false) return const Text("No Image");
+    if (field.fileExists == false) return const Text('No Image');
     return Image.network(field.downloadUrl!);
   }
 
@@ -58,7 +58,7 @@ class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
             TextButton.icon(
                 onPressed: deleteFile,
                 icon: const Icon(Icons.clear),
-                label: const Text("Clear"))
+                label: const Text('Clear'))
           ],
         ));
   }

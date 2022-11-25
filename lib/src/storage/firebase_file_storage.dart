@@ -12,7 +12,7 @@ FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 class FirebaseFileStorage extends SQFileStorage {
   Reference getRef(SQDoc doc, SQFileField field) {
-    return firebaseStorage.ref().child("${doc.path}/${field.name}");
+    return firebaseStorage.ref().child('${doc.path}/${field.name}');
   }
 
   @override
@@ -37,7 +37,7 @@ class FirebaseFileStorage extends SQFileStorage {
         case TaskState.success:
           final downloadUrl = await ref.getDownloadURL();
           field.value = downloadUrl;
-          debugPrint("File uploaded!!");
+          debugPrint('File uploaded!!');
           onUpload();
           break;
         default:

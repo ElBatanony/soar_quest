@@ -15,14 +15,14 @@ class FormScreen extends DocScreen {
   FormScreen(
     this.originalDoc, {
     String? title,
-    this.submitButtonText = "Save",
+    this.submitButtonText = 'Save',
     super.icon,
     super.isInline,
     this.onFieldsChanged = _emptyVoid,
   }) : super(
             originalDoc.collection
                 .newDoc(initialFields: originalDoc.copyFields()),
-            title: title ?? "Edit ${originalDoc.collection.id}");
+            title: title ?? 'Edit ${originalDoc.collection.id}');
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -36,7 +36,7 @@ class FormScreen extends DocScreen {
   Future<void> submitForm(ScreenState screenState) async {
     for (final field in doc.fields) {
       if (field.require && field.value == null) {
-        showSnackBar("${field.name} is required!",
+        showSnackBar('${field.name} is required!',
             context: screenState.context);
         return;
       }
@@ -62,7 +62,7 @@ class FormScreen extends DocScreen {
       },
       items: [
         const BottomNavigationBarItem(
-            icon: Icon(Icons.cancel), label: "Cancel"),
+            icon: Icon(Icons.cancel), label: 'Cancel'),
         BottomNavigationBarItem(
             icon: const Icon(Icons.save), label: submitButtonText),
       ],

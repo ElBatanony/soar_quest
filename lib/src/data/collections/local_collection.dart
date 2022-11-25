@@ -27,11 +27,11 @@ class LocalCollection extends SQCollection {
     docs = prefsStrings.map((e) {
       final docObject = jsonDecode(e);
       if (docObject is! Map<String, dynamic>)
-        throw "Error loading local collection doc";
+        throw 'Error loading local collection doc';
       final newDocId = docObject['id'] as String?;
       final newDocData = docObject['data'] as Map<String, dynamic>?;
-      if (newDocId == null) throw "Doc ID is null";
-      if (newDocData == null) throw "Doc data is null";
+      if (newDocId == null) throw 'Doc ID is null';
+      if (newDocData == null) throw 'Doc data is null';
       return newDoc(id: newDocId)..parse(newDocData);
     }).toList();
   }

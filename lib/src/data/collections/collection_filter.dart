@@ -76,7 +76,7 @@ class RefFilter extends CollectionFilter {
     return docs.where((doc) {
       if (doc.value<SQRef>(fieldName) == null) return false;
       final docRef = doc.value<SQRef>(fieldName);
-      if (docRef == null) throw "Filtering null docRef";
+      if (docRef == null) throw 'Filtering null docRef';
       return docRef.docId == fieldValue!.docId &&
           docRef.collectionPath == fieldValue!.collectionPath;
     }).toList();
@@ -98,7 +98,7 @@ class DocRefFieldFilter extends CollectionFieldFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
     final fieldValue = field.value;
-    if (fieldValue == null) throw "Null field value ref in DocRefFieldFilter";
+    if (fieldValue == null) throw 'Null field value ref in DocRefFieldFilter';
 
     return docs.where((doc) {
       final docRef = doc.value<SQRef>(field.name);
@@ -120,7 +120,7 @@ class CompareFuncFilter extends CollectionFieldFilter {
       (doc) {
         final comparableValue = doc.value<Comparable<dynamic>>(field.name);
         if (comparableValue == null)
-          throw "Comparable value is null in CompareFuncFilter";
+          throw 'Comparable value is null in CompareFuncFilter';
         return compareFunc(
           comparableValue.compareTo(field.value),
         );

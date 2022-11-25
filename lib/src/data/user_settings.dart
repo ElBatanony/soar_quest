@@ -6,8 +6,8 @@ import '../screens/screen.dart';
 import '../sq_auth.dart';
 import 'collections/local_collection.dart';
 
-const _settingsCollectionId = "Settings";
-const _defaultSettingsDocId = "default";
+const _settingsCollectionId = 'Settings';
+const _defaultSettingsDocId = 'default';
 
 class UserSettings {
   static late SQCollection _settingsCollection;
@@ -30,6 +30,6 @@ class UserSettings {
   T? getSetting<T>(String settingName) => _settingsDoc.value(settingName);
 
   static Screen settingsScreen() {
-    return FormScreen(_settingsDoc, title: "Settings", icon: Icons.settings);
+    return FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);
   }
 }

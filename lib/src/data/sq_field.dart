@@ -7,7 +7,7 @@ import 'sq_doc.dart';
 export 'package:flutter/material.dart' show VoidCallback;
 
 abstract class SQField<T> {
-  String name = "";
+  String name = '';
   T? value;
   bool editable;
   bool require;
@@ -61,7 +61,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   late ScreenState screenState;
 
   @override
-  SQFormField<Field> get value => throw "Do not use FormField.value";
+  SQFormField<Field> get value => throw 'Do not use FormField.value';
 
   @override
   void initState() {
@@ -75,7 +75,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  String get fieldLabelText => field.name + (field.require ? " *" : "");
+  String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
   Widget fieldLabel(ScreenState screenState) {
     return Padding(

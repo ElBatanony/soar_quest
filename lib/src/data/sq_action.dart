@@ -23,10 +23,10 @@ abstract class SQAction {
       this.show = trueCond,
       this.onExecute = emptyOnExecute,
       this.confirm = false,
-      this.confirmMessage = "Are you sure?"});
+      this.confirmMessage = 'Are you sure?'});
 
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    debugPrint("Executing action: $name");
+    debugPrint('Executing action: $name');
     await onExecute(doc, screenState);
   }
 
@@ -133,7 +133,7 @@ class GoScreenAction extends SQAction {
 
 class GoEditAction extends GoScreenAction {
   GoEditAction(
-      {String name = "Edit",
+      {String name = 'Edit',
       IconData icon = Icons.edit,
       DocCond show = trueCond,
       super.onExecute})
@@ -187,7 +187,7 @@ class DeleteDocAction extends SQAction {
   bool exitScreen;
 
   DeleteDocAction({
-    String name = "Delete",
+    String name = 'Delete',
     super.icon = Icons.delete,
     DocCond show = trueCond,
     super.onExecute,
@@ -217,7 +217,7 @@ class SetFieldsAction extends SQAction {
     final newFields = getFields(doc);
     for (final entry in newFields.entries) {
       final docField = doc.getField(entry.key);
-      if (docField == null) throw "SetFieldsAction null doc field";
+      if (docField == null) throw 'SetFieldsAction null doc field';
       docField.value = entry.value;
     }
     await doc.collection.saveDoc(doc);
@@ -298,7 +298,7 @@ Future<bool> showConfirmationDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-            title: const Text("Confirm"),
+            title: const Text('Confirm'),
             content: Text(action.confirmMessage),
             actions: [
               SQButton('Cancel',

@@ -15,7 +15,7 @@ class SQDoc {
   late String path;
 
   SQDoc(this.id, {required this.collection}) {
-    path = "${collection.path}/$id";
+    path = '${collection.path}/$id';
 
     fields = collection.fields.map((field) {
       final fieldCopy = field.copy();
@@ -24,7 +24,7 @@ class SQDoc {
             field.name == fieldCopy.name &&
             field.editable == fieldCopy.editable &&
             field.require == fieldCopy.require,
-        "Incorrect SQField copy operation ${field.runtimeType}",
+        'Incorrect SQField copy operation ${field.runtimeType}',
       );
       return fieldCopy;
     }).toList();

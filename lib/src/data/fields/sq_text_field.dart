@@ -22,7 +22,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
     setState(() {});
   }
 
-  String parseFieldValue() => (widget.formField.field.value ?? "").toString();
+  String parseFieldValue() => (widget.formField.field.value ?? '').toString();
 
   @override
   void initState() {

@@ -19,6 +19,6 @@ class CategorySelectScreen extends GalleryScreen {
     final slice = CollectionSlice(itemsCollection,
         filter: RefFilter(categoryField.name, doc.ref));
     return CollectionScreen(
-        title: "${doc.label} ${itemsCollection.id}", collection: slice);
+        title: '${doc.label} ${itemsCollection.id}', collection: slice);
   }
 }

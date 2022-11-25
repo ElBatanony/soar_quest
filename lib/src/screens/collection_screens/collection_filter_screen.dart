@@ -61,7 +61,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
     fieldFilters = widget.filters.whereType<CollectionFieldFilter>().toList();
 
     final fakeColl = InMemoryCollection(
-        id: "hi",
+        id: 'hi',
         fields: fieldFilters.map((fieldFilter) => fieldFilter.field).toList());
 
     final fakeDoc = fakeColl.newDoc();

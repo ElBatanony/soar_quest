@@ -92,8 +92,8 @@ class ScreenState<T extends Screen> extends State<T> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("You should be signed in to view this screen."),
-              SQButton("Sign In",
+              const Text('You should be signed in to view this screen.'),
+              SQButton('Sign In',
                   onPressed: () async => SQProfileScreen().go(context))
             ],
           ),

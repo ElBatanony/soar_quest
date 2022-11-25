@@ -44,7 +44,7 @@ class CollectionScreen extends Screen {
   FloatingActionButton? floatingActionButton(ScreenState screenState) {
     if (collection.updates.adds) {
       final SQAction createNewDocAction = GoEditAction(
-          name: "Create Doc",
+          name: 'Create Doc',
           icon: Icons.add,
           onExecute: (doc, context) async => screenState.refreshScreen(),
           show: CollectionCond((collection) => collection.updates.adds));
@@ -57,7 +57,7 @@ class CollectionScreen extends Screen {
     return ListTile(
       title: Text(doc.label),
       subtitle: doc.fields.length >= 2
-          ? Text((doc.fields[1].value ?? "").toString())
+          ? Text((doc.fields[1].value ?? '').toString())
           : null,
       leading: doc.imageLabel != null
           ? Image.network(doc.imageLabel!.value!, width: 70)
@@ -91,7 +91,7 @@ class CollectionScreen extends Screen {
 
   @override
   Widget screenBody(ScreenState screenState) {
-    if (docs.isEmpty) return const Center(child: Text("This list is empty"));
+    if (docs.isEmpty) return const Center(child: Text('This list is empty'));
     if (groupByField != null) return groupByDocs(docs, screenState);
     return docsDisplay(docs, screenState);
   }

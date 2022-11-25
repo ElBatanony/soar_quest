@@ -8,44 +8,44 @@ bool isAdmin = true;
 late SQCollection talents, services;
 
 void main() async {
-  await SQApp.init("eelspace",
+  await SQApp.init('eelspace',
       theme: ThemeData(primarySwatch: Colors.deepPurple, useMaterial3: true),
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
-  talents = FirestoreCollection(id: "Talents", fields: [
-    SQStringField("Name"),
-    SQImageField("Image"),
-    SQStringField("Skill"),
-    SQStringField("Country"),
-    SQStringField("Contact Details"),
-    SQInverseRefsField("Services",
-        refCollection: () => services, refFieldName: "Talent"),
+  talents = FirestoreCollection(id: 'Talents', fields: [
+    SQStringField('Name'),
+    SQImageField('Image'),
+    SQStringField('Skill'),
+    SQStringField('Country'),
+    SQStringField('Contact Details'),
+    SQInverseRefsField('Services',
+        refCollection: () => services, refFieldName: 'Talent'),
   ], actions: [
-    GoScreenAction("View Service",
+    GoScreenAction('View Service',
         screen: (talentDoc) => CollectionScreen(
             collection: CollectionSlice(services,
-                filter: RefFilter("Talent", talentDoc.ref))))
+                filter: RefFilter('Talent', talentDoc.ref))))
   ]);
 
-  services = FirestoreCollection(id: "Services", fields: [
-    SQStringField("Name"),
-    SQRefField("Talent", collection: talents),
-    SQImageField("Image"),
-    SQStringField("Description"),
-    SQStringField("Duration"),
-    SQStringField("Price"),
+  services = FirestoreCollection(id: 'Services', fields: [
+    SQStringField('Name'),
+    SQRefField('Talent', collection: talents),
+    SQImageField('Image'),
+    SQStringField('Description'),
+    SQStringField('Duration'),
+    SQStringField('Price'),
   ], actions: [
-    CustomAction("Order Now", customExecute: (doc, screenState) async {
-      showSnackBar("Should order service", context: screenState.context);
+    CustomAction('Order Now', customExecute: (doc, screenState) async {
+      showSnackBar('Should order service', context: screenState.context);
     })
   ]);
 
   SQApp.run(
     [
-      const Screen(title: "Home", icon: Icons.home),
+      const Screen(title: 'Home', icon: Icons.home),
       CollectionScreen(collection: talents, icon: Icons.group),
       const Screen(
-          title: "Chats",
+          title: 'Chats',
           icon: Icons.chat), // Use Telegram or LinkedIn instead? 😉😉
       CollectionScreen(collection: services, icon: Icons.room_service),
     ],

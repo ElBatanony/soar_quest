@@ -6,47 +6,47 @@ import 'firebase_options.dart';
 
 void main() async {
   final userDocFields = [
-    SQStringField("Name"),
+    SQStringField('Name'),
   ];
 
   await SQApp.init(
-    "Testing App",
+    'Testing App',
     theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
     userDocFields: userDocFields,
     firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   );
 
   final simpleCollection = FirestoreCollection(
-    id: "Simple Collection",
+    id: 'Simple Collection',
     fields: [
-      SQStringField("Name"),
-      SQBoolField("Cool?"),
+      SQStringField('Name'),
+      SQBoolField('Cool?'),
     ],
   );
 
   final firebaseFileStorage = FirebaseFileStorage();
 
   final testCollection = FirestoreCollection(
-    id: "Test Collection",
+    id: 'Test Collection',
     fields: [
-      SQStringField("String"),
-      SQBoolField("Bool"),
-      SQRefField("Doc Ref", collection: simpleCollection),
-      SQDoubleField("Double"),
-      SQFileField("File", storage: firebaseFileStorage),
-      SQIntField("Int"),
-      SQTimeOfDayField("Time of Day"),
-      SQTimestampField("Timestamp"),
-      SQStringField("Readonly String", value: "I am readonly", editable: false),
+      SQStringField('String'),
+      SQBoolField('Bool'),
+      SQRefField('Doc Ref', collection: simpleCollection),
+      SQDoubleField('Double'),
+      SQFileField('File', storage: firebaseFileStorage),
+      SQIntField('Int'),
+      SQTimeOfDayField('Time of Day'),
+      SQTimestampField('Timestamp'),
+      SQStringField('Readonly String', value: 'I am readonly', editable: false),
     ],
     actions: [
-      GoScreenAction("Child Coll",
+      GoScreenAction('Child Coll',
           screen: (doc) => CollectionScreen(
               collection: FirestoreCollection(
-                  id: "Child Collection",
+                  id: 'Child Collection',
                   fields: [
-                    SQStringField("Name"),
-                    SQRefField("Parent Doc",
+                    SQStringField('Name'),
+                    SQRefField('Parent Doc',
                         collection: doc.collection,
                         value: doc.ref,
                         editable: false),
@@ -56,10 +56,10 @@ void main() async {
   );
 
   final testUserCollection = FirestoreCollection(
-      id: "Test User Collection",
+      id: 'Test User Collection',
       parentDoc: SQAuth.userDoc,
       fields: [
-        SQStringField("Name"),
+        SQStringField('Name'),
       ]);
 
   SQApp.run(

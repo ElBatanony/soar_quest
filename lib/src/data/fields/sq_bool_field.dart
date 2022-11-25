@@ -42,7 +42,7 @@ class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
             onChanged();
           },
           isSelected: [field.value == false, field.value ?? true],
-          children: const [Text("No"), Text("Yes")],
+          children: const [Text('No'), Text('Yes')],
         ),
       ],
     );

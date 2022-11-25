@@ -7,7 +7,7 @@ class TabsScreen extends Screen {
 
   TabsScreen({required super.title, required this.screens})
       : assert(screens.every((screen) => screen.isInline),
-            "All tab screens should be inline");
+            'All tab screens should be inline');
 
   @override
   createState() => _TabsScreenState();

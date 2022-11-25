@@ -34,8 +34,8 @@ abstract class SQCollection<DocType extends SQDoc> {
     List<SQAction>? actions,
   })  : actions = actions ?? [],
         path = parentDoc == null
-            ? "Example Apps/${SQApp.name}/$id"
-            : "${parentDoc.path}/$id" {
+            ? 'Example Apps/${SQApp.name}/$id'
+            : '${parentDoc.path}/$id' {
     if (byPath(path) == null) _collections.add(this);
 
     if (updates.edits) this.actions.add(GoEditAction());

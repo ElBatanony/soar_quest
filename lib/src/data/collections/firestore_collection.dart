@@ -21,13 +21,13 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
 
   @override
   Future<void> loadCollection() async {
-    debugPrint("Fetching collection from ${ref.path}");
+    debugPrint('Fetching collection from ${ref.path}');
     final snap = await ref.get();
     debugPrint('${snap.docs.length} docs fetched for $id!');
     docs = [];
     for (final snapDoc in snap.docs) {
       final docData = snapDoc.data() as Map<String, dynamic>?;
-      if (docData == null) throw "Firestore doc null data";
+      if (docData == null) throw 'Firestore doc null data';
       final doc = newDoc(id: snapDoc.id)..parse(docData);
       docs.add(doc);
     }

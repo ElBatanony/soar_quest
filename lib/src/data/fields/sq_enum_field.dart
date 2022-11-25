@@ -51,7 +51,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.value.toString()),
-        SQButton("Select", onPressed: () async {
+        SQButton('Select', onPressed: () async {
           final newValue =
               await showEnumOptionsDialog(field, context: screenState.context);
           if (newValue != null) {
@@ -70,7 +70,7 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
       context: context,
       builder: (context) {
         return AlertDialog(
-            title: Text("Select ${enumField.name} value"),
+            title: Text('Select ${enumField.name} value'),
             content: Wrap(
               children: [
                 ...enumField.options.map((v) => SQButton(v.toString(),

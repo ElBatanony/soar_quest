@@ -11,7 +11,7 @@ Future<T?> showFieldDialog<T>(
       context: context,
       builder: (context) {
         return AlertDialog(
-            title: Text("Set ${field.name}"),
+            title: Text('Set ${field.name}'),
             content: field.formField(doc),
             actions: [
               SQButton('Cancel', onPressed: () => Navigator.pop<T>(context)),
