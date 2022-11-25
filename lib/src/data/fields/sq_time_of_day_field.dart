@@ -7,8 +7,8 @@ import 'types/sq_time_of_day.dart';
 export 'types/sq_time_of_day.dart';
 
 class SQTimeOfDayField extends SQField<SQTimeOfDay> {
-  SQTimeOfDayField(String name, {SQTimeOfDay? value, super.editable})
-      : super(name, value: value ?? SQTimeOfDay.fromTimeOfDay(TimeOfDay.now()));
+  SQTimeOfDayField(super.name, {SQTimeOfDay? value, super.editable})
+      : super(value: value ?? SQTimeOfDay.fromTimeOfDay(TimeOfDay.now()));
 
   @override
   SQTimeOfDay? parse(source) {

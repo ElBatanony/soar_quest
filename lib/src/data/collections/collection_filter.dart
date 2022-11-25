@@ -26,7 +26,7 @@ abstract class CollectionFieldFilter extends CollectionFilter {
 }
 
 class FieldValueFilter<T> extends CollectionFieldFilter {
-  FieldValueFilter(SQField<T> field) : super(field);
+  FieldValueFilter(super.field);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {

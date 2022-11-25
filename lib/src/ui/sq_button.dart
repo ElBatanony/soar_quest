@@ -9,18 +9,17 @@ class SQButton extends StatelessWidget {
   const SQButton(
     this.text, {
     required this.onPressed,
-    Key? key,
+    super.key,
   })  : icon = null,
-        iconSize = 24,
-        super(key: key);
+        iconSize = 24;
 
   const SQButton.icon(
     this.icon, {
     required this.onPressed,
     this.text,
     this.iconSize = 24,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
