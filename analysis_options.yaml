@@ -13,7 +13,7 @@ linter:
     # Disabled rules
     prefer_const_constructors: false
     curly_braces_in_flow_control_structures: false
-    use_key_in_widget_constructors: false
+    use_key_in_widget_constructors: false # until SQ uses keys
     
     # Error rules
     avoid_dynamic_calls : true

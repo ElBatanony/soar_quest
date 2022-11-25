@@ -6,20 +6,12 @@ class SQButton extends StatelessWidget {
   final IconData? icon;
   final double iconSize;
 
-  const SQButton(
-    this.text, {
-    required this.onPressed,
-    super.key,
-  })  : icon = null,
+  const SQButton(this.text, {required this.onPressed})
+      : icon = null,
         iconSize = 24;
 
-  const SQButton.icon(
-    this.icon, {
-    required this.onPressed,
-    this.text,
-    this.iconSize = 24,
-    super.key,
-  });
+  const SQButton.icon(this.icon,
+      {required this.onPressed, this.text, this.iconSize = 24});
 
   @override
   Widget build(BuildContext context) {

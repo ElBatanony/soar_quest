@@ -42,7 +42,7 @@ abstract class SQFormField<Field extends SQField<dynamic>>
   final SQDoc doc;
   final VoidCallback? onChanged;
 
-  const SQFormField(this.field, this.doc, {this.onChanged, super.key})
+  const SQFormField(this.field, this.doc, {this.onChanged})
       : super(builder: emptyBuilder);
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();

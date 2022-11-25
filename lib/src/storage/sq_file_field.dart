@@ -33,7 +33,7 @@ class SQFileField extends SQStringField {
 
 class SQFileFormField<FileField extends SQFileField>
     extends SQFormField<FileField> {
-  const SQFileFormField(super.field, super.doc, {super.key, super.onChanged});
+  const SQFileFormField(super.field, super.doc, {super.onChanged});
 
   @override
   createState() => SQFileFormFieldState<FileField>();
