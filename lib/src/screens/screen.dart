@@ -51,7 +51,9 @@ class Screen extends StatefulWidget {
   AppBar appBar(ScreenState screenState) {
     return AppBar(
       title: Text(title),
-      leading: Navigator.of(screenState.context).canPop() ? BackButton() : null,
+      leading: Navigator.of(screenState.context).canPop()
+          ? const BackButton()
+          : null,
       actions: appBarActions(screenState),
     );
   }
@@ -63,7 +65,7 @@ class Screen extends StatefulWidget {
   List<Widget> appBarActions(ScreenState screenState) {
     return [
       IconButton(
-          onPressed: screenState.refreshScreen, icon: Icon(Icons.refresh))
+          onPressed: screenState.refreshScreen, icon: const Icon(Icons.refresh))
     ];
   }
 
@@ -90,7 +92,7 @@ class ScreenState<T extends Screen> extends State<T> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("You should be signed in to view this screen."),
+              const Text("You should be signed in to view this screen."),
               SQButton("Sign In",
                   onPressed: () async => SQProfileScreen().go(context))
             ],
@@ -102,7 +104,7 @@ class ScreenState<T extends Screen> extends State<T> {
 
     final Widget body = Builder(builder: (_) {
       return Container(
-        padding: widget.isInline ? null : EdgeInsets.all(16),
+        padding: widget.isInline ? null : const EdgeInsets.all(16),
         child: widget.screenBody(this),
       );
     });

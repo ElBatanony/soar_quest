@@ -16,7 +16,7 @@ class SQButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(3),
+      padding: const EdgeInsets.all(3),
       child: icon == null
           ? ElevatedButton(onPressed: onPressed, child: Text(text!))
           : text == null

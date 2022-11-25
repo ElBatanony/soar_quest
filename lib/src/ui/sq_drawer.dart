@@ -24,7 +24,7 @@ class SQDrawer extends StatelessWidget {
           DrawerHeader(
             child: Text(
               SQApp.name,
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
           ),
           ...screens

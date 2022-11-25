@@ -54,7 +54,7 @@ class TableScreen extends CollectionScreen {
       scrollDirection: Axis.horizontal,
       child: Table(
         border: TableBorder.all(),
-        defaultColumnWidth: IntrinsicColumnWidth(),
+        defaultColumnWidth: const IntrinsicColumnWidth(),
         children: [
           tableHeaderRow(screenState),
           ...docs.map((doc) => tableDocRow(doc, screenState))

@@ -91,7 +91,7 @@ class CollectionScreen extends Screen {
 
   @override
   Widget screenBody(ScreenState screenState) {
-    if (docs.isEmpty) return Center(child: Text("This list is empty"));
+    if (docs.isEmpty) return const Center(child: Text("This list is empty"));
     if (groupByField != null) return groupByDocs(docs, screenState);
     return docsDisplay(docs, screenState);
   }

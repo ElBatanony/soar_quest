@@ -18,7 +18,8 @@ class TabsScreen extends Screen {
       title: Text(title),
       actions: [
         IconButton(
-            onPressed: screenState.refreshScreen, icon: Icon(Icons.refresh))
+            onPressed: screenState.refreshScreen,
+            icon: const Icon(Icons.refresh))
       ],
       bottom: TabBar(
         controller: (screenState as _TabsScreenState)._tabController,

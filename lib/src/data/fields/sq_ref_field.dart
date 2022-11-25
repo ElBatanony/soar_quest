@@ -67,7 +67,7 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
     final ref = field.value;
-    if (ref == null) return Text("Not Set");
+    if (ref == null) return const Text("Not Set");
     final doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

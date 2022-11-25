@@ -24,7 +24,7 @@ void main() async {
       SQStringField("Name"),
       SQImageField("Picture"),
     ],
-    updates: isAdmin ? SQUpdates() : SQUpdates.readOnly(),
+    updates: isAdmin ? const SQUpdates() : SQUpdates.readOnly(),
   );
 
   final courseCategoryRefField = SQRefField("Category", collection: categories);
@@ -42,7 +42,7 @@ void main() async {
               collection: CollectionSlice(lessons,
                   filter: RefFilter("Course", courseDoc.ref))))
     ],
-    updates: isAdmin ? SQUpdates() : SQUpdates.readOnly(),
+    updates: isAdmin ? const SQUpdates() : SQUpdates.readOnly(),
   );
 
   lessons = FirestoreCollection(
@@ -53,7 +53,7 @@ void main() async {
       SQRefField("Course", collection: courses),
       SQVideoLinkField("Video Link"),
     ],
-    updates: isAdmin ? SQUpdates() : SQUpdates.readOnly(),
+    updates: isAdmin ? const SQUpdates() : SQUpdates.readOnly(),
   );
 
   SQApp.run(

@@ -73,11 +73,11 @@ class SQFileFormFieldState<FileField extends SQFileField>
         if (field.fileExists)
           SQButton("Download", onPressed: openFileUrl)
         else
-          Text("File not set"),
+          const Text("File not set"),
         SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
             onPressed: selectAndUploadFile),
         if (field.fileExists)
-          IconButton(onPressed: deleteFile, icon: Icon(Icons.delete))
+          IconButton(onPressed: deleteFile, icon: const Icon(Icons.delete))
       ],
     );
   }

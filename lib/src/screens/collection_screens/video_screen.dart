@@ -47,7 +47,7 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
     if (videoId != null) {
       _controller = YoutubePlayerController(
         initialVideoId: videoId,
-        flags: YoutubePlayerFlags(
+        flags: const YoutubePlayerFlags(
           autoPlay: false,
           mute: true,
         ),
@@ -75,7 +75,7 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
                 showVideoProgressIndicator: true,
               )
             else
-              Text("No video here")
+              const Text("No video here")
           ],
         ),
       ),

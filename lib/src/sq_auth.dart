@@ -106,7 +106,7 @@ class SQProfileScreen extends Screen {
   @override
   Widget screenBody(ScreenState screenState) {
     if (SQAuth.offline) {
-      return Center(child: Text("Profile Screen"));
+      return const Center(child: Text("Profile Screen"));
     }
 
     if (SQAuth.user == null) {

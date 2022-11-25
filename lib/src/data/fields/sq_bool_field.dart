@@ -36,7 +36,7 @@ class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
       children: [
         ToggleButtons(
           borderRadius: BorderRadius.circular(10),
-          constraints: BoxConstraints(minWidth: 100, minHeight: 40),
+          constraints: const BoxConstraints(minWidth: 100, minHeight: 40),
           onPressed: (index) {
             field.value = index == 1;
             onChanged();

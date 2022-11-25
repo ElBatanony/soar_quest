@@ -60,7 +60,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     return saveCollection();
   }
 
-  String newDocId() => Uuid().v1();
+  String newDocId() => const Uuid().v1();
 
   F? getField<F extends SQField<dynamic>>(String fieldName) {
     return fields.singleWhereOrNull(

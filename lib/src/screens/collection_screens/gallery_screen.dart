@@ -24,7 +24,8 @@ class GalleryScreen extends CollectionScreen {
             if (doc.imageLabel != null)
               Image.network(doc.imageLabel!.value!, height: 120)
             else
-              SizedBox(height: 120, child: Center(child: Text("No Image"))),
+              const SizedBox(
+                  height: 120, child: Center(child: Text("No Image"))),
             Text(doc.label)
           ],
         ),

@@ -36,7 +36,7 @@ class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
           throw 'Could not launch $url';
         }
       });
-    return Text("No Link");
+    return const Text("No Link");
   }
 
   @override

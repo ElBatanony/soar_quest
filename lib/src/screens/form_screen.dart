@@ -61,9 +61,10 @@ class FormScreen extends DocScreen {
         await submitForm(screenState);
       },
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.cancel), label: "Cancel"),
+        const BottomNavigationBarItem(
+            icon: Icon(Icons.cancel), label: "Cancel"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.save), label: submitButtonText),
+            icon: const Icon(Icons.save), label: submitButtonText),
       ],
     );
   }

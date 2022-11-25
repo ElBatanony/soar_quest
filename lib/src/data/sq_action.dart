@@ -45,7 +45,7 @@ abstract class SQAction {
   FloatingActionButton fab(SQDoc doc, ScreenState screenState) {
     return FloatingActionButton(
         heroTag: null,
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () async => execute(doc, screenState),
         child: Icon(icon));
   }
@@ -298,7 +298,7 @@ Future<bool> showConfirmationDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-            title: Text("Confirm"),
+            title: const Text("Confirm"),
             content: Text(action.confirmMessage),
             actions: [
               SQButton('Cancel',

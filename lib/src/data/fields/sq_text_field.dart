@@ -44,7 +44,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
         fieldTextController.text = parseFieldValue();
         callOnChange();
       },
-      decoration: InputDecoration(border: OutlineInputBorder()),
+      decoration: const InputDecoration(border: OutlineInputBorder()),
     );
   }
 }
