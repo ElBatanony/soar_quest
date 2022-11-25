@@ -12,7 +12,7 @@ class CardsScreen extends CollectionScreen {
       child: InkWell(
         onTap: () async => goToDocScreen(docScreen(doc), screenState),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               Row(

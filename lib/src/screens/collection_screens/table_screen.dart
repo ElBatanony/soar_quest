@@ -17,7 +17,7 @@ class TableScreen extends CollectionScreen {
 
   Widget tableHeaderCell(SQField<dynamic> field, ScreenState screenState) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
+      padding: const EdgeInsets.all(3),
       child: Text(
         field.name,
         style: Theme.of(screenState.context).textTheme.titleSmall,
@@ -43,7 +43,7 @@ class TableScreen extends CollectionScreen {
           GoScreenAction("Go Doc Screen", screen: (doc) => docScreen(doc))
               .execute(doc, screenState),
       child: Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(3),
         child: Text(doc.value<dynamic>(field.name).toString()),
       ),
     );

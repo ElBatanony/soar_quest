@@ -102,7 +102,7 @@ class ScreenState<T extends Screen> extends State<T> {
 
     final Widget body = Builder(builder: (_) {
       return Container(
-        padding: widget.isInline ? null : EdgeInsets.all(16.0),
+        padding: widget.isInline ? null : EdgeInsets.all(16),
         child: widget.screenBody(this),
       );
     });

@@ -64,7 +64,7 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(15),
       child: Center(
         child: Column(
           children: [
