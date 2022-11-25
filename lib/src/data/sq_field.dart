@@ -71,7 +71,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   }
 
   void onChanged() {
-    if (formField.onChanged != null) formField.onChanged!();
+    formField.onChanged?.call();
     setState(() {});
   }
 

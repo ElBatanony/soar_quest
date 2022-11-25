@@ -59,6 +59,7 @@ linter:
     prefer_final_locals: true
     prefer_if_elements_to_conditional_expressions: true
     prefer_int_literals: true
+    prefer_null_aware_method_calls: true
 
     # Style rules (no change)
     unnecessary_library_directive: true
