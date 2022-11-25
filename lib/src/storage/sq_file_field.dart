@@ -73,9 +73,10 @@ class SQFileFormFieldState<FileField extends SQFileField>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(field.name),
-        field.fileExists
-            ? SQButton("Download", onPressed: openFileUrl)
-            : Text("File not set"),
+        if (field.fileExists)
+          SQButton("Download", onPressed: openFileUrl)
+        else
+          Text("File not set"),
         SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
             onPressed: selectAndUploadFile),
         if (field.fileExists)

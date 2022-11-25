@@ -21,9 +21,10 @@ class GalleryScreen extends CollectionScreen {
         onTap: () async => goToDocScreen(docScreen(doc), screenState),
         child: Column(
           children: [
-            doc.imageLabel != null
-                ? Image.network(doc.imageLabel!.value!, height: 120)
-                : SizedBox(height: 120, child: Center(child: Text("No Image"))),
+            if (doc.imageLabel != null)
+              Image.network(doc.imageLabel!.value!, height: 120)
+            else
+              SizedBox(height: 120, child: Center(child: Text("No Image"))),
             Text(doc.label)
           ],
         ),

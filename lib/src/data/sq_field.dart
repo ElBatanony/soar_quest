@@ -108,9 +108,10 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (field.isInline == false) fieldLabel(screenState),
-          (field.editable && inForm)
-              ? fieldBuilder(screenState)
-              : readOnlyBuilder(screenState),
+          if (field.editable && inForm)
+            fieldBuilder(screenState)
+          else
+            readOnlyBuilder(screenState),
         ],
       ),
     );

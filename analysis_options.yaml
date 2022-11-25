@@ -57,6 +57,7 @@ linter:
     prefer_const_literals_to_create_immutables: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
+    prefer_if_elements_to_conditional_expressions: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

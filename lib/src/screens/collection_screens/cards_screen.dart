@@ -25,16 +25,14 @@ class CardsScreen extends CollectionScreen {
                         style:
                             Theme.of(screenState.context).textTheme.headline6,
                       ),
-                      doc.fields.length >= 2
-                          ? Text((doc.fields[1].value ?? "").toString())
-                          : Container()
+                      if (doc.fields.length >= 2)
+                        Text((doc.fields[1].value ?? "").toString())
                     ],
                   ),
                 ],
               ),
-              doc.imageLabel != null
-                  ? Image.network(doc.imageLabel!.value!, height: 120)
-                  : Container(),
+              if (doc.imageLabel != null)
+                Image.network(doc.imageLabel!.value!, height: 120),
               Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: collection.actions

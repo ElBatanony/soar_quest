@@ -69,12 +69,13 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
         child: Column(
           children: [
             Text(widget.doc.label),
-            _controller != null
-                ? YoutubePlayer(
-                    controller: _controller!,
-                    showVideoProgressIndicator: true,
-                  )
-                : Text("No video here")
+            if (_controller != null)
+              YoutubePlayer(
+                controller: _controller!,
+                showVideoProgressIndicator: true,
+              )
+            else
+              Text("No video here")
           ],
         ),
       ),
