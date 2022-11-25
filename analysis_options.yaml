@@ -63,6 +63,7 @@ linter:
     unawaited_futures: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
+    unnecessary_to_list_in_spreads: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

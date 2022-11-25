@@ -57,7 +57,7 @@ class TableScreen extends CollectionScreen {
         defaultColumnWidth: IntrinsicColumnWidth(),
         children: [
           tableHeaderRow(screenState),
-          ...docs.map((doc) => tableDocRow(doc, screenState)).toList()
+          ...docs.map((doc) => tableDocRow(doc, screenState))
         ],
       ),
     );

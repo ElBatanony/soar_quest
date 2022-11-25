@@ -33,8 +33,7 @@ class SQDrawer extends StatelessWidget {
                     leading: Icon(screen.icon),
                     title: Text(screen.title),
                     onTap: () async => screen.go(context, replace: true),
-                  ))
-              .toList(),
+                  )),
         ],
       ),
     );

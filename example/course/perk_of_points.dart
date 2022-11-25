@@ -62,13 +62,10 @@ void main() async {
     SQRefField("Player", collection: players),
     SQIntField("Points", value: 0, editable: false),
   ], actions: [
-    ...unoPoints.entries
-        .map((pointEntry) => SetFieldsAction(pointEntry.key,
-            getFields: (roundDoc) => {
-                  "Points":
-                      (roundDoc.value<int>("Points") ?? 0) + pointEntry.value
-                }))
-        .toList(),
+    ...unoPoints.entries.map((pointEntry) => SetFieldsAction(pointEntry.key,
+        getFields: (roundDoc) => {
+              "Points": (roundDoc.value<int>("Points") ?? 0) + pointEntry.value
+            })),
     CustomAction("Finish Round",
         customExecute: (doc, screenState) async => screenState.exitScreen()),
   ]);

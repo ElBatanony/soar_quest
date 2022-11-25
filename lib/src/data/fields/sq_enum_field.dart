@@ -73,10 +73,8 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
             title: Text("Select ${enumField.name} value"),
             content: Wrap(
               children: [
-                ...enumField.options
-                    .map((v) => SQButton(v.toString(),
-                        onPressed: () => Navigator.pop<T>(context, v)))
-                    .toList(),
+                ...enumField.options.map((v) => SQButton(v.toString(),
+                    onPressed: () => Navigator.pop<T>(context, v))),
               ],
             ),
             actions: [
