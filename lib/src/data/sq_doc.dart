@@ -31,12 +31,12 @@ class SQDoc {
   }
 
   void parse(Map<String, dynamic> source) {
-    for (var field in fields) field.value = field.parse(source[field.name]);
+    for (final field in fields) field.value = field.parse(source[field.name]);
   }
 
   Map<String, dynamic> serialize() {
     final jsonMap = <String, dynamic>{};
-    for (var field in fields) {
+    for (final field in fields) {
       jsonMap[field.name] = field.serialize();
     }
     return jsonMap;

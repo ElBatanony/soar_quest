@@ -15,7 +15,7 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
   List<SQField<T>> parse(dynamic source) {
     final dynamicList = (source ?? <dynamic>[]) as List;
     final fields = <SQField<T>>[];
-    for (var dynamicFieldValue in dynamicList) {
+    for (final dynamicFieldValue in dynamicList) {
       final newField = field.copy();
       var parsed = newField.parse(dynamicFieldValue);
 

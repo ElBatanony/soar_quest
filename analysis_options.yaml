@@ -55,6 +55,7 @@ linter:
     parameter_assignments: true
     prefer_asserts_with_message: true
     prefer_const_literals_to_create_immutables: true
+    prefer_final_in_for_each: true
 
     # Style rules (no change)
     unnecessary_library_directive: true
