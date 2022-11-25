@@ -39,9 +39,9 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    SQField<T> subfieldCopy = field.subfield.copy();
-    subfieldCopy.value = field.value;
-    subfieldCopy.editable = false;
+    SQField<T> subfieldCopy = field.subfield.copy()
+      ..value = field.value
+      ..editable = false;
     return subfieldCopy.formField(formField.doc);
   }
 

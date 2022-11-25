@@ -33,8 +33,9 @@ class CollectionScreen extends Screen {
 
     List<Widget> tiles = [];
     for (final entry in groups.entries) {
-      tiles.add(ListTile(title: Text(entry.key.toString())));
-      tiles.addAll(entry.value.map((doc) => docDisplay(doc, screenState)));
+      tiles
+        ..add(ListTile(title: Text(entry.key.toString())))
+        ..addAll(entry.value.map((doc) => docDisplay(doc, screenState)));
     }
     return ListView(shrinkWrap: true, children: tiles);
   }

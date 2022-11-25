@@ -28,9 +28,9 @@ class CollectionFilterScreen extends CollectionScreen {
   List<SQDoc> get docs => filterDocs(collection.docs, fieldFilters);
 
   Widget filterFieldsDisplay(ScreenState screenState) {
-    fieldFilters.clear();
     fieldFilters
-        .addAll((screenState as CollectionFilterScreenState).fieldFilters);
+      ..clear()
+      ..addAll((screenState as CollectionFilterScreenState).fieldFilters);
     return Column(
       children: [
         screenState.fieldsFormScreen,

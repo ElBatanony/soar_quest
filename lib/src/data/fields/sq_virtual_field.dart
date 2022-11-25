@@ -24,10 +24,10 @@ class SQVirtualField<T> extends SQField<T> {
   @override
   formField(SQDoc doc, {VoidCallback? onChanged}) {
     value = valueBuilder(doc);
-    SQField<T> fieldCopy = field.copy();
-    fieldCopy.value = value;
-    fieldCopy.editable = false;
-    fieldCopy.isInline = isInline;
+    SQField<T> fieldCopy = field.copy()
+      ..value = value
+      ..editable = false
+      ..isInline = isInline;
     return fieldCopy.formField(doc);
   }
 }
