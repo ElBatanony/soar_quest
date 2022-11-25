@@ -43,7 +43,7 @@ void main() async {
   final doneFilter = ValueFilter("Status", "Done");
   doneTasks =
       CollectionSlice(tasks, filter: doneFilter, updates: SQUpdates.readOnly());
-  pendingTasks = CollectionSlice(tasks, filter: doneFilter.inverse());
+  pendingTasks = CollectionSlice(tasks, filter: doneFilter.inverse);
 
   SQApp.run([
     FormScreen(

@@ -5,7 +5,7 @@ import '../sq_doc.dart';
 abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);
 
-  CollectionFilter inverse() => InverseFilter(this);
+  CollectionFilter get inverse => InverseFilter(this);
 }
 
 class InverseFilter extends CollectionFilter {
