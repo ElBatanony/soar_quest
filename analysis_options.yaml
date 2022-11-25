@@ -54,6 +54,7 @@ linter:
     directives_ordering: true
     lines_longer_than_80_chars: true
     omit_local_variable_types: true
+    parameter_assignments: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
