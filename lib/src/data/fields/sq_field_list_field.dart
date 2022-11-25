@@ -13,10 +13,10 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
 
   @override
   List<SQField<T>> parse(dynamic source) {
-    List<dynamic> dynamicList = (source ?? <dynamic>[]) as List;
-    List<SQField<T>> fields = [];
+    final dynamicList = (source ?? <dynamic>[]) as List;
+    final fields = <SQField<T>>[];
     for (var dynamicFieldValue in dynamicList) {
-      SQField<T> newField = field.copy();
+      final newField = field.copy();
       var parsed = newField.parse(dynamicFieldValue);
 
       if (parsed != null && parsed.runtimeType == field.value.runtimeType) {
@@ -55,7 +55,7 @@ class _SQFieldListFormFieldState<T>
   SQFieldListField<T> get listField => field;
 
   void addField() {
-    SQField<T> newField = listField.field.copy();
+    final newField = listField.field.copy();
     setState(() {
       listField.fields.add(newField);
     });

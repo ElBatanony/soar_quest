@@ -39,7 +39,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    SQField<T> subfieldCopy = field.subfield.copy()
+    final subfieldCopy = field.subfield.copy()
       ..value = field.value
       ..editable = false;
     return subfieldCopy.formField(formField.doc);
@@ -52,7 +52,7 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
       children: [
         Text(field.value.toString()),
         SQButton("Select", onPressed: () async {
-          T? newValue =
+          final newValue =
               await showEnumOptionsDialog(field, context: screenState.context);
           if (newValue != null) {
             field.value = newValue;

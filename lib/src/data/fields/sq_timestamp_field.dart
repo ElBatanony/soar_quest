@@ -66,7 +66,7 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
         SQButton(
           'Select Date',
           onPressed: () async {
-            DateTime? ret =
+            final ret =
                 await Navigator.of(screenState.context).push(_datePickerRoute(
               screenState.context,
             ));

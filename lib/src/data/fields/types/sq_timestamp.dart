@@ -4,7 +4,7 @@ class SQTimestamp extends Timestamp {
   SQTimestamp(super.seconds, super.nanoseconds);
 
   factory SQTimestamp.fromDate(DateTime date) {
-    Timestamp timestamp = Timestamp.fromDate(date);
+    final timestamp = Timestamp.fromDate(date);
     return SQTimestamp(timestamp.seconds, timestamp.nanoseconds);
   }
 

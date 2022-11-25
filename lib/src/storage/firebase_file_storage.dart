@@ -35,7 +35,7 @@ class FirebaseFileStorage extends SQFileStorage {
         .listen((taskSnapshot) async {
       switch (taskSnapshot.state) {
         case TaskState.success:
-          String downloadUrl = await ref.getDownloadURL();
+          final downloadUrl = await ref.getDownloadURL();
           field.value = downloadUrl;
           debugPrint("File uploaded!!");
           onUpload();

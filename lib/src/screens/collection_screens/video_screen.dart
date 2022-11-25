@@ -38,11 +38,11 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   void initState() {
     super.initState();
 
-    String? videoFieldValue = widget.doc.value<String>(widget.videoField.name);
+    final videoFieldValue = widget.doc.value<String>(widget.videoField.name);
 
     if (videoFieldValue == null) return;
 
-    String? videoId = YoutubePlayer.convertUrlToId(videoFieldValue);
+    final videoId = YoutubePlayer.convertUrlToId(videoFieldValue);
 
     if (videoId != null) {
       _controller = YoutubePlayerController(

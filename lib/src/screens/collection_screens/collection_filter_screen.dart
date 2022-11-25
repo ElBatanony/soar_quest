@@ -64,7 +64,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
         id: "hi",
         fields: fieldFilters.map((fieldFilter) => fieldFilter.field).toList());
 
-    SQDoc fakeDoc = fakeColl.newDoc();
+    final fakeDoc = fakeColl.newDoc();
 
     fieldsFormScreen =
         FormScreen(fakeDoc, isInline: true, onFieldsChanged: (doc) async {

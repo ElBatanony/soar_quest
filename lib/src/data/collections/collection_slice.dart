@@ -50,7 +50,7 @@ class CollectionSlice implements SQCollection {
 
   @override
   F? getField<F extends SQField<dynamic>>(String fieldName) {
-    F? field = collection.getField(fieldName);
+    final field = collection.getField(fieldName) as F?;
     if (sliceFields == null) return field;
     if (field == null) return null;
     if (sliceFields!.contains(field.name) == false) return null;

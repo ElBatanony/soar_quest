@@ -24,9 +24,9 @@ class SQRef {
   String toString() => label;
 
   static SQRef? parse(Map<String, dynamic> source) {
-    String? docId = source["docId"] as String?;
-    String? collectionPath = source["collectionPath"] as String?;
-    String? label = source["label"] as String?;
+    final docId = source["docId"] as String?;
+    final collectionPath = source["collectionPath"] as String?;
+    final label = source["label"] as String?;
 
     if (docId == null || collectionPath == null || label == null) return null;
 
@@ -38,10 +38,9 @@ class SQRef {
   }
 
   SQDoc get doc {
-    SQCollection? collection = SQCollection.byPath(collectionPath);
+    final collection = SQCollection.byPath(collectionPath);
     if (collection == null) throw "Referencing a non-existing collection";
-    SQDoc? doc = collection.getDoc(docId);
-    doc = collection.getDoc(docId);
+    final doc = collection.getDoc(docId);
     if (doc == null) throw "Referencing a non-existing doc";
     return doc;
   }

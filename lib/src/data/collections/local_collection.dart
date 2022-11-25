@@ -23,14 +23,13 @@ class LocalCollection extends SQCollection {
   @override
   Future<void> loadCollection() async {
     await _initPrefs();
-    List<String> prefsStrings = _prefs!.getStringList(path) ?? [];
+    final prefsStrings = _prefs!.getStringList(path) ?? [];
     docs = prefsStrings.map((e) {
       final docObject = jsonDecode(e);
       if (docObject is! Map<String, dynamic>)
         throw "Error loading local collection doc";
-      String? newDocId = docObject['id'] as String?;
-      Map<String, dynamic>? newDocData =
-          docObject['data'] as Map<String, dynamic>?;
+      final newDocId = docObject['id'] as String?;
+      final newDocData = docObject['data'] as Map<String, dynamic>?;
       if (newDocId == null) throw "Doc ID is null";
       if (newDocData == null) throw "Doc data is null";
       return newDoc(id: newDocId)..parse(newDocData);

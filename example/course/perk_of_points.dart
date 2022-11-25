@@ -40,8 +40,8 @@ void main() async {
       SQVirtualField(
           field: SQIntField("Points", value: 0),
           valueBuilder: (playerDoc) {
-            int points = 0;
-            List<SQDoc> playerRounds = rounds.docs
+            var points = 0;
+            final playerRounds = rounds.docs
                 .where((round) =>
                     round.value<SQRef>("Player") == playerDoc.ref &&
                     round.value<SQRef>("Game") ==

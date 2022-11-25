@@ -66,9 +66,9 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    final SQRef? ref = field.value;
+    final ref = field.value;
     if (ref == null) return Text("Not Set");
-    SQDoc? doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
+    final doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -90,13 +90,13 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
           SQButton(
             'Select',
             onPressed: () async {
-              SQDoc? retDoc = await SelectDocScreen(
+              final retDoc = await SelectDocScreen(
                       title: "Select ${field.name}",
                       collection: field.collection)
                   .go<SQDoc>(screenState.context);
 
               if (retDoc != null) {
-                SQRef ref = SQRef(
+                final ref = SQRef(
                   docId: retDoc.id,
                   label: retDoc.label,
                   collectionPath: retDoc.collection.path,

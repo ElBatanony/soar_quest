@@ -86,7 +86,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   }
 
   Widget readOnlyBuilder(ScreenState screenState) {
-    String valueString = field.value.toString();
+    final valueString = field.value.toString();
     return GestureDetector(
       onLongPress: () async {
         Clipboard.setData(ClipboardData(text: valueString));

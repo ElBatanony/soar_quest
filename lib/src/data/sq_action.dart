@@ -92,10 +92,10 @@ class _SQActionButtonState extends State<SQActionButton> {
               ? null
               : widget.action.name,
       onPressed: () async {
-        bool confirmed = widget.action.confirm == false ||
+        final isConfirmed = widget.action.confirm == false ||
             await showConfirmationDialog(
                 action: widget.action, context: context);
-        if (confirmed)
+        if (isConfirmed)
           return widget.action.execute(widget.doc, widget.screenState);
       },
     );
@@ -167,9 +167,9 @@ class CreateDocAction extends SQAction {
     final newDoc = getCollection().newDoc(initialFields: initialFields(doc));
 
     if (form) {
-      bool created =
+      final isCreated =
           await FormScreen(newDoc).go<bool>(screenState.context) ?? false;
-      if (created && !goBack && screenState.mounted)
+      if (isCreated && !goBack && screenState.mounted)
         await DocScreen(newDoc).go(screenState.context);
     } else {
       getCollection().saveDoc(newDoc);
@@ -213,9 +213,9 @@ class SetFieldsAction extends SQAction {
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    Map<String, dynamic> newFields = getFields(doc);
+    final newFields = getFields(doc);
     for (final entry in newFields.entries) {
-      SQField<dynamic>? docField = doc.getField(entry.key);
+      final docField = doc.getField(entry.key);
       if (docField == null) throw "SetFieldsAction null doc field";
       docField.value = entry.value;
     }
@@ -240,7 +240,7 @@ class ExecuteOnDocsAction extends SQAction {
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    List<SQDoc> fetchedDocs = getDocs(doc);
+    final fetchedDocs = getDocs(doc);
     for (final doc in fetchedDocs) {
       await action.execute(doc, screenState);
     }
@@ -255,7 +255,7 @@ class OpenUrlAction extends SQAction {
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    String url = getUrl(doc);
+    final url = getUrl(doc);
     if (!await launchUrl(Uri.parse(url),
         mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
@@ -293,7 +293,7 @@ class CustomAction extends SQAction {
 
 Future<bool> showConfirmationDialog(
     {required SQAction action, required BuildContext context}) async {
-  bool? ret = await showDialog<bool>(
+  final isConfirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -306,5 +306,5 @@ Future<bool> showConfirmationDialog(
                   onPressed: () => Navigator.pop(context, true)),
             ]);
       });
-  return ret ?? false;
+  return isConfirmed ?? false;
 }

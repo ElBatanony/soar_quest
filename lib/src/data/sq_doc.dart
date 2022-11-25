@@ -18,7 +18,7 @@ class SQDoc {
     path = "${collection.path}/$id";
 
     fields = collection.fields.map((field) {
-      SQField<dynamic> fieldCopy = field.copy();
+      final fieldCopy = field.copy();
       assert(
         field.runtimeType == fieldCopy.runtimeType &&
             field.name == fieldCopy.name &&
@@ -35,11 +35,11 @@ class SQDoc {
   }
 
   Map<String, dynamic> serialize() {
-    Map<String, dynamic> ret = {};
+    final jsonMap = <String, dynamic>{};
     for (var field in fields) {
-      ret[field.name] = field.serialize();
+      jsonMap[field.name] = field.serialize();
     }
-    return ret;
+    return jsonMap;
   }
 
   F? getField<F extends SQField<dynamic>>(String fieldName) {

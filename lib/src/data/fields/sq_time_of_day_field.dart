@@ -63,7 +63,7 @@ class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
         SQButton(
           'Select Time',
           onPressed: () async {
-            TimeOfDay? newTimeOfDay = await showTimePicker(
+            final newTimeOfDay = await showTimePicker(
               context: screenState.context,
               initialTime: field.value != null
                   ? toTimeOfDay(field.value!)

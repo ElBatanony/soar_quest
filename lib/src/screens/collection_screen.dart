@@ -28,10 +28,10 @@ class CollectionScreen extends Screen {
   State<CollectionScreen> createState() => CollectionScreenState();
 
   Widget groupByDocs(List<SQDoc> docs, ScreenState screenState) {
-    Map<dynamic, List<SQDoc>> groups = groupBy<SQDoc, dynamic>(
+    final groups = groupBy<SQDoc, dynamic>(
         docs, (doc) => doc.value<dynamic>(groupByField!));
 
-    List<Widget> tiles = [];
+    final tiles = <Widget>[];
     for (final entry in groups.entries) {
       tiles
         ..add(ListTile(title: Text(entry.key.toString())))

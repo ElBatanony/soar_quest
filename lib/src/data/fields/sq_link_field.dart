@@ -28,7 +28,7 @@ class _SQLinkFormField extends SQFormField<SQLinkField> {
 class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    final String? url = field.value;
+    final url = field.value;
     if (url != null)
       return SQButton("Open Link", onPressed: () async {
         if (!await launchUrl(Uri.parse(url),

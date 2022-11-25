@@ -27,8 +27,7 @@ void main() async {
     updates: isAdmin ? SQUpdates() : SQUpdates.readOnly(),
   );
 
-  SQRefField courseCategoryRefField =
-      SQRefField("Category", collection: categories);
+  final courseCategoryRefField = SQRefField("Category", collection: categories);
 
   SQCollection courses = FirestoreCollection(
     id: "Courses",

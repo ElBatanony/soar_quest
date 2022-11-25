@@ -53,8 +53,7 @@ void main() async {
     updates: SQUpdates.readOnly(),
   );
 
-  CollectionSlice myBookings =
-      CollectionSlice(bookings, filter: UserFilter("Tenant"));
+  final myBookings = CollectionSlice(bookings, filter: UserFilter("Tenant"));
 
   SQApp.run(
     [

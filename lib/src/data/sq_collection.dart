@@ -69,10 +69,10 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   DocType newDoc(
       {List<SQField<dynamic>> initialFields = const [], String? id}) {
-    DocType newDoc = SQDoc(id ?? newDocId(), collection: this) as DocType;
+    final newDoc = SQDoc(id ?? newDocId(), collection: this) as DocType;
 
     for (final initialField in initialFields) {
-      int index =
+      final index =
           newDoc.fields.indexWhere((field) => field.name == initialField.name);
       newDoc.fields[index] = initialField.copy();
     }

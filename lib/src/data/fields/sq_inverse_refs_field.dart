@@ -73,7 +73,7 @@ class _SQInverseRefsFormFieldState
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {
-    CollectionSlice slice = CollectionSlice(field.collection,
+    final slice = CollectionSlice(field.collection,
         filter: RefFilter(field.refFieldName, doc.ref));
     return TableScreen(collection: slice, isInline: true);
   }
