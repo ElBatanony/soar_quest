@@ -18,7 +18,7 @@ class SQNavBar extends StatelessWidget {
     return NavigationBar(
       onDestinationSelected: (index) async {
         SQApp.selectedNavScreen = index;
-        visibleScreens(context)[SQApp.selectedNavScreen]
+        await visibleScreens(context)[SQApp.selectedNavScreen]
             .go(context, replace: true);
       },
       selectedIndex: initialIndex,

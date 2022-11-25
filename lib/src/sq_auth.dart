@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart'
     hide EmailAuthProvider, PhoneAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -135,7 +137,7 @@ class SQProfileScreen extends Screen {
 class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
   @override
   refreshScreen() async {
-    SQAuth.initUserDoc();
+    unawaited(SQAuth.initUserDoc());
     super.refreshScreen();
   }
 }

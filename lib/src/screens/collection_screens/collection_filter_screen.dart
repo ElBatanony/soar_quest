@@ -71,7 +71,7 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
       for (final fieldFilter in fieldFilters) {
         fieldFilter.field = doc.getField(fieldFilter.field.name)!;
       }
-      refreshScreen();
+      await refreshScreen();
     });
 
     super.initState();
