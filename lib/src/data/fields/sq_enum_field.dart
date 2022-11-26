@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/form_screen.dart';
 import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
 import 'sq_list_field.dart';
@@ -27,6 +28,11 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
   const _SQEnumFormField(super.field, super.doc, {required super.onChanged});
 
   @override
+  Widget fieldLabel(screenState) => screenState is FormScreenState
+      ? super.fieldLabel(screenState)
+      : Container();
+
+  @override
   Widget readOnlyBuilder(ScreenState screenState) {
     final subfieldCopy = field.subfield.copy()
       ..value = field.value
@@ -39,10 +45,6 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 }
 
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
-  @override
-  Widget fieldLabel(context) =>
-      inForm ? super.fieldLabel(context) : Container();
-
   @override
   Widget fieldBuilder(ScreenState screenState) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

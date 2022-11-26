@@ -36,6 +36,23 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
   final List<SQDoc> refDocs;
 
   @override
+  Widget fieldLabel(ScreenState screenState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          super.fieldLabel(screenState),
+          if (field.collection.updates.adds)
+            CreateDocAction('Add',
+                getCollection: () => field.collection,
+                initialFields: (_) => [
+                      SQRefField(field.refFieldName,
+                          collection: doc.collection,
+                          value: doc.ref,
+                          editable: false)
+                    ]).button(doc, screenState: screenState)
+        ],
+      );
+
+  @override
   Widget readOnlyBuilder(ScreenState screenState) {
     final slice = CollectionSlice(field.collection,
         filter: RefFilter(field.refFieldName, doc.ref));
@@ -58,23 +75,6 @@ class _SQInverseRefsFormFieldState
     unawaited(initializeRefCollection());
     super.initState();
   }
-
-  @override
-  Widget fieldLabel(ScreenState screenState) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          super.fieldLabel(screenState),
-          if (field.collection.updates.adds)
-            CreateDocAction('Add',
-                getCollection: () => field.collection,
-                initialFields: (_) => [
-                      SQRefField(field.refFieldName,
-                          collection: doc.collection,
-                          value: doc.ref,
-                          editable: false)
-                    ]).button(doc, screenState: screenState)
-        ],
-      );
 
   @override
   Widget fieldBuilder(ScreenState screenState) {
