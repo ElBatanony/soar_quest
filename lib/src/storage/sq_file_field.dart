@@ -21,14 +21,11 @@ class SQFileField extends SQStringField {
   }
 
   @override
-  SQFileField copy() {
-    return SQFileField(name, value: value, storage: storage);
-  }
+  SQFileField copy() => SQFileField(name, value: value, storage: storage);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return SQFileFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      SQFileFormField(this, doc, onChanged: onChanged);
 }
 
 class SQFileFormField<FileField extends SQFileField>
@@ -65,20 +62,18 @@ class SQFileFormFieldState<FileField extends SQFileField>
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(field.name),
-        if (field.fileExists)
-          SQButton('Download', onPressed: openFileUrl)
-        else
-          const Text('File not set'),
-        SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
-            onPressed: selectAndUploadFile),
-        if (field.fileExists)
-          IconButton(onPressed: deleteFile, icon: const Icon(Icons.delete))
-      ],
-    );
-  }
+  Widget fieldBuilder(ScreenState screenState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(field.name),
+          if (field.fileExists)
+            SQButton('Download', onPressed: openFileUrl)
+          else
+            const Text('File not set'),
+          SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
+              onPressed: selectAndUploadFile),
+          if (field.fileExists)
+            IconButton(onPressed: deleteFile, icon: const Icon(Icons.delete))
+        ],
+      );
 }

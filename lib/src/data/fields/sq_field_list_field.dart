@@ -33,14 +33,12 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
       SQFieldListField(name, field, value: copyList(fields));
 
   @override
-  List<dynamic> serialize() {
-    return fields.map((field) => field.serialize()).toList();
-  }
+  List<dynamic> serialize() =>
+      fields.map((field) => field.serialize()).toList();
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQFieldListFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQFieldListFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
@@ -66,32 +64,28 @@ class _SQFieldListFormFieldState<T>
       '${listField.name} (${listField.fields.length} items)';
 
   @override
-  Widget readOnlyBuilder(ScreenState screenState) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final field in listField.fields)
-          (field..isInline = true).formField(doc),
-      ],
-    );
-  }
+  Widget readOnlyBuilder(ScreenState screenState) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final field in listField.fields)
+            (field..isInline = true).formField(doc),
+        ],
+      );
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return Column(
-      children: [
-        for (final field in listField.fields)
-          Row(
-            children: [
-              Expanded(child: (field..isInline = true).formField(doc)),
-              SQButton.icon(
-                Icons.delete,
-                onPressed: () => listField.fields.remove(field),
-              ),
-            ],
-          ),
-        SQButton.icon(Icons.add, text: 'Insert Item', onPressed: addField),
-      ],
-    );
-  }
+  Widget fieldBuilder(ScreenState screenState) => Column(
+        children: [
+          for (final field in listField.fields)
+            Row(
+              children: [
+                Expanded(child: (field..isInline = true).formField(doc)),
+                SQButton.icon(
+                  Icons.delete,
+                  onPressed: () => listField.fields.remove(field),
+                ),
+              ],
+            ),
+          SQButton.icon(Icons.add, text: 'Insert Item', onPressed: addField),
+        ],
+      );
 }

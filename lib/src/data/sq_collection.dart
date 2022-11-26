@@ -62,10 +62,8 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   String newDocId() => const Uuid().v1();
 
-  F? getField<F extends SQField<dynamic>>(String fieldName) {
-    return fields.singleWhereOrNull(
-        (field) => field.name == fieldName && field is F) as F?;
-  }
+  F? getField<F extends SQField<dynamic>>(String fieldName) =>
+      fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
 
   DocType newDoc(
       {List<SQField<dynamic>> initialFields = const [], String? id}) {

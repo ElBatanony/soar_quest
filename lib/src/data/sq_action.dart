@@ -30,25 +30,27 @@ abstract class SQAction {
     await onExecute(doc, screenState);
   }
 
-  Widget button(SQDoc doc,
-      {required ScreenState screenState,
-      bool isIcon = false,
-      double iconSize = 24.0}) {
-    return SQActionButton(
+  Widget button(
+    SQDoc doc, {
+    required ScreenState screenState,
+    bool isIcon = false,
+    double iconSize = 24.0,
+  }) =>
+      SQActionButton(
         action: this,
         doc: doc,
         screenState: screenState,
         isIcon: isIcon,
-        iconSize: iconSize);
-  }
+        iconSize: iconSize,
+      );
 
-  FloatingActionButton fab(SQDoc doc, ScreenState screenState) {
-    return FloatingActionButton(
+  FloatingActionButton fab(SQDoc doc, ScreenState screenState) =>
+      FloatingActionButton(
         heroTag: null,
         shape: const CircleBorder(),
         onPressed: () async => execute(doc, screenState),
-        child: Icon(icon));
-  }
+        child: Icon(icon),
+      );
 }
 
 class SQActionButton extends StatefulWidget {
@@ -296,16 +298,14 @@ Future<bool> showConfirmationDialog(
     {required SQAction action, required BuildContext context}) async {
   final isConfirmed = await showDialog<bool>(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-            title: const Text('Confirm'),
-            content: Text(action.confirmMessage),
-            actions: [
-              SQButton('Cancel',
-                  onPressed: () => Navigator.pop(context, false)),
-              SQButton(action.name,
-                  onPressed: () => Navigator.pop(context, true)),
-            ]);
-      });
+      builder: (context) => AlertDialog(
+              title: const Text('Confirm'),
+              content: Text(action.confirmMessage),
+              actions: [
+                SQButton('Cancel',
+                    onPressed: () => Navigator.pop(context, false)),
+                SQButton(action.name,
+                    onPressed: () => Navigator.pop(context, true)),
+              ]));
   return isConfirmed ?? false;
 }

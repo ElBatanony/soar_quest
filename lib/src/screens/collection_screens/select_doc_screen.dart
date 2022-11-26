@@ -10,8 +10,6 @@ class SelectDocScreen extends CollectionScreen {
       : super(title: title ?? 'Select ${collection.id}');
 
   @override
-  Widget docDisplay(SQDoc doc, ScreenState screenState) {
-    return SQButton(doc.label,
-        onPressed: () => screenState.exitScreen<SQDoc>(doc));
-  }
+  Widget docDisplay(SQDoc doc, ScreenState screenState) =>
+      SQButton(doc.label, onPressed: () => screenState.exitScreen<SQDoc>(doc));
 }

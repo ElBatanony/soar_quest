@@ -19,10 +19,9 @@ class CollectionFilterScreen extends CollectionScreen {
   State<CollectionFilterScreen> createState() => CollectionFilterScreenState();
 
   List<SQDoc> filterDocs(
-      List<SQDoc> initialDocs, List<CollectionFilter> filters) {
-    return filters.fold(
-        initialDocs, (remainingDocs, filter) => filter.filter(remainingDocs));
-  }
+          List<SQDoc> initialDocs, List<CollectionFilter> filters) =>
+      filters.fold(
+          initialDocs, (remainingDocs, filter) => filter.filter(remainingDocs));
 
   @override
   List<SQDoc> get docs => filterDocs(collection.docs, fieldFilters);
@@ -41,14 +40,12 @@ class CollectionFilterScreen extends CollectionScreen {
   }
 
   @override
-  Widget screenBody(ScreenState screenState) {
-    return Column(
-      children: [
-        filterFieldsDisplay(screenState),
-        Expanded(child: super.screenBody(screenState)),
-      ],
-    );
-  }
+  Widget screenBody(ScreenState screenState) => Column(
+        children: [
+          filterFieldsDisplay(screenState),
+          Expanded(child: super.screenBody(screenState)),
+        ],
+      );
 }
 
 class CollectionFilterScreenState<T extends CollectionFilterScreen>

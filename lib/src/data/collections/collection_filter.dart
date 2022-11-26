@@ -29,11 +29,9 @@ class FieldValueFilter<T> extends CollectionFieldFilter {
   FieldValueFilter(super.field);
 
   @override
-  List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where((doc) => doc.value<T>(field.name) == field.value as T)
-        .toList();
-  }
+  List<SQDoc> filter(List<SQDoc> docs) => docs
+      .where((doc) => doc.value<T>(field.name) == field.value as T)
+      .toList();
 }
 
 class ValueFilter extends CollectionFilter {
@@ -42,26 +40,21 @@ class ValueFilter extends CollectionFilter {
   ValueFilter(this.fieldName, this.fieldValue);
 
   @override
-  List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where((doc) => doc.value<dynamic>(fieldName) == fieldValue)
-        .toList();
-  }
+  List<SQDoc> filter(List<SQDoc> docs) =>
+      docs.where((doc) => doc.value<dynamic>(fieldName) == fieldValue).toList();
 }
 
 class StringContainsFilter extends CollectionFieldFilter {
   StringContainsFilter(super.field);
 
   @override
-  List<SQDoc> filter(List<SQDoc> docs) {
-    return docs
-        .where((doc) => doc
-            .value<dynamic>(field.name)
-            .toString()
-            .toLowerCase()
-            .contains(field.value.toString().toLowerCase()))
-        .toList();
-  }
+  List<SQDoc> filter(List<SQDoc> docs) => docs
+      .where((doc) => doc
+          .value<dynamic>(field.name)
+          .toString()
+          .toLowerCase()
+          .contains(field.value.toString().toLowerCase()))
+      .toList();
 }
 
 class RefFilter extends CollectionFilter {
@@ -115,16 +108,14 @@ class CompareFuncFilter extends CollectionFieldFilter {
   CompareFuncFilter(super.field, {required this.compareFunc});
 
   @override
-  List<SQDoc> filter(List<SQDoc> docs) {
-    return docs.where(
-      (doc) {
-        final comparableValue = doc.value<Comparable<dynamic>>(field.name);
-        if (comparableValue == null)
-          throw 'Comparable value is null in CompareFuncFilter';
-        return compareFunc(
-          comparableValue.compareTo(field.value),
-        );
-      },
-    ).toList();
-  }
+  List<SQDoc> filter(List<SQDoc> docs) => docs.where(
+        (doc) {
+          final comparableValue = doc.value<Comparable<dynamic>>(field.name);
+          if (comparableValue == null)
+            throw 'Comparable value is null in CompareFuncFilter';
+          return compareFunc(
+            comparableValue.compareTo(field.value),
+          );
+        },
+      ).toList();
 }

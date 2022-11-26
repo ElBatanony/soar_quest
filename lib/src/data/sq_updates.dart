@@ -11,11 +11,9 @@ class SQUpdates {
 
   bool get readOnly => !edits && !adds && !deletes;
 
-  SQUpdates operator &(SQUpdates other) {
-    return SQUpdates(
-      edits: edits && other.edits,
-      adds: adds && other.adds,
-      deletes: deletes && other.deletes,
-    );
-  }
+  SQUpdates operator &(SQUpdates other) => SQUpdates(
+        edits: edits && other.edits,
+        adds: adds && other.adds,
+        deletes: deletes && other.deletes,
+      );
 }

@@ -13,9 +13,8 @@ class SQLinkField extends SQStringField {
   SQLinkField copy() => SQLinkField(name, value: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQLinkFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQLinkFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQLinkFormField extends SQFormField<SQLinkField> {
@@ -40,7 +39,6 @@ class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return SQTextField(formField, textParse: (text) => text);
-  }
+  Widget fieldBuilder(ScreenState screenState) =>
+      SQTextField(formField, textParse: (text) => text);
 }

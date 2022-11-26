@@ -12,10 +12,8 @@ class SQEnumField<T> extends SQField<T> {
       : super(subfield.name);
 
   @override
-  SQEnumField<T> copy() {
-    return SQEnumField<T>(subfield.copy(),
-        options: copyList<T>(options), value: value, show: show);
-  }
+  SQEnumField<T> copy() => SQEnumField<T>(subfield.copy(),
+      options: copyList<T>(options), value: value, show: show);
 
   @override
   formField(SQDoc doc, {VoidCallback? onChanged}) =>
@@ -46,39 +44,34 @@ class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(field.value.toString()),
-        SQButton('Select', onPressed: () async {
-          final newValue =
-              await showEnumOptionsDialog(field, context: screenState.context);
-          if (newValue != null) {
-            field.value = newValue;
-            setState(() {});
-          }
-        })
-      ],
-    );
-  }
+  Widget fieldBuilder(ScreenState screenState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(field.value.toString()),
+          SQButton('Select', onPressed: () async {
+            final newValue = await showEnumOptionsDialog(field,
+                context: screenState.context);
+            if (newValue != null) {
+              field.value = newValue;
+              setState(() {});
+            }
+          })
+        ],
+      );
 }
 
 Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
-    {required BuildContext context}) {
-  return showDialog<T?>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-            title: Text('Select ${enumField.name} value'),
-            content: Wrap(
-              children: [
-                ...enumField.options.map((v) => SQButton(v.toString(),
-                    onPressed: () => Navigator.pop<T>(context, v))),
-              ],
-            ),
-            actions: [
-              SQButton('Cancel', onPressed: () => Navigator.pop(context)),
-            ]);
-      });
-}
+        {required BuildContext context}) =>
+    showDialog<T?>(
+        context: context,
+        builder: (context) => AlertDialog(
+                title: Text('Select ${enumField.name} value'),
+                content: Wrap(
+                  children: [
+                    ...enumField.options.map((v) => SQButton(v.toString(),
+                        onPressed: () => Navigator.pop<T>(context, v))),
+                  ],
+                ),
+                actions: [
+                  SQButton('Cancel', onPressed: () => Navigator.pop(context)),
+                ]));

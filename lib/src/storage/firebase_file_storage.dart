@@ -11,9 +11,8 @@ import 'sq_file_storage.dart';
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 class FirebaseFileStorage extends SQFileStorage {
-  Reference getRef(SQDoc doc, SQFileField field) {
-    return firebaseStorage.ref().child('${doc.path}/${field.name}');
-  }
+  Reference getRef(SQDoc doc, SQFileField field) =>
+      firebaseStorage.ref().child('${doc.path}/${field.name}');
 
   @override
   Future<void> uploadFile({

@@ -48,26 +48,22 @@ class Screen extends StatefulWidget {
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
 
-  AppBar appBar(ScreenState screenState) {
-    return AppBar(
-      title: Text(title),
-      leading: Navigator.of(screenState.context).canPop()
-          ? const BackButton()
-          : null,
-      actions: appBarActions(screenState),
-    );
-  }
+  AppBar appBar(ScreenState screenState) => AppBar(
+        title: Text(title),
+        leading: Navigator.of(screenState.context).canPop()
+            ? const BackButton()
+            : null,
+        actions: appBarActions(screenState),
+      );
 
-  Widget screenBody(ScreenState screenState) {
-    return Center(child: Text('$title Screen'));
-  }
+  Widget screenBody(ScreenState screenState) =>
+      Center(child: Text('$title Screen'));
 
-  List<Widget> appBarActions(ScreenState screenState) {
-    return [
-      IconButton(
-          onPressed: screenState.refreshScreen, icon: const Icon(Icons.refresh))
-    ];
-  }
+  List<Widget> appBarActions(ScreenState screenState) => [
+        IconButton(
+            onPressed: screenState.refreshScreen,
+            icon: const Icon(Icons.refresh))
+      ];
 
   FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
 
@@ -102,30 +98,27 @@ class ScreenState<T extends Screen> extends State<T> {
       );
     }
 
-    final Widget body = Builder(builder: (_) {
-      return Container(
-        padding: widget.isInline ? null : const EdgeInsets.all(16),
-        child: widget.screenBody(this),
-      );
-    });
+    final Widget body = Builder(
+        builder: (_) => Container(
+              padding: widget.isInline ? null : const EdgeInsets.all(16),
+              child: widget.screenBody(this),
+            ));
 
     if (widget.isInline) return body;
 
-    return Builder(builder: (_) {
-      return Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: widget.appBar(this),
-        drawer: SQApp.drawer,
-        body: body,
-        floatingActionButton: widget.floatingActionButton(this),
-        bottomNavigationBar: widget.bottomNavBar(this),
-      );
-    });
+    return Builder(
+        builder: (_) => Scaffold(
+              resizeToAvoidBottomInset: true,
+              appBar: widget.appBar(this),
+              drawer: SQApp.drawer,
+              body: body,
+              floatingActionButton: widget.floatingActionButton(this),
+              bottomNavigationBar: widget.bottomNavBar(this),
+            ));
   }
 
-  static ScreenState of(BuildContext context) {
-    return context.findAncestorStateOfType<ScreenState>()!;
-  }
+  static ScreenState of(BuildContext context) =>
+      context.findAncestorStateOfType<ScreenState>()!;
 
   void exitScreen<V extends Object?>([V? value]) {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);

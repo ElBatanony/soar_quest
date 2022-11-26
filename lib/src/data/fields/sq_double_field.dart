@@ -17,9 +17,8 @@ class SQDoubleField extends SQField<double> {
   SQDoubleField copy() => SQDoubleField(name, value: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQDoubleFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQDoubleFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQDoubleFormField extends SQFormField<SQDoubleField> {
@@ -31,7 +30,6 @@ class _SQDoubleFormField extends SQFormField<SQDoubleField> {
 
 class _SQDoubleFormFieldState extends SQFormFieldState<SQDoubleField> {
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return SQTextField(formField, textParse: double.tryParse);
-  }
+  Widget fieldBuilder(ScreenState screenState) =>
+      SQTextField(formField, textParse: double.tryParse);
 }

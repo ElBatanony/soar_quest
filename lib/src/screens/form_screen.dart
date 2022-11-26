@@ -29,9 +29,8 @@ class FormScreen extends DocScreen {
 
   @override
   Future<T?> go<T extends Object?>(BuildContext context,
-      {bool replace = false}) {
-    return super.go(context, replace: false);
-  }
+          {bool replace = false}) =>
+      super.go(context, replace: false);
 
   Future<void> submitForm(ScreenState screenState) async {
     for (final field in doc.fields) {
@@ -49,32 +48,28 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  Widget? bottomNavBar(ScreenState screenState) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.grey[100],
-      currentIndex: 1,
-      onTap: (index) async {
-        if (index == 0) {
-          FocusManager.instance.primaryFocus?.unfocus();
-          return screenState.exitScreen();
-        }
-        await submitForm(screenState);
-      },
-      items: [
-        const BottomNavigationBarItem(
-            icon: Icon(Icons.cancel), label: 'Cancel'),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.save), label: submitButtonText),
-      ],
-    );
-  }
+  Widget? bottomNavBar(ScreenState screenState) => BottomNavigationBar(
+        backgroundColor: Colors.grey[100],
+        currentIndex: 1,
+        onTap: (index) async {
+          if (index == 0) {
+            FocusManager.instance.primaryFocus?.unfocus();
+            return screenState.exitScreen();
+          }
+          await submitForm(screenState);
+        },
+        items: [
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.cancel), label: 'Cancel'),
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.save), label: submitButtonText),
+        ],
+      );
 
   @override
-  Widget screenBody(ScreenState screenState) {
-    return GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: super.screenBody(screenState));
-  }
+  Widget screenBody(ScreenState screenState) => GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: super.screenBody(screenState));
 }
 
 class FormScreenState<T extends FormScreen> extends ScreenState<T> {

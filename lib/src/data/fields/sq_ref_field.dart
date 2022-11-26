@@ -19,10 +19,8 @@ class SQRefField extends SQField<SQRef> {
       {required this.collection, super.value, super.editable, super.show});
 
   @override
-  SQRefField copy() {
-    return SQRefField(name,
-        collection: collection, value: value, editable: editable, show: show);
-  }
+  SQRefField copy() => SQRefField(name,
+      collection: collection, value: value, editable: editable, show: show);
 
   @override
   SQRef? parse(source) {
@@ -42,9 +40,8 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQRefFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQRefFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQRefFormField extends SQFormField<SQRefField> {
@@ -81,32 +78,30 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(field.value?.label ?? 'Not Set'),
-        if (field.editable)
-          SQButton(
-            'Select',
-            onPressed: () async {
-              final retDoc = await SelectDocScreen(
-                      title: 'Select ${field.name}',
-                      collection: field.collection)
-                  .go<SQDoc>(screenState.context);
+  Widget fieldBuilder(ScreenState screenState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(field.value?.label ?? 'Not Set'),
+          if (field.editable)
+            SQButton(
+              'Select',
+              onPressed: () async {
+                final retDoc = await SelectDocScreen(
+                        title: 'Select ${field.name}',
+                        collection: field.collection)
+                    .go<SQDoc>(screenState.context);
 
-              if (retDoc != null) {
-                final ref = SQRef(
-                  docId: retDoc.id,
-                  label: retDoc.label,
-                  collectionPath: retDoc.collection.path,
-                );
-                field.value = ref;
-                onChanged();
-              }
-            },
-          ),
-      ],
-    );
-  }
+                if (retDoc != null) {
+                  final ref = SQRef(
+                    docId: retDoc.id,
+                    label: retDoc.label,
+                    collectionPath: retDoc.collection.path,
+                  );
+                  field.value = ref;
+                  onChanged();
+                }
+              },
+            ),
+        ],
+      );
 }

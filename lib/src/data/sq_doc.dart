@@ -42,14 +42,10 @@ class SQDoc {
     return jsonMap;
   }
 
-  F? getField<F extends SQField<dynamic>>(String fieldName) {
-    return fields.singleWhereOrNull(
-        (field) => field.name == fieldName && field is F) as F?;
-  }
+  F? getField<F extends SQField<dynamic>>(String fieldName) =>
+      fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
 
-  T? value<T>(String fieldName) {
-    return getField<SQField<T>>(fieldName)?.value;
-  }
+  T? value<T>(String fieldName) => getField<SQField<T>>(fieldName)?.value;
 
   String get label => fields.first.value.toString();
 

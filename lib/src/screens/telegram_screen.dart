@@ -33,19 +33,17 @@ class TelegramScreen extends Screen {
   });
 
   @override
-  Widget screenBody(ScreenState<Screen> screenState) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            message,
-            textAlign: TextAlign.center,
-            style: Theme.of(screenState.context).textTheme.bodyLarge,
-          ),
-          TelegramButton(buttonText, username: telegramUsername)
-        ],
-      ),
-    );
-  }
+  Widget screenBody(ScreenState<Screen> screenState) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: Theme.of(screenState.context).textTheme.bodyLarge,
+            ),
+            TelegramButton(buttonText, username: telegramUsername)
+          ],
+        ),
+      );
 }

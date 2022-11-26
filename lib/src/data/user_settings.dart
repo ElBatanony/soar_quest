@@ -14,11 +14,10 @@ class UserSettings {
 
   static bool initialized = false;
 
-  static SQDoc get _settingsDoc {
-    return _settingsCollection.docs
-            .firstWhereOrNull((doc) => doc.id == _defaultSettingsDocId) ??
-        _settingsCollection.newDoc(id: _defaultSettingsDocId);
-  }
+  static SQDoc get _settingsDoc =>
+      _settingsCollection.docs
+          .firstWhereOrNull((doc) => doc.id == _defaultSettingsDocId) ??
+      _settingsCollection.newDoc(id: _defaultSettingsDocId);
 
   static Future<void> setSettings(List<SQField<dynamic>> settings) async {
     _settingsCollection = LocalCollection(
@@ -29,7 +28,6 @@ class UserSettings {
 
   T? getSetting<T>(String settingName) => _settingsDoc.value(settingName);
 
-  static Screen settingsScreen() {
-    return FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);
-  }
+  static Screen settingsScreen() =>
+      FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);
 }

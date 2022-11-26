@@ -17,9 +17,8 @@ class VideoCollectionScreen extends CollectionScreen {
   });
 
   @override
-  Widget docDisplay(SQDoc doc, ScreenState screenState) {
-    return VideoDocDisplay(doc, videoField: videoField);
-  }
+  Widget docDisplay(SQDoc doc, ScreenState screenState) =>
+      VideoDocDisplay(doc, videoField: videoField);
 }
 
 class VideoDocDisplay extends DocScreen {
@@ -62,23 +61,21 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Center(
-        child: Column(
-          children: [
-            Text(widget.doc.label),
-            if (_controller != null)
-              YoutubePlayer(
-                controller: _controller!,
-                showVideoProgressIndicator: true,
-              )
-            else
-              const Text('No video here')
-          ],
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(15),
+        child: Center(
+          child: Column(
+            children: [
+              Text(widget.doc.label),
+              if (_controller != null)
+                YoutubePlayer(
+                  controller: _controller!,
+                  showVideoProgressIndicator: true,
+                )
+              else
+                const Text('No video here')
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

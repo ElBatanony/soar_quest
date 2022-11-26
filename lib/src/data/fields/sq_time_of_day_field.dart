@@ -30,9 +30,8 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQTimeOfDayFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQTimeOfDayFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
@@ -55,26 +54,24 @@ class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
       TimeOfDay(hour: sqTimeOfDay.hour, minute: sqTimeOfDay.minute);
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(field.value.toString()),
-        SQButton(
-          'Select Time',
-          onPressed: () async {
-            final newTimeOfDay = await showTimePicker(
-              context: screenState.context,
-              initialTime: field.value != null
-                  ? toTimeOfDay(field.value!)
-                  : TimeOfDay.now(),
-            );
-            if (newTimeOfDay != null) {
-              _selectTimeOfDay(newTimeOfDay);
-            }
-          },
-        )
-      ],
-    );
-  }
+  Widget fieldBuilder(ScreenState screenState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(field.value.toString()),
+          SQButton(
+            'Select Time',
+            onPressed: () async {
+              final newTimeOfDay = await showTimePicker(
+                context: screenState.context,
+                initialTime: field.value != null
+                    ? toTimeOfDay(field.value!)
+                    : TimeOfDay.now(),
+              );
+              if (newTimeOfDay != null) {
+                _selectTimeOfDay(newTimeOfDay);
+              }
+            },
+          )
+        ],
+      );
 }

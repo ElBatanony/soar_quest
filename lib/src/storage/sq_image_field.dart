@@ -7,14 +7,11 @@ class SQImageField extends SQFileField {
   SQImageField(super.name, {super.value, super.storage});
 
   @override
-  SQImageField copy() {
-    return SQImageField(name, value: value, storage: storage);
-  }
+  SQImageField copy() => SQImageField(name, value: value, storage: storage);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQImageFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQImageFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQImageFormField extends SQFileFormField<SQImageField> {

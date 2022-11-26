@@ -16,26 +16,24 @@ class SQDrawer extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            child: Text(
-              SQApp.name,
-              style: const TextStyle(fontSize: 24),
+  Widget build(BuildContext context) => Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Text(
+                SQApp.name,
+                style: const TextStyle(fontSize: 24),
+              ),
             ),
-          ),
-          ...screens
-              .where((screen) => screen.show(context))
-              .map((screen) => ListTile(
-                    leading: Icon(screen.icon),
-                    title: Text(screen.title),
-                    onTap: () async => screen.go(context, replace: true),
-                  )),
-        ],
-      ),
-    );
-  }
+            ...screens
+                .where((screen) => screen.show(context))
+                .map((screen) => ListTile(
+                      leading: Icon(screen.icon),
+                      title: Text(screen.title),
+                      onTap: () async => screen.go(context, replace: true),
+                    )),
+          ],
+        ),
+      );
 }

@@ -13,30 +13,26 @@ class TabsScreen extends Screen {
   createState() => _TabsScreenState();
 
   @override
-  AppBar appBar(ScreenState screenState) {
-    return AppBar(
-      title: Text(title),
-      actions: [
-        IconButton(
-            onPressed: screenState.refreshScreen,
-            icon: const Icon(Icons.refresh))
-      ],
-      bottom: TabBar(
-        controller: (screenState as _TabsScreenState)._tabController,
-        labelColor: Colors.black,
-        isScrollable: true,
-        onTap: (value) => screenState._tabController.animateTo(value),
-        tabs: screens.map((screen) => Tab(text: screen.title)).toList(),
-      ),
-    );
-  }
+  AppBar appBar(ScreenState screenState) => AppBar(
+        title: Text(title),
+        actions: [
+          IconButton(
+              onPressed: screenState.refreshScreen,
+              icon: const Icon(Icons.refresh))
+        ],
+        bottom: TabBar(
+          controller: (screenState as _TabsScreenState)._tabController,
+          labelColor: Colors.black,
+          isScrollable: true,
+          onTap: (value) => screenState._tabController.animateTo(value),
+          tabs: screens.map((screen) => Tab(text: screen.title)).toList(),
+        ),
+      );
 
   @override
-  Widget screenBody(ScreenState screenState) {
-    return TabBarView(
-        controller: (screenState as _TabsScreenState)._tabController,
-        children: screens);
-  }
+  Widget screenBody(ScreenState screenState) => TabBarView(
+      controller: (screenState as _TabsScreenState)._tabController,
+      children: screens);
 }
 
 class _TabsScreenState extends ScreenState<TabsScreen>

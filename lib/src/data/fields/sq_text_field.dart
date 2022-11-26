@@ -31,8 +31,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return TextField(
+  Widget build(BuildContext context) => TextField(
       controller: fieldTextController,
       maxLines: widget.maxLines,
       onChanged: (text) {
@@ -46,5 +45,4 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
       },
       decoration: const InputDecoration(border: OutlineInputBorder()),
     );
-  }
 }

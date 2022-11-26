@@ -67,6 +67,7 @@ linter:
     use_super_parameters: true
     use_to_and_as_if_applicable: true
     prefer_single_quotes: true
+    prefer_expression_function_bodies: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

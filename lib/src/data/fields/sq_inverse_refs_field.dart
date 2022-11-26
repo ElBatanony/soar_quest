@@ -24,10 +24,9 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
       refCollection: refCollection, refFieldName: refFieldName);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQInverseRefsFormField(this, doc,
-        refDocs: valueBuilder(doc), onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQInverseRefsFormField(this, doc,
+          refDocs: valueBuilder(doc), onChanged: onChanged);
 }
 
 class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
@@ -53,23 +52,21 @@ class _SQInverseRefsFormFieldState
   }
 
   @override
-  Widget fieldLabel(ScreenState screenState) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        super.fieldLabel(screenState),
-        if (field.collection.updates.adds)
-          CreateDocAction('Add',
-              getCollection: () => field.collection,
-              initialFields: (_) => [
-                    SQRefField(field.refFieldName,
-                        collection: doc.collection,
-                        value: doc.ref,
-                        editable: false)
-                  ]).button(doc, screenState: screenState)
-      ],
-    );
-  }
+  Widget fieldLabel(ScreenState screenState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          super.fieldLabel(screenState),
+          if (field.collection.updates.adds)
+            CreateDocAction('Add',
+                getCollection: () => field.collection,
+                initialFields: (_) => [
+                      SQRefField(field.refFieldName,
+                          collection: doc.collection,
+                          value: doc.ref,
+                          editable: false)
+                    ]).button(doc, screenState: screenState)
+        ],
+      );
 
   @override
   Widget readOnlyBuilder(ScreenState screenState) {

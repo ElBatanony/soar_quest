@@ -12,15 +12,11 @@ class DocCond {
 
   DocCond get not => DocCond((doc, context) => !condition(doc, context));
 
-  DocCond operator &(DocCond other) {
-    return DocCond((doc, context) =>
-        condition(doc, context) && other.condition(doc, context));
-  }
+  DocCond operator &(DocCond other) => DocCond((doc, context) =>
+      condition(doc, context) && other.condition(doc, context));
 
-  DocCond operator |(DocCond other) {
-    return DocCond((doc, context) =>
-        condition(doc, context) || other.condition(doc, context));
-  }
+  DocCond operator |(DocCond other) => DocCond((doc, context) =>
+      condition(doc, context) || other.condition(doc, context));
 }
 
 bool _alwaysTrue(doc, context) => true;

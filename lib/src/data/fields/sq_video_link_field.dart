@@ -20,9 +20,8 @@ class SQVideoLinkField extends SQStringField {
       SQVideoLinkField(name, url: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    return _SQVideoLinkFormField(this, doc, onChanged: onChanged);
-  }
+  formField(SQDoc doc, {VoidCallback? onChanged}) =>
+      _SQVideoLinkFormField(this, doc, onChanged: onChanged);
 }
 
 class _SQVideoLinkFormField extends SQFormField<SQVideoLinkField> {
@@ -35,12 +34,10 @@ class _SQVideoLinkFormField extends SQFormField<SQVideoLinkField> {
 
 class _SQVideoLinkFormFieldState extends SQFormFieldState<SQVideoLinkField> {
   @override
-  Widget readOnlyBuilder(ScreenState screenState) {
-    return VideoDocDisplay(formField.doc, videoField: field);
-  }
+  Widget readOnlyBuilder(ScreenState screenState) =>
+      VideoDocDisplay(formField.doc, videoField: field);
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
-    return SQTextField(formField, textParse: (text) => text);
-  }
+  Widget fieldBuilder(ScreenState screenState) =>
+      SQTextField(formField, textParse: (text) => text);
 }

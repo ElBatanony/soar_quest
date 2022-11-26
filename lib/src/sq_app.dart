@@ -47,6 +47,5 @@ class SQApp {
   }
 }
 
-Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) {
-  return Firebase.initializeApp(options: options);
-}
+Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) =>
+    Firebase.initializeApp(options: options);

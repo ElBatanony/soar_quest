@@ -31,9 +31,7 @@ abstract class SQField<T> {
   SQFormField formField(SQDoc doc, {VoidCallback? onChanged});
 
   @override
-  String toString() {
-    return "${name == "" ? "" : "$name:"} $value";
-  }
+  String toString() => "${name == "" ? "" : "$name:"} $value";
 }
 
 abstract class SQFormField<Field extends SQField<dynamic>>
@@ -77,13 +75,12 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
 
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
-  Widget fieldLabel(ScreenState screenState) {
-    return Padding(
+  Widget fieldLabel(ScreenState screenState) => Padding(
       padding: const EdgeInsets.only(bottom: 4),
-      child: Text(fieldLabelText,
-          style: Theme.of(screenState.context).textTheme.headline6),
-    );
-  }
+      child: Text(
+        fieldLabelText,
+        style: Theme.of(screenState.context).textTheme.headline6,
+      ));
 
   Widget readOnlyBuilder(ScreenState screenState) {
     final valueString = field.value.toString();
@@ -101,19 +98,17 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   Widget fieldBuilder(ScreenState screenState);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (field.isInline == false) fieldLabel(screenState),
-          if (field.editable && inForm)
-            fieldBuilder(screenState)
-          else
-            readOnlyBuilder(screenState),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (field.isInline == false) fieldLabel(screenState),
+            if (field.editable && inForm)
+              fieldBuilder(screenState)
+            else
+              readOnlyBuilder(screenState),
+          ],
+        ),
+      );
 }

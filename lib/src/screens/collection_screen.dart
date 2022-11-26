@@ -53,34 +53,30 @@ class CollectionScreen extends Screen {
     return null;
   }
 
-  Widget docDisplay(SQDoc doc, ScreenState screenState) {
-    return ListTile(
-      title: Text(doc.label),
-      subtitle: doc.fields.length >= 2
-          ? Text((doc.fields[1].value ?? '').toString())
-          : null,
-      leading: doc.imageLabel != null
-          ? Image.network(doc.imageLabel!.value!, width: 70)
-          : null,
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: collection.actions
-            .where((action) => action.show.check(doc, screenState))
-            .take(2)
-            .map((action) =>
-                action.button(doc, screenState: screenState, isIcon: true))
-            .toList(),
-      ),
-      onTap: () async => goToDocScreen(docScreen(doc), screenState),
-    );
-  }
+  Widget docDisplay(SQDoc doc, ScreenState screenState) => ListTile(
+        title: Text(doc.label),
+        subtitle: doc.fields.length >= 2
+            ? Text((doc.fields[1].value ?? '').toString())
+            : null,
+        leading: doc.imageLabel != null
+            ? Image.network(doc.imageLabel!.value!, width: 70)
+            : null,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: collection.actions
+              .where((action) => action.show.check(doc, screenState))
+              .take(2)
+              .map((action) =>
+                  action.button(doc, screenState: screenState, isIcon: true))
+              .toList(),
+        ),
+        onTap: () async => goToDocScreen(docScreen(doc), screenState),
+      );
 
-  Widget docsDisplay(List<SQDoc> docs, ScreenState screenState) {
-    return ListView(
-      shrinkWrap: true,
-      children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
-    );
-  }
+  Widget docsDisplay(List<SQDoc> docs, ScreenState screenState) => ListView(
+        shrinkWrap: true,
+        children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
+      );
 
   Future<void> goToDocScreen(Screen docScreen, ScreenState screenState) async {
     await docScreen.go(screenState.context);
