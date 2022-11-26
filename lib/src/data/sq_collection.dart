@@ -90,4 +90,6 @@ abstract class SQCollection<DocType extends SQDoc> {
       fields.map((field) => field.copy()).toList();
 
   DocType? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
+
+  Stream<DocType> liveUpdates(SQDoc doc) => const Stream.empty();
 }

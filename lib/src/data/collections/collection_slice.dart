@@ -92,4 +92,7 @@ class CollectionSlice implements SQCollection {
 
   @override
   SQDoc? getDoc(String id) => collection.getDoc(id);
+
+  @override
+  Stream<SQDoc> liveUpdates(SQDoc doc) => collection.liveUpdates(doc);
 }
