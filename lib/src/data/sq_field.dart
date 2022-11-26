@@ -44,8 +44,6 @@ abstract class SQFormField<Field extends SQField<dynamic>>
   final DocScreenState docScreenState;
   SQDoc get doc => docScreenState.doc;
 
-  void onChanged() => docScreenState.refreshScreen();
-
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
 
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
@@ -87,7 +85,7 @@ class SQFormFieldState<Field extends SQField<dynamic>>
   SQFormField<Field> get value => throw Exception('Do not use FormField.value');
 
   void onChanged() {
-    formField.onChanged();
+    screenState.refreshScreen();
     setState(() {});
   }
 
