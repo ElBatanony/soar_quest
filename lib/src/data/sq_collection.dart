@@ -93,5 +93,5 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   DocType? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 
-  Stream<DocType> liveUpdates(SQDoc doc) => const Stream.empty();
+  Stream<DocType> liveUpdates(DocType doc) => const Stream.empty();
 }

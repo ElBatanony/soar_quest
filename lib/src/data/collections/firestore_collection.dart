@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart'
-    show FirebaseFirestore, CollectionReference, SetOptions;
+    show CollectionReference, FirebaseFirestore, SetOptions;
 import 'package:flutter/material.dart';
 
 import '../sq_collection.dart';
@@ -28,9 +28,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     docs = [];
     for (final snapDoc in snap.docs) {
       final docData = snapDoc.data() as Map<String, dynamic>?;
-      if (docData == null) throw Exception('Firestore doc null data');
-      final doc = newDoc(id: snapDoc.id)..parse(docData);
-      docs.add(doc);
+      docs.add(newDoc(id: snapDoc.id)..parse(docData ?? {}));
     }
   }
 
@@ -51,4 +49,11 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
 
   @override
   Future<void> saveCollection() => loadCollection();
+
+  @override
+  Stream<DocType> liveUpdates(DocType doc) =>
+      ref.doc(doc.id).snapshots().map((snapDoc) {
+        final docData = snapDoc.data() as Map<String, dynamic>?;
+        return newDoc(id: snapDoc.id)..parse(docData ?? {});
+      });
 }
