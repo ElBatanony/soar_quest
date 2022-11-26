@@ -12,7 +12,7 @@ export 'collections/collection_filter.dart';
 export 'sq_doc.dart';
 export 'sq_updates.dart';
 
-abstract class SQCollection<DocType extends SQDoc> {
+abstract class SQCollection {
   SQCollection({
     required this.id,
     required this.fields,
@@ -40,16 +40,16 @@ abstract class SQCollection<DocType extends SQDoc> {
   final SQUpdates updates;
   final bool isLive;
 
-  List<DocType> docs = [];
+  List<SQDoc> docs = [];
 
   static final List<SQCollection> _collections = [];
 
-  bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
+  bool hasDoc(SQDoc doc) => docs.any((d) => d.id == doc.id);
 
   Future<void> loadCollection();
   Future<void> saveCollection();
 
-  Future<void> saveDoc(DocType doc) {
+  Future<void> saveDoc(SQDoc doc) {
     if (hasDoc(doc))
       docs[docs.indexWhere((d) => d.id == doc.id)] = doc;
     else
@@ -57,7 +57,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     return saveCollection();
   }
 
-  Future<void> deleteDoc(DocType doc) {
+  Future<void> deleteDoc(SQDoc doc) {
     if (hasDoc(doc)) docs.removeWhere((d) => d.id == doc.id);
     return saveCollection();
   }
@@ -67,9 +67,8 @@ abstract class SQCollection<DocType extends SQDoc> {
   F? getField<F extends SQField<dynamic>>(String fieldName) =>
       fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
 
-  DocType newDoc(
-      {List<SQField<dynamic>> initialFields = const [], String? id}) {
-    final newDoc = SQDoc(id ?? newDocId(), collection: this) as DocType;
+  SQDoc newDoc({List<SQField<dynamic>> initialFields = const [], String? id}) {
+    final newDoc = SQDoc(id ?? newDocId(), collection: this);
 
     for (final initialField in initialFields) {
       final index =
@@ -91,7 +90,7 @@ abstract class SQCollection<DocType extends SQDoc> {
   List<SQField<dynamic>> copyFields() =>
       fields.map((field) => field.copy()).toList();
 
-  DocType? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
+  SQDoc? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 
-  Stream<DocType> liveUpdates(DocType doc) => const Stream.empty();
+  Stream<SQDoc> liveUpdates(SQDoc doc) => const Stream.empty();
 }

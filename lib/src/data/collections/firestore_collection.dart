@@ -6,7 +6,7 @@ import '../sq_collection.dart';
 
 export '../sq_collection.dart';
 
-class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
+class FirestoreCollection extends SQCollection {
   FirestoreCollection({
     required super.id,
     required super.fields,
@@ -33,7 +33,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }
 
   @override
-  Future<void> deleteDoc(DocType doc) async {
+  Future<void> deleteDoc(SQDoc doc) async {
     await ref.doc(doc.id).delete();
     return super.deleteDoc(doc);
   }
@@ -42,7 +42,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   String newDocId() => ref.doc().id;
 
   @override
-  Future<void> saveDoc(DocType doc) async {
+  Future<void> saveDoc(SQDoc doc) async {
     await ref.doc(doc.id).set(doc.serialize(), SetOptions(merge: true));
     return super.saveDoc(doc);
   }
@@ -51,7 +51,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   Future<void> saveCollection() => loadCollection();
 
   @override
-  Stream<DocType> liveUpdates(DocType doc) =>
+  Stream<SQDoc> liveUpdates(SQDoc doc) =>
       ref.doc(doc.id).snapshots().map((snapDoc) {
         final docData = snapDoc.data() as Map<String, dynamic>?;
         return newDoc(id: snapDoc.id)..parse(docData ?? {});
