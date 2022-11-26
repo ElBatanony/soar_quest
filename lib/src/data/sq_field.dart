@@ -73,7 +73,7 @@ abstract class SQFormField<Field extends SQField<dynamic>>
   SQFormFieldState<Field> createState();
 }
 
-abstract class SQFormFieldState<Field extends SQField<dynamic>>
+class SQFormFieldState<Field extends SQField<dynamic>>
     extends FormFieldState<SQFormField<Field>> {
   SQFormField<Field> get formField => widget as SQFormField<Field>;
   Field get field => formField.field;
