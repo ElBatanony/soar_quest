@@ -68,6 +68,7 @@ linter:
     use_to_and_as_if_applicable: true
     prefer_single_quotes: true
     prefer_expression_function_bodies: true
+    no_default_cases: true
 
     # Style rules (no change)
     unnecessary_library_directive: true
