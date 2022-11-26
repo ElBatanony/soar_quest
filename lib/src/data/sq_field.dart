@@ -70,7 +70,7 @@ abstract class SQFormField<Field extends SQField<dynamic>>
   Widget fieldBuilder(SQFormFieldState formFieldState);
 
   @override
-  SQFormFieldState<Field> createState();
+  SQFormFieldState<Field> createState() => SQFormFieldState();
 }
 
 class SQFormFieldState<Field extends SQField<dynamic>>
