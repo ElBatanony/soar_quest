@@ -19,6 +19,7 @@ abstract class SQCollection<DocType extends SQDoc> {
     this.parentDoc,
     this.updates = const SQUpdates(),
     List<SQAction>? actions,
+    this.isLive = false,
   })  : actions = actions ?? [],
         path = parentDoc == null
             ? 'Example Apps/${SQApp.name}/$id'
@@ -37,6 +38,7 @@ abstract class SQCollection<DocType extends SQDoc> {
 
   final String path;
   final SQUpdates updates;
+  final bool isLive;
 
   List<DocType> docs = [];
 

@@ -13,6 +13,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     super.parentDoc,
     super.updates,
     super.actions,
+    super.isLive,
   }) {
     ref = FirebaseFirestore.instance.collection(path);
   }

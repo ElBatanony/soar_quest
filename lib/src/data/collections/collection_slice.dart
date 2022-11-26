@@ -60,6 +60,9 @@ class CollectionSlice implements SQCollection {
   @override
   String get path => collection.path;
 
+  @override
+  bool get isLive => collection.isLive;
+
   ////////////////////////////////////////////////
 
   @override
