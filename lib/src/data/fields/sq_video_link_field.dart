@@ -38,6 +38,6 @@ class _SQVideoLinkFormField extends SQFormField<SQVideoLinkField> {
 
 class _SQVideoLinkFormFieldState extends SQFormFieldState<SQVideoLinkField> {
   @override
-  Widget fieldBuilder(ScreenState screenState) =>
+  Widget fieldBuilder(formFieldState) =>
       SQTextField(formField, textParse: (text) => text);
 }

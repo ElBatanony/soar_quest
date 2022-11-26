@@ -51,7 +51,7 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) => Row(
+  Widget fieldBuilder(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.value.toString()),

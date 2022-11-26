@@ -39,6 +39,6 @@ class _SQLinkFormField extends SQFormField<SQLinkField> {
 
 class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
   @override
-  Widget fieldBuilder(ScreenState screenState) =>
+  Widget fieldBuilder(formFieldState) =>
       SQTextField(formField, textParse: (text) => text);
 }

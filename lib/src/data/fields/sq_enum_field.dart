@@ -46,7 +46,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
 
 class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
   @override
-  Widget fieldBuilder(ScreenState screenState) => Row(
+  Widget fieldBuilder(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.value.toString()),

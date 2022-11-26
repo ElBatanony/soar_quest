@@ -29,7 +29,7 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
 
 class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
   @override
-  Widget fieldBuilder(ScreenState screenState) {
+  Widget fieldBuilder(formFieldState) {
     if (field.fileExists == false)
       return GestureDetector(
         onTap: selectAndUploadFile,

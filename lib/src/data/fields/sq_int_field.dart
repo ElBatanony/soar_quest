@@ -34,6 +34,6 @@ class _SQIntFormField extends SQFormField<SQIntField> {
 
 class _SQIntFormFieldState extends SQFormFieldState<SQIntField> {
   @override
-  Widget fieldBuilder(ScreenState screenState) =>
+  Widget fieldBuilder(formFieldState) =>
       SQTextField(formField, textParse: int.tryParse);
 }

@@ -54,7 +54,7 @@ class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {
       TimeOfDay(hour: sqTimeOfDay.hour, minute: sqTimeOfDay.minute);
 
   @override
-  Widget fieldBuilder(ScreenState screenState) => Row(
+  Widget fieldBuilder(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.value.toString()),

@@ -72,7 +72,7 @@ class _SQFieldListFormFieldState<T>
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) => Column(
+  Widget fieldBuilder(formFieldState) => Column(
         children: [
           for (final field in listField.fields)
             Row(

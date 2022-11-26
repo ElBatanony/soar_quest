@@ -39,7 +39,7 @@ class _SQListFormField<T> extends SQFormField<SQListField<T>> {
 
 class _SQListFormFieldState<T> extends SQFormFieldState<SQListField<T>> {
   @override
-  Widget fieldBuilder(ScreenState screenState) {
+  Widget fieldBuilder(formFieldState) {
     throw UnimplementedError();
   }
 }

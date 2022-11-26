@@ -95,7 +95,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  Widget fieldBuilder(ScreenState screenState);
+  Widget fieldBuilder(SQFormFieldState formFieldState);
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -105,7 +105,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
           children: [
             if (field.isInline == false) formField.fieldLabel(screenState),
             if (field.editable && inForm)
-              fieldBuilder(screenState)
+              fieldBuilder(this)
             else
               formField.readOnlyBuilder(this),
           ],

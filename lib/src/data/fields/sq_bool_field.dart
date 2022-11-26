@@ -29,7 +29,7 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
 
 class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
   @override
-  Widget fieldBuilder(ScreenState screenState) => Row(
+  Widget fieldBuilder(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ToggleButtons(

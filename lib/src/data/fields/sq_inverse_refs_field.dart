@@ -77,7 +77,7 @@ class _SQInverseRefsFormFieldState
   }
 
   @override
-  Widget fieldBuilder(ScreenState screenState) {
+  Widget fieldBuilder(formFieldState) {
     throw UnimplementedError();
   }
 }
