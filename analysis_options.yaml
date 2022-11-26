@@ -18,12 +18,8 @@ linter:
     avoid_dynamic_calls : true
     discarded_futures: true
 
-    # Error rules (no change)
-    avoid_empty_else: true
     avoid_returning_null_for_future: true
     avoid_type_to_string: true
-    avoid_types_as_parameter_names: true
-    avoid_web_libraries_in_flutter: true
     cancel_subscriptions: true
     close_sinks: true
     collection_methods_unrelated_type: true
@@ -35,10 +31,6 @@ linter:
     throw_in_finally: true
     unnecessary_statements: true
     unsafe_html: true
-
-    # pubspec rules
-    secure_pubspec_urls: true
-    sort_pub_dependencies: true
 
     # Style rules
     always_put_required_named_parameters_first: true
@@ -72,7 +64,6 @@ linter:
     only_throw_errors: true
     sort_constructors_first: true
 
-    # Style rules (no change)
     unnecessary_library_directive: true
     avoid_bool_literals_in_conditional_expressions: true
     avoid_catches_without_on_clauses: true
@@ -129,12 +120,12 @@ linter:
     use_string_in_part_of_directives: true
     use_test_throws_matchers: true
 
+    # Pub rules
+    secure_pubspec_urls: true
+    sort_pub_dependencies: true
+
     # to enable:
-    # avoid_classes_with_only_static_members: true
-    # no_default_cases: true
-    # only_throw_errors: true
-    # use_key_in_widget_constructors: true
-    # prefer_const_constructors: true
+    # avoid_classes_with_only_static_members # for SQApp and SQAuth
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
