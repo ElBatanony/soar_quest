@@ -3,6 +3,7 @@ export 'src/data/fields/sq_bool_field.dart';
 export 'src/data/fields/sq_double_field.dart';
 export 'src/data/fields/sq_enum_field.dart';
 export 'src/data/fields/sq_field_list_field.dart';
+export 'src/data/fields/sq_file_field.dart';
 export 'src/data/fields/sq_int_field.dart';
 export 'src/data/fields/sq_inverse_refs_field.dart';
 export 'src/data/fields/sq_link_field.dart';
@@ -17,5 +18,4 @@ export 'src/data/fields/sq_video_link_field.dart';
 export 'src/data/fields/sq_virtual_field.dart';
 
 // File Storage Fields
-export 'src/storage/sq_file_field.dart';
 export 'src/storage/sq_image_field.dart';
