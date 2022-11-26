@@ -45,6 +45,8 @@ abstract class SQFormField<Field extends SQField<dynamic>>
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
 
+  String get fieldLabelText => field.name + (field.require ? ' *' : '');
+
   Widget readOnlyBuilder(ScreenState screenState) {
     final valueString = field.value.toString();
     return GestureDetector(
@@ -86,12 +88,10 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  String get fieldLabelText => field.name + (field.require ? ' *' : '');
-
   Widget fieldLabel(ScreenState screenState) => Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
-        fieldLabelText,
+        formField.fieldLabelText,
         style: Theme.of(screenState.context).textTheme.headline6,
       ));
 
