@@ -72,7 +72,7 @@ class FormScreen extends DocScreen {
       child: super.screenBody(screenState));
 }
 
-class FormScreenState<T extends FormScreen> extends ScreenState<T> {
+class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
   @override
   void refreshScreen() {
     widget.onFieldsChanged(widget.doc);

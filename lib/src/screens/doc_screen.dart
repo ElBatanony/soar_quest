@@ -47,7 +47,7 @@ class DocScreen extends Screen {
       );
 }
 
-class DocScreenState extends ScreenState<DocScreen> {
+class DocScreenState<DS extends DocScreen> extends ScreenState<DS> {
   StreamSubscription<DocData>? liveListener;
 
   @override
