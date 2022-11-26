@@ -1,4 +1,3 @@
-export 'src/data/fields/show_field_dialog.dart';
 export 'src/data/fields/sq_bool_field.dart';
 export 'src/data/fields/sq_double_field.dart';
 export 'src/data/fields/sq_enum_field.dart';
