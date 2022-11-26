@@ -48,7 +48,7 @@ class DocScreen extends Screen {
 }
 
 class DocScreenState extends ScreenState<DocScreen> {
-  late final StreamSubscription<DocData>? liveListener;
+  StreamSubscription<DocData>? liveListener;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class DocScreenState extends ScreenState<DocScreen> {
 
   @override
   void dispose() {
-    unawaited(liveListener?.cancel());
+    if (liveListener != null) unawaited(liveListener?.cancel());
     super.dispose();
   }
 }
