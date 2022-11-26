@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../data/sq_collection.dart';
@@ -14,6 +16,9 @@ class DocScreen extends Screen {
   final SQDoc doc;
 
   SQCollection get collection => doc.collection;
+
+  @override
+  createState() => DocScreenState();
 
   Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) =>
       field.formField(doc, onChanged: screenState.refreshScreen);
@@ -40,4 +45,24 @@ class DocScreen extends Screen {
           ],
         ),
       );
+}
+
+class DocScreenState extends ScreenState<DocScreen> {
+  late final StreamSubscription<SQDoc>? liveListener;
+
+  @override
+  void initState() {
+    if (widget.collection.isLive)
+      liveListener = widget.collection.liveUpdates(widget.doc).listen((event) {
+        widget.doc.parse(event.serialize());
+        refreshScreen();
+      });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    unawaited(liveListener?.cancel());
+    super.dispose();
+  }
 }
