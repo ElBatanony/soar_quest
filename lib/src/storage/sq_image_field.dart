@@ -18,16 +18,16 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
   const _SQImageFormField(super.field, super.doc, {super.onChanged});
 
   @override
-  createState() => _SQImageFormFieldState();
-}
-
-class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
-  @override
   Widget readOnlyBuilder(ScreenState screenState) {
     if (field.fileExists == false) return const Text('No Image');
     return Image.network(field.downloadUrl!);
   }
 
+  @override
+  createState() => _SQImageFormFieldState();
+}
+
+class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {
   @override
   Widget fieldBuilder(ScreenState screenState) {
     if (field.fileExists == false)

@@ -36,6 +36,13 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
   final List<SQDoc> refDocs;
 
   @override
+  Widget readOnlyBuilder(ScreenState screenState) {
+    final slice = CollectionSlice(field.collection,
+        filter: RefFilter(field.refFieldName, doc.ref));
+    return TableScreen(collection: slice, isInline: true);
+  }
+
+  @override
   createState() => _SQInverseRefsFormFieldState();
 }
 
@@ -68,13 +75,6 @@ class _SQInverseRefsFormFieldState
                     ]).button(doc, screenState: screenState)
         ],
       );
-
-  @override
-  Widget readOnlyBuilder(ScreenState screenState) {
-    final slice = CollectionSlice(field.collection,
-        filter: RefFilter(field.refFieldName, doc.ref));
-    return TableScreen(collection: slice, isInline: true);
-  }
 
   @override
   Widget fieldBuilder(ScreenState screenState) {

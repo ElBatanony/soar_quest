@@ -48,20 +48,6 @@ class _SQRefFormField extends SQFormField<SQRefField> {
   const _SQRefFormField(super.field, super.doc, {super.onChanged});
 
   @override
-  createState() => _SQRefFormFieldState();
-}
-
-class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
-  @override
-  void initState() {
-    if (SQAuth.isSignedIn &&
-        field is SQEditedByField &&
-        ScreenState.of(context) is FormScreenState)
-      field.value = SQAuth.userDoc!.ref;
-    super.initState();
-  }
-
-  @override
   Widget readOnlyBuilder(ScreenState screenState) {
     final ref = field.value;
     if (ref == null) return const Text('Not Set');
@@ -75,6 +61,20 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
               .button(doc, screenState: screenState)
       ],
     );
+  }
+
+  @override
+  createState() => _SQRefFormFieldState();
+}
+
+class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
+  @override
+  void initState() {
+    if (SQAuth.isSignedIn &&
+        field is SQEditedByField &&
+        ScreenState.of(context) is FormScreenState)
+      field.value = SQAuth.userDoc!.ref;
+    super.initState();
   }
 
   @override

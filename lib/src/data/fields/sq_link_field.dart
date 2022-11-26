@@ -21,11 +21,6 @@ class _SQLinkFormField extends SQFormField<SQLinkField> {
   const _SQLinkFormField(super.field, super.doc, {required super.onChanged});
 
   @override
-  createState() => _SQLinkFormFieldState();
-}
-
-class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
-  @override
   Widget readOnlyBuilder(ScreenState screenState) {
     final url = field.value;
     if (url != null)
@@ -38,6 +33,11 @@ class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
     return const Text('No Link');
   }
 
+  @override
+  createState() => _SQLinkFormFieldState();
+}
+
+class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
   @override
   Widget fieldBuilder(ScreenState screenState) =>
       SQTextField(formField, textParse: (text) => text);

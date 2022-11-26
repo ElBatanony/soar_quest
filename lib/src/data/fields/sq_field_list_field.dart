@@ -45,6 +45,15 @@ class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
   const _SQFieldListFormField(super.field, super.doc, {super.onChanged});
 
   @override
+  Widget readOnlyBuilder(ScreenState screenState) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final field in field.fields)
+            (field..isInline = true).formField(doc),
+        ],
+      );
+
+  @override
   createState() => _SQFieldListFormFieldState();
 }
 
@@ -62,15 +71,6 @@ class _SQFieldListFormFieldState<T>
   @override
   String get fieldLabelText =>
       '${listField.name} (${listField.fields.length} items)';
-
-  @override
-  Widget readOnlyBuilder(ScreenState screenState) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final field in listField.fields)
-            (field..isInline = true).formField(doc),
-        ],
-      );
 
   @override
   Widget fieldBuilder(ScreenState screenState) => Column(
