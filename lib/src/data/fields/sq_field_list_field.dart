@@ -48,7 +48,7 @@ class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
   String get fieldLabelText => '${field.name} (${field.fields.length} items)';
 
   @override
-  Widget readOnlyBuilder(ScreenState screenState) => Column(
+  Widget readOnlyBuilder(formFieldState) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (final field in field.fields)

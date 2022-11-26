@@ -30,7 +30,7 @@ class _SQListFormField<T> extends SQFormField<SQListField<T>> {
   const _SQListFormField(super.field, super.doc, {required super.onChanged});
 
   @override
-  Widget readOnlyBuilder(ScreenState screenState) =>
+  Widget readOnlyBuilder(formFieldState) =>
       Text((field.value ?? []).toString());
 
   @override

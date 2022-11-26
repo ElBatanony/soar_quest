@@ -48,7 +48,7 @@ class _SQRefFormField extends SQFormField<SQRefField> {
   const _SQRefFormField(super.field, super.doc, {super.onChanged});
 
   @override
-  Widget readOnlyBuilder(ScreenState screenState) {
+  Widget readOnlyBuilder(formFieldState) {
     final ref = field.value;
     if (ref == null) return const Text('Not Set');
     final doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
@@ -58,7 +58,7 @@ class _SQRefFormField extends SQFormField<SQRefField> {
         Text(ref.label),
         if (doc != null)
           GoScreenAction('', screen: DocScreen.new)
-              .button(doc, screenState: screenState)
+              .button(doc, screenState: formFieldState.screenState)
       ],
     );
   }

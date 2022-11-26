@@ -33,7 +33,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
       : Container();
 
   @override
-  Widget readOnlyBuilder(ScreenState screenState) {
+  Widget readOnlyBuilder(formFieldState) {
     final subfieldCopy = field.subfield.copy()
       ..value = field.value
       ..editable = false;

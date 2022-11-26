@@ -54,11 +54,11 @@ abstract class SQFormField<Field extends SQField<dynamic>>
         style: Theme.of(screenState.context).textTheme.headline6,
       ));
 
-  Widget readOnlyBuilder(ScreenState screenState) {
+  Widget readOnlyBuilder(SQFormFieldState formFieldState) {
     final valueString = field.value.toString();
     return GestureDetector(
       onLongPress: () async {
-        ScaffoldMessenger.of(screenState.context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(formFieldState.context).showSnackBar(SnackBar(
             duration: const Duration(milliseconds: 500),
             content: Text('Copied field: $valueString')));
         await Clipboard.setData(ClipboardData(text: valueString));
@@ -107,7 +107,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
             if (field.editable && inForm)
               fieldBuilder(screenState)
             else
-              formField.readOnlyBuilder(screenState),
+              formField.readOnlyBuilder(this),
           ],
         ),
       );

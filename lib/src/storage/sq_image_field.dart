@@ -18,7 +18,7 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
   const _SQImageFormField(super.field, super.doc, {super.onChanged});
 
   @override
-  Widget readOnlyBuilder(ScreenState screenState) {
+  Widget readOnlyBuilder(formFieldState) {
     if (field.fileExists == false) return const Text('No Image');
     return Image.network(field.downloadUrl!);
   }
