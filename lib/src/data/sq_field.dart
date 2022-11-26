@@ -5,8 +5,6 @@ import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import 'sq_doc.dart';
 
-export 'package:flutter/material.dart' show VoidCallback;
-
 abstract class SQField<T> {
   SQField(
     this.name, {
