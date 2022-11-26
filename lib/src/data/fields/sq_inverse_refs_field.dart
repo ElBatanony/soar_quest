@@ -36,10 +36,10 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
   final List<SQDoc> refDocs;
 
   @override
-  Widget fieldLabel(ScreenState screenState) => Row(
+  Widget fieldLabel(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          super.fieldLabel(screenState),
+          super.fieldLabel(formFieldState),
           if (field.collection.updates.adds)
             CreateDocAction('Add',
                 getCollection: () => field.collection,
@@ -48,7 +48,7 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
                           collection: doc.collection,
                           value: doc.ref,
                           editable: false)
-                    ]).button(doc, screenState: screenState)
+                    ]).button(doc, screenState: formFieldState.screenState)
         ],
       );
 

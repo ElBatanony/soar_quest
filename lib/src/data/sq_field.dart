@@ -47,11 +47,11 @@ abstract class SQFormField<Field extends SQField<dynamic>>
 
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
-  Widget fieldLabel(ScreenState screenState) => Padding(
+  Widget fieldLabel(SQFormFieldState formFieldState) => Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
         fieldLabelText,
-        style: Theme.of(screenState.context).textTheme.headline6,
+        style: Theme.of(formFieldState.context).textTheme.headline6,
       ));
 
   Widget readOnlyBuilder(SQFormFieldState formFieldState) {
@@ -103,7 +103,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (field.isInline == false) formField.fieldLabel(screenState),
+            if (field.isInline == false) formField.fieldLabel(this),
             if (field.editable && inForm)
               formField.fieldBuilder(this)
             else
