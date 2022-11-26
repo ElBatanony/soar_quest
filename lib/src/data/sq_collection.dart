@@ -92,5 +92,5 @@ abstract class SQCollection {
 
   SQDoc? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 
-  Stream<SQDoc> liveUpdates(SQDoc doc) => const Stream.empty();
+  Stream<DocData> liveUpdates(SQDoc doc) => const Stream.empty();
 }

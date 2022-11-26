@@ -51,9 +51,9 @@ class FirestoreCollection extends SQCollection {
   Future<void> saveCollection() => loadCollection();
 
   @override
-  Stream<SQDoc> liveUpdates(SQDoc doc) =>
+  Stream<DocData> liveUpdates(SQDoc doc) =>
       ref.doc(doc.id).snapshots().map((snapDoc) {
         final docData = snapDoc.data() as Map<String, dynamic>?;
-        return newDoc(id: snapDoc.id)..parse(docData ?? {});
+        return docData ?? {};
       });
 }

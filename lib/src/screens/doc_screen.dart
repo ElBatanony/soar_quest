@@ -48,13 +48,14 @@ class DocScreen extends Screen {
 }
 
 class DocScreenState extends ScreenState<DocScreen> {
-  late final StreamSubscription<SQDoc>? liveListener;
+  late final StreamSubscription<DocData>? liveListener;
 
   @override
   void initState() {
     if (widget.collection.isLive)
-      liveListener = widget.collection.liveUpdates(widget.doc).listen((event) {
-        widget.doc.parse(event.serialize());
+      liveListener =
+          widget.collection.liveUpdates(widget.doc).listen((mapData) {
+        widget.doc.parse(mapData);
         refreshScreen();
       });
     super.initState();
