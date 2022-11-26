@@ -1,7 +1,7 @@
 import '../screens/form_screen.dart';
 import '../sq_auth.dart';
-import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
+import 'types/sq_ref.dart';
 
 class DocCond {
   const DocCond(this.condition);

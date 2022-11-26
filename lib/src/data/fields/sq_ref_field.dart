@@ -7,10 +7,10 @@ import '../../sq_auth.dart';
 import '../../ui/sq_button.dart';
 import '../sq_action.dart';
 import '../sq_collection.dart';
+import '../types/sq_ref.dart';
 import 'sq_user_ref_field.dart';
-import 'types/sq_ref.dart';
 
-export 'types/sq_ref.dart';
+export '../types/sq_ref.dart';
 
 class SQRefField extends SQField<SQRef> {
   SQRefField(super.name,

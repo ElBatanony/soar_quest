@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../sq_collection.dart';
+import '../sq_collection.dart';
 
 @immutable
 class SQRef {

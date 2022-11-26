@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
-import 'types/sq_timestamp.dart';
+import '../types/sq_timestamp.dart';
 
-export 'types/sq_timestamp.dart';
+export '../types/sq_timestamp.dart';
 
 class SQTimestampField extends SQField<SQTimestamp> {
   SQTimestampField(super.name, {SQTimestamp? value, super.editable, super.show})

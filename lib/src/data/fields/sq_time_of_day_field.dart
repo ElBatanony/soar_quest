@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
-import 'types/sq_time_of_day.dart';
+import '../types/sq_time_of_day.dart';
 
-export 'types/sq_time_of_day.dart';
+export '../types/sq_time_of_day.dart';
 
 class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   SQTimeOfDayField(super.name, {SQTimeOfDay? value, super.editable})

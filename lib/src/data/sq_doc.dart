@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 
 import 'fields/sq_image_field.dart';
-import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
+import 'types/sq_ref.dart';
 
 export '../screens/screen.dart' show ScreenState;
 export 'sq_condition.dart';
