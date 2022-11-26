@@ -8,6 +8,8 @@ export '../screens/screen.dart' show ScreenState;
 export 'sq_condition.dart';
 export 'sq_field.dart';
 
+typedef DocData = Map<String, dynamic>;
+
 class SQDoc {
   SQDoc(this.id, {required this.collection}) {
     path = '${collection.path}/$id';
