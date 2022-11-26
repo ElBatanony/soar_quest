@@ -70,9 +70,4 @@ class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
           )
         ],
       );
-
-  @override
-  createState() => _SQTimeOfDayFormFieldState();
 }
-
-class _SQTimeOfDayFormFieldState extends SQFormFieldState<SQTimeOfDayField> {}

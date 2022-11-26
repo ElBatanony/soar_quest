@@ -75,10 +75,4 @@ class SQFileFormField<FileField extends SQFileField>
                 icon: const Icon(Icons.delete))
         ],
       );
-
-  @override
-  createState() => SQFileFormFieldState<FileField>();
 }
-
-class SQFileFormFieldState<FileField extends SQFileField>
-    extends SQFormFieldState<FileField> {}

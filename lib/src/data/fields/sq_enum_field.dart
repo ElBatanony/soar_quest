@@ -55,12 +55,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
           })
         ],
       );
-
-  @override
-  createState() => _SQEnumFormFieldState<T>();
 }
-
-class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {}
 
 Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
         {required BuildContext context}) =>

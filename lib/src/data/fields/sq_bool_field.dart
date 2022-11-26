@@ -39,9 +39,4 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
           ),
         ],
       );
-
-  @override
-  createState() => _SQBoolFormFieldState();
 }
-
-class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {}

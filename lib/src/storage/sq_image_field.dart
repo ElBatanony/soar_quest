@@ -54,9 +54,4 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
           ],
         ));
   }
-
-  @override
-  createState() => _SQImageFormFieldState();
 }
-
-class _SQImageFormFieldState extends SQFileFormFieldState<SQImageField> {}

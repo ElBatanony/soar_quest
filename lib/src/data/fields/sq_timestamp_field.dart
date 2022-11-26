@@ -64,9 +64,4 @@ class _SQTimestampFormField extends SQFormField<SQTimestampField> {
           )
         ],
       );
-
-  @override
-  createState() => _SQTimestampFormFieldState();
 }
-
-class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {}

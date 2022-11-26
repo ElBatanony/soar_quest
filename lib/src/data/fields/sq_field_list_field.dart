@@ -80,10 +80,4 @@ class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
               text: 'Insert Item', onPressed: () => addField(formFieldState)),
         ],
       );
-
-  @override
-  createState() => _SQFieldListFormFieldState();
 }
-
-class _SQFieldListFormFieldState<T>
-    extends SQFormFieldState<SQFieldListField<T>> {}

@@ -38,9 +38,4 @@ class _SQStringFormField extends SQFormField<SQStringField> {
   @override
   Widget fieldBuilder(formFieldState) =>
       SQTextField(this, textParse: (text) => text, maxLines: field.maxLines);
-
-  @override
-  createState() => _SQStringFormFieldState();
 }
-
-class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {}
