@@ -56,10 +56,9 @@ class DocScreenState<DS extends DocScreen> extends ScreenState<DS> {
 
   @override
   void initState() {
-    if (widget.collection.isLive)
-      liveListener =
-          widget.collection.liveUpdates(widget.doc).listen((mapData) {
-        widget.doc.parse(mapData);
+    if (collection.isLive)
+      liveListener = collection.liveUpdates(doc).listen((mapData) {
+        doc.parse(mapData);
         refreshScreen();
       });
     super.initState();
