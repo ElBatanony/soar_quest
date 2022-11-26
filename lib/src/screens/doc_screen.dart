@@ -21,8 +21,7 @@ class DocScreen extends Screen {
   createState() => DocScreenState();
 
   Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) =>
-      field.formField(
-          screenState as DocScreenState); // TODO: make ScreenState generic
+      field.formField(screenState as DocScreenState);
 
   List<Widget> fieldsDisplay(ScreenState screenState) => doc.fields
       .where((field) => field.show.check(doc, screenState))
