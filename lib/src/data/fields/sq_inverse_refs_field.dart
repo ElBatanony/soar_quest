@@ -10,14 +10,14 @@ import 'sq_ref_field.dart';
 import 'sq_virtual_field.dart';
 
 class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
+  SQInverseRefsField(String name,
+      {required this.refCollection, required this.refFieldName})
+      : super(field: SQListField(name), valueBuilder: (doc) => []);
+
   String refFieldName;
   SQCollection Function() refCollection;
 
   SQCollection get collection => refCollection();
-
-  SQInverseRefsField(String name,
-      {required this.refCollection, required this.refFieldName})
-      : super(field: SQListField(name), valueBuilder: (doc) => []);
 
   @override
   SQInverseRefsField copy() => SQInverseRefsField(name,
@@ -30,9 +30,10 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
 }
 
 class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
-  final List<SQDoc> refDocs;
   const _SQInverseRefsFormField(super.field, super.doc,
       {required this.refDocs, required super.onChanged});
+
+  final List<SQDoc> refDocs;
 
   @override
   createState() => _SQInverseRefsFormFieldState();

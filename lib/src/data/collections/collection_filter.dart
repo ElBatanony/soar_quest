@@ -9,9 +9,9 @@ abstract class CollectionFilter {
 }
 
 class InverseFilter extends CollectionFilter {
-  CollectionFilter originalFilter;
-
   InverseFilter(this.originalFilter);
+
+  CollectionFilter originalFilter;
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
@@ -21,8 +21,9 @@ class InverseFilter extends CollectionFilter {
 }
 
 abstract class CollectionFieldFilter extends CollectionFilter {
-  SQField<dynamic> field;
   CollectionFieldFilter(this.field);
+
+  SQField<dynamic> field;
 }
 
 class FieldValueFilter<T> extends CollectionFieldFilter {
@@ -35,9 +36,10 @@ class FieldValueFilter<T> extends CollectionFieldFilter {
 }
 
 class ValueFilter extends CollectionFilter {
+  ValueFilter(this.fieldName, this.fieldValue);
+
   String fieldName;
   dynamic fieldValue;
-  ValueFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) =>
@@ -58,10 +60,10 @@ class StringContainsFilter extends CollectionFieldFilter {
 }
 
 class RefFilter extends CollectionFilter {
+  RefFilter(this.fieldName, this.fieldValue);
+
   String fieldName;
   SQRef? fieldValue;
-
-  RefFilter(this.fieldName, this.fieldValue);
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
@@ -104,9 +106,9 @@ class DocRefFieldFilter extends CollectionFieldFilter {
 }
 
 class CompareFuncFilter extends CollectionFieldFilter {
-  bool Function(int) compareFunc;
-
   CompareFuncFilter(super.field, {required this.compareFunc});
+
+  bool Function(int) compareFunc;
 
   @override
   List<SQDoc> filter(List<SQDoc> docs) => docs.where(

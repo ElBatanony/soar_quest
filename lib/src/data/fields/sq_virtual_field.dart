@@ -1,9 +1,6 @@
 import '../sq_doc.dart';
 
 class SQVirtualField<T> extends SQField<T> {
-  SQField<T> field;
-  T Function(SQDoc doc) valueBuilder;
-
   SQVirtualField(
       {required this.field,
       required this.valueBuilder,
@@ -13,6 +10,9 @@ class SQVirtualField<T> extends SQField<T> {
           editable: false,
           show: inFormScreen.not & show,
         );
+
+  SQField<T> field;
+  T Function(SQDoc doc) valueBuilder;
 
   @override
   T? parse(source) => null;

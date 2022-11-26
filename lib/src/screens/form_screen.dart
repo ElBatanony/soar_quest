@@ -7,11 +7,6 @@ import 'doc_screen.dart';
 void _emptyVoid(SQDoc doc) {}
 
 class FormScreen extends DocScreen {
-  final String submitButtonText;
-  final SQDoc originalDoc;
-
-  final void Function(SQDoc) onFieldsChanged;
-
   FormScreen(
     this.originalDoc, {
     String? title,
@@ -23,6 +18,11 @@ class FormScreen extends DocScreen {
             originalDoc.collection
                 .newDoc(initialFields: originalDoc.copyFields()),
             title: title ?? 'Edit ${originalDoc.collection.id}');
+
+  final String submitButtonText;
+  final SQDoc originalDoc;
+
+  final void Function(SQDoc) onFieldsChanged;
 
   @override
   State<FormScreen> createState() => FormScreenState();

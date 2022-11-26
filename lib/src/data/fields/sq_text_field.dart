@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../sq_field.dart';
 
 class SQTextField<T> extends StatefulWidget {
+  const SQTextField(this.formField,
+      {required this.textParse, this.maxLines = 1});
+
   final SQFormField<SQField<T>> formField;
   final T Function(String) textParse;
   final int maxLines;
-
-  const SQTextField(this.formField,
-      {required this.textParse, this.maxLines = 1});
 
   @override
   SQTextFieldState createState() => SQTextFieldState();
@@ -32,17 +32,17 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
 
   @override
   Widget build(BuildContext context) => TextField(
-      controller: fieldTextController,
-      maxLines: widget.maxLines,
-      onChanged: (text) {
-        widget.formField.field.value = widget.textParse(text);
-        callOnChange();
-      },
-      onEditingComplete: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-        fieldTextController.text = parseFieldValue();
-        callOnChange();
-      },
-      decoration: const InputDecoration(border: OutlineInputBorder()),
-    );
+        controller: fieldTextController,
+        maxLines: widget.maxLines,
+        onChanged: (text) {
+          widget.formField.field.value = widget.textParse(text);
+          callOnChange();
+        },
+        onEditingComplete: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          fieldTextController.text = parseFieldValue();
+          callOnChange();
+        },
+        decoration: const InputDecoration(border: OutlineInputBorder()),
+      );
 }

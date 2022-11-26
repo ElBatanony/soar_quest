@@ -5,6 +5,10 @@ import '../ui/sq_button.dart';
 import 'screen.dart';
 
 class TelegramButton extends SQButton {
+  TelegramButton(String text, {required this.username})
+      : super.icon(Icons.telegram,
+            text: text, onPressed: () => openTelegramUrl(username));
+
   final String username;
 
   static Future<void> openTelegramUrl(String username) async {
@@ -13,17 +17,9 @@ class TelegramButton extends SQButton {
       mode: LaunchMode.externalNonBrowserApplication,
     );
   }
-
-  TelegramButton(String text, {required this.username})
-      : super.icon(Icons.telegram,
-            text: text, onPressed: () => openTelegramUrl(username));
 }
 
 class TelegramScreen extends Screen {
-  final String message;
-  final String telegramUsername;
-  final String buttonText;
-
   const TelegramScreen({
     required super.title,
     required this.message,
@@ -31,6 +27,10 @@ class TelegramScreen extends Screen {
     required this.buttonText,
     super.icon,
   });
+
+  final String message;
+  final String telegramUsername;
+  final String buttonText;
 
   @override
   Widget screenBody(ScreenState<Screen> screenState) => Center(

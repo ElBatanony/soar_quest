@@ -13,10 +13,10 @@ import 'types/sq_ref.dart';
 export 'types/sq_ref.dart';
 
 class SQRefField extends SQField<SQRef> {
-  SQCollection collection;
-
   SQRefField(super.name,
       {required this.collection, super.value, super.editable, super.show});
+
+  SQCollection collection;
 
   @override
   SQRefField copy() => SQRefField(name,

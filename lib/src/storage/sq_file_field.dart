@@ -10,15 +10,15 @@ import 'firebase_file_storage.dart';
 import 'sq_file_storage.dart';
 
 class SQFileField extends SQStringField {
+  SQFileField(super.name, {super.value, SQFileStorage? storage}) {
+    this.storage = storage ?? FirebaseFileStorage();
+  }
+
   late SQFileStorage storage;
 
   bool get fileExists => value != null;
 
   String? get downloadUrl => value;
-
-  SQFileField(super.name, {super.value, SQFileStorage? storage}) {
-    this.storage = storage ?? FirebaseFileStorage();
-  }
 
   @override
   SQFileField copy() => SQFileField(name, value: value, storage: storage);

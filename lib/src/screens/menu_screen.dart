@@ -4,9 +4,9 @@ import '../ui/sq_button.dart';
 import 'screen.dart';
 
 class MenuScreen extends Screen {
-  final List<Screen> screens;
-
   const MenuScreen({required this.screens, required super.title});
+
+  final List<Screen> screens;
 
   @override
   Widget screenBody(ScreenState<Screen> screenState) => ListView(

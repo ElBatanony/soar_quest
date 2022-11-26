@@ -27,12 +27,6 @@ Future<T?> _goToScreen<T>(
 bool alwaysShowScreen(BuildContext context) => true;
 
 class Screen extends StatefulWidget {
-  final String title;
-  final IconData? icon;
-  final bool isInline;
-  final bool Function(BuildContext) show;
-  final bool signedIn;
-
   const Screen({
     required this.title,
     this.isInline = false,
@@ -40,6 +34,12 @@ class Screen extends StatefulWidget {
     this.show = alwaysShowScreen,
     this.signedIn = false,
   });
+
+  final String title;
+  final IconData? icon;
+  final bool isInline;
+  final bool Function(BuildContext) show;
+  final bool signedIn;
 
   @override
   State<Screen> createState() => ScreenState();

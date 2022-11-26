@@ -70,6 +70,7 @@ linter:
     prefer_expression_function_bodies: true
     no_default_cases: true
     only_throw_errors: true
+    sort_constructors_first: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

@@ -11,19 +11,21 @@ import 'sq_collection.dart';
 Future<void> emptyOnExecute(doc, context) async {}
 
 abstract class SQAction {
+  SQAction(
+    this.name, {
+    this.icon = Icons.double_arrow_outlined,
+    this.show = trueCond,
+    this.onExecute = emptyOnExecute,
+    this.confirm = false,
+    this.confirmMessage = 'Are you sure?',
+  });
+
   final String name;
   final IconData icon;
   final DocCond show;
   final bool confirm;
   final String confirmMessage;
   Future<void> Function(SQDoc doc, ScreenState screenState) onExecute;
-
-  SQAction(this.name,
-      {this.icon = Icons.double_arrow_outlined,
-      this.show = trueCond,
-      this.onExecute = emptyOnExecute,
-      this.confirm = false,
-      this.confirmMessage = 'Are you sure?'});
 
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
     debugPrint('Executing action: $name');
@@ -54,12 +56,6 @@ abstract class SQAction {
 }
 
 class SQActionButton extends StatefulWidget {
-  final SQAction action;
-  final bool isIcon;
-  final SQDoc doc;
-  final double iconSize;
-  final ScreenState screenState;
-
   const SQActionButton({
     required this.action,
     required this.doc,
@@ -67,6 +63,12 @@ class SQActionButton extends StatefulWidget {
     this.isIcon = false,
     this.iconSize = 24.0,
   });
+
+  final SQAction action;
+  final bool isIcon;
+  final SQDoc doc;
+  final double iconSize;
+  final ScreenState screenState;
 
   @override
   State<SQActionButton> createState() => _SQActionButtonState();
@@ -113,9 +115,6 @@ class GoEditCloneAction extends GoScreenAction {
 }
 
 class GoScreenAction extends SQAction {
-  Screen Function(SQDoc) screen;
-  bool replace;
-
   GoScreenAction(
     super.name, {
     required this.screen,
@@ -124,6 +123,9 @@ class GoScreenAction extends SQAction {
     super.onExecute,
     this.replace = false,
   });
+
+  Screen Function(SQDoc) screen;
+  bool replace;
 
   @override
   execute(SQDoc doc, ScreenState screenState) async {
@@ -148,11 +150,6 @@ class GoEditAction extends GoScreenAction {
 }
 
 class CreateDocAction extends SQAction {
-  SQCollection Function() getCollection;
-  List<SQField<dynamic>> Function(SQDoc) initialFields;
-  bool form;
-  bool goBack;
-
   CreateDocAction(
     super.name, {
     required this.getCollection,
@@ -163,6 +160,11 @@ class CreateDocAction extends SQAction {
     this.form = true,
     this.goBack = true,
   });
+
+  SQCollection Function() getCollection;
+  List<SQField<dynamic>> Function(SQDoc) initialFields;
+  bool form;
+  bool goBack;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -186,8 +188,6 @@ class CreateDocAction extends SQAction {
 }
 
 class DeleteDocAction extends SQAction {
-  bool exitScreen;
-
   DeleteDocAction({
     String name = 'Delete',
     super.icon = Icons.delete,
@@ -199,6 +199,8 @@ class DeleteDocAction extends SQAction {
             show: CollectionCond((collection) => collection.updates.deletes) &
                 show);
 
+  bool exitScreen;
+
   @override
   execute(SQDoc doc, ScreenState screenState) async {
     await doc.collection.deleteDoc(doc);
@@ -209,10 +211,10 @@ class DeleteDocAction extends SQAction {
 }
 
 class SetFieldsAction extends SQAction {
-  Map<String, dynamic> Function(SQDoc doc) getFields;
-
   SetFieldsAction(super.name,
       {required this.getFields, super.icon, super.show, super.onExecute});
+
+  Map<String, dynamic> Function(SQDoc doc) getFields;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -229,9 +231,6 @@ class SetFieldsAction extends SQAction {
 }
 
 class ExecuteOnDocsAction extends SQAction {
-  List<SQDoc> Function(SQDoc) getDocs;
-  SQAction action;
-
   ExecuteOnDocsAction(
     super.name, {
     required this.getDocs,
@@ -240,6 +239,9 @@ class ExecuteOnDocsAction extends SQAction {
     super.show,
     super.onExecute,
   });
+
+  List<SQDoc> Function(SQDoc) getDocs;
+  SQAction action;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -252,9 +254,9 @@ class ExecuteOnDocsAction extends SQAction {
 }
 
 class OpenUrlAction extends SQAction {
-  String Function(SQDoc doc) getUrl;
-
   OpenUrlAction(super.name, {required this.getUrl, super.icon, super.show});
+
+  String Function(SQDoc doc) getUrl;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -268,9 +270,9 @@ class OpenUrlAction extends SQAction {
 }
 
 class SequencesAction extends SQAction {
-  List<SQAction> actions;
-
   SequencesAction(super.name, {required this.actions, super.icon, super.show});
+
+  List<SQAction> actions;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
@@ -282,10 +284,10 @@ class SequencesAction extends SQAction {
 }
 
 class CustomAction extends SQAction {
-  Future<void> Function(SQDoc doc, ScreenState screenState) customExecute;
-
   CustomAction(super.name,
       {required this.customExecute, super.icon, super.show, super.onExecute});
+
+  Future<void> Function(SQDoc doc, ScreenState screenState) customExecute;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {

@@ -7,13 +7,6 @@ import 'sq_doc.dart';
 export 'package:flutter/material.dart' show VoidCallback;
 
 abstract class SQField<T> {
-  String name = '';
-  T? value;
-  bool editable;
-  bool require;
-  DocCond show;
-  bool isInline = false;
-
   SQField(
     this.name, {
     this.value,
@@ -21,6 +14,13 @@ abstract class SQField<T> {
     this.require = false,
     this.show = trueCond,
   });
+
+  String name = '';
+  T? value;
+  bool editable;
+  bool require;
+  DocCond show;
+  bool isInline = false;
 
   SQField<T> copy();
 
@@ -36,12 +36,12 @@ abstract class SQField<T> {
 
 abstract class SQFormField<Field extends SQField<dynamic>>
     extends FormField<SQFormField<Field>> {
+  const SQFormField(this.field, this.doc, {this.onChanged})
+      : super(builder: emptyBuilder);
+
   final Field field;
   final SQDoc doc;
   final VoidCallback? onChanged;
-
-  const SQFormField(this.field, this.doc, {this.onChanged})
-      : super(builder: emptyBuilder);
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
 

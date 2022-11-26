@@ -5,14 +5,14 @@ import '../screen.dart';
 import 'gallery_screen.dart';
 
 class CategorySelectScreen extends GalleryScreen {
-  final SQRefField categoryField;
-  final SQCollection itemsCollection;
-
   CategorySelectScreen({
     required this.itemsCollection,
     required this.categoryField,
     super.title,
   }) : super(collection: categoryField.collection);
+
+  final SQRefField categoryField;
+  final SQCollection itemsCollection;
 
   @override
   Screen docScreen(SQDoc doc) {

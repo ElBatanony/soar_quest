@@ -7,8 +7,6 @@ import '../sq_collection.dart';
 export '../sq_collection.dart';
 
 class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
-  late CollectionReference ref;
-
   FirestoreCollection({
     required super.id,
     required super.fields,
@@ -18,6 +16,8 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
   }) {
     ref = FirebaseFirestore.instance.collection(path);
   }
+
+  late CollectionReference ref;
 
   @override
   Future<void> loadCollection() async {

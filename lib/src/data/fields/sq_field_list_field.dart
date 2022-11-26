@@ -5,9 +5,9 @@ import '../sq_doc.dart';
 import 'sq_list_field.dart';
 
 class SQFieldListField<T> extends SQListField<SQField<T>> {
-  SQField<T> field;
-
   SQFieldListField(super.name, this.field, {super.value});
+
+  SQField<T> field;
 
   List<SQField<T>> get fields => value ?? [];
 

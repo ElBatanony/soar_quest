@@ -13,19 +13,6 @@ export 'sq_doc.dart';
 export 'sq_updates.dart';
 
 abstract class SQCollection<DocType extends SQDoc> {
-  final String id;
-  final SQDoc? parentDoc;
-
-  final List<SQField<dynamic>> fields;
-  final List<SQAction> actions;
-
-  final String path;
-  final SQUpdates updates;
-
-  List<DocType> docs = [];
-
-  static final List<SQCollection> _collections = [];
-
   SQCollection({
     required this.id,
     required this.fields,
@@ -41,6 +28,19 @@ abstract class SQCollection<DocType extends SQDoc> {
     if (updates.edits) this.actions.add(GoEditAction());
     if (updates.deletes) this.actions.add(DeleteDocAction(exitScreen: true));
   }
+
+  final String id;
+  final SQDoc? parentDoc;
+
+  final List<SQField<dynamic>> fields;
+  final List<SQAction> actions;
+
+  final String path;
+  final SQUpdates updates;
+
+  List<DocType> docs = [];
+
+  static final List<SQCollection> _collections = [];
 
   bool hasDoc(DocType doc) => docs.any((d) => d.id == doc.id);
 

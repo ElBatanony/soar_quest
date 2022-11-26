@@ -9,6 +9,21 @@ import '../screens/screen.dart';
 import '../sq_auth.dart';
 
 class FavouritesFeature {
+  FavouritesFeature({required this.collection}) {
+    favouritesCollection = LocalCollection(
+        id: 'Favourite ${collection.id}',
+        fields: [SQRefField('ref', collection: collection)],
+        actions: [
+          GoScreenAction('',
+              screen: (doc) =>
+                  DocScreen(collection.getDoc(doc.value<SQRef>('ref')!.docId)!))
+        ],
+        parentDoc: SQAuth.userDoc,
+        updates: SQUpdates.readOnly());
+    collection.actions
+        .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
+  }
+
   SQCollection collection;
   late final SQCollection favouritesCollection;
 
@@ -33,21 +48,6 @@ class FavouritesFeature {
           screenState.refreshScreen();
         },
       );
-
-  FavouritesFeature({required this.collection}) {
-    favouritesCollection = LocalCollection(
-        id: 'Favourite ${collection.id}',
-        fields: [SQRefField('ref', collection: collection)],
-        actions: [
-          GoScreenAction('',
-              screen: (doc) =>
-                  DocScreen(collection.getDoc(doc.value<SQRef>('ref')!.docId)!))
-        ],
-        parentDoc: SQAuth.userDoc,
-        updates: SQUpdates.readOnly());
-    collection.actions
-        .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
-  }
 
   Future<void> loadFavourites() => favouritesCollection.loadCollection();
 

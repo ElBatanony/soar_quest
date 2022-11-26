@@ -4,15 +4,6 @@ import '../sq_collection.dart';
 export '../sq_collection.dart';
 
 class CollectionSlice implements SQCollection {
-  final SQCollection collection;
-
-  final CollectionFilter? filter;
-  final List<String>? sliceFields;
-  final List<String>? sliceActions;
-
-  @override
-  late SQUpdates updates;
-
   CollectionSlice(
     this.collection, {
     this.filter,
@@ -22,6 +13,15 @@ class CollectionSlice implements SQCollection {
   }) {
     this.updates = updates & collection.updates;
   }
+
+  final SQCollection collection;
+
+  final CollectionFilter? filter;
+  final List<String>? sliceFields;
+  final List<String>? sliceActions;
+
+  @override
+  late SQUpdates updates;
 
   @override
   List<SQAction> get actions => sliceActions == null

@@ -9,11 +9,6 @@ import 'doc_screen.dart';
 import 'screen.dart';
 
 class CollectionScreen extends Screen {
-  final SQCollection collection;
-  final String? groupByField;
-
-  List<SQDoc> get docs => collection.docs;
-
   CollectionScreen({
     required this.collection,
     String? title,
@@ -23,6 +18,11 @@ class CollectionScreen extends Screen {
     super.signedIn,
     super.show,
   }) : super(title: title ?? collection.id);
+
+  final SQCollection collection;
+  final String? groupByField;
+
+  List<SQDoc> get docs => collection.docs;
 
   @override
   State<CollectionScreen> createState() => CollectionScreenState();

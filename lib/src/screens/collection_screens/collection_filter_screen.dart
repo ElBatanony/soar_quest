@@ -5,15 +5,15 @@ import '../collection_screen.dart';
 import '../form_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
-  final List<CollectionFilter> filters;
-  final List<CollectionFieldFilter> fieldFilters = [];
-
   CollectionFilterScreen({
     required super.collection,
     required this.filters,
     super.title,
     super.icon,
   });
+
+  final List<CollectionFilter> filters;
+  final List<CollectionFieldFilter> fieldFilters = [];
 
   @override
   State<CollectionFilterScreen> createState() => CollectionFilterScreenState();

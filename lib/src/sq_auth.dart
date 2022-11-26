@@ -90,8 +90,6 @@ class OfflineUser extends SQUser {
 }
 
 class SQProfileScreen extends Screen {
-  late final List<AuthProvider> providers;
-
   SQProfileScreen(
       {super.title = 'Profile', super.icon = Icons.account_circle}) {
     providers = [
@@ -99,6 +97,8 @@ class SQProfileScreen extends Screen {
       if (SQAuth.methods.contains(AuthMethod.phone)) PhoneAuthProvider(),
     ];
   }
+
+  late final List<AuthProvider> providers;
 
   @override
   State<SQProfileScreen> createState() => _SQProfileScreenState();

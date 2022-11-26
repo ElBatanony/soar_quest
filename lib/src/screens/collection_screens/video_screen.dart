@@ -8,13 +8,13 @@ import '../collection_screen.dart';
 import '../doc_screen.dart';
 
 class VideoCollectionScreen extends CollectionScreen {
-  final SQVideoLinkField videoField;
-
   VideoCollectionScreen({
     required super.collection,
     required this.videoField,
     super.title,
   });
+
+  final SQVideoLinkField videoField;
 
   @override
   Widget docDisplay(SQDoc doc, ScreenState screenState) =>
@@ -22,9 +22,9 @@ class VideoCollectionScreen extends CollectionScreen {
 }
 
 class VideoDocDisplay extends DocScreen {
-  final SQVideoLinkField videoField;
-
   VideoDocDisplay(super.doc, {required this.videoField, super.isInline});
+
+  final SQVideoLinkField videoField;
 
   @override
   State<VideoDocDisplay> createState() => _VideoDocDisplayState();

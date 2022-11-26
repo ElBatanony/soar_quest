@@ -4,13 +4,13 @@ import '../screens/screen.dart';
 import '../sq_app.dart';
 
 class SQNavBar extends StatelessWidget {
+  SQNavBar(this.screens) : initialIndex = SQApp.selectedNavScreen;
+
   final List<Screen> screens;
   final int initialIndex;
 
   List<Screen> visibleScreens(BuildContext context) =>
       screens.where((screen) => screen.show(context)).toList();
-
-  SQNavBar(this.screens) : initialIndex = SQApp.selectedNavScreen;
 
   @override
   Widget build(BuildContext context) {

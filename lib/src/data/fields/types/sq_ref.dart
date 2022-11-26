@@ -4,10 +4,6 @@ import '../../sq_collection.dart';
 
 @immutable
 class SQRef {
-  final String docId;
-  final String label;
-  final String collectionPath;
-
   const SQRef({
     required this.collectionPath,
     required this.docId,
@@ -19,6 +15,10 @@ class SQRef {
             collectionPath: doc.collection.path,
             docId: doc.id,
             label: doc.label);
+
+  final String docId;
+  final String label;
+  final String collectionPath;
 
   @override
   String toString() => label;

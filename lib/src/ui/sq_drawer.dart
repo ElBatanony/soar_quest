@@ -6,14 +6,14 @@ import '../sq_app.dart';
 import '../sq_auth.dart';
 
 class SQDrawer extends StatelessWidget {
-  final List<Screen> screens;
-
   SQDrawer([this.screens = const []]) {
     if (UserSettings.initialized &&
         screens.any((screen) => screen.title == 'Settings') == false)
       screens.add(UserSettings.settingsScreen());
     if (SQAuth.offline == false) screens.add(SQProfileScreen());
   }
+
+  final List<Screen> screens;
 
   @override
   Widget build(BuildContext context) => Drawer(

@@ -1,6 +1,4 @@
 class SQUpdates {
-  final bool edits, adds, deletes;
-
   const SQUpdates({
     this.edits = true,
     this.adds = true,
@@ -8,6 +6,8 @@ class SQUpdates {
   });
 
   SQUpdates.readOnly() : this(edits: false, adds: false, deletes: false);
+
+  final bool edits, adds, deletes;
 
   bool get readOnly => !edits && !adds && !deletes;
 

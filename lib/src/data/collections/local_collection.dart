@@ -7,8 +7,6 @@ import '../sq_collection.dart';
 export '../sq_collection.dart';
 
 class LocalCollection extends SQCollection {
-  static SharedPreferences? _prefs;
-
   LocalCollection({
     required super.id,
     required super.fields,
@@ -16,6 +14,8 @@ class LocalCollection extends SQCollection {
     super.updates,
     super.actions,
   });
+
+  static SharedPreferences? _prefs;
 
   Future<void> _initPrefs() async =>
       _prefs ??= await SharedPreferences.getInstance();

@@ -5,11 +5,11 @@ import '../sq_doc.dart';
 import 'sq_list_field.dart';
 
 class SQEnumField<T> extends SQField<T> {
-  SQField<T> subfield;
-  List<T> options;
-
   SQEnumField(this.subfield, {required this.options, super.value, super.show})
       : super(subfield.name);
+
+  SQField<T> subfield;
+  List<T> options;
 
   @override
   SQEnumField<T> copy() => SQEnumField<T>(subfield.copy(),

@@ -4,14 +4,14 @@ import '../data/sq_collection.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {
-  final SQDoc doc;
-
   DocScreen(
     this.doc, {
     String? title,
     super.icon,
     super.isInline,
   }) : super(title: title ?? doc.label);
+
+  final SQDoc doc;
 
   SQCollection get collection => doc.collection;
 

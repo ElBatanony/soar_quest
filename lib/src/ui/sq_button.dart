@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class SQButton extends StatelessWidget {
-  final String? text;
-  final void Function()? onPressed;
-  final IconData? icon;
-  final double iconSize;
-
   const SQButton(this.text, {required this.onPressed})
       : icon = null,
         iconSize = 24;
 
   const SQButton.icon(this.icon,
       {required this.onPressed, this.text, this.iconSize = 24});
+
+  final String? text;
+  final void Function()? onPressed;
+  final IconData? icon;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) => Container(

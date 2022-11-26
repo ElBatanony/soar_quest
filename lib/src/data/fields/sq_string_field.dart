@@ -4,14 +4,14 @@ import '../sq_doc.dart';
 import 'sq_text_field.dart';
 
 class SQStringField extends SQField<String> {
-  final int maxLines;
-
   SQStringField(super.name,
       {super.value,
       super.editable,
       super.require,
       super.show,
       this.maxLines = 1});
+
+  final int maxLines;
 
   @override
   String? parse(source) {

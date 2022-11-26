@@ -4,9 +4,9 @@ import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 
 class DocCond {
-  final bool Function(SQDoc doc, ScreenState screenState) condition;
-
   const DocCond(this.condition);
+
+  final bool Function(SQDoc doc, ScreenState screenState) condition;
 
   bool check(SQDoc doc, ScreenState screenState) => condition(doc, screenState);
 
@@ -36,10 +36,10 @@ class DocValueCond<T> extends DocCond {
 }
 
 class CollectionCond extends DocCond {
-  bool Function(SQCollection) collectionCondition;
-
   CollectionCond(this.collectionCondition)
       : super((doc, context) => collectionCondition(doc.collection));
+
+  bool Function(SQCollection) collectionCondition;
 }
 
 class DocUserCond extends DocValueCond<SQRef?> {

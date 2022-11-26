@@ -9,11 +9,6 @@ export 'sq_condition.dart';
 export 'sq_field.dart';
 
 class SQDoc {
-  late List<SQField<dynamic>> fields;
-  String id;
-  SQCollection collection;
-  late String path;
-
   SQDoc(this.id, {required this.collection}) {
     path = '${collection.path}/$id';
 
@@ -29,6 +24,11 @@ class SQDoc {
       return fieldCopy;
     }).toList();
   }
+
+  late List<SQField<dynamic>> fields;
+  String id;
+  SQCollection collection;
+  late String path;
 
   void parse(Map<String, dynamic> source) {
     for (final field in fields) field.value = field.parse(source[field.name]);
