@@ -37,12 +37,11 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
       fields.map((field) => field.serialize()).toList();
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQFieldListFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQFieldListFormField(this, docScreenState);
 }
 
 class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
-  const _SQFieldListFormField(super.field, super.doc, {super.onChanged});
+  const _SQFieldListFormField(super.field, super.docScreenState);
 
   SQFieldListField<T> get listField => field;
 
@@ -53,7 +52,8 @@ class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
   Widget readOnlyBuilder(formFieldState) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (final f in listField.fields) (f..isInline = true).formField(doc),
+          for (final f in listField.fields)
+            (f..isInline = true).formField(docScreenState),
         ],
       );
 
@@ -69,7 +69,7 @@ class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
           for (final f in listField.fields)
             Row(
               children: [
-                Expanded(child: (f..isInline = true).formField(doc)),
+                Expanded(child: (f..isInline = true).formField(docScreenState)),
                 SQButton.icon(
                   Icons.delete,
                   onPressed: () => listField.fields.remove(f),

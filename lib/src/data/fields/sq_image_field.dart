@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../sq_doc.dart';
 import 'sq_file_field.dart';
 
 class SQImageField extends SQFileField {
@@ -10,12 +9,11 @@ class SQImageField extends SQFileField {
   SQImageField copy() => SQImageField(name, value: value, storage: storage);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQImageFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQImageFormField(this, docScreenState);
 }
 
 class _SQImageFormField extends SQFileFormField<SQImageField> {
-  const _SQImageFormField(super.field, super.doc, {super.onChanged});
+  const _SQImageFormField(super.field, super.docScreenState);
 
   @override
   Widget readOnlyBuilder(formFieldState) {

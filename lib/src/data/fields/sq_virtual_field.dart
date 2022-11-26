@@ -22,12 +22,12 @@ class SQVirtualField<T> extends SQField<T> {
       SQVirtualField<T>(field: field, valueBuilder: valueBuilder, show: show);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) {
-    value = valueBuilder(doc);
+  formField(docScreenState) {
+    value = valueBuilder(docScreenState.doc);
     final fieldCopy = field.copy()
       ..value = value
       ..editable = false
       ..isInline = isInline;
-    return fieldCopy.formField(doc);
+    return fieldCopy.formField(docScreenState);
   }
 }

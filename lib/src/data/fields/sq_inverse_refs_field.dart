@@ -24,14 +24,16 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
       refCollection: refCollection, refFieldName: refFieldName);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQInverseRefsFormField(this, doc,
-          refDocs: valueBuilder(doc), onChanged: onChanged);
+  formField(docScreenState) => _SQInverseRefsFormField(
+        this,
+        docScreenState,
+        refDocs: valueBuilder(docScreenState.doc),
+      );
 }
 
 class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
-  const _SQInverseRefsFormField(super.field, super.doc,
-      {required this.refDocs, required super.onChanged});
+  const _SQInverseRefsFormField(super.field, super.docScreenState,
+      {required this.refDocs});
 
   final List<SQDoc> refDocs;
 

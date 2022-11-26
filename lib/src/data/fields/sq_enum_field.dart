@@ -17,15 +17,14 @@ class SQEnumField<T> extends SQField<T> {
       options: copyList<T>(options), value: value, show: show);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQEnumFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQEnumFormField(this, docScreenState);
 
   @override
   T? parse(source) => subfield.parse(source);
 }
 
 class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
-  const _SQEnumFormField(super.field, super.doc, {required super.onChanged});
+  const _SQEnumFormField(super.field, super.docScreenState);
 
   @override
   Widget fieldLabel(screenState) => screenState is FormScreenState
@@ -37,7 +36,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
     final subfieldCopy = field.subfield.copy()
       ..value = field.value
       ..editable = false;
-    return subfieldCopy.formField(doc);
+    return subfieldCopy.formField(docScreenState);
   }
 
   @override

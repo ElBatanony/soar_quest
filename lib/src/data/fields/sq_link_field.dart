@@ -13,12 +13,11 @@ class SQLinkField extends SQStringField {
   SQLinkField copy() => SQLinkField(name, value: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQLinkFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQLinkFormField(this, docScreenState);
 }
 
 class _SQLinkFormField extends SQFormField<SQLinkField> {
-  const _SQLinkFormField(super.field, super.doc, {required super.onChanged});
+  const _SQLinkFormField(super.field, super.docScreenState);
 
   @override
   Widget readOnlyBuilder(formFieldState) {

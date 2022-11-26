@@ -24,13 +24,12 @@ class SQFileField extends SQStringField {
   SQFileField copy() => SQFileField(name, value: value, storage: storage);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      SQFileFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => SQFileFormField(this, docScreenState);
 }
 
 class SQFileFormField<FileField extends SQFileField>
     extends SQFormField<FileField> {
-  const SQFileFormField(super.field, super.doc, {super.onChanged});
+  const SQFileFormField(super.field, super.docScreenState);
 
   Future<void> openFileUrl() async {
     if (field.downloadUrl == null)

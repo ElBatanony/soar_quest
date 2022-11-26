@@ -28,12 +28,11 @@ class SQStringField extends SQField<String> {
       maxLines: maxLines);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQStringFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQStringFormField(this, docScreenState);
 }
 
 class _SQStringFormField extends SQFormField<SQStringField> {
-  const _SQStringFormField(super.field, super.doc, {required super.onChanged});
+  const _SQStringFormField(super.field, super.docScreenState);
 
   @override
   Widget fieldBuilder(formFieldState) =>

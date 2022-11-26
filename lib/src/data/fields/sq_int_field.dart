@@ -18,15 +18,14 @@ class SQIntField extends SQField<int> {
       value: value, editable: editable, require: require, show: show);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQIntFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQIntFormField(this, docScreenState);
 
   int sumDocs(List<SQDoc> docs) =>
       docs.fold(0, (sum, doc) => sum + (doc.value<int>(name) ?? 0));
 }
 
 class _SQIntFormField extends SQFormField<SQIntField> {
-  const _SQIntFormField(super.field, super.doc, {required super.onChanged});
+  const _SQIntFormField(super.field, super.docScreenState);
 
   @override
   Widget fieldBuilder(formFieldState) =>

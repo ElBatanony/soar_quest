@@ -21,7 +21,8 @@ class DocScreen extends Screen {
   createState() => DocScreenState();
 
   Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) =>
-      field.formField(doc, onChanged: screenState.refreshScreen);
+      field.formField(
+          screenState as DocScreenState); // TODO: make ScreenState generic
 
   List<Widget> fieldsDisplay(ScreenState screenState) => doc.fields
       .where((field) => field.show.check(doc, screenState))
@@ -48,6 +49,9 @@ class DocScreen extends Screen {
 }
 
 class DocScreenState<DS extends DocScreen> extends ScreenState<DS> {
+  SQDoc get doc => widget.doc;
+  SQCollection get collection => doc.collection;
+
   StreamSubscription<DocData>? liveListener;
 
   @override

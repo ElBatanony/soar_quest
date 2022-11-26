@@ -16,12 +16,11 @@ class SQBoolField extends SQField<bool> {
       SQBoolField(name, value: value, editable: editable, show: show);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQBoolFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQBoolFormField(this, docScreenState);
 }
 
 class _SQBoolFormField extends SQFormField<SQBoolField> {
-  const _SQBoolFormField(super.field, super.doc, {super.onChanged});
+  const _SQBoolFormField(super.field, super.docScreenState);
 
   @override
   Widget fieldBuilder(formFieldState) => Row(

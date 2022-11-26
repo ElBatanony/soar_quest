@@ -17,12 +17,11 @@ class SQDoubleField extends SQField<double> {
   SQDoubleField copy() => SQDoubleField(name, value: value, editable: editable);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQDoubleFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQDoubleFormField(this, docScreenState);
 }
 
 class _SQDoubleFormField extends SQFormField<SQDoubleField> {
-  const _SQDoubleFormField(super.field, super.doc, {super.onChanged});
+  const _SQDoubleFormField(super.field, super.docScreenState);
 
   @override
   Widget fieldBuilder(formFieldState) =>

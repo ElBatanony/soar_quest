@@ -30,13 +30,11 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQTimeOfDayFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQTimeOfDayFormField(this, docScreenState);
 }
 
 class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
-  const _SQTimeOfDayFormField(super.field, super.doc,
-      {required super.onChanged});
+  const _SQTimeOfDayFormField(super.field, super.docScreenState);
 
   void _selectTimeOfDay(
       TimeOfDay? newSelectedTimeOfDay, SQFormFieldState formFieldState) {

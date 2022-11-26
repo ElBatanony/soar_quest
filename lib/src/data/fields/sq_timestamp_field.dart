@@ -18,12 +18,11 @@ class SQTimestampField extends SQField<SQTimestamp> {
       SQTimestampField(name, value: value, editable: editable, show: show);
 
   @override
-  formField(SQDoc doc, {VoidCallback? onChanged}) =>
-      _SQTimestampFormField(this, doc, onChanged: onChanged);
+  formField(docScreenState) => _SQTimestampFormField(this, docScreenState);
 }
 
 class _SQTimestampFormField extends SQFormField<SQTimestampField> {
-  const _SQTimestampFormField(super.field, super.doc, {super.onChanged});
+  const _SQTimestampFormField(super.field, super.docScreenState);
 
   static Route<DateTime> _datePickerRoute(
     BuildContext context,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import 'sq_doc.dart';
 
@@ -28,7 +29,7 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  SQFormField formField(SQDoc doc, {VoidCallback? onChanged});
+  SQFormField formField(DocScreenState docScreenState);
 
   @override
   String toString() => "${name == "" ? "" : "$name:"} $value";
@@ -36,12 +37,14 @@ abstract class SQField<T> {
 
 abstract class SQFormField<Field extends SQField<dynamic>>
     extends FormField<SQFormField<Field>> {
-  const SQFormField(this.field, this.doc, {this.onChanged})
+  const SQFormField(this.field, this.docScreenState)
       : super(builder: emptyBuilder);
 
   final Field field;
-  final SQDoc doc;
-  final VoidCallback? onChanged;
+  final DocScreenState docScreenState;
+  SQDoc get doc => docScreenState.doc;
+
+  void onChanged() => docScreenState.refreshScreen();
 
   static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
 
@@ -78,19 +81,13 @@ class SQFormFieldState<Field extends SQField<dynamic>>
   SQFormField<Field> get formField => widget as SQFormField<Field>;
   Field get field => formField.field;
 
-  late ScreenState screenState;
+  ScreenState get screenState => formField.docScreenState;
 
   @override
   SQFormField<Field> get value => throw Exception('Do not use FormField.value');
 
-  @override
-  void initState() {
-    screenState = context.findAncestorStateOfType<ScreenState>()!;
-    super.initState();
-  }
-
   void onChanged() {
-    formField.onChanged?.call();
+    formField.onChanged();
     setState(() {});
   }
 
