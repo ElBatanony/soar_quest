@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 
-import '../storage/sq_image_field.dart';
+import 'fields/sq_image_field.dart';
 import 'fields/types/sq_ref.dart';
 import 'sq_collection.dart';
 
