@@ -219,7 +219,7 @@ class SetFieldsAction extends SQAction {
     final newFields = getFields(doc);
     for (final entry in newFields.entries) {
       final docField = doc.getField(entry.key);
-      if (docField == null) throw 'SetFieldsAction null doc field';
+      if (docField == null) throw Exception('SetFieldsAction null doc field');
       docField.value = entry.value;
     }
     await doc.collection.saveDoc(doc);
@@ -261,7 +261,7 @@ class OpenUrlAction extends SQAction {
     final url = getUrl(doc);
     if (!await launchUrl(Uri.parse(url),
         mode: LaunchMode.externalApplication)) {
-      throw 'Could not launch $url';
+      throw Exception('Could not launch $url');
     }
     await super.execute(doc, screenState);
   }

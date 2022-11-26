@@ -32,7 +32,7 @@ class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
       return SQButton('Open Link', onPressed: () async {
         if (!await launchUrl(Uri.parse(url),
             mode: LaunchMode.externalApplication)) {
-          throw 'Could not launch $url';
+          throw Exception('Could not launch $url');
         }
       });
     return const Text('No Link');

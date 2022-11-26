@@ -27,7 +27,7 @@ class FirestoreCollection<DocType extends SQDoc> extends SQCollection<DocType> {
     docs = [];
     for (final snapDoc in snap.docs) {
       final docData = snapDoc.data() as Map<String, dynamic>?;
-      if (docData == null) throw 'Firestore doc null data';
+      if (docData == null) throw Exception('Firestore doc null data');
       final doc = newDoc(id: snapDoc.id)..parse(docData);
       docs.add(doc);
     }

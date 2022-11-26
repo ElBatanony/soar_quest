@@ -39,9 +39,10 @@ class SQRef {
 
   SQDoc get doc {
     final collection = SQCollection.byPath(collectionPath);
-    if (collection == null) throw 'Referencing a non-existing collection';
+    if (collection == null)
+      throw Exception('Referencing a non-existing collection');
     final doc = collection.getDoc(docId);
-    if (doc == null) throw 'Referencing a non-existing doc';
+    if (doc == null) throw Exception('Referencing a non-existing doc');
     return doc;
   }
 

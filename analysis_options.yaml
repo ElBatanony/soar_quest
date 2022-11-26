@@ -69,6 +69,7 @@ linter:
     prefer_single_quotes: true
     prefer_expression_function_bodies: true
     no_default_cases: true
+    only_throw_errors: true
 
     # Style rules (no change)
     unnecessary_library_directive: true

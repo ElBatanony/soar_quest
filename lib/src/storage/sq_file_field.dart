@@ -40,10 +40,10 @@ class SQFileFormFieldState<FileField extends SQFileField>
     extends SQFormFieldState<FileField> {
   Future<void> openFileUrl() async {
     if (field.downloadUrl == null)
-      throw 'Download URL for ${field.name} is null';
+      throw Exception('Download URL for ${field.name} is null');
     if (!await launchUrl(Uri.parse(field.downloadUrl!),
         mode: LaunchMode.externalApplication)) {
-      throw 'Could not launch ${field.downloadUrl}';
+      throw Exception('Could not launch ${field.downloadUrl}');
     }
   }
 

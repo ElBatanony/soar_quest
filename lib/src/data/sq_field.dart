@@ -59,7 +59,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   late ScreenState screenState;
 
   @override
-  SQFormField<Field> get value => throw 'Do not use FormField.value';
+  SQFormField<Field> get value => throw Exception('Do not use FormField.value');
 
   @override
   void initState() {
