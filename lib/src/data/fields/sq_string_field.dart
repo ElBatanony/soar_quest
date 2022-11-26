@@ -36,14 +36,11 @@ class _SQStringFormField extends SQFormField<SQStringField> {
   const _SQStringFormField(super.field, super.doc, {required super.onChanged});
 
   @override
+  Widget fieldBuilder(formFieldState) =>
+      SQTextField(this, textParse: (text) => text, maxLines: field.maxLines);
+
+  @override
   createState() => _SQStringFormFieldState();
 }
 
-class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {
-  @override
-  Widget fieldBuilder(formFieldState) => SQTextField(
-        formField,
-        textParse: (text) => text,
-        maxLines: field.maxLines,
-      );
-}
+class _SQStringFormFieldState extends SQFormFieldState<SQStringField> {}

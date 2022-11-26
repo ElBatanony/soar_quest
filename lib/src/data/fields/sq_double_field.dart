@@ -25,11 +25,11 @@ class _SQDoubleFormField extends SQFormField<SQDoubleField> {
   const _SQDoubleFormField(super.field, super.doc, {super.onChanged});
 
   @override
+  Widget fieldBuilder(formFieldState) =>
+      SQTextField(this, textParse: double.tryParse);
+
+  @override
   createState() => _SQDoubleFormFieldState();
 }
 
-class _SQDoubleFormFieldState extends SQFormFieldState<SQDoubleField> {
-  @override
-  Widget fieldBuilder(formFieldState) =>
-      SQTextField(formField, textParse: double.tryParse);
-}
+class _SQDoubleFormFieldState extends SQFormFieldState<SQDoubleField> {}

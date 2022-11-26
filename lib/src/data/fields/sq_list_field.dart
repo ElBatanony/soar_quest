@@ -34,12 +34,12 @@ class _SQListFormField<T> extends SQFormField<SQListField<T>> {
       Text((field.value ?? []).toString());
 
   @override
-  createState() => _SQListFormFieldState<T>();
-}
-
-class _SQListFormFieldState<T> extends SQFormFieldState<SQListField<T>> {
-  @override
   Widget fieldBuilder(formFieldState) {
     throw UnimplementedError();
   }
+
+  @override
+  createState() => _SQListFormFieldState<T>();
 }
+
+class _SQListFormFieldState<T> extends SQFormFieldState<SQListField<T>> {}

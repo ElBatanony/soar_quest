@@ -60,6 +60,11 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
   }
 
   @override
+  Widget fieldBuilder(formFieldState) {
+    throw UnimplementedError();
+  }
+
+  @override
   createState() => _SQInverseRefsFormFieldState();
 }
 
@@ -74,10 +79,5 @@ class _SQInverseRefsFormFieldState
   void initState() {
     unawaited(initializeRefCollection());
     super.initState();
-  }
-
-  @override
-  Widget fieldBuilder(formFieldState) {
-    throw UnimplementedError();
   }
 }

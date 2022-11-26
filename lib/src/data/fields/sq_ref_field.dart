@@ -64,6 +64,34 @@ class _SQRefFormField extends SQFormField<SQRefField> {
   }
 
   @override
+  Widget fieldBuilder(formFieldState) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(field.value?.label ?? 'Not Set'),
+          if (field.editable)
+            SQButton(
+              'Select',
+              onPressed: () async {
+                final retDoc = await SelectDocScreen(
+                        title: 'Select ${field.name}',
+                        collection: field.collection)
+                    .go<SQDoc>(formFieldState.context);
+
+                if (retDoc != null) {
+                  final ref = SQRef(
+                    docId: retDoc.id,
+                    label: retDoc.label,
+                    collectionPath: retDoc.collection.path,
+                  );
+                  field.value = ref;
+                  formFieldState.onChanged();
+                }
+              },
+            ),
+        ],
+      );
+
+  @override
   createState() => _SQRefFormFieldState();
 }
 
@@ -76,32 +104,4 @@ class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
       field.value = SQAuth.userDoc!.ref;
     super.initState();
   }
-
-  @override
-  Widget fieldBuilder(formFieldState) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(field.value?.label ?? 'Not Set'),
-          if (field.editable)
-            SQButton(
-              'Select',
-              onPressed: () async {
-                final retDoc = await SelectDocScreen(
-                        title: 'Select ${field.name}',
-                        collection: field.collection)
-                    .go<SQDoc>(screenState.context);
-
-                if (retDoc != null) {
-                  final ref = SQRef(
-                    docId: retDoc.id,
-                    label: retDoc.label,
-                    collectionPath: retDoc.collection.path,
-                  );
-                  field.value = ref;
-                  onChanged();
-                }
-              },
-            ),
-        ],
-      );
 }

@@ -41,26 +41,26 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
   }
 
   @override
-  createState() => _SQEnumFormFieldState<T>();
-}
-
-class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {
-  @override
   Widget fieldBuilder(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.value.toString()),
           SQButton('Select', onPressed: () async {
             final newValue = await showEnumOptionsDialog(field,
-                context: screenState.context);
+                context: formFieldState.context);
             if (newValue != null) {
               field.value = newValue;
-              setState(() {});
+              formFieldState.onChanged();
             }
           })
         ],
       );
+
+  @override
+  createState() => _SQEnumFormFieldState<T>();
 }
+
+class _SQEnumFormFieldState<T> extends SQFormFieldState<SQEnumField<T>> {}
 
 Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
         {required BuildContext context}) =>

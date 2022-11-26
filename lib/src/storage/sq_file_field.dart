@@ -32,12 +32,6 @@ class SQFileFormField<FileField extends SQFileField>
     extends SQFormField<FileField> {
   const SQFileFormField(super.field, super.doc, {super.onChanged});
 
-  @override
-  createState() => SQFileFormFieldState<FileField>();
-}
-
-class SQFileFormFieldState<FileField extends SQFileField>
-    extends SQFormFieldState<FileField> {
   Future<void> openFileUrl() async {
     if (field.downloadUrl == null)
       throw Exception('Download URL for ${field.name} is null');
@@ -47,18 +41,21 @@ class SQFileFormFieldState<FileField extends SQFileField>
     }
   }
 
-  Future<void> selectAndUploadFile() async {
+  Future<void> selectAndUploadFile(SQFormFieldState formFieldState) async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       await field.storage.uploadFile(
-          doc: doc, file: pickedFile, field: field, onUpload: onChanged);
+          doc: doc,
+          file: pickedFile,
+          field: field,
+          onUpload: () => formFieldState.onChanged());
     }
   }
 
-  Future<void> deleteFile() async {
+  Future<void> deleteFile(SQFormFieldState formFieldState) async {
     await field.storage.deleteFile(doc: doc, field: field);
-    onChanged();
+    formFieldState.onChanged();
   }
 
   @override
@@ -71,9 +68,17 @@ class SQFileFormFieldState<FileField extends SQFileField>
           else
             const Text('File not set'),
           SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
-              onPressed: selectAndUploadFile),
+              onPressed: () async => selectAndUploadFile(formFieldState)),
           if (field.fileExists)
-            IconButton(onPressed: deleteFile, icon: const Icon(Icons.delete))
+            IconButton(
+                onPressed: () async => deleteFile(formFieldState),
+                icon: const Icon(Icons.delete))
         ],
       );
+
+  @override
+  createState() => SQFileFormFieldState<FileField>();
 }
+
+class SQFileFormFieldState<FileField extends SQFileField>
+    extends SQFormFieldState<FileField> {}

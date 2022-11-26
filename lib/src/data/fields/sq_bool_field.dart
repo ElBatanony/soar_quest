@@ -24,11 +24,6 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
   const _SQBoolFormField(super.field, super.doc, {super.onChanged});
 
   @override
-  createState() => _SQBoolFormFieldState();
-}
-
-class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
-  @override
   Widget fieldBuilder(formFieldState) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -37,11 +32,16 @@ class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {
             constraints: const BoxConstraints(minWidth: 100, minHeight: 40),
             onPressed: (index) {
               field.value = index == 1;
-              onChanged();
+              formFieldState.onChanged();
             },
             isSelected: [field.value == false, field.value ?? true],
             children: const [Text('No'), Text('Yes')],
           ),
         ],
       );
+
+  @override
+  createState() => _SQBoolFormFieldState();
 }
+
+class _SQBoolFormFieldState extends SQFormFieldState<SQBoolField> {}

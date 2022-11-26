@@ -25,11 +25,6 @@ class SQTimestampField extends SQField<SQTimestamp> {
 class _SQTimestampFormField extends SQFormField<SQTimestampField> {
   const _SQTimestampFormField(super.field, super.doc, {super.onChanged});
 
-  @override
-  createState() => _SQTimestampFormFieldState();
-}
-
-class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
   static Route<DateTime> _datePickerRoute(
     BuildContext context,
   ) =>
@@ -43,10 +38,10 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
         ),
       );
 
-  void _selectDate(DateTime? newSelectedDate) {
+  void _selectDate(DateTime? newSelectedDate, SQFormFieldState formFieldState) {
     if (newSelectedDate != null) {
       field.value = SQTimestamp.fromDate(newSelectedDate);
-      onChanged();
+      formFieldState.onChanged();
     }
   }
 
@@ -58,15 +53,20 @@ class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {
           SQButton(
             'Select Date',
             onPressed: () async {
-              final ret =
-                  await Navigator.of(screenState.context).push(_datePickerRoute(
-                screenState.context,
+              final ret = await Navigator.of(formFieldState.context)
+                  .push(_datePickerRoute(
+                formFieldState.context,
               ));
               if (ret != null) {
-                _selectDate(ret);
+                _selectDate(ret, formFieldState);
               }
             },
           )
         ],
       );
+
+  @override
+  createState() => _SQTimestampFormFieldState();
 }
+
+class _SQTimestampFormFieldState extends SQFormFieldState<SQTimestampField> {}

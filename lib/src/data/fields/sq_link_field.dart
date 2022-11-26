@@ -34,11 +34,11 @@ class _SQLinkFormField extends SQFormField<SQLinkField> {
   }
 
   @override
+  Widget fieldBuilder(formFieldState) =>
+      SQTextField(this, textParse: (text) => text);
+
+  @override
   createState() => _SQLinkFormFieldState();
 }
 
-class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {
-  @override
-  Widget fieldBuilder(formFieldState) =>
-      SQTextField(formField, textParse: (text) => text);
-}
+class _SQLinkFormFieldState extends SQFormFieldState<SQLinkField> {}

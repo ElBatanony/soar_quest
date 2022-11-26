@@ -67,6 +67,8 @@ abstract class SQFormField<Field extends SQField<dynamic>>
     );
   }
 
+  Widget fieldBuilder(SQFormFieldState formFieldState);
+
   @override
   SQFormFieldState<Field> createState();
 }
@@ -95,8 +97,6 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     setState(() {});
   }
 
-  Widget fieldBuilder(SQFormFieldState formFieldState);
-
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -105,7 +105,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
           children: [
             if (field.isInline == false) formField.fieldLabel(screenState),
             if (field.editable && inForm)
-              fieldBuilder(this)
+              formField.fieldBuilder(this)
             else
               formField.readOnlyBuilder(this),
           ],
