@@ -77,8 +77,6 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
     extends FormFieldState<SQFormField<Field>> {
   SQFormField<Field> get formField => widget as SQFormField<Field>;
   Field get field => formField.field;
-  SQDoc get doc => formField.doc;
-  late bool inForm;
 
   late ScreenState screenState;
 
@@ -88,7 +86,6 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
   @override
   void initState() {
     screenState = context.findAncestorStateOfType<ScreenState>()!;
-    inForm = screenState is FormScreenState;
     super.initState();
   }
 
@@ -104,7 +101,7 @@ abstract class SQFormFieldState<Field extends SQField<dynamic>>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (field.isInline == false) formField.fieldLabel(this),
-            if (field.editable && inForm)
+            if (field.editable && screenState is FormScreenState)
               formField.fieldBuilder(this)
             else
               formField.readOnlyBuilder(this),

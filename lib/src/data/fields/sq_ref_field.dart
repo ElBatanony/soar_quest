@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../screens/collection_screens/select_doc_screen.dart';
 import '../../screens/doc_screen.dart';
+import '../../screens/form_screen.dart';
 import '../../sq_auth.dart';
 import '../../ui/sq_button.dart';
 import '../sq_action.dart';
@@ -97,8 +98,9 @@ class _SQRefFormField extends SQFormField<SQRefField> {
 class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
   @override
   void initState() {
-    if (SQAuth.isSignedIn && field is SQEditedByField && inForm)
-      field.value = SQAuth.userDoc!.ref;
+    if (SQAuth.isSignedIn &&
+        field is SQEditedByField &&
+        screenState is FormScreenState) field.value = SQAuth.userDoc!.ref;
     super.initState();
   }
 }
