@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
+import '../ui/sq_action_button.dart';
 import '../ui/sq_button.dart';
 import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
@@ -53,57 +54,6 @@ abstract class SQAction {
         onPressed: () async => execute(doc, screenState),
         child: Icon(icon),
       );
-}
-
-class SQActionButton extends StatefulWidget {
-  const SQActionButton({
-    required this.action,
-    required this.doc,
-    required this.screenState,
-    this.isIcon = false,
-    this.iconSize = 24.0,
-  });
-
-  final SQAction action;
-  final bool isIcon;
-  final SQDoc doc;
-  final double iconSize;
-  final ScreenState screenState;
-
-  @override
-  State<SQActionButton> createState() => _SQActionButtonState();
-}
-
-class _SQActionButtonState extends State<SQActionButton> {
-  late bool inForm;
-
-  @override
-  void initState() {
-    inForm = widget.screenState is FormScreenState;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (inForm) return Container();
-
-    return SQButton.icon(
-      widget.action.icon,
-      iconSize: widget.iconSize,
-      text: widget.isIcon
-          ? null
-          : widget.action.name.isEmpty
-              ? null
-              : widget.action.name,
-      onPressed: () async {
-        final isConfirmed = widget.action.confirm == false ||
-            await showConfirmationDialog(
-                action: widget.action, context: context);
-        if (isConfirmed)
-          return widget.action.execute(widget.doc, widget.screenState);
-      },
-    );
-  }
 }
 
 class GoEditCloneAction extends GoScreenAction {
