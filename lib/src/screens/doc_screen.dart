@@ -23,7 +23,9 @@ class DocScreen extends Screen {
   Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) =>
       field.formField(screenState as DocScreenState);
 
-  List<Widget> fieldsDisplay(ScreenState screenState) => doc.fields
+  List<Widget> fieldsDisplay(ScreenState screenState) => collection.fields
+      .map((collectionField) => doc.getField(collectionField.name)!)
+      .toList()
       .where((field) => field.show.check(doc, screenState))
       .map((field) => fieldDisplay(field, screenState))
       .toList();

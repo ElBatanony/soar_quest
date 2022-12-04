@@ -31,8 +31,14 @@ class CollectionSlice implements SQCollection {
           .toList();
 
   @override
-  List<SQDoc> get docs =>
-      filter == null ? collection.docs : filter!.filter(collection.docs);
+  List<SQDoc> get docs {
+    final retDocs =
+        (filter == null ? collection.docs : filter!.filter(collection.docs))
+          ..forEach((doc) {
+            doc.collection = this;
+          });
+    return retDocs;
+  }
 
   @override
   set docs(_) => throw UnimplementedError();
@@ -40,7 +46,6 @@ class CollectionSlice implements SQCollection {
   @override
   bool hasDoc(SQDoc doc) => docs.any((d) => d.id == doc.id);
 
-  // TODO: fix sliceFields usage in DocScreen (hide some fields)
   @override
   List<SQField<dynamic>> get fields => sliceFields == null
       ? collection.fields
