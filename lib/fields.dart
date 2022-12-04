@@ -8,6 +8,7 @@ export 'src/data/fields/sq_int_field.dart';
 export 'src/data/fields/sq_inverse_refs_field.dart';
 export 'src/data/fields/sq_link_field.dart';
 export 'src/data/fields/sq_list_field.dart';
+export 'src/data/fields/sq_location_field.dart';
 export 'src/data/fields/sq_ref_field.dart';
 export 'src/data/fields/sq_string_field.dart';
 export 'src/data/fields/sq_text_doc_field.dart';
