@@ -10,6 +10,7 @@ export 'src/data/fields/sq_link_field.dart';
 export 'src/data/fields/sq_list_field.dart';
 export 'src/data/fields/sq_ref_field.dart';
 export 'src/data/fields/sq_string_field.dart';
+export 'src/data/fields/sq_text_doc_field.dart';
 export 'src/data/fields/sq_time_of_day_field.dart';
 export 'src/data/fields/sq_timestamp_field.dart';
 export 'src/data/fields/sq_updated_date_field.dart';
