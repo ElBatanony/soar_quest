@@ -63,6 +63,7 @@ class _SQTextDocFormField extends SQFormField<SQTextDocField> {
             onPressed: () async {
               await TextDocScreen(textDocField: field)
                   .go<List<dynamic>>(formFieldState.context);
+              formFieldState.screenState.refreshScreen();
             },
           ),
         ],
