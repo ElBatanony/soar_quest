@@ -48,7 +48,7 @@ class Screen extends StatefulWidget {
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
 
-  AppBar appBar(ScreenState screenState) => AppBar(
+  PreferredSizeWidget appBar(ScreenState screenState) => AppBar(
         title: Text(title),
         leading: Navigator.of(screenState.context).canPop()
             ? const BackButton()
