@@ -35,6 +35,7 @@ void main() async {
       SQDoubleField('Double'),
       SQFileField('File', storage: firebaseFileStorage),
       SQIntField('Int'),
+      SQColorField('Color'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
       SQStringField('Readonly String', value: 'I am readonly', editable: false),
