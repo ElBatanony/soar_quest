@@ -71,6 +71,9 @@ class Screen extends StatefulWidget {
     if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);
     return null;
   }
+
+  EdgeInsetsGeometry? get screenPadding =>
+      isInline ? null : const EdgeInsets.all(16);
 }
 
 class ScreenState<T extends Screen> extends State<T> {
@@ -100,7 +103,7 @@ class ScreenState<T extends Screen> extends State<T> {
 
     final Widget body = Builder(
         builder: (_) => Container(
-              padding: widget.isInline ? null : const EdgeInsets.all(16),
+              padding: widget.screenPadding,
               child: widget.screenBody(this),
             ));
 
