@@ -7,11 +7,6 @@ void main() async {
   await SQApp.init('Wedding App',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
-  // TODO: guest list
-  // TODO: transportation page
-  // TODO: wiki pages (use flutter_quill). maybe as a field (not page)
-  // TODO: add maps (use flutter_map)
-
   SQApp.run(
     [
       MenuScreen(screens: [
