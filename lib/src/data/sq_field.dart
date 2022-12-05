@@ -34,9 +34,8 @@ abstract class SQField<T> {
 }
 
 abstract class SQFormField<Field extends SQField<dynamic>>
-    extends FormField<SQFormField<Field>> {
-  const SQFormField(this.field, this.docScreenState)
-      : super(builder: emptyBuilder);
+    extends StatefulWidget {
+  const SQFormField(this.field, this.docScreenState);
 
   final Field field;
   final DocScreenState docScreenState;
@@ -75,14 +74,11 @@ abstract class SQFormField<Field extends SQField<dynamic>>
 }
 
 class SQFormFieldState<Field extends SQField<dynamic>>
-    extends FormFieldState<SQFormField<Field>> {
-  SQFormField<Field> get formField => widget as SQFormField<Field>;
+    extends State<SQFormField<Field>> {
+  SQFormField<Field> get formField => widget;
   Field get field => formField.field;
 
   ScreenState get screenState => formField.docScreenState;
-
-  @override
-  SQFormField<Field> get value => throw Exception('Do not use FormField.value');
 
   @override
   Widget build(BuildContext context) => Padding(
