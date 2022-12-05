@@ -32,16 +32,23 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
 }
 
 class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
-  const _SQInverseRefsFormField(super.field, super.docScreenState,
-      {required this.refDocs});
+  _SQInverseRefsFormField(super.field, super.docScreenState,
+      {required this.refDocs}) {
+    unawaited(initializeRefCollection());
+  }
+
+  Future<void> initializeRefCollection() async {
+    if (field.collection.docs.isEmpty) await field.collection.loadCollection();
+    onChanged();
+  }
 
   final List<SQDoc> refDocs;
 
   @override
-  Widget fieldLabel(formFieldState) => Row(
+  Widget fieldLabel(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          super.fieldLabel(formFieldState),
+          super.fieldLabel(context),
           if (field.collection.updates.adds)
             CreateDocAction('Add',
                 getCollection: () => field.collection,
@@ -50,36 +57,19 @@ class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
                           collection: doc.collection,
                           value: doc.ref,
                           editable: false)
-                    ]).button(doc, screenState: formFieldState.screenState)
+                    ]).button(doc, screenState: docScreenState)
         ],
       );
 
   @override
-  Widget readOnlyBuilder(formFieldState) {
+  Widget readOnlyBuilder(context) {
     final slice = CollectionSlice(field.collection,
         filter: RefFilter(field.refFieldName, doc.ref));
     return TableScreen(collection: slice, isInline: true);
   }
 
   @override
-  Widget fieldBuilder(formFieldState) {
+  Widget fieldBuilder(context) {
     throw UnimplementedError();
-  }
-
-  @override
-  createState() => _SQInverseRefsFormFieldState();
-}
-
-class _SQInverseRefsFormFieldState
-    extends SQFormFieldState<SQInverseRefsField> {
-  Future<void> initializeRefCollection() async {
-    if (field.collection.docs.isEmpty) await field.collection.loadCollection();
-    formField.onChanged();
-  }
-
-  @override
-  void initState() {
-    unawaited(initializeRefCollection());
-    super.initState();
   }
 }

@@ -37,7 +37,7 @@ class _SQTimestampFormField extends SQFormField<SQTimestampField> {
         ),
       );
 
-  void _selectDate(DateTime? newSelectedDate, SQFormFieldState formFieldState) {
+  void _selectDate(DateTime? newSelectedDate) {
     if (newSelectedDate != null) {
       field.value = SQTimestamp.fromDate(newSelectedDate);
       onChanged();
@@ -45,19 +45,18 @@ class _SQTimestampFormField extends SQFormField<SQTimestampField> {
   }
 
   @override
-  Widget fieldBuilder(formFieldState) => Row(
+  Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.value.toString()),
           SQButton(
             'Select Date',
             onPressed: () async {
-              final ret = await Navigator.of(formFieldState.context)
-                  .push(_datePickerRoute(
-                formFieldState.context,
+              final ret = await Navigator.of(context).push(_datePickerRoute(
+                context,
               ));
               if (ret != null) {
-                _selectDate(ret, formFieldState);
+                _selectDate(ret);
               }
             },
           )

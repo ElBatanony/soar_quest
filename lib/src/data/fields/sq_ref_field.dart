@@ -44,10 +44,14 @@ class SQRefField extends SQField<SQRef> {
 }
 
 class _SQRefFormField extends SQFormField<SQRefField> {
-  const _SQRefFormField(super.field, super.docScreenState);
+  _SQRefFormField(super.field, super.docScreenState) {
+    if (SQAuth.isSignedIn &&
+        field is SQEditedByField &&
+        docScreenState is FormScreenState) field.value = SQAuth.userDoc!.ref;
+  }
 
   @override
-  Widget readOnlyBuilder(formFieldState) {
+  Widget readOnlyBuilder(context) {
     final ref = field.value;
     if (ref == null) return const Text('Not Set');
     final doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
@@ -57,13 +61,13 @@ class _SQRefFormField extends SQFormField<SQRefField> {
         Text(ref.label),
         if (doc != null)
           GoScreenAction('', screen: DocScreen.new)
-              .button(doc, screenState: formFieldState.screenState)
+              .button(doc, screenState: docScreenState)
       ],
     );
   }
 
   @override
-  Widget fieldBuilder(formFieldState) => Row(
+  Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.value?.label ?? 'Not Set'),
@@ -74,7 +78,7 @@ class _SQRefFormField extends SQFormField<SQRefField> {
                 final retDoc = await SelectDocScreen(
                         title: 'Select ${field.name}',
                         collection: field.collection)
-                    .go<SQDoc>(formFieldState.context);
+                    .go<SQDoc>(context);
 
                 if (retDoc != null) {
                   final ref = SQRef(
@@ -89,17 +93,4 @@ class _SQRefFormField extends SQFormField<SQRefField> {
             ),
         ],
       );
-
-  @override
-  createState() => _SQRefFormFieldState();
-}
-
-class _SQRefFormFieldState extends SQFormFieldState<SQRefField> {
-  @override
-  void initState() {
-    if (SQAuth.isSignedIn &&
-        field is SQEditedByField &&
-        screenState is FormScreenState) field.value = SQAuth.userDoc!.ref;
-    super.initState();
-  }
 }

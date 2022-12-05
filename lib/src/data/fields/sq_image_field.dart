@@ -16,16 +16,16 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
   const _SQImageFormField(super.field, super.docScreenState);
 
   @override
-  Widget readOnlyBuilder(formFieldState) {
+  Widget readOnlyBuilder(context) {
     if (field.fileExists == false) return const Text('No Image');
     return Image.network(field.downloadUrl!);
   }
 
   @override
-  Widget fieldBuilder(formFieldState) {
+  Widget fieldBuilder(context) {
     if (field.fileExists == false)
       return GestureDetector(
-        onTap: () async => selectAndUploadFile(formFieldState),
+        onTap: () async => selectAndUploadFile(context),
         child: Container(
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
@@ -46,7 +46,7 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
             const Icon(Icons.camera_alt, size: 30),
             if (field.downloadUrl != null) Image.network(field.downloadUrl!),
             TextButton.icon(
-                onPressed: () async => deleteFile(formFieldState),
+                onPressed: () async => deleteFile(context),
                 icon: const Icon(Icons.clear),
                 label: const Text('Clear'))
           ],

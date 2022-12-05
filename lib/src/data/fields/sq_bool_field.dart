@@ -23,7 +23,7 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
   const _SQBoolFormField(super.field, super.docScreenState);
 
   @override
-  Widget fieldBuilder(formFieldState) => Row(
+  Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ToggleButtons(

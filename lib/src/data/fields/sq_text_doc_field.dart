@@ -46,7 +46,7 @@ class _SQTextDocFormField extends SQFormField<SQTextDocField> {
       selection: const TextSelection.collapsed(offset: 0));
 
   @override
-  Widget readOnlyBuilder(formFieldState) => SizedBox(
+  Widget readOnlyBuilder(context) => SizedBox(
         height: 40,
         child: QuillEditor.basic(
           controller: _controller,
@@ -55,15 +55,15 @@ class _SQTextDocFormField extends SQFormField<SQTextDocField> {
       );
 
   @override
-  Widget fieldBuilder(formFieldState) => Column(
+  Widget fieldBuilder(context) => Column(
         children: [
-          readOnlyBuilder(formFieldState),
+          readOnlyBuilder(context),
           SQButton(
             'Edit Text Doc',
             onPressed: () async {
               await TextDocScreen(textDocField: field)
-                  .go<List<dynamic>>(formFieldState.context);
-              formFieldState.screenState.refreshScreen();
+                  .go<List<dynamic>>(context);
+              onChanged();
             },
           ),
         ],

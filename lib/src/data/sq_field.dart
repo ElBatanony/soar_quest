@@ -34,29 +34,27 @@ abstract class SQField<T> {
 }
 
 abstract class SQFormField<Field extends SQField<dynamic>>
-    extends StatefulWidget {
+    extends StatelessWidget {
   const SQFormField(this.field, this.docScreenState);
 
   final Field field;
   final DocScreenState docScreenState;
   SQDoc get doc => docScreenState.doc;
 
-  static Widget emptyBuilder(FormFieldState<dynamic> s) => Container();
-
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
-  Widget fieldLabel(SQFormFieldState formFieldState) => Padding(
+  Widget fieldLabel(BuildContext context) => Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
         fieldLabelText,
-        style: Theme.of(formFieldState.context).textTheme.headline6,
+        style: Theme.of(context).textTheme.headline6,
       ));
 
-  Widget readOnlyBuilder(SQFormFieldState formFieldState) {
+  Widget readOnlyBuilder(BuildContext context) {
     final valueString = field.value.toString();
     return GestureDetector(
       onLongPress: () async {
-        ScaffoldMessenger.of(formFieldState.context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             duration: const Duration(milliseconds: 500),
             content: Text('Copied field: $valueString')));
         await Clipboard.setData(ClipboardData(text: valueString));
@@ -65,20 +63,9 @@ abstract class SQFormField<Field extends SQField<dynamic>>
     );
   }
 
-  Widget fieldBuilder(SQFormFieldState formFieldState);
+  Widget fieldBuilder(BuildContext context);
 
   void onChanged() => docScreenState.refreshScreen();
-
-  @override
-  SQFormFieldState<Field> createState() => SQFormFieldState();
-}
-
-class SQFormFieldState<Field extends SQField<dynamic>>
-    extends State<SQFormField<Field>> {
-  SQFormField<Field> get formField => widget;
-  Field get field => formField.field;
-
-  ScreenState get screenState => formField.docScreenState;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -86,11 +73,11 @@ class SQFormFieldState<Field extends SQField<dynamic>>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (field.isInline == false) formField.fieldLabel(this),
-            if (field.editable && screenState is FormScreenState)
-              formField.fieldBuilder(this)
+            if (field.isInline == false) fieldLabel(context),
+            if (field.editable && docScreenState is FormScreenState)
+              fieldBuilder(context)
             else
-              formField.readOnlyBuilder(this),
+              readOnlyBuilder(context),
           ],
         ),
       );

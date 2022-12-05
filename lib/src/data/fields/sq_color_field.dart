@@ -46,48 +46,53 @@ class _SQColorFormField extends SQFormField<SQColorField> {
   const _SQColorFormField(super.field, super.docScreenState);
 
   @override
-  createState() => _SQColorFormFieldState();
-
-  @override
-  Widget fieldBuilder(formFieldState) {
-    final fieldState = formFieldState as _SQColorFormFieldState;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        if (field.value != null)
-          Container(height: 30, width: 30, color: field.value),
-        SQButton('Set Color', onPressed: () async {
-          fieldState.pickerColor = field.value ?? Colors.white;
-          await showDialog<void>(
-            context: formFieldState.context,
-            builder: (context) => AlertDialog(
-              title: Text(field.name),
-              content: ColorPicker(
-                pickerColor: fieldState.pickerColor,
-                onColorChanged: (newPicker) {
-                  fieldState.pickerColor = newPicker;
-                },
-              ),
-              actions: [
-                SQButton('Cancel',
-                    onPressed: () => Navigator.of(context).pop()),
-                SQButton(
-                  'Save',
-                  onPressed: () {
-                    field.value = fieldState.pickerColor;
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-          onChanged();
-        })
-      ],
-    );
-  }
+  Widget fieldBuilder(context) => _SQColorPicker(field);
 }
 
-class _SQColorFormFieldState extends SQFormFieldState<SQColorField> {
+class _SQColorPicker extends StatefulWidget {
+  const _SQColorPicker(this.field);
+
+  final SQColorField field;
+
+  @override
+  State<_SQColorPicker> createState() => __SQColorPickerState();
+}
+
+class __SQColorPickerState extends State<_SQColorPicker> {
   var pickerColor = Colors.white;
+  @override
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          if (widget.field.value != null)
+            Container(height: 30, width: 30, color: widget.field.value),
+          SQButton('Set Color', onPressed: () async {
+            pickerColor = widget.field.value ?? Colors.white;
+            await showDialog<void>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(widget.field.name),
+                content: ColorPicker(
+                  pickerColor: pickerColor,
+                  onColorChanged: (newPicker) {
+                    pickerColor = newPicker;
+                  },
+                ),
+                actions: [
+                  SQButton('Cancel',
+                      onPressed: () => Navigator.of(context).pop()),
+                  SQButton(
+                    'Save',
+                    onPressed: () {
+                      widget.field.value = pickerColor;
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            );
+            setState(() {});
+          })
+        ],
+      );
 }

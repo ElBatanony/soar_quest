@@ -51,7 +51,7 @@ class _SQLocationFormField extends SQFormField<SQLocationField> {
   const _SQLocationFormField(super.field, super.docScreenState);
 
   @override
-  Widget readOnlyBuilder(formFieldState) => SizedBox(
+  Widget readOnlyBuilder(context) => SizedBox(
         height: 200,
         child: FlutterMap(
           options: MapOptions(center: field.value ?? defaultLocation),
@@ -64,15 +64,15 @@ class _SQLocationFormField extends SQFormField<SQLocationField> {
       );
 
   @override
-  Widget fieldBuilder(formFieldState) => Column(
+  Widget fieldBuilder(context) => Column(
         children: [
-          readOnlyBuilder(formFieldState),
+          readOnlyBuilder(context),
           SQButton(
             'Edit Location',
             onPressed: () async {
               await LocationPickerScreen(locationField: field)
-                  .go<List<dynamic>>(formFieldState.context);
-              formFieldState.screenState.refreshScreen();
+                  .go<List<dynamic>>(context);
+              onChanged();
             },
           ),
         ],

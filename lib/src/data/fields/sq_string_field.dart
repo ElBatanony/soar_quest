@@ -35,6 +35,6 @@ class _SQStringFormField extends SQFormField<SQStringField> {
   const _SQStringFormField(super.field, super.docScreenState);
 
   @override
-  Widget fieldBuilder(formFieldState) =>
+  Widget fieldBuilder(context) =>
       SQTextField(this, textParse: (text) => text, maxLines: field.maxLines);
 }

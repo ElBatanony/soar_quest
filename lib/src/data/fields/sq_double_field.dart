@@ -24,6 +24,5 @@ class _SQDoubleFormField extends SQFormField<SQDoubleField> {
   const _SQDoubleFormField(super.field, super.docScreenState);
 
   @override
-  Widget fieldBuilder(formFieldState) =>
-      SQTextField(this, textParse: double.tryParse);
+  Widget fieldBuilder(context) => SQTextField(this, textParse: double.tryParse);
 }

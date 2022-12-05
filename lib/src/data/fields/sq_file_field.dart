@@ -40,7 +40,7 @@ class SQFileFormField<FileField extends SQFileField>
     }
   }
 
-  Future<void> selectAndUploadFile(SQFormFieldState formFieldState) async {
+  Future<void> selectAndUploadFile(context) async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -53,13 +53,13 @@ class SQFileFormField<FileField extends SQFileField>
     }
   }
 
-  Future<void> deleteFile(SQFormFieldState formFieldState) async {
+  Future<void> deleteFile(context) async {
     await field.storage.deleteFile(doc: doc, field: field);
     onChanged();
   }
 
   @override
-  Widget fieldBuilder(formFieldState) => Row(
+  Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.name),
@@ -68,10 +68,10 @@ class SQFileFormField<FileField extends SQFileField>
           else
             const Text('File not set'),
           SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
-              onPressed: () async => selectAndUploadFile(formFieldState)),
+              onPressed: () async => selectAndUploadFile(context)),
           if (field.fileExists)
             IconButton(
-                onPressed: () async => deleteFile(formFieldState),
+                onPressed: () async => deleteFile(context),
                 icon: const Icon(Icons.delete))
         ],
       );
