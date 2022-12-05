@@ -53,5 +53,6 @@ example/playground/
 
 android/
 web/
-example/firebase_options.dart
+windows/
+**/firebase_options.dart
 pubspec.lock

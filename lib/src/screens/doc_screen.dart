@@ -1,57 +1,73 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-import '../db/sq_collection.dart';
+import '../data/sq_collection.dart';
 import 'screen.dart';
 
 class DocScreen extends Screen {
-  final SQDoc doc;
-
   DocScreen(
     this.doc, {
     String? title,
     super.icon,
     super.isInline,
-    super.key,
-  }) : super(title ?? doc.label);
+  }) : super(title: title ?? doc.label);
+
+  final SQDoc doc;
+
+  SQCollection get collection => doc.collection;
 
   @override
-  State<DocScreen> createState() => DocScreenState();
+  createState() => DocScreenState();
+
+  Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) =>
+      field.formField(screenState as DocScreenState);
+
+  List<Widget> fieldsDisplay(ScreenState screenState) => collection.fields
+      .map((collectionField) => doc.getField(collectionField.name)!)
+      .toList()
+      .where((field) => field.show.check(doc, screenState))
+      .map((field) => fieldDisplay(field, screenState))
+      .toList();
+
+  Widget actionsDisplay(ScreenState screenState) => Wrap(
+        children: collection.actions
+            .where((action) => action.show.check(doc, screenState))
+            .map((action) => action.button(doc, screenState: screenState))
+            .toList(),
+      );
+
+  @override
+  Widget screenBody(ScreenState screenState) => SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            actionsDisplay(screenState),
+            ...fieldsDisplay(screenState),
+          ],
+        ),
+      );
 }
 
-class DocScreenState<T extends DocScreen> extends ScreenState<T> {
+class DocScreenState<DS extends DocScreen> extends ScreenState<DS> {
   SQDoc get doc => widget.doc;
   SQCollection get collection => doc.collection;
 
-  Widget fieldDisplay(SQField<dynamic> field, BuildContext context) {
-    return field.formField(doc, onChanged: refreshScreen);
-  }
+  StreamSubscription<DocData>? liveListener;
 
-  List<Widget> fieldsDisplay(BuildContext context) {
-    return doc.fields
-        .where((field) => field.show.check(doc, context))
-        .map((field) => fieldDisplay(field, context))
-        .toList();
-  }
-
-  Widget actionsDisplay(BuildContext context) {
-    return Wrap(
-      children: collection.actions
-          .where((action) => action.show.check(doc, context))
-          .map((action) => action.button(doc))
-          .toList(),
-    );
+  @override
+  void initState() {
+    if (collection.isLive)
+      liveListener = collection.liveUpdates(doc).listen((mapData) {
+        doc.parse(mapData);
+        refreshScreen();
+      });
+    super.initState();
   }
 
   @override
-  Widget screenBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          actionsDisplay(context),
-          ...fieldsDisplay(context),
-        ],
-      ),
-    );
+  void dispose() {
+    if (liveListener != null) unawaited(liveListener?.cancel());
+    super.dispose();
   }
 }

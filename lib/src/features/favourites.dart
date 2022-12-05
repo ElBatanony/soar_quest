@@ -1,55 +1,55 @@
 import 'package:flutter/material.dart';
 
+import '../data/collections/local_collection.dart';
+import '../data/fields/sq_ref_field.dart';
+import '../data/sq_action.dart';
 import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
 import '../screens/screen.dart';
 import '../sq_auth.dart';
-import '../db/local_collection.dart';
-import '../db/sq_action.dart';
-import '../db/sq_collection.dart';
-import '../db/fields/sq_ref_field.dart';
 
 class FavouritesFeature {
+  FavouritesFeature({required this.collection}) {
+    favouritesCollection = LocalCollection(
+        id: 'Favourite ${collection.id}',
+        fields: [SQRefField('ref', collection: collection)],
+        actions: [
+          GoScreenAction('',
+              screen: (doc) =>
+                  DocScreen(collection.getDoc(doc.value<SQRef>('ref')!.docId)!))
+        ],
+        parentDoc: SQAuth.userDoc,
+        updates: SQUpdates.readOnly());
+    collection.actions
+        .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
+  }
+
   SQCollection collection;
   late final SQCollection favouritesCollection;
 
   SQAction addToFavouritesAction() => CustomAction(
-        "Fav",
+        'Fav',
         icon: Icons.favorite,
         show: isInFavourites().not,
-        customExecute: (doc, context) async {
-          var newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
-          newFavDoc.getField<SQRefField>("ref")!.value = doc.ref;
+        customExecute: (doc, screenState) async {
+          final newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
+          newFavDoc.getField<SQRefField>('ref')!.value = doc.ref;
           await favouritesCollection.saveDoc(newFavDoc);
-          ScreenState.of(context).refreshScreen();
+          screenState.refreshScreen();
         },
       );
 
   SQAction removeFromFavouritesAction() => CustomAction(
-        "UnFav",
+        'UnFav',
         icon: Icons.delete_forever_sharp,
         show: isInFavourites(),
-        customExecute: (doc, context) async {
+        customExecute: (doc, screenState) async {
           await favouritesCollection.deleteDoc(doc);
-          ScreenState.of(context).refreshScreen();
+          screenState.refreshScreen();
         },
       );
 
-  FavouritesFeature({required this.collection}) {
-    favouritesCollection = LocalCollection(
-        id: "Favourite ${collection.id}",
-        fields: [SQRefField("ref", collection: collection)],
-        actions: [
-          GoScreenAction("",
-              screen: (doc) =>
-                  DocScreen(collection.getDoc(doc.value<SQRef>("ref")!.docId)!))
-        ],
-        parentDoc: SQAuth.userDoc,
-        readOnly: true);
-    collection.actions
-        .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
-    favouritesCollection.loadCollection();
-  }
+  Future<void> loadFavourites() => favouritesCollection.loadCollection();
 
   DocCond isInFavourites() =>
       DocCond((doc, _) => favouritesCollection.hasDoc(doc));
@@ -57,8 +57,9 @@ class FavouritesFeature {
 
 class FavouritesScreen extends CollectionScreen {
   FavouritesScreen(
-      {required FavouritesFeature favouritesFeature, super.isInline, super.key})
-      : super(
-            collection: favouritesFeature.favouritesCollection,
-            docScreen: (favDoc) => DocScreen(favDoc.value<SQRef>("ref")!.doc));
+      {required FavouritesFeature favouritesFeature, super.isInline})
+      : super(collection: favouritesFeature.favouritesCollection);
+
+  @override
+  Screen docScreen(SQDoc doc) => DocScreen(doc.value<SQRef>('ref')!.doc);
 }

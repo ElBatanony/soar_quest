@@ -1,42 +1,40 @@
 import 'package:flutter/material.dart';
 
-import '../sq_auth.dart';
-import '../sq_app.dart';
+import '../data/user_settings.dart';
 import '../screens/screen.dart';
-import '../db/user_settings.dart';
+import '../sq_app.dart';
+import '../sq_auth.dart';
 
 class SQDrawer extends StatelessWidget {
-  final List<Screen> screens;
-
-  SQDrawer(this.screens) {
+  SQDrawer([List<Screen> screens = const []]) {
+    this.screens.addAll(screens);
     if (UserSettings.initialized &&
-        screens.any((screen) => screen.title == "Settings") == false)
-      screens.add(UserSettings.settingsScreen());
-    if (SQAuth.offline == false) screens.add(SQProfileScreen());
+        screens.any((screen) => screen.title == 'Settings') == false)
+      this.screens.add(UserSettings.settingsScreen());
+    if (SQAuth.offline == false) this.screens.add(SQProfileScreen());
   }
+
+  late final List<Screen> screens = [];
 
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            child: Text(
-              SQApp.name,
-              style: TextStyle(fontSize: 24),
+  Widget build(BuildContext context) => Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Text(
+                SQApp.name,
+                style: const TextStyle(fontSize: 24),
+              ),
             ),
-          ),
-          ...screens
-              .where((screen) => screen.show(context))
-              .map((screen) => ListTile(
-                    leading: Icon(screen.icon),
-                    title: Text(screen.title),
-                    onTap: () => screen.go(context, replace: true),
-                  ))
-              .toList(),
-        ],
-      ),
-    );
-  }
+            ...screens
+                .where((screen) => screen.show(context))
+                .map((screen) => ListTile(
+                      leading: Icon(screen.icon),
+                      title: Text(screen.title),
+                      onTap: () async => screen.go(context, replace: true),
+                    )),
+          ],
+        ),
+      );
 }

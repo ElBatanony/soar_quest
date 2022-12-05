@@ -1,40 +1,30 @@
 import 'package:flutter/material.dart';
 
-import '../sq_app.dart';
 import '../screens/screen.dart';
+import '../sq_app.dart';
 
-class SQNavBar extends StatefulWidget {
+class SQNavBar extends StatelessWidget {
+  SQNavBar(this.screens) : initialIndex = SQApp.selectedNavScreen;
+
   final List<Screen> screens;
+  final int initialIndex;
 
-  const SQNavBar(this.screens);
-
-  @override
-  State<SQNavBar> createState() => _SQNavBarState();
-}
-
-class _SQNavBarState extends State<SQNavBar> {
-  late int initialIndex;
-
-  List<Screen> get screens =>
-      widget.screens.where((screen) => screen.show(context)).toList();
-
-  @override
-  void initState() {
-    initialIndex = SQApp.selectedNavScreen;
-    super.initState();
-  }
+  List<Screen> visibleScreens(BuildContext context) =>
+      screens.where((screen) => screen.show(context)).toList();
 
   @override
   Widget build(BuildContext context) {
-    if (SQApp.navbarScreens.length < 2) throw "Too few screens for SQNavBar";
+    if (SQApp.navbarScreens.length < 2)
+      throw Exception('Too few screens for SQNavBar');
     return NavigationBar(
-      onDestinationSelected: (int index) {
+      onDestinationSelected: (index) async {
         SQApp.selectedNavScreen = index;
-        screens[SQApp.selectedNavScreen].go(context, replace: true);
+        await visibleScreens(context)[SQApp.selectedNavScreen]
+            .go(context, replace: true);
       },
       selectedIndex: initialIndex,
       surfaceTintColor: Colors.white,
-      destinations: screens
+      destinations: visibleScreens(context)
           .map((screen) => NavigationDestination(
               icon: Icon(screen.icon), label: screen.title))
           .toList(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
+import '../sq_auth.dart';
+import '../ui/sq_button.dart';
 import '../ui/sq_navbar.dart';
 
 Future<T?> _goToScreen<T>(
@@ -25,18 +27,19 @@ Future<T?> _goToScreen<T>(
 bool alwaysShowScreen(BuildContext context) => true;
 
 class Screen extends StatefulWidget {
+  const Screen({
+    required this.title,
+    this.isInline = false,
+    this.icon = Icons.stay_current_landscape,
+    this.show = alwaysShowScreen,
+    this.signedIn = false,
+  });
+
   final String title;
   final IconData? icon;
   final bool isInline;
   final bool Function(BuildContext) show;
-
-  const Screen(
-    this.title, {
-    this.isInline = false,
-    this.icon = Icons.stay_current_landscape,
-    this.show = alwaysShowScreen,
-    super.key,
-  });
+  final bool signedIn;
 
   @override
   State<Screen> createState() => ScreenState();
@@ -44,59 +47,77 @@ class Screen extends StatefulWidget {
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
-}
 
-class ScreenState<T extends Screen> extends State<T> {
-  void refreshScreen() => mounted ? setState(() {}) : {};
+  AppBar appBar(ScreenState screenState) => AppBar(
+        title: Text(title),
+        leading: Navigator.of(screenState.context).canPop()
+            ? const BackButton()
+            : null,
+        actions: appBarActions(screenState),
+      );
 
-  Widget screenBody(BuildContext context) {
-    return Center(child: Text('${widget.title} Screen'));
-  }
+  Widget screenBody(ScreenState screenState) =>
+      Center(child: Text('$title Screen'));
 
-  List<Widget> appBarActions(BuildContext context) {
-    return [IconButton(onPressed: refreshScreen, icon: Icon(Icons.refresh))];
-  }
+  List<Widget> appBarActions(ScreenState screenState) => [
+        IconButton(
+            onPressed: screenState.refreshScreen,
+            icon: const Icon(Icons.refresh))
+      ];
 
-  AppBar appBar(BuildContext context) {
-    return AppBar(
-      title: Text(widget.title),
-      leading: Navigator.of(context).canPop() ? BackButton() : null,
-      actions: appBarActions(context),
-    );
-  }
+  FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
 
-  FloatingActionButton? floatingActionButton(BuildContext context) => null;
-
-  Widget? bottomNavBar(BuildContext context) {
-    if (SQApp.navbarScreens.length > 1) return SQNavBar(SQApp.navbarScreens);
+  Widget? bottomNavBar(ScreenState screenState) {
+    if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);
     return null;
   }
 
+  EdgeInsetsGeometry? get screenPadding =>
+      isInline ? null : const EdgeInsets.all(16);
+}
+
+class ScreenState<T extends Screen> extends State<T> {
+  void refreshScreen() => setState(() {});
+
   @override
   Widget build(BuildContext context) {
-    final Widget body = Builder(builder: (context2) {
-      return Container(
-        padding: widget.isInline ? null : EdgeInsets.all(16.0),
-        child: screenBody(context2),
+    if (widget.signedIn && SQAuth.isSignedIn == false) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        drawer: SQApp.drawer,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('You should be signed in to view this screen.'),
+              SQButton('Sign In',
+                  onPressed: () async => SQProfileScreen().go(context))
+            ],
+          ),
+        ),
+        bottomNavigationBar: widget.bottomNavBar(this),
       );
-    });
+    }
+
+    final Widget body = Builder(
+        builder: (_) => Container(
+              padding: widget.screenPadding,
+              child: widget.screenBody(this),
+            ));
 
     if (widget.isInline) return body;
 
-    return Builder(builder: (context2) {
-      return Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: appBar(context2),
-        drawer: SQApp.drawer,
-        body: body,
-        floatingActionButton: floatingActionButton(context2),
-        bottomNavigationBar: bottomNavBar(context2),
-      );
-    });
-  }
-
-  static ScreenState of(BuildContext context) {
-    return context.findAncestorStateOfType<ScreenState>()!;
+    return Builder(
+        builder: (_) => Scaffold(
+              resizeToAvoidBottomInset: true,
+              appBar: widget.appBar(this),
+              drawer: SQApp.drawer,
+              body: body,
+              floatingActionButton: widget.floatingActionButton(this),
+              bottomNavigationBar: widget.bottomNavBar(this),
+            ));
   }
 
   void exitScreen<V extends Object?>([V? value]) {

@@ -1,31 +1,55 @@
 import 'package:flutter/material.dart';
 
-import '../../db/in_memory_collection.dart';
-import '../../db/sq_collection.dart';
+import '../../data/collections/in_memory_collection.dart';
 import '../collection_screen.dart';
 import '../form_screen.dart';
 
 class CollectionFilterScreen extends CollectionScreen {
-  final List<CollectionFilter> filters;
-
   CollectionFilterScreen({
-    super.title,
     required super.collection,
     required this.filters,
-    super.docScreen,
+    super.title,
     super.icon,
-    super.key,
   });
+
+  final List<CollectionFilter> filters;
+  final List<CollectionFieldFilter> fieldFilters = [];
 
   @override
   State<CollectionFilterScreen> createState() => CollectionFilterScreenState();
+
+  List<SQDoc> filterDocs(
+          List<SQDoc> initialDocs, List<CollectionFilter> filters) =>
+      filters.fold(
+          initialDocs, (remainingDocs, filter) => filter.filter(remainingDocs));
+
+  @override
+  List<SQDoc> get docs => filterDocs(collection.docs, fieldFilters);
+
+  Widget filterFieldsDisplay(ScreenState screenState) {
+    fieldFilters
+      ..clear()
+      ..addAll((screenState as CollectionFilterScreenState).fieldFilters);
+    return Column(
+      children: [
+        screenState.fieldsFormScreen,
+        Text('Total docs: ${collection.docs.length}'),
+        Text('Showing docs: ${docs.length}')
+      ],
+    );
+  }
+
+  @override
+  Widget screenBody(ScreenState screenState) => Column(
+        children: [
+          filterFieldsDisplay(screenState),
+          Expanded(child: super.screenBody(screenState)),
+        ],
+      );
 }
 
 class CollectionFilterScreenState<T extends CollectionFilterScreen>
     extends CollectionScreenState<T> {
-  @override
-  List<SQDoc> get docs => collection.filterBy(fieldFilters);
-
   late FormScreen fieldsFormScreen;
   List<CollectionFieldFilter> fieldFilters = [];
 
@@ -33,40 +57,20 @@ class CollectionFilterScreenState<T extends CollectionFilterScreen>
   void initState() {
     fieldFilters = widget.filters.whereType<CollectionFieldFilter>().toList();
 
-    SQCollection fakeColl = InMemoryCollection(
-        id: "hi",
+    final fakeColl = InMemoryCollection(
+        id: 'hi',
         fields: fieldFilters.map((fieldFilter) => fieldFilter.field).toList());
 
-    SQDoc fakeDoc = fakeColl.newDoc();
+    final fakeDoc = fakeColl.newDoc();
 
     fieldsFormScreen =
-        FormScreen(fakeDoc, isInline: true, onFieldsChanged: (doc) {
+        FormScreen(fakeDoc, isInline: true, onFieldsChanged: (doc) async {
       for (final fieldFilter in fieldFilters) {
         fieldFilter.field = doc.getField(fieldFilter.field.name)!;
       }
-      refreshScreen();
+      await refreshScreen();
     });
 
     super.initState();
-  }
-
-  Widget filterFieldsDisplay() {
-    return Column(
-      children: [
-        fieldsFormScreen,
-        Text('Total docs: ${widget.collection.docs.length}'),
-        Text('Showing docs: ${docs.length}')
-      ],
-    );
-  }
-
-  @override
-  Widget screenBody(BuildContext context) {
-    return Column(
-      children: [
-        filterFieldsDisplay(),
-        Expanded(child: super.screenBody(context)),
-      ],
-    );
   }
 }

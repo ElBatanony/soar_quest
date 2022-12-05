@@ -52,11 +52,13 @@ dependencies:
 
 ### Android Setup
 
-To compile your app in Android, update your `minSdkVersion` to 19 (or higher), and enable `multiDex`.
+To compile your app in Android, update your `minSdkVersion` to `19` (or higher), and enable `multiDex`.
+Additionally, set your `compileSdkVersion` to `33` (or higher).
 You can find the settings in `android\app\build.gradle`.
 
 ```gradle
 android {
+  compileSdkVersion 33
   defaultConfig {
     minSdkVersion 19
     multiDexEnabled true

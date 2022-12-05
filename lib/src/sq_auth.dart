@@ -1,14 +1,15 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart'
     hide EmailAuthProvider, PhoneAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'db/fields/sq_string_field.dart';
-import 'db/firestore_collection.dart';
-import 'db/sq_collection.dart';
-import 'db/local_collection.dart';
+import 'data/collections/firestore_collection.dart';
+import 'data/collections/local_collection.dart';
+import 'data/fields/sq_string_field.dart';
 
-import 'db/sq_action.dart';
+import 'data/sq_action.dart';
 import 'screens/screen.dart';
 
 enum AuthMethod { email, phone }
@@ -34,12 +35,12 @@ class SQAuth {
       userDoc = usersCollection.getDoc(user!.userId);
       if (userDoc == null) {
         userDoc = usersCollection.newDoc(id: user!.userId, initialFields: [
-          SQStringField("Email", value: SQAuth.user!.email, editable: false)
+          SQStringField('Email', value: SQAuth.user!.email, editable: false)
         ]);
         await usersCollection.saveDoc(userDoc!);
       } else {
-        if (userDoc!.value<String>("Email") != SQAuth.user!.email) {
-          userDoc!.getField("Email")!.value = SQAuth.user!.email;
+        if (userDoc!.value<String>('Email') != SQAuth.user!.email) {
+          userDoc!.getField('Email')!.value = SQAuth.user!.email;
           await usersCollection.saveDoc(userDoc!);
         }
       }
@@ -53,14 +54,14 @@ class SQAuth {
     List<AuthMethod>? methods,
   }) async {
     SQAuth.methods = methods ?? [AuthMethod.email];
-    userDocFields = userDocFields ?? [];
-    userDocFields.insert(0, SQStringField("Email", editable: false));
+    userDocFields ??= [];
+    userDocFields.insert(0, SQStringField('Email', editable: false));
     if (offline) {
-      usersCollection =
-          LocalCollection(id: "Users", fields: userDocFields, readOnly: true);
+      usersCollection = LocalCollection(
+          id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
     } else {
       usersCollection = FirestoreCollection(
-          id: "Users", fields: userDocFields, readOnly: true);
+          id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
     }
     await usersCollection.loadCollection();
     await initUserDoc();
@@ -83,63 +84,60 @@ class FirebaseUser extends SQUser {
 
 class OfflineUser extends SQUser {
   @override
-  String get userId => "Offline User";
+  String get userId => 'Offline User';
   @override
-  String get email => "Offline Email";
+  String get email => 'Offline Email';
 }
 
 class SQProfileScreen extends Screen {
-  const SQProfileScreen(
-      {String title = "Profile", super.icon = Icons.account_circle})
-      : super(title);
-
-  @override
-  State<SQProfileScreen> createState() => _SQProfileScreenState();
-}
-
-class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
-  late List<AuthProvider> providers;
-
-  @override
-  void initState() {
+  SQProfileScreen(
+      {super.title = 'Profile', super.icon = Icons.account_circle}) {
     providers = [
       if (SQAuth.methods.contains(AuthMethod.email)) EmailAuthProvider(),
       if (SQAuth.methods.contains(AuthMethod.phone)) PhoneAuthProvider(),
     ];
-    super.initState();
   }
 
-  @override
-  void refreshScreen() {
-    SQAuth.initUserDoc();
-    super.refreshScreen();
-  }
+  late final List<AuthProvider> providers;
 
   @override
-  Widget screenBody(BuildContext context) {
+  State<SQProfileScreen> createState() => _SQProfileScreenState();
+
+  @override
+  Widget screenBody(ScreenState screenState) {
     if (SQAuth.offline) {
-      return Center(child: Text("Profile Screen"));
+      return const Center(child: Text('Profile Screen'));
     }
 
     if (SQAuth.user == null) {
       return SignInScreen(
         providers: providers,
         actions: [
-          AuthStateChangeAction<SignedIn>((context, state) => refreshScreen()),
+          AuthStateChangeAction<SignedIn>(
+              (bcontext, state) => screenState.refreshScreen()),
         ],
       );
     }
     return ProfileScreen(
       actions: [
-        AuthStateChangeAction<SignedIn>((context, state) => refreshScreen()),
-        SignedOutAction((context) => refreshScreen()),
+        AuthStateChangeAction<SignedIn>(
+            (bcontext, state) => screenState.refreshScreen()),
+        SignedOutAction((bcontext) => screenState.refreshScreen()),
       ],
       providers: providers,
       children: [
         if (SQAuth.userDoc != null)
-          GoEditAction(name: "Edit Profile", show: isSignedIn)
-              .button(SQAuth.userDoc!),
+          GoEditAction(name: 'Edit Profile', show: isSignedIn)
+              .button(SQAuth.userDoc!, screenState: screenState),
       ],
     );
+  }
+}
+
+class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
+  @override
+  refreshScreen() async {
+    unawaited(SQAuth.initUserDoc());
+    super.refreshScreen();
   }
 }

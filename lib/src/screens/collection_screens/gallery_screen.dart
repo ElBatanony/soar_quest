@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
 
-import '../../db/sq_doc.dart';
+import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 
 class GalleryScreen extends CollectionScreen {
   GalleryScreen({required super.collection, super.title});
 
   @override
-  createState() => GalleryScreenState();
-}
+  Widget docsDisplay(List<SQDoc> docs, ScreenState screenState) =>
+      GridView.count(
+        crossAxisCount: 2,
+        children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
+      );
 
-class GalleryScreenState<S extends GalleryScreen>
-    extends CollectionScreenState<S> {
   @override
-  Widget docDisplay(SQDoc doc, BuildContext context) {
-    return Card(
-      child: InkWell(
-        onTap: () => goToDocScreen(docScreen(doc)),
-        child: Column(
-          children: [
-            doc.imageLabel != null
-                ? Image.network(doc.imageLabel!.value!, height: 120)
-                : SizedBox(height: 120, child: Center(child: Text("No Image"))),
-            Text(doc.label)
-          ],
+  Widget docDisplay(SQDoc doc, ScreenState screenState) => Card(
+        child: InkWell(
+          onTap: () async => goToDocScreen(docScreen(doc), screenState),
+          child: Column(
+            children: [
+              if (doc.imageLabel != null)
+                Image.network(doc.imageLabel!.value!, height: 120)
+              else
+                const SizedBox(
+                    height: 120, child: Center(child: Text('No Image'))),
+              Text(doc.label)
+            ],
+          ),
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget docsDisplay(List<SQDoc> docs, BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: docs.map((doc) => docDisplay(doc, context)).toList(),
-    );
-  }
+      );
 }

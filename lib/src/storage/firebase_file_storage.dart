@@ -1,24 +1,24 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'sq_file_field.dart';
-import '../db/sq_doc.dart';
+import '../data/fields/sq_file_field.dart';
+import '../data/sq_doc.dart';
 import 'sq_file_storage.dart';
 
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 class FirebaseFileStorage extends SQFileStorage {
-  Reference getRef(SQDoc doc, SQFileField field) {
-    return firebaseStorage.ref().child("${doc.path}/${field.name}");
-  }
+  Reference getRef(SQDoc doc, SQFileField field) =>
+      firebaseStorage.ref().child('${doc.path}/${field.name}');
 
   @override
   Future<void> uploadFile({
     required SQDoc doc,
     required XFile file,
-    required Function onUpload,
+    required VoidCallback onUpload,
     required SQFileField field,
   }) async {
     final metadata = SettableMetadata(
@@ -32,15 +32,13 @@ class FirebaseFileStorage extends SQFileStorage {
         .putFile(File(file.path), metadata)
         .snapshotEvents
         .listen((taskSnapshot) async {
-      switch (taskSnapshot.state) {
-        case TaskState.success:
-          String downloadUrl = await ref.getDownloadURL();
-          field.value = downloadUrl;
-          print("File uploaded!!");
-          onUpload();
-          break;
-        default:
-          print(taskSnapshot.state);
+      debugPrint(taskSnapshot.state.toString());
+      if (taskSnapshot.state == TaskState.success) {
+        final downloadUrl = await ref.getDownloadURL();
+        field.value = downloadUrl;
+        debugPrint('File uploaded!!');
+        onUpload();
+        return;
       }
     });
   }

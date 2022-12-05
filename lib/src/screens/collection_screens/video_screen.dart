@@ -2,63 +2,51 @@ import 'package:flutter/material.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../db/sq_doc.dart';
-import '../../db/fields/sq_video_link_field.dart';
+import '../../data/fields/sq_video_link_field.dart';
+import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 import '../doc_screen.dart';
 
 class VideoCollectionScreen extends CollectionScreen {
-  final SQVideoLinkField videoField;
-
   VideoCollectionScreen({
-    super.title,
     required super.collection,
     required this.videoField,
-    super.key,
+    super.title,
   });
 
-  @override
-  State<VideoCollectionScreen> createState() => _VideoCollectionScreenState();
-}
+  final SQVideoLinkField videoField;
 
-class _VideoCollectionScreenState
-    extends CollectionScreenState<VideoCollectionScreen> {
   @override
-  Widget docDisplay(SQDoc doc, BuildContext context) {
-    return VideoDocDisplay(
-      doc,
-      videoField: widget.videoField,
-    );
-  }
+  Widget docDisplay(SQDoc doc, ScreenState screenState) =>
+      VideoDocDisplay(doc, videoField: videoField);
 }
 
 class VideoDocDisplay extends DocScreen {
-  final SQVideoLinkField videoField;
+  VideoDocDisplay(super.doc, {required this.videoField, super.isInline});
 
-  VideoDocDisplay(super.doc,
-      {required this.videoField, super.isInline, super.key});
+  final SQVideoLinkField videoField;
 
   @override
   State<VideoDocDisplay> createState() => _VideoDocDisplayState();
 }
 
-class _VideoDocDisplayState extends DocScreenState<VideoDocDisplay> {
+class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   YoutubePlayerController? _controller;
 
   @override
   void initState() {
     super.initState();
 
-    String? videoFieldValue = widget.doc.value<String>(widget.videoField.name);
+    final videoFieldValue = widget.doc.value<String>(widget.videoField.name);
 
     if (videoFieldValue == null) return;
 
-    String? videoId = YoutubePlayer.convertUrlToId(videoFieldValue);
+    final videoId = YoutubePlayer.convertUrlToId(videoFieldValue);
 
     if (videoId != null) {
       _controller = YoutubePlayerController(
         initialVideoId: videoId,
-        flags: YoutubePlayerFlags(
+        flags: const YoutubePlayerFlags(
           autoPlay: false,
           mute: true,
         ),
@@ -73,22 +61,21 @@ class _VideoDocDisplayState extends DocScreenState<VideoDocDisplay> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Center(
-        child: Column(
-          children: [
-            Text(widget.doc.label),
-            _controller != null
-                ? YoutubePlayer(
-                    controller: _controller!,
-                    showVideoProgressIndicator: true,
-                  )
-                : Text("No video here")
-          ],
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(15),
+        child: Center(
+          child: Column(
+            children: [
+              Text(widget.doc.label),
+              if (_controller != null)
+                YoutubePlayer(
+                  controller: _controller!,
+                  showVideoProgressIndicator: true,
+                )
+              else
+                const Text('No video here')
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

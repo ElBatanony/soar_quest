@@ -1,13 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'sq_file_field.dart';
-import '../db/sq_doc.dart';
+import '../data/fields/sq_file_field.dart';
+import '../data/sq_doc.dart';
 
 abstract class SQFileStorage {
   Future<void> uploadFile({
     required SQDoc doc,
     required XFile file,
-    required Function onUpload,
+    required VoidCallback onUpload,
     required SQFileField field,
   });
 

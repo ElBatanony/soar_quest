@@ -1,11 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-
-import 'ui/sq_drawer.dart';
-import 'sq_auth.dart';
-import 'db/sq_field.dart';
+import 'data/sq_field.dart';
 import 'screens/screen.dart';
+import 'sq_auth.dart';
+import 'ui/sq_drawer.dart';
 
 class SQApp {
   static late String name;
@@ -48,6 +47,5 @@ class SQApp {
   }
 }
 
-Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) {
-  return Firebase.initializeApp(options: options);
-}
+Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) =>
+    Firebase.initializeApp(options: options);

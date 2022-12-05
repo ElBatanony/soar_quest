@@ -11,21 +11,26 @@ environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-    
-  firebase_core: ^2.1.1
   cloud_firestore: ^4.0.3
+  collection: ^1.16.0
   firebase_auth: ^4.1.0
+  firebase_core: ^2.1.1
   firebase_storage: ^11.0.3
   firebase_ui_auth: ^1.0.3
-  youtube_player_flutter: ^8.1.0
+
+  flutter:
+    sdk: flutter
+
+  flutter_colorpicker: ^1.0.3
+  flutter_map: ^3.0.0
+  flutter_quill: ^6.1.6
   image_picker: ^0.8.5+3
+  latlong2: ^0.8.1
   path_provider: ^2.0.11
-  url_launcher: ^6.1.5
-  collection: ^1.16.0
   shared_preferences: ^2.0.15
+  url_launcher: ^6.1.5
   uuid: ^3.0.6
+  youtube_player_flutter: ^8.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
