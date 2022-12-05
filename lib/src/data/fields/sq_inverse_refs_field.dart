@@ -74,7 +74,7 @@ class _SQInverseRefsFormFieldState
     extends SQFormFieldState<SQInverseRefsField> {
   Future<void> initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
-    onChanged();
+    formField.onChanged();
   }
 
   @override

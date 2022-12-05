@@ -40,7 +40,7 @@ class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
       TimeOfDay? newSelectedTimeOfDay, SQFormFieldState formFieldState) {
     if (newSelectedTimeOfDay != null) {
       field.value = SQTimeOfDay.fromTimeOfDay(newSelectedTimeOfDay);
-      formFieldState.onChanged();
+      onChanged();
     }
   }
 

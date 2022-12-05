@@ -81,7 +81,7 @@ class _SQColorFormField extends SQFormField<SQColorField> {
               ],
             ),
           );
-          formFieldState.onChanged();
+          onChanged();
         })
       ],
     );

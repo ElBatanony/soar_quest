@@ -31,7 +31,7 @@ class _SQBoolFormField extends SQFormField<SQBoolField> {
             constraints: const BoxConstraints(minWidth: 100, minHeight: 40),
             onPressed: (index) {
               field.value = index == 1;
-              formFieldState.onChanged();
+              onChanged();
             },
             isSelected: [field.value == false, field.value ?? true],
             children: const [Text('No'), Text('Yes')],

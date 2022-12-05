@@ -60,7 +60,7 @@ class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
   void addField(SQFormFieldState formFieldState) {
     final newField = listField.field.copy();
     listField.fields.add(newField);
-    formFieldState.onChanged();
+    onChanged();
   }
 
   @override

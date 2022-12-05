@@ -49,7 +49,7 @@ class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
                 context: formFieldState.context);
             if (newValue != null) {
               field.value = newValue;
-              formFieldState.onChanged();
+              onChanged();
             }
           })
         ],

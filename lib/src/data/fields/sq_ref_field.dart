@@ -83,7 +83,7 @@ class _SQRefFormField extends SQFormField<SQRefField> {
                     collectionPath: retDoc.collection.path,
                   );
                   field.value = ref;
-                  formFieldState.onChanged();
+                  onChanged();
                 }
               },
             ),

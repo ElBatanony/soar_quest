@@ -68,6 +68,8 @@ abstract class SQFormField<Field extends SQField<dynamic>>
 
   Widget fieldBuilder(SQFormFieldState formFieldState);
 
+  void onChanged() => docScreenState.refreshScreen();
+
   @override
   SQFormFieldState<Field> createState() => SQFormFieldState();
 }
@@ -81,11 +83,6 @@ class SQFormFieldState<Field extends SQField<dynamic>>
 
   @override
   SQFormField<Field> get value => throw Exception('Do not use FormField.value');
-
-  void onChanged() {
-    screenState.refreshScreen();
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) => Padding(

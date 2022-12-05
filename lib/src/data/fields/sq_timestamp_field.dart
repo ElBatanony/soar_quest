@@ -40,7 +40,7 @@ class _SQTimestampFormField extends SQFormField<SQTimestampField> {
   void _selectDate(DateTime? newSelectedDate, SQFormFieldState formFieldState) {
     if (newSelectedDate != null) {
       field.value = SQTimestamp.fromDate(newSelectedDate);
-      formFieldState.onChanged();
+      onChanged();
     }
   }
 
