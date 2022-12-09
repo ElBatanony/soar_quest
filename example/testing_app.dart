@@ -35,6 +35,8 @@ void main() async {
       SQDoubleField('Double'),
       SQFileField('File', storage: firebaseFileStorage),
       SQIntField('Int'),
+      SQVirtualField(
+          field: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
       SQColorField('Color'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
