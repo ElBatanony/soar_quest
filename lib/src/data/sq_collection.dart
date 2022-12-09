@@ -83,9 +83,6 @@ abstract class SQCollection {
   static SQCollection? byPath(String path) =>
       _collections.singleWhereOrNull((collection) => collection.path == path);
 
-  List<SQField<dynamic>> copyFields() =>
-      fields.map((field) => field.copy()).toList();
-
   SQDoc? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 
   Stream<DocData> liveUpdates(SQDoc doc) => const Stream.empty();
