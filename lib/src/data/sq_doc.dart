@@ -42,6 +42,10 @@ class SQDoc {
 
   String get label => _values[collection.fields.first.name].toString();
 
+  String? get secondaryLabel => collection.fields.length >= 2
+      ? _values[collection.fields[1].name].toString()
+      : null;
+
   SQRef get ref => SQRef.fromDoc(this);
 
   @override

@@ -24,8 +24,8 @@ class CardsScreen extends CollectionScreen {
                           style:
                               Theme.of(screenState.context).textTheme.headline6,
                         ),
-                        if (doc.fields.length >= 2)
-                          Text((doc.fields[1].value ?? '').toString())
+                        if (doc.secondaryLabel != null)
+                          Text(doc.secondaryLabel!)
                       ],
                     ),
                   ],

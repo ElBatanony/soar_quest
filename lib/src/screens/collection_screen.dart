@@ -55,9 +55,7 @@ class CollectionScreen extends Screen {
 
   Widget docDisplay(SQDoc doc, ScreenState screenState) => ListTile(
         title: Text(doc.label),
-        subtitle: doc.fields.length >= 2
-            ? Text((doc.fields[1].value ?? '').toString())
-            : null,
+        subtitle: doc.secondaryLabel == null ? null : Text(doc.secondaryLabel!),
         leading: doc.imageLabel != null
             ? Image.network(doc.imageLabel!, width: 70)
             : null,
