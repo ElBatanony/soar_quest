@@ -39,6 +39,7 @@ void main() async {
           field: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
       SQFieldListField(SQStringField('String List'), defaultValue: ['hi']),
       SQColorField('Color'),
+      SQLocationField('Location'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
       SQStringField('Readonly String', value: 'I am readonly', editable: false),
