@@ -37,6 +37,7 @@ void main() async {
       SQIntField('Int'),
       SQVirtualField(
           field: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
+      SQFieldListField(SQStringField('String List'), defaultValue: ['hi']),
       SQColorField('Color'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
