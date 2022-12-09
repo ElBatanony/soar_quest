@@ -102,7 +102,7 @@ class CreateDocAction extends SQAction {
   CreateDocAction(
     super.name, {
     required this.getCollection,
-    required this.initialFields,
+    required this.source,
     super.icon,
     super.show,
     super.onExecute,
@@ -111,7 +111,7 @@ class CreateDocAction extends SQAction {
   });
 
   SQCollection Function() getCollection;
-  List<SQField<dynamic>> Function(SQDoc) initialFields;
+  Map<String, dynamic> Function(SQDoc) source;
   bool form;
   bool goBack;
 
