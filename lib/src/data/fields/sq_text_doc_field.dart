@@ -24,18 +24,18 @@ class SQTextDocField extends SQField<Document> {
   @override
   serialize(value) {
     if (value == null) return null;
-    return jsonEncode(value!.toDelta().toJson());
+    return jsonEncode(value.toDelta().toJson());
   }
 
   @override
-  formField(docScreenState) => _SQTextDocFormField(this, docScreenState);
+  formField(docScreenState) => SQTextDocFormField(this, docScreenState);
 
   @override
   String toString() => 'Text Doc $name';
 }
 
-class _SQTextDocFormField extends SQFormField<SQTextDocField> {
-  _SQTextDocFormField(super.field, super.docScreenState);
+class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
+  SQTextDocFormField(super.field, super.docScreenState);
 
   late final QuillController _controller = QuillController(
       document: field.value ?? Document.fromJson(defaultDeltaJson),

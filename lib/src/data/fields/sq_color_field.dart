@@ -39,7 +39,7 @@ class SQColorField extends SQField<Color> {
   }
 }
 
-class _SQColorFormField extends SQFormField<SQColorField> {
+class _SQColorFormField extends SQFormField<Color, SQColorField> {
   const _SQColorFormField(super.field, super.docScreenState);
 
   @override

@@ -23,7 +23,7 @@ class SQStringField extends SQField<String> {
   formField(docScreenState) => _SQStringFormField(this, docScreenState);
 }
 
-class _SQStringFormField extends SQFormField<SQStringField> {
+class _SQStringFormField extends SQFormField<String, SQStringField> {
   const _SQStringFormField(super.field, super.docScreenState);
 
   @override

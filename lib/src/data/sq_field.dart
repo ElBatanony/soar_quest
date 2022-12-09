@@ -25,13 +25,13 @@ abstract class SQField<T> {
 
   T? parse(dynamic source);
 
-  SQFormField formField(DocScreenState docScreenState);
+  SQFormField<T, SQField<T>> formField(DocScreenState docScreenState);
 
   @override
   String toString() => '${T.runtimeType} $name';
 }
 
-abstract class SQFormField<Field extends SQField<dynamic>>
+abstract class SQFormField<T, Field extends SQField<T>>
     extends StatelessWidget {
   const SQFormField(this.field, this.docScreenState);
 

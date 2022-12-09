@@ -42,7 +42,7 @@ class SQRefField extends SQField<SQRef> {
   formField(docScreenState) => _SQRefFormField(this, docScreenState);
 }
 
-class _SQRefFormField extends SQFormField<SQRefField> {
+class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
   _SQRefFormField(super.field, super.docScreenState) {
     if (SQAuth.isSignedIn &&
         field is SQEditedByField &&

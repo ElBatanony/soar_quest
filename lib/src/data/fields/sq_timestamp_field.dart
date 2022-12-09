@@ -18,7 +18,7 @@ class SQTimestampField extends SQField<SQTimestamp> {
   formField(docScreenState) => _SQTimestampFormField(this, docScreenState);
 }
 
-class _SQTimestampFormField extends SQFormField<SQTimestampField> {
+class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
   const _SQTimestampFormField(super.field, super.docScreenState);
 
   static Route<DateTime> _datePickerRoute(

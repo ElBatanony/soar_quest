@@ -21,7 +21,7 @@ class SQListField<T> extends SQField<List<T>> {
   }
 }
 
-class _SQListFormField<T> extends SQFormField<SQListField<T>> {
+class _SQListFormField<T> extends SQFormField<List<T>, SQListField<T>> {
   const _SQListFormField(super.field, super.docScreenState);
 
   @override

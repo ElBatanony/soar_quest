@@ -25,7 +25,7 @@ class SQFileField extends SQStringField {
 }
 
 class SQFileFormField<FileField extends SQFileField>
-    extends SQFormField<FileField> {
+    extends SQFormField<String, FileField> {
   const SQFileFormField(super.field, super.docScreenState);
 
   Future<void> openFileUrl() async {

@@ -19,7 +19,7 @@ class SQEnumField<T> extends SQField<T> {
   T? parse(source) => subfield.parse(source);
 }
 
-class _SQEnumFormField<T> extends SQFormField<SQEnumField<T>> {
+class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
   const _SQEnumFormField(super.field, super.docScreenState);
 
   @override

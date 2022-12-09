@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../sq_field.dart';
 
+// TODO: move to UI components
+
 class SQTextField<T> extends StatefulWidget {
   const SQTextField(this.formField,
       {required this.textParse, this.maxLines = 1});
 
-  final SQFormField<SQField<T>> formField;
+  final SQFormField<T, SQField<T>> formField;
   final T Function(String) textParse;
   final int maxLines;
 

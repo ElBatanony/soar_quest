@@ -22,8 +22,8 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   serialize(value) {
     if (value == null) return null;
     return {
-      'hour': value?.hour,
-      'minute': value?.minute,
+      'hour': value.hour,
+      'minute': value.minute,
     };
   }
 
@@ -31,7 +31,7 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   formField(docScreenState) => _SQTimeOfDayFormField(this, docScreenState);
 }
 
-class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDayField> {
+class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDay, SQTimeOfDayField> {
   const _SQTimeOfDayFormField(super.field, super.docScreenState);
 
   void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {

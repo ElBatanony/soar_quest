@@ -7,8 +7,7 @@ class SQUpdatedDateField extends SQField<SQTimestamp> {
   @override
   SQTimestamp? parse(source) => SQTimestamp.parse(source);
 
-  @override
-  serialize() => value = SQTimestamp.now();
+  // TODO: set SQUpdatedDateField in FormScreen
 
   @override
   formField(docScreenState) {

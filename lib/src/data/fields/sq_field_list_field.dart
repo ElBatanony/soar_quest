@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
-import 'sq_list_field.dart';
 
-class SQFieldListField<T> extends SQListField<SQField<T>> {
+class SQFieldListField<T> extends SQField<List<T>> {
   SQFieldListField(this.field, {super.defaultValue}) : super(field.name) {
 
   SQField<T> field;
@@ -38,7 +37,8 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
   formField(docScreenState) => _SQFieldListFormField(this, docScreenState);
 }
 
-class _SQFieldListFormField<T> extends SQFormField<SQFieldListField<T>> {
+class _SQFieldListFormField<T>
+    extends SQFormField<List<T>, SQFieldListField<T>> {
   const _SQFieldListFormField(super.field, super.docScreenState);
 
   SQFieldListField<T> get listField => field;

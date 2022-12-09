@@ -17,7 +17,7 @@ class SQDoubleField extends SQField<double> {
   formField(docScreenState) => _SQDoubleFormField(this, docScreenState);
 }
 
-class _SQDoubleFormField extends SQFormField<SQDoubleField> {
+class _SQDoubleFormField extends SQFormField<double, SQDoubleField> {
   const _SQDoubleFormField(super.field, super.docScreenState);
 
   @override

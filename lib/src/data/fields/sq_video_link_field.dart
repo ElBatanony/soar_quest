@@ -19,7 +19,7 @@ class SQVideoLinkField extends SQStringField {
   formField(docScreenState) => _SQVideoLinkFormField(this, docScreenState);
 }
 
-class _SQVideoLinkFormField extends SQFormField<SQVideoLinkField> {
+class _SQVideoLinkFormField extends SQFormField<String, SQVideoLinkField> {
   const _SQVideoLinkFormField(super.field, super.docScreenState);
 
   @override

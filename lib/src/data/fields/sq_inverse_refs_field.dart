@@ -27,7 +27,8 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
       );
 }
 
-class _SQInverseRefsFormField extends SQFormField<SQInverseRefsField> {
+class _SQInverseRefsFormField
+    extends SQFormField<List<SQDoc>, SQInverseRefsField> {
   _SQInverseRefsFormField(super.field, super.docScreenState,
       {required this.refDocs}) {
     unawaited(initializeRefCollection());

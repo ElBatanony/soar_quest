@@ -15,7 +15,7 @@ class SQBoolField extends SQField<bool> {
   formField(docScreenState) => _SQBoolFormField(this, docScreenState);
 }
 
-class _SQBoolFormField extends SQFormField<SQBoolField> {
+class _SQBoolFormField extends SQFormField<bool, SQBoolField> {
   const _SQBoolFormField(super.field, super.docScreenState);
 
   @override

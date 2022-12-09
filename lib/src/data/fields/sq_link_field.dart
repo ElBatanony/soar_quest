@@ -13,7 +13,7 @@ class SQLinkField extends SQStringField {
   formField(docScreenState) => _SQLinkFormField(this, docScreenState);
 }
 
-class _SQLinkFormField extends SQFormField<SQLinkField> {
+class _SQLinkFormField extends SQFormField<String, SQLinkField> {
   const _SQLinkFormField(super.field, super.docScreenState);
 
   @override
