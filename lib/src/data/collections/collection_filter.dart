@@ -42,8 +42,9 @@ class ValueFilter extends CollectionFilter {
   dynamic fieldValue;
 
   @override
-  List<SQDoc> filter(List<SQDoc> docs) =>
-      docs.where((doc) => doc.value<dynamic>(fieldName) == fieldValue).toList();
+  List<SQDoc> filter(List<SQDoc> docs) => docs
+      .where((doc) => doc.getValue<dynamic>(fieldName) == fieldValue)
+      .toList();
 }
 
 class StringContainsFilter extends CollectionFieldFilter {
@@ -69,8 +70,8 @@ class RefFilter extends CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs) {
     if (fieldValue == null) return [];
     return docs.where((doc) {
-      if (doc.value<SQRef>(fieldName) == null) return false;
-      final docRef = doc.value<SQRef>(fieldName);
+      if (doc.getValue<SQRef>(fieldName) == null) return false;
+      final docRef = doc.getValue<SQRef>(fieldName);
       if (docRef == null) throw Exception('Filtering null docRef');
       return docRef.docId == fieldValue!.docId &&
           docRef.collectionPath == fieldValue!.collectionPath;
