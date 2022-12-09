@@ -2,7 +2,7 @@ import '../../sq_auth.dart';
 import 'sq_ref_field.dart';
 
 class SQUserRefField extends SQRefField {
-  SQUserRefField(super.name, {super.value, super.editable, super.show})
+  SQUserRefField(super.name, {super.defaultValue, super.editable, super.show})
       : super(collection: SQAuth.usersCollection);
 
   @override
@@ -11,7 +11,7 @@ class SQUserRefField extends SQRefField {
 }
 
 class SQEditedByField extends SQUserRefField {
-  SQEditedByField(super.name, {super.value, super.show})
+  SQEditedByField(super.name, {super.defaultValue, super.show})
       : super(editable: false);
 
   @override
@@ -25,7 +25,7 @@ class SQEditedByField extends SQUserRefField {
 }
 
 class SQCreatedByField extends SQUserRefField {
-  SQCreatedByField(super.name, {super.value}) : super(editable: false);
+  SQCreatedByField(super.name, {super.defaultValue}) : super(editable: false);
 
   @override
   SQCreatedByField copy() => SQCreatedByField(name, value: value);

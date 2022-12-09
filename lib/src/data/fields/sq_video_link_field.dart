@@ -7,7 +7,7 @@ import 'sq_text_field.dart';
 
 class SQVideoLinkField extends SQStringField {
   SQVideoLinkField(super.name, {String? url, super.editable})
-      : super(value: url ?? '');
+      : super(defaultValue: url ?? '');
 
   @override
   String? parse(source) {

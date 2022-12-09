@@ -4,7 +4,7 @@ import '../sq_doc.dart';
 import 'sq_text_field.dart';
 
 class SQDoubleField extends SQField<double> {
-  SQDoubleField(super.name, {super.value, super.editable});
+  SQDoubleField(super.name, {super.defaultValue, super.editable});
 
   @override
   double? parse(source) {

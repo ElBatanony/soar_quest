@@ -5,7 +5,7 @@ import '../sq_doc.dart';
 import 'sq_list_field.dart';
 
 class SQFieldListField<T> extends SQListField<SQField<T>> {
-  SQFieldListField(super.name, this.field, {super.value});
+  SQFieldListField(this.field, {super.defaultValue}) : super(field.name) {
 
   SQField<T> field;
 

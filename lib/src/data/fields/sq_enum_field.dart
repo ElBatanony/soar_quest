@@ -6,7 +6,8 @@ import '../sq_doc.dart';
 import 'sq_list_field.dart';
 
 class SQEnumField<T> extends SQField<T> {
-  SQEnumField(this.subfield, {required this.options, super.value, super.show})
+  SQEnumField(this.subfield,
+      {required this.options, super.defaultValue, super.show})
       : super(subfield.name);
 
   SQField<T> subfield;

@@ -8,14 +8,14 @@ import 'sq_doc.dart';
 abstract class SQField<T> {
   SQField(
     this.name, {
-    this.value,
+    this.defaultValue,
     this.editable = true,
     this.require = false,
     this.show = trueCond,
   });
 
   String name = '';
-  T? value;
+  T? defaultValue;
   bool editable;
   bool require;
   DocCond show;

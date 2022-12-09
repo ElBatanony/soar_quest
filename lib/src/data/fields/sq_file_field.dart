@@ -10,7 +10,7 @@ import '../sq_doc.dart';
 import 'sq_string_field.dart';
 
 class SQFileField extends SQStringField {
-  SQFileField(super.name, {super.value, SQFileStorage? storage}) {
+  SQFileField(super.name, {super.defaultValue, SQFileStorage? storage}) {
     this.storage = storage ?? FirebaseFileStorage();
   }
 

@@ -5,7 +5,7 @@ import 'sq_text_field.dart';
 
 class SQStringField extends SQField<String> {
   SQStringField(super.name,
-      {super.value,
+      {super.defaultValue,
       super.editable,
       super.require,
       super.show,

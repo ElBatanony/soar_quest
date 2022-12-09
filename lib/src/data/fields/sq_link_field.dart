@@ -7,7 +7,7 @@ import 'sq_string_field.dart';
 import 'sq_text_field.dart';
 
 class SQLinkField extends SQStringField {
-  SQLinkField(super.name, {super.value, super.editable});
+  SQLinkField(super.name, {super.defaultValue, super.editable});
 
   @override
   SQLinkField copy() => SQLinkField(name, value: value, editable: editable);

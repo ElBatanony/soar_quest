@@ -5,7 +5,7 @@ import 'sq_text_field.dart';
 
 class SQIntField extends SQField<int> {
   SQIntField(super.name,
-      {super.value, super.editable, super.require, super.show});
+      {super.defaultValue, super.editable, super.require, super.show});
 
   @override
   int? parse(source) {

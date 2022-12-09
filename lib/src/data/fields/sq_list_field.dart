@@ -7,7 +7,7 @@ List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
 class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
-    super.value,
+    super.defaultValue,
     super.editable,
   });
 
