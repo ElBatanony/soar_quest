@@ -47,10 +47,10 @@ class SQDoc {
   @override
   String toString() => label;
 
-  SQImageField? get imageLabel => fields
+  SQImageField? get _imageLabelField => collection.fields
       .whereType<SQImageField>()
-      .firstWhereOrNull((field) => field.value != null);
+      .firstWhereOrNull((field) => _values[field.name] != null);
 
-  List<SQField<dynamic>> copyFields() =>
-      fields.map((field) => field.copy()).toList();
+  String? get imageLabel =>
+      _imageLabelField == null ? null : _values[_imageLabelField] as String;
 }

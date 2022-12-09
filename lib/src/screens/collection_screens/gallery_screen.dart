@@ -20,7 +20,7 @@ class GalleryScreen extends CollectionScreen {
           child: Column(
             children: [
               if (doc.imageLabel != null)
-                Image.network(doc.imageLabel!.value!, height: 120)
+                Image.network(doc.imageLabel!, height: 120)
               else
                 const SizedBox(
                     height: 120, child: Center(child: Text('No Image'))),

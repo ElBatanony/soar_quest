@@ -31,7 +31,7 @@ class CardsScreen extends CollectionScreen {
                   ],
                 ),
                 if (doc.imageLabel != null)
-                  Image.network(doc.imageLabel!.value!, height: 120),
+                  Image.network(doc.imageLabel!, height: 120),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: collection.actions

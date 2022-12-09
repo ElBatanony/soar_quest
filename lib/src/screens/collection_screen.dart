@@ -59,7 +59,7 @@ class CollectionScreen extends Screen {
             ? Text((doc.fields[1].value ?? '').toString())
             : null,
         leading: doc.imageLabel != null
-            ? Image.network(doc.imageLabel!.value!, width: 70)
+            ? Image.network(doc.imageLabel!, width: 70)
             : null,
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
