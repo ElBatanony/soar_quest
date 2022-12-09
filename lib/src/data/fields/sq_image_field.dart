@@ -14,13 +14,13 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
 
   @override
   Widget readOnlyBuilder(context) {
-    if (field.fileExists == false) return const Text('No Image');
-    return Image.network(field.downloadUrl!);
+    if (field.fileExists(doc) == false) return const Text('No Image');
+    return Image.network(field.downloadUrl(doc)!);
   }
 
   @override
   Widget fieldBuilder(context) {
-    if (field.fileExists == false)
+    if (field.fileExists(doc) == false)
       return GestureDetector(
         onTap: () async => selectAndUploadFile(context),
         child: Container(
@@ -41,7 +41,8 @@ class _SQImageFormField extends SQFileFormField<SQImageField> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Icon(Icons.camera_alt, size: 30),
-            if (field.downloadUrl != null) Image.network(field.downloadUrl!),
+            if (field.downloadUrl(doc) != null)
+              Image.network(field.downloadUrl(doc)!),
             TextButton.icon(
                 onPressed: () async => deleteFile(context),
                 icon: const Icon(Icons.clear),

@@ -16,9 +16,9 @@ class SQFileField extends SQStringField {
 
   late SQFileStorage storage;
 
-  bool get fileExists => value != null;
+  bool fileExists(SQDoc doc) => downloadUrl(doc) != null;
 
-  String? get downloadUrl => value;
+  String? downloadUrl(SQDoc doc) => doc.getValue<String>(name);
 
   @override
   formField(docScreenState) => SQFileFormField(this, docScreenState);
@@ -29,9 +29,9 @@ class SQFileFormField<FileField extends SQFileField>
   const SQFileFormField(super.field, super.docScreenState);
 
   Future<void> openFileUrl() async {
-    if (field.downloadUrl == null)
+    if (field.downloadUrl(doc) == null)
       throw Exception('Download URL for ${field.name} is null');
-    if (!await launchUrl(Uri.parse(field.downloadUrl!),
+    if (!await launchUrl(Uri.parse(field.downloadUrl(doc)!),
         mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch ${field.downloadUrl}');
     }
@@ -45,14 +45,16 @@ class SQFileFormField<FileField extends SQFileField>
         doc: doc,
         file: pickedFile,
         field: field,
-        onUpload: onChanged,
+        onUpload: () {
+          // TODO: refresh screen after file upload
+        },
       );
     }
   }
 
   Future<void> deleteFile(context) async {
     await field.storage.deleteFile(doc: doc, field: field);
-    onChanged();
+    // TODO: refresh screen after file delete
   }
 
   @override
@@ -60,13 +62,13 @@ class SQFileFormField<FileField extends SQFileField>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.name),
-          if (field.fileExists)
+          if (field.fileExists(doc))
             SQButton('Download', onPressed: openFileUrl)
           else
             const Text('File not set'),
-          SQButton("${field.fileExists ? 'Edit' : 'Upload'} File",
+          SQButton("${field.fileExists(doc) ? 'Edit' : 'Upload'} File",
               onPressed: () async => selectAndUploadFile(context)),
-          if (field.fileExists)
+          if (field.fileExists(doc))
             IconButton(
                 onPressed: () async => deleteFile(context),
                 icon: const Icon(Icons.delete))
