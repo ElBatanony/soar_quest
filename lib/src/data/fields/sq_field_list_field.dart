@@ -8,23 +8,15 @@ class SQFieldListField<T> extends SQField<List<T>> {
 
   SQField<T> field;
 
-  List<SQField<T>> get fields => value ?? [];
-
   @override
-  List<SQField<T>> parse(dynamic source) {
+  List<T> parse(dynamic source) {
     final dynamicList = (source ?? <dynamic>[]) as List;
-    final fields = <SQField<T>>[];
+    final retValues = <T>[];
     for (final dynamicFieldValue in dynamicList) {
-      final newField = field.copy();
-      final parsed = newField.parse(dynamicFieldValue);
-
-      if (parsed != null && parsed.runtimeType == field.value.runtimeType) {
-        newField.value = parsed;
-        fields.add(newField);
-        break;
-      }
+      final parsed = field.parse(dynamicFieldValue);
+      if (parsed != null) retValues.add(parsed);
     }
-    return fields;
+    return retValues;
   }
 
   @override
