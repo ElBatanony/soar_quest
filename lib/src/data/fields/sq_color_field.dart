@@ -9,9 +9,6 @@ class SQColorField extends SQField<Color> {
   SQColorField(super.name, {super.defaultValue});
 
   @override
-  SQField<Color> copy() => SQColorField(name, value: value);
-
-  @override
   formField(DocScreenState<DocScreen> docScreenState) =>
       _SQColorFormField(this, docScreenState);
 

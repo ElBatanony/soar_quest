@@ -14,10 +14,6 @@ class SQIntField extends SQField<int> {
   }
 
   @override
-  SQIntField copy() => SQIntField(name,
-      value: value, editable: editable, require: require, show: show);
-
-  @override
   formField(docScreenState) => _SQIntFormField(this, docScreenState);
 
   int sumDocs(List<SQDoc> docs) =>

@@ -12,10 +12,6 @@ class SQBoolField extends SQField<bool> {
   }
 
   @override
-  SQBoolField copy() =>
-      SQBoolField(name, value: value, editable: editable, show: show);
-
-  @override
   formField(docScreenState) => _SQBoolFormField(this, docScreenState);
 }
 

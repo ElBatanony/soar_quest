@@ -28,9 +28,6 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
     return fields;
   }
 
-  @override
-  SQFieldListField<T> copy() =>
-      SQFieldListField(name, field, value: copyList(fields));
 
   @override
   List<dynamic> serialize() =>

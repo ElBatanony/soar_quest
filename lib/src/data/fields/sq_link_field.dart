@@ -10,9 +10,6 @@ class SQLinkField extends SQStringField {
   SQLinkField(super.name, {super.defaultValue, super.editable});
 
   @override
-  SQLinkField copy() => SQLinkField(name, value: value, editable: editable);
-
-  @override
   formField(docScreenState) => _SQLinkFormField(this, docScreenState);
 }
 

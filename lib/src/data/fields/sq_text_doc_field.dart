@@ -28,10 +28,6 @@ class SQTextDocField extends SQField<Document> {
   }
 
   @override
-  SQTextDocField copy() =>
-      SQTextDocField(name, value: value, editable: editable, show: show);
-
-  @override
   formField(docScreenState) => _SQTextDocFormField(this, docScreenState);
 
   @override

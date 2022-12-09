@@ -6,9 +6,6 @@ class SQImageField extends SQFileField {
   SQImageField(super.name, {super.defaultValue, super.storage});
 
   @override
-  SQImageField copy() => SQImageField(name, value: value, storage: storage);
-
-  @override
   formField(docScreenState) => _SQImageFormField(this, docScreenState);
 }
 

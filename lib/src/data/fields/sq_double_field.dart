@@ -14,9 +14,6 @@ class SQDoubleField extends SQField<double> {
   }
 
   @override
-  SQDoubleField copy() => SQDoubleField(name, value: value, editable: editable);
-
-  @override
   formField(docScreenState) => _SQDoubleFormField(this, docScreenState);
 }
 

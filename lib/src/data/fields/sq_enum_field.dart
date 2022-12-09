@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../screens/form_screen.dart';
 import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
-import 'sq_list_field.dart';
 
 class SQEnumField<T> extends SQField<T> {
   SQEnumField(this.subfield,
@@ -12,10 +11,6 @@ class SQEnumField<T> extends SQField<T> {
 
   SQField<T> subfield;
   List<T> options;
-
-  @override
-  SQEnumField<T> copy() => SQEnumField<T>(subfield.copy(),
-      options: copyList<T>(options), value: value, show: show);
 
   @override
   formField(docScreenState) => _SQEnumFormField(this, docScreenState);

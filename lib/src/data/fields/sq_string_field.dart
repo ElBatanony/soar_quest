@@ -20,14 +20,6 @@ class SQStringField extends SQField<String> {
   }
 
   @override
-  SQStringField copy() => SQStringField(name,
-      value: value,
-      editable: editable,
-      require: require,
-      show: show,
-      maxLines: maxLines);
-
-  @override
   formField(docScreenState) => _SQStringFormField(this, docScreenState);
 }
 

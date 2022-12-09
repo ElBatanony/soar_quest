@@ -20,10 +20,6 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   SQCollection get collection => refCollection();
 
   @override
-  SQInverseRefsField copy() => SQInverseRefsField(name,
-      refCollection: refCollection, refFieldName: refFieldName);
-
-  @override
   formField(docScreenState) => _SQInverseRefsFormField(
         this,
         docScreenState,

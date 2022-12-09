@@ -8,9 +8,6 @@ class SQUpdatedDateField extends SQField<SQTimestamp> {
   SQTimestamp? parse(source) => SQTimestamp.parse(source);
 
   @override
-  SQUpdatedDateField copy() => SQUpdatedDateField(name, value: value);
-
-  @override
   serialize() => value = SQTimestamp.now();
 
   @override

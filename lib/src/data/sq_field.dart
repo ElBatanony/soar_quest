@@ -21,8 +21,6 @@ abstract class SQField<T> {
   DocCond show;
   bool isInline = false;
 
-  SQField<T> copy();
-
   dynamic serialize() => value;
 
   T? parse(dynamic source);

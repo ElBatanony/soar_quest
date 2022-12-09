@@ -40,10 +40,6 @@ class SQLocationField extends SQField<LatLng> {
   serialize() => value?.toJson();
 
   @override
-  SQLocationField copy() =>
-      SQLocationField(name, value: value, editable: editable, show: show);
-
-  @override
   formField(docScreenState) => _SQLocationFormField(this, docScreenState);
 }
 

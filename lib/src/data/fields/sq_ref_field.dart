@@ -22,10 +22,6 @@ class SQRefField extends SQField<SQRef> {
   SQCollection collection;
 
   @override
-  SQRefField copy() => SQRefField(name,
-      collection: collection, value: value, editable: editable, show: show);
-
-  @override
   SQRef? parse(source) {
     if (source is! Map<String, dynamic>) return null;
     return SQRef.parse(source);

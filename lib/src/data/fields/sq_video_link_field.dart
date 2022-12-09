@@ -16,10 +16,6 @@ class SQVideoLinkField extends SQStringField {
   }
 
   @override
-  SQVideoLinkField copy() =>
-      SQVideoLinkField(name, url: value, editable: editable);
-
-  @override
   formField(docScreenState) => _SQVideoLinkFormField(this, docScreenState);
 }
 

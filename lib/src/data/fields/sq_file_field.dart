@@ -21,9 +21,6 @@ class SQFileField extends SQStringField {
   String? get downloadUrl => value;
 
   @override
-  SQFileField copy() => SQFileField(name, value: value, storage: storage);
-
-  @override
   formField(docScreenState) => SQFileFormField(this, docScreenState);
 }
 

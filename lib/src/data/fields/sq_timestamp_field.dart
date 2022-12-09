@@ -15,10 +15,6 @@ class SQTimestampField extends SQField<SQTimestamp> {
   SQTimestamp? parse(source) => SQTimestamp.parse(source);
 
   @override
-  SQTimestampField copy() =>
-      SQTimestampField(name, value: value, editable: editable, show: show);
-
-  @override
   formField(docScreenState) => _SQTimestampFormField(this, docScreenState);
 }
 

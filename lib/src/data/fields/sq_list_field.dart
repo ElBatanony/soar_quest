@@ -12,10 +12,6 @@ class SQListField<T> extends SQField<List<T>> {
   });
 
   @override
-  SQListField<T> copy() =>
-      SQListField<T>(name, value: copyList(value ?? []), editable: editable);
-
-  @override
   formField(docScreenState) => _SQListFormField(this, docScreenState);
 
   @override

@@ -18,10 +18,6 @@ class SQVirtualField<T> extends SQField<T> {
   T? parse(source) => null;
 
   @override
-  SQVirtualField<T> copy() =>
-      SQVirtualField<T>(field: field, valueBuilder: valueBuilder, show: show);
-
-  @override
   formField(docScreenState) {
     value = valueBuilder(docScreenState.doc);
     final fieldCopy = field.copy()

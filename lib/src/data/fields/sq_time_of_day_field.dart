@@ -19,10 +19,6 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  SQTimeOfDayField copy() =>
-      SQTimeOfDayField(name, value: value, editable: editable);
-
-  @override
   serialize() {
     if (value == null) return null;
     return {
