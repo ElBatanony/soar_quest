@@ -31,15 +31,15 @@ class FormScreen extends DocScreen {
       super.go(context, replace: false);
 
   Future<void> submitForm(ScreenState screenState) async {
-    for (final field in doc.fields) {
-      if (field.require && field.value == null) {
+    for (final field in collection.fields) {
+      if (field.require && doc.getValue<dynamic>(field.name) == null) {
         showSnackBar('${field.name} is required!',
             context: screenState.context);
         return;
       }
     }
 
-    originalDoc.fields = doc.copyFields();
+    originalDoc.parse(doc.serialize());
 
     await collection.saveDoc(originalDoc);
     screenState.exitScreen<bool>(true);
