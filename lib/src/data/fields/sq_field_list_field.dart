@@ -28,10 +28,11 @@ class SQFieldListField<T> extends SQListField<SQField<T>> {
     return fields;
   }
 
-
   @override
-  List<dynamic> serialize() =>
-      fields.map((field) => field.serialize()).toList();
+  serialize(value) {
+    if (value == null) return null;
+    return value.map((v) => field.serialize(v)).toList();
+  }
 
   @override
   formField(docScreenState) => _SQFieldListFormField(this, docScreenState);

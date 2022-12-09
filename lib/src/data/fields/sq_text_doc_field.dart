@@ -22,7 +22,7 @@ class SQTextDocField extends SQField<Document> {
   }
 
   @override
-  serialize() {
+  serialize(value) {
     if (value == null) return null;
     return jsonEncode(value!.toDelta().toJson());
   }

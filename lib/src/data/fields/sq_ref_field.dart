@@ -28,13 +28,13 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  Map<String, dynamic> serialize() {
+  Map<String, dynamic> serialize(value) {
     if (value == null) return {};
 
     return {
-      'docId': value!.docId,
-      'label': value!.label,
-      'collectionPath': value!.collectionPath
+      'docId': value.docId,
+      'label': value.label,
+      'collectionPath': value.collectionPath
     };
   }
 

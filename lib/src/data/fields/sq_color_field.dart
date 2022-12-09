@@ -27,7 +27,7 @@ class SQColorField extends SQField<Color> {
   }
 
   @override
-  serialize() {
+  serialize(value) {
     final color = value;
     if (color == null) return null;
     return {

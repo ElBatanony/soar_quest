@@ -10,11 +10,12 @@ class SQEditedByField extends SQUserRefField {
   SQEditedByField(super.name, {super.defaultValue, super.show})
       : super(editable: false);
 
-  @override
-  serialize() {
-    value ??= SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null;
-    return super.serialize();
-  }
+  // TODO: set SQEditedByField in FormScreen
+  // @override
+  // serialize() {
+  //   value ??= SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null;
+  //   return super.serialize();
+  // }
 }
 
 class SQCreatedByField extends SQUserRefField {
