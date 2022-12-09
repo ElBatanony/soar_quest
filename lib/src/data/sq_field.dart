@@ -28,7 +28,7 @@ abstract class SQField<T> {
   SQFormField formField(DocScreenState docScreenState);
 
   @override
-  String toString() => "${name == "" ? "" : "$name:"} $value";
+  String toString() => '${T.runtimeType} $name';
 }
 
 abstract class SQFormField<Field extends SQField<dynamic>>
