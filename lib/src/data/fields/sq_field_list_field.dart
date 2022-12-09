@@ -5,6 +5,10 @@ import '../sq_doc.dart';
 
 class SQFieldListField<T> extends SQField<List<T>> {
   SQFieldListField(this.field, {super.defaultValue}) : super(field.name) {
+    field
+      ..name += '_field'
+      ..isInline = true;
+  }
 
   SQField<T> field;
 
@@ -77,6 +81,7 @@ class _SQFieldListFormField<T>
                   ),
                 ],
               ),
+          field.field.formField(docScreenState),
           SQButton.icon(Icons.add,
               text: 'Insert Item', onPressed: () => addField(context)),
         ],
