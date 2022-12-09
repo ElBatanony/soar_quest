@@ -83,8 +83,8 @@ class CollectionSlice implements SQCollection {
   Future<void> loadCollection() => collection.loadCollection();
 
   @override
-  SQDoc newDoc({List<SQField<dynamic>> initialFields = const [], String? id}) =>
-      collection.newDoc(initialFields: initialFields, id: id);
+  SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) =>
+      collection.newDoc(source: source, id: id);
 
   @override
   String newDocId() => collection.newDocId();

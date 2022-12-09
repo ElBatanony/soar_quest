@@ -59,8 +59,8 @@ abstract class SQAction {
 class GoEditCloneAction extends GoScreenAction {
   GoEditCloneAction(super.name, {super.icon, super.show})
       : super(
-          screen: (doc) => FormScreen(
-              doc.collection.newDoc(initialFields: copyList(doc.fields))),
+          screen: (doc) =>
+              FormScreen(doc.collection.newDoc(source: doc.serialize())),
         );
 }
 
@@ -118,7 +118,7 @@ class CreateDocAction extends SQAction {
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    final newDoc = getCollection().newDoc(initialFields: initialFields(doc));
+    final newDoc = getCollection().newDoc(source: source(doc));
 
     if (form) {
       final isCreated =

@@ -34,9 +34,8 @@ class SQAuth {
     if (isSignedIn) {
       userDoc = usersCollection.getDoc(user!.userId);
       if (userDoc == null) {
-        userDoc = usersCollection.newDoc(id: user!.userId, initialFields: [
-          SQStringField('Email', value: SQAuth.user!.email, editable: false)
-        ]);
+        userDoc = usersCollection
+            .newDoc(id: user!.userId, source: {'Email': SQAuth.user!.email});
         await usersCollection.saveDoc(userDoc!);
       } else {
         if (userDoc!.value<String>('Email') != SQAuth.user!.email) {

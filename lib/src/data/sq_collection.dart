@@ -67,15 +67,11 @@ abstract class SQCollection {
   F? getField<F extends SQField<dynamic>>(String fieldName) =>
       fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
 
-  SQDoc newDoc({List<SQField<dynamic>> initialFields = const [], String? id}) {
-    final newDoc = SQDoc(id ?? newDocId(), collection: this);
+  SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) {
+    final newDoc = SQDoc(id ?? newDocId(), collection: this)..parse(source);
 
-    for (final initialField in initialFields) {
-      final index =
-          newDoc.fields.indexWhere((field) => field.name == initialField.name);
-      newDoc.fields[index] = initialField.copy();
-    }
-
+    // TODO: set fields default values, using field.defaulValue. foreach
+    // TODO: remove SQCreatedByField here. collected from default value
     if (SQAuth.isSignedIn)
       fields
           .whereType<SQCreatedByField>()

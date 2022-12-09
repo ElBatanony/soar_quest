@@ -14,9 +14,7 @@ class FormScreen extends DocScreen {
     super.icon,
     super.isInline,
     this.onFieldsChanged = _emptyVoid,
-  }) : super(
-            originalDoc.collection
-                .newDoc(initialFields: originalDoc.copyFields()),
+  }) : super(originalDoc.collection.newDoc(source: originalDoc.serialize()),
             title: title ?? 'Edit ${originalDoc.collection.id}');
 
   final String submitButtonText;
