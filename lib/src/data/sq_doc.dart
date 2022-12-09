@@ -13,43 +13,34 @@ typedef DocData = Map<String, dynamic>;
 class SQDoc {
   SQDoc(this.id, {required this.collection}) {
     path = '${collection.path}/$id';
-
-    fields = collection.fields.map((field) {
-      final fieldCopy = field.copy();
-      assert(
-        field.runtimeType == fieldCopy.runtimeType &&
-            field.name == fieldCopy.name &&
-            field.editable == fieldCopy.editable &&
-            field.require == fieldCopy.require,
-        'Incorrect SQField copy operation ${field.runtimeType}',
-      );
-      return fieldCopy;
-    }).toList();
+    // TODO: copy collection fields default values
   }
 
-  late List<SQField<dynamic>> fields;
+  final Map<String, dynamic> _values = {};
   String id;
   SQCollection collection;
   late String path;
 
   void parse(Map<String, dynamic> source) {
-    for (final field in fields) field.value = field.parse(source[field.name]);
+    // TODO: user Map.addAll. values.addAll source maybe
+    for (final field in collection.fields)
+      _values[field.name] = field.parse(source[field.name]);
   }
 
   Map<String, dynamic> serialize() {
     final jsonMap = <String, dynamic>{};
-    for (final field in fields) {
-      jsonMap[field.name] = field.serialize();
+    for (final field in collection.fields) {
+      jsonMap[field.name] = field.serialize(_values[field.name]);
     }
     return jsonMap;
   }
 
-  F? getField<F extends SQField<dynamic>>(String fieldName) =>
-      fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
+  T? getValue<T>(String fieldName) => _values[fieldName] as T?;
+  void setValue<T>(String fieldName, T value) => _values[fieldName] = value;
+  // TODO: add type checking for setting doc value.
+  // check collection field with same name
 
-  T? value<T>(String fieldName) => getField<SQField<T>>(fieldName)?.value;
-
-  String get label => fields.first.value.toString();
+  String get label => _values[collection.fields.first.name].toString();
 
   SQRef get ref => SQRef.fromDoc(this);
 
