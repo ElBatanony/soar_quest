@@ -18,7 +18,7 @@ class _SQLinkFormField extends SQFormField<String, SQLinkField> {
 
   @override
   Widget readOnlyBuilder(context) {
-    final url = field.value;
+    final url = getDocValue();
     if (url != null)
       return SQButton('Open Link', onPressed: () async {
         if (!await launchUrl(Uri.parse(url),

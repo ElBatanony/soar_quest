@@ -36,8 +36,7 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
 
   void _selectDate(DateTime? newSelectedDate) {
     if (newSelectedDate != null) {
-      field.value = SQTimestamp.fromDate(newSelectedDate);
-      onChanged();
+      doc.setValue(field.name, SQTimestamp.fromDate(newSelectedDate));
     }
   }
 
@@ -45,7 +44,7 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
   Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(field.value.toString()),
+          Text(doc.getValue<dynamic>(field.name).toString()),
           SQButton(
             'Select Date',
             onPressed: () async {

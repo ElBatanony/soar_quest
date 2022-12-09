@@ -29,7 +29,7 @@ class CollectionScreen extends Screen {
 
   Widget groupByDocs(List<SQDoc> docs, ScreenState screenState) {
     final groups = groupBy<SQDoc, dynamic>(
-        docs, (doc) => doc.value<dynamic>(groupByField!));
+        docs, (doc) => doc.getValue<dynamic>(groupByField!));
 
     final tiles = <Widget>[];
     for (final entry in groups.entries) {

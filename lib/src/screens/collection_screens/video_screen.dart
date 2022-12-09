@@ -37,7 +37,7 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   void initState() {
     super.initState();
 
-    final videoFieldValue = widget.doc.value<String>(widget.videoField.name);
+    final videoFieldValue = widget.doc.getValue<String>(widget.videoField.name);
 
     if (videoFieldValue == null) return;
 

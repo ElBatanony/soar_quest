@@ -38,7 +38,7 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
   SQTextDocFormField(super.field, super.docScreenState);
 
   late final QuillController _controller = QuillController(
-      document: field.value ?? Document.fromJson(defaultDeltaJson),
+      document: getDocValue() ?? Document.fromJson(defaultDeltaJson),
       selection: const TextSelection.collapsed(offset: 0));
 
   @override
@@ -57,9 +57,7 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
           SQButton(
             'Edit Text Doc',
             onPressed: () async {
-              await TextDocScreen(textDocField: field)
-                  .go<List<dynamic>>(context);
-              onChanged();
+              await TextDocScreen(formField: this).go<List<dynamic>>(context);
             },
           ),
         ],
@@ -68,18 +66,18 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
 
 class TextDocScreen extends Screen {
   TextDocScreen({
-    required this.textDocField,
-  }) : super(title: textDocField.name);
+    required this.formField,
+  }) : super(title: formField.field.name);
 
-  final SQTextDocField textDocField;
+  final SQTextDocFormField formField;
 
   late final QuillController _controller = QuillController(
-      document: textDocField.value ?? Document.fromJson(defaultDeltaJson),
+      document: formField.getDocValue() ?? Document.fromJson(defaultDeltaJson),
       selection: const TextSelection.collapsed(offset: 0));
 
   void saveAndExit(ScreenState<Screen> screenState) {
-    textDocField.value =
-        Document.fromJson(_controller.document.toDelta().toJson());
+    formField.setDocValue(
+        Document.fromJson(_controller.document.toDelta().toJson()));
     screenState.exitScreen();
   }
 
@@ -94,12 +92,12 @@ class TextDocScreen extends Screen {
   @override
   Widget screenBody(screenState) => Column(
         children: [
-          if (textDocField.editable)
+          if (formField.field.editable)
             QuillToolbar.basic(controller: _controller),
           Expanded(
             child: QuillEditor.basic(
               controller: _controller,
-              readOnly: !textDocField.editable,
+              readOnly: !formField.field.editable,
             ),
           ),
         ],

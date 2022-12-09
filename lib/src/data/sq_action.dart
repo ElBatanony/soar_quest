@@ -6,7 +6,6 @@ import '../screens/form_screen.dart';
 import '../screens/screen.dart';
 import '../ui/sq_action_button.dart';
 import '../ui/sq_button.dart';
-import 'fields/sq_list_field.dart';
 import 'sq_collection.dart';
 
 Future<void> emptyOnExecute(doc, context) async {}
@@ -170,9 +169,7 @@ class SetFieldsAction extends SQAction {
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
     final newFields = getFields(doc);
     for (final entry in newFields.entries) {
-      final docField = doc.getField(entry.key);
-      if (docField == null) throw Exception('SetFieldsAction null doc field');
-      docField.value = entry.value;
+      doc.setValue(entry.key, entry.value);
     }
     await doc.collection.saveDoc(doc);
     screenState.refreshScreen();

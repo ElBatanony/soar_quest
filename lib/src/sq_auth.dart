@@ -38,8 +38,8 @@ class SQAuth {
             .newDoc(id: user!.userId, source: {'Email': SQAuth.user!.email});
         await usersCollection.saveDoc(userDoc!);
       } else {
-        if (userDoc!.value<String>('Email') != SQAuth.user!.email) {
-          userDoc!.getField('Email')!.value = SQAuth.user!.email;
+        if (userDoc!.getValue<String>('Email') != SQAuth.user!.email) {
+          userDoc!.setValue('Email', SQAuth.user!.email);
           await usersCollection.saveDoc(userDoc!);
         }
       }

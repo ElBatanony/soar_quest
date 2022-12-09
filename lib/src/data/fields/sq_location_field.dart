@@ -50,11 +50,11 @@ class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
   Widget readOnlyBuilder(context) => SizedBox(
         height: 200,
         child: FlutterMap(
-          options: MapOptions(center: field.value ?? defaultLocation),
+          options: MapOptions(center: getDocValue() ?? defaultLocation),
           nonRotatedChildren: [mapAttribution],
           children: [
             tileLayer,
-            if (field.value != null) markerLayerFromPoint(field.value!),
+            if (getDocValue() != null) markerLayerFromPoint(getDocValue()!),
           ],
         ),
       );
@@ -66,9 +66,8 @@ class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
           SQButton(
             'Edit Location',
             onPressed: () async {
-              await LocationPickerScreen(locationField: field)
+              await LocationPickerScreen(formField: this)
                   .go<List<dynamic>>(context);
-              onChanged();
             },
           ),
         ],
@@ -77,10 +76,10 @@ class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
 
 class LocationPickerScreen extends Screen {
   LocationPickerScreen({
-    required this.locationField,
-  }) : super(title: locationField.name);
+    required this.formField,
+  }) : super(title: formField.field.name);
 
-  final SQLocationField locationField;
+  final SQLocationFormField formField;
 
   @override
   List<Widget> appBarActions(screenState) => [
@@ -93,16 +92,16 @@ class LocationPickerScreen extends Screen {
   @override
   Widget screenBody(screenState) => FlutterMap(
         options: MapOptions(
-            center: locationField.value ?? defaultLocation,
+            center: formField.getDocValue() ?? defaultLocation,
             onTap: (tapPosition, point) {
-              locationField.value = point;
+              formField.setDocValue(point);
               screenState.refreshScreen();
             }),
         nonRotatedChildren: [mapAttribution],
         children: [
           tileLayer,
-          if (locationField.value != null)
-            markerLayerFromPoint(locationField.value!),
+          if (formField.getDocValue() != null)
+            markerLayerFromPoint(formField.getDocValue()!),
         ],
       );
 }

@@ -41,6 +41,13 @@ abstract class SQFormField<T, Field extends SQField<T>>
 
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
+  T? getDocValue() => doc.getValue<T>(field.name);
+
+  void setDocValue(T value) {
+    doc.setValue(field.name, value);
+    docScreenState.refreshScreen();
+  }
+
   Widget fieldLabel(BuildContext context) => Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
@@ -49,7 +56,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
       ));
 
   Widget readOnlyBuilder(BuildContext context) {
-    final valueString = field.value.toString();
+    final valueString = getDocValue().toString();
     return GestureDetector(
       onLongPress: () async {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -62,8 +69,6 @@ abstract class SQFormField<T, Field extends SQField<T>>
   }
 
   Widget fieldBuilder(BuildContext context);
-
-  void onChanged() => docScreenState.refreshScreen();
 
   @override
   Widget build(BuildContext context) => Padding(

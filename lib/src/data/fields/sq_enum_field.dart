@@ -39,13 +39,12 @@ class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
   fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(field.value.toString()),
+          Text(getDocValue().toString()),
           SQButton('Select', onPressed: () async {
             final newValue =
                 await showEnumOptionsDialog(field, context: context);
             if (newValue != null) {
-              field.value = newValue;
-              onChanged();
+              setDocValue(newValue);
             }
           })
         ],

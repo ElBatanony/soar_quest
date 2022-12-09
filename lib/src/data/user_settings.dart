@@ -26,7 +26,7 @@ class UserSettings {
     initialized = true;
   }
 
-  T? getSetting<T>(String settingName) => _settingsDoc.value(settingName);
+  T? getSetting<T>(String settingName) => _settingsDoc.getValue(settingName);
 
   static Screen settingsScreen() =>
       FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);

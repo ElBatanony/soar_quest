@@ -24,7 +24,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
     setState(() {});
   }
 
-  String parseFieldValue() => (widget.formField.field.value ?? '').toString();
+  String parseFieldValue() => (widget.formField.getDocValue() ?? '').toString();
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
         controller: fieldTextController,
         maxLines: widget.maxLines,
         onChanged: (text) {
-          widget.formField.field.value = widget.textParse(text);
+          widget.formField.setDocValue(widget.textParse(text));
           callOnChange();
         },
         onEditingComplete: () {

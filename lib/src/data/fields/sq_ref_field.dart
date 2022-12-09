@@ -46,12 +46,13 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
   _SQRefFormField(super.field, super.docScreenState) {
     if (SQAuth.isSignedIn &&
         field is SQEditedByField &&
-        docScreenState is FormScreenState) field.value = SQAuth.userDoc!.ref;
+        docScreenState is FormScreenState)
+      doc.setValue(field.name, SQAuth.userDoc!.ref);
   }
 
   @override
   Widget readOnlyBuilder(context) {
-    final ref = field.value;
+    final ref = getDocValue();
     if (ref == null) return const Text('Not Set');
     final doc = SQCollection.byPath(ref.collectionPath)!.getDoc(ref.docId);
     return Row(
@@ -69,7 +70,7 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
   Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(field.value?.label ?? 'Not Set'),
+          Text(getDocValue()?.label ?? 'Not Set'),
           if (field.editable)
             SQButton(
               'Select',
@@ -85,8 +86,7 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
                     label: retDoc.label,
                     collectionPath: retDoc.collection.path,
                   );
-                  field.value = ref;
-                  onChanged();
+                  setDocValue(ref);
                 }
               },
             ),

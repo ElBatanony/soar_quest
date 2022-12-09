@@ -35,7 +35,7 @@ class FirebaseFileStorage extends SQFileStorage {
       debugPrint(taskSnapshot.state.toString());
       if (taskSnapshot.state == TaskState.success) {
         final downloadUrl = await ref.getDownloadURL();
-        field.value = downloadUrl;
+        doc.setValue(field.name, downloadUrl);
         debugPrint('File uploaded!!');
         onUpload();
         return;
@@ -54,7 +54,7 @@ class FirebaseFileStorage extends SQFileStorage {
   Future<void> deleteFile(
       {required SQDoc doc, required SQFileField field}) async {
     final ref = getRef(doc, field);
-    field.value = null;
+    doc.setValue(field.name, null);
     await ref.delete();
   }
 }

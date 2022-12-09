@@ -17,7 +17,7 @@ class SQIntField extends SQField<int> {
   formField(docScreenState) => _SQIntFormField(this, docScreenState);
 
   int sumDocs(List<SQDoc> docs) =>
-      docs.fold(0, (sum, doc) => sum + (doc.value<int>(name) ?? 0));
+      docs.fold(0, (sum, doc) => sum + (doc.getValue<int>(name) ?? 0));
 }
 
 class _SQIntFormField extends SQFormField<int, SQIntField> {

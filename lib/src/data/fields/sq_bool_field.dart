@@ -26,10 +26,12 @@ class _SQBoolFormField extends SQFormField<bool, SQBoolField> {
             borderRadius: BorderRadius.circular(10),
             constraints: const BoxConstraints(minWidth: 100, minHeight: 40),
             onPressed: (index) {
-              field.value = index == 1;
-              onChanged();
+              doc.setValue(field.name, index == 1);
             },
-            isSelected: [field.value == false, field.value ?? true],
+            isSelected: [
+              doc.getValue<bool>(field.name) == false,
+              doc.getValue<bool>(field.name) ?? true
+            ],
             children: const [Text('No'), Text('Yes')],
           ),
         ],

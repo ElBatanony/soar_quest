@@ -6,7 +6,6 @@ import '../../screens/collection_screens/table_screen.dart';
 import '../collections/collection_slice.dart';
 import '../sq_action.dart';
 import 'sq_list_field.dart';
-import 'sq_ref_field.dart';
 import 'sq_virtual_field.dart';
 
 class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
@@ -36,7 +35,6 @@ class _SQInverseRefsFormField
 
   Future<void> initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
-    onChanged();
   }
 
   final List<SQDoc> refDocs;
@@ -48,13 +46,9 @@ class _SQInverseRefsFormField
           super.fieldLabel(context),
           if (field.collection.updates.adds)
             CreateDocAction('Add',
-                getCollection: () => field.collection,
-                initialFields: (_) => [
-                      SQRefField(field.refFieldName,
-                          collection: doc.collection,
-                          value: doc.ref,
-                          editable: false)
-                    ]).button(doc, screenState: docScreenState)
+                    getCollection: () => field.collection,
+                    source: (_) => {field.refFieldName: doc.ref})
+                .button(doc, screenState: docScreenState)
         ],
       );
 

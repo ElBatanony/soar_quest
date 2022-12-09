@@ -44,36 +44,47 @@ class _SQFieldListFormField<T>
   SQFieldListField<T> get listField => field;
 
   @override
-  String get fieldLabelText => '${field.name} (${field.fields.length} items)';
+  List<T> getDocValue() => super.getDocValue() ?? <T>[];
+
+  @override
+  String get fieldLabelText => '${field.name} (${getDocValue().length} items)';
 
   @override
   Widget readOnlyBuilder(context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (final f in listField.fields)
-            (f..isInline = true).formField(docScreenState),
+          for (final v in getDocValue()) Text(v.toString()),
         ],
       );
 
   void addField(context) {
-    final newField = listField.field.copy();
-    listField.fields.add(newField);
-    onChanged();
+    final list = getDocValue();
+    final v = doc.getValue<T>(field.field.name);
+    if (v != null) {
+      list.add(v);
+      setDocValue(list);
+    }
+    doc.setValue(field.field.name, null);
+  }
+
+  void removeValue(T v) {
+    setDocValue(getDocValue()..remove(v));
   }
 
   @override
   Widget fieldBuilder(context) => Column(
         children: [
-          for (final f in listField.fields)
-            Row(
-              children: [
-                Expanded(child: (f..isInline = true).formField(docScreenState)),
-                SQButton.icon(
-                  Icons.delete,
-                  onPressed: () => listField.fields.remove(f),
-                ),
-              ],
-            ),
+          for (final v in getDocValue())
+            if (v != null)
+              Row(
+                children: [
+                  Expanded(child: Text(v.toString())),
+                  SQButton.icon(
+                    Icons.delete,
+                    onPressed: () => removeValue(v),
+                  ),
+                ],
+              ),
           SQButton.icon(Icons.add,
               text: 'Insert Item', onPressed: () => addField(context)),
         ],

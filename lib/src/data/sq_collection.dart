@@ -75,7 +75,7 @@ abstract class SQCollection {
     if (SQAuth.isSignedIn)
       fields
           .whereType<SQCreatedByField>()
-          .forEach((field) => field.value = SQAuth.userDoc!.ref);
+          .forEach((field) => newDoc.setValue(field.name, SQAuth.userDoc!.ref));
 
     return newDoc;
   }

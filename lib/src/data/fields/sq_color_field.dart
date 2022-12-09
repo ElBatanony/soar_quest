@@ -43,32 +43,33 @@ class _SQColorFormField extends SQFormField<Color, SQColorField> {
   const _SQColorFormField(super.field, super.docScreenState);
 
   @override
-  Widget fieldBuilder(context) => _SQColorPicker(field);
+  fieldBuilder(context) => _SQColorPicker(this);
 }
 
 class _SQColorPicker extends StatefulWidget {
-  const _SQColorPicker(this.field);
+  const _SQColorPicker(this.formField);
 
-  final SQColorField field;
+  final _SQColorFormField formField;
 
   @override
-  State<_SQColorPicker> createState() => __SQColorPickerState();
+  State<_SQColorPicker> createState() => _SQColorPickerState();
 }
 
-class __SQColorPickerState extends State<_SQColorPicker> {
+class _SQColorPickerState extends State<_SQColorPicker> {
   var pickerColor = Colors.white;
   @override
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          if (widget.field.value != null)
-            Container(height: 30, width: 30, color: widget.field.value),
+          if (widget.formField.getDocValue() != null)
+            Container(
+                height: 30, width: 30, color: widget.formField.getDocValue()),
           SQButton('Set Color', onPressed: () async {
-            pickerColor = widget.field.value ?? Colors.white;
+            pickerColor = widget.formField.getDocValue() ?? Colors.white;
             await showDialog<void>(
               context: context,
               builder: (context) => AlertDialog(
-                title: Text(widget.field.name),
+                title: Text(widget.formField.field.name),
                 content: ColorPicker(
                   pickerColor: pickerColor,
                   onColorChanged: (newPicker) {
@@ -81,7 +82,7 @@ class __SQColorPickerState extends State<_SQColorPicker> {
                   SQButton(
                     'Save',
                     onPressed: () {
-                      widget.field.value = pickerColor;
+                      widget.formField.setDocValue(pickerColor);
                       Navigator.of(context).pop();
                     },
                   ),
