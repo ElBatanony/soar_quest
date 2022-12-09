@@ -12,7 +12,8 @@ void main() async {
     SQStringField('Name'),
     SQTimestampField('Date'),
     SQStringField('Description', maxLines: 3),
-    SQBoolField('Completed', value: false, editable: false, show: falseCond),
+    SQBoolField('Completed',
+        defaultValue: false, editable: false, show: falseCond),
     SQTimestampField('Completed Date', editable: false, show: inFormScreen.not),
     SQEditedByField('User', show: falseCond),
   ], actions: [

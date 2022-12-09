@@ -42,7 +42,8 @@ void main() async {
       SQLocationField('Location'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
-      SQStringField('Readonly String', value: 'I am readonly', editable: false),
+      SQStringField('Readonly String',
+          defaultValue: 'I am readonly', editable: false),
     ],
     actions: [
       GoScreenAction('Child Coll',
@@ -53,7 +54,7 @@ void main() async {
                     SQStringField('Name'),
                     SQRefField('Parent Doc',
                         collection: doc.collection,
-                        value: doc.ref,
+                        defaultValue: doc.ref,
                         editable: false),
                   ],
                   parentDoc: doc)))

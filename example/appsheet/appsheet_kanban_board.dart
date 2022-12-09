@@ -17,7 +17,7 @@ void main() async {
 
   workstreams = FirestoreCollection(id: 'Workstreams', fields: [
     SQStringField('Workstream'),
-    SQStringField('test readonly', editable: false, value: 'hamada'),
+    SQStringField('test readonly', editable: false, defaultValue: 'hamada'),
     SQEnumField(SQStringField('Color'),
         options: ['#4285F4', '#DB4437', '#F4B400', '#0F9D58']),
     SQInverseRefsField('Related Projects',
@@ -30,10 +30,8 @@ void main() async {
     CreateDocAction(
       'New Project',
       getCollection: () => projects,
-      initialFields: (doc) => [
-        SQRefField('Workstream', collection: workstreams, value: doc.ref),
-        SQStringField('Project', value: 'From Workstream ${doc.label}'),
-      ],
+      source: (doc) =>
+          {'Workstream': doc.ref, 'Project': 'From Workstream ${doc.label}'},
     ),
     DeleteDocAction(name: 'Delete Workflow'),
     ExecuteOnDocsAction('Make Project Hamada',
