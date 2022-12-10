@@ -1,5 +1,6 @@
 export 'src/data/fields/sq_bool_field.dart';
 export 'src/data/fields/sq_color_field.dart';
+export 'src/data/fields/sq_created_by_field.dart';
 export 'src/data/fields/sq_double_field.dart';
 export 'src/data/fields/sq_enum_field.dart';
 export 'src/data/fields/sq_field_list_field.dart';
