@@ -2,8 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
 import '../sq_app.dart';
-import '../sq_auth.dart';
-import 'fields/sq_user_ref_field.dart';
 import 'sq_action.dart';
 import 'sq_doc.dart';
 import 'sq_updates.dart';
@@ -69,13 +67,6 @@ abstract class SQCollection {
 
   SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) {
     final newDoc = SQDoc(id ?? newDocId(), collection: this)..parse(source);
-
-    // TODO: remove SQCreatedByField here. collected from default value
-    if (SQAuth.isSignedIn)
-      fields
-          .whereType<SQCreatedByField>()
-          .forEach((field) => newDoc.setValue(field.name, SQAuth.userDoc!.ref));
-
     return newDoc;
   }
 
