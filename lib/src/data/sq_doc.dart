@@ -14,9 +14,7 @@ class SQDoc {
   SQDoc(this.id, {required this.collection}) {
     path = '${collection.path}/$id';
 
-    for (final field in collection.fields) {
-      setValue(field.name, field.defaultValue);
-    }
+    for (final field in collection.fields) field.init(this);
   }
 
   final Map<String, dynamic> _values = {};
