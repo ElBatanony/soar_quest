@@ -9,7 +9,11 @@ class SQVirtualField<T> extends SQField<T> {
           subfield.name,
           editable: false,
           show: inFormScreen.not & show,
-        );
+        ) {
+    subfield
+      ..editable = false
+      ..isInline = false;
+  }
 
   SQField<T> subfield;
   T Function(SQDoc doc) valueBuilder;
@@ -21,10 +25,6 @@ class SQVirtualField<T> extends SQField<T> {
   formField(docScreenState) {
     final retValue = valueBuilder(docScreenState.doc);
     docScreenState.doc.setValue(subfield.name, retValue);
-    subfield
-      ..editable = false
-      ..isInline = false;
-    // TODO: set editable and inline in constructor
     return subfield.formField(docScreenState);
   }
 }
