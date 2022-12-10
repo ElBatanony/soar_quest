@@ -20,9 +20,9 @@ class SQDoc {
   }
 
   final Map<String, dynamic> _values = {};
-  String id;
+  final String id;
   SQCollection collection;
-  late String path;
+  late final String path;
 
   void parse(Map<String, dynamic> source) {
     // TODO: user Map.addAll. values.addAll source maybe
