@@ -26,7 +26,7 @@ class _SQBoolFormField extends SQFormField<bool, SQBoolField> {
             borderRadius: BorderRadius.circular(10),
             constraints: const BoxConstraints(minWidth: 100, minHeight: 40),
             onPressed: (index) {
-              doc.setValue(field.name, index == 1);
+              setDocValue(index == 1);
             },
             isSelected: [
               doc.getValue<bool>(field.name) == false,
