@@ -37,9 +37,10 @@ class SQDoc {
   }
 
   T? getValue<T>(String fieldName) => _values[fieldName] as T?;
-  void setValue<T>(String fieldName, T value) => _values[fieldName] = value;
-  // TODO: add type checking for setting doc value.
-  // check collection field with same name
+
+  void setValue<T>(String fieldName, T value) {
+    _values[fieldName] = collection.getField(fieldName)?.parse(value);
+  }
 
   String get label => _values[collection.fields.first.name].toString();
 
