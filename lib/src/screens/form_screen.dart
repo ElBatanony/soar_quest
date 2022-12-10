@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../data/fields/sq_updated_date_field.dart';
+import '../../fields.dart';
 import '../data/sq_collection.dart';
-import '../data/types/sq_timestamp.dart';
+import '../sq_auth.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
 
@@ -42,6 +42,9 @@ class FormScreen extends DocScreen {
 
       if (field is SQUpdatedDateField)
         doc.setValue(field.name, SQTimestamp.now());
+
+      if (field is SQEditedByField && SQAuth.isSignedIn)
+        doc.setValue(field.name, SQAuth.userDoc!.ref);
     }
 
     originalDoc.parse(doc.serialize());

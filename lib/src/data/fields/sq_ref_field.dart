@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../screens/collection_screens/select_doc_screen.dart';
 import '../../screens/doc_screen.dart';
-import '../../screens/form_screen.dart';
-import '../../sq_auth.dart';
 import '../../ui/sq_button.dart';
 import '../sq_action.dart';
 import '../sq_collection.dart';
 import '../types/sq_ref.dart';
-import 'sq_user_ref_field.dart';
 
 export '../types/sq_ref.dart';
 
@@ -23,6 +20,7 @@ class SQRefField extends SQField<SQRef> {
 
   @override
   SQRef? parse(source) {
+    if (source is SQRef) return source;
     if (source is! Map<String, dynamic>) return null;
     return SQRef.parse(source);
   }
@@ -43,12 +41,7 @@ class SQRefField extends SQField<SQRef> {
 }
 
 class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
-  _SQRefFormField(super.field, super.docScreenState) {
-    if (SQAuth.isSignedIn &&
-        field is SQEditedByField &&
-        docScreenState is FormScreenState)
-      doc.setValue(field.name, SQAuth.userDoc!.ref);
-  }
+  const _SQRefFormField(super.field, super.docScreenState);
 
   @override
   Widget readOnlyBuilder(context) {
