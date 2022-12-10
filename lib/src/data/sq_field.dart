@@ -21,6 +21,8 @@ abstract class SQField<T> {
   DocCond show;
   bool isInline = false;
 
+  void init(SQDoc doc) => doc.setValue(name, defaultValue);
+
   dynamic serialize(T? value) => value;
 
   T? parse(dynamic source);
