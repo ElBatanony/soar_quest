@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../sq_doc.dart';
-import 'sq_text_field.dart';
+import '../../ui/sq_text_field.dart';
+import '../sq_field.dart';
 
 class SQStringField extends SQField<String> {
   SQStringField(super.name,
@@ -27,6 +25,6 @@ class _SQStringFormField extends SQFormField<String, SQStringField> {
   const _SQStringFormField(super.field, super.docScreenState);
 
   @override
-  Widget fieldBuilder(context) =>
+  fieldBuilder(context) =>
       SQTextField(this, textParse: (text) => text, maxLines: field.maxLines);
 }

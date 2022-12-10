@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sq_field.dart';
-
-// TODO: move to UI components
+import '../data/sq_field.dart';
 
 class SQTextField<T> extends StatefulWidget {
   const SQTextField(this.formField,

@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-
+import '../../ui/sq_text_field.dart';
 import '../sq_doc.dart';
-import 'sq_text_field.dart';
 
 class SQIntField extends SQField<int> {
   SQIntField(super.name,
@@ -24,5 +22,5 @@ class _SQIntFormField extends SQFormField<int, SQIntField> {
   const _SQIntFormField(super.field, super.docScreenState);
 
   @override
-  Widget fieldBuilder(context) => SQTextField(this, textParse: int.tryParse);
+  fieldBuilder(context) => SQTextField(this, textParse: int.tryParse);
 }

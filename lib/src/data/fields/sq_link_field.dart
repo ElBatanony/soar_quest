@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../ui/sq_button.dart';
-import '../sq_doc.dart';
+import '../../ui/sq_text_field.dart';
+import '../sq_field.dart';
 import 'sq_string_field.dart';
-import 'sq_text_field.dart';
 
 class SQLinkField extends SQStringField {
   SQLinkField(super.name, {super.defaultValue, super.editable});
@@ -17,7 +17,7 @@ class _SQLinkFormField extends SQFormField<String, SQLinkField> {
   const _SQLinkFormField(super.field, super.docScreenState);
 
   @override
-  Widget readOnlyBuilder(context) {
+  readOnlyBuilder(context) {
     final url = getDocValue();
     if (url != null)
       return SQButton('Open Link', onPressed: () async {
@@ -30,5 +30,5 @@ class _SQLinkFormField extends SQFormField<String, SQLinkField> {
   }
 
   @override
-  Widget fieldBuilder(context) => SQTextField(this, textParse: (text) => text);
+  fieldBuilder(context) => SQTextField(this, textParse: (text) => text);
 }
