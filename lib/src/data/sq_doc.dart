@@ -24,7 +24,8 @@ class SQDoc {
   void parse(Map<String, dynamic> source) {
     // TODO: user Map.addAll. values.addAll source maybe
     for (final field in collection.fields)
-      _values[field.name] = field.parse(source[field.name]);
+      if (source.containsKey(field.name))
+        _values[field.name] = field.parse(source[field.name]);
   }
 
   Map<String, dynamic> serialize() {
