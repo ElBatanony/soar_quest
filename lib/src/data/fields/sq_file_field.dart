@@ -56,7 +56,13 @@ class SQFileFormField<FileField extends SQFileField>
   }
 
   @override
-  Widget fieldBuilder(context) => Row(
+  readOnlyBuilder(context) {
+    if (field.fileExists(doc) == false) return const Text('No File');
+    return SQButton('Download', onPressed: openFileUrl);
+  }
+
+  @override
+  fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(field.name),
