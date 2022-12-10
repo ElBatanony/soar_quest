@@ -1,16 +1,5 @@
-import '../sq_doc.dart';
-import '../types/sq_timestamp.dart';
+import 'sq_timestamp_field.dart';
 
-class SQUpdatedDateField extends SQField<SQTimestamp> {
-  SQUpdatedDateField(super.name, {super.defaultValue}) : super(editable: false);
-
-  @override
-  SQTimestamp? parse(source) => SQTimestamp.parse(source);
-
-  // TODO: set SQUpdatedDateField in FormScreen
-
-  @override
-  formField(docScreenState) {
-    throw UnimplementedError();
-  }
+class SQUpdatedDateField extends SQTimestampField {
+  SQUpdatedDateField(super.name) : super(editable: false);
 }
