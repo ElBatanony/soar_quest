@@ -70,7 +70,6 @@ abstract class SQCollection {
   SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) {
     final newDoc = SQDoc(id ?? newDocId(), collection: this)..parse(source);
 
-    // TODO: set fields default values, using field.defaulValue. foreach
     // TODO: remove SQCreatedByField here. collected from default value
     if (SQAuth.isSignedIn)
       fields

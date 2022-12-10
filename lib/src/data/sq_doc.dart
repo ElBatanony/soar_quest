@@ -13,7 +13,10 @@ typedef DocData = Map<String, dynamic>;
 class SQDoc {
   SQDoc(this.id, {required this.collection}) {
     path = '${collection.path}/$id';
-    // TODO: copy collection fields default values
+
+    for (final field in collection.fields) {
+      setValue(field.name, field.defaultValue);
+    }
   }
 
   final Map<String, dynamic> _values = {};
