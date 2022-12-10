@@ -65,10 +65,8 @@ abstract class SQCollection {
   F? getField<F extends SQField<dynamic>>(String fieldName) =>
       fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
 
-  SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) {
-    final newDoc = SQDoc(id ?? newDocId(), collection: this)..parse(source);
-    return newDoc;
-  }
+  SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) =>
+      SQDoc(id ?? newDocId(), collection: this)..parse(source);
 
   static SQCollection? byPath(String path) =>
       _collections.singleWhereOrNull((collection) => collection.path == path);
