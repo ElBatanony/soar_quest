@@ -36,7 +36,7 @@ void main() async {
       SQFileField('File', storage: firebaseFileStorage),
       SQIntField('Int'),
       SQVirtualField(
-          field: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
+          subfield: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
       SQFieldListField(SQStringField('String List'), defaultValue: ['hi']),
       SQColorField('Color'),
       SQLocationField('Location'),

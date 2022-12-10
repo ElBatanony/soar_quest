@@ -2,16 +2,16 @@ import '../sq_doc.dart';
 
 class SQVirtualField<T> extends SQField<T> {
   SQVirtualField(
-      {required this.field,
+      {required this.subfield,
       required this.valueBuilder,
       DocCond show = trueCond})
       : super(
-          field.name,
+          subfield.name,
           editable: false,
           show: inFormScreen.not & show,
         );
 
-  SQField<T> field;
+  SQField<T> subfield;
   T Function(SQDoc doc) valueBuilder;
 
   @override
@@ -20,11 +20,11 @@ class SQVirtualField<T> extends SQField<T> {
   @override
   formField(docScreenState) {
     final retValue = valueBuilder(docScreenState.doc);
-    docScreenState.doc.setValue(field.name, retValue);
-    field
+    docScreenState.doc.setValue(subfield.name, retValue);
+    subfield
       ..editable = false
       ..isInline = false;
     // TODO: set editable and inline in constructor
-    return field.formField(docScreenState);
+    return subfield.formField(docScreenState);
   }
 }

@@ -11,7 +11,7 @@ import 'sq_virtual_field.dart';
 class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   SQInverseRefsField(String name,
       {required this.refCollection, required this.refFieldName})
-      : super(field: SQListField(name), valueBuilder: (doc) => []);
+      : super(subfield: SQListField(name), valueBuilder: (doc) => []);
 
   String refFieldName;
   SQCollection Function() refCollection;
