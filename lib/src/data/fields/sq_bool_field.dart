@@ -30,7 +30,7 @@ class _SQBoolFormField extends SQFormField<bool, SQBoolField> {
             },
             isSelected: [
               doc.getValue<bool>(field.name) == false,
-              doc.getValue<bool>(field.name) ?? true
+              doc.getValue<bool>(field.name) ?? false,
             ],
             children: const [Text('No'), Text('Yes')],
           ),
