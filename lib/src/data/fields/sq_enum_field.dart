@@ -7,7 +7,9 @@ import '../sq_doc.dart';
 class SQEnumField<T> extends SQField<T> {
   SQEnumField(this.subfield,
       {required this.options, super.defaultValue, super.show})
-      : super(subfield.name);
+      : super(subfield.name) {
+    subfield.editable = false;
+  }
 
   SQField<T> subfield;
   List<T> options;
@@ -28,11 +30,7 @@ class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
       : Container();
 
   @override
-  Widget readOnlyBuilder(context) {
-    field.subfield.editable = false;
-    // TODO: set to not editable in constructor
-    return field.subfield.formField(docScreenState);
-  }
+  Widget readOnlyBuilder(context) => field.subfield.formField(docScreenState);
 
   @override
   fieldBuilder(context) => Row(
