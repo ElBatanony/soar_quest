@@ -60,7 +60,8 @@ abstract class SQFormField<T, Field extends SQField<T>>
       ));
 
   Widget readOnlyBuilder(BuildContext context) {
-    final valueString = getDocValue().toString();
+    final value = getDocValue();
+    final valueString = value.toString();
     return GestureDetector(
       onLongPress: () async {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -68,7 +69,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
             content: Text('Copied field: $valueString')));
         await Clipboard.setData(ClipboardData(text: valueString));
       },
-      child: Text(valueString),
+      child: field.valueDisplay(value),
     );
   }
 
