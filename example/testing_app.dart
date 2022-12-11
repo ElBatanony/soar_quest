@@ -23,6 +23,7 @@ void main() async {
     fields: [
       SQStringField('Name'),
       SQBoolField('Cool?'),
+      SQMaturityRatingField(),
     ],
   );
 
@@ -78,7 +79,7 @@ void main() async {
   SQApp.run(
     [
       CollectionScreen(collection: testCollection),
-      CollectionScreen(collection: simpleCollection),
+      CollectionScreen(collection: KidsModeSlice(simpleCollection)),
       FavouritesScreen(
           favouritesFeature: FavouritesFeature(collection: simpleCollection))
     ],
