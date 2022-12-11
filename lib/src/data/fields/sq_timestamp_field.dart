@@ -34,12 +34,6 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
         ),
       );
 
-  void _selectDate(DateTime? newSelectedDate) {
-    if (newSelectedDate != null) {
-      doc.setValue(field.name, SQTimestamp.fromDate(newSelectedDate));
-    }
-  }
-
   @override
   Widget fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,12 +42,10 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
           SQButton(
             'Select Date',
             onPressed: () async {
-              final ret = await Navigator.of(context).push(_datePickerRoute(
-                context,
-              ));
-              if (ret != null) {
-                _selectDate(ret);
-              }
+              final newSelectedDate =
+                  await Navigator.of(context).push(_datePickerRoute(context));
+              if (newSelectedDate != null)
+                setDocValue(SQTimestamp.fromDate(newSelectedDate));
             },
           )
         ],
