@@ -14,6 +14,7 @@ class SQColorField extends SQField<Color> {
 
   @override
   Color? parse(source) {
+    if (source is Color) return source;
     if (source is! Map<String, dynamic>) return null;
     try {
       final a = source['a'] as int;
