@@ -54,20 +54,19 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  Widget? bottomNavBar(ScreenState screenState) => BottomNavigationBar(
-        backgroundColor: Colors.grey[100],
-        currentIndex: 1,
-        onTap: (index) async {
+  Widget? bottomNavBar(ScreenState screenState) => NavigationBar(
+        selectedIndex: 1,
+        onDestinationSelected: (index) async {
           if (index == 0) {
             FocusManager.instance.primaryFocus?.unfocus();
             return screenState.exitScreen();
           }
           await submitForm(screenState);
         },
-        items: [
-          const BottomNavigationBarItem(
+        destinations: [
+          const NavigationDestination(
               icon: Icon(Icons.cancel), label: 'Cancel'),
-          BottomNavigationBarItem(
+          NavigationDestination(
               icon: const Icon(Icons.save), label: submitButtonText),
         ],
       );
