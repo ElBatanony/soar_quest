@@ -14,29 +14,15 @@ class SQColorField extends SQField<Color> {
 
   @override
   Color? parse(source) {
+    if (source is int) return Color(source);
     if (source is Color) return source;
-    if (source is! Map<String, dynamic>) return null;
-    try {
-      final a = source['a'] as int;
-      final r = source['r'] as int;
-      final g = source['g'] as int;
-      final b = source['b'] as int;
-      return Color.fromARGB(a, r, g, b);
-    } on Exception catch (_) {
-      return null;
-    }
+    return null;
   }
 
   @override
-  serialize(value) {
-    final color = value;
-    if (color == null) return null;
-    return {
-      'a': color.alpha,
-      'r': color.red,
-      'g': color.green,
-      'b': color.blue,
-    };
+  int? serialize(value) {
+    if (value == null) return null;
+    return value.value;
   }
 }
 
