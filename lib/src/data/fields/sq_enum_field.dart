@@ -34,7 +34,7 @@ class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
   fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(getDocValue().toString()),
+          field.subfield.valueDisplay(getDocValue()),
           SQButton('Select', onPressed: () async {
             final newValue =
                 await showEnumOptionsDialog(field, context: context);
@@ -54,7 +54,8 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
                 title: Text('Select ${enumField.name} value'),
                 content: Wrap(
                   children: [
-                    ...enumField.options.map((v) => SQButton(v.toString(),
+                    ...enumField.options.map((v) => ElevatedButton(
+                        child: enumField.subfield.valueDisplay(v),
                         onPressed: () => Navigator.pop<T>(context, v))),
                   ],
                 ),
