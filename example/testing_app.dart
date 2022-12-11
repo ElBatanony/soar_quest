@@ -11,10 +11,12 @@ void main() async {
 
   await SQApp.init(
     'Testing App',
-    theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+    theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
     userDocFields: userDocFields,
     firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);
 
   final simpleCollection = FirestoreCollection(
     id: 'Simple Collection',
