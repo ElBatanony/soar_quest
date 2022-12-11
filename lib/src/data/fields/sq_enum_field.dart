@@ -5,9 +5,8 @@ import '../../ui/sq_button.dart';
 import '../sq_doc.dart';
 
 class SQEnumField<T> extends SQField<T> {
-  SQEnumField(this.subfield,
-      {required this.options, super.defaultValue, super.show})
-      : super(subfield.name) {
+  SQEnumField(this.subfield, {required this.options, super.show})
+      : super(subfield.name, defaultValue: subfield.defaultValue) {
     subfield.editable = false;
   }
 

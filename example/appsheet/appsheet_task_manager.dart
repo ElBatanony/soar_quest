@@ -26,9 +26,8 @@ void main() async {
     fields: [
       SQStringField('Task', require: true),
       SQEnumField<String>(
-        SQStringField('Status'),
+        SQStringField('Status', defaultValue: 'To-Do'),
         options: ['Done', 'To-Do'],
-        defaultValue: 'To-Do',
         show: inFormScreen.not,
       ),
       // SQImageField("Image"),
