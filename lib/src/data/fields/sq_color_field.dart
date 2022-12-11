@@ -24,6 +24,10 @@ class SQColorField extends SQField<Color> {
     if (value == null) return null;
     return value.value;
   }
+
+  @override
+  valueDisplay(value) =>
+      Container(width: 30, height: 30, color: value ?? Colors.white);
 }
 
 class _SQColorFormField extends SQFormField<Color, SQColorField> {
