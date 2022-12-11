@@ -19,6 +19,9 @@ class SQEnumField<T> extends SQField<T> {
 
   @override
   T? parse(source) => subfield.parse(source);
+
+  @override
+  serialize(value) => subfield.serialize(value);
 }
 
 class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
