@@ -41,6 +41,7 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
           Text(doc.getValue<dynamic>(field.name).toString()),
           SQButton(
             'Select Date',
+            padding: 0,
             onPressed: () async {
               final newSelectedDate =
                   await Navigator.of(context).push(_datePickerRoute(context));
