@@ -54,7 +54,7 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  Widget? bottomNavBar(ScreenState screenState) => NavigationBar(
+  Widget? navigationBar(ScreenState screenState) => NavigationBar(
         selectedIndex: 1,
         onDestinationSelected: (index) async {
           if (index == 0) {

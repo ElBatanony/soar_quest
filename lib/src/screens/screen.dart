@@ -67,7 +67,7 @@ class Screen extends StatefulWidget {
 
   FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
 
-  Widget? bottomNavBar(ScreenState screenState) {
+  Widget? navigationBar(ScreenState screenState) {
     if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);
     return null;
   }
@@ -97,7 +97,7 @@ class ScreenState<T extends Screen> extends State<T> {
             ],
           ),
         ),
-        bottomNavigationBar: widget.bottomNavBar(this),
+        bottomNavigationBar: widget.navigationBar(this),
       );
     }
 
@@ -116,7 +116,7 @@ class ScreenState<T extends Screen> extends State<T> {
               drawer: SQApp.drawer,
               body: body,
               floatingActionButton: widget.floatingActionButton(this),
-              bottomNavigationBar: widget.bottomNavBar(this),
+              bottomNavigationBar: widget.navigationBar(this),
             ));
   }
 
