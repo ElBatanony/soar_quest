@@ -51,7 +51,7 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
     showDialog<T?>(
         context: context,
         builder: (context) => AlertDialog(
-                title: Text('Select ${enumField.name} value'),
+                title: Text('Select ${enumField.name}'),
                 content: Wrap(
                   children: [
                     ...enumField.options.map((v) => ElevatedButton(
