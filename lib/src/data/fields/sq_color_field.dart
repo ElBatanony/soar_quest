@@ -53,8 +53,7 @@ class _SQColorPickerState extends State<_SQColorPicker> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           if (widget.formField.getDocValue() != null)
-            Container(
-                height: 30, width: 30, color: widget.formField.getDocValue()),
+            widget.formField.field.valueDisplay(widget.formField.getDocValue()),
           SQButton('Set Color', onPressed: () async {
             pickerColor = widget.formField.getDocValue() ?? Colors.white;
             await showDialog<void>(
