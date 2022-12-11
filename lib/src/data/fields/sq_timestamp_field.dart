@@ -30,7 +30,7 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
         builder: (context) => DatePickerDialog(
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: initialValue,
-          firstDate: DateTime(2000),
+          firstDate: DateTime(1900),
           lastDate: DateTime(2040),
         ),
       );
