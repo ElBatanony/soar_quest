@@ -31,6 +31,8 @@ abstract class SQField<T> {
 
   @override
   String toString() => '${T.runtimeType} $name';
+
+  Widget valueDisplay(T? value) => Text(value.toString());
 }
 
 abstract class SQFormField<T, Field extends SQField<T>>
