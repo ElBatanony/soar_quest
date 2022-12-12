@@ -6,9 +6,12 @@ import '../data/user_settings.dart';
 
 const dateOfBirthFieldName = 'Date of Birth';
 const maturityLevelFieldName = 'Maturity Level';
+const minUserAgeInYears = 3;
 
 class SQDateOfBirthField extends SQTimestampField {
-  SQDateOfBirthField() : super(dateOfBirthFieldName);
+  SQDateOfBirthField()
+      : super(dateOfBirthFieldName,
+            lastDate: DateTime(DateTime.now().year - minUserAgeInYears));
 }
 
 class SQMaturityRatingField extends SQEnumField<int> {
