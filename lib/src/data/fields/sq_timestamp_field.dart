@@ -6,10 +6,22 @@ import '../types/sq_timestamp.dart';
 
 export '../types/sq_timestamp.dart';
 
+final defaultFirstDate = DateTime(1900);
+final defaultLastDate = DateTime(2040);
+
 class SQTimestampField extends SQField<SQTimestamp> {
-  SQTimestampField(super.name,
-      {SQTimestamp? defaultValue, super.editable, super.show})
-      : super(defaultValue: defaultValue ?? SQTimestamp.now());
+  SQTimestampField(
+    super.name, {
+    SQTimestamp? defaultValue,
+    super.editable,
+    super.show,
+    DateTime? firstDate,
+    DateTime? lastDate,
+  })  : firstDate = firstDate ?? defaultFirstDate,
+        lastDate = lastDate ?? defaultLastDate,
+        super(defaultValue: defaultValue ?? SQTimestamp.now());
+
+  final DateTime firstDate, lastDate;
 
   @override
   SQTimestamp? parse(source) =>
