@@ -22,8 +22,6 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final String? groupByField;
 
-  List<SQDoc> get docs => collection.docs;
-
   @override
   createState() => CollectionScreenState();
 
@@ -87,6 +85,7 @@ class CollectionScreen extends Screen {
 
   @override
   Widget screenBody(screenState) {
+    final docs = collection.docs;
     if (docs.isEmpty) return const Center(child: Text('This list is empty'));
     if (groupByField != null)
       return groupByDocs(docs, screenState as CollectionScreenState);
