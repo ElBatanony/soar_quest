@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 
 class CardsScreen extends CollectionScreen {
   CardsScreen({required super.collection, super.title});
 
   @override
-  Widget docDisplay(SQDoc doc, ScreenState screenState) => Card(
+  Widget docDisplay(doc, screenState) => Card(
         child: InkWell(
           onTap: () async => goToDocScreen(docScreen(doc), screenState),
           child: Padding(

@@ -25,9 +25,9 @@ class CollectionScreen extends Screen {
   List<SQDoc> get docs => collection.docs;
 
   @override
-  State<CollectionScreen> createState() => CollectionScreenState();
+  createState() => CollectionScreenState();
 
-  Widget groupByDocs(List<SQDoc> docs, ScreenState screenState) {
+  Widget groupByDocs(List<SQDoc> docs, CollectionScreenState screenState) {
     final groups = groupBy<SQDoc, dynamic>(
         docs, (doc) => doc.getValue<dynamic>(groupByField!));
 
@@ -53,7 +53,7 @@ class CollectionScreen extends Screen {
     return null;
   }
 
-  Widget docDisplay(SQDoc doc, ScreenState screenState) => ListTile(
+  Widget docDisplay(SQDoc doc, CollectionScreenState screenState) => ListTile(
         title: Text(doc.label),
         subtitle: doc.secondaryLabel == null ? null : Text(doc.secondaryLabel!),
         leading: doc.imageLabel != null
@@ -71,23 +71,26 @@ class CollectionScreen extends Screen {
         onTap: () async => goToDocScreen(docScreen(doc), screenState),
       );
 
-  Widget docsDisplay(List<SQDoc> docs, ScreenState screenState) => ListView(
+  Widget docsDisplay(List<SQDoc> docs, CollectionScreenState screenState) =>
+      ListView(
         shrinkWrap: true,
         children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
       );
 
-  Future<void> goToDocScreen(Screen docScreen, ScreenState screenState) async {
+  Future<void> goToDocScreen(
+      Screen docScreen, CollectionScreenState screenState) async {
     await docScreen.go(screenState.context);
-    screenState.refreshScreen();
+    await screenState.refreshScreen();
   }
 
   Screen docScreen(SQDoc doc) => DocScreen(doc);
 
   @override
-  Widget screenBody(ScreenState screenState) {
+  Widget screenBody(screenState) {
     if (docs.isEmpty) return const Center(child: Text('This list is empty'));
-    if (groupByField != null) return groupByDocs(docs, screenState);
-    return docsDisplay(docs, screenState);
+    if (groupByField != null)
+      return groupByDocs(docs, screenState as CollectionScreenState);
+    return docsDisplay(docs, screenState as CollectionScreenState);
   }
 }
 
