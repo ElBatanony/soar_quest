@@ -44,6 +44,7 @@ export 'src/screens/collection_screens/cards_screen.dart';
 // Features
 export 'src/features/favourites.dart';
 export 'src/features/feedback_screen.dart';
+export 'src/features/faq_screen.dart';
 export 'src/features/dark_mode_setting.dart';
 export 'src/features/kids_mode.dart';
 
