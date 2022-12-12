@@ -34,17 +34,14 @@ class SQTimestampField extends SQField<SQTimestamp> {
 class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
   const _SQTimestampFormField(super.field, super.docScreenState);
 
-  static Route<DateTime> _datePickerRoute(
-    DateTime initialValue,
-    BuildContext context,
-  ) =>
+  Route<DateTime> _datePickerRoute(BuildContext context) =>
       DialogRoute<DateTime>(
         context: context,
         builder: (context) => DatePickerDialog(
           initialEntryMode: DatePickerEntryMode.calendarOnly,
-          initialDate: initialValue,
-          firstDate: DateTime(1900),
-          lastDate: DateTime(2040),
+          initialDate: getDocValue()?.toDate() ?? DateTime.now(),
+          firstDate: field.firstDate,
+          lastDate: field.lastDate,
         ),
       );
 
@@ -57,9 +54,8 @@ class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
             'Select Date',
             padding: 0,
             onPressed: () async {
-              final newSelectedDate = await Navigator.of(context).push(
-                  _datePickerRoute(
-                      getDocValue()?.toDate() ?? DateTime.now(), context));
+              final newSelectedDate =
+                  await Navigator.of(context).push(_datePickerRoute(context));
               if (newSelectedDate != null)
                 setDocValue(SQTimestamp.fromDate(newSelectedDate));
             },
