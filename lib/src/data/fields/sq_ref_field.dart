@@ -20,9 +20,9 @@ class SQRefField extends SQField<SQRef> {
 
   @override
   SQRef? parse(source) {
-    if (source is SQRef) return source;
-    if (source is! Map<String, dynamic>) return null;
-    return SQRef.parse(source);
+    if (source is Map<String, dynamic> && source.containsKey('docId'))
+      return SQRef.parse(source);
+    return super.parse(source);
   }
 
   @override

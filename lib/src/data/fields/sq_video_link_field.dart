@@ -8,12 +8,6 @@ class SQVideoLinkField extends SQStringField {
       : super(defaultValue: url ?? '');
 
   @override
-  String? parse(source) {
-    if (source is String) return source;
-    return null;
-  }
-
-  @override
   formField(docScreenState) => _SQVideoLinkFormField(this, docScreenState);
 }
 

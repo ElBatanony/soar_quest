@@ -6,9 +6,8 @@ class SQDoubleField extends SQField<double> {
 
   @override
   double? parse(source) {
-    if (source is double) return source;
     if (source is int) return source.toDouble();
-    return null;
+    return super.parse(source);
   }
 
   @override

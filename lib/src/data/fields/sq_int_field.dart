@@ -6,12 +6,6 @@ class SQIntField extends SQField<int> {
       {super.defaultValue, super.editable, super.require, super.show});
 
   @override
-  int? parse(source) {
-    if (source is int) return source;
-    return null;
-  }
-
-  @override
   formField(docScreenState) => _SQIntFormField(this, docScreenState);
 
   int sumDocs(List<SQDoc> docs) =>

@@ -25,7 +25,11 @@ abstract class SQField<T> {
 
   dynamic serialize(T? value) => value;
 
-  T? parse(dynamic source);
+  @mustCallSuper
+  T? parse(dynamic source) {
+    if (source is T) return source;
+    return null;
+  }
 
   SQFormField<T, SQField<T>> formField(DocScreenState docScreenState);
 

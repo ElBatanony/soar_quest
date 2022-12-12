@@ -6,12 +6,6 @@ class SQBoolField extends SQField<bool> {
   SQBoolField(super.name, {super.defaultValue, super.editable, super.show});
 
   @override
-  bool? parse(source) {
-    if (source is bool) return source;
-    return null;
-  }
-
-  @override
   formField(docScreenState) => _SQBoolFormField(this, docScreenState);
 }
 

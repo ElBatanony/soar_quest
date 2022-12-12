@@ -17,7 +17,6 @@ class SQTimestamp extends Timestamp {
   String toString() => toDate().toString().substring(0, 10);
 
   static SQTimestamp? parse(dynamic source) {
-    if (source == null) return null;
     if (source is SQTimestamp) return source;
     if (source is Timestamp) return SQTimestamp.fromTimestamp(source);
     if (source is Map<String, dynamic> && source['_seconds'] is int)

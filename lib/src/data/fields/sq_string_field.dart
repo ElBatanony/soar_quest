@@ -12,12 +12,6 @@ class SQStringField extends SQField<String> {
   final int maxLines;
 
   @override
-  String? parse(source) {
-    if (source is String) return source;
-    return null;
-  }
-
-  @override
   formField(docScreenState) => _SQStringFormField(this, docScreenState);
 }
 

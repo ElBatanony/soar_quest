@@ -15,8 +15,7 @@ class SQColorField extends SQField<Color> {
   @override
   Color? parse(source) {
     if (source is int) return Color(source);
-    if (source is Color) return source;
-    return null;
+    return super.parse(source);
   }
 
   @override

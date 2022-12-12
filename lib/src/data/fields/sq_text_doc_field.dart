@@ -16,9 +16,11 @@ class SQTextDocField extends SQField<Document> {
 
   @override
   Document? parse(source) {
-    if (source is! String) return null;
-    final json = jsonDecode(source);
-    return json is List<dynamic> ? Document.fromJson(json) : null;
+    if (source is String) {
+      final json = jsonDecode(source);
+      if (json is List<dynamic>) return Document.fromJson(json);
+    }
+    return super.parse(source);
   }
 
   @override

@@ -14,8 +14,9 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
 
   @override
   SQTimeOfDay? parse(source) {
-    if (source is! Map<String, dynamic>) return null;
-    return SQTimeOfDay.parse(source);
+    if (source is Map<String, dynamic> && source.containsKey('hour'))
+      return SQTimeOfDay.parse(source);
+    return super.parse(source);
   }
 
   @override

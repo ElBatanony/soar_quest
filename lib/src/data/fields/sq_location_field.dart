@@ -32,8 +32,9 @@ class SQLocationField extends SQField<LatLng> {
 
   @override
   LatLng? parse(source) {
-    if (source is! Map<String, dynamic>) return null;
-    return LatLng.fromJson(source);
+    if (source is Map<String, dynamic> && source.containsKey('coordinates'))
+      return LatLng.fromJson(source);
+    return super.parse(source);
   }
 
   @override

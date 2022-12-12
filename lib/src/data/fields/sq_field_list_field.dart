@@ -13,14 +13,10 @@ class SQFieldListField<T> extends SQField<List<T>> {
   SQField<T> field;
 
   @override
-  List<T> parse(dynamic source) {
-    final dynamicList = (source ?? <dynamic>[]) as List;
-    final retValues = <T>[];
-    for (final dynamicFieldValue in dynamicList) {
-      final parsed = field.parse(dynamicFieldValue);
-      if (parsed != null) retValues.add(parsed);
-    }
-    return retValues;
+  List<T>? parse(dynamic source) {
+    if (source is! List) return null;
+    return super.parse(source) ??
+        source.map(field.parse).whereType<T>().toList();
   }
 
   @override

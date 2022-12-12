@@ -17,7 +17,7 @@ class SQListField<T> extends SQField<List<T>> {
   @override
   List<T>? parse(source) {
     if (source is! List) return null;
-    return source.whereType<T>().toList();
+    return super.parse(source) ?? source.whereType<T>().toList();
   }
 }
 

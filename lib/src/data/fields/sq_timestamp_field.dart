@@ -12,7 +12,8 @@ class SQTimestampField extends SQField<SQTimestamp> {
       : super(defaultValue: defaultValue ?? SQTimestamp.now());
 
   @override
-  SQTimestamp? parse(source) => SQTimestamp.parse(source);
+  SQTimestamp? parse(source) =>
+      SQTimestamp.parse(source) ?? super.parse(source);
 
   @override
   formField(docScreenState) => _SQTimestampFormField(this, docScreenState);

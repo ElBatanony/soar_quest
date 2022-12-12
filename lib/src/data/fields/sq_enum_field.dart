@@ -18,7 +18,7 @@ class SQEnumField<T> extends SQField<T> {
   formField(docScreenState) => _SQEnumFormField(this, docScreenState);
 
   @override
-  T? parse(source) => subfield.parse(source);
+  T? parse(source) => subfield.parse(source) ?? super.parse(source);
 
   @override
   serialize(value) => subfield.serialize(value);
