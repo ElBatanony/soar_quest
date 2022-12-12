@@ -96,8 +96,8 @@ class CollectionScreen extends Screen {
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
-  Future<void> refreshScreen() async {
-    unawaited(loadData());
+  Future<void> refreshScreen({bool refetchData = true}) async {
+    if (refetchData) unawaited(loadData());
     super.refreshScreen();
   }
 
