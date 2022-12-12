@@ -69,7 +69,8 @@ class CollectionScreen extends Screen {
         onTap: () async => goToDocScreen(docScreen(doc), screenState),
       );
 
-  Widget docsDisplay(List<SQDoc> docs, CollectionScreenState screenState) =>
+  Widget collectionDisplay(
+          List<SQDoc> docs, CollectionScreenState screenState) =>
       ListView(
         shrinkWrap: true,
         children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
@@ -89,7 +90,7 @@ class CollectionScreen extends Screen {
     if (docs.isEmpty) return const Center(child: Text('This list is empty'));
     if (groupByField != null)
       return groupByDocs(docs, screenState as CollectionScreenState);
-    return docsDisplay(docs, screenState as CollectionScreenState);
+    return collectionDisplay(docs, screenState as CollectionScreenState);
   }
 }
 

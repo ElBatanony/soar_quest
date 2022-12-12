@@ -6,7 +6,7 @@ class GalleryScreen extends CollectionScreen {
   GalleryScreen({required super.collection, super.title});
 
   @override
-  Widget docsDisplay(docs, screenState) => GridView.count(
+  Widget collectionDisplay(docs, screenState) => GridView.count(
         crossAxisCount: 2,
         children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
       );
