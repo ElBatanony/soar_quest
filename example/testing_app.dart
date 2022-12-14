@@ -85,6 +85,11 @@ void main() async {
     ],
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
+      FAQScreen(
+          collection: FirestoreCollection(id: 'FAQ', fields: [
+        SQStringField('Question'),
+        SQStringField('Answer'),
+      ]))
     ]),
   );
 }
