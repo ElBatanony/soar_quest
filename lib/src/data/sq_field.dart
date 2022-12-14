@@ -47,6 +47,8 @@ abstract class SQFormField<T, Field extends SQField<T>>
   final DocScreenState docScreenState;
   SQDoc get doc => docScreenState.doc;
 
+  bool get isInFormScreen => docScreenState is FormScreenState;
+
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
   T? getDocValue() => doc.getValue<T>(field.name);
@@ -86,7 +88,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (field.isInline == false) fieldLabel(context),
-            if (field.editable && docScreenState is FormScreenState)
+            if (field.editable && isInFormScreen)
               fieldBuilder(context)
             else
               readOnlyBuilder(context),
