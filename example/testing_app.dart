@@ -34,12 +34,12 @@ void main() async {
     fields: [
       SQStringField('String'),
       SQBoolField('Bool'),
+      SQQRCodeField('QR'),
       SQEnumField(SQColorField('Color Enum'),
           options: [Colors.red, Colors.blue, Colors.amber]),
       SQRefField('Doc Ref', collection: simpleCollection),
       SQEditedByField('Edited By'),
       SQDoubleField('Double'),
-      SQFileField('File', storage: firebaseFileStorage),
       SQIntField('Int'),
       SQVirtualField(
           subfield: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
@@ -52,6 +52,7 @@ void main() async {
       SQUpdatedDateField('Updated Date'),
       SQStringField('Readonly String',
           defaultValue: 'I am readonly', editable: false),
+      SQFileField('File', storage: firebaseFileStorage),
     ],
     actions: [
       GoScreenAction('Child Coll',
