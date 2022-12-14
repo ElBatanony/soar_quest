@@ -27,6 +27,7 @@ dependencies:
   flutter_quill: ^6.1.6
   image_picker: ^0.8.5+3
   latlong2: ^0.8.1
+  mobile_scanner: ^3.0.0-beta.4
   path_provider: ^2.0.11
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.5
