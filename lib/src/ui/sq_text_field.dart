@@ -31,6 +31,15 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
   }
 
   @override
+  void didUpdateWidget(oldWidget) {
+    if (fieldTextController.text != parseFieldValue()) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      fieldTextController.text = parseFieldValue();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) => TextField(
         controller: fieldTextController,
         maxLines: widget.maxLines,
