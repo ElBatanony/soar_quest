@@ -1,7 +1,7 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/sq_button.dart';
+import '../../ui/sq_qr_code_display.dart';
 import '../../ui/sq_text_field.dart';
 import '../sq_field.dart';
 import 'sq_string_field.dart';
@@ -21,12 +21,7 @@ class _SQQRCodeFormField extends SQFormField<String, SQQRCodeField> {
         context: context,
         builder: (context) => AlertDialog(
           title: Text(field.name),
-          content: BarcodeWidget(
-            barcode: Barcode.qrCode(),
-            data: qrCodeString,
-            width: 200,
-            height: 200,
-          ),
+          content: SQQRCodeDisplay(string: qrCodeString, size: 200),
           actions: [
             TextButton(
               style: TextButton.styleFrom(
