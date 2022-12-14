@@ -21,16 +21,18 @@ class SQButton extends StatelessWidget {
   final double padding;
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.all(padding),
-        child: icon == null
-            ? ElevatedButton(onPressed: onPressed, child: Text(text!))
-            : text == null
-                ? IconButton(
-                    iconSize: iconSize, onPressed: onPressed, icon: Icon(icon))
-                : ElevatedButton.icon(
-                    onPressed: onPressed,
-                    icon: Icon(icon, size: iconSize),
-                    label: Text(text!)),
-      );
+  Widget build(BuildContext context) {
+    final textWidget = text == null ? null : Text(text!);
+    final iconWidget = icon == null ? null : Icon(icon, size: iconSize);
+    return Container(
+      padding: EdgeInsets.all(padding),
+      child: iconWidget == null
+          ? ElevatedButton(onPressed: onPressed, child: textWidget)
+          : textWidget == null
+              ? IconButton(
+                  iconSize: iconSize, onPressed: onPressed, icon: iconWidget)
+              : ElevatedButton.icon(
+                  onPressed: onPressed, icon: iconWidget, label: textWidget),
+    );
+  }
 }
