@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../screens/doc_screen.dart';
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 import '../sq_field.dart';
 
 class SQColorField extends SQField<Color> {

@@ -4,8 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import '../ui/sq_action_button.dart';
-import '../ui/sq_button.dart';
+import '../ui/action_button.dart';
+import '../ui/button.dart';
 import 'sq_collection.dart';
 
 Future<void> emptyOnExecute(doc, context) async {}

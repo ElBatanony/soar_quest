@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/sq_doc.dart';
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 
 import '../collection_screen.dart';
 

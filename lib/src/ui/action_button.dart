@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/sq_action.dart';
 import '../data/sq_doc.dart';
 import '../screens/form_screen.dart';
-import 'sq_button.dart';
+import 'button.dart';
 
 class SQActionButton extends StatefulWidget {
   const SQActionButton({

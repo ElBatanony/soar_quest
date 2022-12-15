@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../storage/firebase_file_storage.dart';
 import '../../storage/sq_file_storage.dart';
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 import '../sq_doc.dart';
 
 class SQFileField extends SQField<String> {

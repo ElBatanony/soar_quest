@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../screens/screen.dart';
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 import '../sq_doc.dart';
 
 const defaultDeltaJson = [

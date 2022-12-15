@@ -21,10 +21,10 @@ export 'src/storage/sq_file_storage.dart';
 export 'src/storage/firebase_file_storage.dart';
 
 // UI Components
-export 'src/ui/sq_button.dart';
+export 'src/ui/button.dart';
 export 'src/ui/snackbar.dart';
-export 'src/ui/sq_navbar.dart';
-export 'src/ui/sq_drawer.dart';
+export 'src/ui/navbar.dart';
+export 'src/ui/drawer.dart';
 
 // Screens
 export 'src/screens/screen.dart';

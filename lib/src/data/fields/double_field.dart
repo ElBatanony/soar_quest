@@ -1,4 +1,4 @@
-import '../../ui/sq_text_field.dart';
+import '../../ui/text_field.dart';
 import '../sq_field.dart';
 
 class SQDoubleField extends SQField<double> {

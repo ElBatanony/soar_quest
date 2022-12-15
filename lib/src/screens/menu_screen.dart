@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ui/sq_button.dart';
+import '../ui/button.dart';
 import 'screen.dart';
 
 class MenuScreen extends Screen {

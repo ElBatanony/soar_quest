@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../screens/screen.dart';
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 import '../sq_doc.dart';
 
 final mapAttribution =

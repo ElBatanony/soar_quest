@@ -5,7 +5,7 @@ import 'data/sq_field.dart';
 import 'features/dark_mode_setting.dart';
 import 'screens/screen.dart';
 import 'sq_auth.dart';
-import 'ui/sq_drawer.dart';
+import 'ui/drawer.dart';
 
 class SQApp {
   static late String name;

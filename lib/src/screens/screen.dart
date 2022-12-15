@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
 import '../sq_auth.dart';
-import '../ui/sq_button.dart';
-import '../ui/sq_navbar.dart';
+import '../ui/button.dart';
+import '../ui/navbar.dart';
 
 Future<T?> _goToScreen<T>(
   Screen screen,

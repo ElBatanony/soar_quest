@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 import '../sq_doc.dart';
 
 class SQEnumField<T> extends SQField<T> {

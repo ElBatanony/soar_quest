@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../screens/collection_screens/select_doc_screen.dart';
 import '../../screens/doc_screen.dart';
-import '../../ui/sq_button.dart';
+import '../../ui/button.dart';
 import '../sq_action.dart';
 import '../sq_collection.dart';
 import '../types/sq_ref.dart';
