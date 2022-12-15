@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/collections/local_collection.dart';
-import '../data/fields/sq_ref_field.dart';
+import '../data/fields/ref_field.dart';
 import '../data/sq_action.dart';
 import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';

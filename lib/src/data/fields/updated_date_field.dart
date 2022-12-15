@@ -1,4 +1,4 @@
-import 'sq_timestamp_field.dart';
+import 'timestamp_field.dart';
 
 class SQUpdatedDateField extends SQTimestampField {
   SQUpdatedDateField(super.name) : super(editable: false);

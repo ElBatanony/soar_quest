@@ -5,7 +5,7 @@ import '../../ui/sq_button.dart';
 import '../../ui/sq_qr_code_display.dart';
 import '../../ui/sq_text_field.dart';
 import '../sq_field.dart';
-import 'sq_string_field.dart';
+import 'string_field.dart';
 
 class SQQRCodeField extends SQStringField {
   SQQRCodeField(super.name);

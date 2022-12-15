@@ -1,5 +1,5 @@
 import '../../sq_auth.dart';
-import '../fields/sq_ref_field.dart';
+import '../fields/ref_field.dart';
 import '../sq_doc.dart';
 
 // TODO: add back field filters (CollectionFieldFilter)

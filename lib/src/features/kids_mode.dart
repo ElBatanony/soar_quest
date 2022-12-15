@@ -1,7 +1,7 @@
 import '../data/collections/collection_slice.dart';
-import '../data/fields/sq_enum_field.dart';
-import '../data/fields/sq_int_field.dart';
-import '../data/fields/sq_timestamp_field.dart';
+import '../data/fields/enum_field.dart';
+import '../data/fields/int_field.dart';
+import '../data/fields/timestamp_field.dart';
 import '../data/user_settings.dart';
 
 const dateOfBirthFieldName = 'Date of Birth';

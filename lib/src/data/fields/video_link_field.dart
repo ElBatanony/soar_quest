@@ -1,7 +1,7 @@
 import '../../screens/collection_screens/video_screen.dart';
 import '../../ui/sq_text_field.dart';
 import '../sq_field.dart';
-import 'sq_string_field.dart';
+import 'string_field.dart';
 
 class SQVideoLinkField extends SQStringField {
   SQVideoLinkField(super.name, {String? url, super.editable})
