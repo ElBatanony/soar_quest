@@ -48,5 +48,4 @@ export 'src/features/faq_screen.dart';
 export 'src/features/dark_mode_setting.dart';
 export 'src/features/kids_mode.dart';
 
-// Unfeatures
-export 'src/unfeatures/social_feed.dart';
+export 'src/features/social_feed.dart';

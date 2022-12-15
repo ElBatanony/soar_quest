@@ -1,7 +1,7 @@
 import '../screens/telegram_screen.dart';
 
-class SocialFeed extends TelegramScreen {
-  const SocialFeed({required super.title, super.icon})
+class SocialFeedScreen extends TelegramScreen {
+  const SocialFeedScreen({required super.title, super.icon})
       : super(
           message:
               'Soar Quest does not promote social feeds (posts, likes, etc.). '
