@@ -4,29 +4,28 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../data/fields/file_field.dart';
 import '../data/sq_doc.dart';
 import 'sq_file_storage.dart';
 
 FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 class FirebaseFileStorage extends SQFileStorage {
-  Reference getRef(SQDoc doc, SQFileField field) =>
-      firebaseStorage.ref().child('${doc.path}/${field.name}');
+  Reference getRef(SQDoc doc, String fileFieldName) =>
+      firebaseStorage.ref().child('${doc.path}/$fileFieldName');
 
   @override
   Future<void> uploadFile({
     required SQDoc doc,
     required XFile file,
     required VoidCallback onUpload,
-    required SQFileField field,
+    required String fileFieldName,
   }) async {
     final metadata = SettableMetadata(
       contentType: 'image/jpeg',
       customMetadata: {'picked-file-path': file.path},
     );
 
-    final ref = getRef(doc, field);
+    final ref = getRef(doc, fileFieldName);
 
     ref
         .putFile(File(file.path), metadata)
@@ -35,7 +34,7 @@ class FirebaseFileStorage extends SQFileStorage {
       debugPrint(taskSnapshot.state.toString());
       if (taskSnapshot.state == TaskState.success) {
         final downloadUrl = await ref.getDownloadURL();
-        doc.setValue(field.name, downloadUrl);
+        doc.setValue(fileFieldName, downloadUrl);
         debugPrint('File uploaded!!');
         onUpload();
         return;
@@ -44,17 +43,18 @@ class FirebaseFileStorage extends SQFileStorage {
   }
 
   @override
-  Future<String> getFileDownloadURL(SQDoc doc, SQFileField field) async {
-    final ref = getRef(doc, field);
+  Future<String> getFileDownloadURL(
+      {required SQDoc doc, required String fileFieldName}) async {
+    final ref = getRef(doc, fileFieldName);
     final fileUrl = await ref.getDownloadURL();
     return fileUrl;
   }
 
   @override
   Future<void> deleteFile(
-      {required SQDoc doc, required SQFileField field}) async {
-    final ref = getRef(doc, field);
-    doc.setValue(field.name, null);
+      {required SQDoc doc, required String fileFieldName}) async {
+    final ref = getRef(doc, fileFieldName);
+    doc.setValue(fileFieldName, null);
     await ref.delete();
   }
 }

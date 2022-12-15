@@ -43,14 +43,14 @@ class SQFileFormField<FileField extends SQFileField>
       await field.storage.uploadFile(
         doc: doc,
         file: pickedFile,
-        field: field,
+        fileFieldName: field.name,
         onUpload: docScreenState.refreshScreen,
       );
     }
   }
 
   Future<void> deleteFile(context) async {
-    await field.storage.deleteFile(doc: doc, field: field);
+    await field.storage.deleteFile(doc: doc, fileFieldName: field.name);
     docScreenState.refreshScreen();
   }
 
