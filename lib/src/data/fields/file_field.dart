@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../storage/firebase_file_storage.dart';
-import '../../storage/sq_file_storage.dart';
 import '../../ui/button.dart';
+import '../firebase_file_storage.dart';
 import '../sq_doc.dart';
+import '../sq_file_storage.dart';
 
 class SQFileField extends SQField<String> {
   SQFileField(super.name, {super.defaultValue, SQFileStorage? storage}) {
