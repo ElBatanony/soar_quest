@@ -8,7 +8,9 @@ import '../sq_field.dart';
 import 'string_field.dart';
 
 class SQQRCodeField extends SQStringField {
-  SQQRCodeField(super.name);
+  SQQRCodeField(super.name, {this.showStringField = true});
+
+  final bool showStringField;
 
   @override
   formField(docScreenState) => _SQQRCodeFormField(this, docScreenState);
@@ -73,6 +75,7 @@ class _SQQRCodeFormField extends SQFormField<String, SQQRCodeField> {
   }
 
   @override
-  Widget fieldBuilder(BuildContext context) =>
-      SQTextField(this, textParse: (text) => text, maxLines: field.maxLines);
+  Widget fieldBuilder(BuildContext context) => field.showStringField
+      ? SQTextField(this, textParse: (text) => text, maxLines: field.maxLines)
+      : Container();
 }
