@@ -6,7 +6,7 @@ import '../sq_auth.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
 
-void _emptyVoid(SQDoc doc) {}
+void _emptyVoid(FormScreenState formScreenState) {}
 
 class FormScreen extends DocScreen {
   FormScreen(
@@ -22,7 +22,7 @@ class FormScreen extends DocScreen {
   final String submitButtonText;
   final SQDoc originalDoc;
 
-  final void Function(SQDoc) onFieldsChanged;
+  final void Function(FormScreenState formScreenState) onFieldsChanged;
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -80,7 +80,7 @@ class FormScreen extends DocScreen {
 class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
   @override
   void refreshScreen() {
-    widget.onFieldsChanged(doc);
+    widget.onFieldsChanged(this);
     super.refreshScreen();
   }
 }
