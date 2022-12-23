@@ -38,8 +38,8 @@ class _SQQRCodeFormField extends SQFormField<String, SQQRCodeField> {
                   MobileScannerController(formats: [BarcodeFormat.qrCode]),
               onDetect: (capture) {
                 final newString = capture.barcodes.first.rawValue;
-                if (newString != null) setDocValue(newString);
                 Navigator.of(context).pop();
+                if (newString != null) setDocValue(newString);
               },
             ),
           ),
