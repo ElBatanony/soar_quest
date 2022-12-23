@@ -49,9 +49,10 @@
 		"scope": "dart",
 		"prefix": "sqapp",
 		"body": [
-			"await SQApp.init(\"$1\", firebaseOptions: DefaultFirebaseOptions.currentPlatform);",
+			"await SQApp.init('$1',",
+			"\t\tfirebaseOptions: DefaultFirebaseOptions.currentPlatform);",
 			"",
-			"SQApp.run([Screen(title: \"Hello World\")]);",
+			"SQApp.run([const Screen(title: 'Hello World')]);",
 		],
 	},
 	"New SQFormField": {
