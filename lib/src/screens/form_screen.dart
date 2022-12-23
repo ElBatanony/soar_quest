@@ -15,6 +15,7 @@ class FormScreen extends DocScreen {
     this.submitButtonText = 'Save',
     super.icon,
     super.isInline,
+    super.signedIn,
     this.onFieldsChanged = _emptyVoid,
   }) : super(originalDoc.collection.newDoc(source: originalDoc.serialize()),
             title: title ?? 'Edit ${originalDoc.collection.id}');
