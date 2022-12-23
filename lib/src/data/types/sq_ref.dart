@@ -7,7 +7,7 @@ class SQRef {
   const SQRef({
     required this.collectionPath,
     required this.docId,
-    required this.label,
+    this.label,
   });
 
   SQRef.fromDoc(SQDoc doc)
@@ -17,11 +17,11 @@ class SQRef {
             label: doc.label);
 
   final String docId;
-  final String label;
+  final String? label;
   final String collectionPath;
 
   @override
-  String toString() => label;
+  String toString() => label ?? docId;
 
   static SQRef? parse(Map<String, dynamic> source) {
     final docId = source['docId'] as String?;

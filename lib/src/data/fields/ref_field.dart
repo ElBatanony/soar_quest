@@ -51,7 +51,7 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(ref.label),
+        Text(ref.toString()),
         if (doc != null)
           GoScreenAction('', screen: DocScreen.new)
               .button(doc, screenState: docScreenState)
