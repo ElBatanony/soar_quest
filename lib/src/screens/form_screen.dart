@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../fields.dart';
@@ -17,11 +19,17 @@ class FormScreen extends DocScreen {
     super.isInline,
     super.signedIn,
     this.onFieldsChanged = _emptyVoid,
-  }) : super(originalDoc.collection.newDoc(source: originalDoc.serialize()),
+    this.liveEdit = false,
+  }) : super(
+            liveEdit
+                ? originalDoc
+                : originalDoc.collection
+                    .newDoc(source: originalDoc.serialize()),
             title: title ?? 'Edit ${originalDoc.collection.id}');
 
   final String submitButtonText;
   final SQDoc originalDoc;
+  final bool liveEdit;
 
   final void Function(FormScreenState formScreenState) onFieldsChanged;
 
@@ -79,9 +87,13 @@ class FormScreen extends DocScreen {
 }
 
 class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
+  FormScreen get formScreen => widget;
+
   @override
   void refreshScreen() {
-    widget.onFieldsChanged(this);
+    formScreen.onFieldsChanged(this);
+    if (formScreen.liveEdit)
+      unawaited(formScreen.collection.saveDoc(widget.doc));
     super.refreshScreen();
   }
 }
