@@ -51,5 +51,10 @@ example/playground/
 android/
 web/
 windows/
-**/firebase_options.dart
 pubspec.lock
+
+# Firebase
+**/firebase_options.dart
+firebase.json
+.firebaserc
+.firebase/hosting*
