@@ -34,7 +34,7 @@ abstract class SQField<T> {
   SQFormField<T, SQField<T>> formField(DocScreenState docScreenState);
 
   @override
-  String toString() => '${T.runtimeType} $name';
+  String toString() => '$T $name';
 
   Widget valueDisplay(T? value) => Text(value.toString());
 }
