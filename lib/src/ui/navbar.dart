@@ -19,6 +19,7 @@ class SQNavBar extends StatelessWidget {
     return NavigationBar(
       onDestinationSelected: (index) async {
         SQApp.selectedNavScreen = index;
+        while (Navigator.of(context).canPop()) Navigator.of(context).pop();
         await visibleScreens(context)[SQApp.selectedNavScreen]
             .go(context, replace: true);
       },
