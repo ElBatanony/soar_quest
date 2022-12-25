@@ -39,7 +39,11 @@ class SQDoc {
   T? getValue<T>(String fieldName) => _values[fieldName] as T?;
 
   void setValue<T>(String fieldName, T value) {
-    _values[fieldName] = collection.getField(fieldName)?.parse(value);
+    final field = collection.getField(fieldName);
+    if (field != null)
+      _values[fieldName] = field.parse(value);
+    else
+      _values[fieldName] = value;
   }
 
   String get label => _values[collection.fields.first.name].toString();
