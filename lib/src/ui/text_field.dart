@@ -44,8 +44,11 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
         controller: fieldTextController,
         maxLines: widget.maxLines,
         onChanged: (text) {
-          widget.formField.setDocValue(widget.textParse(text));
-          callOnChange();
+          final parsedText = widget.textParse(text);
+          if (parsedText != null) {
+            widget.formField.setDocValue(parsedText);
+            callOnChange();
+          }
         },
         onEditingComplete: () {
           FocusManager.instance.primaryFocus?.unfocus();
