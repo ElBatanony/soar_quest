@@ -48,10 +48,12 @@ lib/playground/
 .VSCodeCounter/
 example/playground/
 
+# Not app
 android/
 web/
 windows/
 pubspec.lock
+lib/main.dart
 
 # Firebase
 **/firebase_options.dart
