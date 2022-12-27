@@ -55,6 +55,9 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
           fieldTextController.text = parseFieldValue();
           callOnChange();
         },
-        decoration: const InputDecoration(border: OutlineInputBorder()),
+        decoration: InputDecoration(
+          hintText: widget.formField.field.name,
+          border: const OutlineInputBorder(),
+        ),
       );
 }
