@@ -31,9 +31,13 @@ class SQFieldListField<T> extends SQField<List<T>> {
 
 class _SQFieldListFormField<T>
     extends SQFormField<List<T>, SQFieldListField<T>> {
-  const _SQFieldListFormField(super.field, super.docScreenState);
+  _SQFieldListFormField(super.field, super.docScreenState) {
+    subfieldFormField = field.field.formField(docScreenState);
+  }
 
   SQFieldListField<T> get listField => field;
+
+  late final SQFormField<T, SQField<T>> subfieldFormField;
 
   @override
   List<T> getDocValue() => super.getDocValue() ?? <T>[];
@@ -54,9 +58,9 @@ class _SQFieldListFormField<T>
     final v = doc.getValue<T>(field.field.name);
     if (v != null) {
       list.add(v);
+      subfieldFormField.clearDocValue();
       setDocValue(list);
     }
-    doc.setValue(field.field.name, null);
   }
 
   void removeValue(T v) {
@@ -77,7 +81,7 @@ class _SQFieldListFormField<T>
                   ),
                 ],
               ),
-          field.field.formField(docScreenState),
+          subfieldFormField,
           SQButton.icon(Icons.add,
               text: 'Insert Item', onPressed: () => addField(context)),
         ],
