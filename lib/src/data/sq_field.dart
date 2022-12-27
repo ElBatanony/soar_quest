@@ -53,7 +53,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
 
   T? getDocValue() => doc.getValue<T>(field.name);
 
-  void setDocValue(T value) {
+  void setDocValue(T? value) {
     doc.setValue(field.name, value);
     if (isInFormScreen) {
       final formScreenState = docScreenState as FormScreenState;
@@ -61,6 +61,8 @@ abstract class SQFormField<T, Field extends SQField<T>>
     }
     docScreenState.refreshScreen();
   }
+
+  void clearDocValue() => setDocValue(field.defaultValue);
 
   Widget fieldLabel(BuildContext context) => Padding(
       padding: const EdgeInsets.only(bottom: 4),
