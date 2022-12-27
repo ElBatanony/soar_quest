@@ -8,8 +8,6 @@ import '../sq_auth.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
 
-void _emptyVoid(FormScreenState formScreenState) {}
-
 class FormScreen extends DocScreen {
   FormScreen(
     this.originalDoc, {
@@ -18,7 +16,7 @@ class FormScreen extends DocScreen {
     super.icon,
     super.isInline,
     super.signedIn,
-    this.onFieldsChanged = _emptyVoid,
+    this.onFieldsChanged,
     this.liveEdit = false,
   }) : super(
             liveEdit
@@ -31,7 +29,8 @@ class FormScreen extends DocScreen {
   final SQDoc originalDoc;
   final bool liveEdit;
 
-  final void Function(FormScreenState formScreenState) onFieldsChanged;
+  final void Function(FormScreenState formScreenState,
+      SQFormField<dynamic, SQField<dynamic>> formField)? onFieldsChanged;
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -91,7 +90,6 @@ class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
 
   @override
   void refreshScreen() {
-    formScreen.onFieldsChanged(this);
     if (formScreen.liveEdit)
       unawaited(formScreen.collection.saveDoc(widget.doc));
     super.refreshScreen();

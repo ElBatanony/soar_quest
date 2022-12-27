@@ -93,7 +93,7 @@ class AttendNewSessionFormScreen extends FormScreen {
   AttendNewSessionFormScreen(super.originalDoc)
       : super(
             signedIn: true,
-            onFieldsChanged: (formScreenState) async {
+            onFieldsChanged: (formScreenState, formField) async {
               final doc = formScreenState.doc;
               final scannedQR = doc.getValue<String>('QR');
               try {
