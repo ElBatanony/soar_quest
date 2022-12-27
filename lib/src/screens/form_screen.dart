@@ -30,7 +30,10 @@ class FormScreen extends DocScreen {
 
   @mustCallSuper
   void onFieldsChanged(
-      FormScreenState formScreenState, SQField<dynamic> field) {}
+      FormScreenState formScreenState, SQField<dynamic> field) {
+    if (liveEdit && field.isLive)
+      unawaited(collection.saveDoc(formScreenState.doc));
+  }
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -87,11 +90,4 @@ class FormScreen extends DocScreen {
 
 class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
   FormScreen get formScreen => widget;
-
-  @override
-  void refreshScreen() {
-    if (formScreen.liveEdit)
-      unawaited(formScreen.collection.saveDoc(widget.doc));
-    super.refreshScreen();
-  }
 }
