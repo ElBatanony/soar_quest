@@ -59,4 +59,4 @@ lib/main.dart
 **/firebase_options.dart
 firebase.json
 .firebaserc
-.firebase/hosting*
+.firebase/
