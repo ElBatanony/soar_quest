@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import '../data/sq_field.dart';
 
 class SQTextField<T> extends StatefulWidget {
-  const SQTextField(this.formField,
-      {required this.textParse, this.maxLines = 1});
+  const SQTextField(
+    this.formField, {
+    required this.textParse,
+    this.maxLines = 1,
+    this.numeric = false,
+  });
 
   final SQFormField<T, SQField<T>> formField;
   final T Function(String) textParse;
   final int maxLines;
+  final bool numeric;
 
   @override
   SQTextFieldState createState() => SQTextFieldState();
@@ -42,6 +47,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
   @override
   Widget build(BuildContext context) => TextField(
         controller: fieldTextController,
+        keyboardType: widget.numeric ? TextInputType.number : null,
         maxLines: widget.maxLines,
         onChanged: (text) {
           final parsedText = widget.textParse(text);
