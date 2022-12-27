@@ -43,7 +43,8 @@ class _SQFieldListFormField<T>
   List<T> getDocValue() => super.getDocValue() ?? <T>[];
 
   @override
-  String get fieldLabelText => '${field.name} (${getDocValue().length} items)';
+  String get fieldLabelText =>
+      '${super.fieldLabelText} (${getDocValue().length} items)';
 
   @override
   Widget readOnlyBuilder(context) => Column(
