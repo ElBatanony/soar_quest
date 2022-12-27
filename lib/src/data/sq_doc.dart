@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 
 import 'fields/image_field.dart';
+import 'fields/virtual_field.dart';
 import 'sq_collection.dart';
 import 'types/sq_ref.dart';
 
@@ -31,6 +32,7 @@ class SQDoc {
   Map<String, dynamic> serialize() {
     final jsonMap = <String, dynamic>{};
     for (final field in collection.fields) {
+      if (field is SQVirtualField) continue;
       jsonMap[field.name] = field.serialize(_values[field.name]);
     }
     return jsonMap;
