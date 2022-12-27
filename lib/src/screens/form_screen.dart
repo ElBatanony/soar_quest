@@ -16,7 +16,6 @@ class FormScreen extends DocScreen {
     super.icon,
     super.isInline,
     super.signedIn,
-    this.onFieldsChanged,
     this.liveEdit = false,
   }) : super(
             liveEdit
@@ -29,8 +28,9 @@ class FormScreen extends DocScreen {
   final SQDoc originalDoc;
   final bool liveEdit;
 
-  final void Function(FormScreenState formScreenState,
-      SQFormField<dynamic, SQField<dynamic>> formField)? onFieldsChanged;
+  @mustCallSuper
+  void onFieldsChanged(
+      FormScreenState formScreenState, SQField<dynamic> field) {}
 
   @override
   State<FormScreen> createState() => FormScreenState();

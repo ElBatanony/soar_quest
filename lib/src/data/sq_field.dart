@@ -57,7 +57,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
     doc.setValue(field.name, value);
     if (isInFormScreen) {
       final formScreenState = docScreenState as FormScreenState;
-      formScreenState.formScreen.onFieldsChanged?.call(formScreenState, this);
+      formScreenState.formScreen.onFieldsChanged(formScreenState, field);
     }
     docScreenState.refreshScreen();
   }
