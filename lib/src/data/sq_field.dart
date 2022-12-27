@@ -20,6 +20,7 @@ abstract class SQField<T> {
   bool require;
   DocCond show;
   bool isInline = false;
+  bool isLive = false;
 
   void init(SQDoc doc) => doc.setValue(name, defaultValue);
 
