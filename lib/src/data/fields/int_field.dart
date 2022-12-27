@@ -16,5 +16,6 @@ class _SQIntFormField extends SQFormField<int, SQIntField> {
   const _SQIntFormField(super.field, super.docScreenState);
 
   @override
-  fieldBuilder(context) => SQTextField(this, textParse: int.tryParse);
+  fieldBuilder(context) =>
+      SQTextField(this, textParse: int.tryParse, numeric: true);
 }
