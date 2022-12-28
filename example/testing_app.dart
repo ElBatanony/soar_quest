@@ -90,7 +90,9 @@ void main() async {
           collection: FirestoreCollection(id: 'FAQ', fields: [
         SQStringField('Question'),
         SQStringField('Answer'),
-      ]))
+      ])),
+      const Screen(title: 'Top Screen', isInline: true) &
+          const Screen(title: 'Bottom Screen', isInline: true),
     ]),
   );
 }
