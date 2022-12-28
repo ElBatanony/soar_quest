@@ -27,13 +27,14 @@ void main() async {
   SQApp.run([const Screen(title: 'Hello World')]);
 
   sessionsCollection = FirestoreCollection(id: 'Sessions', fields: [
-    SQStringField('Session Name'),
+    SQStringField('Session Name')..isLive,
     SQCreatedByField(instructorFieldName),
     SQBoolField('Collecting Attendance',
         show: DocCond((doc, screenState) => screenState is FormScreenState),
-        defaultValue: true),
+        defaultValue: true)
+      ..isLive = true,
     SQFieldListField(SQStringField(attendeesFieldName)),
-    SQStringField(challengeFieldName, show: falseCond),
+    SQStringField(challengeFieldName, show: falseCond)..isLive = true,
   ], actions: [
     GoScreenAction('Resume Check-in', screen: SessionCollectionFormScreen.new)
   ]);
@@ -93,58 +94,55 @@ class MySessionsCollectionScreen extends CollectionScreen {
 }
 
 class AttendNewSessionFormScreen extends FormScreen {
-  AttendNewSessionFormScreen(super.originalDoc)
-      : super(
-            signedIn: true,
-            onFieldsChanged: (formScreenState, formField) async {
-              final doc = formScreenState.doc;
-              final scannedQR = doc.getValue<String>('QR');
-              try {
-                final json =
-                    jsonDecode(scannedQR ?? '') as Map<String, dynamic>;
-                debugPrint('Decoded JSON: $json');
-                if (scannedQR != null) doc.parse(json);
-                debugPrint('Serialized doc: ${doc.serialize()}');
-                final sessionId = doc.getValue<String>('Session ID');
-                debugPrint('Session ID $sessionId');
-                if (sessionId != null) {
-                  final sessionDocRef = SQRef(
-                    collectionPath: sessionsCollection.path,
-                    docId: sessionId,
-                  );
-                  await sessionsCollection.loadCollection();
-                  final sessionDoc = sessionDocRef.doc;
-                  final attendees =
-                      sessionDoc.getValue<List<String>>(attendeesFieldName) ??
-                          [];
-                  final sessionChallenge =
-                      sessionDoc.getValue<String>(challengeFieldName);
-                  final scannedChallenge =
-                      doc.getValue<String>(challengeFieldName);
+  AttendNewSessionFormScreen(super.originalDoc) : super(signedIn: true);
 
-                  if (scannedChallenge != sessionChallenge) {
-                    showSnackBar('Incorrect QR code (challenge)',
-                        context: formScreenState.context);
-                    return;
-                  }
+  @override
+  Future<void> onFieldsChanged(formScreenState, field) async {
+    final doc = formScreenState.doc;
+    final scannedQR = doc.getValue<String>('QR');
+    try {
+      final json = jsonDecode(scannedQR ?? '') as Map<String, dynamic>;
+      debugPrint('Decoded JSON: $json');
+      if (scannedQR != null) doc.parse(json);
+      debugPrint('Serialized doc: ${doc.serialize()}');
+      final sessionId = doc.getValue<String>('Session ID');
+      debugPrint('Session ID $sessionId');
+      if (sessionId != null) {
+        final sessionDocRef = SQRef(
+          collectionPath: sessionsCollection.path,
+          docId: sessionId,
+        );
+        await sessionsCollection.loadCollection();
+        final sessionDoc = sessionDocRef.doc;
+        final attendees =
+            sessionDoc.getValue<List<String>>(attendeesFieldName) ?? [];
+        final sessionChallenge =
+            sessionDoc.getValue<String>(challengeFieldName);
+        final scannedChallenge = doc.getValue<String>(challengeFieldName);
 
-                  final myEmail = SQAuth.user?.email;
-                  if (myEmail != null) attendees.add(myEmail);
-                  sessionDoc.setValue(attendeesFieldName, attendees);
-                  unawaited(sessionsCollection.saveDoc(sessionDoc));
-                  if (formScreenState.mounted)
-                    await DocScreen(sessionDoc)
-                        .go(formScreenState.context, replace: true);
-                } else {
-                  showSnackBar('Incorrect Session ID',
-                      context: formScreenState.context);
-                }
-              } on Exception {
-                showSnackBar('Error processing QR code',
-                    context: formScreenState.context);
-                return;
-              }
-            });
+        if (scannedChallenge != sessionChallenge) {
+          showSnackBar('Incorrect QR code (challenge)',
+              context: formScreenState.context);
+          return;
+        }
+
+        final myEmail = SQAuth.user?.email;
+        if (myEmail != null) attendees.add(myEmail);
+        sessionDoc.setValue(attendeesFieldName, attendees);
+        unawaited(sessionsCollection.saveDoc(sessionDoc));
+        if (formScreenState.mounted)
+          await DocScreen(sessionDoc)
+              .go(formScreenState.context, replace: true);
+      } else {
+        showSnackBar('Incorrect Session ID', context: formScreenState.context);
+      }
+    } on Exception {
+      showSnackBar('Error processing QR code',
+          context: formScreenState.context);
+      return;
+    }
+    super.onFieldsChanged(formScreenState, field);
+  }
 }
 
 class SessionCollectionScreen extends CollectionScreen {
@@ -197,7 +195,9 @@ class SessionCollectionFormScreenState
   late Timer timer;
 
   void updateChallenge() {
+    if (doc.getValue<bool>('Collecting Attendance') != true) return;
     widget.doc.setValue(challengeFieldName, timer.tick.toString());
+    formScreen.onFieldsChanged(this, collection.getField(challengeFieldName)!);
     refreshScreen();
   }
 
