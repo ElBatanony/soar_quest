@@ -1,5 +1,6 @@
 export 'src/data/fields/bool_field.dart';
 export 'src/data/fields/color_field.dart';
+export 'src/data/fields/composite_field.dart';
 export 'src/data/fields/created_by_field.dart';
 export 'src/data/fields/double_field.dart';
 export 'src/data/fields/edited_by_field.dart';
