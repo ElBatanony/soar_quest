@@ -74,6 +74,10 @@ class Screen extends StatefulWidget {
 
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
+
+  Screen operator &(Screen other) => _CustomBodyScreen(
+      title: title,
+      bodyBuilder: (screenState) => Column(children: [this, other]));
 }
 
 class ScreenState<T extends Screen> extends State<T> {
@@ -123,4 +127,13 @@ class ScreenState<T extends Screen> extends State<T> {
   void exitScreen<V extends Object?>([V? value]) {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
+}
+
+class _CustomBodyScreen extends Screen {
+  const _CustomBodyScreen({required super.title, required this.bodyBuilder});
+
+  final Widget Function(ScreenState) bodyBuilder;
+
+  @override
+  screenBody(screenState) => bodyBuilder(screenState);
 }
