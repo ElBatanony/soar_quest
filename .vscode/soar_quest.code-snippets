@@ -1,7 +1,7 @@
 {
 	"New Screen Template": {
 		"scope": "dart",
-		"prefix": "screen",
+		"prefix": "nsqs",
 		"body": [
 			"class $1 extends Screen {",
 			"\tconst $1({required super.title});",
@@ -17,7 +17,7 @@
 	},
 	"New Collection Screen": {
 		"scope": "dart",
-		"prefix": "collectionScreen",
+		"prefix": "nsqcs",
 		"body": [
 			"class $1 extends CollectionScreen {",
 			"\t$1({required super.collection});",
@@ -32,7 +32,7 @@
 	},
 	"New Doc Screen": {
 		"scope": "dart",
-		"prefix": "docScreen",
+		"prefix": "nsqds",
 		"body": [
 			"class $1 extends DocScreen {",
 			"\t$1(super.doc);",
@@ -47,7 +47,7 @@
 	},
 	"New SQ App": {
 		"scope": "dart",
-		"prefix": "sqapp",
+		"prefix": "nsqapp",
 		"body": [
 			"await SQApp.init('$1',",
 			"\t\tfirebaseOptions: DefaultFirebaseOptions.currentPlatform);",
@@ -57,7 +57,7 @@
 	},
 	"New SQFormField": {
 		"scope": "dart",
-		"prefix": "sqformfield",
+		"prefix": "nsqff",
 		"body": [
 			"class _SQ$1FormField extends SQFormField<SQ$1Field> {",
 			"  const _SQ$1FormField(super.field, {required super.onChanged, super.doc});",
