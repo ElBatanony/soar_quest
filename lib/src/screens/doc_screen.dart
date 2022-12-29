@@ -19,12 +19,11 @@ class DocScreen extends Screen {
   @override
   createState() => DocScreenState();
 
-  Widget fieldDisplay(SQField<dynamic> field, ScreenState screenState) =>
-      field.formField(screenState as DocScreenState);
+  Widget fieldDisplay(SQField<dynamic> field) => field.formField(this);
 
-  List<Widget> fieldsDisplay(ScreenState screenState) => collection.fields
-      .where((field) => field.show.check(doc, screenState))
-      .map((field) => fieldDisplay(field, screenState))
+  List<Widget> fieldsDisplay() => collection.fields
+      .where((field) => field.show.check(doc, this))
+      .map(fieldDisplay)
       .toList();
 
   Widget actionsDisplay() => Wrap(
