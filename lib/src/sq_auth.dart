@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'data/collections/firestore_collection.dart';
 import 'data/collections/local_collection.dart';
-import 'data/fields/sq_string_field.dart';
+import 'data/fields/string_field.dart';
 
 import 'data/sq_action.dart';
 import 'screens/screen.dart';
@@ -34,13 +34,12 @@ class SQAuth {
     if (isSignedIn) {
       userDoc = usersCollection.getDoc(user!.userId);
       if (userDoc == null) {
-        userDoc = usersCollection.newDoc(id: user!.userId, initialFields: [
-          SQStringField('Email', value: SQAuth.user!.email, editable: false)
-        ]);
+        userDoc = usersCollection
+            .newDoc(id: user!.userId, source: {'Email': SQAuth.user!.email});
         await usersCollection.saveDoc(userDoc!);
       } else {
-        if (userDoc!.value<String>('Email') != SQAuth.user!.email) {
-          userDoc!.getField('Email')!.value = SQAuth.user!.email;
+        if (userDoc!.getValue<String>('Email') != SQAuth.user!.email) {
+          userDoc!.setValue('Email', SQAuth.user!.email);
           await usersCollection.saveDoc(userDoc!);
         }
       }

@@ -26,14 +26,13 @@ void main() async {
     fields: [
       SQStringField('Task', require: true),
       SQEnumField<String>(
-        SQStringField('Status'),
+        SQStringField('Status', defaultValue: 'To-Do'),
         options: ['Done', 'To-Do'],
-        value: 'To-Do',
         show: inFormScreen.not,
       ),
       // SQImageField("Image"),
       SQEditedByField('hamada user'),
-      SQBoolField('Repeat', value: false),
+      SQBoolField('Repeat', defaultValue: false),
       SQIntField('Repeat Every (Hours)', show: DocValueCond('Repeat', true)),
       SQTimestampField('Last Updated'),
     ],

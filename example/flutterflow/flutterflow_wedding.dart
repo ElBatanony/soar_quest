@@ -18,7 +18,7 @@ void main() async {
           Screen(title: 'Groomsmen', isInline: true),
         ])
       ], title: 'Home'),
-      const SocialFeed(title: 'Social Feed', icon: Icons.no_drinks),
+      const SocialFeedScreen(title: 'Social Feed', icon: Icons.no_drinks),
     ],
     drawer: SQDrawer(const [FeedbackScreen(telegramUsername: 'batanony')]),
   );

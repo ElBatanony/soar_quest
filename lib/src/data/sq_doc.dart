@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 
-import 'fields/sq_image_field.dart';
+import 'fields/image_field.dart';
+import 'fields/virtual_field.dart';
 import 'sq_collection.dart';
 import 'types/sq_ref.dart';
 
@@ -14,52 +15,54 @@ class SQDoc {
   SQDoc(this.id, {required this.collection}) {
     path = '${collection.path}/$id';
 
-    fields = collection.fields.map((field) {
-      final fieldCopy = field.copy();
-      assert(
-        field.runtimeType == fieldCopy.runtimeType &&
-            field.name == fieldCopy.name &&
-            field.editable == fieldCopy.editable &&
-            field.require == fieldCopy.require,
-        'Incorrect SQField copy operation ${field.runtimeType}',
-      );
-      return fieldCopy;
-    }).toList();
+    for (final field in collection.fields) field.init(this);
   }
 
-  late List<SQField<dynamic>> fields;
-  String id;
+  final Map<String, dynamic> _values = {};
+  final String id;
   SQCollection collection;
-  late String path;
+  late final String path;
 
   void parse(Map<String, dynamic> source) {
-    for (final field in fields) field.value = field.parse(source[field.name]);
+    for (final field in collection.fields)
+      if (source.containsKey(field.name))
+        _values[field.name] = field.parse(source[field.name]);
   }
 
   Map<String, dynamic> serialize() {
     final jsonMap = <String, dynamic>{};
-    for (final field in fields) {
-      jsonMap[field.name] = field.serialize();
+    for (final field in collection.fields) {
+      if (field is SQVirtualField) continue;
+      jsonMap[field.name] = field.serialize(_values[field.name]);
     }
     return jsonMap;
   }
 
-  F? getField<F extends SQField<dynamic>>(String fieldName) =>
-      fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
+  T? getValue<T>(String fieldName) => _values[fieldName] as T?;
 
-  T? value<T>(String fieldName) => getField<SQField<T>>(fieldName)?.value;
+  void setValue<T>(String fieldName, T value) {
+    final field = collection.getField(fieldName);
+    if (field != null)
+      _values[fieldName] = field.parse(value);
+    else
+      _values[fieldName] = value;
+  }
 
-  String get label => fields.first.value.toString();
+  String get label => _values[collection.fields.first.name].toString();
+
+  String? get secondaryLabel => collection.fields.length >= 2
+      ? _values[collection.fields[1].name].toString()
+      : null;
 
   SQRef get ref => SQRef.fromDoc(this);
 
   @override
   String toString() => label;
 
-  SQImageField? get imageLabel => fields
+  SQImageField? get _imageLabelField => collection.fields
       .whereType<SQImageField>()
-      .firstWhereOrNull((field) => field.value != null);
+      .firstWhereOrNull((field) => _values[field.name] != null);
 
-  List<SQField<dynamic>> copyFields() =>
-      fields.map((field) => field.copy()).toList();
+  String? get imageLabel =>
+      _imageLabelField == null ? null : _values[_imageLabelField] as String;
 }

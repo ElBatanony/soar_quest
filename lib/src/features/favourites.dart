@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/collections/local_collection.dart';
-import '../data/fields/sq_ref_field.dart';
+import '../data/fields/ref_field.dart';
 import '../data/sq_action.dart';
 import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
@@ -15,8 +15,8 @@ class FavouritesFeature {
         fields: [SQRefField('ref', collection: collection)],
         actions: [
           GoScreenAction('',
-              screen: (doc) =>
-                  DocScreen(collection.getDoc(doc.value<SQRef>('ref')!.docId)!))
+              screen: (doc) => DocScreen(
+                  collection.getDoc(doc.getValue<SQRef>('ref')!.docId)!))
         ],
         parentDoc: SQAuth.userDoc,
         updates: SQUpdates.readOnly());
@@ -32,8 +32,8 @@ class FavouritesFeature {
         icon: Icons.favorite,
         show: isInFavourites().not,
         customExecute: (doc, screenState) async {
-          final newFavDoc = SQDoc(doc.id, collection: favouritesCollection);
-          newFavDoc.getField<SQRefField>('ref')!.value = doc.ref;
+          final newFavDoc = SQDoc(doc.id, collection: favouritesCollection)
+            ..setValue('ref', doc.ref);
           await favouritesCollection.saveDoc(newFavDoc);
           screenState.refreshScreen();
         },
@@ -61,5 +61,5 @@ class FavouritesScreen extends CollectionScreen {
       : super(collection: favouritesFeature.favouritesCollection);
 
   @override
-  Screen docScreen(SQDoc doc) => DocScreen(doc.value<SQRef>('ref')!.doc);
+  Screen docScreen(SQDoc doc) => DocScreen(doc.getValue<SQRef>('ref')!.doc);
 }

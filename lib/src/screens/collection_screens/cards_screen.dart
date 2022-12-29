@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 
 class CardsScreen extends CollectionScreen {
   CardsScreen({required super.collection, super.title});
 
   @override
-  Widget docDisplay(SQDoc doc, ScreenState screenState) => Card(
+  Widget docDisplay(doc, screenState) => Card(
         child: InkWell(
           onTap: () async => goToDocScreen(docScreen(doc), screenState),
           child: Padding(
@@ -24,14 +23,14 @@ class CardsScreen extends CollectionScreen {
                           style:
                               Theme.of(screenState.context).textTheme.headline6,
                         ),
-                        if (doc.fields.length >= 2)
-                          Text((doc.fields[1].value ?? '').toString())
+                        if (doc.secondaryLabel != null)
+                          Text(doc.secondaryLabel!)
                       ],
                     ),
                   ],
                 ),
                 if (doc.imageLabel != null)
-                  Image.network(doc.imageLabel!.value!, height: 120),
+                  Image.network(doc.imageLabel!, height: 120),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: collection.actions

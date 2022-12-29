@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import '../../fields.dart';
 import '../data/sq_collection.dart';
+import '../sq_auth.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
-
-void _emptyVoid(SQDoc doc) {}
 
 class FormScreen extends DocScreen {
   FormScreen(
@@ -13,16 +15,25 @@ class FormScreen extends DocScreen {
     this.submitButtonText = 'Save',
     super.icon,
     super.isInline,
-    this.onFieldsChanged = _emptyVoid,
+    super.signedIn,
+    this.liveEdit = false,
   }) : super(
-            originalDoc.collection
-                .newDoc(initialFields: originalDoc.copyFields()),
+            liveEdit
+                ? originalDoc
+                : originalDoc.collection
+                    .newDoc(source: originalDoc.serialize()),
             title: title ?? 'Edit ${originalDoc.collection.id}');
 
   final String submitButtonText;
   final SQDoc originalDoc;
+  final bool liveEdit;
 
-  final void Function(SQDoc) onFieldsChanged;
+  @mustCallSuper
+  void onFieldsChanged(
+      FormScreenState formScreenState, SQField<dynamic> field) {
+    if (liveEdit && field.isLive)
+      unawaited(collection.saveDoc(formScreenState.doc));
+  }
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -33,35 +44,40 @@ class FormScreen extends DocScreen {
       super.go(context, replace: false);
 
   Future<void> submitForm(ScreenState screenState) async {
-    for (final field in doc.fields) {
-      if (field.require && field.value == null) {
+    for (final field in collection.fields) {
+      if (field.require && doc.getValue<dynamic>(field.name) == null) {
         showSnackBar('${field.name} is required!',
             context: screenState.context);
         return;
       }
+
+      if (field is SQUpdatedDateField)
+        doc.setValue(field.name, SQTimestamp.now());
+
+      if (field is SQEditedByField && SQAuth.isSignedIn)
+        doc.setValue(field.name, SQAuth.userDoc!.ref);
     }
 
-    originalDoc.fields = doc.copyFields();
+    originalDoc.parse(doc.serialize());
 
     await collection.saveDoc(originalDoc);
     screenState.exitScreen<bool>(true);
   }
 
   @override
-  Widget? bottomNavBar(ScreenState screenState) => BottomNavigationBar(
-        backgroundColor: Colors.grey[100],
-        currentIndex: 1,
-        onTap: (index) async {
+  Widget? navigationBar(ScreenState screenState) => NavigationBar(
+        selectedIndex: 1,
+        onDestinationSelected: (index) async {
           if (index == 0) {
             FocusManager.instance.primaryFocus?.unfocus();
             return screenState.exitScreen();
           }
           await submitForm(screenState);
         },
-        items: [
-          const BottomNavigationBarItem(
+        destinations: [
+          const NavigationDestination(
               icon: Icon(Icons.cancel), label: 'Cancel'),
-          BottomNavigationBarItem(
+          NavigationDestination(
               icon: const Icon(Icons.save), label: submitButtonText),
         ],
       );
@@ -73,9 +89,5 @@ class FormScreen extends DocScreen {
 }
 
 class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
-  @override
-  void refreshScreen() {
-    widget.onFieldsChanged(doc);
-    super.refreshScreen();
-  }
+  FormScreen get formScreen => widget;
 }

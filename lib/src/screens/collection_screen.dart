@@ -22,14 +22,12 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final String? groupByField;
 
-  List<SQDoc> get docs => collection.docs;
-
   @override
-  State<CollectionScreen> createState() => CollectionScreenState();
+  createState() => CollectionScreenState();
 
-  Widget groupByDocs(List<SQDoc> docs, ScreenState screenState) {
+  Widget groupByDocs(List<SQDoc> docs, CollectionScreenState screenState) {
     final groups = groupBy<SQDoc, dynamic>(
-        docs, (doc) => doc.value<dynamic>(groupByField!));
+        docs, (doc) => doc.getValue<dynamic>(groupByField!));
 
     final tiles = <Widget>[];
     for (final entry in groups.entries) {
@@ -53,13 +51,11 @@ class CollectionScreen extends Screen {
     return null;
   }
 
-  Widget docDisplay(SQDoc doc, ScreenState screenState) => ListTile(
+  Widget docDisplay(SQDoc doc, CollectionScreenState screenState) => ListTile(
         title: Text(doc.label),
-        subtitle: doc.fields.length >= 2
-            ? Text((doc.fields[1].value ?? '').toString())
-            : null,
+        subtitle: doc.secondaryLabel == null ? null : Text(doc.secondaryLabel!),
         leading: doc.imageLabel != null
-            ? Image.network(doc.imageLabel!.value!, width: 70)
+            ? Image.network(doc.imageLabel!, width: 70)
             : null,
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -73,30 +69,35 @@ class CollectionScreen extends Screen {
         onTap: () async => goToDocScreen(docScreen(doc), screenState),
       );
 
-  Widget docsDisplay(List<SQDoc> docs, ScreenState screenState) => ListView(
+  Widget collectionDisplay(
+          List<SQDoc> docs, CollectionScreenState screenState) =>
+      ListView(
         shrinkWrap: true,
         children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
       );
 
-  Future<void> goToDocScreen(Screen docScreen, ScreenState screenState) async {
+  Future<void> goToDocScreen(
+      Screen docScreen, CollectionScreenState screenState) async {
     await docScreen.go(screenState.context);
-    screenState.refreshScreen();
+    await screenState.refreshScreen();
   }
 
   Screen docScreen(SQDoc doc) => DocScreen(doc);
 
   @override
-  Widget screenBody(ScreenState screenState) {
+  Widget screenBody(screenState) {
+    final docs = collection.docs;
     if (docs.isEmpty) return const Center(child: Text('This list is empty'));
-    if (groupByField != null) return groupByDocs(docs, screenState);
-    return docsDisplay(docs, screenState);
+    if (groupByField != null)
+      return groupByDocs(docs, screenState as CollectionScreenState);
+    return collectionDisplay(docs, screenState as CollectionScreenState);
   }
 }
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
-  Future<void> refreshScreen() async {
-    unawaited(loadData());
+  Future<void> refreshScreen({bool refetchData = true}) async {
+    if (refetchData) unawaited(loadData());
     super.refreshScreen();
   }
 

@@ -32,7 +32,7 @@ DocCond isSignedIn = DocCond((doc, context) => SQAuth.isSignedIn);
 
 class DocValueCond<T> extends DocCond {
   DocValueCond(String fieldName, T expectedValue)
-      : super((doc, context) => doc.value<T>(fieldName) == expectedValue);
+      : super((doc, context) => doc.getValue<T>(fieldName) == expectedValue);
 }
 
 class CollectionCond extends DocCond {

@@ -32,9 +32,6 @@ migrate_working_dir/
 .pub/
 /build/
 
-# Web related
-lib/generated_plugin_registrant.dart
-
 # Symbolication related
 app.*.symbols
 
@@ -51,8 +48,15 @@ lib/playground/
 .VSCodeCounter/
 example/playground/
 
+# Not app
 android/
 web/
 windows/
-**/firebase_options.dart
 pubspec.lock
+lib/main.dart
+
+# Firebase
+**/firebase_options.dart
+firebase.json
+.firebaserc
+.firebase/

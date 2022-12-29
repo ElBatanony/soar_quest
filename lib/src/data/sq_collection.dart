@@ -2,8 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
 import '../sq_app.dart';
-import '../sq_auth.dart';
-import 'fields/sq_user_ref_field.dart';
 import 'sq_action.dart';
 import 'sq_doc.dart';
 import 'sq_updates.dart';
@@ -67,28 +65,11 @@ abstract class SQCollection {
   F? getField<F extends SQField<dynamic>>(String fieldName) =>
       fields.singleWhereOrNull((f) => f.name == fieldName && f is F) as F?;
 
-  SQDoc newDoc({List<SQField<dynamic>> initialFields = const [], String? id}) {
-    final newDoc = SQDoc(id ?? newDocId(), collection: this);
-
-    for (final initialField in initialFields) {
-      final index =
-          newDoc.fields.indexWhere((field) => field.name == initialField.name);
-      newDoc.fields[index] = initialField.copy();
-    }
-
-    if (SQAuth.isSignedIn)
-      fields
-          .whereType<SQCreatedByField>()
-          .forEach((field) => field.value = SQAuth.userDoc!.ref);
-
-    return newDoc;
-  }
+  SQDoc newDoc({Map<String, dynamic> source = const {}, String? id}) =>
+      SQDoc(id ?? newDocId(), collection: this)..parse(source);
 
   static SQCollection? byPath(String path) =>
       _collections.singleWhereOrNull((collection) => collection.path == path);
-
-  List<SQField<dynamic>> copyFields() =>
-      fields.map((field) => field.copy()).toList();
 
   SQDoc? getDoc(String id) => docs.firstWhereOrNull((doc) => doc.id == id);
 

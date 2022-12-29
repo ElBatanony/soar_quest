@@ -37,7 +37,7 @@ class TableScreen extends CollectionScreen {
             .execute(doc, screenState),
         child: Padding(
           padding: const EdgeInsets.all(3),
-          child: Text(doc.value<dynamic>(field.name).toString()),
+          child: Text(doc.getValue<dynamic>(field.name).toString()),
         ),
       );
 
@@ -49,7 +49,7 @@ class TableScreen extends CollectionScreen {
           defaultColumnWidth: const IntrinsicColumnWidth(),
           children: [
             tableHeaderRow(screenState),
-            ...docs.map((doc) => tableDocRow(doc, screenState))
+            ...collection.docs.map((doc) => tableDocRow(doc, screenState))
           ],
         ),
       );

@@ -4,9 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import '../ui/sq_action_button.dart';
-import '../ui/sq_button.dart';
-import 'fields/sq_list_field.dart';
+import '../ui/action_button.dart';
+import '../ui/button.dart';
 import 'sq_collection.dart';
 
 Future<void> emptyOnExecute(doc, context) async {}
@@ -59,8 +58,8 @@ abstract class SQAction {
 class GoEditCloneAction extends GoScreenAction {
   GoEditCloneAction(super.name, {super.icon, super.show})
       : super(
-          screen: (doc) => FormScreen(
-              doc.collection.newDoc(initialFields: copyList(doc.fields))),
+          screen: (doc) =>
+              FormScreen(doc.collection.newDoc(source: doc.serialize())),
         );
 }
 
@@ -103,7 +102,7 @@ class CreateDocAction extends SQAction {
   CreateDocAction(
     super.name, {
     required this.getCollection,
-    required this.initialFields,
+    required this.source,
     super.icon,
     super.show,
     super.onExecute,
@@ -112,13 +111,13 @@ class CreateDocAction extends SQAction {
   });
 
   SQCollection Function() getCollection;
-  List<SQField<dynamic>> Function(SQDoc) initialFields;
+  Map<String, dynamic> Function(SQDoc) source;
   bool form;
   bool goBack;
 
   @override
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
-    final newDoc = getCollection().newDoc(initialFields: initialFields(doc));
+    final newDoc = getCollection().newDoc(source: source(doc));
 
     if (form) {
       final isCreated =
@@ -170,9 +169,7 @@ class SetFieldsAction extends SQAction {
   Future<void> execute(SQDoc doc, ScreenState screenState) async {
     final newFields = getFields(doc);
     for (final entry in newFields.entries) {
-      final docField = doc.getField(entry.key);
-      if (docField == null) throw Exception('SetFieldsAction null doc field');
-      docField.value = entry.value;
+      doc.setValue(entry.key, entry.value);
     }
     await doc.collection.saveDoc(doc);
     screenState.refreshScreen();

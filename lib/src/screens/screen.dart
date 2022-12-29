@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../sq_app.dart';
 import '../sq_auth.dart';
-import '../ui/sq_button.dart';
-import '../ui/sq_navbar.dart';
+import '../ui/button.dart';
+import '../ui/navbar.dart';
 
 Future<T?> _goToScreen<T>(
   Screen screen,
@@ -48,7 +48,7 @@ class Screen extends StatefulWidget {
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
 
-  AppBar appBar(ScreenState screenState) => AppBar(
+  PreferredSizeWidget appBar(ScreenState screenState) => AppBar(
         title: Text(title),
         leading: Navigator.of(screenState.context).canPop()
             ? const BackButton()
@@ -67,13 +67,17 @@ class Screen extends StatefulWidget {
 
   FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
 
-  Widget? bottomNavBar(ScreenState screenState) {
+  Widget? navigationBar(ScreenState screenState) {
     if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);
     return null;
   }
 
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
+
+  Screen operator &(Screen other) => _CustomBodyScreen(
+      title: title,
+      bodyBuilder: (screenState) => Column(children: [this, other]));
 }
 
 class ScreenState<T extends Screen> extends State<T> {
@@ -97,7 +101,7 @@ class ScreenState<T extends Screen> extends State<T> {
             ],
           ),
         ),
-        bottomNavigationBar: widget.bottomNavBar(this),
+        bottomNavigationBar: widget.navigationBar(this),
       );
     }
 
@@ -116,11 +120,20 @@ class ScreenState<T extends Screen> extends State<T> {
               drawer: SQApp.drawer,
               body: body,
               floatingActionButton: widget.floatingActionButton(this),
-              bottomNavigationBar: widget.bottomNavBar(this),
+              bottomNavigationBar: widget.navigationBar(this),
             ));
   }
 
   void exitScreen<V extends Object?>([V? value]) {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
+}
+
+class _CustomBodyScreen extends Screen {
+  const _CustomBodyScreen({required super.title, required this.bodyBuilder});
+
+  final Widget Function(ScreenState) bodyBuilder;
+
+  @override
+  screenBody(screenState) => bodyBuilder(screenState);
 }

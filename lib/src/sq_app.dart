@@ -2,9 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'data/sq_field.dart';
+import 'features/dark_mode_setting.dart';
 import 'screens/screen.dart';
 import 'sq_auth.dart';
-import 'ui/sq_drawer.dart';
+import 'ui/drawer.dart';
 
 class SQApp {
   static late String name;
@@ -42,7 +43,9 @@ class SQApp {
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
-        theme: theme,
+        theme: SQApp.theme,
+        darkTheme: ThemeData.dark(useMaterial3: true),
+        themeMode: SQDarkMode.themeMode,
         home: SQApp.navbarScreens[SQApp.selectedNavScreen]));
   }
 }

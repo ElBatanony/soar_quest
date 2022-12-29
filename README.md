@@ -52,7 +52,7 @@ dependencies:
 
 ### Android Setup
 
-To compile your app in Android, update your `minSdkVersion` to `19` (or higher), and enable `multiDex`.
+To compile your app in Android, update your `minSdkVersion` (see snippet below), and enable `multiDex`.
 Additionally, set your `compileSdkVersion` to `33` (or higher).
 You can find the settings in `android\app\build.gradle`.
 
@@ -60,11 +60,15 @@ You can find the settings in `android\app\build.gradle`.
 android {
   compileSdkVersion 33
   defaultConfig {
-    minSdkVersion 19
+    minSdkVersion 21
     multiDexEnabled true
   }
 }                                                              
 ```
+
+### QR Code Scanning Setup
+
+See instructions [here](https://pub.dev/packages/mobile_scanner/versions/3.0.0-beta.4#platform-specific-setup).
 
 ## SQApp
 

@@ -11,16 +11,19 @@ void main() async {
 
   await SQApp.init(
     'Testing App',
-    theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+    theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
     userDocFields: userDocFields,
     firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);
 
   final simpleCollection = FirestoreCollection(
     id: 'Simple Collection',
     fields: [
       SQStringField('Name'),
       SQBoolField('Cool?'),
+      SQMaturityRatingField(),
     ],
   );
 
@@ -31,13 +34,25 @@ void main() async {
     fields: [
       SQStringField('String'),
       SQBoolField('Bool'),
+      SQQRCodeField('QR'),
+      SQEnumField(SQColorField('Color Enum'),
+          options: [Colors.red, Colors.blue, Colors.amber]),
       SQRefField('Doc Ref', collection: simpleCollection),
+      SQEditedByField('Edited By'),
       SQDoubleField('Double'),
-      SQFileField('File', storage: firebaseFileStorage),
       SQIntField('Int'),
+      SQVirtualField(
+          subfield: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
+      SQFieldListField(SQStringField('String List'), defaultValue: ['hi']),
+      SQColorField('Color'),
+      SQLocationField('Location'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
-      SQStringField('Readonly String', value: 'I am readonly', editable: false),
+      SQCreatedByField('Creator'),
+      SQUpdatedDateField('Updated Date'),
+      SQStringField('Readonly String',
+          defaultValue: 'I am readonly', editable: false),
+      SQFileField('File', storage: firebaseFileStorage),
     ],
     actions: [
       GoScreenAction('Child Coll',
@@ -48,7 +63,7 @@ void main() async {
                     SQStringField('Name'),
                     SQRefField('Parent Doc',
                         collection: doc.collection,
-                        value: doc.ref,
+                        defaultValue: doc.ref,
                         editable: false),
                   ],
                   parentDoc: doc)))
@@ -65,12 +80,19 @@ void main() async {
   SQApp.run(
     [
       CollectionScreen(collection: testCollection),
-      CollectionScreen(collection: simpleCollection),
+      CollectionScreen(collection: KidsModeSlice(simpleCollection)),
       FavouritesScreen(
           favouritesFeature: FavouritesFeature(collection: simpleCollection))
     ],
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
+      FAQScreen(
+          collection: FirestoreCollection(id: 'FAQ', fields: [
+        SQStringField('Question'),
+        SQStringField('Answer'),
+      ])),
+      const Screen(title: 'Top Screen', isInline: true) &
+          const Screen(title: 'Bottom Screen', isInline: true),
     ]),
   );
 }
