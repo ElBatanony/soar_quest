@@ -22,7 +22,7 @@ class CollectionScreen extends Screen {
   @override
   createState() => CollectionScreenState();
 
-  Widget groupByDocs(List<SQDoc> docs, CollectionScreenState screenState) {
+  Widget groupByDocs(List<SQDoc> docs) {
     final groups = groupBy<SQDoc, dynamic>(
         docs, (doc) => doc.getValue<dynamic>(groupByField!));
 
@@ -30,7 +30,7 @@ class CollectionScreen extends Screen {
     for (final entry in groups.entries) {
       tiles
         ..add(ListTile(title: Text(entry.key.toString())))
-        ..addAll(entry.value.map((doc) => docDisplay(doc, screenState)));
+        ..addAll(entry.value.map(docDisplay));
     }
     return ListView(shrinkWrap: true, children: tiles);
   }
