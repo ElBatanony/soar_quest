@@ -69,7 +69,7 @@ class Screen extends StatefulWidget {
             icon: const Icon(Icons.refresh))
       ];
 
-  FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
+  FloatingActionButton? floatingActionButton() => null;
 
   Widget? navigationBar() {
     if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);

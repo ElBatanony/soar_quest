@@ -39,14 +39,14 @@ class CollectionScreen extends Screen {
   }
 
   @override
-  FloatingActionButton? floatingActionButton(ScreenState screenState) {
+  FloatingActionButton? floatingActionButton() {
     if (collection.updates.adds) {
       final SQAction createNewDocAction = GoEditAction(
           name: 'Create Doc',
           icon: Icons.add,
           onExecute: (doc, context) async => refresh(),
           show: CollectionCond((collection) => collection.updates.adds));
-      return createNewDocAction.fab(collection.newDoc(), screenState);
+      return createNewDocAction.fab(collection.newDoc(), this);
     }
     return null;
   }
