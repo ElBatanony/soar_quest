@@ -80,15 +80,16 @@ class Screen extends StatefulWidget {
       bodyBuilder: (screenState) => Column(children: [this, other]));
 }
 
-class ScreenState<T extends Screen> extends State<T> {
+class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
   void refreshScreen() => setState(() {});
 
+  S get _screen => widget.screen;
   @override
   Widget build(BuildContext context) {
-    if (widget.signedIn && SQAuth.isSignedIn == false) {
+    if (_screen.signedIn && SQAuth.isSignedIn == false) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(_screen.title),
         ),
         drawer: SQApp.drawer,
         body: Center(
@@ -101,32 +102,34 @@ class ScreenState<T extends Screen> extends State<T> {
             ],
           ),
         ),
-        bottomNavigationBar: widget.navigationBar(this),
+        bottomNavigationBar: _screen.navigationBar(),
       );
     }
 
     final Widget body = Builder(
         builder: (_) => Container(
-              padding: widget.screenPadding,
-              child: widget.screenBody(this),
+              padding: _screen.screenPadding,
+              child: _screen.screenBody(),
             ));
 
-    if (widget.isInline) return body;
+    if (_screen.isInline) return body;
 
     return Builder(
         builder: (_) => Scaffold(
               resizeToAvoidBottomInset: true,
-              appBar: widget.appBar(this),
+              appBar: _screen.appBar(),
               drawer: SQApp.drawer,
               body: body,
-              floatingActionButton: widget.floatingActionButton(this),
-              bottomNavigationBar: widget.navigationBar(this),
+              floatingActionButton: _screen.floatingActionButton(),
+              bottomNavigationBar: _screen.navigationBar(),
             ));
   }
 
   void exitScreen<V extends Object?>([V? value]) {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
+}
+
 class ScreenWidget<S extends Screen> extends StatefulWidget {
   const ScreenWidget(this.screen);
 
