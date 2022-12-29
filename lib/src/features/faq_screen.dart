@@ -22,7 +22,7 @@ class FAQScreen extends CollectionScreen {
         child: ExpansionPanelList(
           expansionCallback: (index, isExpanded) async {
             expanded[docs[index].id] = !isExpanded;
-            await screenState.refreshScreen(refetchData: false);
+            await refresh(refetchData: false);
           },
           children: docs
               .map(

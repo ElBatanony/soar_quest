@@ -130,7 +130,7 @@ class CreateDocAction extends SQAction {
         await DocScreen(newDoc).go(screenState.context);
     }
 
-    screenState.refreshScreen();
+    screen.refresh();
 
     return super.execute(doc, screenState);
   }

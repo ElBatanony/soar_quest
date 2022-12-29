@@ -23,7 +23,7 @@ class SQTextFieldState extends State<SQTextField<dynamic>> {
   final fieldTextController = TextEditingController();
 
   void callOnChange() {
-    widget.formField.docScreenState.refreshScreen();
+    widget.formField.docScreen.refresh();
     setState(() {});
   }
 

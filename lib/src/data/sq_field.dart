@@ -60,7 +60,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
       final formScreenState = docScreenState as FormScreenState;
       formScreenState.formScreen.onFieldsChanged(formScreenState, field);
     }
-    docScreenState.refreshScreen();
+    docScreen.refresh();
   }
 
   void clearDocValue() => setDocValue(field.defaultValue);

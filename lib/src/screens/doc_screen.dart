@@ -59,7 +59,7 @@ class DocScreenState<DS extends DocScreen> extends ScreenState<DS> {
     if (collection.isLive)
       liveListener = collection.liveUpdates(doc).listen((mapData) {
         doc.parse(mapData);
-        refreshScreen();
+        refresh();
       });
     super.initState();
   }

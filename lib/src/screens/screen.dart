@@ -82,6 +82,11 @@ class Screen extends StatefulWidget {
   @mustCallSuper
   void dispose() {}
 
+  @mustCallSuper
+  void refresh() {
+    if (mounted) _myState.refreshScreen();
+  }
+
   Widget toWidget() => ScreenWidget(this);
 
   void exitScreen<V extends Object?>([V? value]) {

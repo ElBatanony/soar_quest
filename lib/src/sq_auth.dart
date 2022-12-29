@@ -112,16 +112,14 @@ class SQProfileScreen extends Screen {
       return SignInScreen(
         providers: providers,
         actions: [
-          AuthStateChangeAction<SignedIn>(
-              (bcontext, state) => screenState.refreshScreen()),
+          AuthStateChangeAction<SignedIn>((bcontext, state) => refresh()),
         ],
       );
     }
     return ProfileScreen(
       actions: [
-        AuthStateChangeAction<SignedIn>(
-            (bcontext, state) => screenState.refreshScreen()),
-        SignedOutAction((bcontext) => screenState.refreshScreen()),
+        AuthStateChangeAction<SignedIn>((bcontext, state) => refresh()),
+        SignedOutAction((bcontext) => refresh()),
       ],
       providers: providers,
       children: [
@@ -135,8 +133,8 @@ class SQProfileScreen extends Screen {
 
 class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
   @override
-  refreshScreen() async {
+  void refresh() {
     unawaited(SQAuth.initUserDoc());
-    super.refreshScreen();
+    super.refresh();
   }
 }

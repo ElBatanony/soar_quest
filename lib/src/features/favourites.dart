@@ -35,7 +35,7 @@ class FavouritesFeature {
           final newFavDoc = SQDoc(doc.id, collection: favouritesCollection)
             ..setValue('ref', doc.ref);
           await favouritesCollection.saveDoc(newFavDoc);
-          screenState.refreshScreen();
+          screen.refresh();
         },
       );
 
@@ -45,7 +45,7 @@ class FavouritesFeature {
         show: isInFavourites(),
         customExecute: (doc, screenState) async {
           await favouritesCollection.deleteDoc(doc);
-          screenState.refreshScreen();
+          screen.refresh();
         },
       );
 

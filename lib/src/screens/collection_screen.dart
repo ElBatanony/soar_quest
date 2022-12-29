@@ -44,7 +44,7 @@ class CollectionScreen extends Screen {
       final SQAction createNewDocAction = GoEditAction(
           name: 'Create Doc',
           icon: Icons.add,
-          onExecute: (doc, context) async => screenState.refreshScreen(),
+          onExecute: (doc, context) async => refresh(),
           show: CollectionCond((collection) => collection.updates.adds));
       return createNewDocAction.fab(collection.newDoc(), screenState);
     }
@@ -96,9 +96,9 @@ class CollectionScreen extends Screen {
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
-  Future<void> refreshScreen({bool refetchData = true}) async {
+  Future<void> refresh({bool refetchData = true}) async {
     if (refetchData) unawaited(loadData());
-    super.refreshScreen();
+    super.refresh();
   }
 
   Future<void> loadData() async {
