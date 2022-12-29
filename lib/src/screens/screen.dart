@@ -45,6 +45,8 @@ class Screen extends StatefulWidget {
 
   State<ScreenWidget> createState() => _myState = _ScreenState();
 
+  BuildContext get context => _myState.context;
+  
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
