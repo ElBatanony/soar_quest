@@ -14,14 +14,14 @@ Future<T?> _goToScreen<T>(
     return Navigator.pushReplacement(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => screen,
+        pageBuilder: (context, animation1, animation2) => screen.toWidget(),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       ),
     );
 
   return Navigator.push<T>(
-      context, MaterialPageRoute(builder: (context) => screen));
+      context, MaterialPageRoute(builder: (context) => screen.toWidget()));
 }
 
 bool alwaysShowScreen(BuildContext context) => true;
@@ -77,6 +77,8 @@ class Screen extends StatefulWidget {
 
   @mustCallSuper
   void dispose() {}
+
+  Widget toWidget() => ScreenWidget(this);
 
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);

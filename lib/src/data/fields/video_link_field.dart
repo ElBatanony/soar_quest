@@ -15,7 +15,8 @@ class _SQVideoLinkFormField extends SQFormField<String, SQVideoLinkField> {
   const _SQVideoLinkFormField(super.field, super.docScreenState);
 
   @override
-  readOnlyBuilder(context) => VideoDocDisplay(doc, videoField: field);
+  readOnlyBuilder(context) =>
+      VideoDocDisplay(doc, videoField: field).toWidget();
 
   @override
   fieldBuilder(context) => SQTextField(this, textParse: (text) => text);
