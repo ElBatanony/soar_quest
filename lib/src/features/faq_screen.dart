@@ -13,7 +13,7 @@ class FAQScreen extends CollectionScreen {
   final String answerFieldName;
 
   @override
-  Widget docDisplay(doc, screenState) => ListTile(
+  Widget docDisplay(doc) => ListTile(
         title: Text(doc.getValue(answerFieldName) ?? 'No answer (yet).'),
       );
 

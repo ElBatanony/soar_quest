@@ -6,9 +6,9 @@ class CardsScreen extends CollectionScreen {
   CardsScreen({required super.collection, super.title});
 
   @override
-  Widget docDisplay(doc, screenState) => Card(
+  Widget docDisplay(doc) => Card(
         child: InkWell(
-          onTap: () async => goToDocScreen(docScreen(doc), screenState),
+          onTap: () async => goToDocScreen(docScreen(doc)),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -20,8 +20,7 @@ class CardsScreen extends CollectionScreen {
                       children: [
                         Text(
                           doc.label,
-                          style:
-                              Theme.of(screenState.context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                         if (doc.secondaryLabel != null)
                           Text(doc.secondaryLabel!)

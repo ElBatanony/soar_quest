@@ -8,9 +8,9 @@ class TableScreen extends CollectionScreen {
   TableScreen({required super.collection, super.title});
 
   @override
-  Widget docDisplay(SQDoc doc, ScreenState screenState) => Row(
+  Widget docDisplay(SQDoc doc) => Row(
       children: collection.fields
-          .map((field) => tableFieldCell(doc, field, screenState))
+          .map((field) => tableFieldCell(doc, field))
           .toList());
 
   Widget tableHeaderCell(SQField<dynamic> field, ScreenState screenState) =>

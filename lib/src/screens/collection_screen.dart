@@ -48,7 +48,7 @@ class CollectionScreen extends Screen {
     return null;
   }
 
-  Widget docDisplay(SQDoc doc, CollectionScreenState screenState) => ListTile(
+  Widget docDisplay(SQDoc doc) => ListTile(
         title: Text(doc.label),
         subtitle: doc.secondaryLabel == null ? null : Text(doc.secondaryLabel!),
         leading: doc.imageLabel != null
@@ -62,7 +62,7 @@ class CollectionScreen extends Screen {
               .map((action) => action.button(doc, screen: this, isIcon: true))
               .toList(),
         ),
-        onTap: () async => goToDocScreen(docScreen(doc), screenState),
+        onTap: () async => goToDocScreen(docScreen(doc)),
       );
 
   Widget collectionDisplay(List<SQDoc> docs) => ListView(
