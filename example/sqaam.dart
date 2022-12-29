@@ -81,14 +81,14 @@ class MySessionsCollectionScreen extends CollectionScreen {
           screenState);
 
   @override
-  Widget screenBody(ScreenState<Screen> screenState) => Column(
+  Widget screenBody() => Column(
         children: [
           SQButton('Attend New Session', onPressed: () async {
             await AttendNewSessionFormScreen(checkInCollection.newDoc())
-                .go(screenState.context);
-            screenState.refreshScreen();
+                .go(context);
+            await refresh();
           }),
-          super.screenBody(screenState),
+          super.screenBody(),
         ],
       );
 }
@@ -154,28 +154,28 @@ class SessionCollectionScreen extends CollectionScreen {
   }
 
   @override
-  screenBody(screenState) => SingleChildScrollView(
+  screenBody() => SingleChildScrollView(
         child: Column(
           children: [
             SQButton('Collection New Session', onPressed: () async {
               await SessionCollectionFormScreen(collection.newDoc())
-                  .go(screenState.context);
-              screenState.refreshScreen();
+                  .go(context);
+              await refresh();
             }),
-            super.screenBody(screenState),
+            super.screenBody(),
           ],
         ),
       );
 
   @override
-  floatingActionButton(screenState) => null;
+  floatingActionButton() => null;
 }
 
 class SessionCollectionFormScreen extends FormScreen {
   SessionCollectionFormScreen(super.originalDoc) : super(liveEdit: true);
 
   @override
-  Widget screenBody(screenState) => SingleChildScrollView(
+  Widget screenBody() => SingleChildScrollView(
         child: Column(
           children: [
             if (true == doc.getValue<bool>('Collecting Attendance'))
@@ -185,7 +185,7 @@ class SessionCollectionFormScreen extends FormScreen {
                     challengeFieldName: doc.getValue<String>('Challenge')
                   }),
                   size: 250),
-            super.screenBody(screenState),
+            super.screenBody(),
           ],
         ),
       );

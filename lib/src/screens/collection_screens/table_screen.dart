@@ -42,15 +42,12 @@ class TableScreen extends CollectionScreen {
       );
 
   @override
-  Widget screenBody(ScreenState screenState) => SingleChildScrollView(
+  Widget screenBody() => SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Table(
           border: TableBorder.all(),
           defaultColumnWidth: const IntrinsicColumnWidth(),
-          children: [
-            tableHeaderRow(screenState),
-            ...collection.docs.map((doc) => tableDocRow(doc, screenState))
-          ],
+          children: [tableHeaderRow(), ...collection.docs.map(tableDocRow)],
         ),
       );
 }

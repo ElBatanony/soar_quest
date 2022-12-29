@@ -60,12 +60,12 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget screenBody() => Padding(
         padding: const EdgeInsets.all(15),
         child: Center(
           child: Column(
             children: [
-              Text(widget.doc.label),
+              Text(doc.label),
               if (_controller != null)
                 YoutubePlayer(
                   controller: _controller!,

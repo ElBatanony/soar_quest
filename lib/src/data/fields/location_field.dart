@@ -89,13 +89,10 @@ class LocationPickerScreen extends Screen {
       ];
 
   @override
-  Widget screenBody(screenState) => FlutterMap(
+  Widget screenBody() => FlutterMap(
         options: MapOptions(
             center: formField.getDocValue() ?? defaultLocation,
-            onTap: (tapPosition, point) {
-              formField.setDocValue(point);
-              screenState.refreshScreen();
-            }),
+            onTap: (tapPosition, point) => formField.setDocValue(point)),
         nonRotatedChildren: [mapAttribution],
         children: [
           tileLayer,

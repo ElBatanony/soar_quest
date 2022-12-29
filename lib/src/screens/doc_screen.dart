@@ -35,12 +35,12 @@ class DocScreen extends Screen {
       );
 
   @override
-  Widget screenBody(ScreenState screenState) => SingleChildScrollView(
+  Widget screenBody() => SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            actionsDisplay(screenState),
-            ...fieldsDisplay(screenState),
+            actionsDisplay(),
+            ...fieldsDisplay(),
           ],
         ),
       );

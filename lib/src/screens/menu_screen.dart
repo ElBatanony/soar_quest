@@ -9,12 +9,12 @@ class MenuScreen extends Screen {
   final List<Screen> screens;
 
   @override
-  Widget screenBody(ScreenState<Screen> screenState) => ListView(
+  Widget screenBody() => ListView(
         children: [
           for (final screen in screens)
             SQButton(
               screen.title,
-              onPressed: () async => screen.go(screenState.context),
+              onPressed: () async => screen.go(context),
             ),
         ],
       );

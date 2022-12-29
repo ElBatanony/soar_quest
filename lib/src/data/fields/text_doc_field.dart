@@ -77,7 +77,7 @@ class TextDocScreen extends Screen {
       document: formField.getDocValue() ?? Document.fromJson(defaultDeltaJson),
       selection: const TextSelection.collapsed(offset: 0));
 
-  void saveAndExit(ScreenState<Screen> screenState) {
+  void saveAndExit() {
     formField.setDocValue(
         Document.fromJson(_controller.document.toDelta().toJson()));
     exitScreen();
@@ -90,7 +90,7 @@ class TextDocScreen extends Screen {
       ];
 
   @override
-  Widget screenBody(screenState) => Column(
+  Widget screenBody() => Column(
         children: [
           if (formField.field.editable)
             QuillToolbar.basic(controller: _controller),

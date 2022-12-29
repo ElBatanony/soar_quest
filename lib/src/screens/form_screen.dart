@@ -80,9 +80,9 @@ class FormScreen extends DocScreen {
       );
 
   @override
-  Widget screenBody(ScreenState screenState) => GestureDetector(
+  Widget screenBody() => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: super.screenBody(screenState));
+      child: super.screenBody());
 }
 
 class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {

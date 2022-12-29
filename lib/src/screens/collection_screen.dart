@@ -82,14 +82,12 @@ class CollectionScreen extends Screen {
   Screen docScreen(SQDoc doc) => DocScreen(doc);
 
   @override
-  Widget screenBody(screenState) {
+  Widget screenBody() {
     final docs = collection.docs;
     if (docs.isEmpty) return const Center(child: Text('This list is empty'));
-    if (groupByField != null)
-      return groupByDocs(docs, screenState as CollectionScreenState);
-    return collectionDisplay(docs, screenState as CollectionScreenState);
+    if (groupByField != null) return groupByDocs(docs);
+    return collectionDisplay(docs);
   }
-}
 
 class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
