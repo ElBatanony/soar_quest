@@ -27,10 +27,8 @@ class FormScreen extends DocScreen {
   final bool liveEdit;
 
   @mustCallSuper
-  void onFieldsChanged(
-      FormScreenState formScreenState, SQField<dynamic> field) {
-    if (liveEdit && field.isLive)
-      unawaited(collection.saveDoc(formScreenState.doc));
+  void onFieldsChanged(SQField<dynamic> field) {
+    if (liveEdit && field.isLive) unawaited(collection.saveDoc(doc));
   }
 
   @override

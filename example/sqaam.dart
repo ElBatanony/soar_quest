@@ -97,8 +97,7 @@ class AttendNewSessionFormScreen extends FormScreen {
   }
 
   @override
-  Future<void> onFieldsChanged(formScreenState, field) async {
-    final doc = formScreenState.doc;
+  Future<void> onFieldsChanged(field) async {
     final scannedQR = doc.getValue<String>('QR');
     try {
       final json = jsonDecode(scannedQR ?? '') as Map<String, dynamic>;
@@ -121,8 +120,7 @@ class AttendNewSessionFormScreen extends FormScreen {
         final scannedChallenge = doc.getValue<String>(challengeFieldName);
 
         if (scannedChallenge != sessionChallenge) {
-          showSnackBar('Incorrect QR code (challenge)',
-              context: formScreenState.context);
+          showSnackBar('Incorrect QR code (challenge)', context: context);
           return;
         }
 
@@ -130,18 +128,15 @@ class AttendNewSessionFormScreen extends FormScreen {
         if (myEmail != null) attendees.add(myEmail);
         sessionDoc.setValue(attendeesFieldName, attendees);
         unawaited(sessionsCollection.saveDoc(sessionDoc));
-        if (formScreenState.mounted)
-          await DocScreen(sessionDoc)
-              .go(formScreenState.context, replace: true);
+        if (mounted) await DocScreen(sessionDoc).go(context, replace: true);
       } else {
-        showSnackBar('Incorrect Session ID', context: formScreenState.context);
+        showSnackBar('Incorrect Session ID', context: context);
       }
     } on Exception {
-      showSnackBar('Error processing QR code',
-          context: formScreenState.context);
+      showSnackBar('Error processing QR code', context: context);
       return;
     }
-    super.onFieldsChanged(formScreenState, field);
+    super.onFieldsChanged(field);
   }
 }
 
