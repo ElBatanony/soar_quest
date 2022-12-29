@@ -56,7 +56,7 @@ void main() async {
     ],
     actions: [
       GoScreenAction('Child Coll',
-          screen: (doc) => CollectionScreen(
+          toScreen: (doc) => CollectionScreen(
               collection: FirestoreCollection(
                   id: 'Child Collection',
                   fields: [

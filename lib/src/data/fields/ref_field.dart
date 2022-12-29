@@ -53,8 +53,8 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
       children: [
         Text(ref.toString()),
         if (doc != null)
-          GoScreenAction('', screen: DocScreen.new)
-              .button(doc, screenState: docScreenState)
+          GoScreenAction('', toScreen: DocScreen.new)
+              .button(doc, screen: docScreen)
       ],
     );
   }

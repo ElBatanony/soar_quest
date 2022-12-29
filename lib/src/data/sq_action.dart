@@ -58,7 +58,7 @@ abstract class SQAction {
 class GoEditCloneAction extends GoScreenAction {
   GoEditCloneAction(super.name, {super.icon, super.show})
       : super(
-          screen: (doc) =>
+          toScreen: (doc) =>
               FormScreen(doc.collection.newDoc(source: doc.serialize())),
         );
 }
@@ -66,19 +66,19 @@ class GoEditCloneAction extends GoScreenAction {
 class GoScreenAction extends SQAction {
   GoScreenAction(
     super.name, {
-    required this.screen,
+    required this.toScreen,
     super.icon,
     super.show,
     super.onExecute,
     this.replace = false,
   });
 
-  Screen Function(SQDoc) screen;
+  Screen Function(SQDoc) toScreen;
   bool replace;
 
   @override
-  execute(SQDoc doc, ScreenState screenState) async {
-    await screen(doc).go(screenState.context, replace: replace);
+  execute(SQDoc doc, Screen screen) async {
+    await toScreen(doc).go(screen.context, replace: replace);
     screenState.refreshScreen();
     await super.execute(doc, screenState);
   }
@@ -94,7 +94,7 @@ class GoEditAction extends GoScreenAction {
           name,
           icon: icon,
           show: DocCond((doc, _) => doc.collection.updates.edits) & show,
-          screen: FormScreen.new,
+          toScreen: FormScreen.new,
         );
 }
 

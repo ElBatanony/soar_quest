@@ -36,7 +36,7 @@ void main() async {
     SQFieldListField(SQStringField(attendeesFieldName)),
     SQStringField(challengeFieldName, show: falseCond)..isLive = true,
   ], actions: [
-    GoScreenAction('Resume Check-in', screen: SessionCollectionFormScreen.new)
+    GoScreenAction('Resume Check-in', toScreen: SessionCollectionFormScreen.new)
   ]);
 
   checkInCollection = InMemoryCollection(id: 'Check-in', fields: [

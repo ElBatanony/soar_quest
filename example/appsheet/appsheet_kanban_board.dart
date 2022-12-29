@@ -25,7 +25,7 @@ void main() async {
   ], actions: [
     GoEditCloneAction('Clone Workspace'),
     GoScreenAction('Go Empty',
-        screen: (doc) => Screen(title: 'Empty Screen for ${doc.label}')),
+        toScreen: (doc) => Screen('Empty Screen for ${doc.label}')),
     GoEditAction(name: 'Edit Workspace'),
     CreateDocAction(
       'New Project',

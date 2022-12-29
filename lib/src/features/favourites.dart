@@ -15,7 +15,7 @@ class FavouritesFeature {
         fields: [SQRefField('ref', collection: collection)],
         actions: [
           GoScreenAction('',
-              screen: (doc) => DocScreen(
+              toScreen: (doc) => DocScreen(
                   collection.getDoc(doc.getValue<SQRef>('ref')!.docId)!))
         ],
         parentDoc: SQAuth.userDoc,
