@@ -41,8 +41,9 @@ class Screen extends StatefulWidget {
   final bool Function(BuildContext) show;
   final bool signedIn;
 
-  @override
-  State<Screen> createState() => ScreenState();
+  late _ScreenState _myState;
+
+  State<ScreenWidget> createState() => _myState = _ScreenState();
 
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
