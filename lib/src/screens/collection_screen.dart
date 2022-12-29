@@ -57,7 +57,7 @@ class CollectionScreen extends Screen {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: collection.actions
-              .where((action) => action.show.check(doc, screenState))
+              .where((action) => action.show.check(doc, this))
               .take(2)
               .map((action) =>
                   action.button(doc, screenState: screenState, isIcon: true))

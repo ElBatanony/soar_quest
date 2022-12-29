@@ -34,7 +34,7 @@ class CardsScreen extends CollectionScreen {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: collection.actions
-                        .where((action) => action.show.check(doc, screenState))
+                        .where((action) => action.show.check(doc, this))
                         .take(3)
                         .map((action) => action.button(doc,
                             screenState: screenState, isIcon: true))

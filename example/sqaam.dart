@@ -29,9 +29,7 @@ void main() async {
   sessionsCollection = FirestoreCollection(id: 'Sessions', fields: [
     SQStringField('Session Name')..isLive,
     SQCreatedByField(instructorFieldName),
-    SQBoolField('Collecting Attendance',
-        show: DocCond((doc, screenState) => screenState is FormScreenState),
-        defaultValue: true)
+    SQBoolField('Collecting Attendance', show: inFormScreen, defaultValue: true)
       ..isLive = true,
     SQFieldListField(SQStringField(attendeesFieldName)),
     SQStringField(challengeFieldName, show: falseCond)..isLive = true,
