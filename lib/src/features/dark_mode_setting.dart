@@ -7,7 +7,10 @@ class SQDarkMode {
 
   static late SQEnumField<String> _setting;
 
-  static String get _settingValue => UserSettings.initialized
+  static bool initialized = false;
+
+  static String get _settingValue => (UserSettings.initialized &&
+          SQDarkMode.initialized)
       ? (UserSettings().getSetting<String>(_setting.name) ?? _defaultMode.name)
       : _defaultMode.name;
 
@@ -15,12 +18,14 @@ class SQDarkMode {
       ThemeMode.values.firstWhere((mode) => mode.name == _settingValue);
 
   static SQEnumField<String> setting(
-          {ThemeMode defaultMode = _defaultMode, String name = 'Dark Mode'}) =>
-      _setting = SQEnumField(
-          SQStringField(name, defaultValue: defaultMode.name),
-          options: [
-            ThemeMode.light.name,
-            ThemeMode.dark.name,
-            ThemeMode.system.name,
-          ]);
+      {ThemeMode defaultMode = _defaultMode, String name = 'Dark Mode'}) {
+    SQDarkMode.initialized = true;
+    return _setting = SQEnumField(
+        SQStringField(name, defaultValue: defaultMode.name),
+        options: [
+          ThemeMode.light.name,
+          ThemeMode.dark.name,
+          ThemeMode.system.name,
+        ]);
+  }
 }
