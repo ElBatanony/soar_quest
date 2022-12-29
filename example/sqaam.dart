@@ -179,26 +179,20 @@ class SessionCollectionFormScreen extends FormScreen {
         ),
       );
 
-  @override
-  createState() => SessionCollectionFormScreenState();
-}
-
-class SessionCollectionFormScreenState
-    extends FormScreenState<SessionCollectionFormScreen> {
   late Timer timer;
 
   void updateChallenge() {
     if (doc.getValue<bool>('Collecting Attendance') != true) return;
-    widget.doc.setValue(challengeFieldName, timer.tick.toString());
-    formScreen.onFieldsChanged(this, collection.getField(challengeFieldName)!);
-    refreshScreen();
+    doc.setValue(challengeFieldName, timer.tick.toString());
+    onFieldsChanged(collection.getField(challengeFieldName)!);
+    refresh();
   }
 
   @override
-  void initState() {
+  void initScreen() {
     timer = Timer.periodic(const Duration(seconds: challengeUpdateSeconds),
         (t) => updateChallenge());
-    super.initState();
+    super.initScreen();
   }
 
   @override
