@@ -26,20 +26,14 @@ Future<T?> _goToScreen<T>(
 
 bool alwaysShowScreen(BuildContext context) => true;
 
-class Screen extends StatefulWidget {
-  const Screen({
-    required this.title,
-    this.isInline = false,
-    this.icon = Icons.stay_current_landscape,
-    this.show = alwaysShowScreen,
-    this.signedIn = false,
-  });
+class Screen {
+  Screen(this.title, {this.icon = Icons.stay_current_landscape});
 
   final String title;
-  final IconData? icon;
-  final bool isInline;
-  final bool Function(BuildContext) show;
-  final bool signedIn;
+  IconData? icon;
+  bool isInline = false;
+  bool Function(BuildContext) show = alwaysShowScreen;
+  bool signedIn = false;
 
   late _ScreenState _myState;
 

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'screen.dart';
 
 class TabsScreen extends Screen {
-  TabsScreen({required super.title, required this.screens})
-      : assert(screens.every((screen) => screen.isInline),
-            'All tab screens should be inline');
+  TabsScreen(super.title, {required this.screens}) {
+    for (final screen in screens) screen.isInline = true;
+  }
 
   final List<Screen> screens;
 

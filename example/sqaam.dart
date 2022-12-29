@@ -24,7 +24,7 @@ void main() async {
   await SQApp.init('SQAAM',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
-  SQApp.run([const Screen(title: 'Hello World')]);
+  SQApp.run([Screen('Hello World')]);
 
   sessionsCollection = FirestoreCollection(id: 'Sessions', fields: [
     SQStringField('Session Name')..isLive,
@@ -61,11 +61,11 @@ void main() async {
 class MySessionsCollectionScreen extends CollectionScreen {
   MySessionsCollectionScreen()
       : super(
-          collection: sessionsCollection,
-          title: 'Attended Sessions',
-          icon: Icons.check_circle_outline_outlined,
-          signedIn: true,
-        );
+            collection: sessionsCollection,
+            title: 'Attended Sessions',
+            icon: Icons.check_circle_outline_outlined) {
+    signedIn = true;
+  }
 
   @override
   Widget collectionDisplay(List<SQDoc> docs,
@@ -94,7 +94,9 @@ class MySessionsCollectionScreen extends CollectionScreen {
 }
 
 class AttendNewSessionFormScreen extends FormScreen {
-  AttendNewSessionFormScreen(super.originalDoc) : super(signedIn: true);
+  AttendNewSessionFormScreen(super.originalDoc) {
+    signedIn = true;
+  }
 
   @override
   Future<void> onFieldsChanged(formScreenState, field) async {
@@ -147,7 +149,9 @@ class AttendNewSessionFormScreen extends FormScreen {
 
 class SessionCollectionScreen extends CollectionScreen {
   SessionCollectionScreen({required super.collection})
-      : super(title: 'Collected Sessions', icon: Icons.list, signedIn: true);
+      : super(title: 'Collected Sessions', icon: Icons.list) {
+    signedIn = true;
+  }
 
   @override
   screenBody(screenState) => SingleChildScrollView(

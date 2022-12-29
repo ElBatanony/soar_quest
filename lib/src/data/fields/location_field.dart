@@ -78,7 +78,7 @@ class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
 class LocationPickerScreen extends Screen {
   LocationPickerScreen({
     required this.formField,
-  }) : super(title: formField.field.name);
+  }) : super(formField.field.name);
 
   final SQLocationFormField formField;
 

@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '../screens/telegram_screen.dart';
 
 class SocialFeedScreen extends TelegramScreen {
-  const SocialFeedScreen({required super.title, super.icon})
+  SocialFeedScreen(super.title)
       : super(
           message:
               'Soar Quest does not promote social feeds (posts, likes, etc.). '
@@ -9,5 +11,7 @@ class SocialFeedScreen extends TelegramScreen {
               ' for such purposes.',
           telegramUsername: '',
           buttonText: 'Checkout Telegram',
-        );
+        ) {
+    icon = Icons.no_drinks;
+  }
 }

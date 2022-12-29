@@ -20,8 +20,8 @@ class TelegramButton extends SQButton {
 }
 
 class TelegramScreen extends Screen {
-  const TelegramScreen({
-    required super.title,
+  TelegramScreen(
+    super.title, {
     required this.message,
     required this.telegramUsername,
     required this.buttonText,

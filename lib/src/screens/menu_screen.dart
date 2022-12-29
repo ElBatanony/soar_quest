@@ -4,7 +4,7 @@ import '../ui/button.dart';
 import 'screen.dart';
 
 class MenuScreen extends Screen {
-  const MenuScreen({required this.screens, required super.title});
+  MenuScreen(super.title, {required this.screens});
 
   final List<Screen> screens;
 

@@ -12,12 +12,9 @@ class CollectionScreen extends Screen {
   CollectionScreen({
     required this.collection,
     String? title,
-    super.isInline,
     super.icon,
     this.groupByField,
-    super.signedIn,
-    super.show,
-  }) : super(title: title ?? collection.id);
+  }) : super(title ?? collection.id);
 
   final SQCollection collection;
   final String? groupByField;

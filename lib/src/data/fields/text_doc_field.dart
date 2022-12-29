@@ -69,7 +69,7 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
 class TextDocScreen extends Screen {
   TextDocScreen({
     required this.formField,
-  }) : super(title: formField.field.name);
+  }) : super(formField.field.name);
 
   final SQTextDocFormField formField;
 

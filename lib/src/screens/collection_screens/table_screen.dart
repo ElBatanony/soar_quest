@@ -5,7 +5,7 @@ import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 
 class TableScreen extends CollectionScreen {
-  TableScreen({required super.collection, super.title, super.isInline});
+  TableScreen({required super.collection, super.title});
 
   @override
   Widget docDisplay(SQDoc doc, ScreenState screenState) => Row(

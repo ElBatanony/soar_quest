@@ -10,9 +10,7 @@ class DocScreen extends Screen {
     this.doc, {
     String? title,
     super.icon,
-    super.isInline,
-    super.signedIn,
-  }) : super(title: title ?? doc.label);
+  }) : super(title ?? doc.label);
 
   final SQDoc doc;
 

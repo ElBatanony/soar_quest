@@ -56,8 +56,7 @@ class FavouritesFeature {
 }
 
 class FavouritesScreen extends CollectionScreen {
-  FavouritesScreen(
-      {required FavouritesFeature favouritesFeature, super.isInline})
+  FavouritesScreen({required FavouritesFeature favouritesFeature})
       : super(collection: favouritesFeature.favouritesCollection);
 
   @override

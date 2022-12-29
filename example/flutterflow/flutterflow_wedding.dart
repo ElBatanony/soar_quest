@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
 import 'firebase_options.dart';
@@ -9,17 +8,17 @@ void main() async {
 
   SQApp.run(
     [
-      MenuScreen(screens: [
-        const Screen(title: 'Transportation'),
-        const Screen(title: 'Ceremony'),
-        const Screen(title: 'Our Story'),
-        TabsScreen(title: 'Wedding Party', screens: const [
-          Screen(title: 'Bridesmaids', isInline: true),
-          Screen(title: 'Groomsmen', isInline: true),
+      MenuScreen('Home', screens: [
+        Screen('Transportation'),
+        Screen('Ceremony'),
+        Screen('Our Story'),
+        TabsScreen('Wedding Party', screens: [
+          Screen('Bridesmaids')..isInline = true,
+          Screen('Groomsmen')..isInline = true,
         ])
-      ], title: 'Home'),
-      const SocialFeedScreen(title: 'Social Feed', icon: Icons.no_drinks),
+      ]),
+      SocialFeedScreen('Social Feed'),
     ],
-    drawer: SQDrawer(const [FeedbackScreen(telegramUsername: 'batanony')]),
+    drawer: SQDrawer([FeedbackScreen(telegramUsername: 'batanony')]),
   );
 }

@@ -21,7 +21,7 @@ class VideoCollectionScreen extends CollectionScreen {
 }
 
 class VideoDocDisplay extends DocScreen {
-  VideoDocDisplay(super.doc, {required this.videoField, super.isInline});
+  VideoDocDisplay(super.doc, {required this.videoField});
 
   final SQVideoLinkField videoField;
 

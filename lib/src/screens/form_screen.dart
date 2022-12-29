@@ -14,8 +14,6 @@ class FormScreen extends DocScreen {
     String? title,
     this.submitButtonText = 'Save',
     super.icon,
-    super.isInline,
-    super.signedIn,
     this.liveEdit = false,
   }) : super(
             liveEdit

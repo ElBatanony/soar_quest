@@ -52,20 +52,19 @@ void main() async {
     ),
     CardsScreen(collection: tasks),
     CollectionScreen(
-      show: (context) => true,
       title: 'Tasks 2',
       collection: tasks,
       groupByField: 'Status',
-    ),
+    )..show = (context) => true,
     // CollectionFilterScreen(collection: tasks, filters: [
     //   StringContainsFilter(SQStringField("Task")),
     //   FieldValueFilter(SQBoolField("Repeat"))
     // ]),
     // TableScreen(title: "Table", collection: tasks),
-    TabsScreen(title: 'Tasks', screens: [
-      CollectionScreen(
-          title: 'Pending Tasks', collection: pendingTasks, isInline: true),
-      CollectionScreen(title: 'Done', collection: doneTasks, isInline: true),
+    TabsScreen('Tasks', screens: [
+      CollectionScreen(title: 'Pending Tasks', collection: pendingTasks)
+        ..isInline = true,
+      CollectionScreen(title: 'Done', collection: doneTasks)..isInline = true,
     ]),
   ], startingScreen: 1);
 }

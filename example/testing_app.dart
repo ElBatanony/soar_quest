@@ -91,8 +91,8 @@ void main() async {
         SQStringField('Question'),
         SQStringField('Answer'),
       ])),
-      const Screen(title: 'Top Screen', isInline: true) &
-          const Screen(title: 'Bottom Screen', isInline: true),
+      (Screen('Top Screen')..isInline = true) &
+          (Screen('Bottom Screen')..isInline = true),
     ]),
   );
 }
