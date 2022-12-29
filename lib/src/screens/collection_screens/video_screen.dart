@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../data/fields/video_link_field.dart';
-import '../../data/sq_doc.dart';
 import '../collection_screen.dart';
 import '../doc_screen.dart';
 
@@ -25,18 +24,12 @@ class VideoDocDisplay extends DocScreen {
 
   final SQVideoLinkField videoField;
 
-  @override
-  State<VideoDocDisplay> createState() => _VideoDocDisplayState();
-}
-
-class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   YoutubePlayerController? _controller;
 
   @override
-  void initState() {
-    super.initState();
-
-    final videoFieldValue = widget.doc.getValue<String>(widget.videoField.name);
+  void initScreen() {
+    super.initScreen();
+    final videoFieldValue = doc.getValue<String>(videoField.name);
 
     if (videoFieldValue == null) return;
 
