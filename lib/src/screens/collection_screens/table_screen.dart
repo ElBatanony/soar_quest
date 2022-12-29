@@ -13,28 +13,23 @@ class TableScreen extends CollectionScreen {
           .map((field) => tableFieldCell(doc, field))
           .toList());
 
-  Widget tableHeaderCell(SQField<dynamic> field, ScreenState screenState) =>
-      Padding(
+  Widget tableHeaderCell(SQField<dynamic> field) => Padding(
         padding: const EdgeInsets.all(3),
         child: Text(
           field.name,
-          style: Theme.of(screenState.context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       );
 
-  TableRow tableHeaderRow(ScreenState screenState) => TableRow(
-      children: collection.fields
-          .map((field) => tableHeaderCell(field, screenState))
-          .toList());
+  TableRow tableHeaderRow() =>
+      TableRow(children: collection.fields.map(tableHeaderCell).toList());
 
-  TableRow tableDocRow(SQDoc doc, ScreenState screenState) =>
-      TableRow(children: (docDisplay(doc, screenState) as Row).children);
+  TableRow tableDocRow(SQDoc doc) =>
+      TableRow(children: (docDisplay(doc) as Row).children);
 
-  Widget tableFieldCell(
-          SQDoc doc, SQField<dynamic> field, ScreenState screenState) =>
-      GestureDetector(
-        onTap: () async => GoScreenAction('Go Doc Screen', screen: docScreen)
-            .execute(doc, screenState),
+  Widget tableFieldCell(SQDoc doc, SQField<dynamic> field) => GestureDetector(
+        onTap: () async => GoScreenAction('Go Doc Screen', toScreen: docScreen)
+            .execute(doc, this),
         child: Padding(
           padding: const EdgeInsets.all(3),
           child: Text(doc.getValue<dynamic>(field.name).toString()),
