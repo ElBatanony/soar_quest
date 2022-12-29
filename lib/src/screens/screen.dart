@@ -72,6 +72,9 @@ class Screen extends StatefulWidget {
     return null;
   }
 
+  @mustCallSuper
+  void initScreen() {}
+
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
 
@@ -84,6 +87,13 @@ class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
   void refreshScreen() => setState(() {});
 
   S get _screen => widget.screen;
+
+  @override
+  void initState() {
+    super.initState();
+    _screen.initScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_screen.signedIn && SQAuth.isSignedIn == false) {
