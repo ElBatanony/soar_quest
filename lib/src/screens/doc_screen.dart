@@ -27,7 +27,7 @@ class DocScreen extends Screen {
       .map((field) => fieldDisplay(field, screenState))
       .toList();
 
-  Widget actionsDisplay(ScreenState screenState) => Wrap(
+  Widget actionsDisplay() => Wrap(
         children: collection.actions
             .where((action) => action.show.check(doc, this))
             .map((action) => action.button(doc, screen: this))
