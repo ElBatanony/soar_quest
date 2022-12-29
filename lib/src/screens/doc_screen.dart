@@ -16,9 +16,6 @@ class DocScreen extends Screen {
 
   SQCollection get collection => doc.collection;
 
-  @override
-  createState() => DocScreenState();
-
   Widget fieldDisplay(SQField<dynamic> field) => field.formField(this);
 
   List<Widget> fieldsDisplay() => collection.fields
@@ -43,22 +40,17 @@ class DocScreen extends Screen {
           ],
         ),
       );
-}
-
-class DocScreenState<DS extends DocScreen> extends ScreenState<DS> {
-  SQDoc get doc => widget.doc;
-  SQCollection get collection => doc.collection;
 
   StreamSubscription<DocData>? liveListener;
 
   @override
-  void initState() {
+  void initScreen() {
     if (collection.isLive)
       liveListener = collection.liveUpdates(doc).listen((mapData) {
         doc.parse(mapData);
         refresh();
       });
-    super.initState();
+    super.initScreen();
   }
 
   @override
