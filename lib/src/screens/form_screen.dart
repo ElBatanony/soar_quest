@@ -43,11 +43,10 @@ class FormScreen extends DocScreen {
           {bool replace = false}) =>
       super.go(context, replace: false);
 
-  Future<void> submitForm(ScreenState screenState) async {
+  Future<void> submitForm() async {
     for (final field in collection.fields) {
       if (field.require && doc.getValue<dynamic>(field.name) == null) {
-        showSnackBar('${field.name} is required!',
-            context: screenState.context);
+        showSnackBar('${field.name} is required!', context: context);
         return;
       }
 
@@ -65,14 +64,14 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  Widget? navigationBar(ScreenState screenState) => NavigationBar(
+  Widget? navigationBar() => NavigationBar(
         selectedIndex: 1,
         onDestinationSelected: (index) async {
           if (index == 0) {
             FocusManager.instance.primaryFocus?.unfocus();
             return exitScreen();
           }
-          await submitForm(screenState);
+          await submitForm();
         },
         destinations: [
           const NavigationDestination(

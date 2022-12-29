@@ -71,7 +71,7 @@ class Screen extends StatefulWidget {
 
   FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
 
-  Widget? navigationBar(ScreenState screenState) {
+  Widget? navigationBar() {
     if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);
     return null;
   }
