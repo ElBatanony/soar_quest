@@ -32,7 +32,7 @@ abstract class SQField<T> {
     return null;
   }
 
-  SQFormField<T, SQField<T>> formField(DocScreenState docScreenState);
+  SQFormField<T, SQField<T>> formField(DocScreen docScreen);
 
   @override
   String toString() => '$T $name';
@@ -42,13 +42,13 @@ abstract class SQField<T> {
 
 abstract class SQFormField<T, Field extends SQField<T>>
     extends StatelessWidget {
-  const SQFormField(this.field, this.docScreenState);
+  const SQFormField(this.field, this.docScreen);
 
   final Field field;
-  final DocScreenState docScreenState;
-  SQDoc get doc => docScreenState.doc;
+  final DocScreen docScreen;
+  SQDoc get doc => docScreen.doc;
 
-  bool get isInFormScreen => docScreenState is FormScreenState;
+  bool get isInFormScreen => docScreen is FormScreen;
 
   String get fieldLabelText => field.name + (field.require ? ' *' : '');
 
@@ -57,8 +57,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
   void setDocValue(T? value) {
     doc.setValue(field.name, value);
     if (isInFormScreen) {
-      final formScreenState = docScreenState as FormScreenState;
-      formScreenState.formScreen.onFieldsChanged(formScreenState, field);
+      (docScreen as FormScreen).onFieldsChanged(docScreen, field);
     }
     docScreen.refresh();
   }
