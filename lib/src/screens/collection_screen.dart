@@ -19,9 +19,6 @@ class CollectionScreen extends Screen {
   final SQCollection collection;
   final String? groupByField;
 
-  @override
-  createState() => CollectionScreenState();
-
   Widget groupByDocs(List<SQDoc> docs) {
     final groups = groupBy<SQDoc, dynamic>(
         docs, (doc) => doc.getValue<dynamic>(groupByField!));
@@ -85,7 +82,6 @@ class CollectionScreen extends Screen {
     return collectionDisplay(docs);
   }
 
-class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   @override
   Future<void> refresh({bool refetchData = true}) async {
     if (refetchData) unawaited(loadData());
@@ -93,13 +89,13 @@ class CollectionScreenState<T extends CollectionScreen> extends ScreenState<T> {
   }
 
   Future<void> loadData() async {
-    await widget.collection.loadCollection();
-    super.refreshScreen();
+    await collection.loadCollection();
+    super.refresh();
   }
 
   @override
-  void initState() {
+  void initScreen() {
     unawaited(loadData());
-    super.initState();
+    super.initScreen();
   }
 }
