@@ -100,9 +100,6 @@ class SQProfileScreen extends Screen {
   late final List<AuthProvider> providers;
 
   @override
-  State<SQProfileScreen> createState() => _SQProfileScreenState();
-
-  @override
   screenBody() {
     if (SQAuth.offline) {
       return const Center(child: Text('Profile Screen'));
@@ -129,9 +126,7 @@ class SQProfileScreen extends Screen {
       ],
     );
   }
-}
 
-class _SQProfileScreenState extends ScreenState<SQProfileScreen> {
   @override
   void refresh() {
     unawaited(SQAuth.initUserDoc());
