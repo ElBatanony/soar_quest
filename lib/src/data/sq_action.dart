@@ -34,14 +34,14 @@ abstract class SQAction {
 
   Widget button(
     SQDoc doc, {
-    required ScreenState screenState,
+    required Screen screen,
     bool isIcon = false,
     double iconSize = 24.0,
   }) =>
       SQActionButton(
         action: this,
         doc: doc,
-        screenState: screenState,
+        screen: screen,
         isIcon: isIcon,
         iconSize: iconSize,
       );

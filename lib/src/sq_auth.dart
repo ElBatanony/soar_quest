@@ -125,7 +125,7 @@ class SQProfileScreen extends Screen {
       children: [
         if (SQAuth.userDoc != null)
           GoEditAction(name: 'Edit Profile', show: isSignedIn)
-              .button(SQAuth.userDoc!, screenState: screenState),
+              .button(SQAuth.userDoc!, screen: this),
       ],
     );
   }

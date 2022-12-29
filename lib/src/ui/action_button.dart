@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../data/sq_action.dart';
 import '../data/sq_doc.dart';
 import '../screens/form_screen.dart';
+import '../screens/screen.dart';
 import 'button.dart';
 
 class SQActionButton extends StatefulWidget {
   const SQActionButton({
     required this.action,
     required this.doc,
-    required this.screenState,
+    required this.screen,
     this.isIcon = false,
     this.iconSize = 24.0,
   });
@@ -18,7 +19,7 @@ class SQActionButton extends StatefulWidget {
   final bool isIcon;
   final SQDoc doc;
   final double iconSize;
-  final ScreenState screenState;
+  final Screen screen;
 
   @override
   State<SQActionButton> createState() => _SQActionButtonState();
@@ -29,7 +30,7 @@ class _SQActionButtonState extends State<SQActionButton> {
 
   @override
   void initState() {
-    inForm = widget.screenState is FormScreenState;
+    inForm = widget.screen is FormScreen;
     super.initState();
   }
 
@@ -50,7 +51,7 @@ class _SQActionButtonState extends State<SQActionButton> {
             await showConfirmationDialog(
                 action: widget.action, context: context);
         if (isConfirmed)
-          return widget.action.execute(widget.doc, widget.screenState);
+          return widget.action.execute(widget.doc, widget.screen);
       },
     );
   }

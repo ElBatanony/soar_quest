@@ -36,8 +36,8 @@ class CardsScreen extends CollectionScreen {
                     children: collection.actions
                         .where((action) => action.show.check(doc, this))
                         .take(3)
-                        .map((action) => action.button(doc,
-                            screenState: screenState, isIcon: true))
+                        .map((action) =>
+                            action.button(doc, screen: this, isIcon: true))
                         .toList()),
               ],
             ),
