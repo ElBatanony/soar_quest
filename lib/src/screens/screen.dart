@@ -84,9 +84,8 @@ class Screen {
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
 
-  Screen operator &(Screen other) => _CustomBodyScreen(
-      title: title,
-      bodyBuilder: (screenState) => Column(children: [this, other]));
+  Screen operator &(Screen other) => _CustomBodyScreen(title,
+      bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
 }
 
 class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
