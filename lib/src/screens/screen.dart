@@ -75,6 +75,9 @@ class Screen extends StatefulWidget {
   @mustCallSuper
   void initScreen() {}
 
+  @mustCallSuper
+  void dispose() {}
+
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
 
@@ -92,6 +95,12 @@ class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
   void initState() {
     super.initState();
     _screen.initScreen();
+  }
+
+  @override
+  void dispose() {
+    _screen.dispose();
+    super.dispose();
   }
 
   @override
