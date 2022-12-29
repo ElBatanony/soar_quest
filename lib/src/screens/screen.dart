@@ -127,6 +127,14 @@ class ScreenState<T extends Screen> extends State<T> {
   void exitScreen<V extends Object?>([V? value]) {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
+class ScreenWidget<S extends Screen> extends StatefulWidget {
+  const ScreenWidget(this.screen);
+
+  final S screen;
+
+  @override
+  // ignore: no_logic_in_create_state
+  createState() => screen.createState();
 }
 
 class _CustomBodyScreen extends Screen {
