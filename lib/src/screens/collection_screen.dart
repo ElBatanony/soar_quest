@@ -70,10 +70,9 @@ class CollectionScreen extends Screen {
         children: docs.map(docDisplay).toList(),
       );
 
-  Future<void> goToDocScreen(
-      Screen docScreen, CollectionScreenState screenState) async {
-    await docScreen.go(screenState.context);
-    await screenState.refreshScreen();
+  Future<void> goToDocScreen(Screen docScreen) async {
+    await docScreen.go(context);
+    await refresh();
   }
 
   Screen docScreen(SQDoc doc) => DocScreen(doc);
