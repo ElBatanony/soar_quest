@@ -159,10 +159,10 @@ class ScreenWidget<S extends Screen> extends StatefulWidget {
 }
 
 class _CustomBodyScreen extends Screen {
-  const _CustomBodyScreen({required super.title, required this.bodyBuilder});
+  _CustomBodyScreen(super.title, {required this.bodyBuilder});
 
-  final Widget Function(ScreenState) bodyBuilder;
+  final Widget Function() bodyBuilder;
 
   @override
-  screenBody(screenState) => bodyBuilder(screenState);
+  screenBody() => bodyBuilder();
 }
