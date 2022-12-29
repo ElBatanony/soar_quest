@@ -61,7 +61,7 @@ class FormScreen extends DocScreen {
     originalDoc.parse(doc.serialize());
 
     await collection.saveDoc(originalDoc);
-    screenState.exitScreen<bool>(true);
+    exitScreen<bool>(true);
   }
 
   @override
@@ -70,7 +70,7 @@ class FormScreen extends DocScreen {
         onDestinationSelected: (index) async {
           if (index == 0) {
             FocusManager.instance.primaryFocus?.unfocus();
-            return screenState.exitScreen();
+            return exitScreen();
           }
           await submitForm(screenState);
         },

@@ -80,6 +80,10 @@ class Screen extends StatefulWidget {
 
   Widget toWidget() => ScreenWidget(this);
 
+  void exitScreen<V extends Object?>([V? value]) {
+    if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
+  }
+
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
 
@@ -144,10 +148,6 @@ class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
               floatingActionButton: _screen.floatingActionButton(),
               bottomNavigationBar: _screen.navigationBar(),
             ));
-  }
-
-  void exitScreen<V extends Object?>([V? value]) {
-    if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
 }
 

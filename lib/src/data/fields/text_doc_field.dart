@@ -80,7 +80,7 @@ class TextDocScreen extends Screen {
   void saveAndExit(ScreenState<Screen> screenState) {
     formField.setDocValue(
         Document.fromJson(_controller.document.toDelta().toJson()));
-    screenState.exitScreen();
+    exitScreen();
   }
 
   @override
