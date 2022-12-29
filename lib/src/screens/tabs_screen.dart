@@ -8,40 +8,58 @@ class TabsScreen extends Screen {
   }
 
   final List<Screen> screens;
+  TabController? tabController;
 
   @override
-  createState() => _TabsScreenState();
+  appBar() {
+    if (tabController == null) return super.appBar();
+    return AppBar(
+      title: Text(title),
+      actions: [
+        IconButton(onPressed: refresh, icon: const Icon(Icons.refresh))
+      ],
+      bottom: TabBar(
+        controller: tabController,
+        labelColor: Colors.black,
+        isScrollable: true,
+        onTap: (value) => tabController?.animateTo(value),
+        tabs: screens.map((screen) => Tab(text: screen.title)).toList(),
+      ),
+    );
+  }
 
   @override
-  AppBar appBar(ScreenState screenState) => AppBar(
-        title: Text(title),
-        actions: [
-          IconButton(
-              onPressed: screenState.refreshScreen,
-              icon: const Icon(Icons.refresh))
-        ],
-        bottom: TabBar(
-          controller: (screenState as _TabsScreenState)._tabController,
-          labelColor: Colors.black,
-          isScrollable: true,
-          onTap: (value) => screenState._tabController.animateTo(value),
-          tabs: screens.map((screen) => Tab(text: screen.title)).toList(),
-        ),
-      );
+  Widget screenBody() => _StatefulTab(this);
 
   @override
-  Widget screenBody(ScreenState screenState) => TabBarView(
-      controller: (screenState as _TabsScreenState)._tabController,
-      children: screens);
+  void dispose() {
+    tabController?.dispose();
+    tabController = null;
+    super.dispose();
+  }
 }
 
-class _TabsScreenState extends ScreenState<TabsScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _StatefulTab extends StatefulWidget {
+  const _StatefulTab(this.tabsScreen);
+
+  final TabsScreen tabsScreen;
 
   @override
+  State<_StatefulTab> createState() => _StatefulTabState();
+}
+
+class _StatefulTabState extends State<_StatefulTab>
+    with SingleTickerProviderStateMixin {
+  @override
   void initState() {
-    _tabController = TabController(length: widget.screens.length, vsync: this);
     super.initState();
+    widget.tabsScreen.tabController =
+        TabController(length: widget.tabsScreen.screens.length, vsync: this);
+    widget.tabsScreen.initScreen();
   }
+
+  @override
+  Widget build(context) => TabBarView(
+      controller: widget.tabsScreen.tabController,
+      children: widget.tabsScreen.screens.map((s) => s.toWidget()).toList());
 }
