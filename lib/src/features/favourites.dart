@@ -31,7 +31,7 @@ class FavouritesFeature {
         'Fav',
         icon: Icons.favorite,
         show: isInFavourites().not,
-        customExecute: (doc, screenState) async {
+        customExecute: (doc, screen) async {
           final newFavDoc = SQDoc(doc.id, collection: favouritesCollection)
             ..setValue('ref', doc.ref);
           await favouritesCollection.saveDoc(newFavDoc);
@@ -43,7 +43,7 @@ class FavouritesFeature {
         'UnFav',
         icon: Icons.delete_forever_sharp,
         show: isInFavourites(),
-        customExecute: (doc, screenState) async {
+        customExecute: (doc, screen) async {
           await favouritesCollection.deleteDoc(doc);
           screen.refresh();
         },
