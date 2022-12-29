@@ -18,14 +18,14 @@ class SQCompositeField extends SQField<Map<String, dynamic>> {
   }
 
   @override
-  formField(docScreenState) => _SQCompositeFormField(this, docScreenState);
+  formField(docScreen) => _SQCompositeFormField(this, docScreen);
 }
 
 class _SQCompositeFormField
     extends SQFormField<Map<String, dynamic>, SQCompositeField> {
-  _SQCompositeFormField(super.field, super.docScreenState) {
+  _SQCompositeFormField(super.field, super.docScreen) {
     for (final subfield in field.subfields) {
-      subFormFields.add(subfield.formField(docScreenState));
+      subFormFields.add(subfield.formField(docScreen));
     }
 
     final docValue = getDocValue();

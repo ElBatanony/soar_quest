@@ -37,11 +37,11 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  formField(docScreenState) => _SQRefFormField(this, docScreenState);
+  formField(docScreen) => _SQRefFormField(this, docScreen);
 }
 
 class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
-  const _SQRefFormField(super.field, super.docScreenState);
+  const _SQRefFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../sq_field.dart';
 import '../types/sq_time_of_day.dart';
 
 export '../types/sq_time_of_day.dart';
@@ -29,11 +29,11 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  formField(docScreenState) => _SQTimeOfDayFormField(this, docScreenState);
+  formField(docScreen) => _SQTimeOfDayFormField(this, docScreen);
 }
 
 class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDay, SQTimeOfDayField> {
-  const _SQTimeOfDayFormField(super.field, super.docScreenState);
+  const _SQTimeOfDayFormField(super.field, super.docScreen);
 
   void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
     if (newSelectedTimeOfDay != null) {

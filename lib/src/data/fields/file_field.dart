@@ -20,12 +20,12 @@ class SQFileField extends SQField<String> {
   String? downloadUrl(SQDoc doc) => doc.getValue<String>(name);
 
   @override
-  formField(docScreenState) => SQFileFormField(this, docScreenState);
+  formField(docScreen) => SQFileFormField(this, docScreen);
 }
 
 class SQFileFormField<FileField extends SQFileField>
     extends SQFormField<String, FileField> {
-  const SQFileFormField(super.field, super.docScreenState);
+  const SQFileFormField(super.field, super.docScreen);
 
   Future<void> openFileUrl() async {
     if (field.downloadUrl(doc) == null)

@@ -12,7 +12,7 @@ class SQListField<T> extends SQField<List<T>> {
   });
 
   @override
-  formField(docScreenState) => _SQListFormField(this, docScreenState);
+  formField(docScreen) => _SQListFormField(this, docScreen);
 
   @override
   List<T>? parse(source) {
@@ -22,7 +22,7 @@ class SQListField<T> extends SQField<List<T>> {
 }
 
 class _SQListFormField<T> extends SQFormField<List<T>, SQListField<T>> {
-  const _SQListFormField(super.field, super.docScreenState);
+  const _SQListFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) => Text((getDocValue() ?? []).toString());

@@ -10,11 +10,11 @@ class SQLinkField extends SQStringField {
   SQLinkField(super.name, {super.defaultValue, super.editable});
 
   @override
-  formField(docScreenState) => _SQLinkFormField(this, docScreenState);
+  formField(docScreen) => _SQLinkFormField(this, docScreen);
 }
 
 class _SQLinkFormField extends SQFormField<String, SQLinkField> {
-  const _SQLinkFormField(super.field, super.docScreenState);
+  const _SQLinkFormField(super.field, super.docScreen);
 
   @override
   readOnlyBuilder(context) {

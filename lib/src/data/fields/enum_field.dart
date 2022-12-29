@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../sq_field.dart';
 
 class SQEnumField<T> extends SQField<T> {
   SQEnumField(this.subfield, {required this.options, super.show})
@@ -15,7 +15,7 @@ class SQEnumField<T> extends SQField<T> {
   List<T> options;
 
   @override
-  formField(docScreenState) => _SQEnumFormField(this, docScreenState);
+  formField(docScreen) => _SQEnumFormField(this, docScreen);
 
   @override
   T? parse(source) => subfield.parse(source) ?? super.parse(source);
@@ -25,10 +25,10 @@ class SQEnumField<T> extends SQField<T> {
 }
 
 class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
-  const _SQEnumFormField(super.field, super.docScreenState);
+  const _SQEnumFormField(super.field, super.docScreen);
 
   @override
-  Widget readOnlyBuilder(context) => field.subfield.formField(docScreenState);
+  Widget readOnlyBuilder(context) => field.subfield.formField(docScreen);
 
   @override
   fieldBuilder(context) => Row(

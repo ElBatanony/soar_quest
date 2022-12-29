@@ -19,16 +19,16 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   SQCollection get collection => refCollection();
 
   @override
-  formField(docScreenState) => _SQInverseRefsFormField(
+  formField(docScreen) => _SQInverseRefsFormField(
         this,
-        docScreenState,
-        refDocs: valueBuilder(docScreenState.doc),
+        docScreen,
+        refDocs: valueBuilder(docScreen.doc),
       );
 }
 
 class _SQInverseRefsFormField
     extends SQFormField<List<SQDoc>, SQInverseRefsField> {
-  _SQInverseRefsFormField(super.field, super.docScreenState,
+  _SQInverseRefsFormField(super.field, super.docScreen,
       {required this.refDocs}) {
     unawaited(initializeRefCollection());
   }
@@ -48,7 +48,7 @@ class _SQInverseRefsFormField
             CreateDocAction('Add',
                     getCollection: () => field.collection,
                     source: (_) => {field.refFieldName: doc.ref})
-                .button(doc, screenState: docScreenState)
+                .button(doc, screen: docScreen)
         ],
       );
 

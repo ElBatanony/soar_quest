@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../sq_field.dart';
 import '../types/sq_timestamp.dart';
 
 export '../types/sq_timestamp.dart';
@@ -28,11 +28,11 @@ class SQTimestampField extends SQField<SQTimestamp> {
       SQTimestamp.parse(source) ?? super.parse(source);
 
   @override
-  formField(docScreenState) => _SQTimestampFormField(this, docScreenState);
+  formField(docScreen) => _SQTimestampFormField(this, docScreen);
 }
 
 class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
-  const _SQTimestampFormField(super.field, super.docScreenState);
+  const _SQTimestampFormField(super.field, super.docScreen);
 
   Route<DateTime> _datePickerRoute(BuildContext context) =>
       DialogRoute<DateTime>(

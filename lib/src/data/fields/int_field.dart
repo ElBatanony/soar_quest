@@ -6,14 +6,14 @@ class SQIntField extends SQField<int> {
       {super.defaultValue, super.editable, super.require, super.show});
 
   @override
-  formField(docScreenState) => _SQIntFormField(this, docScreenState);
+  formField(docScreen) => _SQIntFormField(this, docScreen);
 
   int sumDocs(List<SQDoc> docs) =>
       docs.fold(0, (sum, doc) => sum + (doc.getValue<int>(name) ?? 0));
 }
 
 class _SQIntFormField extends SQFormField<int, SQIntField> {
-  const _SQIntFormField(super.field, super.docScreenState);
+  const _SQIntFormField(super.field, super.docScreen);
 
   @override
   fieldBuilder(context) =>

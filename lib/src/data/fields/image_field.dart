@@ -6,11 +6,11 @@ class SQImageField extends SQFileField {
   SQImageField(super.name, {super.defaultValue, super.storage});
 
   @override
-  formField(docScreenState) => _SQImageFormField(this, docScreenState);
+  formField(docScreen) => _SQImageFormField(this, docScreen);
 }
 
 class _SQImageFormField extends SQFileFormField<SQImageField> {
-  const _SQImageFormField(super.field, super.docScreenState);
+  const _SQImageFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) {

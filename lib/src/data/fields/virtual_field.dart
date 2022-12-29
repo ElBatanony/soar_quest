@@ -19,9 +19,9 @@ class SQVirtualField<T> extends SQField<T> {
   T Function(SQDoc doc) valueBuilder;
 
   @override
-  formField(docScreenState) {
-    final retValue = valueBuilder(docScreenState.doc);
-    docScreenState.doc.setValue(subfield.name, retValue);
-    return subfield.formField(docScreenState);
+  formField(docScreen) {
+    final retValue = valueBuilder(docScreen.doc);
+    docScreen.doc.setValue(subfield.name, retValue);
+    return subfield.formField(docScreen);
   }
 }

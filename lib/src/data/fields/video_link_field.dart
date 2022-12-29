@@ -8,11 +8,11 @@ class SQVideoLinkField extends SQStringField {
       : super(defaultValue: url ?? '');
 
   @override
-  formField(docScreenState) => _SQVideoLinkFormField(this, docScreenState);
+  formField(docScreen) => _SQVideoLinkFormField(this, docScreen);
 }
 
 class _SQVideoLinkFormField extends SQFormField<String, SQVideoLinkField> {
-  const _SQVideoLinkFormField(super.field, super.docScreenState);
+  const _SQVideoLinkFormField(super.field, super.docScreen);
 
   @override
   readOnlyBuilder(context) =>

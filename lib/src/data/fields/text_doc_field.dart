@@ -5,7 +5,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../screens/screen.dart';
 import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../sq_field.dart';
 
 const defaultDeltaJson = [
   {'insert': '\n'}
@@ -30,14 +30,14 @@ class SQTextDocField extends SQField<Document> {
   }
 
   @override
-  formField(docScreenState) => SQTextDocFormField(this, docScreenState);
+  formField(docScreen) => SQTextDocFormField(this, docScreen);
 
   @override
   String toString() => 'Text Doc $name';
 }
 
 class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
-  SQTextDocFormField(super.field, super.docScreenState);
+  SQTextDocFormField(super.field, super.docScreen);
 
   late final QuillController _controller = QuillController(
       document: getDocValue() ?? Document.fromJson(defaultDeltaJson),

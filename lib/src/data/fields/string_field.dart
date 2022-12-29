@@ -12,11 +12,11 @@ class SQStringField extends SQField<String> {
   final int maxLines;
 
   @override
-  formField(docScreenState) => _SQStringFormField(this, docScreenState);
+  formField(docScreen) => _SQStringFormField(this, docScreen);
 }
 
 class _SQStringFormField extends SQFormField<String, SQStringField> {
-  const _SQStringFormField(super.field, super.docScreenState);
+  const _SQStringFormField(super.field, super.docScreen);
 
   @override
   fieldBuilder(context) =>

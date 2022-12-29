@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-import '../../screens/doc_screen.dart';
 import '../../ui/button.dart';
 import '../sq_field.dart';
 
@@ -9,8 +8,7 @@ class SQColorField extends SQField<Color> {
   SQColorField(super.name, {super.defaultValue});
 
   @override
-  formField(DocScreenState<DocScreen> docScreenState) =>
-      _SQColorFormField(this, docScreenState);
+  formField(docScreen) => _SQColorFormField(this, docScreen);
 
   @override
   Color? parse(source) {
@@ -30,7 +28,7 @@ class SQColorField extends SQField<Color> {
 }
 
 class _SQColorFormField extends SQFormField<Color, SQColorField> {
-  const _SQColorFormField(super.field, super.docScreenState);
+  const _SQColorFormField(super.field, super.docScreen);
 
   @override
   fieldBuilder(context) => _SQColorPicker(this);

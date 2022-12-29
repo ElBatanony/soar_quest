@@ -41,11 +41,11 @@ class SQLocationField extends SQField<LatLng> {
   serialize(value) => value?.toJson();
 
   @override
-  formField(docScreenState) => SQLocationFormField(this, docScreenState);
+  formField(docScreen) => SQLocationFormField(this, docScreen);
 }
 
 class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
-  const SQLocationFormField(super.field, super.docScreenState);
+  const SQLocationFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) => SizedBox(

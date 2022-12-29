@@ -11,11 +11,11 @@ class SQDoubleField extends SQField<double> {
   }
 
   @override
-  formField(docScreenState) => _SQDoubleFormField(this, docScreenState);
+  formField(docScreen) => _SQDoubleFormField(this, docScreen);
 }
 
 class _SQDoubleFormField extends SQFormField<double, SQDoubleField> {
-  const _SQDoubleFormField(super.field, super.docScreenState);
+  const _SQDoubleFormField(super.field, super.docScreen);
 
   @override
   fieldBuilder(context) =>
