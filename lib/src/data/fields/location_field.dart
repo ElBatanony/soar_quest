@@ -83,11 +83,9 @@ class LocationPickerScreen extends Screen {
   final SQLocationFormField formField;
 
   @override
-  List<Widget> appBarActions(screenState) => [
-        IconButton(
-            onPressed: () => screenState.exitScreen(),
-            icon: const Icon(Icons.save)),
-        ...super.appBarActions(screenState)
+  List<Widget> appBarActions() => [
+        IconButton(onPressed: exitScreen, icon: const Icon(Icons.save)),
+        ...super.appBarActions()
       ];
 
   @override

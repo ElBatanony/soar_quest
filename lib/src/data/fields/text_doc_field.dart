@@ -84,11 +84,9 @@ class TextDocScreen extends Screen {
   }
 
   @override
-  List<Widget> appBarActions(screenState) => [
-        IconButton(
-            onPressed: () => saveAndExit(screenState),
-            icon: const Icon(Icons.save)),
-        ...super.appBarActions(screenState)
+  List<Widget> appBarActions() => [
+        IconButton(onPressed: saveAndExit, icon: const Icon(Icons.save)),
+        ...super.appBarActions()
       ];
 
   @override

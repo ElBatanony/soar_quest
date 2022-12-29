@@ -63,11 +63,8 @@ class Screen extends StatefulWidget {
   Widget screenBody(ScreenState screenState) =>
       Center(child: Text('$title Screen'));
 
-  List<Widget> appBarActions(ScreenState screenState) => [
-        IconButton(
-            onPressed: screenState.refreshScreen,
-            icon: const Icon(Icons.refresh))
-      ];
+  List<Widget> appBarActions() =>
+      [IconButton(onPressed: refresh, icon: const Icon(Icons.refresh))];
 
   FloatingActionButton? floatingActionButton() => null;
 
