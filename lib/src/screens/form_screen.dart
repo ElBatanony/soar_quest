@@ -32,9 +32,6 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  State<FormScreen> createState() => FormScreenState();
-
-  @override
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       super.go(context, replace: false);
@@ -81,8 +78,4 @@ class FormScreen extends DocScreen {
   Widget screenBody() => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: super.screenBody());
-}
-
-class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
-  FormScreen get formScreen => widget;
 }
