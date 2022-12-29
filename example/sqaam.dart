@@ -66,17 +66,13 @@ class MySessionsCollectionScreen extends CollectionScreen {
   }
 
   @override
-  Widget collectionDisplay(List<SQDoc> docs,
-          CollectionScreenState<CollectionScreen> screenState) =>
-      super.collectionDisplay(
-          docs
-              .where((doc) =>
-                  doc
-                      .getValue<List<String>>(attendeesFieldName)
-                      ?.contains(SQAuth.user?.email) ??
-                  false)
-              .toList(),
-          screenState);
+  Widget collectionDisplay(List<SQDoc> docs) => super.collectionDisplay(docs
+      .where((doc) =>
+          doc
+              .getValue<List<String>>(attendeesFieldName)
+              ?.contains(SQAuth.user?.email) ??
+          false)
+      .toList());
 
   @override
   Widget screenBody() => Column(

@@ -66,11 +66,9 @@ class CollectionScreen extends Screen {
         onTap: () async => goToDocScreen(docScreen(doc), screenState),
       );
 
-  Widget collectionDisplay(
-          List<SQDoc> docs, CollectionScreenState screenState) =>
-      ListView(
+  Widget collectionDisplay(List<SQDoc> docs) => ListView(
         shrinkWrap: true,
-        children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
+        children: docs.map(docDisplay).toList(),
       );
 
   Future<void> goToDocScreen(
