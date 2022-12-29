@@ -35,13 +35,11 @@ void main() async {
       title: 'My Tasks',
       collection: todoTasks,
       icon: Icons.add_task,
-      signedIn: true,
-    ),
+    )..signedIn = true,
     CollectionScreen(
       title: 'Completed Tasks',
       collection: completedTasks,
       icon: Icons.task_alt,
-      signedIn: true,
-    ),
+    )..signedIn = true,
   ], drawer: SQDrawer());
 }
