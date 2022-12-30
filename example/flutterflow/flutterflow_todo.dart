@@ -12,7 +12,8 @@ void main() async {
     SQStringField('Name'),
     SQTimestampField('Date'),
     SQStringField('Description', maxLines: 3),
-    SQBoolField('Completed', defaultValue: false)
+    SQBoolField('Completed')
+      ..defaultValue = false
       ..editable = false
       ..show = falseCond,
     SQTimestampField('Completed Date')

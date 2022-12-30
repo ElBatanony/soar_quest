@@ -43,14 +43,15 @@ void main() async {
       SQIntField('Int'),
       SQVirtualField(
           subfield: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
-      SQFieldListField(SQStringField('String List'), defaultValue: ['hi']),
+      SQFieldListField(SQStringField('String List'))..defaultValue = ['hi'],
       SQColorField('Color'),
       SQLocationField('Location'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
       SQCreatedByField('Creator'),
       SQUpdatedDateField('Updated Date'),
-      SQStringField('Readonly String', defaultValue: 'I am readonly')
+      SQStringField('Readonly String')
+        ..defaultValue = 'I am readonly'
         ..editable = false,
       SQFileField('File', storage: firebaseFileStorage),
     ],
@@ -61,8 +62,8 @@ void main() async {
                   id: 'Child Collection',
                   fields: [
                     SQStringField('Name'),
-                    SQRefField('Parent Doc',
-                        collection: doc.collection, defaultValue: doc.ref)
+                    SQRefField('Parent Doc', collection: doc.collection)
+                      ..defaultValue = doc.ref
                       ..editable = false,
                   ],
                   parentDoc: doc)))

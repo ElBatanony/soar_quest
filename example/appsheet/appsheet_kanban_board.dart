@@ -17,7 +17,9 @@ void main() async {
 
   workstreams = FirestoreCollection(id: 'Workstreams', fields: [
     SQStringField('Workstream'),
-    SQStringField('test readonly', defaultValue: 'hamada')..editable = false,
+    SQStringField('test readonly')
+      ..defaultValue = 'hamada'
+      ..editable = false,
     SQEnumField(SQStringField('Color'),
         options: ['#4285F4', '#DB4437', '#F4B400', '#0F9D58']),
     SQInverseRefsField('Related Projects',
