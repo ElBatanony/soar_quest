@@ -10,7 +10,7 @@ void main() async {
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
   items = FirestoreCollection(id: 'Items', fields: [
-    SQStringField('Name', require: true),
+    SQStringField('Name')..require = false,
     SQStringField('Description'),
     SQVirtualField<int>(
         subfield: SQIntField('Total Stock Available'),
@@ -25,7 +25,7 @@ void main() async {
   inventory = FirestoreCollection(id: 'Inventory', fields: [
     SQRefField('Item', collection: items),
     SQTimestampField('DateTime'),
-    SQIntField('Amount', require: true),
+    SQIntField('Amount')..require = true,
   ]);
 
   SQApp.run([

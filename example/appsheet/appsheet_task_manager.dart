@@ -24,7 +24,7 @@ void main() async {
   tasks = FirestoreCollection(
     id: 'Tasks',
     fields: [
-      SQStringField('Task', require: true),
+      SQStringField('Task')..require = true,
       SQEnumField<String>(
         SQStringField('Status', defaultValue: 'To-Do'),
         options: ['Done', 'To-Do'],
