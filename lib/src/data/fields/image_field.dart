@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'file_field.dart';
 
 class SQImageField extends SQFileField {
-  SQImageField(super.name, {super.defaultValue, super.storage});
+  SQImageField(super.name, {super.storage});
 
   @override
   formField(docScreen) => _SQImageFormField(this, docScreen);

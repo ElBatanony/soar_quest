@@ -2,11 +2,7 @@ import '../../ui/text_field.dart';
 import '../sq_field.dart';
 
 class SQStringField extends SQField<String> {
-  SQStringField(
-    super.name, {
-    super.defaultValue,
-    this.maxLines = 1,
-  });
+  SQStringField(super.name, {this.maxLines = 1});
 
   final int maxLines;
 

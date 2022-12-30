@@ -12,12 +12,12 @@ final defaultLastDate = DateTime(2040);
 class SQTimestampField extends SQField<SQTimestamp> {
   SQTimestampField(
     super.name, {
-    SQTimestamp? defaultValue,
     DateTime? firstDate,
     DateTime? lastDate,
   })  : firstDate = firstDate ?? defaultFirstDate,
-        lastDate = lastDate ?? defaultLastDate,
-        super(defaultValue: defaultValue ?? SQTimestamp.now());
+        lastDate = lastDate ?? defaultLastDate {
+    defaultValue = SQTimestamp.now();
+  }
 
   final DateTime firstDate, lastDate;
 

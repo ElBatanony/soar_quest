@@ -3,7 +3,7 @@ import '../types/sq_ref.dart';
 import 'user_ref_field.dart';
 
 class SQCreatedByField extends SQUserRefField {
-  SQCreatedByField(super.name, {super.defaultValue}) {
+  SQCreatedByField(super.name) {
     editable = false;
   }
 

@@ -16,7 +16,7 @@ class SQDateOfBirthField extends SQTimestampField {
 
 class SQMaturityRatingField extends SQEnumField<int> {
   SQMaturityRatingField()
-      : super(SQIntField(maturityLevelFieldName, defaultValue: 0),
+      : super(SQIntField(maturityLevelFieldName)..defaultValue = 0,
             options: [0, 6, 9, 12, 14, 16, 18]);
 }
 

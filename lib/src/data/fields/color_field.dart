@@ -5,7 +5,7 @@ import '../../ui/button.dart';
 import '../sq_field.dart';
 
 class SQColorField extends SQField<Color> {
-  SQColorField(super.name, {super.defaultValue});
+  SQColorField(super.name);
 
   @override
   formField(docScreen) => _SQColorFormField(this, docScreen);

@@ -5,10 +5,7 @@ import '../sq_doc.dart';
 List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
 
 class SQListField<T> extends SQField<List<T>> {
-  SQListField(
-    super.name, {
-    super.defaultValue,
-  });
+  SQListField(super.name);
 
   @override
   formField(docScreen) => _SQListFormField(this, docScreen);

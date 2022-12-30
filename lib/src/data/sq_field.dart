@@ -6,10 +6,7 @@ import '../screens/form_screen.dart';
 import 'sq_doc.dart';
 
 abstract class SQField<T> {
-  SQField(
-    this.name, {
-    this.defaultValue,
-  });
+  SQField(this.name);
 
   String name = '';
   T? defaultValue;

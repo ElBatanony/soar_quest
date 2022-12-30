@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../sq_field.dart';
 
 class SQBoolField extends SQField<bool> {
-  SQBoolField(super.name, {super.defaultValue});
+  SQBoolField(super.name);
 
   @override
   formField(docScreen) => _SQBoolFormField(this, docScreen);

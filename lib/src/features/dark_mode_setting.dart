@@ -21,7 +21,7 @@ class SQDarkMode {
       {ThemeMode defaultMode = _defaultMode, String name = 'Dark Mode'}) {
     SQDarkMode.initialized = true;
     return _setting = SQEnumField(
-        SQStringField(name, defaultValue: defaultMode.name),
+        SQStringField(name)..defaultValue = defaultMode.name,
         options: [
           ThemeMode.light.name,
           ThemeMode.dark.name,
