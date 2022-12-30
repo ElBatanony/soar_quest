@@ -1,12 +1,9 @@
 import '../sq_doc.dart';
 
 class SQVirtualField<T> extends SQField<T> {
-  SQVirtualField(
-      {required this.subfield,
-      required this.valueBuilder,
-      DocCond show = trueCond})
+  SQVirtualField({required this.subfield, required this.valueBuilder})
       : super(subfield.name) {
-    this.show = inFormScreen.not & show;
+    show = inFormScreen.not;
     editable = false;
     subfield
       ..editable = false
