@@ -54,7 +54,7 @@ class SQAuth {
   }) async {
     SQAuth.methods = methods ?? [AuthMethod.email];
     userDocFields ??= [];
-    userDocFields.insert(0, SQStringField('Email', editable: false));
+    userDocFields.insert(0, SQStringField('Email')..editable = false);
     if (offline) {
       usersCollection = LocalCollection(
           id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());

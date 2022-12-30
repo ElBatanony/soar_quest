@@ -10,8 +10,7 @@ import '../types/sq_ref.dart';
 export '../types/sq_ref.dart';
 
 class SQRefField extends SQField<SQRef> {
-  SQRefField(super.name,
-      {required this.collection, super.defaultValue, super.editable});
+  SQRefField(super.name, {required this.collection, super.defaultValue});
 
   SQCollection collection;
 

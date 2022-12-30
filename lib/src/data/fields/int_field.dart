@@ -2,7 +2,7 @@ import '../../ui/text_field.dart';
 import '../sq_doc.dart';
 
 class SQIntField extends SQField<int> {
-  SQIntField(super.name, {super.defaultValue, super.editable});
+  SQIntField(super.name, {super.defaultValue});
 
   @override
   formField(docScreen) => _SQIntFormField(this, docScreen);

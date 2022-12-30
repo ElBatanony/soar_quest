@@ -13,7 +13,6 @@ class SQTimestampField extends SQField<SQTimestamp> {
   SQTimestampField(
     super.name, {
     SQTimestamp? defaultValue,
-    super.editable,
     DateTime? firstDate,
     DateTime? lastDate,
   })  : firstDate = firstDate ?? defaultFirstDate,

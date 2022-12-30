@@ -4,8 +4,7 @@ import '../sq_field.dart';
 import 'string_field.dart';
 
 class SQVideoLinkField extends SQStringField {
-  SQVideoLinkField(super.name, {String? url, super.editable})
-      : super(defaultValue: url ?? '');
+  SQVideoLinkField(super.name, {String? url}) : super(defaultValue: url ?? '');
 
   @override
   formField(docScreen) => _SQVideoLinkFormField(this, docScreen);

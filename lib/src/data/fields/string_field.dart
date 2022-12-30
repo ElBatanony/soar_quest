@@ -5,7 +5,6 @@ class SQStringField extends SQField<String> {
   SQStringField(
     super.name, {
     super.defaultValue,
-    super.editable,
     this.maxLines = 1,
   });
 

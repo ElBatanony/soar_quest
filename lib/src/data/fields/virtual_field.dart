@@ -5,11 +5,9 @@ class SQVirtualField<T> extends SQField<T> {
       {required this.subfield,
       required this.valueBuilder,
       DocCond show = trueCond})
-      : super(
-          subfield.name,
-          editable: false,
-        ) {
+      : super(subfield.name) {
     this.show = inFormScreen.not & show;
+    editable = false;
     subfield
       ..editable = false
       ..isInline = false;

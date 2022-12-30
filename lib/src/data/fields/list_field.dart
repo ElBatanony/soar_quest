@@ -8,7 +8,6 @@ class SQListField<T> extends SQField<List<T>> {
   SQListField(
     super.name, {
     super.defaultValue,
-    super.editable,
   });
 
   @override
