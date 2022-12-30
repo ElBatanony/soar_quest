@@ -50,8 +50,8 @@ void main() async {
       SQTimestampField('Timestamp'),
       SQCreatedByField('Creator'),
       SQUpdatedDateField('Updated Date'),
-      SQStringField('Readonly String',
-          defaultValue: 'I am readonly', editable: false),
+      SQStringField('Readonly String', defaultValue: 'I am readonly')
+        ..editable = false,
       SQFileField('File', storage: firebaseFileStorage),
     ],
     actions: [
@@ -62,9 +62,8 @@ void main() async {
                   fields: [
                     SQStringField('Name'),
                     SQRefField('Parent Doc',
-                        collection: doc.collection,
-                        defaultValue: doc.ref,
-                        editable: false),
+                        collection: doc.collection, defaultValue: doc.ref)
+                      ..editable = false,
                   ],
                   parentDoc: doc)))
     ],
