@@ -1,8 +1,7 @@
 import '../sq_doc.dart';
 
 class SQVirtualField<T> extends SQField<T> {
-  SQVirtualField({required this.subfield, required this.valueBuilder})
-      : super(subfield.name) {
+  SQVirtualField(this.subfield, this.valueBuilder) : super(subfield.name) {
     show = inFormScreen.not;
     editable = false;
     subfield

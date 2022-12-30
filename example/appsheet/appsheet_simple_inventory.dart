@@ -13,8 +13,8 @@ void main() async {
     SQStringField('Name')..require = false,
     SQStringField('Description'),
     SQVirtualField<int>(
-        subfield: SQIntField('Total Stock Available'),
-        valueBuilder: (doc) => inventory
+        SQIntField('Total Stock Available'),
+        (doc) => inventory
             .getField<SQIntField>('Amount')!
             .sumDocs(RefFilter('Item', doc.ref).filter(inventory.docs))),
     SQImageField('Image'),

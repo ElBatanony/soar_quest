@@ -41,8 +41,7 @@ void main() async {
       SQEditedByField('Edited By'),
       SQDoubleField('Double'),
       SQIntField('Int'),
-      SQVirtualField(
-          subfield: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
+      SQVirtualField(SQIntField('Virtual Int'), (doc) => 5 + 2),
       SQFieldListField(SQStringField('String List'))..defaultValue = ['hi'],
       SQColorField('Color'),
       SQLocationField('Location'),
