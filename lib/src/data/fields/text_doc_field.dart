@@ -12,7 +12,7 @@ const defaultDeltaJson = [
 ];
 
 class SQTextDocField extends SQField<Document> {
-  SQTextDocField(super.name, {super.defaultValue, super.editable, super.show});
+  SQTextDocField(super.name, {super.defaultValue, super.editable});
 
   @override
   Document? parse(source) {

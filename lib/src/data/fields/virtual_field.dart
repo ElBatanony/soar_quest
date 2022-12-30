@@ -8,8 +8,8 @@ class SQVirtualField<T> extends SQField<T> {
       : super(
           subfield.name,
           editable: false,
-          show: inFormScreen.not & show,
         ) {
+    this.show = inFormScreen.not & show;
     subfield
       ..editable = false
       ..isInline = false;

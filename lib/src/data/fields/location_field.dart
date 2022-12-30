@@ -28,7 +28,7 @@ MarkerLayer markerLayerFromPoint(LatLng point) => MarkerLayer(
     );
 
 class SQLocationField extends SQField<LatLng> {
-  SQLocationField(super.name, {super.defaultValue, super.editable, super.show});
+  SQLocationField(super.name, {super.defaultValue, super.editable});
 
   @override
   LatLng? parse(source) {

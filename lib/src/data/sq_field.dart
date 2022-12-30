@@ -10,14 +10,13 @@ abstract class SQField<T> {
     this.name, {
     this.defaultValue,
     this.editable = true,
-    this.show = trueCond,
   });
 
   String name = '';
   T? defaultValue;
   bool editable;
   bool require = false;
-  DocCond show;
+  DocCond show = trueCond;
   bool isInline = false;
   bool isLive = false;
 

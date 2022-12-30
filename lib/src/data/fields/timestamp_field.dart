@@ -14,7 +14,6 @@ class SQTimestampField extends SQField<SQTimestamp> {
     super.name, {
     SQTimestamp? defaultValue,
     super.editable,
-    super.show,
     DateTime? firstDate,
     DateTime? lastDate,
   })  : firstDate = firstDate ?? defaultFirstDate,
