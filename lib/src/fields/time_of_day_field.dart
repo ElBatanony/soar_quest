@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/button.dart';
-import '../sq_field.dart';
-import '../types/sq_time_of_day.dart';
+import '../data/sq_field.dart';
+import '../data/types/sq_time_of_day.dart';
+import '../ui/button.dart';
 
-export '../types/sq_time_of_day.dart';
+export '../data/types/sq_time_of_day.dart';
 
 class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   SQTimeOfDayField(super.name) {

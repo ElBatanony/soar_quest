@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/collection_screens/select_doc_screen.dart';
-import '../../screens/doc_screen.dart';
-import '../../ui/button.dart';
-import '../sq_action.dart';
-import '../sq_collection.dart';
-import '../types/sq_ref.dart';
+import '../data/sq_action.dart';
+import '../data/sq_collection.dart';
+import '../data/types/sq_ref.dart';
+import '../screens/collection_screens/select_doc_screen.dart';
+import '../screens/doc_screen.dart';
+import '../ui/button.dart';
 
-export '../types/sq_ref.dart';
+export '../data/types/sq_ref.dart';
 
 class SQRefField extends SQField<SQRef> {
   SQRefField(super.name, {required this.collection});

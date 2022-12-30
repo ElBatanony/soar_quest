@@ -7,9 +7,8 @@ import 'package:flutter/material.dart';
 
 import 'data/collections/firestore_collection.dart';
 import 'data/collections/local_collection.dart';
-import 'data/fields/string_field.dart';
-
 import 'data/sq_action.dart';
+import 'fields/string_field.dart';
 import 'screens/screen.dart';
 
 enum AuthMethod { email, phone }

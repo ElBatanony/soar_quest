@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../screens/collection_screens/table_screen.dart';
-import '../collections/collection_slice.dart';
-import '../sq_action.dart';
+import '../data/collections/collection_slice.dart';
+import '../data/sq_action.dart';
+import '../screens/collection_screens/table_screen.dart';
 import 'list_field.dart';
 import 'virtual_field.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sq_doc.dart';
+import '../data/sq_doc.dart';
 
 List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
 

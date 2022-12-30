@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 
-import 'fields/image_field.dart';
-import 'fields/virtual_field.dart';
+import '../fields/image_field.dart';
+import '../fields/virtual_field.dart';
 import 'sq_collection.dart';
 import 'types/sq_ref.dart';
 

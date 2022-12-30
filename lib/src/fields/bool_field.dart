@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sq_field.dart';
+import '../data/sq_field.dart';
 
 class SQBoolField extends SQField<bool> {
   SQBoolField(super.name);

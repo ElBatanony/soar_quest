@@ -1,5 +1,5 @@
-import '../../ui/text_field.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../ui/text_field.dart';
 
 class SQStringField extends SQField<String> {
   SQStringField(super.name, {this.maxLines = 1});

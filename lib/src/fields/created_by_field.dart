@@ -1,5 +1,5 @@
-import '../../sq_auth.dart';
-import '../types/sq_ref.dart';
+import '../data/types/sq_ref.dart';
+import '../sq_auth.dart';
 import 'user_ref_field.dart';
 
 class SQCreatedByField extends SQUserRefField {

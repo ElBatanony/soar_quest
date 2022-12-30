@@ -1,6 +1,6 @@
-import '../../screens/collection_screens/video_screen.dart';
-import '../../ui/text_field.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../screens/collection_screens/video_screen.dart';
+import '../ui/text_field.dart';
 import 'string_field.dart';
 
 class SQVideoLinkField extends SQStringField {

@@ -1,5 +1,5 @@
-import '../../ui/text_field.dart';
-import '../sq_doc.dart';
+import '../data/sq_doc.dart';
+import '../ui/text_field.dart';
 
 class SQIntField extends SQField<int> {
   SQIntField(super.name);

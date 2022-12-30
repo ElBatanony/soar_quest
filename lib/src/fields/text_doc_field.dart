@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
-import '../../screens/screen.dart';
-import '../../ui/button.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../screens/screen.dart';
+import '../ui/button.dart';
 
 const defaultDeltaJson = [
   {'insert': '\n'}

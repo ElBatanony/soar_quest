@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sq_field.dart';
+import '../data/sq_field.dart';
 
 class SQCompositeField extends SQField<Map<String, dynamic>> {
   SQCompositeField(super.name, {required this.subfields}) {

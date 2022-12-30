@@ -1,5 +1,5 @@
+import '../../fields/ref_field.dart';
 import '../../sq_auth.dart';
-import '../fields/ref_field.dart';
 import '../sq_doc.dart';
 
 abstract class CollectionFilter {

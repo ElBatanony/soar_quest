@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../screens/screen.dart';
-import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../data/sq_doc.dart';
+import '../screens/screen.dart';
+import '../ui/button.dart';
 
 final mapAttribution =
     AttributionWidget.defaultWidget(source: 'OpenStreetMap contributors');

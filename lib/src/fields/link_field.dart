@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../ui/button.dart';
-import '../../ui/text_field.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../ui/button.dart';
+import '../ui/text_field.dart';
 import 'string_field.dart';
 
 class SQLinkField extends SQStringField {

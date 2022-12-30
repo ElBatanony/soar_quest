@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/button.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../ui/button.dart';
 
 class SQEnumField<T> extends SQField<T> {
   SQEnumField(this.subfield, {required this.options}) : super(subfield.name) {

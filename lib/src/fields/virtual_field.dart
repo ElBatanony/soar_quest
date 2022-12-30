@@ -1,4 +1,4 @@
-import '../sq_doc.dart';
+import '../data/sq_doc.dart';
 
 class SQVirtualField<T> extends SQField<T> {
   SQVirtualField(this.subfield, this.valueBuilder) : super(subfield.name) {

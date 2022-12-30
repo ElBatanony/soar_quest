@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-import '../../ui/button.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../ui/button.dart';
 
 class SQColorField extends SQField<Color> {
   SQColorField(super.name);
