@@ -41,30 +41,29 @@ void main() async {
       SQEditedByField('Edited By'),
       SQDoubleField('Double'),
       SQIntField('Int'),
-      SQVirtualField(
-          subfield: SQIntField('Virtual Int'), valueBuilder: (doc) => 5 + 2),
-      SQFieldListField(SQStringField('String List'), defaultValue: ['hi']),
+      SQVirtualField(SQIntField('Virtual Int'), (doc) => 5 + 2),
+      SQFieldListField(SQStringField('String List'))..defaultValue = ['hi'],
       SQColorField('Color'),
       SQLocationField('Location'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
       SQCreatedByField('Creator'),
       SQUpdatedDateField('Updated Date'),
-      SQStringField('Readonly String',
-          defaultValue: 'I am readonly', editable: false),
+      SQStringField('Readonly String')
+        ..defaultValue = 'I am readonly'
+        ..editable = false,
       SQFileField('File', storage: firebaseFileStorage),
     ],
     actions: [
       GoScreenAction('Child Coll',
-          screen: (doc) => CollectionScreen(
+          toScreen: (doc) => CollectionScreen(
               collection: FirestoreCollection(
                   id: 'Child Collection',
                   fields: [
                     SQStringField('Name'),
-                    SQRefField('Parent Doc',
-                        collection: doc.collection,
-                        defaultValue: doc.ref,
-                        editable: false),
+                    SQRefField('Parent Doc', collection: doc.collection)
+                      ..defaultValue = doc.ref
+                      ..editable = false,
                   ],
                   parentDoc: doc)))
     ],
@@ -91,8 +90,8 @@ void main() async {
         SQStringField('Question'),
         SQStringField('Answer'),
       ])),
-      const Screen(title: 'Top Screen', isInline: true) &
-          const Screen(title: 'Bottom Screen', isInline: true),
+      (Screen('Top Screen')..isInline = true) &
+          (Screen('Bottom Screen')..isInline = true),
     ]),
   );
 }

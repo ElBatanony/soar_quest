@@ -1,8 +1,8 @@
 import '../data/collections/collection_slice.dart';
-import '../data/fields/enum_field.dart';
-import '../data/fields/int_field.dart';
-import '../data/fields/timestamp_field.dart';
 import '../data/user_settings.dart';
+import '../fields/enum_field.dart';
+import '../fields/int_field.dart';
+import '../fields/timestamp_field.dart';
 
 const dateOfBirthFieldName = 'Date of Birth';
 const maturityLevelFieldName = 'Maturity Level';
@@ -16,7 +16,7 @@ class SQDateOfBirthField extends SQTimestampField {
 
 class SQMaturityRatingField extends SQEnumField<int> {
   SQMaturityRatingField()
-      : super(SQIntField(maturityLevelFieldName, defaultValue: 0),
+      : super(SQIntField(maturityLevelFieldName)..defaultValue = 0,
             options: [0, 6, 9, 12, 14, 16, 18]);
 }
 

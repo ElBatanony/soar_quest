@@ -6,15 +6,15 @@ class GalleryScreen extends CollectionScreen {
   GalleryScreen({required super.collection, super.title});
 
   @override
-  Widget collectionDisplay(docs, screenState) => GridView.count(
+  Widget collectionDisplay(docs) => GridView.count(
         crossAxisCount: 2,
-        children: docs.map((doc) => docDisplay(doc, screenState)).toList(),
+        children: docs.map(docDisplay).toList(),
       );
 
   @override
-  Widget docDisplay(doc, screenState) => Card(
+  Widget docDisplay(doc) => Card(
         child: InkWell(
-          onTap: () async => goToDocScreen(docScreen(doc), screenState),
+          onTap: () async => goToDocScreen(docScreen(doc)),
           child: Column(
             children: [
               if (doc.imageLabel != null)

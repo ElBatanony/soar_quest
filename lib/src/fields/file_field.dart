@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../ui/button.dart';
-import '../firebase_file_storage.dart';
-import '../sq_doc.dart';
-import '../sq_file_storage.dart';
+import '../data/firebase_file_storage.dart';
+import '../data/sq_doc.dart';
+import '../data/sq_file_storage.dart';
+import '../ui/button.dart';
 
 class SQFileField extends SQField<String> {
-  SQFileField(super.name, {super.defaultValue, SQFileStorage? storage}) {
+  SQFileField(super.name, {SQFileStorage? storage}) {
     this.storage = storage ?? FirebaseFileStorage();
   }
 
@@ -20,12 +19,12 @@ class SQFileField extends SQField<String> {
   String? downloadUrl(SQDoc doc) => doc.getValue<String>(name);
 
   @override
-  formField(docScreenState) => SQFileFormField(this, docScreenState);
+  formField(docScreen) => SQFileFormField(this, docScreen);
 }
 
 class SQFileFormField<FileField extends SQFileField>
     extends SQFormField<String, FileField> {
-  const SQFileFormField(super.field, super.docScreenState);
+  const SQFileFormField(super.field, super.docScreen);
 
   Future<void> openFileUrl() async {
     if (field.downloadUrl(doc) == null)
@@ -44,14 +43,14 @@ class SQFileFormField<FileField extends SQFileField>
         doc: doc,
         file: pickedFile,
         fileFieldName: field.name,
-        onUpload: docScreenState.refreshScreen,
+        onUpload: docScreen.refresh,
       );
     }
   }
 
   Future<void> deleteFile(context) async {
     await field.storage.deleteFile(doc: doc, fileFieldName: field.name);
-    docScreenState.refreshScreen();
+    docScreen.refresh();
   }
 
   @override

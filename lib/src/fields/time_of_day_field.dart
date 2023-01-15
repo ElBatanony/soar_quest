@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/button.dart';
-import '../sq_doc.dart';
-import '../types/sq_time_of_day.dart';
+import '../data/sq_field.dart';
+import '../data/types/sq_time_of_day.dart';
+import '../ui/button.dart';
 
-export '../types/sq_time_of_day.dart';
+export '../data/types/sq_time_of_day.dart';
 
 class SQTimeOfDayField extends SQField<SQTimeOfDay> {
-  SQTimeOfDayField(super.name, {SQTimeOfDay? defaultValue, super.editable})
-      : super(
-            defaultValue:
-                defaultValue ?? SQTimeOfDay.fromTimeOfDay(TimeOfDay.now()));
+  SQTimeOfDayField(super.name) {
+    defaultValue = SQTimeOfDay.fromTimeOfDay(TimeOfDay.now());
+  }
 
   @override
   SQTimeOfDay? parse(source) {
@@ -29,11 +28,11 @@ class SQTimeOfDayField extends SQField<SQTimeOfDay> {
   }
 
   @override
-  formField(docScreenState) => _SQTimeOfDayFormField(this, docScreenState);
+  formField(docScreen) => _SQTimeOfDayFormField(this, docScreen);
 }
 
 class _SQTimeOfDayFormField extends SQFormField<SQTimeOfDay, SQTimeOfDayField> {
-  const _SQTimeOfDayFormField(super.field, super.docScreenState);
+  const _SQTimeOfDayFormField(super.field, super.docScreen);
 
   void _selectTimeOfDay(TimeOfDay? newSelectedTimeOfDay) {
     if (newSelectedTimeOfDay != null) {

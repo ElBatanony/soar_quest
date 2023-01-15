@@ -1,9 +1,11 @@
-import '../../sq_auth.dart';
-import '../types/sq_ref.dart';
+import '../data/types/sq_ref.dart';
+import '../sq_auth.dart';
 import 'user_ref_field.dart';
 
 class SQCreatedByField extends SQUserRefField {
-  SQCreatedByField(super.name, {super.defaultValue}) : super(editable: false);
+  SQCreatedByField(super.name) {
+    editable = false;
+  }
 
   @override
   init(doc) {

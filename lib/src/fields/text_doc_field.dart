@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
-import '../../screens/screen.dart';
-import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../data/sq_field.dart';
+import '../screens/screen.dart';
+import '../ui/button.dart';
 
 const defaultDeltaJson = [
   {'insert': '\n'}
 ];
 
 class SQTextDocField extends SQField<Document> {
-  SQTextDocField(super.name, {super.defaultValue, super.editable, super.show});
+  SQTextDocField(super.name);
 
   @override
   Document? parse(source) {
@@ -30,14 +30,14 @@ class SQTextDocField extends SQField<Document> {
   }
 
   @override
-  formField(docScreenState) => SQTextDocFormField(this, docScreenState);
+  formField(docScreen) => SQTextDocFormField(this, docScreen);
 
   @override
   String toString() => 'Text Doc $name';
 }
 
 class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
-  SQTextDocFormField(super.field, super.docScreenState);
+  SQTextDocFormField(super.field, super.docScreen);
 
   late final QuillController _controller = QuillController(
       document: getDocValue() ?? Document.fromJson(defaultDeltaJson),
@@ -69,7 +69,7 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
 class TextDocScreen extends Screen {
   TextDocScreen({
     required this.formField,
-  }) : super(title: formField.field.name);
+  }) : super(formField.field.name);
 
   final SQTextDocFormField formField;
 
@@ -77,22 +77,20 @@ class TextDocScreen extends Screen {
       document: formField.getDocValue() ?? Document.fromJson(defaultDeltaJson),
       selection: const TextSelection.collapsed(offset: 0));
 
-  void saveAndExit(ScreenState<Screen> screenState) {
+  void saveAndExit() {
     formField.setDocValue(
         Document.fromJson(_controller.document.toDelta().toJson()));
-    screenState.exitScreen();
+    exitScreen();
   }
 
   @override
-  List<Widget> appBarActions(screenState) => [
-        IconButton(
-            onPressed: () => saveAndExit(screenState),
-            icon: const Icon(Icons.save)),
-        ...super.appBarActions(screenState)
+  List<Widget> appBarActions() => [
+        IconButton(onPressed: saveAndExit, icon: const Icon(Icons.save)),
+        ...super.appBarActions()
       ];
 
   @override
-  Widget screenBody(screenState) => Column(
+  Widget screenBody() => Column(
         children: [
           if (formField.field.editable)
             QuillToolbar.basic(controller: _controller),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/button.dart';
-import '../sq_doc.dart';
-import '../types/sq_timestamp.dart';
+import '../data/sq_field.dart';
+import '../data/types/sq_timestamp.dart';
+import '../ui/button.dart';
 
-export '../types/sq_timestamp.dart';
+export '../data/types/sq_timestamp.dart';
 
 final defaultFirstDate = DateTime(1900);
 final defaultLastDate = DateTime(2040);
@@ -12,14 +12,12 @@ final defaultLastDate = DateTime(2040);
 class SQTimestampField extends SQField<SQTimestamp> {
   SQTimestampField(
     super.name, {
-    SQTimestamp? defaultValue,
-    super.editable,
-    super.show,
     DateTime? firstDate,
     DateTime? lastDate,
   })  : firstDate = firstDate ?? defaultFirstDate,
-        lastDate = lastDate ?? defaultLastDate,
-        super(defaultValue: defaultValue ?? SQTimestamp.now());
+        lastDate = lastDate ?? defaultLastDate {
+    defaultValue = SQTimestamp.now();
+  }
 
   final DateTime firstDate, lastDate;
 
@@ -28,11 +26,11 @@ class SQTimestampField extends SQField<SQTimestamp> {
       SQTimestamp.parse(source) ?? super.parse(source);
 
   @override
-  formField(docScreenState) => _SQTimestampFormField(this, docScreenState);
+  formField(docScreen) => _SQTimestampFormField(this, docScreen);
 }
 
 class _SQTimestampFormField extends SQFormField<SQTimestamp, SQTimestampField> {
-  const _SQTimestampFormField(super.field, super.docScreenState);
+  const _SQTimestampFormField(super.field, super.docScreen);
 
   Route<DateTime> _datePickerRoute(BuildContext context) =>
       DialogRoute<DateTime>(

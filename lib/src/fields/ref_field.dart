@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/collection_screens/select_doc_screen.dart';
-import '../../screens/doc_screen.dart';
-import '../../ui/button.dart';
-import '../sq_action.dart';
-import '../sq_collection.dart';
-import '../types/sq_ref.dart';
+import '../data/sq_action.dart';
+import '../data/sq_collection.dart';
+import '../data/types/sq_ref.dart';
+import '../screens/collection_screens/select_doc_screen.dart';
+import '../screens/doc_screen.dart';
+import '../ui/button.dart';
 
-export '../types/sq_ref.dart';
+export '../data/types/sq_ref.dart';
 
 class SQRefField extends SQField<SQRef> {
-  SQRefField(super.name,
-      {required this.collection,
-      super.defaultValue,
-      super.editable,
-      super.show});
+  SQRefField(super.name, {required this.collection});
 
   SQCollection collection;
 
@@ -37,11 +33,11 @@ class SQRefField extends SQField<SQRef> {
   }
 
   @override
-  formField(docScreenState) => _SQRefFormField(this, docScreenState);
+  formField(docScreen) => _SQRefFormField(this, docScreen);
 }
 
 class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
-  const _SQRefFormField(super.field, super.docScreenState);
+  const _SQRefFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) {
@@ -53,8 +49,8 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
       children: [
         Text(ref.toString()),
         if (doc != null)
-          GoScreenAction('', screen: DocScreen.new)
-              .button(doc, screenState: docScreenState)
+          GoScreenAction('', toScreen: DocScreen.new)
+              .button(doc, screen: docScreen)
       ],
     );
   }

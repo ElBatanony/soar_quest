@@ -1,10 +1,6 @@
+import '../../fields/ref_field.dart';
 import '../../sq_auth.dart';
-import '../fields/ref_field.dart';
 import '../sq_doc.dart';
-
-// TODO: add back field filters (CollectionFieldFilter)
-// FieldValueFilter, StringContainsFilter, DocRefFieldFilter, CompareFuncFilter
-// TODO: add back CollectionFilterScreen
 
 abstract class CollectionFilter {
   List<SQDoc> filter(List<SQDoc> docs);

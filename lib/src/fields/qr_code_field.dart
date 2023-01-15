@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../../ui/button.dart';
-import '../../ui/qr_code_display.dart';
-import '../../ui/text_field.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../ui/button.dart';
+import '../ui/qr_code_display.dart';
+import '../ui/text_field.dart';
 import 'string_field.dart';
 
 class SQQRCodeField extends SQStringField {
@@ -13,11 +13,11 @@ class SQQRCodeField extends SQStringField {
   final bool showStringField;
 
   @override
-  formField(docScreenState) => _SQQRCodeFormField(this, docScreenState);
+  formField(docScreen) => _SQQRCodeFormField(this, docScreen);
 }
 
 class _SQQRCodeFormField extends SQFormField<String, SQQRCodeField> {
-  const _SQQRCodeFormField(super.field, super.docScreenState);
+  const _SQQRCodeFormField(super.field, super.docScreen);
 
   Future<void> displayQRCode(BuildContext context, String qrCodeString) =>
       showDialog(

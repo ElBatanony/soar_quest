@@ -14,8 +14,6 @@ class FormScreen extends DocScreen {
     String? title,
     this.submitButtonText = 'Save',
     super.icon,
-    super.isInline,
-    super.signedIn,
     this.liveEdit = false,
   }) : super(
             liveEdit
@@ -29,25 +27,19 @@ class FormScreen extends DocScreen {
   final bool liveEdit;
 
   @mustCallSuper
-  void onFieldsChanged(
-      FormScreenState formScreenState, SQField<dynamic> field) {
-    if (liveEdit && field.isLive)
-      unawaited(collection.saveDoc(formScreenState.doc));
+  void onFieldsChanged(SQField<dynamic> field) {
+    if (liveEdit && field.isLive) unawaited(collection.saveDoc(doc));
   }
-
-  @override
-  State<FormScreen> createState() => FormScreenState();
 
   @override
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       super.go(context, replace: false);
 
-  Future<void> submitForm(ScreenState screenState) async {
+  Future<void> submitForm() async {
     for (final field in collection.fields) {
       if (field.require && doc.getValue<dynamic>(field.name) == null) {
-        showSnackBar('${field.name} is required!',
-            context: screenState.context);
+        showSnackBar('${field.name} is required!', context: context);
         return;
       }
 
@@ -61,18 +53,18 @@ class FormScreen extends DocScreen {
     originalDoc.parse(doc.serialize());
 
     await collection.saveDoc(originalDoc);
-    screenState.exitScreen<bool>(true);
+    exitScreen<bool>(true);
   }
 
   @override
-  Widget? navigationBar(ScreenState screenState) => NavigationBar(
+  Widget? navigationBar() => NavigationBar(
         selectedIndex: 1,
         onDestinationSelected: (index) async {
           if (index == 0) {
             FocusManager.instance.primaryFocus?.unfocus();
-            return screenState.exitScreen();
+            return exitScreen();
           }
-          await submitForm(screenState);
+          await submitForm();
         },
         destinations: [
           const NavigationDestination(
@@ -83,11 +75,7 @@ class FormScreen extends DocScreen {
       );
 
   @override
-  Widget screenBody(ScreenState screenState) => GestureDetector(
+  Widget screenBody() => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: super.screenBody(screenState));
-}
-
-class FormScreenState<FS extends FormScreen> extends DocScreenState<FS> {
-  FormScreen get formScreen => widget;
+      child: super.screenBody());
 }

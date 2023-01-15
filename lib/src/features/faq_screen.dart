@@ -13,16 +13,16 @@ class FAQScreen extends CollectionScreen {
   final String answerFieldName;
 
   @override
-  Widget docDisplay(doc, screenState) => ListTile(
+  Widget docDisplay(doc) => ListTile(
         title: Text(doc.getValue(answerFieldName) ?? 'No answer (yet).'),
       );
 
   @override
-  Widget collectionDisplay(docs, screenState) => SingleChildScrollView(
+  Widget collectionDisplay(docs) => SingleChildScrollView(
         child: ExpansionPanelList(
           expansionCallback: (index, isExpanded) async {
             expanded[docs[index].id] = !isExpanded;
-            await screenState.refreshScreen(refetchData: false);
+            await refresh(refetchData: false);
           },
           children: docs
               .map(
@@ -30,7 +30,7 @@ class FAQScreen extends CollectionScreen {
                   canTapOnHeader: true,
                   headerBuilder: (context, isExpanded) =>
                       ListTile(title: Text(doc.label)),
-                  body: docDisplay(doc, screenState),
+                  body: docDisplay(doc),
                   isExpanded: expanded[doc.id] ?? false,
                 ),
               )

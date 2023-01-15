@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../sq_doc.dart';
+import '../data/sq_doc.dart';
 
 List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
 
 class SQListField<T> extends SQField<List<T>> {
-  SQListField(
-    super.name, {
-    super.defaultValue,
-    super.editable,
-  });
+  SQListField(super.name);
 
   @override
-  formField(docScreenState) => _SQListFormField(this, docScreenState);
+  formField(docScreen) => _SQListFormField(this, docScreen);
 
   @override
   List<T>? parse(source) {
@@ -22,7 +18,7 @@ class SQListField<T> extends SQField<List<T>> {
 }
 
 class _SQListFormField<T> extends SQFormField<List<T>, SQListField<T>> {
-  const _SQListFormField(super.field, super.docScreenState);
+  const _SQListFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) => Text((getDocValue() ?? []).toString());

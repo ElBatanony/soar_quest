@@ -14,81 +14,103 @@ Future<T?> _goToScreen<T>(
     return Navigator.pushReplacement(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => screen,
+        pageBuilder: (context, animation1, animation2) => screen.toWidget(),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       ),
     );
 
   return Navigator.push<T>(
-      context, MaterialPageRoute(builder: (context) => screen));
+      context, MaterialPageRoute(builder: (context) => screen.toWidget()));
 }
 
 bool alwaysShowScreen(BuildContext context) => true;
 
-class Screen extends StatefulWidget {
-  const Screen({
-    required this.title,
-    this.isInline = false,
-    this.icon = Icons.stay_current_landscape,
-    this.show = alwaysShowScreen,
-    this.signedIn = false,
-  });
+class Screen {
+  Screen(this.title, {this.icon = Icons.stay_current_landscape});
 
   final String title;
-  final IconData? icon;
-  final bool isInline;
-  final bool Function(BuildContext) show;
-  final bool signedIn;
+  IconData? icon;
+  bool isInline = false;
+  bool Function(BuildContext) show = alwaysShowScreen;
+  bool signedIn = false;
 
-  @override
-  State<Screen> createState() => ScreenState();
+  late _ScreenState _myState;
+
+  State<ScreenWidget> createState() => _myState = _ScreenState();
+
+  BuildContext get context => _myState.context;
+  bool get mounted => _myState.mounted;
 
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
 
-  PreferredSizeWidget appBar(ScreenState screenState) => AppBar(
+  PreferredSizeWidget appBar() => AppBar(
         title: Text(title),
-        leading: Navigator.of(screenState.context).canPop()
-            ? const BackButton()
-            : null,
-        actions: appBarActions(screenState),
+        leading: Navigator.of(context).canPop() ? const BackButton() : null,
+        actions: appBarActions(),
       );
 
-  Widget screenBody(ScreenState screenState) =>
-      Center(child: Text('$title Screen'));
+  Widget screenBody() => Center(child: Text('$title Screen'));
 
-  List<Widget> appBarActions(ScreenState screenState) => [
-        IconButton(
-            onPressed: screenState.refreshScreen,
-            icon: const Icon(Icons.refresh))
-      ];
+  List<Widget> appBarActions() =>
+      [IconButton(onPressed: refresh, icon: const Icon(Icons.refresh))];
 
-  FloatingActionButton? floatingActionButton(ScreenState screenState) => null;
+  FloatingActionButton? floatingActionButton() => null;
 
-  Widget? navigationBar(ScreenState screenState) {
+  Widget? navigationBar() {
     if (SQApp.navbarScreens.length >= 2) return SQNavBar(SQApp.navbarScreens);
     return null;
+  }
+
+  @mustCallSuper
+  void initScreen() {}
+
+  @mustCallSuper
+  void dispose() {}
+
+  @mustCallSuper
+  void refresh() {
+    if (mounted) _myState.refreshScreen();
+  }
+
+  Widget toWidget() => ScreenWidget(this);
+
+  void exitScreen<V extends Object?>([V? value]) {
+    if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
 
   EdgeInsetsGeometry? get screenPadding =>
       isInline ? null : const EdgeInsets.all(16);
 
-  Screen operator &(Screen other) => _CustomBodyScreen(
-      title: title,
-      bodyBuilder: (screenState) => Column(children: [this, other]));
+  Screen operator &(Screen other) => _CustomBodyScreen(title,
+      bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
 }
 
-class ScreenState<T extends Screen> extends State<T> {
+class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
   void refreshScreen() => setState(() {});
+
+  S get _screen => widget.screen;
+
+  @override
+  void initState() {
+    super.initState();
+    _screen.initScreen();
+  }
+
+  @override
+  void dispose() {
+    _screen.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.signedIn && SQAuth.isSignedIn == false) {
+    if (_screen.signedIn && SQAuth.isSignedIn == false) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(_screen.title),
         ),
         drawer: SQApp.drawer,
         body: Center(
@@ -101,39 +123,45 @@ class ScreenState<T extends Screen> extends State<T> {
             ],
           ),
         ),
-        bottomNavigationBar: widget.navigationBar(this),
+        bottomNavigationBar: _screen.navigationBar(),
       );
     }
 
     final Widget body = Builder(
         builder: (_) => Container(
-              padding: widget.screenPadding,
-              child: widget.screenBody(this),
+              padding: _screen.screenPadding,
+              child: _screen.screenBody(),
             ));
 
-    if (widget.isInline) return body;
+    if (_screen.isInline) return body;
 
     return Builder(
         builder: (_) => Scaffold(
               resizeToAvoidBottomInset: true,
-              appBar: widget.appBar(this),
+              appBar: _screen.appBar(),
               drawer: SQApp.drawer,
               body: body,
-              floatingActionButton: widget.floatingActionButton(this),
-              bottomNavigationBar: widget.navigationBar(this),
+              floatingActionButton: _screen.floatingActionButton(),
+              bottomNavigationBar: _screen.navigationBar(),
             ));
-  }
-
-  void exitScreen<V extends Object?>([V? value]) {
-    if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
 }
 
-class _CustomBodyScreen extends Screen {
-  const _CustomBodyScreen({required super.title, required this.bodyBuilder});
+class ScreenWidget<S extends Screen> extends StatefulWidget {
+  const ScreenWidget(this.screen);
 
-  final Widget Function(ScreenState) bodyBuilder;
+  final S screen;
 
   @override
-  screenBody(screenState) => bodyBuilder(screenState);
+  // ignore: no_logic_in_create_state
+  createState() => screen.createState();
+}
+
+class _CustomBodyScreen extends Screen {
+  _CustomBodyScreen(super.title, {required this.bodyBuilder});
+
+  final Widget Function() bodyBuilder;
+
+  @override
+  screenBody() => bodyBuilder();
 }

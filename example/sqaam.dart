@@ -24,19 +24,21 @@ void main() async {
   await SQApp.init('SQAAM',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
-  SQApp.run([const Screen(title: 'Hello World')]);
+  SQApp.run([Screen('Hello World')]);
 
   sessionsCollection = FirestoreCollection(id: 'Sessions', fields: [
     SQStringField('Session Name')..isLive,
     SQCreatedByField(instructorFieldName),
-    SQBoolField('Collecting Attendance',
-        show: DocCond((doc, screenState) => screenState is FormScreenState),
-        defaultValue: true)
+    SQBoolField('Collecting Attendance')
+      ..defaultValue = false
+      ..show = inFormScreen
       ..isLive = true,
     SQFieldListField(SQStringField(attendeesFieldName)),
-    SQStringField(challengeFieldName, show: falseCond)..isLive = true,
+    SQStringField(challengeFieldName)
+      ..show = falseCond
+      ..isLive = true,
   ], actions: [
-    GoScreenAction('Resume Check-in', screen: SessionCollectionFormScreen.new)
+    GoScreenAction('Resume Check-in', toScreen: SessionCollectionFormScreen.new)
   ]);
 
   checkInCollection = InMemoryCollection(id: 'Check-in', fields: [
@@ -61,44 +63,41 @@ void main() async {
 class MySessionsCollectionScreen extends CollectionScreen {
   MySessionsCollectionScreen()
       : super(
-          collection: sessionsCollection,
-          title: 'Attended Sessions',
-          icon: Icons.check_circle_outline_outlined,
-          signedIn: true,
-        );
+            collection: sessionsCollection,
+            title: 'Attended Sessions',
+            icon: Icons.check_circle_outline_outlined) {
+    signedIn = true;
+  }
 
   @override
-  Widget collectionDisplay(List<SQDoc> docs,
-          CollectionScreenState<CollectionScreen> screenState) =>
-      super.collectionDisplay(
-          docs
-              .where((doc) =>
-                  doc
-                      .getValue<List<String>>(attendeesFieldName)
-                      ?.contains(SQAuth.user?.email) ??
-                  false)
-              .toList(),
-          screenState);
+  Widget collectionDisplay(List<SQDoc> docs) => super.collectionDisplay(docs
+      .where((doc) =>
+          doc
+              .getValue<List<String>>(attendeesFieldName)
+              ?.contains(SQAuth.user?.email) ??
+          false)
+      .toList());
 
   @override
-  Widget screenBody(ScreenState<Screen> screenState) => Column(
+  Widget screenBody() => Column(
         children: [
           SQButton('Attend New Session', onPressed: () async {
             await AttendNewSessionFormScreen(checkInCollection.newDoc())
-                .go(screenState.context);
-            screenState.refreshScreen();
+                .go(context);
+            await refresh();
           }),
-          super.screenBody(screenState),
+          super.screenBody(),
         ],
       );
 }
 
 class AttendNewSessionFormScreen extends FormScreen {
-  AttendNewSessionFormScreen(super.originalDoc) : super(signedIn: true);
+  AttendNewSessionFormScreen(super.originalDoc) {
+    signedIn = true;
+  }
 
   @override
-  Future<void> onFieldsChanged(formScreenState, field) async {
-    final doc = formScreenState.doc;
+  Future<void> onFieldsChanged(field) async {
     final scannedQR = doc.getValue<String>('QR');
     try {
       final json = jsonDecode(scannedQR ?? '') as Map<String, dynamic>;
@@ -121,8 +120,7 @@ class AttendNewSessionFormScreen extends FormScreen {
         final scannedChallenge = doc.getValue<String>(challengeFieldName);
 
         if (scannedChallenge != sessionChallenge) {
-          showSnackBar('Incorrect QR code (challenge)',
-              context: formScreenState.context);
+          showSnackBar('Incorrect QR code (challenge)', context: context);
           return;
         }
 
@@ -130,48 +128,47 @@ class AttendNewSessionFormScreen extends FormScreen {
         if (myEmail != null) attendees.add(myEmail);
         sessionDoc.setValue(attendeesFieldName, attendees);
         unawaited(sessionsCollection.saveDoc(sessionDoc));
-        if (formScreenState.mounted)
-          await DocScreen(sessionDoc)
-              .go(formScreenState.context, replace: true);
+        if (mounted) await DocScreen(sessionDoc).go(context, replace: true);
       } else {
-        showSnackBar('Incorrect Session ID', context: formScreenState.context);
+        showSnackBar('Incorrect Session ID', context: context);
       }
     } on Exception {
-      showSnackBar('Error processing QR code',
-          context: formScreenState.context);
+      showSnackBar('Error processing QR code', context: context);
       return;
     }
-    super.onFieldsChanged(formScreenState, field);
+    super.onFieldsChanged(field);
   }
 }
 
 class SessionCollectionScreen extends CollectionScreen {
   SessionCollectionScreen({required super.collection})
-      : super(title: 'Collected Sessions', icon: Icons.list, signedIn: true);
+      : super(title: 'Collected Sessions', icon: Icons.list) {
+    signedIn = true;
+  }
 
   @override
-  screenBody(screenState) => SingleChildScrollView(
+  screenBody() => SingleChildScrollView(
         child: Column(
           children: [
             SQButton('Collection New Session', onPressed: () async {
               await SessionCollectionFormScreen(collection.newDoc())
-                  .go(screenState.context);
-              screenState.refreshScreen();
+                  .go(context);
+              await refresh();
             }),
-            super.screenBody(screenState),
+            super.screenBody(),
           ],
         ),
       );
 
   @override
-  floatingActionButton(screenState) => null;
+  floatingActionButton() => null;
 }
 
 class SessionCollectionFormScreen extends FormScreen {
   SessionCollectionFormScreen(super.originalDoc) : super(liveEdit: true);
 
   @override
-  Widget screenBody(screenState) => SingleChildScrollView(
+  Widget screenBody() => SingleChildScrollView(
         child: Column(
           children: [
             if (true == doc.getValue<bool>('Collecting Attendance'))
@@ -181,31 +178,25 @@ class SessionCollectionFormScreen extends FormScreen {
                     challengeFieldName: doc.getValue<String>('Challenge')
                   }),
                   size: 250),
-            super.screenBody(screenState),
+            super.screenBody(),
           ],
         ),
       );
 
-  @override
-  createState() => SessionCollectionFormScreenState();
-}
-
-class SessionCollectionFormScreenState
-    extends FormScreenState<SessionCollectionFormScreen> {
   late Timer timer;
 
   void updateChallenge() {
     if (doc.getValue<bool>('Collecting Attendance') != true) return;
-    widget.doc.setValue(challengeFieldName, timer.tick.toString());
-    formScreen.onFieldsChanged(this, collection.getField(challengeFieldName)!);
-    refreshScreen();
+    doc.setValue(challengeFieldName, timer.tick.toString());
+    onFieldsChanged(collection.getField(challengeFieldName)!);
+    refresh();
   }
 
   @override
-  void initState() {
+  void initScreen() {
     timer = Timer.periodic(const Duration(seconds: challengeUpdateSeconds),
         (t) => updateChallenge());
-    super.initState();
+    super.initScreen();
   }
 
   @override

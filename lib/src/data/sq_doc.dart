@@ -1,11 +1,10 @@
 import 'package:collection/collection.dart';
 
-import 'fields/image_field.dart';
-import 'fields/virtual_field.dart';
+import '../fields/image_field.dart';
+import '../fields/virtual_field.dart';
 import 'sq_collection.dart';
 import 'types/sq_ref.dart';
 
-export '../screens/screen.dart' show ScreenState;
 export 'sq_condition.dart';
 export 'sq_field.dart';
 

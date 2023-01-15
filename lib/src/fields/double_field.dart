@@ -1,8 +1,8 @@
-import '../../ui/text_field.dart';
-import '../sq_field.dart';
+import '../data/sq_field.dart';
+import '../ui/text_field.dart';
 
 class SQDoubleField extends SQField<double> {
-  SQDoubleField(super.name, {super.defaultValue, super.editable});
+  SQDoubleField(super.name);
 
   @override
   double? parse(source) {
@@ -11,11 +11,11 @@ class SQDoubleField extends SQField<double> {
   }
 
   @override
-  formField(docScreenState) => _SQDoubleFormField(this, docScreenState);
+  formField(docScreen) => _SQDoubleFormField(this, docScreen);
 }
 
 class _SQDoubleFormField extends SQFormField<double, SQDoubleField> {
-  const _SQDoubleFormField(super.field, super.docScreenState);
+  const _SQDoubleFormField(super.field, super.docScreen);
 
   @override
   fieldBuilder(context) =>

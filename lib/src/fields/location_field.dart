@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../screens/screen.dart';
-import '../../ui/button.dart';
-import '../sq_doc.dart';
+import '../data/sq_doc.dart';
+import '../screens/screen.dart';
+import '../ui/button.dart';
 
 final mapAttribution =
     AttributionWidget.defaultWidget(source: 'OpenStreetMap contributors');
@@ -28,7 +28,7 @@ MarkerLayer markerLayerFromPoint(LatLng point) => MarkerLayer(
     );
 
 class SQLocationField extends SQField<LatLng> {
-  SQLocationField(super.name, {super.defaultValue, super.editable, super.show});
+  SQLocationField(super.name);
 
   @override
   LatLng? parse(source) {
@@ -41,11 +41,11 @@ class SQLocationField extends SQField<LatLng> {
   serialize(value) => value?.toJson();
 
   @override
-  formField(docScreenState) => SQLocationFormField(this, docScreenState);
+  formField(docScreen) => SQLocationFormField(this, docScreen);
 }
 
 class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
-  const SQLocationFormField(super.field, super.docScreenState);
+  const SQLocationFormField(super.field, super.docScreen);
 
   @override
   Widget readOnlyBuilder(context) => SizedBox(
@@ -78,26 +78,21 @@ class SQLocationFormField extends SQFormField<LatLng, SQLocationField> {
 class LocationPickerScreen extends Screen {
   LocationPickerScreen({
     required this.formField,
-  }) : super(title: formField.field.name);
+  }) : super(formField.field.name);
 
   final SQLocationFormField formField;
 
   @override
-  List<Widget> appBarActions(screenState) => [
-        IconButton(
-            onPressed: () => screenState.exitScreen(),
-            icon: const Icon(Icons.save)),
-        ...super.appBarActions(screenState)
+  List<Widget> appBarActions() => [
+        IconButton(onPressed: exitScreen, icon: const Icon(Icons.save)),
+        ...super.appBarActions()
       ];
 
   @override
-  Widget screenBody(screenState) => FlutterMap(
+  Widget screenBody() => FlutterMap(
         options: MapOptions(
             center: formField.getDocValue() ?? defaultLocation,
-            onTap: (tapPosition, point) {
-              formField.setDocValue(point);
-              screenState.refreshScreen();
-            }),
+            onTap: (tapPosition, point) => formField.setDocValue(point)),
         nonRotatedChildren: [mapAttribution],
         children: [
           tileLayer,

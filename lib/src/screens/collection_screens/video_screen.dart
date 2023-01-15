@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../data/fields/video_link_field.dart';
-import '../../data/sq_doc.dart';
+import '../../fields/video_link_field.dart';
 import '../collection_screen.dart';
 import '../doc_screen.dart';
 
@@ -17,27 +16,20 @@ class VideoCollectionScreen extends CollectionScreen {
   final SQVideoLinkField videoField;
 
   @override
-  Widget docDisplay(SQDoc doc, ScreenState screenState) =>
-      VideoDocDisplay(doc, videoField: videoField);
+  docDisplay(doc) => VideoDocDisplay(doc, videoField: videoField).toWidget();
 }
 
 class VideoDocDisplay extends DocScreen {
-  VideoDocDisplay(super.doc, {required this.videoField, super.isInline});
+  VideoDocDisplay(super.doc, {required this.videoField});
 
   final SQVideoLinkField videoField;
 
-  @override
-  State<VideoDocDisplay> createState() => _VideoDocDisplayState();
-}
-
-class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   YoutubePlayerController? _controller;
 
   @override
-  void initState() {
-    super.initState();
-
-    final videoFieldValue = widget.doc.getValue<String>(widget.videoField.name);
+  void initScreen() {
+    super.initScreen();
+    final videoFieldValue = doc.getValue<String>(videoField.name);
 
     if (videoFieldValue == null) return;
 
@@ -61,12 +53,12 @@ class _VideoDocDisplayState extends ScreenState<VideoDocDisplay> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget screenBody() => Padding(
         padding: const EdgeInsets.all(15),
         child: Center(
           child: Column(
             children: [
-              Text(widget.doc.label),
+              Text(doc.label),
               if (_controller != null)
                 YoutubePlayer(
                   controller: _controller!,

@@ -17,7 +17,9 @@ void main() async {
 
   workstreams = FirestoreCollection(id: 'Workstreams', fields: [
     SQStringField('Workstream'),
-    SQStringField('test readonly', editable: false, defaultValue: 'hamada'),
+    SQStringField('test readonly')
+      ..defaultValue = 'hamada'
+      ..editable = false,
     SQEnumField(SQStringField('Color'),
         options: ['#4285F4', '#DB4437', '#F4B400', '#0F9D58']),
     SQInverseRefsField('Related Projects',
@@ -25,7 +27,7 @@ void main() async {
   ], actions: [
     GoEditCloneAction('Clone Workspace'),
     GoScreenAction('Go Empty',
-        screen: (doc) => Screen(title: 'Empty Screen for ${doc.label}')),
+        toScreen: (doc) => Screen('Empty Screen for ${doc.label}')),
     GoEditAction(name: 'Edit Workspace'),
     CreateDocAction(
       'New Project',

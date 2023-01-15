@@ -24,16 +24,15 @@ void main() async {
   tasks = FirestoreCollection(
     id: 'Tasks',
     fields: [
-      SQStringField('Task', require: true),
+      SQStringField('Task')..require = true,
       SQEnumField<String>(
-        SQStringField('Status', defaultValue: 'To-Do'),
+        SQStringField('Status')..defaultValue = 'To-Do',
         options: ['Done', 'To-Do'],
-        show: inFormScreen.not,
-      ),
+      )..show = inFormScreen.not,
       // SQImageField("Image"),
       SQEditedByField('hamada user'),
-      SQBoolField('Repeat', defaultValue: false),
-      SQIntField('Repeat Every (Hours)', show: DocValueCond('Repeat', true)),
+      SQBoolField('Repeat')..defaultValue = false,
+      SQIntField('Repeat Every (Hours)')..show = DocValueCond('Repeat', true),
       SQTimestampField('Last Updated'),
     ],
     actions: [checkTaskAction, uncheckTaskAction],
@@ -52,20 +51,19 @@ void main() async {
     ),
     CardsScreen(collection: tasks),
     CollectionScreen(
-      show: (context) => true,
       title: 'Tasks 2',
       collection: tasks,
       groupByField: 'Status',
-    ),
+    )..show = (context) => true,
     // CollectionFilterScreen(collection: tasks, filters: [
     //   StringContainsFilter(SQStringField("Task")),
     //   FieldValueFilter(SQBoolField("Repeat"))
     // ]),
     // TableScreen(title: "Table", collection: tasks),
-    TabsScreen(title: 'Tasks', screens: [
-      CollectionScreen(
-          title: 'Pending Tasks', collection: pendingTasks, isInline: true),
-      CollectionScreen(title: 'Done', collection: doneTasks, isInline: true),
+    TabsScreen('Tasks', screens: [
+      CollectionScreen(title: 'Pending Tasks', collection: pendingTasks)
+        ..isInline = true,
+      CollectionScreen(title: 'Done', collection: doneTasks)..isInline = true,
     ]),
   ], startingScreen: 1);
 }

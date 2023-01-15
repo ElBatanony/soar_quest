@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../sq_doc.dart';
+import '../data/sq_field.dart';
 
 class SQBoolField extends SQField<bool> {
-  SQBoolField(super.name, {super.defaultValue, super.editable, super.show});
+  SQBoolField(super.name);
 
   @override
-  formField(docScreenState) => _SQBoolFormField(this, docScreenState);
+  formField(docScreen) => _SQBoolFormField(this, docScreen);
 }
 
 class _SQBoolFormField extends SQFormField<bool, SQBoolField> {
-  const _SQBoolFormField(super.field, super.docScreenState);
+  const _SQBoolFormField(super.field, super.docScreen);
 
   @override
   Widget fieldBuilder(context) => Row(

@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../screens/collection_screens/table_screen.dart';
-import '../collections/collection_slice.dart';
-import '../sq_action.dart';
+import '../data/collections/collection_slice.dart';
+import '../data/sq_action.dart';
+import '../screens/collection_screens/table_screen.dart';
 import 'list_field.dart';
 import 'virtual_field.dart';
 
 class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   SQInverseRefsField(String name,
       {required this.refCollection, required this.refFieldName})
-      : super(subfield: SQListField(name), valueBuilder: (doc) => []);
+      : super(SQListField(name), (doc) => []);
 
   String refFieldName;
   SQCollection Function() refCollection;
@@ -19,16 +19,16 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   SQCollection get collection => refCollection();
 
   @override
-  formField(docScreenState) => _SQInverseRefsFormField(
+  formField(docScreen) => _SQInverseRefsFormField(
         this,
-        docScreenState,
-        refDocs: valueBuilder(docScreenState.doc),
+        docScreen,
+        refDocs: valueBuilder(docScreen.doc),
       );
 }
 
 class _SQInverseRefsFormField
     extends SQFormField<List<SQDoc>, SQInverseRefsField> {
-  _SQInverseRefsFormField(super.field, super.docScreenState,
+  _SQInverseRefsFormField(super.field, super.docScreen,
       {required this.refDocs}) {
     unawaited(initializeRefCollection());
   }
@@ -48,7 +48,7 @@ class _SQInverseRefsFormField
             CreateDocAction('Add',
                     getCollection: () => field.collection,
                     source: (_) => {field.refFieldName: doc.ref})
-                .button(doc, screenState: docScreenState)
+                .button(doc, screen: docScreen)
         ],
       );
 
@@ -56,7 +56,7 @@ class _SQInverseRefsFormField
   Widget readOnlyBuilder(context) {
     final slice = CollectionSlice(field.collection,
         filter: RefFilter(field.refFieldName, doc.ref));
-    return TableScreen(collection: slice, isInline: true);
+    return (TableScreen(collection: slice)..isInline = true).toWidget();
   }
 
   @override
