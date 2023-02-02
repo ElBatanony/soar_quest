@@ -119,7 +119,7 @@ class AttendNewSessionFormScreen extends FormScreen {
             sessionDoc.getValue<String>(challengeFieldName);
         final scannedChallenge = doc.getValue<String>(challengeFieldName);
 
-        if (scannedChallenge != sessionChallenge) {
+        if (scannedChallenge != sessionChallenge && context.mounted) {
           showSnackBar('Incorrect QR code (challenge)', context: context);
           return;
         }
