@@ -20,7 +20,7 @@ class CardsScreen extends CollectionScreen {
                       children: [
                         Text(
                           doc.label,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         if (doc.secondaryLabel != null)
                           Text(doc.secondaryLabel!)
