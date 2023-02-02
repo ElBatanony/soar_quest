@@ -1,5 +1,5 @@
-/// Takedown of Baam on Flutter (BoF)
-/// https://gitlab.com/markovvn1-iu/f22-ccmdwf/bof
+// Takedown of Baam on Flutter (BoF)
+// https://gitlab.com/markovvn1-iu/f22-ccmdwf/bof
 
 import 'dart:async';
 import 'dart:convert';
