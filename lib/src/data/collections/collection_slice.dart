@@ -44,6 +44,12 @@ class CollectionSlice implements SQCollection {
   set docs(_) => throw UnimplementedError();
 
   @override
+  bool get isLoading => collection.isLoading;
+
+  @override
+  set isLoading(_) => throw UnimplementedError();
+
+  @override
   bool hasDoc(SQDoc doc) => docs.any((d) => d.id == doc.id);
 
   @override

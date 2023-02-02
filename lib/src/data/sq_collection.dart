@@ -39,6 +39,7 @@ abstract class SQCollection {
   final bool isLive;
 
   List<SQDoc> docs = [];
+  bool isLoading = false;
 
   static final List<SQCollection> _collections = [];
 
