@@ -8,6 +8,7 @@ class SQNavBar extends StatelessWidget {
 
   final List<Screen> screens;
   final int initialIndex;
+  final labelBehavior = NavigationDestinationLabelBehavior.alwaysShow;
 
   List<Screen> visibleScreens(BuildContext context) =>
       screens.where((screen) => screen.show(context)).toList();
@@ -29,6 +30,7 @@ class SQNavBar extends StatelessWidget {
           .map((screen) => NavigationDestination(
               icon: Icon(screen.icon), label: screen.title))
           .toList(),
+      labelBehavior: labelBehavior,
     );
   }
 }
