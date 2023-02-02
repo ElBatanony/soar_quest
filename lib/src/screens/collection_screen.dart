@@ -77,6 +77,8 @@ class CollectionScreen extends Screen {
   @override
   Widget screenBody() {
     final docs = collection.docs;
+    if (docs.isEmpty && collection.isLoading)
+      return const Center(child: CircularProgressIndicator());
     if (docs.isEmpty)
       return Center(child: Text('${collection.id} list is empty'));
     if (groupByField != null) return groupByDocs(docs);
