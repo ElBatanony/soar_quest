@@ -62,6 +62,7 @@ class SQDoc {
       .whereType<SQImageField>()
       .firstWhereOrNull((field) => _values[field.name] != null);
 
-  String? get imageLabel =>
-      _imageLabelField == null ? null : _values[_imageLabelField] as String;
+  String? get imageLabel => _imageLabelField == null
+      ? null
+      : _values[_imageLabelField?.name] as String?;
 }
