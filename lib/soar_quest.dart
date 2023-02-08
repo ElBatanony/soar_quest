@@ -16,6 +16,8 @@ export 'src/data/sq_condition.dart';
 
 export 'src/data/user_settings.dart';
 
+export 'src/data/sq_analytics.dart';
+
 // File Storage
 export 'src/data/sq_file_storage.dart';
 export 'src/data/firebase_file_storage.dart';
