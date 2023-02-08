@@ -45,22 +45,26 @@ class CollectionScreen extends Screen {
     return null;
   }
 
-  Widget docDisplay(SQDoc doc) => ListTile(
-        title: Text(doc.label),
-        subtitle: doc.secondaryLabel == null ? null : Text(doc.secondaryLabel!),
-        leading: doc.imageLabel != null
-            ? Image.network(doc.imageLabel!, width: 70)
-            : null,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: collection.actions
-              .where((action) => action.show.check(doc, this))
-              .take(2)
-              .map((action) => action.button(doc, screen: this, isIcon: true))
-              .toList(),
-        ),
-        onTap: () async => goToDocScreen(docScreen(doc)),
-      );
+  Widget docDisplay(SQDoc doc) {
+    final docImageLabel = doc.imageLabel;
+    final secondaryLabel = doc.secondaryLabel;
+    return ListTile(
+      title: Text(doc.label),
+      subtitle: secondaryLabel != null ? Text(secondaryLabel) : null,
+      leading: docImageLabel != null
+          ? Image.network(docImageLabel, width: 70)
+          : null,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: collection.actions
+            .where((action) => action.show.check(doc, this))
+            .take(2)
+            .map((action) => action.button(doc, screen: this, isIcon: true))
+            .toList(),
+      ),
+      onTap: () async => goToDocScreen(docScreen(doc)),
+    );
+  }
 
   Widget collectionDisplay(List<SQDoc> docs) => ListView(
         shrinkWrap: true,
