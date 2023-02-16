@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +48,10 @@ class SQApp {
     SQApp.drawer = drawer;
     SQApp.navbarScreens = screens;
     SQApp.selectedNavScreen = startingScreen;
+
+    final user = SQAuth.user;
+    if (user != null) unawaited(SQApp.analytics?.setUserId(user.userId));
+
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
