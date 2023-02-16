@@ -15,7 +15,6 @@ class SQFirebaseAnalytics extends SQAnalytics {
   late FirebaseAnalytics _instance;
 
   @override
-  Future<void> logEvent(String name, {Map<String, dynamic>? params}) async {
-    await _instance.logEvent(name: name);
-  }
+  Future<void> logEvent(String name, {Map<String, Object>? params}) =>
+      _instance.logEvent(name: name, parameters: params);
 }
