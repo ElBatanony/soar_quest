@@ -8,6 +8,8 @@ abstract class SQAnalytics {
   Future<void> logEvent(String name, {Map<String, Object>? params});
 
   Future<void> setCurrentScreen(Screen screen);
+
+  Future<void> setUserId(String id);
 }
 
 class SQFirebaseAnalytics extends SQAnalytics {
@@ -25,4 +27,7 @@ class SQFirebaseAnalytics extends SQAnalytics {
   @override
   Future<void> setCurrentScreen(Screen screen) =>
       _instance.setCurrentScreen(screenName: screen.title);
+
+  @override
+  Future<void> setUserId(String id) => _instance.setUserId(id: id);
 }
