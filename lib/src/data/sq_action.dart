@@ -32,7 +32,8 @@ abstract class SQAction {
 
   Future<void> execute(SQDoc doc, Screen screen) async {
     debugPrint('Executing action: $name');
-    unawaited(SQApp.analytics?.logEvent(name));
+    unawaited(
+        SQApp.analytics?.logEvent(name.replaceAll(' ', '_').toLowerCase()));
     await onExecute(doc, screen);
   }
 
