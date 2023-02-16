@@ -1,9 +1,13 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-abstract class SQAnalytics {
-  Future<void> logEvent(String name, {Map<String, dynamic>? params});
+import '../screens/screen.dart';
 
+abstract class SQAnalytics {
   void init();
+
+  Future<void> logEvent(String name, {Map<String, Object>? params});
+
+  Future<void> setCurrentScreen(Screen screen);
 }
 
 class SQFirebaseAnalytics extends SQAnalytics {
@@ -17,4 +21,8 @@ class SQFirebaseAnalytics extends SQAnalytics {
   @override
   Future<void> logEvent(String name, {Map<String, Object>? params}) =>
       _instance.logEvent(name: name, parameters: params);
+
+  @override
+  Future<void> setCurrentScreen(Screen screen) =>
+      _instance.setCurrentScreen(screenName: screen.title);
 }
