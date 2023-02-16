@@ -25,8 +25,7 @@ class SQApp {
     SQAnalytics? analytics,
   }) async {
     SQApp.name = name;
-    SQApp.theme =
-        theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
+    SQApp.theme = theme ?? ThemeData.light(useMaterial3: true);
 
     WidgetsFlutterBinding.ensureInitialized();
     if (firebaseOptions != null) await initializeFirebaseApp(firebaseOptions);
