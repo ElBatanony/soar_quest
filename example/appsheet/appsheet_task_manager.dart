@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
-import '../firebase_options.dart';
-
 late SQCollection tasks;
 late CollectionSlice pendingTasks, doneTasks;
 
 void main() async {
-  await SQApp.init('Task Manager',
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Task Manager');
 
   await UserSettings.setSettings([SQStringField('hai'), SQBoolField('Dope')]);
 

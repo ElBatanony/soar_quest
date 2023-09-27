@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
-import '../firebase_options.dart';
-
 late SQCollection items, inventory;
 
 void main() async {
-  await SQApp.init('Simple Inventory',
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Simple Inventory');
 
   items = LocalCollection(id: 'Items', fields: [
     SQStringField('Name')..require = false,

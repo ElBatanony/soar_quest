@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
-  await SQApp.init('Robin.do',
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Robin.do');
 
   final tasks =
       LocalCollection(id: 'Todos', parentDoc: SQAuth.userDoc, fields: [

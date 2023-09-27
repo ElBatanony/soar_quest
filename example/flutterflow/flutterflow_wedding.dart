@@ -1,10 +1,7 @@
 import 'package:soar_quest/soar_quest.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
-  await SQApp.init('Wedding App',
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Wedding App');
 
   SQApp.run(
     [

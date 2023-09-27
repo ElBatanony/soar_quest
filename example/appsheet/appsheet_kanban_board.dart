@@ -1,7 +1,5 @@
 import 'package:soar_quest/soar_quest.dart';
 
-import '../firebase_options.dart';
-
 late SQCollection workstreams, projects, tasks;
 
 void main() async {
@@ -10,9 +8,7 @@ void main() async {
     SQStringField('Role'),
   ];
 
-  await SQApp.init('Kanban Board',
-      userDocFields: userDocFields,
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Kanban Board', userDocFields: userDocFields);
 
   workstreams = LocalCollection(id: 'Workstreams', fields: [
     SQStringField('Workstream'),

@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:soar_quest/soar_quest.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
   final userDocFields = [
     SQStringField('Name'),
   ];
 
-  await SQApp.init(
-    'Testing App',
-    theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true),
-    userDocFields: userDocFields,
-    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-  );
+  await SQApp.init('Testing App',
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+          useMaterial3: true),
+      userDocFields: userDocFields);
 
   await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);
 
