@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'data/sq_analytics.dart';
@@ -22,7 +21,6 @@ class SQApp {
     String name, {
     ThemeData? theme,
     List<SQField<dynamic>>? userDocFields,
-    FirebaseOptions? firebaseOptions,
     List<AuthMethod>? authMethods,
     SQAnalytics? analytics,
   }) async {
@@ -30,9 +28,6 @@ class SQApp {
     SQApp.theme = theme ?? ThemeData.light(useMaterial3: true);
 
     WidgetsFlutterBinding.ensureInitialized();
-    if (firebaseOptions != null) await initializeFirebaseApp(firebaseOptions);
-
-    SQAuth.offline = firebaseOptions == null;
 
     SQApp.analytics = analytics;
     analytics?.init();
@@ -61,6 +56,3 @@ class SQApp {
         home: SQApp.navbarScreens[SQApp.selectedNavScreen].toWidget()));
   }
 }
-
-Future<FirebaseApp> initializeFirebaseApp(FirebaseOptions options) =>
-    Firebase.initializeApp(options: options);

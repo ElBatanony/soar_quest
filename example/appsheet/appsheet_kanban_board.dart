@@ -1,21 +1,16 @@
 import 'package:soar_quest/soar_quest.dart';
 
-import '../firebase_options.dart';
-
 late SQCollection workstreams, projects, tasks;
 
 void main() async {
   final userDocFields = [
     SQStringField('Name'),
     SQStringField('Role'),
-    SQImageField('Photo'),
   ];
 
-  await SQApp.init('Kanban Board',
-      userDocFields: userDocFields,
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Kanban Board', userDocFields: userDocFields);
 
-  workstreams = FirestoreCollection(id: 'Workstreams', fields: [
+  workstreams = LocalCollection(id: 'Workstreams', fields: [
     SQStringField('Workstream'),
     SQStringField('test readonly')
       ..defaultValue = 'hamada'
@@ -47,7 +42,7 @@ void main() async {
             showSnackBar('Hamada ${doc.label}', context: screenState.context)),
   ]);
 
-  projects = FirestoreCollection(id: 'Projects', fields: [
+  projects = LocalCollection(id: 'Projects', fields: [
     SQStringField('Project'),
     SQRefField('Workstream', collection: workstreams),
     SQEnumField(SQStringField('Status'),
@@ -56,7 +51,7 @@ void main() async {
         refCollection: () => tasks, refFieldName: 'Project'),
   ]);
 
-  tasks = FirestoreCollection(id: 'Tasks', fields: [
+  tasks = LocalCollection(id: 'Tasks', fields: [
     SQStringField('Task'),
     SQRefField('Project', collection: projects),
     SQEnumField(SQStringField('Status'), options: ['To-do', 'Complete']),

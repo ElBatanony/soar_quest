@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 import 'package:soar_quest/src/ui/qr_code_display.dart';
 
-import 'firebase_options.dart';
-
 const challengeFieldName = 'Challenge';
 const challengeUpdateSeconds = 3;
 const attendeesFieldName = 'Attendees';
@@ -21,12 +19,11 @@ late SQCollection sessionsCollection, checkInCollection;
 // {"Session ID": "oiMIKDYCtH1BTPDq1qnL", "Challenge": "5"}
 
 void main() async {
-  await SQApp.init('SQAAM',
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('SQAAM');
 
   SQApp.run([Screen('Hello World')]);
 
-  sessionsCollection = FirestoreCollection(id: 'Sessions', fields: [
+  sessionsCollection = LocalCollection(id: 'Sessions', fields: [
     SQStringField('Session Name')..isLive,
     SQCreatedByField(instructorFieldName),
     SQBoolField('Collecting Attendance')

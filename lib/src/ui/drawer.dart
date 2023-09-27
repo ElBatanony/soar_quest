@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../data/user_settings.dart';
 import '../screens/screen.dart';
 import '../sq_app.dart';
-import '../sq_auth.dart';
 
 class SQDrawer extends StatelessWidget {
   SQDrawer([List<Screen> screens = const []]) {
@@ -11,7 +10,6 @@ class SQDrawer extends StatelessWidget {
     if (UserSettings.initialized &&
         screens.any((screen) => screen.title == 'Settings') == false)
       this.screens.add(UserSettings.settingsScreen());
-    if (SQAuth.offline == false) this.screens.add(SQProfileScreen());
   }
 
   late final List<Screen> screens = [];

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
-  await SQApp.init('Robin.do',
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init('Robin.do');
 
   final tasks =
-      FirestoreCollection(id: 'Todos', parentDoc: SQAuth.userDoc, fields: [
+      LocalCollection(id: 'Todos', parentDoc: SQAuth.userDoc, fields: [
     SQStringField('Name'),
     SQTimestampField('Date'),
     SQStringField('Description', maxLines: 3),

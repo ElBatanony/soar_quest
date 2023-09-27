@@ -1,6 +1,6 @@
 # Soar Quest
 
-A framework to build applications faster. Built on Flutter and Firebase.
+A framework to build applications faster. Built on Flutter.
 
 [![pub package](https://img.shields.io/pub/v/soar_quest.svg?&logo=Flutter&color=blue)](https://pub.dev/packages/soar_quest)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](/LICENSE)
@@ -37,7 +37,7 @@ Many design decisions here are inspired by No-code tools, due to the efficiency 
 Add the following line to your dependencies in `pubspec.yaml`.
 
 ```yaml
-soar_quest: ^0.6.0
+soar_quest: ^0.7.0
 ```
 
 The depndencies section will look something like:
@@ -46,8 +46,7 @@ The depndencies section will look something like:
 dependencies:
   flutter:
     sdk: flutter
-  soar_quest: ^0.6.0
-  firebase_core:
+  soar_quest: ^0.7.0
 ```
 
 ### Android Setup
@@ -74,21 +73,14 @@ See instructions [here](https://pub.dev/packages/mobile_scanner/versions/3.0.0-b
 
 The root of your application uses `SQApp`.
 
-The framework uses many [Firebase](https://firebase.google.com/) components under the hood.
-Therefore, `SQApp` has a parameter for the Firebase configuration of your project.
-You can find out how to configure Firebase for your project using the `flutterfire configure` command from [here](https://firebase.google.com/docs/flutter/setup?platform=web#configure-firebase).
-
 The following code can get you started with your first Soar Quest app.
 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
-  await SQApp.init("My Cool App",
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  await SQApp.init("My Cool App");
 
   SQApp.run([
     Screen("Hello World"),
@@ -97,49 +89,13 @@ void main() async {
 }
 ```
 
-## SQAuth
-
-The authentication system requires the minimal configuration on your side.
-
-Note: the authentication system only support Firebase Auth.
-Therefore, Firebase should be configured.
-
-If you add an empty drawer (side menu) to the app, a profile screen will automatically appear there.
-
-```dart
-SQApp.run([
-    Screen("Hello World"),
-    Screen("Second Screen"),
-], drawer: SQDrawer([]));
-```
-
-Alternatively, if you would like to include the profile screen in the bottom navigation bar, use the `SQProfileScreen` screen.
-
-```dart
-SQApp.run([
-    Screen("Hello World"),
-    SQProfileScreen(),
-]);
-```
-
-The profile screen handles all the authentication workflows.
-If the user is not logged in, they will be prompted to sign in.
-
-Other included features:
-
-- Email verification
-- Changing password (forgot passowrd)
-- Editing username
-- Profile fields (user data)
-
 ### User Data (Fields)
 
 To include custom user data fields, populate the `userDocFields` parameter when creating the `SQApp`.
 
 ```dart
 await SQApp.init("My Cool App",
-      userDocFields: [SQStringField("Telegram Handle")],
-      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+      userDocFields: [SQStringField("Telegram Handle")]);
 ```
 
 ### User Settings
@@ -169,7 +125,6 @@ There are several collections provided by SQ.
 The difference if the location of storage.
 The behave the same.
 
-- `FirestoreCollection`
 - `LocalCollection`
 - `InMemoryCollection`
 
@@ -315,7 +270,7 @@ The following are a few examples of how to set actions for a collection.
 
 ```dart
 late SQCollection simpleCollection;
-simpleCollection = FirestoreCollection(id: "Simple Collection", fields: [
+simpleCollection = LocalCollection(id: "Simple Collection", fields: [
   SQStringField("Name"),
   SQBoolField("Magic"),
   SQStringField("Status", value: "To-Do"),
@@ -342,16 +297,6 @@ simpleCollection = FirestoreCollection(id: "Simple Collection", fields: [
       customExecute: (doc, context) async => print("hi")),
 ]);
 ```
-
-## File Storage
-
-File storage is handled by Firebase Cloud Stroage.
-You need to have Firebase set up to be able to upload files and images.
-
-To use the storage capabilities, add the following fields to your collection's fields:
-
-- `SQFileField`. For storing files.
-- `SQImageField`. Fot Storing images.
 
 ## Contribution
 
