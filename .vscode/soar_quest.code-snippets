@@ -49,8 +49,7 @@
 		"scope": "dart",
 		"prefix": "nsqapp",
 		"body": [
-			"await SQApp.init('$1',",
-			"\t\tfirebaseOptions: DefaultFirebaseOptions.currentPlatform);",
+			"await SQApp.init('$1');",
 			"",
 			"SQApp.run([const Screen('Hello World')]);",
 		],
