@@ -1,13 +1,10 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart'
-    hide EmailAuthProvider, PhoneAuthProvider;
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'data/collections/firestore_collection.dart';
 import 'data/collections/local_collection.dart';
-import 'data/sq_action.dart';
 import 'fields/string_field.dart';
 import 'screens/screen.dart';
 
@@ -89,42 +86,10 @@ class OfflineUser extends SQUser {
 
 class SQProfileScreen extends Screen {
   SQProfileScreen({String title = 'Profile', super.icon = Icons.account_circle})
-      : super(title) {
-    providers = [
-      if (SQAuth.methods.contains(AuthMethod.email)) EmailAuthProvider(),
-      if (SQAuth.methods.contains(AuthMethod.phone)) PhoneAuthProvider(),
-    ];
-  }
-
-  late final List<AuthProvider> providers;
+      : super(title);
 
   @override
-  screenBody() {
-    if (SQAuth.offline) {
-      return const Center(child: Text('Profile Screen'));
-    }
-
-    if (SQAuth.user == null) {
-      return SignInScreen(
-        providers: providers,
-        actions: [
-          AuthStateChangeAction<SignedIn>((bcontext, state) => refresh()),
-        ],
-      );
-    }
-    return ProfileScreen(
-      actions: [
-        AuthStateChangeAction<SignedIn>((bcontext, state) => refresh()),
-        SignedOutAction((bcontext) => refresh()),
-      ],
-      providers: providers,
-      children: [
-        if (SQAuth.userDoc != null)
-          GoEditAction(name: 'Edit Profile', show: isSignedIn)
-              .button(SQAuth.userDoc!, screen: this),
-      ],
-    );
-  }
+  screenBody() => const Center(child: Text('Profile Screen'));
 
   @override
   void refresh() {
