@@ -21,7 +21,7 @@ void main() async {
       icon: Icons.arrow_back,
       show: DocValueCond('Status', 'Done'));
 
-  tasks = FirestoreCollection(
+  tasks = LocalCollection(
     id: 'Tasks',
     fields: [
       SQStringField('Task')..require = true,

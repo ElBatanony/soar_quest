@@ -9,7 +9,7 @@ void main() async {
   await SQApp.init('Simple Inventory',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
-  items = FirestoreCollection(id: 'Items', fields: [
+  items = LocalCollection(id: 'Items', fields: [
     SQStringField('Name')..require = false,
     SQStringField('Description'),
     SQVirtualField<int>(
@@ -21,7 +21,7 @@ void main() async {
         refCollection: () => inventory, refFieldName: 'Item'),
   ]);
 
-  inventory = FirestoreCollection(id: 'Inventory', fields: [
+  inventory = LocalCollection(id: 'Inventory', fields: [
     SQRefField('Item', collection: items),
     SQTimestampField('DateTime'),
     SQIntField('Amount')..require = true,

@@ -20,7 +20,7 @@ void main() async {
 
   await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);
 
-  final simpleCollection = FirestoreCollection(
+  final simpleCollection = LocalCollection(
     id: 'Simple Collection',
     fields: [
       SQStringField('Name'),
@@ -29,7 +29,7 @@ void main() async {
     ],
   );
 
-  final testCollection = FirestoreCollection(
+  final testCollection = LocalCollection(
     id: 'Test Collection',
     fields: [
       SQStringField('String'),
@@ -56,7 +56,7 @@ void main() async {
     actions: [
       GoScreenAction('Child Coll',
           toScreen: (doc) => CollectionScreen(
-              collection: FirestoreCollection(
+              collection: LocalCollection(
                   id: 'Child Collection',
                   fields: [
                     SQStringField('Name'),
@@ -68,7 +68,7 @@ void main() async {
     ],
   );
 
-  final testUserCollection = FirestoreCollection(
+  final testUserCollection = LocalCollection(
       id: 'Test User Collection',
       parentDoc: SQAuth.userDoc,
       fields: [
@@ -85,7 +85,7 @@ void main() async {
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
       FAQScreen(
-          collection: FirestoreCollection(id: 'FAQ', fields: [
+          collection: LocalCollection(id: 'FAQ', fields: [
         SQStringField('Question'),
         SQStringField('Answer'),
       ])),

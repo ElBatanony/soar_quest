@@ -8,7 +8,7 @@ void main() async {
       firebaseOptions: DefaultFirebaseOptions.currentPlatform);
 
   final tasks =
-      FirestoreCollection(id: 'Todos', parentDoc: SQAuth.userDoc, fields: [
+      LocalCollection(id: 'Todos', parentDoc: SQAuth.userDoc, fields: [
     SQStringField('Name'),
     SQTimestampField('Date'),
     SQStringField('Description', maxLines: 3),

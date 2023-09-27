@@ -26,7 +26,7 @@ void main() async {
 
   SQApp.run([Screen('Hello World')]);
 
-  sessionsCollection = FirestoreCollection(id: 'Sessions', fields: [
+  sessionsCollection = LocalCollection(id: 'Sessions', fields: [
     SQStringField('Session Name')..isLive,
     SQCreatedByField(instructorFieldName),
     SQBoolField('Collecting Attendance')
