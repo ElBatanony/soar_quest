@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'data/collections/firestore_collection.dart';
 import 'data/collections/local_collection.dart';
 import 'fields/string_field.dart';
 import 'screens/screen.dart';
@@ -50,7 +49,7 @@ class SQAuth {
       usersCollection = LocalCollection(
           id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
     } else {
-      usersCollection = FirestoreCollection(
+      usersCollection = LocalCollection(
           id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
     }
     await usersCollection.loadCollection();
