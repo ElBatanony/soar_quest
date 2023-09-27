@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'data/sq_analytics.dart';
 import 'data/sq_field.dart';
 import 'features/dark_mode_setting.dart';
 import 'screens/screen.dart';
@@ -13,6 +16,7 @@ class SQApp {
   static SQDrawer? drawer;
   static late List<Screen> navbarScreens;
   static int selectedNavScreen = 0;
+  static SQAnalytics? analytics;
 
   static Future<void> init(
     String name, {
@@ -20,15 +24,19 @@ class SQApp {
     List<SQField<dynamic>>? userDocFields,
     FirebaseOptions? firebaseOptions,
     List<AuthMethod>? authMethods,
+    SQAnalytics? analytics,
   }) async {
     SQApp.name = name;
-    SQApp.theme =
-        theme ?? ThemeData(primaryColor: Colors.blue, useMaterial3: true);
+    SQApp.theme = theme ?? ThemeData.light(useMaterial3: true);
 
     WidgetsFlutterBinding.ensureInitialized();
     if (firebaseOptions != null) await initializeFirebaseApp(firebaseOptions);
 
     SQAuth.offline = firebaseOptions == null;
+
+    SQApp.analytics = analytics;
+    analytics?.init();
+
     await SQAuth.init(userDocFields: userDocFields, methods: authMethods);
   }
 
@@ -40,6 +48,10 @@ class SQApp {
     SQApp.drawer = drawer;
     SQApp.navbarScreens = screens;
     SQApp.selectedNavScreen = startingScreen;
+
+    final user = SQAuth.user;
+    if (user != null) unawaited(SQApp.analytics?.setUserId(user.userId));
+
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,

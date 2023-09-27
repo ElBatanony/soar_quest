@@ -1,5 +1,5 @@
-/// Takedown of Baam on Flutter (BoF)
-/// https://gitlab.com/markovvn1-iu/f22-ccmdwf/bof
+// Takedown of Baam on Flutter (BoF)
+// https://gitlab.com/markovvn1-iu/f22-ccmdwf/bof
 
 import 'dart:async';
 import 'dart:convert';
@@ -119,7 +119,7 @@ class AttendNewSessionFormScreen extends FormScreen {
             sessionDoc.getValue<String>(challengeFieldName);
         final scannedChallenge = doc.getValue<String>(challengeFieldName);
 
-        if (scannedChallenge != sessionChallenge) {
+        if (scannedChallenge != sessionChallenge && context.mounted) {
           showSnackBar('Incorrect QR code (challenge)', context: context);
           return;
         }

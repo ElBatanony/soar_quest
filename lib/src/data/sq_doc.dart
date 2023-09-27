@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 
+import '../fields/file_field.dart';
 import '../fields/image_field.dart';
 import '../fields/virtual_field.dart';
 import 'sq_collection.dart';
@@ -49,9 +50,14 @@ class SQDoc {
 
   String get label => _values[collection.fields.first.name].toString();
 
-  String? get secondaryLabel => collection.fields.length >= 2
-      ? _values[collection.fields[1].name].toString()
-      : null;
+  String? get secondaryLabel {
+    final nonImageFields = collection.fields
+        .whereNot((field) => field is SQFileField || field is SQVirtualField)
+        .toList();
+    return nonImageFields.length >= 2
+        ? _values[nonImageFields[1].name].toString()
+        : null;
+  }
 
   SQRef get ref => SQRef.fromDoc(this);
 
@@ -62,6 +68,7 @@ class SQDoc {
       .whereType<SQImageField>()
       .firstWhereOrNull((field) => _values[field.name] != null);
 
-  String? get imageLabel =>
-      _imageLabelField == null ? null : _values[_imageLabelField] as String;
+  String? get imageLabel => _imageLabelField == null
+      ? null
+      : _values[_imageLabelField?.name] as String?;
 }

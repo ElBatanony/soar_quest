@@ -22,6 +22,7 @@ class FirestoreCollection extends SQCollection {
 
   @override
   Future<void> loadCollection() async {
+    isLoading = true;
     debugPrint('Fetching collection from ${ref.path}');
     final snap = await ref.get();
     debugPrint('${snap.docs.length} docs fetched for $id!');
@@ -30,6 +31,7 @@ class FirestoreCollection extends SQCollection {
       final docData = snapDoc.data() as Map<String, dynamic>?;
       docs.add(newDoc(id: snapDoc.id)..parse(docData ?? {}));
     }
+    isLoading = false;
   }
 
   @override

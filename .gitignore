@@ -54,6 +54,7 @@ web/
 windows/
 pubspec.lock
 lib/main.dart
+.metadata
 
 # Firebase
 **/firebase_options.dart

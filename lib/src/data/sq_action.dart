@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
+import '../sq_app.dart';
 import '../ui/action_button.dart';
 import '../ui/button.dart';
 import 'sq_collection.dart';
@@ -29,6 +32,8 @@ abstract class SQAction {
 
   Future<void> execute(SQDoc doc, Screen screen) async {
     debugPrint('Executing action: $name');
+    unawaited(
+        SQApp.analytics?.logEvent(name.replaceAll(' ', '_').toLowerCase()));
     await onExecute(doc, screen);
   }
 

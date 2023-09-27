@@ -62,7 +62,7 @@ abstract class SQFormField<T, Field extends SQField<T>>
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
         fieldLabelText,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ));
 
   Widget readOnlyBuilder(BuildContext context) {

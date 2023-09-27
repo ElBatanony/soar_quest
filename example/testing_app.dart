@@ -11,9 +11,12 @@ void main() async {
 
   await SQApp.init(
     'Testing App',
-    theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+    theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        useMaterial3: true),
     userDocFields: userDocFields,
     firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+    analytics: SQFirebaseAnalytics(),
   );
 
   await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);

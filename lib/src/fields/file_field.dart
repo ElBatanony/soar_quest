@@ -63,7 +63,6 @@ class SQFileFormField<FileField extends SQFileField>
   fieldBuilder(context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(field.name),
           if (field.fileExists(doc))
             SQButton('Download', onPressed: openFileUrl)
           else

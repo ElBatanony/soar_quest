@@ -54,9 +54,14 @@ Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
                 title: Text('Select ${enumField.name}'),
                 content: Wrap(
                   children: [
-                    ...enumField.options.map((v) => ElevatedButton(
-                        child: enumField.subfield.valueDisplay(v),
-                        onPressed: () => Navigator.pop<T>(context, v))),
+                    ...enumField.options.map(
+                      (v) => Padding(
+                        padding: const EdgeInsets.all(3),
+                        child: ElevatedButton(
+                            child: enumField.subfield.valueDisplay(v),
+                            onPressed: () => Navigator.pop<T>(context, v)),
+                      ),
+                    ),
                   ],
                 ),
                 actions: [

@@ -10,6 +10,8 @@ Future<T?> _goToScreen<T>(
   BuildContext context, {
   bool replace = false,
 }) {
+  SQApp.analytics?.setCurrentScreen(screen);
+
   if (replace)
     return Navigator.pushReplacement(
       context,
