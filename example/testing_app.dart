@@ -29,8 +29,6 @@ void main() async {
     ],
   );
 
-  final firebaseFileStorage = FirebaseFileStorage();
-
   final testCollection = FirestoreCollection(
     id: 'Test Collection',
     fields: [
@@ -54,7 +52,6 @@ void main() async {
       SQStringField('Readonly String')
         ..defaultValue = 'I am readonly'
         ..editable = false,
-      SQFileField('File', storage: firebaseFileStorage),
     ],
     actions: [
       GoScreenAction('Child Coll',

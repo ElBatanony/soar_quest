@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../data/firebase_file_storage.dart';
 import '../data/sq_doc.dart';
 import '../data/sq_file_storage.dart';
 import '../ui/button.dart';
 
 class SQFileField extends SQField<String> {
-  SQFileField(super.name, {SQFileStorage? storage}) {
-    this.storage = storage ?? FirebaseFileStorage();
-  }
+  SQFileField(super.name, {required this.storage});
 
-  late SQFileStorage storage;
+  SQFileStorage storage;
 
   bool fileExists(SQDoc doc) => downloadUrl(doc) != null;
 

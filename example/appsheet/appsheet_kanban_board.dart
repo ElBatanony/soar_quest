@@ -8,7 +8,6 @@ void main() async {
   final userDocFields = [
     SQStringField('Name'),
     SQStringField('Role'),
-    SQImageField('Photo'),
   ];
 
   await SQApp.init('Kanban Board',
