@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'data/collections/firestore_collection.dart';
@@ -11,11 +10,7 @@ import 'screens/screen.dart';
 enum AuthMethod { email, phone }
 
 class SQAuth {
-  static SQUser? get user => offline
-      ? OfflineUser()
-      : FirebaseAuth.instance.currentUser == null
-          ? null
-          : FirebaseUser();
+  static SQUser? get user => offline ? OfflineUser() : null;
 
   static bool get isSignedIn => user != null;
 
@@ -66,15 +61,6 @@ class SQAuth {
 abstract class SQUser {
   String get userId;
   String get email;
-}
-
-class FirebaseUser extends SQUser {
-  User get firebaseUser => FirebaseAuth.instance.currentUser!;
-
-  @override
-  String get userId => firebaseUser.uid;
-  @override
-  String get email => firebaseUser.email!;
 }
 
 class OfflineUser extends SQUser {

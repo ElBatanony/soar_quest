@@ -14,7 +14,6 @@ dependencies:
   barcode_widget: ^2.0.3
   cloud_firestore: ^4.0.3
   collection: ^1.16.0
-  firebase_auth: ^4.1.0
   firebase_core: ^2.1.1
   firebase_storage: ^11.0.3
 
