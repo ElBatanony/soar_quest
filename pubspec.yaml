@@ -12,21 +12,19 @@ environment:
 
 dependencies:
   barcode_widget: ^2.0.3
-  collection: ^1.16.0
-
+  collection: ^1.17.2
   flutter:
     sdk: flutter
-
   flutter_colorpicker: ^1.0.3
-  flutter_map: ^3.0.0
-  flutter_quill: ^6.1.6
-  image_picker: ^0.8.5+3
-  latlong2: ^0.8.1
+  flutter_map: ^5.0.0
+  flutter_quill: ^7.4.7
+  image_picker: ^1.0.4
+  latlong2: ^0.9.0
   mobile_scanner: ^3.0.0-beta.4
   path_provider: ^2.0.11
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.5
-  uuid: ^3.0.6
+  uuid: ^4.1.0
   youtube_player_flutter: ^8.1.0
 
 dev_dependencies:
