@@ -9,7 +9,7 @@ import 'screens/screen.dart';
 enum AuthMethod { email, phone }
 
 class SQAuth {
-  static SQUser? get user => offline ? OfflineUser() : null;
+  static SQUser? get user => null;
 
   static bool get isSignedIn => user != null;
 
@@ -17,8 +17,6 @@ class SQAuth {
   static late SQDoc? userDoc;
 
   static late List<AuthMethod> methods;
-
-  static bool offline = false;
 
   static Future<void> initUserDoc() async {
     if (isSignedIn) {
@@ -45,13 +43,10 @@ class SQAuth {
     SQAuth.methods = methods ?? [AuthMethod.email];
     userDocFields ??= [];
     userDocFields.insert(0, SQStringField('Email')..editable = false);
-    if (offline) {
-      usersCollection = LocalCollection(
-          id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
-    } else {
-      usersCollection = LocalCollection(
-          id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
-    }
+
+    usersCollection = LocalCollection(
+        id: 'Users', fields: userDocFields, updates: SQUpdates.readOnly());
+
     await usersCollection.loadCollection();
     await initUserDoc();
   }
@@ -60,13 +55,6 @@ class SQAuth {
 abstract class SQUser {
   String get userId;
   String get email;
-}
-
-class OfflineUser extends SQUser {
-  @override
-  String get userId => 'Offline User';
-  @override
-  String get email => 'Offline Email';
 }
 
 class SQProfileScreen extends Screen {

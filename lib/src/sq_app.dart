@@ -29,8 +29,6 @@ class SQApp {
 
     WidgetsFlutterBinding.ensureInitialized();
 
-    SQAuth.offline = true;
-
     SQApp.analytics = analytics;
     analytics?.init();
 
