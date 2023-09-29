@@ -51,7 +51,7 @@
 		"body": [
 			"await SQApp.init('$1');",
 			"",
-			"SQApp.run([const Screen('Hello World')]);",
+			"SQApp.run([Screen('Hello World')]);",
 		],
 	},
 	"New SQFormField": {
