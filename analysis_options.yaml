@@ -1,4 +1,3 @@
-
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
@@ -9,13 +8,12 @@ analyzer:
 
 linter:
   rules:
-
     # Disabled rules
     curly_braces_in_flow_control_structures: false
     use_key_in_widget_constructors: false # until SQ uses keys
-    
+
     # Error rules
-    avoid_dynamic_calls : true
+    avoid_dynamic_calls: true
     discarded_futures: true
 
     avoid_returning_null_for_future: true
@@ -126,7 +124,6 @@ linter:
 
     # to enable:
     # avoid_classes_with_only_static_members # for SQApp and SQAuth
-
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
 # https://dart-lang.github.io/linter/lints/index.html
