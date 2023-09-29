@@ -60,3 +60,6 @@ lib/main.dart
 .firebase/
 .firebaserc
 firebase.json
+
+# Tunneling
+ngrok.exe
