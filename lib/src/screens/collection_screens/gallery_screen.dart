@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import '../collection_screen.dart';
 
 class GalleryScreen extends CollectionScreen {
-  GalleryScreen({required super.collection, super.title});
+  GalleryScreen({
+    required super.collection,
+    super.title,
+    this.columns = 2,
+  });
+
+  final int columns;
 
   @override
   Widget collectionDisplay(docs) => GridView.count(
-        crossAxisCount: 2,
-        children: docs.map(docDisplay).toList(),
-      );
+      crossAxisCount: columns, children: docs.map(docDisplay).toList());
 
   @override
   Widget docDisplay(doc) => Card(
