@@ -73,6 +73,11 @@ void main() async {
 }
 ```
 
+### Designing Mini Apps
+
+Soar Quest automatically captures the user's custom [`ThemeParams`](https://core.telegram.org/bots/webapps#themeparams)
+and adjusts the [Material Design 3](https://m3.material.io/) Theme.
+
 ### User Data (Fields)
 
 To include custom user data fields, populate the `userDocFields` parameter when creating the `SQApp`.
