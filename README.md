@@ -1,6 +1,6 @@
 # Soar Quest
 
-A framework to build applications faster. Built on Flutter.
+A framework to build [Telegram Mini Apps](https://core.telegram.org/bots/webapps) faster with [Flutter](https://flutter.dev/).
 
 [![pub package](https://img.shields.io/pub/v/soar_quest.svg?&logo=Flutter&color=blue)](https://pub.dev/packages/soar_quest)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](/LICENSE)
