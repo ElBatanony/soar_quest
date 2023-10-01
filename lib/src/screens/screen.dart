@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../mini_apps/mini_app.dart';
 import '../sq_app.dart';
 import '../sq_auth.dart';
 import '../ui/button.dart';
@@ -91,6 +92,7 @@ class Screen {
 
   @mustCallSuper
   void refresh() {
+    refreshMainButton();
     if (mounted) _myState.refreshScreen();
   }
 
@@ -104,6 +106,10 @@ class Screen {
 
   Screen operator &(Screen other) => _CustomBodyScreen(title,
       bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
+
+  void refreshMainButton() {
+    if (MiniApp.mainButton.isVisible) MiniApp.mainButton.hide();
+  }
 }
 
 class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
