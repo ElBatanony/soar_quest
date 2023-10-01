@@ -29,15 +29,19 @@ Future<T?> _goToScreen<T>(
 bool alwaysShowScreen(BuildContext context) => true;
 
 class Screen {
-  Screen(this.title,
-      {this.icon = Icons.stay_current_landscape,
-      this.padding = const EdgeInsets.all(16)});
+  Screen(
+    this.title, {
+    this.icon = Icons.stay_current_landscape,
+    this.padding = const EdgeInsets.all(16),
+    this.appbarEnabled = false,
+  });
 
   final String title;
   IconData? icon;
   bool isInline = false;
   bool Function(BuildContext) show = alwaysShowScreen;
   bool signedIn = false;
+  bool appbarEnabled;
 
   late _ScreenState _myState;
 
@@ -59,11 +63,13 @@ class Screen {
     return ret;
   }
 
-  PreferredSizeWidget appBar() => AppBar(
-        title: Text(title),
-        leading: Navigator.of(context).canPop() ? const BackButton() : null,
-        actions: appBarActions(),
-      );
+  PreferredSizeWidget? appBar() => appbarEnabled
+      ? AppBar(
+          title: Text(title),
+          leading: Navigator.of(context).canPop() ? const BackButton() : null,
+          actions: appBarActions(),
+        )
+      : null;
 
   Widget screenBody() => Center(child: Text('$title Screen'));
 
