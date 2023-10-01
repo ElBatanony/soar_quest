@@ -37,7 +37,7 @@ Many design decisions here are inspired by No-code tools, due to the efficiency 
 Add the following line to your dependencies in `pubspec.yaml`.
 
 ```yaml
-soar_quest: ^0.7.0
+soar_quest: ^0.8.0
 ```
 
 The depndencies section will look something like:
@@ -46,7 +46,7 @@ The depndencies section will look something like:
 dependencies:
   flutter:
     sdk: flutter
-  soar_quest: ^0.7.0
+  soar_quest: ^0.8.0
 ```
 
 ### QR Code Scanning Setup
