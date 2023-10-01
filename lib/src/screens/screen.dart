@@ -92,6 +92,7 @@ class Screen {
 
   @mustCallSuper
   void refresh() {
+    refreshBackButton();
     refreshMainButton();
     if (mounted) _myState.refreshScreen();
   }
@@ -106,6 +107,16 @@ class Screen {
 
   Screen operator &(Screen other) => _CustomBodyScreen(title,
       bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
+
+  void refreshBackButton() {
+    final backButton = MiniApp.backButton;
+    if (Navigator.of(context).canPop()) {
+      backButton.callback = exitScreen;
+      if (backButton.isVisible == false) MiniApp.backButton.show();
+    } else if (backButton.isVisible) {
+      backButton.hide();
+    }
+  }
 
   void refreshMainButton() {
     if (MiniApp.mainButton.isVisible) MiniApp.mainButton.hide();
