@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart' show Color, Colors;
 export 'package:flutter/material.dart' show Color;
 
-enum MiniAppColorScheme { light, dark }
-
 extension MiniAppColorExtension on Color {
   MiniAppColor toMiniAppColor() => MiniAppColor(toHex());
   String toHex() => '#${value.toRadixString(16).padLeft(8, '0').substring(2)}';
