@@ -52,6 +52,13 @@ class Screen {
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
 
+  Future<T?> navigateTo<T extends Object?>(Screen targetScreen,
+      {bool replace = false}) async {
+    final ret = await _goToScreen<T>(targetScreen, context, replace: replace);
+    refresh();
+    return ret;
+  }
+
   PreferredSizeWidget appBar() => AppBar(
         title: Text(title),
         leading: Navigator.of(context).canPop() ? const BackButton() : null,
