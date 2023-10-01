@@ -12,7 +12,6 @@ import 'ui/drawer.dart';
 
 class SQApp {
   static late String name;
-  static late ThemeData theme;
   static SQDrawer? drawer;
   static late List<Screen> navbarScreens;
   static int selectedNavScreen = 0;
@@ -20,7 +19,6 @@ class SQApp {
 
   static Future<void> init(
     String name, {
-    ThemeData? theme,
     List<SQField<dynamic>>? userDocFields,
     List<AuthMethod>? authMethods,
     SQAnalytics? analytics,
