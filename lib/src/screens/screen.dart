@@ -29,7 +29,9 @@ Future<T?> _goToScreen<T>(
 bool alwaysShowScreen(BuildContext context) => true;
 
 class Screen {
-  Screen(this.title, {this.icon = Icons.stay_current_landscape});
+  Screen(this.title,
+      {this.icon = Icons.stay_current_landscape,
+      this.padding = const EdgeInsets.all(16)});
 
   final String title;
   IconData? icon;
@@ -43,6 +45,8 @@ class Screen {
 
   BuildContext get context => _myState.context;
   bool get mounted => _myState.mounted;
+
+  EdgeInsets padding;
 
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
@@ -83,8 +87,7 @@ class Screen {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
 
-  EdgeInsetsGeometry? get screenPadding =>
-      isInline ? null : const EdgeInsets.all(16);
+  EdgeInsetsGeometry? get screenPadding => isInline ? null : padding;
 
   Screen operator &(Screen other) => _CustomBodyScreen(title,
       bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
