@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart' show Color, Colors;
 export 'package:flutter/material.dart' show Color;
 
 enum MiniAppColorScheme { light, dark }
