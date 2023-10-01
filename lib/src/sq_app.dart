@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../mini_apps.dart';
 import 'data/sq_analytics.dart';
 import 'data/sq_field.dart';
 import 'features/dark_mode_setting.dart';
@@ -25,7 +26,8 @@ class SQApp {
     SQAnalytics? analytics,
   }) async {
     SQApp.name = name;
-    SQApp.theme = theme ?? ThemeData.light(useMaterial3: true);
+
+    MiniApp.init();
 
     WidgetsFlutterBinding.ensureInitialized();
 
