@@ -39,6 +39,7 @@ class SQApp {
     List<Screen> screens, {
     SQDrawer? drawer,
     int startingScreen = 0,
+    ThemeData? themeData,
   }) {
     SQApp.drawer = drawer;
     SQApp.navbarScreens = screens;
@@ -53,7 +54,7 @@ class SQApp {
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
-        theme: SQApp.theme,
+        theme: themeData,
         darkTheme: ThemeData.dark(useMaterial3: true),
         themeMode: SQDarkMode.themeMode,
         home: SQApp.navbarScreens[SQApp.selectedNavScreen].toWidget()));
