@@ -11,7 +11,7 @@ linter:
     # Disabled rules
     curly_braces_in_flow_control_structures: false
     use_key_in_widget_constructors: false # until SQ uses keys
-    avoid_web_libraries_in_flutter: false
+    avoid_web_libraries_in_flutter: true # see mini_apps/js.dart
 
     # Error rules
     avoid_dynamic_calls: true
