@@ -6,6 +6,8 @@ import 'dart:js';
 export 'dart:convert' show jsonDecode, jsonEncode;
 export 'dart:js' show JsArray, JsObject;
 
+final webAppJsObject = (context['Telegram'] as JsObject)['WebApp'] as JsObject;
+
 Future<T> jsCallbackToFuture<T>(
     JsObject js, String methodName, List<dynamic> args) {
   final completer = Completer<T>();
