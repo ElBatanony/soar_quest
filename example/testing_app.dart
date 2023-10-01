@@ -7,11 +7,7 @@ void main() async {
     SQStringField('Name'),
   ];
 
-  await SQApp.init('Testing App',
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-          useMaterial3: true),
-      userDocFields: userDocFields);
+  await SQApp.init('Testing App', userDocFields: userDocFields);
 
   await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);
 
@@ -77,6 +73,7 @@ void main() async {
       FavouritesScreen(
           favouritesFeature: FavouritesFeature(collection: simpleCollection))
     ],
+    themeData: MiniApp.themeParams.toMaterialThemeData(),
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
       FAQScreen(

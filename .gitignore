@@ -55,3 +55,11 @@ windows/
 pubspec.lock
 lib/main.dart
 .metadata
+
+# Firebase (Hosting)
+.firebase/
+.firebaserc
+firebase.json
+
+# Tunneling
+ngrok.exe

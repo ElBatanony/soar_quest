@@ -130,7 +130,8 @@ class AttendNewSessionFormScreen extends FormScreen {
         showSnackBar('Incorrect Session ID', context: context);
       }
     } on Exception {
-      showSnackBar('Error processing QR code', context: context);
+      if (context.mounted)
+        showSnackBar('Error processing QR code', context: context);
       return;
     }
     super.onFieldsChanged(field);

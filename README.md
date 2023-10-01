@@ -1,6 +1,6 @@
 # Soar Quest
 
-A framework to build applications faster. Built on Flutter.
+A framework to build [Telegram Mini Apps](https://core.telegram.org/bots/webapps) faster with [Flutter](https://flutter.dev/).
 
 [![pub package](https://img.shields.io/pub/v/soar_quest.svg?&logo=Flutter&color=blue)](https://pub.dev/packages/soar_quest)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](/LICENSE)
@@ -37,7 +37,7 @@ Many design decisions here are inspired by No-code tools, due to the efficiency 
 Add the following line to your dependencies in `pubspec.yaml`.
 
 ```yaml
-soar_quest: ^0.7.0
+soar_quest: ^0.8.0
 ```
 
 The depndencies section will look something like:
@@ -46,23 +46,7 @@ The depndencies section will look something like:
 dependencies:
   flutter:
     sdk: flutter
-  soar_quest: ^0.7.0
-```
-
-### Android Setup
-
-To compile your app in Android, update your `minSdkVersion` (see snippet below), and enable `multiDex`.
-Additionally, set your `compileSdkVersion` to `33` (or higher).
-You can find the settings in `android\app\build.gradle`.
-
-```gradle
-android {
-  compileSdkVersion 33
-  defaultConfig {
-    minSdkVersion 21
-    multiDexEnabled true
-  }
-}                                                              
+  soar_quest: ^0.8.0
 ```
 
 ### QR Code Scanning Setup
@@ -88,6 +72,11 @@ void main() async {
   ]);
 }
 ```
+
+### Designing Mini Apps
+
+Soar Quest automatically captures the user's custom [`ThemeParams`](https://core.telegram.org/bots/webapps#themeparams)
+and adjusts the [Material Design 3](https://m3.material.io/) Theme.
 
 ### User Data (Fields)
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../mini_apps/mini_app.dart';
 import '../sq_app.dart';
 import '../sq_auth.dart';
 import '../ui/button.dart';
@@ -29,13 +30,19 @@ Future<T?> _goToScreen<T>(
 bool alwaysShowScreen(BuildContext context) => true;
 
 class Screen {
-  Screen(this.title, {this.icon = Icons.stay_current_landscape});
+  Screen(
+    this.title, {
+    this.icon = Icons.stay_current_landscape,
+    this.padding = const EdgeInsets.all(16),
+    this.appbarEnabled = false,
+  });
 
   final String title;
   IconData? icon;
   bool isInline = false;
   bool Function(BuildContext) show = alwaysShowScreen;
   bool signedIn = false;
+  bool appbarEnabled;
 
   late _ScreenState _myState;
 
@@ -44,15 +51,26 @@ class Screen {
   BuildContext get context => _myState.context;
   bool get mounted => _myState.mounted;
 
+  EdgeInsets padding;
+
   Future<T?> go<T extends Object?>(BuildContext context,
           {bool replace = false}) =>
       _goToScreen<T>(this, context, replace: replace);
 
-  PreferredSizeWidget appBar() => AppBar(
-        title: Text(title),
-        leading: Navigator.of(context).canPop() ? const BackButton() : null,
-        actions: appBarActions(),
-      );
+  Future<T?> navigateTo<T extends Object?>(Screen targetScreen,
+      {bool replace = false}) async {
+    final ret = await _goToScreen<T>(targetScreen, context, replace: replace);
+    refresh();
+    return ret;
+  }
+
+  PreferredSizeWidget? appBar() => appbarEnabled
+      ? AppBar(
+          title: Text(title),
+          leading: Navigator.of(context).canPop() ? const BackButton() : null,
+          actions: appBarActions(),
+        )
+      : null;
 
   Widget screenBody() => Center(child: Text('$title Screen'));
 
@@ -74,6 +92,8 @@ class Screen {
 
   @mustCallSuper
   void refresh() {
+    refreshBackButton();
+    refreshMainButton();
     if (mounted) _myState.refreshScreen();
   }
 
@@ -83,11 +103,24 @@ class Screen {
     if (Navigator.canPop(context)) return Navigator.pop<V>(context, value);
   }
 
-  EdgeInsetsGeometry? get screenPadding =>
-      isInline ? null : const EdgeInsets.all(16);
+  EdgeInsetsGeometry? get screenPadding => isInline ? null : padding;
 
   Screen operator &(Screen other) => _CustomBodyScreen(title,
       bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
+
+  void refreshBackButton() {
+    final backButton = MiniApp.backButton;
+    if (Navigator.of(context).canPop()) {
+      backButton.callback = exitScreen;
+      if (backButton.isVisible == false) MiniApp.backButton.show();
+    } else if (backButton.isVisible) {
+      backButton.hide();
+    }
+  }
+
+  void refreshMainButton() {
+    if (MiniApp.mainButton.isVisible) MiniApp.mainButton.hide();
+  }
 }
 
 class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {

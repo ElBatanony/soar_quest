@@ -27,7 +27,7 @@ class SQButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(padding),
       child: iconWidget == null
-          ? ElevatedButton(onPressed: onPressed, child: textWidget)
+          ? FilledButton(onPressed: onPressed, child: textWidget)
           : textWidget == null
               ? IconButton(
                   iconSize: iconSize, onPressed: onPressed, icon: iconWidget)

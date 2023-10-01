@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../mini_apps.dart';
 import 'data/sq_analytics.dart';
 import 'data/sq_field.dart';
 import 'features/dark_mode_setting.dart';
@@ -11,7 +12,6 @@ import 'ui/drawer.dart';
 
 class SQApp {
   static late String name;
-  static late ThemeData theme;
   static SQDrawer? drawer;
   static late List<Screen> navbarScreens;
   static int selectedNavScreen = 0;
@@ -19,13 +19,13 @@ class SQApp {
 
   static Future<void> init(
     String name, {
-    ThemeData? theme,
     List<SQField<dynamic>>? userDocFields,
     List<AuthMethod>? authMethods,
     SQAnalytics? analytics,
   }) async {
     SQApp.name = name;
-    SQApp.theme = theme ?? ThemeData.light(useMaterial3: true);
+
+    MiniApp.init();
 
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -39,6 +39,7 @@ class SQApp {
     List<Screen> screens, {
     SQDrawer? drawer,
     int startingScreen = 0,
+    ThemeData? themeData,
   }) {
     SQApp.drawer = drawer;
     SQApp.navbarScreens = screens;
@@ -47,10 +48,13 @@ class SQApp {
     final user = SQAuth.user;
     if (user != null) unawaited(SQApp.analytics?.setUserId(user.userId));
 
+    MiniApp.ready();
+    MiniApp.expand();
+
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
-        theme: SQApp.theme,
+        theme: themeData,
         darkTheme: ThemeData.dark(useMaterial3: true),
         themeMode: SQDarkMode.themeMode,
         home: SQApp.navbarScreens[SQApp.selectedNavScreen].toWidget()));

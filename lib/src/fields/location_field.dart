@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/sq_doc.dart';
 import '../screens/screen.dart';
 import '../ui/button.dart';
 
-final mapAttribution =
-    AttributionWidget.defaultWidget(source: 'OpenStreetMap contributors');
+final mapAttribution = RichAttributionWidget(
+  attributions: [
+    TextSourceAttribution(
+      'OpenStreetMap contributors',
+      onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+    ),
+  ],
+);
 
-final defaultLocation = LatLng(55.753361, 48.743537);
+const defaultLocation = LatLng(55.753361, 48.743537);
 
 final tileLayer = TileLayer(
   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
