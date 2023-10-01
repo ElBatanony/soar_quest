@@ -1,4 +1,4 @@
-import 'dart:js';
+import 'js.dart';
 
 class MiniAppBackButton {
   MiniAppBackButton(this.js) {
