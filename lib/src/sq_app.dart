@@ -49,6 +49,9 @@ class SQApp {
     final user = SQAuth.user;
     if (user != null) unawaited(SQApp.analytics?.setUserId(user.userId));
 
+    MiniApp.ready();
+    MiniApp.expand();
+
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
