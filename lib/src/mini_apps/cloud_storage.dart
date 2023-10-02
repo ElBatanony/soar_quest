@@ -5,19 +5,19 @@ class CloudStorage {
 
   JsObject js;
 
-  void setItem(String key, String value) =>
+  Future<void> setItem(String key, String value) async =>
       js.callMethod('setItem', [sanitizeKey(key), value]);
 
-  Future<T> getItem<T>(String key) =>
+  Future<T?> getItem<T>(String key) =>
       jsCallbackToFuture(js, 'getItem', [sanitizeKey(key)]);
 
   Future<List<dynamic>> getItems(List<String> keys) =>
       jsCallbackToFuture(js, 'getItems', [keys.map(sanitizeKey).toList()]);
 
-  void removeItem(String key) =>
+  Future<void> removeItem(String key) async =>
       js.callMethod('removeItem', [sanitizeKey(key)]);
 
-  Future<dynamic> removeItems(List<String> keys) =>
+  Future<void> removeItems(List<String> keys) async =>
       jsCallbackToFuture(js, 'removeItems', [keys.map(sanitizeKey).toList()]);
 
   Future<List<String>> getKeys() async {
