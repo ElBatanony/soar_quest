@@ -5,6 +5,7 @@ import 'js.dart';
 import 'main_button.dart';
 import 'popups.dart';
 import 'theme_params.dart';
+import 'user.dart';
 
 class MiniApp {
   MiniApp.init() {
@@ -21,6 +22,7 @@ class MiniApp {
   }
 
   static late final JsObject js;
+  static WebAppUser get user => initData.user;
 
   static late final WebAppInitData initData;
   static late final String version;
