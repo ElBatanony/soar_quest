@@ -20,7 +20,6 @@ class SQApp {
   static Future<void> init(
     String name, {
     List<SQField<dynamic>>? userDocFields,
-    List<AuthMethod>? authMethods,
     SQAnalytics? analytics,
   }) async {
     SQApp.name = name;
@@ -32,7 +31,7 @@ class SQApp {
     SQApp.analytics = analytics;
     analytics?.init();
 
-    await SQAuth.init(userDocFields: userDocFields, methods: authMethods);
+    await SQAuth.init(userDocFields: userDocFields);
   }
 
   static void run(

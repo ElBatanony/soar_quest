@@ -56,10 +56,14 @@ pubspec.lock
 lib/main.dart
 .metadata
 
-# Firebase (Hosting)
+# Firebase
 .firebase/
 .firebaserc
 firebase.json
+firebase_options.dart
+/functions/
 
 # Tunneling
 ngrok.exe
+
+playground/

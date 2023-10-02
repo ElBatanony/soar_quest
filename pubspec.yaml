@@ -12,7 +12,9 @@ environment:
 
 dependencies:
   barcode_widget: ^2.0.3
+  cloud_firestore: ^4.9.2
   collection: ^1.17.2
+  firebase_core: ^2.16.0
   flutter:
     sdk: flutter
   flutter_colorpicker: ^1.0.3

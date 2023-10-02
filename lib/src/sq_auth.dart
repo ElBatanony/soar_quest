@@ -6,8 +6,6 @@ import 'data/collections/local_collection.dart';
 import 'fields/string_field.dart';
 import 'screens/screen.dart';
 
-enum AuthMethod { email, phone }
-
 class SQAuth {
   static SQUser? get user => null;
 
@@ -15,8 +13,6 @@ class SQAuth {
 
   static late SQCollection usersCollection;
   static late SQDoc? userDoc;
-
-  static late List<AuthMethod> methods;
 
   static Future<void> initUserDoc() async {
     if (isSignedIn) {
@@ -36,11 +32,7 @@ class SQAuth {
     }
   }
 
-  static Future<void> init({
-    List<SQField<dynamic>>? userDocFields,
-    List<AuthMethod>? methods,
-  }) async {
-    SQAuth.methods = methods ?? [AuthMethod.email];
+  static Future<void> init({List<SQField<dynamic>>? userDocFields}) async {
     userDocFields ??= [];
     userDocFields.insert(0, SQStringField('Email')..editable = false);
 

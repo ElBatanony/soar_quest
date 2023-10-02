@@ -38,7 +38,7 @@ class MiniAppCollection extends SQCollection {
   @override
   Future<void> saveCollection() async {
     final serializedDocs =
-        docs.map((doc) => {'id': doc.id, 'data': doc.serialize()});
+        docs.map((doc) => {'id': doc.id, 'data': doc.serialize()}).toList();
     cloudStorage.setItem(id, jsonEncode(serializedDocs));
   }
 }

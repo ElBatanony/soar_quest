@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import '../../mini_apps.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import '../sq_auth.dart';
 import 'collections/local_collection.dart';
 
 const _settingsCollectionId = 'Settings';
@@ -20,8 +20,8 @@ class UserSettings {
       _settingsCollection.newDoc(id: _defaultSettingsDocId);
 
   static Future<void> setSettings(List<SQField<dynamic>> settings) async {
-    _settingsCollection = LocalCollection(
-        id: _settingsCollectionId, parentDoc: SQAuth.userDoc, fields: settings);
+    _settingsCollection =
+        MiniAppCollection(id: _settingsCollectionId, fields: settings);
     await _settingsCollection.loadCollection();
     initialized = true;
   }
