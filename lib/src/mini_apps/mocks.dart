@@ -3,6 +3,13 @@ import 'js.dart';
 
 bool mocking = (webAppJsObject['initDataUnsafe'] as JsObject)['user'] == null;
 
+void mockInitDataUnsafe() {
+  final initDataUnsafe = webAppJsObject['initDataUnsafe'] as JsObject;
+  initDataUnsafe['user'] = JsObject.jsify({'id': 99911, 'first_name': 'test'});
+  initDataUnsafe['auth_date'] = '16000';
+  initDataUnsafe['hash'] = 'XYZ';
+}
+
 class CloudStorageMock implements CloudStorage {
   CloudStorageMock();
 

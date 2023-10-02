@@ -11,6 +11,7 @@ import 'user.dart';
 class MiniApp {
   MiniApp.init() {
     js = webAppJsObject;
+    if (mocking) mockInitDataUnsafe();
     version = js['version'] as String;
     platform = js['platform'] as String;
     initData = WebAppInitData(
