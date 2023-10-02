@@ -26,7 +26,7 @@ class CloudStorage {
     return jsList.map((element) => element as String).toList();
   }
 
-  String sanitizeKey(String key) {
+  static String sanitizeKey(String key) {
     if (key.isEmpty || key.length > 128)
       throw ArgumentError('Key length must be between 1 and 128 characters.');
 
