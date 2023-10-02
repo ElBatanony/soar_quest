@@ -3,6 +3,7 @@ import 'cloud_storage.dart';
 import 'init_data.dart';
 import 'js.dart';
 import 'main_button.dart';
+import 'mocks.dart';
 import 'popups.dart';
 import 'theme_params.dart';
 import 'user.dart';
@@ -10,13 +11,16 @@ import 'user.dart';
 class MiniApp {
   MiniApp.init() {
     js = webAppJsObject;
+    if (mocking) mockInitDataUnsafe();
     version = js['version'] as String;
     platform = js['platform'] as String;
     initData = WebAppInitData(
         js['initDataUnsafe'] as JsObject, js['initData'] as String);
     backButton = MiniAppBackButton(js['BackButton'] as JsObject);
     mainButton = MainButton(js['MainButton'] as JsObject);
-    cloudStorage = CloudStorage(js['CloudStorage'] as JsObject);
+    cloudStorage = mocking
+        ? CloudStorageMock()
+        : CloudStorage(js['CloudStorage'] as JsObject);
     themeParams =
         ThemeParams(js['themeParams'] as JsObject, js['colorScheme'] as String);
   }

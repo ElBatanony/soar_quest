@@ -284,14 +284,15 @@ class MiniAppTestingScreen extends Screen {
               alignment: MainAxisAlignment.center,
               children: [
                 SQButton('Set Test key to X',
-                    onPressed: () => cloudStorage.setItem('Test', 'X')),
+                    onPressed: () async => cloudStorage.setItem('Test', 'X')),
                 SQButton('Set to Y',
-                    onPressed: () => cloudStorage.setItem('Test', 'Y')),
+                    onPressed: () async => cloudStorage.setItem('Test', 'Y')),
               ],
             ),
             SQButton('Get value of Test key',
                 onPressed: () async => MiniApp.showAlert(
-                    await cloudStorage.getItem<String>('Test'))),
+                    await cloudStorage.getItem<String>('Test') ??
+                        'No value stored')),
             SQButton('Remove Test key',
                 onPressed: () async => cloudStorage.removeItem('Test')),
             SQButton(

@@ -12,7 +12,7 @@ class MiniAppCollection extends SQCollection {
   @override
   Future<void> loadCollection() async {
     isLoading = true;
-    final serializedString = await cloudStorage.getItem<String>(id);
+    final serializedString = await cloudStorage.getItem<String>(id) ?? '';
 
     docs = [];
 
@@ -39,6 +39,6 @@ class MiniAppCollection extends SQCollection {
   Future<void> saveCollection() async {
     final serializedDocs =
         docs.map((doc) => {'id': doc.id, 'data': doc.serialize()}).toList();
-    cloudStorage.setItem(id, jsonEncode(serializedDocs));
+    await cloudStorage.setItem(id, jsonEncode(serializedDocs));
   }
 }
