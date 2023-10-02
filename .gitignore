@@ -65,3 +65,5 @@ firebase_options.dart
 
 # Tunneling
 ngrok.exe
+
+playground/
