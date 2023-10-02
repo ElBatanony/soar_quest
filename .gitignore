@@ -61,6 +61,7 @@ lib/main.dart
 .firebaserc
 firebase.json
 firebase_options.dart
+/functions/
 
 # Tunneling
 ngrok.exe
