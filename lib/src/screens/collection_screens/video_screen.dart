@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../fields/video_link_field.dart';
 import '../collection_screen.dart';
@@ -30,25 +31,16 @@ class VideoDocDisplay extends DocScreen {
   void initScreen() {
     super.initScreen();
     final videoFieldValue = doc.getValue<String>(videoField.name);
-
     if (videoFieldValue == null) return;
-
-    final videoId = YoutubePlayer.convertUrlToId(videoFieldValue);
-
-    if (videoId != null) {
-      _controller = YoutubePlayerController(
-        initialVideoId: videoId,
-        flags: const YoutubePlayerFlags(
-          autoPlay: false,
-          mute: true,
-        ),
-      );
-    }
+    _controller = YoutubePlayerController(
+      params: const YoutubePlayerParams(showFullscreenButton: true),
+    );
+    unawaited(_controller?.loadVideo(videoFieldValue));
   }
 
   @override
   void dispose() {
-    _controller?.dispose();
+    unawaited(_controller?.close());
     super.dispose();
   }
 
