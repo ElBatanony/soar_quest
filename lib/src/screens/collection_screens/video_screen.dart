@@ -45,21 +45,12 @@ class VideoDocDisplay extends DocScreen {
   }
 
   @override
-  Widget screenBody() => Padding(
-        padding: const EdgeInsets.all(15),
-        child: Center(
-          child: Column(
-            children: [
-              Text(doc.label),
-              if (_controller != null)
-                YoutubePlayer(
-                  controller: _controller!,
-                  showVideoProgressIndicator: true,
-                )
-              else
-                const Text('No video here')
-            ],
-          ),
+  Widget screenBody() => Center(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: _controller != null
+              ? YoutubePlayer(controller: _controller!)
+              : const Text('No video here'),
         ),
       );
 }
