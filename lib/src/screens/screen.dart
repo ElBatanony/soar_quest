@@ -85,7 +85,10 @@ class Screen {
   }
 
   @mustCallSuper
-  void initScreen() {}
+  void initScreen() {
+    refreshBackButton();
+    refreshMainButton();
+  }
 
   @mustCallSuper
   void dispose() {}
