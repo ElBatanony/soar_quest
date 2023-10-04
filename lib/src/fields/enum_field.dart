@@ -4,7 +4,11 @@ import '../data/sq_field.dart';
 import '../ui/button.dart';
 
 class SQEnumField<T> extends SQField<T> {
-  SQEnumField(this.subfield, {required this.options}) : super(subfield.name) {
+  SQEnumField(
+    this.subfield, {
+    required this.options,
+    this.isDropdown = false,
+  }) : super(subfield.name) {
     defaultValue = subfield.defaultValue;
     subfield
       ..editable = false
@@ -13,6 +17,7 @@ class SQEnumField<T> extends SQField<T> {
 
   SQField<T> subfield;
   List<T> options;
+  bool isDropdown;
 
   @override
   formField(docScreen) => _SQEnumFormField(this, docScreen);
@@ -31,19 +36,29 @@ class _SQEnumFormField<T> extends SQFormField<T, SQEnumField<T>> {
   Widget readOnlyBuilder(context) => field.subfield.formField(docScreen);
 
   @override
-  fieldBuilder(context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          field.subfield.valueDisplay(getDocValue()),
-          SQButton('Select', onPressed: () async {
-            final newValue =
-                await showEnumOptionsDialog(field, context: context);
-            if (newValue != null) {
-              setDocValue(newValue);
-            }
-          })
-        ],
-      );
+  fieldBuilder(context) => field.isDropdown
+      ? dropdownMenuField()
+      : Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            field.subfield.valueDisplay(getDocValue()),
+            SQButton('Select', onPressed: () async {
+              final newValue =
+                  await showEnumOptionsDialog(field, context: context);
+              if (newValue != null) {
+                setDocValue(newValue);
+              }
+            })
+          ],
+        );
+
+  Widget dropdownMenuField() => DropdownButton<T>(
+      value: getDocValue(),
+      items: field.options
+          .map((option) => DropdownMenuItem<T>(
+              value: option, child: field.subfield.valueDisplay(option)))
+          .toList(),
+      onChanged: setDocValue);
 }
 
 Future<T?> showEnumOptionsDialog<T>(SQEnumField<T> enumField,
