@@ -1,8 +1,6 @@
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import '../sq_auth.dart';
 import 'sq_collection.dart';
-import 'types/sq_ref.dart';
 
 class DocCond {
   const DocCond(this.condition);
@@ -28,8 +26,6 @@ const falseCond = DocCond(_alwaysFalse);
 
 DocCond inFormScreen = DocCond((_, screen) => screen is FormScreen);
 
-DocCond isSignedIn = DocCond((doc, context) => SQAuth.isSignedIn);
-
 class DocValueCond<T> extends DocCond {
   DocValueCond(String fieldName, T expectedValue)
       : super((doc, context) => doc.getValue<T>(fieldName) == expectedValue);
@@ -40,10 +36,4 @@ class CollectionCond extends DocCond {
       : super((doc, context) => collectionCondition(doc.collection));
 
   bool Function(SQCollection) collectionCondition;
-}
-
-class DocUserCond extends DocValueCond<SQRef?> {
-  DocUserCond(String fieldName, {SQRef? userRef})
-      : super(fieldName,
-            userRef ?? (SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null));
 }

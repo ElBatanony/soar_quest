@@ -57,11 +57,13 @@ class _SQColorPickerState extends State<_SQColorPicker> {
               context: context,
               builder: (context) => AlertDialog(
                 title: Text(widget.formField.field.name),
-                content: ColorPicker(
-                  pickerColor: pickerColor,
-                  onColorChanged: (newPicker) {
-                    pickerColor = newPicker;
-                  },
+                content: SingleChildScrollView(
+                  child: ColorPicker(
+                    pickerColor: pickerColor,
+                    onColorChanged: (newPicker) {
+                      pickerColor = newPicker;
+                    },
+                  ),
                 ),
                 actions: [
                   SQButton('Cancel',

@@ -61,7 +61,7 @@ void main() async {
 
   final testUserCollection = LocalCollection(
       id: 'Test User Collection',
-      parentDoc: SQAuth.userDoc,
+      parentDoc: SQFirebaseAuth.userDoc,
       fields: [
         SQStringField('Name'),
       ]);

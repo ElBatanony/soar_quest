@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../mini_apps/mini_app.dart';
 import '../sq_app.dart';
-import '../sq_auth.dart';
-import '../ui/button.dart';
 import '../ui/navbar.dart';
 
 Future<T?> _goToScreen<T>(
@@ -41,7 +39,6 @@ class Screen {
   IconData? icon;
   bool isInline = false;
   bool Function(BuildContext) show = alwaysShowScreen;
-  bool signedIn = false;
   bool appbarEnabled;
 
   late _ScreenState _myState;
@@ -95,9 +92,11 @@ class Screen {
 
   @mustCallSuper
   void refresh() {
-    refreshBackButton();
-    refreshMainButton();
-    if (mounted) _myState.refreshScreen();
+    if (mounted) {
+      refreshBackButton();
+      refreshMainButton();
+      _myState.refreshScreen();
+    }
   }
 
   Widget toWidget() => ScreenWidget(this);
@@ -145,26 +144,6 @@ class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {
 
   @override
   Widget build(BuildContext context) {
-    if (_screen.signedIn && SQAuth.isSignedIn == false) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(_screen.title),
-        ),
-        drawer: SQApp.drawer,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('You should be signed in to view this screen.'),
-              SQButton('Sign In',
-                  onPressed: () async => SQProfileScreen().go(context))
-            ],
-          ),
-        ),
-        bottomNavigationBar: _screen.navigationBar(),
-      );
-    }
-
     final Widget body = Builder(
         builder: (_) => Container(
               padding: _screen.screenPadding,

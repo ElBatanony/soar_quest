@@ -1,9 +1,7 @@
 export 'src/fields/bool_field.dart';
 export 'src/fields/color_field.dart';
 export 'src/fields/composite_field.dart';
-export 'src/fields/created_by_field.dart';
 export 'src/fields/double_field.dart';
-export 'src/fields/edited_by_field.dart';
 export 'src/fields/enum_field.dart';
 export 'src/fields/field_list_field.dart';
 export 'src/fields/file_field.dart';
@@ -21,6 +19,5 @@ export 'src/fields/text_doc_field.dart';
 export 'src/fields/time_of_day_field.dart';
 export 'src/fields/timestamp_field.dart';
 export 'src/fields/updated_date_field.dart';
-export 'src/fields/user_ref_field.dart';
 export 'src/fields/video_link_field.dart';
 export 'src/fields/virtual_field.dart';

@@ -3,7 +3,6 @@
 export 'mini_apps.dart';
 
 export 'src/sq_app.dart';
-export 'src/sq_auth.dart';
 export 'fields.dart';
 
 // Database
@@ -54,3 +53,4 @@ export 'src/features/social_feed.dart';
 
 // Firebase
 export 'src/firebase/firestore_collection.dart';
+export 'src/firebase/auth.dart';

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
 void main() async {
-  await SQApp.init('Robin.do');
+  await SQApp.init('Todo App');
 
-  final tasks =
-      LocalCollection(id: 'Todos', parentDoc: SQAuth.userDoc, fields: [
+  final tasks = MiniAppCollection(id: 'Todos', fields: [
     SQStringField('Name'),
     SQTimestampField('Date'),
     SQStringField('Description', maxLines: 3),
@@ -16,7 +15,6 @@ void main() async {
     SQTimestampField('Completed Date')
       ..editable = false
       ..show = inFormScreen.not,
-    SQEditedByField('User')..show = falseCond,
   ], actions: [
     SetFieldsAction('Mark As Complete',
         icon: Icons.done_rounded,
@@ -36,11 +34,11 @@ void main() async {
       title: 'My Tasks',
       collection: todoTasks,
       icon: Icons.add_task,
-    )..signedIn = true,
+    ),
     CollectionScreen(
       title: 'Completed Tasks',
       collection: completedTasks,
       icon: Icons.task_alt,
-    )..signedIn = true,
-  ], drawer: SQDrawer());
+    ),
+  ]);
 }
