@@ -49,6 +49,7 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
         child: QuillEditor.basic(
           controller: _controller,
           readOnly: true,
+          autoFocus: false,
         ),
       );
 
