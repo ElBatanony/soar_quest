@@ -5,7 +5,12 @@ import 'js.dart';
 import 'mini_app.dart';
 
 class MiniAppCollection extends SQCollection {
-  MiniAppCollection({required super.id, required super.fields});
+  MiniAppCollection({
+    required super.id,
+    required super.fields,
+    super.actions,
+    super.updates,
+  });
 
   final CloudStorage cloudStorage = MiniApp.cloudStorage;
 
