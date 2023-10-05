@@ -9,6 +9,7 @@ class CollectionSlice implements SQCollection {
     this.filter,
     this.sliceFields,
     this.sliceActions,
+    this.sortCompare,
     SQUpdates updates = const SQUpdates(),
   }) {
     this.updates = updates & collection.updates;
@@ -19,6 +20,7 @@ class CollectionSlice implements SQCollection {
   final CollectionFilter? filter;
   final List<String>? sliceFields;
   final List<String>? sliceActions;
+  final int Function(SQDoc, SQDoc)? sortCompare;
 
   @override
   late SQUpdates updates;
@@ -32,11 +34,14 @@ class CollectionSlice implements SQCollection {
 
   @override
   List<SQDoc> get docs {
-    final retDocs =
-        (filter == null ? collection.docs : filter!.filter(collection.docs))
-          ..forEach((doc) {
-            doc.collection = this;
-          });
+    var retDocs = collection.docs;
+    if (filter != null) {
+      retDocs = filter!.filter(collection.docs)
+        ..forEach((doc) {
+          doc.collection = this;
+        });
+    }
+    if (sortCompare != null) retDocs.sort(sortCompare);
     return retDocs;
   }
 
