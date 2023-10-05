@@ -8,6 +8,7 @@ export 'src/fields/enum_field.dart';
 export 'src/fields/field_list_field.dart';
 export 'src/fields/file_field.dart';
 export 'src/fields/image_field.dart';
+export 'src/fields/image_link_field.dart';
 export 'src/fields/int_field.dart';
 export 'src/fields/inverse_refs_field.dart';
 export 'src/fields/link_field.dart';
