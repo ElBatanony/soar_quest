@@ -48,3 +48,7 @@ class UserFilter extends RefFilter {
         );
 }
 
+// DocConditions
+
+DocCond isSignedIn = DocCond((doc, context) => SQFirebaseAuth.isSignedIn);
+

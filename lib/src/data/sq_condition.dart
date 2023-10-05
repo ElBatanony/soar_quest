@@ -28,8 +28,6 @@ const falseCond = DocCond(_alwaysFalse);
 
 DocCond inFormScreen = DocCond((_, screen) => screen is FormScreen);
 
-DocCond isSignedIn = DocCond((doc, context) => SQAuth.isSignedIn);
-
 class DocValueCond<T> extends DocCond {
   DocValueCond(String fieldName, T expectedValue)
       : super((doc, context) => doc.getValue<T>(fieldName) == expectedValue);
