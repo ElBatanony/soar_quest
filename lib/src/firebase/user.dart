@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/collections/collection_filter.dart';
+import '../data/sq_doc.dart';
 import '../fields/ref_field.dart';
 import '../screens/doc_screen.dart';
 import 'auth.dart';
@@ -52,3 +53,12 @@ class UserFilter extends RefFilter {
 
 DocCond isSignedIn = DocCond((doc, context) => SQFirebaseAuth.isSignedIn);
 
+class DocUserCond extends DocValueCond<SQRef?> {
+  DocUserCond(String fieldName, {SQRef? userRef})
+      : super(
+            fieldName,
+            userRef ??
+                (SQFirebaseAuth.isSignedIn
+                    ? SQFirebaseAuth.userDoc!.ref
+                    : null));
+}

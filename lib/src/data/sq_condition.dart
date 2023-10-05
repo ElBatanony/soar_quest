@@ -1,8 +1,6 @@
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
-import '../sq_auth.dart';
 import 'sq_collection.dart';
-import 'types/sq_ref.dart';
 
 class DocCond {
   const DocCond(this.condition);
@@ -38,10 +36,4 @@ class CollectionCond extends DocCond {
       : super((doc, context) => collectionCondition(doc.collection));
 
   bool Function(SQCollection) collectionCondition;
-}
-
-class DocUserCond extends DocValueCond<SQRef?> {
-  DocUserCond(String fieldName, {SQRef? userRef})
-      : super(fieldName,
-            userRef ?? (SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null));
 }
