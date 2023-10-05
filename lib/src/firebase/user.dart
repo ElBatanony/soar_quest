@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/collections/collection_filter.dart';
 import '../fields/ref_field.dart';
 import '../screens/doc_screen.dart';
 import 'auth.dart';
@@ -34,5 +35,16 @@ class SQCreatedByField extends SQUserRefField {
     if (SQFirebaseAuth.isSignedIn && doc.getValue<SQRef>(name) == null)
       doc.setValue(name, SQFirebaseAuth.userDoc!.ref);
   }
+}
+
+// Filters
+
+class UserFilter extends RefFilter {
+  UserFilter(String userFieldName, {SQRef? userRef})
+      : super(
+          userFieldName,
+          userRef ??
+              (SQFirebaseAuth.isSignedIn ? SQFirebaseAuth.userDoc!.ref : null),
+        );
 }
 

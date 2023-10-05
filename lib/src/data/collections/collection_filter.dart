@@ -1,5 +1,4 @@
 import '../../fields/ref_field.dart';
-import '../../sq_auth.dart';
 import '../sq_doc.dart';
 
 abstract class CollectionFilter {
@@ -49,10 +48,4 @@ class RefFilter extends CollectionFilter {
           docRef.collectionPath == fieldValue!.collectionPath;
     }).toList();
   }
-}
-
-class UserFilter extends RefFilter {
-  UserFilter(String userFieldName, {SQRef? userRef})
-      : super(userFieldName,
-            userRef ?? (SQAuth.isSignedIn ? SQAuth.userDoc!.ref : null));
 }
