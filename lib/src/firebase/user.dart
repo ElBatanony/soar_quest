@@ -22,3 +22,17 @@ class SQEditedByField extends SQUserRefField {
     editable = false;
   }
 }
+
+class SQCreatedByField extends SQUserRefField {
+  SQCreatedByField(super.name) {
+    editable = false;
+  }
+
+  @override
+  init(doc) {
+    super.init(doc);
+    if (SQFirebaseAuth.isSignedIn && doc.getValue<SQRef>(name) == null)
+      doc.setValue(name, SQFirebaseAuth.userDoc!.ref);
+  }
+}
+
