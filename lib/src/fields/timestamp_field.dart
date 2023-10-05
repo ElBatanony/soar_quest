@@ -26,6 +26,9 @@ class SQTimestampField extends SQField<SQTimestamp> {
       SQTimestamp.parse(source) ?? super.parse(source);
 
   @override
+  serialize(SQTimestamp? value) => value?.toJson();
+
+  @override
   formField(docScreen) => _SQTimestampFormField(this, docScreen);
 }
 
