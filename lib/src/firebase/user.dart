@@ -16,3 +16,9 @@ class SQUserRefField extends SQRefField {
   SQUserRefField(super.name)
       : super(collection: SQFirebaseAuth.usersCollection);
 }
+
+class SQEditedByField extends SQUserRefField {
+  SQEditedByField(super.name) {
+    editable = false;
+  }
+}
