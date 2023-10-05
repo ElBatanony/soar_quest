@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../soar_quest.dart';
 
 class MiniAppTestingScreen extends Screen {
-  MiniAppTestingScreen(super.title);
+  MiniAppTestingScreen() : super('Mini App Testing Screen');
 
   late final MiniAppCollection miniAppCollection;
 
