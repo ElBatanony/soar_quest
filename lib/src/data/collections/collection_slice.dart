@@ -112,3 +112,15 @@ class CollectionSlice implements SQCollection {
   @override
   Stream<DocData> liveUpdates(SQDoc doc) => collection.liveUpdates(doc);
 }
+
+int Function(SQDoc, SQDoc) fieldSortCompare<T extends Comparable<dynamic>>(
+        String fieldName,
+        {bool reversed = false}) =>
+    (doc1, doc2) {
+      final value1 = doc1.getValue<T>(fieldName);
+      final value2 = doc2.getValue<T>(fieldName);
+      if (value1 == null) return 1;
+      if (value2 == null) return -1;
+      if (reversed) return value2.compareTo(value1);
+      return value1.compareTo(value2);
+    };
