@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../fields.dart';
 import '../data/sq_collection.dart';
-import '../sq_auth.dart';
+import '../firebase/auth.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
 
@@ -46,8 +46,8 @@ class FormScreen extends DocScreen {
       if (field is SQUpdatedDateField)
         doc.setValue(field.name, SQTimestamp.now());
 
-      if (field is SQEditedByField && SQAuth.isSignedIn)
-        doc.setValue(field.name, SQAuth.userDoc!.ref);
+      if (field is SQEditedByField && SQFirebaseAuth.isSignedIn)
+        doc.setValue(field.name, SQFirebaseAuth.userDoc!.ref);
     }
 
     originalDoc.parse(doc.serialize());
