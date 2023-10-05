@@ -92,9 +92,11 @@ class Screen {
 
   @mustCallSuper
   void refresh() {
-    refreshBackButton();
-    refreshMainButton();
-    if (mounted) _myState.refreshScreen();
+    if (mounted) {
+      refreshBackButton();
+      refreshMainButton();
+      _myState.refreshScreen();
+    }
   }
 
   Widget toWidget() => ScreenWidget(this);
