@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soar_quest/soar_quest.dart';
 
 void main() async {
-  await SQApp.init('Robin.do');
+  await SQApp.init('Todo App');
 
   final tasks = MiniAppCollection(id: 'Todos', fields: [
     SQStringField('Name'),
