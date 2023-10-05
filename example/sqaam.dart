@@ -62,16 +62,14 @@ class MySessionsCollectionScreen extends CollectionScreen {
       : super(
             collection: sessionsCollection,
             title: 'Attended Sessions',
-            icon: Icons.check_circle_outline_outlined) {
-    signedIn = true;
-  }
+            icon: Icons.check_circle_outline_outlined);
 
   @override
   Widget collectionDisplay(List<SQDoc> docs) => super.collectionDisplay(docs
       .where((doc) =>
           doc
               .getValue<List<String>>(attendeesFieldName)
-              ?.contains(SQAuth.user?.email) ??
+              ?.contains(SQFirebaseAuth.user?.uid) ??
           false)
       .toList());
 
@@ -89,9 +87,7 @@ class MySessionsCollectionScreen extends CollectionScreen {
 }
 
 class AttendNewSessionFormScreen extends FormScreen {
-  AttendNewSessionFormScreen(super.originalDoc) {
-    signedIn = true;
-  }
+  AttendNewSessionFormScreen(super.originalDoc);
 
   @override
   Future<void> onFieldsChanged(field) async {
@@ -121,8 +117,8 @@ class AttendNewSessionFormScreen extends FormScreen {
           return;
         }
 
-        final myEmail = SQAuth.user?.email;
-        if (myEmail != null) attendees.add(myEmail);
+        final myUid = SQFirebaseAuth.user?.uid;
+        if (myUid != null) attendees.add(myUid);
         sessionDoc.setValue(attendeesFieldName, attendees);
         unawaited(sessionsCollection.saveDoc(sessionDoc));
         if (mounted) await DocScreen(sessionDoc).go(context, replace: true);
@@ -140,9 +136,7 @@ class AttendNewSessionFormScreen extends FormScreen {
 
 class SessionCollectionScreen extends CollectionScreen {
   SessionCollectionScreen({required super.collection})
-      : super(title: 'Collected Sessions', icon: Icons.list) {
-    signedIn = true;
-  }
+      : super(title: 'Collected Sessions', icon: Icons.list);
 
   @override
   screenBody() => SingleChildScrollView(
