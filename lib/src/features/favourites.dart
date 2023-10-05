@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../mini_apps.dart';
 import '../data/collections/local_collection.dart';
 import '../data/sq_action.dart';
 import '../fields/ref_field.dart';
 import '../screens/collection_screen.dart';
 import '../screens/doc_screen.dart';
 import '../screens/screen.dart';
-import '../sq_auth.dart';
 
 class FavouritesFeature {
   FavouritesFeature({required this.collection}) {
-    favouritesCollection = LocalCollection(
+    favouritesCollection = MiniAppCollection(
         id: 'Favourite ${collection.id}',
         fields: [SQRefField('ref', collection: collection)],
         actions: [
@@ -18,7 +18,6 @@ class FavouritesFeature {
               toScreen: (doc) => DocScreen(
                   collection.getDoc(doc.getValue<SQRef>('ref')!.docId)!))
         ],
-        parentDoc: SQAuth.userDoc,
         updates: SQUpdates.readOnly());
     collection.actions
         .addAll([addToFavouritesAction(), removeFromFavouritesAction()]);
