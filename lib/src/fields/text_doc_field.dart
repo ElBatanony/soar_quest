@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../mini_apps.dart';
 import '../data/sq_field.dart';
 import '../screens/screen.dart';
 import '../ui/button.dart';
@@ -70,7 +71,7 @@ class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
 class TextDocScreen extends Screen {
   TextDocScreen({
     required this.formField,
-  }) : super(formField.field.name, appbarEnabled: true);
+  }) : super(formField.field.name);
 
   final SQTextDocFormField formField;
 
@@ -103,4 +104,10 @@ class TextDocScreen extends Screen {
           ),
         ],
       );
+
+  @override
+  void refreshMainButton() {
+    MiniApp.mainButton.setParams(text: 'Save', isVisible: true);
+    MiniApp.mainButton.callback = saveAndExit;
+  }
 }
