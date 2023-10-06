@@ -18,7 +18,7 @@ class GalleryScreen extends CollectionScreen {
   @override
   Widget docDisplay(doc) => Card(
         child: InkWell(
-          onTap: () async => goToDocScreen(docScreen(doc)),
+          onTap: () async => navigateTo(docScreen(doc)),
           child: Column(
             children: [
               if (doc.imageLabel != null)

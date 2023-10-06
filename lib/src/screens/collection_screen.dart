@@ -62,7 +62,7 @@ class CollectionScreen extends Screen {
             .map((action) => action.button(doc, screen: this, isIcon: true))
             .toList(),
       ),
-      onTap: () async => goToDocScreen(docScreen(doc)),
+      onTap: () async => navigateTo(docScreen(doc)),
     );
   }
 
@@ -70,11 +70,6 @@ class CollectionScreen extends Screen {
         shrinkWrap: true,
         children: docs.map(docDisplay).toList(),
       );
-
-  Future<void> goToDocScreen(Screen docScreen) async {
-    await docScreen.go(context);
-    await refresh();
-  }
 
   Screen docScreen(SQDoc doc) => DocScreen(doc);
 

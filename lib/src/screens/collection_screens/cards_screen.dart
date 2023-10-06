@@ -8,7 +8,7 @@ class CardsScreen extends CollectionScreen {
   @override
   Widget docDisplay(doc) => Card(
         child: InkWell(
-          onTap: () async => goToDocScreen(docScreen(doc)),
+          onTap: () async => navigateTo(docScreen(doc)),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
