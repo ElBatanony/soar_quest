@@ -6,16 +6,16 @@ import '../ui/button.dart';
 
 export '../data/types/sq_timestamp.dart';
 
-final defaultFirstDate = DateTime(1900);
-final defaultLastDate = DateTime(2040);
+final _defaultFirstDate = DateTime(1900);
+final _defaultLastDate = DateTime(2040);
 
 class SQTimestampField extends SQField<SQTimestamp> {
   SQTimestampField(
     super.name, {
     DateTime? firstDate,
     DateTime? lastDate,
-  })  : firstDate = firstDate ?? defaultFirstDate,
-        lastDate = lastDate ?? defaultLastDate {
+  })  : firstDate = firstDate ?? _defaultFirstDate,
+        lastDate = lastDate ?? _defaultLastDate {
     defaultValue = SQTimestamp.now();
   }
 
