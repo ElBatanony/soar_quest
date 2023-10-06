@@ -10,9 +10,11 @@ import '../ui/button.dart';
 export '../data/types/sq_ref.dart';
 
 class SQRefField extends SQField<SQRef> {
-  SQRefField(super.name, {required this.collection});
+  SQRefField(super.name,
+      {required this.collection, this.hasNavigateAction = true});
 
   SQCollection collection;
+  bool hasNavigateAction;
 
   @override
   SQRef? parse(source) {
@@ -48,7 +50,7 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(ref.toString()),
-        if (doc != null)
+        if (doc != null && field.hasNavigateAction)
           GoScreenAction('', toScreen: DocScreen.new)
               .button(doc, screen: docScreen)
       ],
