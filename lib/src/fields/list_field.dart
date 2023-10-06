@@ -53,17 +53,18 @@ class _SQListFormField<T> extends SQFormField<List<T?>, SQListField<T>> {
               Expanded(child: field.subfield.formField(docScreen)),
               SQButton.icon(isEditing ? Icons.save : Icons.add, onPressed: () {
                 final newValue = docScreen.doc.getValue<T>(field.subfield.name);
+                final newList = listValues;
                 if (newValue != null) {
                   if (isEditing) {
-                    listValues[field._isEditIndex] = newValue;
+                    newList[field._isEditIndex] = newValue;
                     field._isEditIndex = -1;
                   } else {
                     if (field.inverseInsert)
-                      listValues.insert(0, newValue);
+                      newList.insert(0, newValue);
                     else
-                      listValues.add(newValue);
+                      newList.add(newValue);
                   }
-                  setDocValue(listValues);
+                  setDocValue(newList);
                 }
                 docScreen.doc
                     .setValue(field.subfield.name, field.subfield.defaultValue);
