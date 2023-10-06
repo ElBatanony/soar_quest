@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 
 import '../data/collections/collection_slice.dart';
 import '../data/sq_action.dart';
-import '../screens/collection_screens/table_screen.dart';
+import '../screens/collection_screen.dart';
 import 'list_field.dart';
+import 'ref_field.dart';
 import 'virtual_field.dart';
 
-class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
+class SQInverseRefsField extends SQVirtualField<List<SQRef?>> {
   SQInverseRefsField(String name,
       {required this.refCollection, required this.refFieldName})
-      : super(SQListField(name), (doc) => []);
+      : super(SQListField(SQRefField(name, collection: refCollection())),
+            (doc) => []);
 
   String refFieldName;
   SQCollection Function() refCollection;
@@ -19,25 +21,18 @@ class SQInverseRefsField extends SQVirtualField<List<SQDoc>> {
   SQCollection get collection => refCollection();
 
   @override
-  formField(docScreen) => _SQInverseRefsFormField(
-        this,
-        docScreen,
-        refDocs: valueBuilder(docScreen.doc),
-      );
+  formField(docScreen) => _SQInverseRefsFormField(this, docScreen);
 }
 
 class _SQInverseRefsFormField
-    extends SQFormField<List<SQDoc>, SQInverseRefsField> {
-  _SQInverseRefsFormField(super.field, super.docScreen,
-      {required this.refDocs}) {
+    extends SQFormField<List<SQRef?>, SQInverseRefsField> {
+  _SQInverseRefsFormField(super.field, super.docScreen) {
     unawaited(initializeRefCollection());
   }
 
   Future<void> initializeRefCollection() async {
     if (field.collection.docs.isEmpty) await field.collection.loadCollection();
   }
-
-  final List<SQDoc> refDocs;
 
   @override
   Widget fieldLabel(context) => Row(
