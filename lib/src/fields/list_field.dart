@@ -77,13 +77,12 @@ class _SQListFormField<T> extends SQFormField<List<T?>, SQListField<T>> {
                 Text(listValues[i].toString()),
                 Row(
                   children: [
-                    if (!isEditing)
-                      SQButton.icon(Icons.edit, onPressed: () {
-                        docScreen.doc
-                            .setValue(field.subfield.name, listValues[i]);
-                        field._isEditIndex = i;
-                        setDocValue(listValues);
-                      }),
+                    SQButton.icon(Icons.edit, onPressed: () {
+                      docScreen.doc
+                          .setValue(field.subfield.name, listValues[i]);
+                      field._isEditIndex = i;
+                      setDocValue(listValues);
+                    }),
                     SQButton.icon(Icons.delete, onPressed: () {
                       listValues.removeAt(i);
                       setDocValue(listValues);
