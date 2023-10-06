@@ -56,7 +56,7 @@ class _SQInverseRefsFormField
   Widget readOnlyBuilder(context) {
     final slice = CollectionSlice(field.collection,
         filter: RefFilter(field.refFieldName, doc.ref));
-    return (TableScreen(collection: slice)..isInline = true).toWidget();
+    return (CollectionScreen(collection: slice)..isInline = true).toWidget();
   }
 
   @override
