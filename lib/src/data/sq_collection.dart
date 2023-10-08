@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
 import '../sq_app.dart';
+import 'collections/filter_field.dart';
 import 'sq_action.dart';
 import 'sq_doc.dart';
 import 'sq_updates.dart';
@@ -18,6 +19,7 @@ abstract class SQCollection {
     this.updates = const SQUpdates(),
     List<SQAction>? actions,
     this.isLive = false,
+    this.filters = const [],
   })  : actions = actions ?? [],
         path = parentDoc == null
             ? 'Example Apps/${SQApp.name}/$id'
@@ -37,6 +39,8 @@ abstract class SQCollection {
   final String path;
   final SQUpdates updates;
   final bool isLive;
+
+  List<CollectionFilterField<dynamic>> filters;
 
   List<SQDoc> docs = [];
   bool isLoading = false;
