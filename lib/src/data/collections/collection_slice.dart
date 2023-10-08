@@ -111,6 +111,12 @@ class CollectionSlice implements SQCollection {
 
   @override
   Stream<DocData> liveUpdates(SQDoc doc) => collection.liveUpdates(doc);
+
+  @override
+  List<CollectionFilterField<dynamic>> get filters => collection.filters;
+
+  @override
+  set filters(_) => throw UnimplementedError();
 }
 
 int Function(SQDoc, SQDoc) fieldSortCompare<T extends Comparable<dynamic>>(
