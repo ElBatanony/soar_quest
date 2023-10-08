@@ -1,4 +1,13 @@
-import '../sq_doc.dart';
+import 'in_memory_collection.dart';
+
+class FiltersCollection extends InMemoryCollection {
+  FiltersCollection(
+    SQCollection collection,
+  ) : super(
+            id: '${collection.id}_filters',
+            filters: collection.filters,
+            fields: collection.filters.map((filter) => filter.field).toList());
+}
 
 abstract class CollectionFilterField<T> {
   CollectionFilterField(this.field);
