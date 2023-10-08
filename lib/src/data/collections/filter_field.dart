@@ -18,3 +18,10 @@ abstract class CollectionFilterField<T> {
 
   bool filterTest(T? filterValue, T? docValue);
 }
+
+class EqualValueFilter extends CollectionFilterField<dynamic> {
+  EqualValueFilter(super.field);
+
+  @override
+  bool filterTest(filterValue, docValue) => filterValue == docValue;
+}
