@@ -1,3 +1,4 @@
+import '../../screens/form_screen.dart';
 import 'in_memory_collection.dart';
 
 class FiltersCollection extends InMemoryCollection {
@@ -7,6 +8,25 @@ class FiltersCollection extends InMemoryCollection {
             id: '${collection.id}_filters',
             filters: collection.filters,
             fields: collection.filters.map((filter) => filter.field).toList());
+}
+
+class FilterFormScreen extends FormScreen {
+  FilterFormScreen(this.filtersCollection, {this.callback})
+      : super(filtersCollection.newDoc(), liveEdit: true) {
+    isInline = true;
+  }
+
+  late FiltersCollection filtersCollection;
+
+  List<CollectionFilterField<dynamic>> get filters => filtersCollection.filters;
+
+  void Function()? callback;
+
+  @override
+  void onFieldsChanged(SQField<dynamic> field) {
+    super.onFieldsChanged(field);
+    callback?.call();
+  }
 }
 
 abstract class CollectionFilterField<T> {
