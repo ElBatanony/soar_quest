@@ -47,7 +47,6 @@ class SQApp {
         title: name,
         debugShowCheckedModeBanner: false,
         theme: themeData,
-        darkTheme: ThemeData.dark(useMaterial3: true),
         home: SQApp.navbarScreens[SQApp.selectedNavScreen].toWidget()));
   }
 }
