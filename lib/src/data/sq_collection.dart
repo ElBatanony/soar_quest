@@ -8,6 +8,7 @@ import 'sq_doc.dart';
 import 'sq_updates.dart';
 
 export 'collections/collection_filter.dart';
+export 'collections/filter_field.dart';
 export 'sq_doc.dart';
 export 'sq_updates.dart';
 
