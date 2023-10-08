@@ -49,3 +49,12 @@ class RefFilter extends CollectionFilter {
     }).toList();
   }
 }
+
+class CustomFilter extends CollectionFilter {
+  CustomFilter(this.testCondition);
+
+  bool Function(SQDoc doc) testCondition;
+
+  @override
+  List<SQDoc> filter(List<SQDoc> docs) => docs.where(testCondition).toList();
+}
