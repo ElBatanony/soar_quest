@@ -25,3 +25,11 @@ class EqualValueFilter extends CollectionFilterField<dynamic> {
   @override
   bool filterTest(filterValue, docValue) => filterValue == docValue;
 }
+
+class TextSearchFiler extends CollectionFilterField<String> {
+  TextSearchFiler(super.field);
+
+  @override
+  bool filterTest(String? filterValue, String? docValue) =>
+      docValue?.toLowerCase().contains(filterValue!.toLowerCase()) ?? true;
+}
