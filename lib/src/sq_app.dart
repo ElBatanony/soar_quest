@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../mini_apps.dart';
 import 'data/sq_analytics.dart';
 import 'data/sq_field.dart';
-import 'features/dark_mode_setting.dart';
 import 'screens/screen.dart';
 import 'ui/drawer.dart';
 
@@ -49,7 +48,6 @@ class SQApp {
         debugShowCheckedModeBanner: false,
         theme: themeData,
         darkTheme: ThemeData.dark(useMaterial3: true),
-        themeMode: SQDarkMode.themeMode,
         home: SQApp.navbarScreens[SQApp.selectedNavScreen].toWidget()));
   }
 }
