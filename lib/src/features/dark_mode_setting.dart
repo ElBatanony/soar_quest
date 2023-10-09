@@ -11,7 +11,7 @@ class SQDarkMode {
 
   static String get _settingValue => (UserSettings.initialized &&
           SQDarkMode.initialized)
-      ? (UserSettings().getSetting<String>(_setting.name) ?? _defaultMode.name)
+      ? (UserSettings.getSetting<String>(_setting.name) ?? _defaultMode.name)
       : _defaultMode.name;
 
   static ThemeMode get themeMode =>

@@ -23,10 +23,9 @@ class SQMaturityRatingField extends SQEnumField<int> {
 class KidsModeFilter extends CollectionFilter {
   @override
   List<SQDoc> filter(List<SQDoc> docs) {
-    final dateOfBirth = UserSettings()
-            .getSetting<SQTimestamp>(dateOfBirthFieldName)
-            ?.toDate() ??
-        DateTime(1990);
+    final dateOfBirth =
+        UserSettings.getSetting<SQTimestamp>(dateOfBirthFieldName)?.toDate() ??
+            DateTime(1990);
 
     final userAge = DateTime.now().difference(dateOfBirth).inDays ~/ 365;
 
