@@ -71,6 +71,11 @@ class CollectionScreen extends Screen {
     );
   }
 
+  Widget filtersDisplay() {
+    if (collection.filters.isNotEmpty) return filterScreen.toWidget();
+    return Container();
+  }
+
   Widget collectionDisplay(List<SQDoc> docs) => ListView(
         shrinkWrap: true,
         children: docs.map(docDisplay).toList(),
