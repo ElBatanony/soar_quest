@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../mini_apps.dart';
 import 'data/sq_analytics.dart';
-import 'data/sq_field.dart';
 import 'screens/screen.dart';
 import 'ui/drawer.dart';
 
@@ -17,7 +16,6 @@ class SQApp {
 
   static Future<void> init(
     String name, {
-    List<SQField<dynamic>>? userDocFields,
     SQAnalytics? analytics,
   }) async {
     SQApp.name = name;

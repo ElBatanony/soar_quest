@@ -4,11 +4,7 @@ import 'package:soar_quest/firebase.dart';
 import 'package:soar_quest/soar_quest.dart';
 
 void main() async {
-  final userDocFields = [
-    SQStringField('Name'),
-  ];
-
-  await SQApp.init('Testing App', userDocFields: userDocFields);
+  await SQApp.init('Testing App');
 
   await UserSettings.setSettings([SQDarkMode.setting(), SQDateOfBirthField()]);
 
