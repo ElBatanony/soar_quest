@@ -10,8 +10,8 @@ class GalleryScreen extends CollectionScreen {
     this.childAspectRatio = 1.0,
   });
 
-  final int columns;
-  final double childAspectRatio;
+  int columns;
+  double childAspectRatio;
 
   @override
   Widget collectionDisplay(docs) => GridView.count(
