@@ -101,11 +101,13 @@ class CollectionScreen extends Screen {
       return Center(child: Text('${collection.id} list is empty'));
     if (groupByField != null) return groupByDocs(docs);
 
-    return Column(
-      children: [
-        if (collection.filters.isNotEmpty) filterScreen.toWidget(),
-        Expanded(child: collectionDisplay(docs)),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          filtersDisplay(),
+          collectionDisplay(docs),
+        ],
+      ),
     );
   }
 
