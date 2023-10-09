@@ -11,6 +11,12 @@ class TabsScreen extends Screen {
   final List<Screen> screens;
 
   @override
+  void refresh() {
+    for (final screen in screens) screen.refresh();
+    super.refresh();
+  }
+
+  @override
   Widget toWidget() => TabsScreenWidget(this, screens);
 }
 
