@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soar_quest/firebase.dart';
 
 import 'package:soar_quest/soar_quest.dart';
 
