@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:soar_quest/firebase.dart';
 import 'package:soar_quest/soar_quest.dart';
 import 'package:soar_quest/src/ui/qr_code_display.dart';
 
