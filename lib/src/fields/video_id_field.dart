@@ -16,6 +16,11 @@ class _SQVideoLinkFormField extends SQFormField<String, SQVideoIDField> {
   const _SQVideoLinkFormField(super.field, super.docScreen);
 
   @override
+  String get fieldLabelText => isInFormScreen
+      ? '${super.fieldLabelText} (Insert the YouTube Video ID)'
+      : super.fieldLabelText;
+
+  @override
   readOnlyBuilder(context) => getDocValue() == null
       ? const Text('No Video')
       : VideoDisplayWidget(doc, field);
