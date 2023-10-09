@@ -41,6 +41,7 @@ export 'src/screens/collection_screens/select_doc_screen.dart';
 export 'src/screens/collection_screens/table_screen.dart';
 export 'src/screens/collection_screens/gallery_screen.dart';
 export 'src/screens/collection_screens/cards_screen.dart';
+export 'src/screens/collection_screens/video_screen.dart';
 
 // Features
 export 'src/features/favourites.dart';
