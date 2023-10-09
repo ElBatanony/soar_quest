@@ -17,7 +17,7 @@ class VideoCollectionScreen extends CollectionScreen {
   final SQVideoLinkField videoField;
 
   @override
-  docDisplay(doc) => VideoDocDisplay(doc, videoField: videoField).toWidget();
+  docDisplay(doc) => VideoDisplayWidget(doc, videoField);
 }
 
 class VideoDisplayWidget extends StatefulWidget {
