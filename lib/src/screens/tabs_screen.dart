@@ -39,6 +39,9 @@ class _TabsScreenWidgetState extends State<TabsScreenWidget>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
 
+  List<Screen> visibleScreens(BuildContext context) =>
+      widget.screens.where((screen) => screen.show(context)).toList();
+
   @override
   void initState() {
     tabController = TabController(length: widget.screens.length, vsync: this);
@@ -54,7 +57,7 @@ class _TabsScreenWidgetState extends State<TabsScreenWidget>
         tabController.animateTo(value);
         setState(() {});
       },
-      tabs: widget.screens
+      tabs: visibleScreens(context)
           .map((screen) => widget.tabsScreen.screenTab(screen))
           .toList(),
     );
@@ -72,10 +75,11 @@ class _TabsScreenWidgetState extends State<TabsScreenWidget>
         padding: widget.tabsScreen.padding,
         child: TabBarView(
             controller: tabController,
-            children: widget.screens.map((s) => s.toWidget()).toList()),
+            children:
+                visibleScreens(context).map((s) => s.toWidget()).toList()),
       ),
       floatingActionButton:
-          widget.screens[tabController.index].floatingActionButton(),
+          visibleScreens(context)[tabController.index].floatingActionButton(),
       bottomNavigationBar: widget.tabsScreen.navigationBar(),
     );
   }
