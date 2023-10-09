@@ -14,10 +14,14 @@ class GalleryScreen extends CollectionScreen {
   double childAspectRatio;
 
   @override
-  Widget collectionDisplay(docs) => GridView.count(
-      childAspectRatio: childAspectRatio,
-      crossAxisCount: columns,
-      children: docs.map(docDisplay).toList());
+  Widget collectionDisplay(docs) => GridView.builder(
+        itemCount: docs.length,
+        itemBuilder: (context, index) => docDisplay(docs[index]),
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columns, childAspectRatio: childAspectRatio),
+      );
 
   @override
   Widget docDisplay(doc) => Card(
