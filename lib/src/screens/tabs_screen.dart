@@ -18,6 +18,11 @@ class TabsScreen extends Screen {
 
   @override
   Widget toWidget() => TabsScreenWidget(this, screens);
+
+  Tab screenTab(Screen screen) => Tab(
+        text: screen.title,
+        icon: Icon(screen.icon),
+      );
 }
 
 class TabsScreenWidget extends StatefulWidget {
@@ -46,7 +51,9 @@ class _TabsScreenWidgetState extends State<TabsScreenWidget>
       controller: tabController,
       isScrollable: true,
       onTap: (value) => tabController.animateTo(value),
-      tabs: widget.screens.map((screen) => Tab(text: screen.title)).toList(),
+      tabs: widget.screens
+          .map((screen) => widget.tabsScreen.screenTab(screen))
+          .toList(),
     );
     final PreferredSizeWidget appBar = PreferredSize(
       preferredSize: Size.fromHeight(tabBar.preferredSize.height),
