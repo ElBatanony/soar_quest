@@ -50,7 +50,3 @@ export 'src/features/dark_mode_setting.dart';
 export 'src/features/kids_mode.dart';
 
 export 'src/features/social_feed.dart';
-
-// Firebase
-export 'src/firebase/firestore_collection.dart';
-export 'src/firebase/auth.dart';

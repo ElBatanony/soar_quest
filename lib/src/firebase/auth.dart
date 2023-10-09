@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../soar_quest.dart';
+import 'firestore_collection.dart';
 
 export 'user.dart';
 
