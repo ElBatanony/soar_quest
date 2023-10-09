@@ -26,8 +26,6 @@ void main() async {
         SQStringField('Status')..defaultValue = 'To-Do',
         options: ['Done', 'To-Do'],
       )..show = inFormScreen.not,
-      // SQImageField("Image"),
-      SQEditedByField('hamada user'),
       SQBoolField('Repeat')..defaultValue = false,
       SQIntField('Repeat Every (Hours)')..show = DocValueCond('Repeat', true),
       SQTimestampField('Last Updated'),
