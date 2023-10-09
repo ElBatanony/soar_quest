@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../data/sq_doc.dart';
-import '../fields/video_link_field.dart';
+import '../fields/video_id_field.dart';
 
 class VideoDisplayWidget extends StatefulWidget {
   const VideoDisplayWidget(this.doc, this.videoField);
 
   final SQDoc doc;
-  final SQVideoLinkField videoField;
+  final SQVideoIDField videoField;
 
   @override
   State<VideoDisplayWidget> createState() => _VideoDisplayWidgetState();

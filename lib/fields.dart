@@ -20,5 +20,5 @@ export 'src/fields/text_doc_field.dart';
 export 'src/fields/time_of_day_field.dart';
 export 'src/fields/timestamp_field.dart';
 export 'src/fields/updated_date_field.dart';
-export 'src/fields/video_link_field.dart';
+export 'src/fields/video_id_field.dart';
 export 'src/fields/virtual_field.dart';

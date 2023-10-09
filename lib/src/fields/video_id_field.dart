@@ -5,14 +5,14 @@ import '../ui/text_field.dart';
 import '../ui/video_display.dart';
 import 'string_field.dart';
 
-class SQVideoLinkField extends SQStringField {
-  SQVideoLinkField(super.name);
+class SQVideoIDField extends SQStringField {
+  SQVideoIDField(super.name);
 
   @override
   formField(docScreen) => _SQVideoLinkFormField(this, docScreen);
 }
 
-class _SQVideoLinkFormField extends SQFormField<String, SQVideoLinkField> {
+class _SQVideoLinkFormField extends SQFormField<String, SQVideoIDField> {
   const _SQVideoLinkFormField(super.field, super.docScreen);
 
   @override
