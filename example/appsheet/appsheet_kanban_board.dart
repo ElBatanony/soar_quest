@@ -3,12 +3,7 @@ import 'package:soar_quest/soar_quest.dart';
 late SQCollection workstreams, projects, tasks;
 
 void main() async {
-  final userDocFields = [
-    SQStringField('Name'),
-    SQStringField('Role'),
-  ];
-
-  await SQApp.init('Kanban Board', userDocFields: userDocFields);
+  await SQApp.init('Kanban Board');
 
   workstreams = LocalCollection(id: 'Workstreams', fields: [
     SQStringField('Workstream'),
@@ -55,13 +50,11 @@ void main() async {
     SQStringField('Task'),
     SQRefField('Project', collection: projects),
     SQEnumField(SQStringField('Status'), options: ['To-do', 'Complete']),
-    SQUserRefField('Owner'),
   ]);
 
   SQApp.run([
     CollectionScreen(collection: workstreams),
     CollectionScreen(collection: projects),
     CollectionScreen(collection: tasks),
-    FirebaseProfileScreen(),
   ]);
 }
