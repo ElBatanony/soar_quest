@@ -7,13 +7,17 @@ class GalleryScreen extends CollectionScreen {
     required super.collection,
     super.title,
     this.columns = 2,
+    this.childAspectRatio = 1.0,
   });
 
   final int columns;
+  final double childAspectRatio;
 
   @override
   Widget collectionDisplay(docs) => GridView.count(
-      crossAxisCount: columns, children: docs.map(docDisplay).toList());
+      childAspectRatio: childAspectRatio,
+      crossAxisCount: columns,
+      children: docs.map(docDisplay).toList());
 
   @override
   Widget docDisplay(doc) => Card(
