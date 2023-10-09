@@ -10,6 +10,7 @@ class MiniAppCollection extends SQCollection {
     required super.fields,
     super.actions,
     super.updates,
+    super.filters,
   });
 
   final CloudStorage cloudStorage = MiniApp.cloudStorage;
