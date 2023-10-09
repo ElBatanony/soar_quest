@@ -50,7 +50,10 @@ class _TabsScreenWidgetState extends State<TabsScreenWidget>
     final tabBar = TabBar(
       controller: tabController,
       isScrollable: true,
-      onTap: (value) => tabController.animateTo(value),
+      onTap: (value) {
+        tabController.animateTo(value);
+        setState(() {});
+      },
       tabs: widget.screens
           .map((screen) => widget.tabsScreen.screenTab(screen))
           .toList(),
@@ -71,7 +74,8 @@ class _TabsScreenWidgetState extends State<TabsScreenWidget>
             controller: tabController,
             children: widget.screens.map((s) => s.toWidget()).toList()),
       ),
-      floatingActionButton: widget.tabsScreen.floatingActionButton(),
+      floatingActionButton:
+          widget.screens[tabController.index].floatingActionButton(),
       bottomNavigationBar: widget.tabsScreen.navigationBar(),
     );
   }
