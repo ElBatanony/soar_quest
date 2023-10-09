@@ -99,7 +99,7 @@ class CollectionScreen extends Screen {
     return Column(
       children: [
         if (collection.filters.isNotEmpty) filterScreen.toWidget(),
-        collectionDisplay(docs),
+        Expanded(child: collectionDisplay(docs)),
       ],
     );
   }
