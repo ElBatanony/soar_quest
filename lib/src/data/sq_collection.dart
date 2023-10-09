@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
@@ -21,6 +23,7 @@ abstract class SQCollection {
     List<SQAction>? actions,
     this.isLive = false,
     this.filters = const [],
+    this.onDocSaveCallback,
   })  : actions = actions ?? [],
         path = parentDoc == null
             ? 'Example Apps/${SQApp.name}/$id'
@@ -48,16 +51,19 @@ abstract class SQCollection {
 
   static final List<SQCollection> _collections = [];
 
+  FutureOr<void> Function(SQDoc doc)? onDocSaveCallback;
+
   bool hasDoc(SQDoc doc) => docs.any((d) => d.id == doc.id);
 
   Future<void> loadCollection();
   Future<void> saveCollection();
 
-  Future<void> saveDoc(SQDoc doc) {
+  Future<void> saveDoc(SQDoc doc) async {
     if (hasDoc(doc))
       docs[docs.indexWhere((d) => d.id == doc.id)] = doc;
     else
       docs.add(doc);
+    await onDocSaveCallback?.call(doc);
     return saveCollection();
   }
 

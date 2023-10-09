@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../sq_action.dart';
 import '../sq_collection.dart';
 
@@ -117,6 +119,9 @@ class CollectionSlice implements SQCollection {
 
   @override
   set filters(_) => throw UnimplementedError();
+
+  @override
+  FutureOr<void> Function(SQDoc doc)? onDocSaveCallback;
 }
 
 int Function(SQDoc, SQDoc) fieldSortCompare<T extends Comparable<dynamic>>(
