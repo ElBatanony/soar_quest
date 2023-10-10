@@ -40,4 +40,11 @@ class UserSettings {
 
   static Screen settingsScreen() =>
       FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);
+
+  static Future<void> restartApp() async {
+    if (restartLink == null) return;
+    final confirmRestart =
+        await MiniApp.showConfirm('Restart to apply settings?');
+    if (confirmRestart) MiniApp.openTelegramLink(restartLink!);
+  }
 }
