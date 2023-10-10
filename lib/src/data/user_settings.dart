@@ -24,12 +24,7 @@ class UserSettings {
       {String? restartLink}) async {
     _settingsCollection =
         MiniAppCollection(id: _settingsCollectionId, fields: settings)
-          ..onDocSaveCallback = (doc) async {
-            if (restartLink == null) return;
-            final confirmRestart =
-                await MiniApp.showConfirm('Restart to apply settings?');
-            if (confirmRestart) MiniApp.openTelegramLink(restartLink);
-          };
+          ..onDocSaveCallback = (doc) => restartApp();
     await _settingsCollection.loadCollection();
     initialized = true;
     UserSettings.restartLink = restartLink;
