@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:js';
 
 export 'dart:convert' show jsonDecode, jsonEncode;
-export 'dart:js' show JsArray, JsObject;
+export 'dart:js' show JsArray, JsFunction, JsObject;
 
 final webAppJsObject = (context['Telegram'] as JsObject)['WebApp'] as JsObject;
 
