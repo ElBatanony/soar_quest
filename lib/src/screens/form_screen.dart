@@ -58,22 +58,7 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  Widget? navigationBar() => NavigationBar(
-        selectedIndex: 1,
-        onDestinationSelected: (index) async {
-          if (index == 0) {
-            FocusManager.instance.primaryFocus?.unfocus();
-            return exitScreen();
-          }
-          await submitForm();
-        },
-        destinations: [
-          const NavigationDestination(
-              icon: Icon(Icons.cancel), label: 'Cancel'),
-          NavigationDestination(
-              icon: const Icon(Icons.save), label: submitButtonText),
-        ],
-      );
+  Widget? navigationBar() => null;
 
   @override
   Widget screenBody() => GestureDetector(
@@ -92,5 +77,17 @@ class FormScreen extends DocScreen {
           return exitScreen();
         }
       };
+  }
+
+  @override
+  void refreshMainButton() {
+    if (isInline) return;
+    if (!MiniApp.mainButton.isVisible)
+      MiniApp.mainButton
+        ..setParams(
+          text: submitButtonText,
+          isVisible: true,
+        )
+        ..callback = submitForm;
   }
 }
