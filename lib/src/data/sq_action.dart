@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../mini_apps.dart';
 import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
 import '../sq_app.dart';
 import '../ui/action_button.dart';
-import '../ui/button.dart';
 import 'sq_collection.dart';
 
 Future<void> emptyOnExecute(doc, context) async {}
@@ -248,16 +248,6 @@ class CustomAction extends SQAction {
 
 Future<bool> showConfirmationDialog(
     {required SQAction action, required BuildContext context}) async {
-  final isConfirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-              title: const Text('Confirm'),
-              content: Text(action.confirmMessage),
-              actions: [
-                SQButton('Cancel',
-                    onPressed: () => Navigator.pop(context, false)),
-                SQButton(action.name,
-                    onPressed: () => Navigator.pop(context, true)),
-              ]));
-  return isConfirmed ?? false;
+  final isConfirmed = await MiniApp.showConfirm(action.confirmMessage);
+  return isConfirmed;
 }
