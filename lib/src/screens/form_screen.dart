@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../fields.dart';
+import '../../mini_apps.dart';
 import '../data/sq_collection.dart';
 import '../firebase/auth.dart';
 import '../ui/snackbar.dart';
@@ -78,4 +79,18 @@ class FormScreen extends DocScreen {
   Widget screenBody() => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: super.screenBody());
+
+  @override
+  void refreshBackButton() {
+    if (isInline) return;
+    MiniApp.backButton
+      ..show()
+      ..callback = () async {
+        final confirmCancel = await MiniApp.showConfirm('Cancel editing?');
+        if (confirmCancel) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          return exitScreen();
+        }
+      };
+  }
 }
