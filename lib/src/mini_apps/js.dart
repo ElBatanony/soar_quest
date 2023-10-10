@@ -19,3 +19,18 @@ Future<T> jsCallbackToFuture<T>(
   ]);
   return completer.future;
 }
+
+Future<T> jsCallbackToFuture2<T>(
+    JsObject js, String methodName, List<dynamic> args,
+    {bool secondRet = false}) {
+  final completer = Completer<T>();
+
+  js.callMethod(methodName, [
+    ...args,
+    JsFunction.withThis((_, dynamic ret1, dynamic ret2) {
+      completer.complete(ret2 as T);
+    })
+  ]);
+
+  return completer.future;
+}
