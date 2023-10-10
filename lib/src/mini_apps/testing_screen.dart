@@ -18,18 +18,20 @@ class MiniAppTestingScreen extends Screen {
 
   @override
   void refreshBackButton() {
-    MiniApp.backButton.callback = () async => MiniApp.showPopup(PopupParams(
-            message: 'Back button clicked!',
-            title: 'Back Button Popup',
-            buttons: [
-              PopupButton(
-                text: 'Close Mini App',
-                type: PopupButtonType.destructive,
-                id: 'close',
-                onPressed: () => MiniApp.close,
-              ),
-              PopupButton(text: 'Ok', type: PopupButtonType.ok),
-            ]));
+    MiniApp.backButton.callback = () async {
+      await MiniApp.showPopup(PopupParams(
+          message: 'Back button clicked!',
+          title: 'Back Button Popup',
+          buttons: [
+            PopupButton(
+              text: 'Close Mini App',
+              type: PopupButtonType.destructive,
+              id: 'close',
+              onPressed: MiniApp.close,
+            ),
+            PopupButton(text: 'Ok', type: PopupButtonType.ok),
+          ]));
+    };
   }
 
   @override
