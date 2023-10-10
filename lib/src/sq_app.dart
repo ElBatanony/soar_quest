@@ -43,7 +43,7 @@ class SQApp {
 
     themeData = themeData ?? ThemeData(useMaterial3: true);
 
-    MiniApp.mainButton.setParams(color: themeData.colorScheme.primary);
+    MiniApp.mainButton.setParams(color: MiniApp.themeParams.buttonColor);
 
     runApp(MaterialApp(
         title: name,
