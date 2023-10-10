@@ -104,7 +104,7 @@ class CollectionScreen extends Screen {
     return SingleChildScrollView(
       child: Column(
         children: [
-          if (!isInline) filtersDisplay(),
+          filtersDisplay(),
           collectionDisplay(docs),
         ],
       ),
