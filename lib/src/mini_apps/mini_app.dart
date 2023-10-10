@@ -77,7 +77,7 @@ class MiniApp {
   static Future<String> showPopup(PopupParams params,
       [void Function()? callback]) async {
     final buttonId =
-        await jsCallbackToFuture<String>(js, 'showPopup', [params.jsify()]);
+        await jsCallbackToFuture1<String>(js, 'showPopup', [params.jsify()]);
     if (buttonId.isNotEmpty)
       params.buttons
           ?.firstWhere((button) => button.id == buttonId)
@@ -86,14 +86,14 @@ class MiniApp {
     return buttonId;
   }
 
-  static Future<void> showAlert(String message) => jsCallbackToFuture(
+  static Future<void> showAlert(String message) => jsCallbackToFuture0(
       js, 'showAlert', [if (message.isEmpty) 'Empty string' else message]);
 
-  static Future<bool> showConfirm(String message) => jsCallbackToFuture<bool>(
+  static Future<bool> showConfirm(String message) => jsCallbackToFuture1<bool>(
       js, 'showConfirm', [if (message.isEmpty) 'Empty string' else message]);
 
   static Future<String?> showScanQrPopup(ScanQrPopupParams params) =>
-      jsCallbackToFuture<String>(
+      jsCallbackToFuture1<String>(
           js, 'showScanQrPopup', [if (params.text != null) params.jsify()]);
 
   static void closeScanQrPopup() => js.callMethod('closeScanQrPopup');

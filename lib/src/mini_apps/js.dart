@@ -8,7 +8,19 @@ export 'dart:js' show JsArray, JsFunction, JsObject;
 
 final webAppJsObject = (context['Telegram'] as JsObject)['WebApp'] as JsObject;
 
-Future<T> jsCallbackToFuture<T>(
+Future<void> jsCallbackToFuture0(
+    JsObject js, String methodName, List<dynamic> args) {
+  final completer = Completer<void>();
+  js.callMethod(methodName, [
+    ...args,
+    JsFunction.withThis((_) {
+      completer.complete();
+    })
+  ]);
+  return completer.future;
+}
+
+Future<T> jsCallbackToFuture1<T>(
     JsObject js, String methodName, List<dynamic> args) {
   final completer = Completer<T>();
   js.callMethod(methodName, [
