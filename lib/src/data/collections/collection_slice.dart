@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../sq_action.dart';
 import '../sq_collection.dart';
 
@@ -9,6 +11,7 @@ class CollectionSlice implements SQCollection {
     this.filter,
     this.sliceFields,
     this.sliceActions,
+    this.sortCompare,
     SQUpdates updates = const SQUpdates(),
   }) {
     this.updates = updates & collection.updates;
@@ -19,6 +22,7 @@ class CollectionSlice implements SQCollection {
   final CollectionFilter? filter;
   final List<String>? sliceFields;
   final List<String>? sliceActions;
+  final int Function(SQDoc, SQDoc)? sortCompare;
 
   @override
   late SQUpdates updates;
@@ -32,11 +36,14 @@ class CollectionSlice implements SQCollection {
 
   @override
   List<SQDoc> get docs {
-    final retDocs =
-        (filter == null ? collection.docs : filter!.filter(collection.docs))
-          ..forEach((doc) {
-            doc.collection = this;
-          });
+    var retDocs = collection.docs;
+    if (filter != null) {
+      retDocs = filter!.filter(collection.docs)
+        ..forEach((doc) {
+          doc.collection = this;
+        });
+    }
+    if (sortCompare != null) retDocs.sort(sortCompare);
     return retDocs;
   }
 
@@ -106,4 +113,25 @@ class CollectionSlice implements SQCollection {
 
   @override
   Stream<DocData> liveUpdates(SQDoc doc) => collection.liveUpdates(doc);
+
+  @override
+  List<CollectionFilterField<dynamic>> get filters => collection.filters;
+
+  @override
+  set filters(_) => throw UnimplementedError();
+
+  @override
+  FutureOr<void> Function(SQDoc doc)? onDocSaveCallback;
 }
+
+int Function(SQDoc, SQDoc) fieldSortCompare<T extends Comparable<dynamic>>(
+        String fieldName,
+        {bool reversed = false}) =>
+    (doc1, doc2) {
+      final value1 = doc1.getValue<T>(fieldName);
+      final value2 = doc2.getValue<T>(fieldName);
+      if (value1 == null) return 1;
+      if (value2 == null) return -1;
+      if (reversed) return value2.compareTo(value1);
+      return value1.compareTo(value2);
+    };

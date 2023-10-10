@@ -41,6 +41,7 @@ export 'src/screens/collection_screens/select_doc_screen.dart';
 export 'src/screens/collection_screens/table_screen.dart';
 export 'src/screens/collection_screens/gallery_screen.dart';
 export 'src/screens/collection_screens/cards_screen.dart';
+export 'src/screens/collection_screens/video_screen.dart';
 
 // Features
 export 'src/features/favourites.dart';
@@ -50,7 +51,3 @@ export 'src/features/dark_mode_setting.dart';
 export 'src/features/kids_mode.dart';
 
 export 'src/features/social_feed.dart';
-
-// Firebase
-export 'src/firebase/firestore_collection.dart';
-export 'src/firebase/auth.dart';

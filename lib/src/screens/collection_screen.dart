@@ -14,10 +14,15 @@ class CollectionScreen extends Screen {
     String? title,
     super.icon,
     this.groupByField,
-  }) : super(title ?? collection.id);
+  }) : super(title ?? collection.id) {
+    filterScreen =
+        FilterFormScreen(FiltersCollection(collection), callback: refresh);
+  }
 
   final SQCollection collection;
   final String? groupByField;
+
+  late final FilterFormScreen filterScreen;
 
   Widget groupByDocs(List<SQDoc> docs) {
     final groups = groupBy<SQDoc, dynamic>(
@@ -66,6 +71,11 @@ class CollectionScreen extends Screen {
     );
   }
 
+  Widget filtersDisplay() {
+    if (collection.filters.isNotEmpty) return filterScreen.toWidget();
+    return Container();
+  }
+
   Widget collectionDisplay(List<SQDoc> docs) => ListView(
         shrinkWrap: true,
         children: docs.map(docDisplay).toList(),
@@ -80,13 +90,25 @@ class CollectionScreen extends Screen {
 
   @override
   Widget screenBody() {
-    final docs = collection.docs;
+    var docs = collection.docs;
+    for (final collectionFilter in filterScreen.filters)
+      docs = collectionFilter.filter(docs, filterScreen.doc);
+    final isFiltered = docs.length < collection.docs.length;
+
     if (docs.isEmpty && collection.isLoading)
       return const Center(child: CircularProgressIndicator());
-    if (docs.isEmpty)
+    if (docs.isEmpty && !isFiltered)
       return Center(child: Text('${collection.id} list is empty'));
     if (groupByField != null) return groupByDocs(docs);
-    return collectionDisplay(docs);
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          filtersDisplay(),
+          collectionDisplay(docs),
+        ],
+      ),
+    );
   }
 
   @override

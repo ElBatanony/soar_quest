@@ -1,30 +1,97 @@
 import 'package:flutter/material.dart';
 
-import '../data/sq_doc.dart';
+import '../data/sq_field.dart';
+import '../ui/button.dart';
 
-List<T> copyList<T>(List<T> list) => list.map((e) => e).toList();
+class SQListField<T> extends SQField<List<T?>> {
+  SQListField(this.subfield, {this.inverseInsert = true})
+      : super(subfield.name) {
+    subfield
+      ..isInline = true
+      ..name = '_${subfield.name}_';
+  }
 
-class SQListField<T> extends SQField<List<T>> {
-  SQListField(super.name);
+  SQField<T> subfield;
+  bool inverseInsert;
+
+  int _isEditIndex = -1;
 
   @override
   formField(docScreen) => _SQListFormField(this, docScreen);
 
   @override
-  List<T>? parse(source) {
+  List<T?>? parse(source) {
+    super.parse(source);
     if (source is! List) return null;
-    return super.parse(source) ?? source.whereType<T>().toList();
+    return source.map((listItem) => subfield.parse(listItem)).toList();
+  }
+
+  @override
+  serialize(List<T?>? value) {
+    if (value == null) return null;
+    return value.map((listItem) => subfield.serialize(listItem)).toList();
   }
 }
 
-class _SQListFormField<T> extends SQFormField<List<T>, SQListField<T>> {
+class _SQListFormField<T> extends SQFormField<List<T?>, SQListField<T>> {
   const _SQListFormField(super.field, super.docScreen);
 
-  @override
-  Widget readOnlyBuilder(context) => Text((getDocValue() ?? []).toString());
+  List<T?> get listValues => getDocValue() ?? [];
+  bool get isEditing => field._isEditIndex >= 0;
 
   @override
-  Widget fieldBuilder(context) {
-    throw UnimplementedError();
-  }
+  Widget readOnlyBuilder(context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: listValues.map((value) => Text(value.toString())).toList(),
+      );
+
+  @override
+  Widget fieldBuilder(context) => Column(
+        children: [
+          Row(
+            children: [
+              Expanded(child: field.subfield.formField(docScreen)),
+              SQButton.icon(isEditing ? Icons.save : Icons.add, onPressed: () {
+                final newValue = docScreen.doc.getValue<T>(field.subfield.name);
+                final newList = listValues;
+                if (newValue != null) {
+                  if (isEditing) {
+                    newList[field._isEditIndex] = newValue;
+                    field._isEditIndex = -1;
+                  } else {
+                    if (field.inverseInsert)
+                      newList.insert(0, newValue);
+                    else
+                      newList.add(newValue);
+                  }
+                  setDocValue(newList);
+                }
+                docScreen.doc
+                    .setValue(field.subfield.name, field.subfield.defaultValue);
+              }),
+            ],
+          ),
+          for (var i = 0; i < listValues.length; i += 1)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(listValues[i].toString()),
+                Row(
+                  children: [
+                    SQButton.icon(Icons.edit, onPressed: () {
+                      docScreen.doc
+                          .setValue(field.subfield.name, listValues[i]);
+                      field._isEditIndex = i;
+                      setDocValue(listValues);
+                    }),
+                    SQButton.icon(Icons.delete, onPressed: () {
+                      listValues.removeAt(i);
+                      setDocValue(listValues);
+                    })
+                  ],
+                )
+              ],
+            ),
+        ],
+      );
 }

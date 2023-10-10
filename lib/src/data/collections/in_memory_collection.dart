@@ -9,6 +9,7 @@ class InMemoryCollection extends SQCollection {
     super.parentDoc,
     super.updates,
     super.actions,
+    super.filters,
   });
 
   @override

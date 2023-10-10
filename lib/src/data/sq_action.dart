@@ -166,11 +166,11 @@ class SetFieldsAction extends SQAction {
   SetFieldsAction(super.name,
       {required this.getFields, super.icon, super.show, super.onExecute});
 
-  Map<String, dynamic> Function(SQDoc doc) getFields;
+  FutureOr<Map<String, dynamic>> Function(SQDoc doc) getFields;
 
   @override
   Future<void> execute(SQDoc doc, Screen screen) async {
-    final newFields = getFields(doc);
+    final newFields = await getFields(doc);
     for (final entry in newFields.entries) {
       doc.setValue(entry.key, entry.value);
     }

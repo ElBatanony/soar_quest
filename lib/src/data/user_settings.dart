@@ -13,20 +13,30 @@ class UserSettings {
   static late SQCollection _settingsCollection;
 
   static bool initialized = false;
+  static String? restartLink;
 
   static SQDoc get _settingsDoc =>
       _settingsCollection.docs
           .firstWhereOrNull((doc) => doc.id == _defaultSettingsDocId) ??
       _settingsCollection.newDoc(id: _defaultSettingsDocId);
 
-  static Future<void> setSettings(List<SQField<dynamic>> settings) async {
+  static Future<void> setSettings(List<SQField<dynamic>> settings,
+      {String? restartLink}) async {
     _settingsCollection =
-        MiniAppCollection(id: _settingsCollectionId, fields: settings);
+        MiniAppCollection(id: _settingsCollectionId, fields: settings)
+          ..onDocSaveCallback = (doc) async {
+            if (restartLink == null) return;
+            final confirmRestart =
+                await MiniApp.showConfirm('Restart to apply settings?');
+            if (confirmRestart) MiniApp.openTelegramLink(restartLink);
+          };
     await _settingsCollection.loadCollection();
     initialized = true;
+    UserSettings.restartLink = restartLink;
   }
 
-  T? getSetting<T>(String settingName) => _settingsDoc.getValue(settingName);
+  static T? getSetting<T>(String settingName) =>
+      _settingsDoc.getValue<T>(settingName);
 
   static Screen settingsScreen() =>
       FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);

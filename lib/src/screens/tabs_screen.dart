@@ -5,61 +5,88 @@ import 'screen.dart';
 class TabsScreen extends Screen {
   TabsScreen(super.title, {required this.screens}) {
     for (final screen in screens) screen.isInline = true;
+    appbarEnabled = true;
   }
 
   final List<Screen> screens;
-  TabController? tabController;
 
   @override
-  appBar() {
-    if (tabController == null) return super.appBar();
-    return AppBar(
-      title: Text(title),
-      actions: [
-        IconButton(onPressed: refresh, icon: const Icon(Icons.refresh))
-      ],
-      bottom: TabBar(
-        controller: tabController,
-        labelColor: Colors.black,
-        isScrollable: true,
-        onTap: (value) => tabController?.animateTo(value),
-        tabs: screens.map((screen) => Tab(text: screen.title)).toList(),
+  void refresh() {
+    for (final screen in screens) screen.refresh();
+    super.refresh();
+  }
+
+  @override
+  Widget toWidget() => TabsScreenWidget(this, screens);
+
+  Tab screenTab(Screen screen) => Tab(
+        text: screen.title,
+        icon: Icon(screen.icon),
+      );
+}
+
+class TabsScreenWidget extends StatefulWidget {
+  const TabsScreenWidget(this.tabsScreen, this.screens);
+
+  final TabsScreen tabsScreen;
+  final List<Screen> screens;
+
+  @override
+  State<TabsScreenWidget> createState() => _TabsScreenWidgetState();
+}
+
+class _TabsScreenWidgetState extends State<TabsScreenWidget>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+
+  List<Screen> visibleScreens(BuildContext context) =>
+      widget.screens.where((screen) => screen.show(context)).toList();
+
+  @override
+  void initState() {
+    tabController = TabController(length: widget.screens.length, vsync: this);
+    super.initState();
+  }
+
+  @override
+  Widget build(context) {
+    final tabBar = TabBar(
+      controller: tabController,
+      isScrollable: true,
+      onTap: (value) {
+        tabController.animateTo(value);
+        setState(() {});
+      },
+      tabs: visibleScreens(context)
+          .map((screen) => widget.tabsScreen.screenTab(screen))
+          .toList(),
+    );
+    final PreferredSizeWidget appBar = PreferredSize(
+      preferredSize: Size.fromHeight(tabBar.preferredSize.height),
+      child: AppBar(
+        toolbarHeight: tabBar.preferredSize.height,
+        bottom: tabBar,
+        elevation: 0,
       ),
+    );
+    return Scaffold(
+      appBar: appBar,
+      body: Padding(
+        padding: widget.tabsScreen.padding,
+        child: TabBarView(
+            controller: tabController,
+            children:
+                visibleScreens(context).map((s) => s.toWidget()).toList()),
+      ),
+      floatingActionButton:
+          visibleScreens(context)[tabController.index].floatingActionButton(),
+      bottomNavigationBar: widget.tabsScreen.navigationBar(),
     );
   }
 
   @override
-  Widget screenBody() => _StatefulTab(this);
-
-  @override
   void dispose() {
-    tabController?.dispose();
-    tabController = null;
+    tabController.dispose();
     super.dispose();
   }
-}
-
-class _StatefulTab extends StatefulWidget {
-  const _StatefulTab(this.tabsScreen);
-
-  final TabsScreen tabsScreen;
-
-  @override
-  State<_StatefulTab> createState() => _StatefulTabState();
-}
-
-class _StatefulTabState extends State<_StatefulTab>
-    with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-    widget.tabsScreen.tabController =
-        TabController(length: widget.tabsScreen.screens.length, vsync: this);
-    widget.tabsScreen.initScreen();
-  }
-
-  @override
-  Widget build(context) => TabBarView(
-      controller: widget.tabsScreen.tabController,
-      children: widget.tabsScreen.screens.map((s) => s.toWidget()).toList());
 }

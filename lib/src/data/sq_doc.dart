@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 
 import '../fields/file_field.dart';
-import '../fields/image_field.dart';
+import '../fields/image_link_field.dart';
 import '../fields/virtual_field.dart';
 import 'sq_collection.dart';
 import 'types/sq_ref.dart';
@@ -64,8 +64,8 @@ class SQDoc {
   @override
   String toString() => label;
 
-  SQImageField? get _imageLabelField => collection.fields
-      .whereType<SQImageField>()
+  SQImageLinkField? get _imageLabelField => collection.fields
+      .whereType<SQImageLinkField>()
       .firstWhereOrNull((field) => _values[field.name] != null);
 
   String? get imageLabel => _imageLabelField == null

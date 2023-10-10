@@ -3,14 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../data/collections/collection_slice.dart';
-import '../data/sq_action.dart';
 import '../screens/collection_screen.dart';
 import 'list_field.dart';
 import 'ref_field.dart';
 import 'virtual_field.dart';
 
-class SQInverseRefsField extends SQVirtualField<List<SQRef?>> {
-  SQInverseRefsField(String name,
+class SQInverseListRefsField extends SQVirtualField<List<SQRef?>> {
+  SQInverseListRefsField(String name,
       {required this.refCollection, required this.refFieldName})
       : super(SQListField(SQRefField(name, collection: refCollection())),
             (doc) => []);
@@ -21,12 +20,12 @@ class SQInverseRefsField extends SQVirtualField<List<SQRef?>> {
   SQCollection get collection => refCollection();
 
   @override
-  formField(docScreen) => _SQInverseRefsFormField(this, docScreen);
+  formField(docScreen) => _SQInverseListRefsFormField(this, docScreen);
 }
 
-class _SQInverseRefsFormField
-    extends SQFormField<List<SQRef?>, SQInverseRefsField> {
-  _SQInverseRefsFormField(super.field, super.docScreen) {
+class _SQInverseListRefsFormField
+    extends SQFormField<List<SQRef?>, SQInverseListRefsField> {
+  _SQInverseListRefsFormField(super.field, super.docScreen) {
     unawaited(initializeRefCollection());
   }
 
@@ -35,22 +34,15 @@ class _SQInverseRefsFormField
   }
 
   @override
-  Widget fieldLabel(context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          super.fieldLabel(context),
-          if (isInFormScreen & field.collection.updates.adds)
-            CreateDocAction('Add',
-                    getCollection: () => field.collection,
-                    source: (_) => {field.refFieldName: doc.ref})
-                .button(doc, screen: docScreen)
-        ],
-      );
-
-  @override
   Widget readOnlyBuilder(context) {
-    final slice = CollectionSlice(field.collection,
-        filter: RefFilter(field.refFieldName, doc.ref));
+    final slice = CollectionSlice(
+      field.collection,
+      filter: CustomFilter((otherDoc) =>
+          otherDoc
+              .getValue<List<SQRef?>>(field.refFieldName)
+              ?.contains(doc.ref) ??
+          false),
+    );
     return (CollectionScreen(collection: slice)..isInline = true).toWidget();
   }
 

@@ -55,11 +55,11 @@ class FavouritesFeature {
 }
 
 class FavouritesScreen extends CollectionScreen {
-  FavouritesScreen({required FavouritesFeature favouritesFeature})
-      : super(
-          collection: favouritesFeature.favouritesCollection,
-          icon: Icons.favorite,
-        );
+  FavouritesScreen(
+      {required FavouritesFeature favouritesFeature,
+      super.title,
+      super.icon = Icons.favorite})
+      : super(collection: favouritesFeature.favouritesCollection);
 
   @override
   Screen docScreen(SQDoc doc) => DocScreen(doc.getValue<SQRef>('ref')!.doc);
