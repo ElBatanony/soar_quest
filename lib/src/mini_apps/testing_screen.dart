@@ -119,8 +119,7 @@ class MiniAppTestingScreen extends Screen {
               final ret = await MiniApp.showScanQrPopup(
                   ScanQrPopupParams('Scanning the QR'));
               debugPrint(ret.toString());
-              if (ret != null && ret.contains('SCANNED'))
-                MiniApp.closeScanQrPopup();
+              if (ret != null) MiniApp.closeScanQrPopup();
               await MiniApp.showAlert(ret.toString());
             }),
             const SQButton('Request write access',
