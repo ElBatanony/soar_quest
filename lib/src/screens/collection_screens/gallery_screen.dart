@@ -8,6 +8,7 @@ class GalleryScreen extends CollectionScreen {
     super.title,
     this.columns = 2,
     this.childAspectRatio = 1.0,
+    super.icon,
   });
 
   int columns;
