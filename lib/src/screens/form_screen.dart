@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../fields.dart';
+import '../../mini_apps.dart';
 import '../data/sq_collection.dart';
 import '../firebase/auth.dart';
 import '../ui/snackbar.dart';
@@ -57,25 +58,36 @@ class FormScreen extends DocScreen {
   }
 
   @override
-  Widget? navigationBar() => NavigationBar(
-        selectedIndex: 1,
-        onDestinationSelected: (index) async {
-          if (index == 0) {
-            FocusManager.instance.primaryFocus?.unfocus();
-            return exitScreen();
-          }
-          await submitForm();
-        },
-        destinations: [
-          const NavigationDestination(
-              icon: Icon(Icons.cancel), label: 'Cancel'),
-          NavigationDestination(
-              icon: const Icon(Icons.save), label: submitButtonText),
-        ],
-      );
+  Widget? navigationBar() => null;
 
   @override
   Widget screenBody() => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: super.screenBody());
+
+  @override
+  void refreshBackButton() {
+    if (isInline) return;
+    MiniApp.backButton
+      ..show()
+      ..callback = () async {
+        final confirmCancel = await MiniApp.showConfirm('Cancel editing?');
+        if (confirmCancel) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          return exitScreen();
+        }
+      };
+  }
+
+  @override
+  void refreshMainButton() {
+    if (isInline) return;
+    if (!MiniApp.mainButton.isVisible)
+      MiniApp.mainButton
+        ..setParams(
+          text: submitButtonText,
+          isVisible: true,
+        )
+        ..callback = submitForm;
+  }
 }

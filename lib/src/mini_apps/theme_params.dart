@@ -29,13 +29,9 @@ class ThemeParams {
   final Color buttonTextcolor;
   final Color secondaryBgColor;
 
-  // TODO: Match Material 3 ThemeData with Mini App ThemeParams
   ThemeData toMaterialThemeData() => ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          brightness: colorScheme,
-          seedColor: buttonColor,
-          background: bgColor,
-        ),
+        brightness: colorScheme,
+        colorSchemeSeed: linkColor,
       );
 }

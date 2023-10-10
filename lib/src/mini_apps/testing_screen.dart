@@ -18,18 +18,20 @@ class MiniAppTestingScreen extends Screen {
 
   @override
   void refreshBackButton() {
-    MiniApp.backButton.callback = () async => MiniApp.showPopup(PopupParams(
-            message: 'Back button clicked!',
-            title: 'Back Button Popup',
-            buttons: [
-              PopupButton(
-                text: 'Close Mini App',
-                type: PopupButtonType.destructive,
-                id: 'close',
-                onPressed: () => MiniApp.close,
-              ),
-              PopupButton(text: 'Ok', type: PopupButtonType.ok),
-            ]));
+    MiniApp.backButton.callback = () async {
+      await MiniApp.showPopup(PopupParams(
+          message: 'Back button clicked!',
+          title: 'Back Button Popup',
+          buttons: [
+            PopupButton(
+              text: 'Close Mini App',
+              type: PopupButtonType.destructive,
+              id: 'close',
+              onPressed: MiniApp.close,
+            ),
+            PopupButton(text: 'Ok', type: PopupButtonType.ok),
+          ]));
+    };
   }
 
   @override
@@ -119,8 +121,7 @@ class MiniAppTestingScreen extends Screen {
               final ret = await MiniApp.showScanQrPopup(
                   ScanQrPopupParams('Scanning the QR'));
               debugPrint(ret.toString());
-              if (ret != null && ret.contains('SCANNED'))
-                MiniApp.closeScanQrPopup();
+              if (ret != null) MiniApp.closeScanQrPopup();
               await MiniApp.showAlert(ret.toString());
             }),
             const SQButton('Request write access',

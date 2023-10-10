@@ -41,10 +41,14 @@ class SQApp {
     MiniApp.ready();
     MiniApp.expand();
 
+    themeData = themeData ?? MiniApp.themeParams.toMaterialThemeData();
+
+    MiniApp.mainButton.setParams(color: MiniApp.themeParams.buttonColor);
+
     runApp(MaterialApp(
         title: name,
         debugShowCheckedModeBanner: false,
-        theme: themeData ?? ThemeData(useMaterial3: true),
+        theme: themeData,
         home: SQApp.navbarScreens[SQApp.selectedNavScreen].toWidget()));
   }
 }

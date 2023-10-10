@@ -4,18 +4,45 @@ import 'dart:async';
 import 'dart:js';
 
 export 'dart:convert' show jsonDecode, jsonEncode;
-export 'dart:js' show JsArray, JsObject;
+export 'dart:js' show JsArray, JsFunction, JsObject;
 
 final webAppJsObject = (context['Telegram'] as JsObject)['WebApp'] as JsObject;
 
-Future<T> jsCallbackToFuture<T>(
+Future<void> jsCallbackToFuture0(
+    JsObject js, String methodName, List<dynamic> args) {
+  final completer = Completer<void>();
+  js.callMethod(methodName, [
+    ...args,
+    JsFunction.withThis((_) {
+      completer.complete();
+    })
+  ]);
+  return completer.future;
+}
+
+Future<T> jsCallbackToFuture1<T>(
     JsObject js, String methodName, List<dynamic> args) {
   final completer = Completer<T>();
-  final callback = JsFunction.withThis((_, dynamic arg1, dynamic arg2) {
-    if (arg2 == null) return completer.complete(arg1 as T);
-    return completer.complete(arg2 as T);
-  });
-  args.add(callback);
-  js.callMethod(methodName, args);
+  js.callMethod(methodName, [
+    ...args,
+    JsFunction.withThis((_, dynamic ret1) {
+      completer.complete(ret1 as T);
+    })
+  ]);
+  return completer.future;
+}
+
+Future<T> jsCallbackToFuture2<T>(
+    JsObject js, String methodName, List<dynamic> args,
+    {bool secondRet = false}) {
+  final completer = Completer<T>();
+
+  js.callMethod(methodName, [
+    ...args,
+    JsFunction.withThis((_, dynamic ret1, dynamic ret2) {
+      completer.complete(ret2 as T);
+    })
+  ]);
+
   return completer.future;
 }
