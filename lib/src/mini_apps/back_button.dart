@@ -2,14 +2,14 @@ import 'js.dart';
 
 class MiniAppBackButton {
   MiniAppBackButton(this.js) {
-    js.callMethod('onClick', [onClickCallback]);
+    js.callMethod('onClick', [JsFunction.withThis(onClickCallback)]);
   }
 
   JsObject js;
 
   bool get isVisible => js['isVisible'] as bool;
 
-  void onClickCallback() => callback?.call();
+  void onClickCallback(_) => callback?.call();
 
   void Function()? callback;
 
