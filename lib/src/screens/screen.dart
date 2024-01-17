@@ -29,7 +29,7 @@ bool alwaysShowScreen(BuildContext context) => true;
 class Screen {
   Screen(
     this.title, {
-    this.icon = Icons.stay_current_landscape,
+    this.icon,
     this.padding = const EdgeInsets.all(16),
     this.appbarEnabled = false,
   });
