@@ -31,7 +31,7 @@ class Screen {
     this.title, {
     this.icon,
     this.padding = const EdgeInsets.all(16),
-    this.appbarEnabled = false,
+    this.appbarEnabled = true,
   });
 
   final String title;
