@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../mini_apps.dart';
 import '../data/collections/local_collection.dart';
 import '../data/sq_action.dart';
 import '../fields/ref_field.dart';
@@ -10,7 +9,7 @@ import '../screens/screen.dart';
 
 class FavouritesFeature {
   FavouritesFeature({required this.collection}) {
-    favouritesCollection = MiniAppCollection(
+    favouritesCollection = LocalCollection(
         id: 'Favourite ${collection.id}',
         fields: [SQRefField('ref', collection: collection)],
         actions: [

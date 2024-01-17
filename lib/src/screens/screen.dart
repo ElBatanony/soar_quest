@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../mini_apps/mini_app.dart';
 import '../sq_app.dart';
 import '../ui/navbar.dart';
 
@@ -82,10 +81,7 @@ class Screen {
   }
 
   @mustCallSuper
-  void initScreen() {
-    refreshBackButton();
-    refreshMainButton();
-  }
+  void initScreen() {}
 
   @mustCallSuper
   void dispose() {}
@@ -93,8 +89,6 @@ class Screen {
   @mustCallSuper
   void refresh() {
     if (mounted) {
-      refreshBackButton();
-      refreshMainButton();
       _myState.refreshScreen();
     }
   }
@@ -109,20 +103,6 @@ class Screen {
 
   Screen operator &(Screen other) => _CustomBodyScreen(title,
       bodyBuilder: () => Column(children: [toWidget(), other.toWidget()]));
-
-  void refreshBackButton() {
-    final backButton = MiniApp.backButton;
-    if (Navigator.of(context).canPop()) {
-      backButton.callback = exitScreen;
-      if (backButton.isVisible == false) MiniApp.backButton.show();
-    } else if (backButton.isVisible) {
-      backButton.hide();
-    }
-  }
-
-  void refreshMainButton() {
-    if (MiniApp.mainButton.isVisible) MiniApp.mainButton.hide();
-  }
 }
 
 class _ScreenState<S extends Screen> extends State<ScreenWidget<S>> {

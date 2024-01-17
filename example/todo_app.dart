@@ -4,7 +4,7 @@ import 'package:soar_quest/soar_quest.dart';
 void main() async {
   await SQApp.init('Todo App');
 
-  final tasks = MiniAppCollection(
+  final tasks = LocalCollection(
     id: 'Todos',
     fields: [
       SQStringField('Name')..require = true,
