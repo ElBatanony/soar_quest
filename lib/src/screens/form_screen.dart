@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../fields.dart';
 import '../data/sq_collection.dart';
 import '../firebase/auth.dart';
+import '../ui/button.dart';
 import '../ui/snackbar.dart';
 import 'doc_screen.dart';
 
@@ -62,7 +63,12 @@ class FormScreen extends DocScreen {
   @override
   Widget screenBody() => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: super.screenBody());
-
-  // TODO: add save and cancel buttons to form screen
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            super.screenBody(),
+            SQButton('Add ${collection.id}', onPressed: submitForm)
+          ],
+        ),
+      ));
 }
