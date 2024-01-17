@@ -122,6 +122,9 @@ class CollectionSlice implements SQCollection {
 
   @override
   FutureOr<void> Function(SQDoc doc)? onDocSaveCallback;
+
+  @override
+  String? label;
 }
 
 int Function(SQDoc, SQDoc) fieldSortCompare<T extends Comparable<dynamic>>(
