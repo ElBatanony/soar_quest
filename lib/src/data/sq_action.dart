@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../mini_apps.dart';
 import '../screens/doc_screen.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
@@ -246,8 +245,7 @@ class CustomAction extends SQAction {
   }
 }
 
+// TODO: show action confirmation dialog
 Future<bool> showConfirmationDialog(
-    {required SQAction action, required BuildContext context}) async {
-  final isConfirmed = await MiniApp.showConfirm(action.confirmMessage);
-  return isConfirmed;
-}
+        {required SQAction action, required BuildContext context}) async =>
+    true;

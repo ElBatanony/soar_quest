@@ -70,7 +70,6 @@ void main() async {
       FavouritesScreen(
           favouritesFeature: FavouritesFeature(collection: simpleCollection))
     ],
-    themeData: MiniApp.themeParams.toMaterialThemeData(),
     drawer: SQDrawer([
       CollectionScreen(collection: testUserCollection),
       FAQScreen(

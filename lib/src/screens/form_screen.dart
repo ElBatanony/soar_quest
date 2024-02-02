@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../fields.dart';
-import '../../mini_apps.dart';
 import '../data/sq_collection.dart';
 import '../firebase/auth.dart';
 import '../ui/snackbar.dart';
@@ -65,29 +64,5 @@ class FormScreen extends DocScreen {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: super.screenBody());
 
-  @override
-  void refreshBackButton() {
-    if (isInline) return;
-    MiniApp.backButton
-      ..show()
-      ..callback = () async {
-        final confirmCancel = await MiniApp.showConfirm('Cancel editing?');
-        if (confirmCancel) {
-          FocusManager.instance.primaryFocus?.unfocus();
-          return exitScreen();
-        }
-      };
-  }
-
-  @override
-  void refreshMainButton() {
-    if (isInline) return;
-    if (!MiniApp.mainButton.isVisible)
-      MiniApp.mainButton
-        ..setParams(
-          text: submitButtonText,
-          isVisible: true,
-        )
-        ..callback = submitForm;
-  }
+  // TODO: add save and cancel buttons to form screen
 }

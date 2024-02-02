@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../mini_apps.dart';
 import 'data/sq_analytics.dart';
 import 'screens/screen.dart';
 import 'ui/drawer.dart';
@@ -20,8 +19,6 @@ class SQApp {
   }) async {
     SQApp.name = name;
 
-    MiniApp.init();
-
     WidgetsFlutterBinding.ensureInitialized();
 
     SQApp.analytics = analytics;
@@ -38,12 +35,7 @@ class SQApp {
     SQApp.navbarScreens = screens;
     SQApp.selectedNavScreen = startingScreen;
 
-    MiniApp.ready();
-    MiniApp.expand();
-
-    themeData = themeData ?? MiniApp.themeParams.toMaterialThemeData();
-
-    MiniApp.mainButton.setParams(color: MiniApp.themeParams.buttonColor);
+    themeData = themeData;
 
     runApp(MaterialApp(
         title: name,

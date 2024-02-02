@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import '../../mini_apps.dart';
 import '../screens/form_screen.dart';
 import '../screens/screen.dart';
 import 'collections/local_collection.dart';
@@ -23,8 +22,7 @@ class UserSettings {
   static Future<void> setSettings(List<SQField<dynamic>> settings,
       {String? restartLink}) async {
     _settingsCollection =
-        MiniAppCollection(id: _settingsCollectionId, fields: settings)
-          ..onDocSaveCallback = (doc) => restartApp();
+        LocalCollection(id: _settingsCollectionId, fields: settings);
     await _settingsCollection.loadCollection();
     initialized = true;
     UserSettings.restartLink = restartLink;
@@ -35,11 +33,4 @@ class UserSettings {
 
   static Screen settingsScreen() =>
       FormScreen(_settingsDoc, title: 'Settings', icon: Icons.settings);
-
-  static Future<void> restartApp() async {
-    if (restartLink == null) return;
-    final confirmRestart =
-        await MiniApp.showConfirm('Restart to apply settings?');
-    if (confirmRestart) MiniApp.openTelegramLink(restartLink!);
-  }
 }

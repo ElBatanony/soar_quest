@@ -44,8 +44,6 @@ class SQFirebaseAuth {
     if (isSignedIn) {
       userDoc = usersCollection.getDoc(user!.uid);
       userDoc ??= usersCollection.newDoc(id: user!.uid);
-      userDoc!.setValue('Username', MiniApp.user.username ?? MiniApp.user.id);
-      userDoc!.setValue('User ID', MiniApp.user.id);
       unawaited(SQApp.analytics?.setUserId(user!.uid));
       await usersCollection.saveDoc(userDoc!);
     } else {
@@ -57,7 +55,7 @@ class SQFirebaseAuth {
     final response = await http.post(
       Uri.parse(generateTokenUrl),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: jsonEncode({'initData': MiniApp.initData.rawInitdata}),
+      body: jsonEncode({}),
     );
 
     if (response.statusCode == 200) {
