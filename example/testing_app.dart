@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:soar_quest/firebase.dart';
 
 import 'package:soar_quest/soar_quest.dart';
 
@@ -26,7 +25,6 @@ void main() async {
       SQEnumField(SQColorField('Color Enum'),
           options: [Colors.red, Colors.blue, Colors.amber]),
       SQRefField('Doc Ref', collection: simpleCollection),
-      SQEditedByField('Edited By'),
       SQDoubleField('Double'),
       SQIntField('Int'),
       SQVirtualField(SQIntField('Virtual Int'), (doc) => 5 + 2),
@@ -35,7 +33,6 @@ void main() async {
       SQLocationField('Location'),
       SQTimeOfDayField('Time of Day'),
       SQTimestampField('Timestamp'),
-      SQCreatedByField('Creator'),
       SQUpdatedDateField('Updated Date'),
       SQStringField('Readonly String')
         ..defaultValue = 'I am readonly'
@@ -56,13 +53,6 @@ void main() async {
     ],
   );
 
-  final testUserCollection = LocalCollection(
-      id: 'Test User Collection',
-      parentDoc: SQFirebaseAuth.userDoc,
-      fields: [
-        SQStringField('Name'),
-      ]);
-
   SQApp.run(
     [
       CollectionScreen(collection: testCollection),
@@ -71,7 +61,6 @@ void main() async {
           favouritesFeature: FavouritesFeature(collection: simpleCollection))
     ],
     drawer: SQDrawer([
-      CollectionScreen(collection: testUserCollection),
       FAQScreen(
           collection: LocalCollection(id: 'FAQ', fields: [
         SQStringField('Question'),
