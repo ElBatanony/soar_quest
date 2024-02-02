@@ -15,7 +15,7 @@ Future<void> emptyOnExecute(doc, context) async {}
 abstract class SQAction {
   SQAction(
     this.name, {
-    this.icon = Icons.double_arrow_outlined,
+    this.icon,
     this.show = trueCond,
     this.onExecute = emptyOnExecute,
     this.confirm = false,
@@ -23,7 +23,7 @@ abstract class SQAction {
   });
 
   final String name;
-  final IconData icon;
+  final IconData? icon;
   final DocCond show;
   final bool confirm;
   final String confirmMessage;

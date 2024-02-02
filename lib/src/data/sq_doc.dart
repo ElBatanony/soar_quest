@@ -48,7 +48,8 @@ class SQDoc {
       _values[fieldName] = value;
   }
 
-  String get label => _values[collection.fields.first.name].toString();
+  String get label =>
+      _values[collection.label ?? collection.fields.first.name].toString();
 
   String? get secondaryLabel {
     final nonImageFields = collection.fields

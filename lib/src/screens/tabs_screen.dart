@@ -20,7 +20,7 @@ class TabsScreen extends Screen {
   Widget toWidget() => TabsScreenWidget(this, screens);
 
   Tab screenTab(Screen screen) => Tab(
-        text: screen.title,
+        text: screen.title.toUpperCase(),
         icon: Icon(screen.icon),
       );
 }

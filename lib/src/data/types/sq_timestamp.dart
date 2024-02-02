@@ -2,6 +2,7 @@
 // https://pub.dev/packages/cloud_firestore
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 const int _kThousand = 1000;
 const int _kMillion = 1000000;
@@ -32,7 +33,7 @@ class SQTimestamp implements Comparable<SQTimestamp> {
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch);
 
   @override
-  String toString() => toDate().toString().substring(0, 10);
+  String toString() => DateFormat('MMM dd, yyyy, HH:mm').format(toDate());
 
   static SQTimestamp? parse(dynamic source) {
     if (source is SQTimestamp) return source;

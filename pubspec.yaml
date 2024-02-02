@@ -20,9 +20,10 @@ dependencies:
     sdk: flutter
   flutter_colorpicker: ^1.0.3
   flutter_map: ^5.0.0
-  flutter_quill: ^7.4.7
+  flutter_quill: ^9.2.6
   http: ^1.1.0
   image_picker: ^1.0.4
+  intl: ^0.18.1
   latlong2: ^0.9.0
   mobile_scanner: ^3.0.0-beta.4
   path_provider: ^2.0.11

@@ -64,7 +64,8 @@ class CollectionScreen extends Screen {
         children: collection.actions
             .where((action) => action.show.check(doc, this))
             .take(2)
-            .map((action) => action.button(doc, screen: this, isIcon: true))
+            .map((action) =>
+                action.button(doc, screen: this, isIcon: action.icon != null))
             .toList(),
       ),
       onTap: () async => goToDocScreen(docScreen(doc)),

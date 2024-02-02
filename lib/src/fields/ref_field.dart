@@ -51,7 +51,7 @@ class _SQRefFormField extends SQFormField<SQRef, SQRefField> {
       children: [
         Text(ref.toString()),
         if (doc != null && field.hasNavigateAction)
-          GoScreenAction('', toScreen: DocScreen.new)
+          GoScreenAction('', toScreen: DocScreen.new, icon: Icons.navigate_next)
               .button(doc, screen: docScreen)
       ],
     );

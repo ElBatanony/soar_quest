@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
-import '../../mini_apps.dart';
 import '../data/sq_field.dart';
 import '../screens/screen.dart';
 import '../ui/button.dart';
@@ -40,17 +39,17 @@ class SQTextDocField extends SQField<Document> {
 class SQTextDocFormField extends SQFormField<Document, SQTextDocField> {
   SQTextDocFormField(super.field, super.docScreen);
 
-  late final QuillController _controller = QuillController(
-      document: getDocValue() ?? Document.fromJson(defaultDeltaJson),
-      selection: const TextSelection.collapsed(offset: 0));
+  late final QuillController _controller = QuillController.basic()
+    ..document = getDocValue() ?? Document.fromJson(defaultDeltaJson);
 
   @override
   Widget readOnlyBuilder(context) => SizedBox(
         height: 40,
         child: QuillEditor.basic(
-          controller: _controller,
-          readOnly: true,
-          autoFocus: false,
+          configurations: QuillEditorConfigurations(
+            controller: _controller,
+            readOnly: true,
+          ),
         ),
       );
 
@@ -95,19 +94,19 @@ class TextDocScreen extends Screen {
   Widget screenBody() => Column(
         children: [
           if (formField.field.editable)
-            QuillToolbar.basic(controller: _controller),
+            QuillToolbar.simple(
+              configurations: QuillSimpleToolbarConfigurations(
+                controller: _controller,
+              ),
+            ),
           Expanded(
             child: QuillEditor.basic(
-              controller: _controller,
-              readOnly: !formField.field.editable,
+              configurations: QuillEditorConfigurations(
+                controller: _controller,
+                readOnly: !formField.field.editable,
+              ),
             ),
           ),
         ],
       );
-
-  @override
-  void refreshMainButton() {
-    MiniApp.mainButton.setParams(text: 'Save', isVisible: true);
-    MiniApp.mainButton.callback = saveAndExit;
-  }
 }

@@ -36,6 +36,7 @@ abstract class SQCollection {
 
   final String id;
   final SQDoc? parentDoc;
+  String? label;
 
   final List<SQField<dynamic>> fields;
   final List<SQAction> actions;
