@@ -7,6 +7,14 @@ A framework to build [Telegram Mini Apps](https://core.telegram.org/bots/webapps
 
 ![Soar Quest Logo](logo.png)
 
+## ⚠️ Archived
+
+This version of the project is no longer maintained.
+The archival announcement can be found [here](https://t.me/MiniAppsQuest/34).
+
+A new version of this framework is being developed.
+To follow the latest news, go [here](https://soar.quest).
+
 ## Introduction
 
 Soar Quest is designed to help you get straight to providing value to your users.
@@ -31,27 +39,6 @@ This project is driven by a belief that the current software engineering process
 A guiding principle is that new code should be added only to provide new value to the app's user.
 This would entail less code to create apps, less effort, and faster development.
 Many design decisions here are inspired by No-code tools, due to the efficiency they provide for creators.
-
-## Installing
-
-Add the following line to your dependencies in `pubspec.yaml`.
-
-```yaml
-soar_quest: ^0.8.0
-```
-
-The depndencies section will look something like:
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  soar_quest: ^0.8.0
-```
-
-### QR Code Scanning Setup
-
-See instructions [here](https://pub.dev/packages/mobile_scanner/versions/3.0.0-beta.4#platform-specific-setup).
 
 ## SQApp
 
@@ -128,8 +115,6 @@ CollectionSlice slice =
 
 SQApp.run([CollectionScreen(collection: slice)]);
 ```
-
-## DocCondition
 
 ### SQDoc
 
@@ -286,11 +271,6 @@ simpleCollection = LocalCollection(id: "Simple Collection", fields: [
       customExecute: (doc, context) async => print("hi")),
 ]);
 ```
-
-## Contribution
-
-The best way to contribute is to [suggest additions](https://github.com/ElBatanony/soar_quest/issues/new) to the package and using it in your projects.
-Consider leaving a star on GitHub 😉.
 
 ## Acknowledgements
 
